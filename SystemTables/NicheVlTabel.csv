@@ -1,0 +1,1207 @@
+"","VEG_CODE","VEG_TYPE","REGIO","SOIL","TROFIE","ZUURGRAAD","GHG_MIN","GHG_MAX","GLG_MIN","GLG_MAX","MANAGEMENT","INUNDATIE","NAT_SCORE","OPM1","OPM2","OPM3","OPM4"
+"1",1,"Sphagno-Betuletum",0,30000,2,1,20,1,38,20,0,0,1,"origineel",NA,NA,NA
+"2",1,"Sphagno-Betuletum",0,30000,1,1,20,1,38,20,0,0,1,"origineel",NA,NA,NA
+"3",1,"Sphagno-Betuletum",0,30000,2,2,20,1,38,20,0,0,1,"aanvulling zuurgraad",NA,NA,NA
+"4",1,"Sphagno-Betuletum",0,30000,1,2,20,1,38,20,0,0,1,"aanvulling zuurgraad",NA,NA,NA
+"5",1,"Sphagno-Betuletum",0,80000,2,1,23,-18,36,5,0,0,1,"origineel",NA,NA,NA
+"6",1,"Sphagno-Betuletum",0,80000,1,1,23,-18,36,5,0,0,1,"origineel",NA,NA,NA
+"7",1,"Sphagno-Betuletum",0,80000,2,2,23,-18,36,5,0,0,1,"aanvulling zuurgraad",NA,NA,NA
+"8",1,"Sphagno-Betuletum",0,80000,1,2,23,-18,36,5,0,0,1,"aanvulling zuurgraad",NA,NA,NA
+"9",1,"Sphagno-Betuletum",0,130000,2,1,36,-1,77,20,0,0,1,"origineel",NA,NA,NA
+"10",1,"Sphagno-Betuletum",0,130000,1,1,36,-1,77,20,0,0,1,"origineel",NA,NA,NA
+"11",1,"Sphagno-Betuletum",0,130000,2,2,36,-1,77,20,0,0,1,"aanvulling zuurgraad",NA,NA,NA
+"12",1,"Sphagno-Betuletum",0,130000,1,2,36,-1,77,20,0,0,1,"aanvulling zuurgraad",NA,NA,NA
+"13",2,"Carici elongatae-Alnetum",0,140000,2,1,46,-6,110,29,0,0,1,"origineel","GHG op basis van Z1",NA,NA
+"14",2,"Carici elongatae-Alnetum",0,140000,2,2,46,-6,110,29,0,0,1,"origineel","GHG op basis van Z1",NA,NA
+"15",2,"Carici elongatae-Alnetum",0,140000,3,1,46,-6,110,29,0,0,1,"origineel","GHG op basis van Z1",NA,NA
+"16",2,"Carici elongatae-Alnetum",0,140000,3,2,46,-6,110,29,0,0,1,"origineel","GHG op basis van Z1",NA,NA
+"17",2,"Carici elongatae-Alnetum",0,80000,2,1,18,-24,32,-15,0,0,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"18",2,"Carici elongatae-Alnetum",0,80000,3,1,18,-24,32,-15,0,0,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"19",2,"Carici elongatae-Alnetum",0,80000,2,2,18,-24,32,-15,0,0,1,"aanvulling zuurgraad","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"20",2,"Carici elongatae-Alnetum",0,80000,3,2,18,-24,32,-15,0,0,1,"aanvulling zuurgraad","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"21",2,"Carici elongatae-Alnetum",0,110000,2,1,46,-6,97,14,0,0,1,"origineel",NA,NA,NA
+"22",2,"Carici elongatae-Alnetum",0,110000,3,1,46,-6,97,14,0,0,1,"origineel",NA,NA,NA
+"23",2,"Carici elongatae-Alnetum",0,120000,2,1,46,-6,97,14,0,0,1,"interpolatie Z2",NA,NA,NA
+"24",2,"Carici elongatae-Alnetum",0,120000,3,1,46,-6,97,14,0,0,1,NA,NA,NA,NA
+"25",2,"Carici elongatae-Alnetum",0,130000,2,1,46,-6,97,14,0,0,1,"interpolatie bodemcode, met GXG en zuurgraad van Z1",NA,NA,NA
+"26",2,"Carici elongatae-Alnetum",0,130000,3,1,46,-6,97,14,0,0,1,NA,NA,NA,NA
+"27",2,"Carici elongatae-Alnetum",0,130000,2,2,46,-6,97,14,0,0,1,NA,NA,NA,NA
+"28",2,"Carici elongatae-Alnetum",0,130000,3,2,46,-6,97,14,0,0,1,NA,NA,NA,NA
+"29",2,"Carici elongatae-Alnetum",0,150000,2,1,46,-6,110,29,0,0,1,"interpolatie bodemcode, met GXG en zuurgraad van L1",NA,NA,NA
+"30",2,"Carici elongatae-Alnetum",0,150000,3,1,46,-6,110,29,0,0,1,NA,NA,NA,NA
+"31",2,"Carici elongatae-Alnetum",0,150000,2,2,46,-6,110,29,0,0,1,NA,NA,NA,NA
+"32",2,"Carici elongatae-Alnetum",0,150000,3,2,46,-6,110,29,0,0,1,NA,NA,NA,NA
+"33",2,"Carici elongatae-Alnetum",0,140000,2,1,46,-6,110,29,0,1,1,"origineel","GHG op basis van Z1",NA,NA
+"34",2,"Carici elongatae-Alnetum",0,140000,2,2,46,-6,110,29,0,1,1,"origineel","GHG op basis van Z1",NA,NA
+"35",2,"Carici elongatae-Alnetum",0,140000,3,1,46,-6,110,29,0,1,1,"origineel","GHG op basis van Z1",NA,NA
+"36",2,"Carici elongatae-Alnetum",0,140000,3,2,46,-6,110,29,0,1,1,"origineel","GHG op basis van Z1",NA,NA
+"37",2,"Carici elongatae-Alnetum",0,80000,2,1,18,-24,32,-15,0,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"38",2,"Carici elongatae-Alnetum",0,80000,3,1,18,-24,32,-15,0,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"39",2,"Carici elongatae-Alnetum",0,80000,2,2,18,-24,32,-15,0,1,1,"aanvulling zuurgraad","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"40",2,"Carici elongatae-Alnetum",0,80000,3,2,18,-24,32,-15,0,1,1,"aanvulling zuurgraad","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"41",2,"Carici elongatae-Alnetum",0,110000,2,1,46,-6,97,14,0,1,1,"origineel",NA,NA,NA
+"42",2,"Carici elongatae-Alnetum",0,110000,3,1,46,-6,97,14,0,1,1,"origineel",NA,NA,NA
+"43",2,"Carici elongatae-Alnetum",0,120000,2,1,46,-6,97,14,0,1,1,"interpolatie Z2",NA,NA,NA
+"44",2,"Carici elongatae-Alnetum",0,120000,3,1,46,-6,97,14,0,1,1,NA,NA,NA,NA
+"45",2,"Carici elongatae-Alnetum",0,130000,2,1,46,-6,97,14,0,1,1,"interpolatie bodemcode, met GXG en zuurgraad van Z1",NA,NA,NA
+"46",2,"Carici elongatae-Alnetum",0,130000,3,1,46,-6,97,14,0,1,1,NA,NA,NA,NA
+"47",2,"Carici elongatae-Alnetum",0,130000,2,2,46,-6,97,14,0,1,1,NA,NA,NA,NA
+"48",2,"Carici elongatae-Alnetum",0,130000,3,2,46,-6,97,14,0,1,1,NA,NA,NA,NA
+"49",2,"Carici elongatae-Alnetum",0,150000,2,1,46,-6,110,29,0,1,1,"interpolatie bodemcode, met GXG en zuurgraad van L1",NA,NA,NA
+"50",2,"Carici elongatae-Alnetum",0,150000,3,1,46,-6,110,29,0,1,1,NA,NA,NA,NA
+"51",2,"Carici elongatae-Alnetum",0,150000,2,2,46,-6,110,29,0,1,1,NA,NA,NA,NA
+"52",2,"Carici elongatae-Alnetum",0,150000,3,2,46,-6,110,29,0,1,1,NA,NA,NA,NA
+"53",2,"Carici elongatae-Alnetum",0,140000,2,1,46,-6,110,29,0,2,1,"origineel","GHG op basis van Z1",NA,NA
+"54",2,"Carici elongatae-Alnetum",0,140000,2,2,46,-6,110,29,0,2,1,"origineel","GHG op basis van Z1",NA,NA
+"55",2,"Carici elongatae-Alnetum",0,140000,3,1,46,-6,110,29,0,2,1,"origineel","GHG op basis van Z1",NA,NA
+"56",2,"Carici elongatae-Alnetum",0,140000,3,2,46,-6,110,29,0,2,1,"origineel","GHG op basis van Z1",NA,NA
+"57",2,"Carici elongatae-Alnetum",0,80000,2,1,18,-24,32,-15,0,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"58",2,"Carici elongatae-Alnetum",0,80000,3,1,18,-24,32,-15,0,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"59",2,"Carici elongatae-Alnetum",0,80000,2,2,18,-24,32,-15,0,2,1,"aanvulling zuurgraad","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"60",2,"Carici elongatae-Alnetum",0,80000,3,2,18,-24,32,-15,0,2,1,"aanvulling zuurgraad","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"61",2,"Carici elongatae-Alnetum",0,110000,2,1,46,-6,97,14,0,2,1,"origineel",NA,NA,NA
+"62",2,"Carici elongatae-Alnetum",0,110000,3,1,46,-6,97,14,0,2,1,"origineel",NA,NA,NA
+"63",2,"Carici elongatae-Alnetum",0,120000,2,1,46,-6,97,14,0,2,1,"interpolatie Z2",NA,NA,NA
+"64",2,"Carici elongatae-Alnetum",0,120000,3,1,46,-6,97,14,0,2,1,NA,NA,NA,NA
+"65",2,"Carici elongatae-Alnetum",0,130000,2,1,46,-6,97,14,0,2,1,"interpolatie bodemcode, met GXG en zuurgraad van Z1",NA,NA,NA
+"66",2,"Carici elongatae-Alnetum",0,130000,3,1,46,-6,97,14,0,2,1,NA,NA,NA,NA
+"67",2,"Carici elongatae-Alnetum",0,130000,2,2,46,-6,97,14,0,2,1,NA,NA,NA,NA
+"68",2,"Carici elongatae-Alnetum",0,130000,3,2,46,-6,97,14,0,2,1,NA,NA,NA,NA
+"69",2,"Carici elongatae-Alnetum",0,150000,2,1,46,-6,110,29,0,2,1,"interpolatie bodemcode, met GXG en zuurgraad van L1",NA,NA,NA
+"70",2,"Carici elongatae-Alnetum",0,150000,3,1,46,-6,110,29,0,2,1,NA,NA,NA,NA
+"71",2,"Carici elongatae-Alnetum",0,150000,2,2,46,-6,110,29,0,2,1,NA,NA,NA,NA
+"72",2,"Carici elongatae-Alnetum",0,150000,3,2,46,-6,110,29,0,2,1,NA,NA,NA,NA
+"73",3,"Macrophorbio-Alnetum",0,20000,4,1,30,-19,82,4,0,0,1,"origineel",NA,NA,NA
+"74",3,"Macrophorbio-Alnetum",0,20000,4,2,30,-19,82,4,0,0,1,"origineel",NA,NA,NA
+"75",3,"Macrophorbio-Alnetum",0,20000,2,1,30,-19,82,4,0,0,1,"origineel",NA,NA,NA
+"76",3,"Macrophorbio-Alnetum",0,20000,2,2,30,-19,82,4,0,0,1,"origineel",NA,NA,NA
+"77",3,"Macrophorbio-Alnetum",0,20000,3,1,30,-19,82,4,0,0,1,"origineel",NA,NA,NA
+"78",3,"Macrophorbio-Alnetum",0,20000,3,2,30,-19,82,4,0,0,1,"origineel",NA,NA,NA
+"79",3,"Macrophorbio-Alnetum",0,20000,4,3,30,-19,82,4,0,0,1,"aanvulling zuurgraad: Klei is basisch",NA,NA,NA
+"80",3,"Macrophorbio-Alnetum",0,20000,2,3,30,-19,82,4,0,0,1,NA,NA,NA,NA
+"81",3,"Macrophorbio-Alnetum",0,20000,3,3,30,-19,82,4,0,0,1,NA,NA,NA,NA
+"82",3,"Macrophorbio-Alnetum",0,30000,4,1,22,-23,62,13,0,0,1,"origineel","KV en LV afgestemd",NA,NA
+"83",3,"Macrophorbio-Alnetum",0,30000,4,2,22,-23,62,13,0,0,1,"origineel","KV en LV afgestemd",NA,NA
+"84",3,"Macrophorbio-Alnetum",0,30000,2,1,22,-23,62,13,0,0,1,"origineel","KV en LV afgestemd",NA,NA
+"85",3,"Macrophorbio-Alnetum",0,30000,2,2,22,-23,62,13,0,0,1,"origineel","KV en LV afgestemd",NA,NA
+"86",3,"Macrophorbio-Alnetum",0,30000,3,1,22,-23,62,13,0,0,1,"origineel","KV en LV afgestemd",NA,NA
+"87",3,"Macrophorbio-Alnetum",0,30000,3,2,22,-23,62,13,0,0,1,"origineel","KV en LV afgestemd",NA,NA
+"88",3,"Macrophorbio-Alnetum",0,140000,4,2,89,-47,124,-8,0,0,1,"origineel",NA,NA,NA
+"89",3,"Macrophorbio-Alnetum",0,140000,2,2,89,-47,124,-8,0,0,1,"origineel",NA,NA,NA
+"90",3,"Macrophorbio-Alnetum",0,140000,3,2,89,-47,124,-8,0,0,1,"origineel",NA,NA,NA
+"91",3,"Macrophorbio-Alnetum",0,140000,4,1,89,-47,124,-8,0,0,1,"uitbreiding zuurgraad",NA,NA,NA
+"92",3,"Macrophorbio-Alnetum",0,140000,2,1,89,-47,124,-8,0,0,1,"uitbreiding zuurgraad",NA,NA,NA
+"93",3,"Macrophorbio-Alnetum",0,140000,3,1,89,-47,124,-8,0,0,1,"uitbreiding zuurgraad",NA,NA,NA
+"94",3,"Macrophorbio-Alnetum",0,150000,4,2,22,-23,62,13,0,0,1,"origineel","KV en LV afgestemd",NA,NA
+"95",3,"Macrophorbio-Alnetum",0,150000,2,2,22,-23,62,13,0,0,1,"origineel","KV en LV afgestemd",NA,NA
+"96",3,"Macrophorbio-Alnetum",0,150000,3,2,22,-23,62,13,0,0,1,"origineel","KV en LV afgestemd",NA,NA
+"97",3,"Macrophorbio-Alnetum",0,150000,4,1,22,-23,62,13,0,0,1,"uitbreiding zuurgraad",NA,NA,NA
+"98",3,"Macrophorbio-Alnetum",0,150000,2,1,22,-23,62,13,0,0,1,"uitbreiding zuurgraad",NA,NA,NA
+"99",3,"Macrophorbio-Alnetum",0,150000,3,1,22,-23,62,13,0,0,1,"uitbreiding zuurgraad",NA,NA,NA
+"100",3,"Macrophorbio-Alnetum",0,80000,4,1,36,-22,70,-4,0,0,1,"origineel",NA,NA,NA
+"101",3,"Macrophorbio-Alnetum",0,80000,4,2,36,-22,70,-4,0,0,1,"origineel",NA,NA,NA
+"102",3,"Macrophorbio-Alnetum",0,80000,2,1,36,-22,70,-4,0,0,1,"origineel",NA,NA,NA
+"103",3,"Macrophorbio-Alnetum",0,80000,2,2,36,-22,70,-4,0,0,1,"origineel",NA,NA,NA
+"104",3,"Macrophorbio-Alnetum",0,80000,3,1,36,-22,70,-4,0,0,1,"origineel",NA,NA,NA
+"105",3,"Macrophorbio-Alnetum",0,80000,3,2,36,-22,70,-4,0,0,1,"origineel",NA,NA,NA
+"106",3,"Macrophorbio-Alnetum",0,130000,4,2,22,-23,62,13,0,0,1,"uitbreiding ZV op basis van LV en KV",NA,NA,NA
+"107",3,"Macrophorbio-Alnetum",0,130000,2,2,22,-23,62,13,0,0,1,NA,NA,NA,NA
+"108",3,"Macrophorbio-Alnetum",0,130000,3,2,22,-23,62,13,0,0,1,NA,NA,NA,NA
+"109",3,"Macrophorbio-Alnetum",0,130000,4,1,22,-23,62,13,0,0,1,NA,NA,NA,NA
+"110",3,"Macrophorbio-Alnetum",0,130000,2,1,22,-23,62,13,0,0,1,NA,NA,NA,NA
+"111",3,"Macrophorbio-Alnetum",0,130000,3,1,22,-23,62,13,0,0,1,NA,NA,NA,NA
+"112",3,"Macrophorbio-Alnetum",0,20000,4,1,30,-19,82,4,0,1,1,"origineel",NA,NA,NA
+"113",3,"Macrophorbio-Alnetum",0,20000,4,2,30,-19,82,4,0,1,1,"origineel",NA,NA,NA
+"114",3,"Macrophorbio-Alnetum",0,20000,2,1,30,-19,82,4,0,1,1,"origineel",NA,NA,NA
+"115",3,"Macrophorbio-Alnetum",0,20000,2,2,30,-19,82,4,0,1,1,"origineel",NA,NA,NA
+"116",3,"Macrophorbio-Alnetum",0,20000,3,1,30,-19,82,4,0,1,1,"origineel",NA,NA,NA
+"117",3,"Macrophorbio-Alnetum",0,20000,3,2,30,-19,82,4,0,1,1,"origineel",NA,NA,NA
+"118",3,"Macrophorbio-Alnetum",0,20000,4,3,30,-19,82,4,0,1,1,"aanvulling zuurgraad: Klei is basisch",NA,NA,NA
+"119",3,"Macrophorbio-Alnetum",0,20000,2,3,30,-19,82,4,0,1,1,NA,NA,NA,NA
+"120",3,"Macrophorbio-Alnetum",0,20000,3,3,30,-19,82,4,0,1,1,NA,NA,NA,NA
+"121",3,"Macrophorbio-Alnetum",0,30000,4,1,22,-23,62,13,0,1,1,"origineel","KV en LV afgestemd",NA,NA
+"122",3,"Macrophorbio-Alnetum",0,30000,4,2,22,-23,62,13,0,1,1,"origineel","KV en LV afgestemd",NA,NA
+"123",3,"Macrophorbio-Alnetum",0,30000,2,1,22,-23,62,13,0,1,1,"origineel","KV en LV afgestemd",NA,NA
+"124",3,"Macrophorbio-Alnetum",0,30000,2,2,22,-23,62,13,0,1,1,"origineel","KV en LV afgestemd",NA,NA
+"125",3,"Macrophorbio-Alnetum",0,30000,3,1,22,-23,62,13,0,1,1,"origineel","KV en LV afgestemd",NA,NA
+"126",3,"Macrophorbio-Alnetum",0,30000,3,2,22,-23,62,13,0,1,1,"origineel","KV en LV afgestemd",NA,NA
+"127",3,"Macrophorbio-Alnetum",0,140000,4,2,89,-47,124,-8,0,1,1,"origineel",NA,NA,NA
+"128",3,"Macrophorbio-Alnetum",0,140000,2,2,89,-47,124,-8,0,1,1,"origineel",NA,NA,NA
+"129",3,"Macrophorbio-Alnetum",0,140000,3,2,89,-47,124,-8,0,1,1,"origineel",NA,NA,NA
+"130",3,"Macrophorbio-Alnetum",0,140000,4,1,89,-47,124,-8,0,1,1,"uitbreiding zuurgraad",NA,NA,NA
+"131",3,"Macrophorbio-Alnetum",0,140000,2,1,89,-47,124,-8,0,1,1,"uitbreiding zuurgraad",NA,NA,NA
+"132",3,"Macrophorbio-Alnetum",0,140000,3,1,89,-47,124,-8,0,1,1,"uitbreiding zuurgraad",NA,NA,NA
+"133",3,"Macrophorbio-Alnetum",0,150000,4,2,22,-23,62,13,0,1,1,"origineel","KV en LV afgestemd",NA,NA
+"134",3,"Macrophorbio-Alnetum",0,150000,2,2,22,-23,62,13,0,1,1,"origineel","KV en LV afgestemd",NA,NA
+"135",3,"Macrophorbio-Alnetum",0,150000,3,2,22,-23,62,13,0,1,1,"origineel","KV en LV afgestemd",NA,NA
+"136",3,"Macrophorbio-Alnetum",0,150000,4,1,22,-23,62,13,0,1,1,"uitbreiding zuurgraad",NA,NA,NA
+"137",3,"Macrophorbio-Alnetum",0,150000,2,1,22,-23,62,13,0,1,1,"uitbreiding zuurgraad",NA,NA,NA
+"138",3,"Macrophorbio-Alnetum",0,150000,3,1,22,-23,62,13,0,1,1,"uitbreiding zuurgraad",NA,NA,NA
+"139",3,"Macrophorbio-Alnetum",0,80000,4,1,36,-22,70,-4,0,1,1,"origineel",NA,NA,NA
+"140",3,"Macrophorbio-Alnetum",0,80000,4,2,36,-22,70,-4,0,1,1,"origineel",NA,NA,NA
+"141",3,"Macrophorbio-Alnetum",0,80000,2,1,36,-22,70,-4,0,1,1,"origineel",NA,NA,NA
+"142",3,"Macrophorbio-Alnetum",0,80000,2,2,36,-22,70,-4,0,1,1,"origineel",NA,NA,NA
+"143",3,"Macrophorbio-Alnetum",0,80000,3,1,36,-22,70,-4,0,1,1,"origineel",NA,NA,NA
+"144",3,"Macrophorbio-Alnetum",0,80000,3,2,36,-22,70,-4,0,1,1,"origineel",NA,NA,NA
+"145",3,"Macrophorbio-Alnetum",0,130000,4,2,22,-23,62,13,0,1,1,"uitbreiding ZV op basis van LV en KV",NA,NA,NA
+"146",3,"Macrophorbio-Alnetum",0,130000,2,2,22,-23,62,13,0,1,1,NA,NA,NA,NA
+"147",3,"Macrophorbio-Alnetum",0,130000,3,2,22,-23,62,13,0,1,1,NA,NA,NA,NA
+"148",3,"Macrophorbio-Alnetum",0,130000,4,1,22,-23,62,13,0,1,1,NA,NA,NA,NA
+"149",3,"Macrophorbio-Alnetum",0,130000,2,1,22,-23,62,13,0,1,1,NA,NA,NA,NA
+"150",3,"Macrophorbio-Alnetum",0,130000,3,1,22,-23,62,13,0,1,1,NA,NA,NA,NA
+"151",3,"Macrophorbio-Alnetum",0,20000,4,1,30,-19,82,4,0,2,1,"origineel",NA,NA,NA
+"152",3,"Macrophorbio-Alnetum",0,20000,4,2,30,-19,82,4,0,2,1,"origineel",NA,NA,NA
+"153",3,"Macrophorbio-Alnetum",0,20000,2,1,30,-19,82,4,0,2,1,"origineel",NA,NA,NA
+"154",3,"Macrophorbio-Alnetum",0,20000,2,2,30,-19,82,4,0,2,1,"origineel",NA,NA,NA
+"155",3,"Macrophorbio-Alnetum",0,20000,3,1,30,-19,82,4,0,2,1,"origineel",NA,NA,NA
+"156",3,"Macrophorbio-Alnetum",0,20000,3,2,30,-19,82,4,0,2,1,"origineel",NA,NA,NA
+"157",3,"Macrophorbio-Alnetum",0,20000,4,3,30,-19,82,4,0,2,1,"aanvulling zuurgraad: Klei is basisch",NA,NA,NA
+"158",3,"Macrophorbio-Alnetum",0,20000,2,3,30,-19,82,4,0,2,1,NA,NA,NA,NA
+"159",3,"Macrophorbio-Alnetum",0,20000,3,3,30,-19,82,4,0,2,1,NA,NA,NA,NA
+"160",3,"Macrophorbio-Alnetum",0,30000,4,1,22,-23,62,13,0,2,1,"origineel","KV en LV afgestemd",NA,NA
+"161",3,"Macrophorbio-Alnetum",0,30000,4,2,22,-23,62,13,0,2,1,"origineel","KV en LV afgestemd",NA,NA
+"162",3,"Macrophorbio-Alnetum",0,30000,2,1,22,-23,62,13,0,2,1,"origineel","KV en LV afgestemd",NA,NA
+"163",3,"Macrophorbio-Alnetum",0,30000,2,2,22,-23,62,13,0,2,1,"origineel","KV en LV afgestemd",NA,NA
+"164",3,"Macrophorbio-Alnetum",0,30000,3,1,22,-23,62,13,0,2,1,"origineel","KV en LV afgestemd",NA,NA
+"165",3,"Macrophorbio-Alnetum",0,30000,3,2,22,-23,62,13,0,2,1,"origineel","KV en LV afgestemd",NA,NA
+"166",3,"Macrophorbio-Alnetum",0,140000,4,2,89,-47,124,-8,0,2,1,"origineel",NA,NA,NA
+"167",3,"Macrophorbio-Alnetum",0,140000,2,2,89,-47,124,-8,0,2,1,"origineel",NA,NA,NA
+"168",3,"Macrophorbio-Alnetum",0,140000,3,2,89,-47,124,-8,0,2,1,"origineel",NA,NA,NA
+"169",3,"Macrophorbio-Alnetum",0,140000,4,1,89,-47,124,-8,0,2,1,"uitbreiding zuurgraad",NA,NA,NA
+"170",3,"Macrophorbio-Alnetum",0,140000,2,1,89,-47,124,-8,0,2,1,"uitbreiding zuurgraad",NA,NA,NA
+"171",3,"Macrophorbio-Alnetum",0,140000,3,1,89,-47,124,-8,0,2,1,"uitbreiding zuurgraad",NA,NA,NA
+"172",3,"Macrophorbio-Alnetum",0,150000,4,2,22,-23,62,13,0,2,1,"origineel","KV en LV afgestemd",NA,NA
+"173",3,"Macrophorbio-Alnetum",0,150000,2,2,22,-23,62,13,0,2,1,"origineel","KV en LV afgestemd",NA,NA
+"174",3,"Macrophorbio-Alnetum",0,150000,3,2,22,-23,62,13,0,2,1,"origineel","KV en LV afgestemd",NA,NA
+"175",3,"Macrophorbio-Alnetum",0,150000,4,1,22,-23,62,13,0,2,1,"uitbreiding zuurgraad",NA,NA,NA
+"176",3,"Macrophorbio-Alnetum",0,150000,2,1,22,-23,62,13,0,2,1,"uitbreiding zuurgraad",NA,NA,NA
+"177",3,"Macrophorbio-Alnetum",0,150000,3,1,22,-23,62,13,0,2,1,"uitbreiding zuurgraad",NA,NA,NA
+"178",3,"Macrophorbio-Alnetum",0,80000,4,1,36,-22,70,-4,0,2,1,"origineel",NA,NA,NA
+"179",3,"Macrophorbio-Alnetum",0,80000,4,2,36,-22,70,-4,0,2,1,"origineel",NA,NA,NA
+"180",3,"Macrophorbio-Alnetum",0,80000,2,1,36,-22,70,-4,0,2,1,"origineel",NA,NA,NA
+"181",3,"Macrophorbio-Alnetum",0,80000,2,2,36,-22,70,-4,0,2,1,"origineel",NA,NA,NA
+"182",3,"Macrophorbio-Alnetum",0,80000,3,1,36,-22,70,-4,0,2,1,"origineel",NA,NA,NA
+"183",3,"Macrophorbio-Alnetum",0,80000,3,2,36,-22,70,-4,0,2,1,"origineel",NA,NA,NA
+"184",3,"Macrophorbio-Alnetum",0,130000,4,2,22,-23,62,13,0,2,1,"uitbreiding ZV op basis van LV en KV",NA,NA,NA
+"185",3,"Macrophorbio-Alnetum",0,130000,2,2,22,-23,62,13,0,2,1,NA,NA,NA,NA
+"186",3,"Macrophorbio-Alnetum",0,130000,3,2,22,-23,62,13,0,2,1,NA,NA,NA,NA
+"187",3,"Macrophorbio-Alnetum",0,130000,4,1,22,-23,62,13,0,2,1,NA,NA,NA,NA
+"188",3,"Macrophorbio-Alnetum",0,130000,2,1,22,-23,62,13,0,2,1,NA,NA,NA,NA
+"189",3,"Macrophorbio-Alnetum",0,130000,3,1,22,-23,62,13,0,2,1,NA,NA,NA,NA
+"190",4,"Pruno-Fraxinetum",0,140000,4,1,42,1,89,14,0,0,1,"origineel",NA,NA,NA
+"191",4,"Pruno-Fraxinetum",0,140000,4,2,42,1,89,14,0,0,1,"origineel",NA,NA,NA
+"192",4,"Pruno-Fraxinetum",0,140000,2,1,42,1,89,14,0,0,1,"origineel",NA,NA,NA
+"193",4,"Pruno-Fraxinetum",0,140000,2,2,42,1,89,14,0,0,1,"origineel",NA,NA,NA
+"194",4,"Pruno-Fraxinetum",0,140000,3,1,42,1,89,14,0,0,1,"origineel",NA,NA,NA
+"195",4,"Pruno-Fraxinetum",0,140000,3,2,42,1,89,14,0,0,1,"origineel",NA,NA,NA
+"196",4,"Pruno-Fraxinetum",0,150000,4,1,43,-13,79,6,0,0,1,"origineel",NA,NA,NA
+"197",4,"Pruno-Fraxinetum",0,150000,4,2,43,-13,79,6,0,0,1,"origineel",NA,NA,NA
+"198",4,"Pruno-Fraxinetum",0,150000,2,1,43,-13,79,6,0,0,1,"origineel",NA,NA,NA
+"199",4,"Pruno-Fraxinetum",0,150000,2,2,43,-13,79,6,0,0,1,"origineel",NA,NA,NA
+"200",4,"Pruno-Fraxinetum",0,150000,3,1,43,-13,79,6,0,0,1,"origineel",NA,NA,NA
+"201",4,"Pruno-Fraxinetum",0,150000,3,2,43,-13,79,6,0,0,1,"origineel",NA,NA,NA
+"202",4,"Pruno-Fraxinetum",0,20000,4,1,42,1,89,14,0,0,1,"uitbreiding op basis van literatuur (project Hans J.)",NA,NA,NA
+"203",4,"Pruno-Fraxinetum",0,20000,4,2,42,1,89,14,0,0,1,NA,NA,NA,NA
+"204",4,"Pruno-Fraxinetum",0,20000,2,1,42,1,89,14,0,0,1,NA,NA,NA,NA
+"205",4,"Pruno-Fraxinetum",0,20000,2,2,42,1,89,14,0,0,1,NA,NA,NA,NA
+"206",4,"Pruno-Fraxinetum",0,20000,3,1,42,1,89,14,0,0,1,NA,NA,NA,NA
+"207",4,"Pruno-Fraxinetum",0,20000,3,2,42,1,89,14,0,0,1,NA,NA,NA,NA
+"208",4,"Pruno-Fraxinetum",0,20000,4,3,42,1,89,14,0,0,1,"uitbreiding zuurgraad: cf. SynBioSys",NA,NA,NA
+"209",4,"Pruno-Fraxinetum",0,20000,2,3,42,1,89,14,0,0,1,"klei is basisch",NA,NA,NA
+"210",4,"Pruno-Fraxinetum",0,20000,3,3,42,1,89,14,0,0,1,NA,NA,NA,NA
+"211",4,"Pruno-Fraxinetum",0,30000,4,1,43,-13,79,6,0,0,1,NA,NA,NA,NA
+"212",4,"Pruno-Fraxinetum",0,30000,4,2,43,-13,79,6,0,0,1,NA,NA,NA,NA
+"213",4,"Pruno-Fraxinetum",0,30000,2,1,43,-13,79,6,0,0,1,NA,NA,NA,NA
+"214",4,"Pruno-Fraxinetum",0,30000,2,2,43,-13,79,6,0,0,1,NA,NA,NA,NA
+"215",4,"Pruno-Fraxinetum",0,30000,3,1,43,-13,79,6,0,0,1,NA,NA,NA,NA
+"216",4,"Pruno-Fraxinetum",0,30000,3,2,43,-13,79,6,0,0,1,NA,NA,NA,NA
+"217",4,"Pruno-Fraxinetum",0,130000,4,1,43,-13,79,6,0,0,1,"ZV, cf. Synbiosys lemig zand",NA,NA,NA
+"218",4,"Pruno-Fraxinetum",0,130000,2,1,43,-13,79,6,0,0,1,NA,NA,NA,NA
+"219",4,"Pruno-Fraxinetum",0,130000,3,1,43,-13,79,6,0,0,1,NA,NA,NA,NA
+"220",4,"Pruno-Fraxinetum",0,130000,4,2,43,-13,79,6,0,0,1,NA,NA,NA,NA
+"221",4,"Pruno-Fraxinetum",0,130000,2,2,43,-13,79,6,0,0,1,NA,NA,NA,NA
+"222",4,"Pruno-Fraxinetum",0,130000,3,2,43,-13,79,6,0,0,1,NA,NA,NA,NA
+"223",5,"Carpinion betuli",0,140000,2,1,66,5,214,17,0,0,1,"origineel",NA,NA,NA
+"224",5,"Carpinion betuli",0,140000,2,2,66,5,214,17,0,0,1,"origineel",NA,NA,NA
+"225",5,"Carpinion betuli",0,140000,3,1,66,5,214,17,0,0,1,"origineel",NA,NA,NA
+"226",5,"Carpinion betuli",0,140000,3,2,66,5,214,17,0,0,1,"origineel",NA,NA,NA
+"227",6,"Betulo-Quercetum roboris",0,110000,2,1,179,21,272,38,0,0,1,"origineel",NA,NA,NA
+"228",6,"Betulo-Quercetum roboris",0,110000,1,1,179,21,272,38,0,0,1,"origineel",NA,NA,NA
+"229",6,"Betulo-Quercetum roboris",0,120000,2,1,179,12,272,38,0,0,1,"origineel","GXG volgens Z1",NA,NA
+"230",6,"Betulo-Quercetum roboris",0,120000,1,1,179,12,272,38,0,0,1,"origineel","GXG volgens Z1",NA,NA
+"231",7,"Caricion gracilis",0,20000,4,3,43,-21,99,11,1,1,1,"origineel",NA,NA,NA
+"232",7,"Caricion gracilis",0,20000,4,2,43,-21,99,11,1,1,1,"interpolatie zuurgraad",NA,NA,NA
+"233",7,"Caricion gracilis",0,20000,4,1,43,-21,99,11,1,1,1,"origineel",NA,NA,NA
+"234",7,"Caricion gracilis",0,20000,2,3,43,-21,99,11,1,1,1,"origineel",NA,NA,NA
+"235",7,"Caricion gracilis",0,20000,2,2,43,-21,99,11,1,1,1,"interpolatie zuurgraad",NA,NA,NA
+"236",7,"Caricion gracilis",0,20000,2,1,43,-21,99,11,1,1,1,"origineel",NA,NA,NA
+"237",7,"Caricion gracilis",0,20000,3,3,43,-21,99,11,1,1,1,"origineel",NA,NA,NA
+"238",7,"Caricion gracilis",0,20000,3,2,43,-21,99,11,1,1,1,"interpolatie zuurgraad",NA,NA,NA
+"239",7,"Caricion gracilis",0,20000,3,1,43,-21,99,11,1,1,1,"origineel",NA,NA,NA
+"240",7,"Caricion gracilis",0,30000,4,1,32,-9,70,3,1,1,1,"origineel",NA,NA,NA
+"241",7,"Caricion gracilis",0,30000,4,2,32,-9,70,3,1,1,1,"origineel",NA,NA,NA
+"242",7,"Caricion gracilis",0,30000,2,1,32,-9,70,3,1,1,1,"origineel",NA,NA,NA
+"243",7,"Caricion gracilis",0,30000,2,2,32,-9,70,3,1,1,1,"origineel",NA,NA,NA
+"244",7,"Caricion gracilis",0,30000,3,1,32,-9,70,3,1,1,1,"origineel",NA,NA,NA
+"245",7,"Caricion gracilis",0,30000,3,2,32,-9,70,3,1,1,1,"origineel",NA,NA,NA
+"246",7,"Caricion gracilis",0,30000,4,3,32,-9,70,3,1,1,1,"aanvulling zuurgraad",NA,NA,NA
+"247",7,"Caricion gracilis",0,30000,2,3,32,-9,70,3,1,1,1,"aanvulling zuurgraad",NA,NA,NA
+"248",7,"Caricion gracilis",0,30000,3,3,32,-9,70,3,1,1,1,"aanvulling zuurgraad",NA,NA,NA
+"249",7,"Caricion gracilis",0,140000,4,3,31,-32,73,-1,1,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"250",7,"Caricion gracilis",0,140000,4,1,31,-32,73,-1,1,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"251",7,"Caricion gracilis",0,140000,4,2,31,-32,73,-1,1,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"252",7,"Caricion gracilis",0,140000,2,3,31,-32,73,-1,1,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"253",7,"Caricion gracilis",0,140000,2,1,31,-32,73,-1,1,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"254",7,"Caricion gracilis",0,140000,2,2,31,-32,73,-1,1,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"255",7,"Caricion gracilis",0,140000,3,3,31,-32,73,-1,1,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"256",7,"Caricion gracilis",0,140000,3,1,31,-32,73,-1,1,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"257",7,"Caricion gracilis",0,140000,3,2,31,-32,73,-1,1,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"258",7,"Caricion gracilis",0,150000,4,3,12,-10,75,17,1,1,1,"origineel",NA,NA,NA
+"259",7,"Caricion gracilis",0,150000,4,2,12,-10,75,17,1,1,1,"origineel",NA,NA,NA
+"260",7,"Caricion gracilis",0,150000,2,3,12,-10,75,17,1,1,1,"origineel",NA,NA,NA
+"261",7,"Caricion gracilis",0,150000,2,2,12,-10,75,17,1,1,1,"origineel",NA,NA,NA
+"262",7,"Caricion gracilis",0,150000,3,3,12,-10,75,17,1,1,1,"origineel",NA,NA,NA
+"263",7,"Caricion gracilis",0,150000,3,2,12,-10,75,17,1,1,1,"origineel",NA,NA,NA
+"264",7,"Caricion gracilis",0,150000,4,1,12,-10,75,17,1,1,1,"aanvulling zuurgraad",NA,NA,NA
+"265",7,"Caricion gracilis",0,150000,2,1,12,-10,75,17,1,1,1,"aanvulling zuurgraad",NA,NA,NA
+"266",7,"Caricion gracilis",0,150000,3,1,12,-10,75,17,1,1,1,"aanvulling zuurgraad",NA,NA,NA
+"267",7,"Caricion gracilis",0,80000,4,3,9,-28,77,-19,1,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"268",7,"Caricion gracilis",0,80000,4,2,9,-28,77,-19,1,1,1,"interpolatie zuurgraad","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"269",7,"Caricion gracilis",0,80000,4,1,9,-28,77,-19,1,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"270",7,"Caricion gracilis",0,80000,2,3,9,-28,77,-19,1,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"271",7,"Caricion gracilis",0,80000,2,2,9,-28,77,-19,1,1,1,"interpolatie zuurgraad","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"272",7,"Caricion gracilis",0,80000,2,1,9,-28,77,-19,1,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"273",7,"Caricion gracilis",0,80000,3,3,9,-28,77,-19,1,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"274",7,"Caricion gracilis",0,80000,3,2,9,-28,77,-19,1,1,1,"interpolatie zuurgraad","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"275",7,"Caricion gracilis",0,80000,3,1,9,-28,77,-19,1,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"276",7,"Caricion gracilis",0,130000,4,1,45,-10,75,17,1,1,1,"origineel","GXG volgens LV",NA,NA
+"277",7,"Caricion gracilis",0,130000,2,1,45,-10,75,17,1,1,1,"origineel","GXG volgens LV",NA,NA
+"278",7,"Caricion gracilis",0,130000,3,1,45,-10,75,17,1,1,1,"origineel","GXG volgens LV",NA,NA
+"279",7,"Caricion gracilis",0,130000,4,2,45,-10,75,17,1,1,1,"aanvulling zuurgraad","GXG volgens LV",NA,NA
+"280",7,"Caricion gracilis",0,130000,2,2,45,-10,75,17,1,1,1,"aanvulling zuurgraad","GXG volgens LV",NA,NA
+"281",7,"Caricion gracilis",0,130000,3,2,45,-10,75,17,1,1,1,"aanvulling zuurgraad","GXG volgens LV",NA,NA
+"282",7,"Caricion gracilis",0,20000,4,3,43,-21,99,11,1,2,1,"origineel",NA,NA,NA
+"283",7,"Caricion gracilis",0,20000,4,2,43,-21,99,11,1,2,1,"interpolatie zuurgraad",NA,NA,NA
+"284",7,"Caricion gracilis",0,20000,4,1,43,-21,99,11,1,2,1,"origineel",NA,NA,NA
+"285",7,"Caricion gracilis",0,20000,2,3,43,-21,99,11,1,2,1,"origineel",NA,NA,NA
+"286",7,"Caricion gracilis",0,20000,2,2,43,-21,99,11,1,2,1,"interpolatie zuurgraad",NA,NA,NA
+"287",7,"Caricion gracilis",0,20000,2,1,43,-21,99,11,1,2,1,"origineel",NA,NA,NA
+"288",7,"Caricion gracilis",0,20000,3,3,43,-21,99,11,1,2,1,"origineel",NA,NA,NA
+"289",7,"Caricion gracilis",0,20000,3,2,43,-21,99,11,1,2,1,"interpolatie zuurgraad",NA,NA,NA
+"290",7,"Caricion gracilis",0,20000,3,1,43,-21,99,11,1,2,1,"origineel",NA,NA,NA
+"291",7,"Caricion gracilis",0,30000,4,1,32,-9,70,3,1,2,1,"origineel",NA,NA,NA
+"292",7,"Caricion gracilis",0,30000,4,2,32,-9,70,3,1,2,1,"origineel",NA,NA,NA
+"293",7,"Caricion gracilis",0,30000,2,1,32,-9,70,3,1,2,1,"origineel",NA,NA,NA
+"294",7,"Caricion gracilis",0,30000,2,2,32,-9,70,3,1,2,1,"origineel",NA,NA,NA
+"295",7,"Caricion gracilis",0,30000,3,1,32,-9,70,3,1,2,1,"origineel",NA,NA,NA
+"296",7,"Caricion gracilis",0,30000,3,2,32,-9,70,3,1,2,1,"origineel",NA,NA,NA
+"297",7,"Caricion gracilis",0,30000,4,3,32,-9,70,3,1,2,1,"aanvulling zuurgraad",NA,NA,NA
+"298",7,"Caricion gracilis",0,30000,2,3,32,-9,70,3,1,2,1,"aanvulling zuurgraad",NA,NA,NA
+"299",7,"Caricion gracilis",0,30000,3,3,32,-9,70,3,1,2,1,"aanvulling zuurgraad",NA,NA,NA
+"300",7,"Caricion gracilis",0,140000,4,3,31,-32,73,-1,1,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"301",7,"Caricion gracilis",0,140000,4,1,31,-32,73,-1,1,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"302",7,"Caricion gracilis",0,140000,4,2,31,-32,73,-1,1,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"303",7,"Caricion gracilis",0,140000,2,3,31,-32,73,-1,1,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"304",7,"Caricion gracilis",0,140000,2,1,31,-32,73,-1,1,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"305",7,"Caricion gracilis",0,140000,2,2,31,-32,73,-1,1,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"306",7,"Caricion gracilis",0,140000,3,3,31,-32,73,-1,1,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"307",7,"Caricion gracilis",0,140000,3,1,31,-32,73,-1,1,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"308",7,"Caricion gracilis",0,140000,3,2,31,-32,73,-1,1,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"309",7,"Caricion gracilis",0,150000,4,3,12,-10,75,17,1,2,1,"origineel",NA,NA,NA
+"310",7,"Caricion gracilis",0,150000,4,2,12,-10,75,17,1,2,1,"origineel",NA,NA,NA
+"311",7,"Caricion gracilis",0,150000,2,3,12,-10,75,17,1,2,1,"origineel",NA,NA,NA
+"312",7,"Caricion gracilis",0,150000,2,2,12,-10,75,17,1,2,1,"origineel",NA,NA,NA
+"313",7,"Caricion gracilis",0,150000,3,3,12,-10,75,17,1,2,1,"origineel",NA,NA,NA
+"314",7,"Caricion gracilis",0,150000,3,2,12,-10,75,17,1,2,1,"origineel",NA,NA,NA
+"315",7,"Caricion gracilis",0,150000,4,1,12,-10,75,17,1,2,1,"aanvulling zuurgraad",NA,NA,NA
+"316",7,"Caricion gracilis",0,150000,2,1,12,-10,75,17,1,2,1,"aanvulling zuurgraad",NA,NA,NA
+"317",7,"Caricion gracilis",0,150000,3,1,12,-10,75,17,1,2,1,"aanvulling zuurgraad",NA,NA,NA
+"318",7,"Caricion gracilis",0,80000,4,3,9,-28,77,-19,1,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"319",7,"Caricion gracilis",0,80000,4,2,9,-28,77,-19,1,2,1,"interpolatie zuurgraad","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"320",7,"Caricion gracilis",0,80000,4,1,9,-28,77,-19,1,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"321",7,"Caricion gracilis",0,80000,2,3,9,-28,77,-19,1,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"322",7,"Caricion gracilis",0,80000,2,2,9,-28,77,-19,1,2,1,"interpolatie zuurgraad","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"323",7,"Caricion gracilis",0,80000,2,1,9,-28,77,-19,1,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"324",7,"Caricion gracilis",0,80000,3,3,9,-28,77,-19,1,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"325",7,"Caricion gracilis",0,80000,3,2,9,-28,77,-19,1,2,1,"interpolatie zuurgraad","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"326",7,"Caricion gracilis",0,80000,3,1,9,-28,77,-19,1,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"327",7,"Caricion gracilis",0,130000,4,1,45,-10,75,17,1,2,1,"origineel","GXG volgens LV",NA,NA
+"328",7,"Caricion gracilis",0,130000,2,1,45,-10,75,17,1,2,1,"origineel","GXG volgens LV",NA,NA
+"329",7,"Caricion gracilis",0,130000,3,1,45,-10,75,17,1,2,1,"origineel","GXG volgens LV",NA,NA
+"330",7,"Caricion gracilis",0,130000,4,2,45,-10,75,17,1,2,1,"aanvulling zuurgraad","GXG volgens LV",NA,NA
+"331",7,"Caricion gracilis",0,130000,2,2,45,-10,75,17,1,2,1,"aanvulling zuurgraad","GXG volgens LV",NA,NA
+"332",7,"Caricion gracilis",0,130000,3,2,45,-10,75,17,1,2,1,"aanvulling zuurgraad","GXG volgens LV",NA,NA
+"333",7,"Caricion gracilis",0,20000,4,3,43,-21,99,11,3,1,1,"origineel",NA,NA,NA
+"334",7,"Caricion gracilis",0,20000,4,2,43,-21,99,11,3,1,1,"interpolatie zuurgraad",NA,NA,NA
+"335",7,"Caricion gracilis",0,20000,4,1,43,-21,99,11,3,1,1,"origineel",NA,NA,NA
+"336",7,"Caricion gracilis",0,20000,2,3,43,-21,99,11,3,1,1,"origineel",NA,NA,NA
+"337",7,"Caricion gracilis",0,20000,2,2,43,-21,99,11,3,1,1,"interpolatie zuurgraad",NA,NA,NA
+"338",7,"Caricion gracilis",0,20000,2,1,43,-21,99,11,3,1,1,"origineel",NA,NA,NA
+"339",7,"Caricion gracilis",0,20000,3,3,43,-21,99,11,3,1,1,"origineel",NA,NA,NA
+"340",7,"Caricion gracilis",0,20000,3,2,43,-21,99,11,3,1,1,"interpolatie zuurgraad",NA,NA,NA
+"341",7,"Caricion gracilis",0,20000,3,1,43,-21,99,11,3,1,1,"origineel",NA,NA,NA
+"342",7,"Caricion gracilis",0,30000,4,1,32,-9,70,3,3,1,1,"origineel",NA,NA,NA
+"343",7,"Caricion gracilis",0,30000,4,2,32,-9,70,3,3,1,1,"origineel",NA,NA,NA
+"344",7,"Caricion gracilis",0,30000,2,1,32,-9,70,3,3,1,1,"origineel",NA,NA,NA
+"345",7,"Caricion gracilis",0,30000,2,2,32,-9,70,3,3,1,1,"origineel",NA,NA,NA
+"346",7,"Caricion gracilis",0,30000,3,1,32,-9,70,3,3,1,1,"origineel",NA,NA,NA
+"347",7,"Caricion gracilis",0,30000,3,2,32,-9,70,3,3,1,1,"origineel",NA,NA,NA
+"348",7,"Caricion gracilis",0,30000,4,3,32,-9,70,3,3,1,1,"aanvulling zuurgraad",NA,NA,NA
+"349",7,"Caricion gracilis",0,30000,2,3,32,-9,70,3,3,1,1,"aanvulling zuurgraad",NA,NA,NA
+"350",7,"Caricion gracilis",0,30000,3,3,32,-9,70,3,3,1,1,"aanvulling zuurgraad",NA,NA,NA
+"351",7,"Caricion gracilis",0,140000,4,3,31,-32,73,-1,3,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"352",7,"Caricion gracilis",0,140000,4,1,31,-32,73,-1,3,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"353",7,"Caricion gracilis",0,140000,4,2,31,-32,73,-1,3,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"354",7,"Caricion gracilis",0,140000,2,3,31,-32,73,-1,3,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"355",7,"Caricion gracilis",0,140000,2,1,31,-32,73,-1,3,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"356",7,"Caricion gracilis",0,140000,2,2,31,-32,73,-1,3,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"357",7,"Caricion gracilis",0,140000,3,3,31,-32,73,-1,3,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"358",7,"Caricion gracilis",0,140000,3,1,31,-32,73,-1,3,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"359",7,"Caricion gracilis",0,140000,3,2,31,-32,73,-1,3,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"360",7,"Caricion gracilis",0,150000,4,3,12,-10,75,17,3,1,1,"origineel",NA,NA,NA
+"361",7,"Caricion gracilis",0,150000,4,2,12,-10,75,17,3,1,1,"origineel",NA,NA,NA
+"362",7,"Caricion gracilis",0,150000,2,3,12,-10,75,17,3,1,1,"origineel",NA,NA,NA
+"363",7,"Caricion gracilis",0,150000,2,2,12,-10,75,17,3,1,1,"origineel",NA,NA,NA
+"364",7,"Caricion gracilis",0,150000,3,3,12,-10,75,17,3,1,1,"origineel",NA,NA,NA
+"365",7,"Caricion gracilis",0,150000,3,2,12,-10,75,17,3,1,1,"origineel",NA,NA,NA
+"366",7,"Caricion gracilis",0,150000,4,1,12,-10,75,17,3,1,1,"aanvulling zuurgraad",NA,NA,NA
+"367",7,"Caricion gracilis",0,150000,2,1,12,-10,75,17,3,1,1,"aanvulling zuurgraad",NA,NA,NA
+"368",7,"Caricion gracilis",0,150000,3,1,12,-10,75,17,3,1,1,"aanvulling zuurgraad",NA,NA,NA
+"369",7,"Caricion gracilis",0,80000,4,3,9,-28,77,-19,3,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"370",7,"Caricion gracilis",0,80000,4,2,9,-28,77,-19,3,1,1,"interpolatie zuurgraad","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"371",7,"Caricion gracilis",0,80000,4,1,9,-28,77,-19,3,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"372",7,"Caricion gracilis",0,80000,2,3,9,-28,77,-19,3,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"373",7,"Caricion gracilis",0,80000,2,2,9,-28,77,-19,3,1,1,"interpolatie zuurgraad","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"374",7,"Caricion gracilis",0,80000,2,1,9,-28,77,-19,3,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"375",7,"Caricion gracilis",0,80000,3,3,9,-28,77,-19,3,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"376",7,"Caricion gracilis",0,80000,3,2,9,-28,77,-19,3,1,1,"interpolatie zuurgraad","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"377",7,"Caricion gracilis",0,80000,3,1,9,-28,77,-19,3,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"378",7,"Caricion gracilis",0,130000,4,1,45,-10,75,17,3,1,1,"origineel","GXG volgens LV",NA,NA
+"379",7,"Caricion gracilis",0,130000,2,1,45,-10,75,17,3,1,1,"origineel","GXG volgens LV",NA,NA
+"380",7,"Caricion gracilis",0,130000,3,1,45,-10,75,17,3,1,1,"origineel","GXG volgens LV",NA,NA
+"381",7,"Caricion gracilis",0,130000,4,2,45,-10,75,17,3,1,1,"aanvulling zuurgraad","GXG volgens LV",NA,NA
+"382",7,"Caricion gracilis",0,130000,2,2,45,-10,75,17,3,1,1,"aanvulling zuurgraad","GXG volgens LV",NA,NA
+"383",7,"Caricion gracilis",0,130000,3,2,45,-10,75,17,3,1,1,"aanvulling zuurgraad","GXG volgens LV",NA,NA
+"384",7,"Caricion gracilis",0,20000,4,3,43,-21,99,11,3,2,1,"origineel",NA,NA,NA
+"385",7,"Caricion gracilis",0,20000,4,2,43,-21,99,11,3,2,1,"interpolatie zuurgraad",NA,NA,NA
+"386",7,"Caricion gracilis",0,20000,4,1,43,-21,99,11,3,2,1,"origineel",NA,NA,NA
+"387",7,"Caricion gracilis",0,20000,2,3,43,-21,99,11,3,2,1,"origineel",NA,NA,NA
+"388",7,"Caricion gracilis",0,20000,2,2,43,-21,99,11,3,2,1,"interpolatie zuurgraad",NA,NA,NA
+"389",7,"Caricion gracilis",0,20000,2,1,43,-21,99,11,3,2,1,"origineel",NA,NA,NA
+"390",7,"Caricion gracilis",0,20000,3,3,43,-21,99,11,3,2,1,"origineel",NA,NA,NA
+"391",7,"Caricion gracilis",0,20000,3,2,43,-21,99,11,3,2,1,"interpolatie zuurgraad",NA,NA,NA
+"392",7,"Caricion gracilis",0,20000,3,1,43,-21,99,11,3,2,1,"origineel",NA,NA,NA
+"393",7,"Caricion gracilis",0,30000,4,1,32,-9,70,3,3,2,1,"origineel",NA,NA,NA
+"394",7,"Caricion gracilis",0,30000,4,2,32,-9,70,3,3,2,1,"origineel",NA,NA,NA
+"395",7,"Caricion gracilis",0,30000,2,1,32,-9,70,3,3,2,1,"origineel",NA,NA,NA
+"396",7,"Caricion gracilis",0,30000,2,2,32,-9,70,3,3,2,1,"origineel",NA,NA,NA
+"397",7,"Caricion gracilis",0,30000,3,1,32,-9,70,3,3,2,1,"origineel",NA,NA,NA
+"398",7,"Caricion gracilis",0,30000,3,2,32,-9,70,3,3,2,1,"origineel",NA,NA,NA
+"399",7,"Caricion gracilis",0,30000,4,3,32,-9,70,3,3,2,1,"aanvulling zuurgraad",NA,NA,NA
+"400",7,"Caricion gracilis",0,30000,2,3,32,-9,70,3,3,2,1,"aanvulling zuurgraad",NA,NA,NA
+"401",7,"Caricion gracilis",0,30000,3,3,32,-9,70,3,3,2,1,"aanvulling zuurgraad",NA,NA,NA
+"402",7,"Caricion gracilis",0,140000,4,3,31,-32,73,-1,3,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"403",7,"Caricion gracilis",0,140000,4,1,31,-32,73,-1,3,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"404",7,"Caricion gracilis",0,140000,4,2,31,-32,73,-1,3,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"405",7,"Caricion gracilis",0,140000,2,3,31,-32,73,-1,3,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"406",7,"Caricion gracilis",0,140000,2,1,31,-32,73,-1,3,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"407",7,"Caricion gracilis",0,140000,2,2,31,-32,73,-1,3,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"408",7,"Caricion gracilis",0,140000,3,3,31,-32,73,-1,3,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"409",7,"Caricion gracilis",0,140000,3,1,31,-32,73,-1,3,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"410",7,"Caricion gracilis",0,140000,3,2,31,-32,73,-1,3,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"411",7,"Caricion gracilis",0,150000,4,3,12,-10,75,17,3,2,1,"origineel",NA,NA,NA
+"412",7,"Caricion gracilis",0,150000,4,2,12,-10,75,17,3,2,1,"origineel",NA,NA,NA
+"413",7,"Caricion gracilis",0,150000,2,3,12,-10,75,17,3,2,1,"origineel",NA,NA,NA
+"414",7,"Caricion gracilis",0,150000,2,2,12,-10,75,17,3,2,1,"origineel",NA,NA,NA
+"415",7,"Caricion gracilis",0,150000,3,3,12,-10,75,17,3,2,1,"origineel",NA,NA,NA
+"416",7,"Caricion gracilis",0,150000,3,2,12,-10,75,17,3,2,1,"origineel",NA,NA,NA
+"417",7,"Caricion gracilis",0,150000,4,1,12,-10,75,17,3,2,1,"aanvulling zuurgraad",NA,NA,NA
+"418",7,"Caricion gracilis",0,150000,2,1,12,-10,75,17,3,2,1,"aanvulling zuurgraad",NA,NA,NA
+"419",7,"Caricion gracilis",0,150000,3,1,12,-10,75,17,3,2,1,"aanvulling zuurgraad",NA,NA,NA
+"420",7,"Caricion gracilis",0,80000,4,3,9,-28,77,-19,3,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"421",7,"Caricion gracilis",0,80000,4,2,9,-28,77,-19,3,2,1,"interpolatie zuurgraad","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"422",7,"Caricion gracilis",0,80000,4,1,9,-28,77,-19,3,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"423",7,"Caricion gracilis",0,80000,2,3,9,-28,77,-19,3,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"424",7,"Caricion gracilis",0,80000,2,2,9,-28,77,-19,3,2,1,"interpolatie zuurgraad","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"425",7,"Caricion gracilis",0,80000,2,1,9,-28,77,-19,3,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"426",7,"Caricion gracilis",0,80000,3,3,9,-28,77,-19,3,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"427",7,"Caricion gracilis",0,80000,3,2,9,-28,77,-19,3,2,1,"interpolatie zuurgraad","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"428",7,"Caricion gracilis",0,80000,3,1,9,-28,77,-19,3,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"429",7,"Caricion gracilis",0,130000,4,1,45,-10,75,17,3,2,1,"origineel","GXG volgens LV",NA,NA
+"430",7,"Caricion gracilis",0,130000,2,1,45,-10,75,17,3,2,1,"origineel","GXG volgens LV",NA,NA
+"431",7,"Caricion gracilis",0,130000,3,1,45,-10,75,17,3,2,1,"origineel","GXG volgens LV",NA,NA
+"432",7,"Caricion gracilis",0,130000,4,2,45,-10,75,17,3,2,1,"aanvulling zuurgraad","GXG volgens LV",NA,NA
+"433",7,"Caricion gracilis",0,130000,2,2,45,-10,75,17,3,2,1,"aanvulling zuurgraad","GXG volgens LV",NA,NA
+"434",7,"Caricion gracilis",0,130000,3,2,45,-10,75,17,3,2,1,"aanvulling zuurgraad","GXG volgens LV",NA,NA
+"435",8,"Filipendulion",0,20000,4,3,45,-31,172,42,1,0,1,"origineel",NA,"GHG_max zoals L1",NA
+"436",8,"Filipendulion",0,20000,2,3,45,-31,172,42,1,0,1,"origineel",NA,"GHG_max zoals L1",NA
+"437",8,"Filipendulion",0,20000,3,3,45,-31,172,42,1,0,1,"origineel",NA,"GHG_max zoals L1",NA
+"438",8,"Filipendulion",0,20000,4,2,45,-31,172,42,1,0,1,"aanvulling zuurgraad",NA,"GHG_max zoals L1",NA
+"439",8,"Filipendulion",0,20000,2,2,45,-31,172,42,1,0,1,"aanvulling zuurgraad",NA,"GHG_max zoals L1",NA
+"440",8,"Filipendulion",0,20000,3,2,45,-31,172,42,1,0,1,"aanvulling zuurgraad",NA,"GHG_max zoals L1",NA
+"441",8,"Filipendulion",0,20000,4,1,45,-31,172,42,1,0,1,"aanvulling zuurgraad",NA,"GHG_max zoals L1",NA
+"442",8,"Filipendulion",0,20000,2,1,45,-31,172,42,1,0,1,"aanvulling zuurgraad",NA,"GHG_max zoals L1",NA
+"443",8,"Filipendulion",0,20000,3,1,45,-31,172,42,1,0,1,"aanvulling zuurgraad",NA,"GHG_max zoals L1",NA
+"444",8,"Filipendulion",0,30000,4,1,45,-31,172,42,1,0,1,"aanvulling zuurgraad","GXG op basis van K1","GHG_max zoals L1",NA
+"445",8,"Filipendulion",0,30000,2,1,45,-31,172,42,1,0,1,"aanvulling zuurgraad","GXG op basis van K1","GHG_max zoals L1",NA
+"446",8,"Filipendulion",0,30000,3,1,45,-31,172,42,1,0,1,"aanvulling zuurgraad","GXG op basis van K1","GHG_max zoals L1",NA
+"447",8,"Filipendulion",0,30000,4,2,45,-31,172,42,1,0,1,"aanvulling zuurgraad","GXG op basis van K1","GHG_max zoals L1",NA
+"448",8,"Filipendulion",0,30000,2,2,45,-31,172,42,1,0,1,"aanvulling zuurgraad","GXG op basis van K1","GHG_max zoals L1",NA
+"449",8,"Filipendulion",0,30000,3,2,45,-31,172,42,1,0,1,"aanvulling zuurgraad","GXG op basis van K1","GHG_max zoals L1",NA
+"450",8,"Filipendulion",0,140000,4,1,80,-31,170,21,1,0,1,"origineel versie 11","nieuwe GXG grenzen na correcties in de databank, versie 11",NA,NA
+"451",8,"Filipendulion",0,140000,4,2,80,-31,170,21,1,0,1,"origineel versie 11","nieuwe GXG grenzen na correcties in de databank, versie 11",NA,NA
+"452",8,"Filipendulion",0,140000,2,1,80,-31,170,21,1,0,1,"origineel versie 11","nieuwe GXG grenzen na correcties in de databank, versie 11",NA,NA
+"453",8,"Filipendulion",0,140000,2,2,80,-31,170,21,1,0,1,"origineel versie 11","nieuwe GXG grenzen na correcties in de databank, versie 11",NA,NA
+"454",8,"Filipendulion",0,140000,3,1,80,-31,170,21,1,0,1,"origineel versie 11","nieuwe GXG grenzen na correcties in de databank, versie 11",NA,NA
+"455",8,"Filipendulion",0,140000,3,2,80,-31,170,21,1,0,1,"origineel versie 11","nieuwe GXG grenzen na correcties in de databank, versie 11",NA,NA
+"456",8,"Filipendulion",0,140000,4,3,80,-31,170,21,1,0,1,"aanvulling zuurgraad","nieuwe GXG grenzen na correcties in de databank, versie 11",NA,NA
+"457",8,"Filipendulion",0,140000,2,3,80,-31,170,21,1,0,1,"aanvulling zuurgraad","nieuwe GXG grenzen na correcties in de databank, versie 11",NA,NA
+"458",8,"Filipendulion",0,140000,3,3,80,-31,170,21,1,0,1,"aanvulling zuurgraad","nieuwe GXG grenzen na correcties in de databank, versie 11",NA,NA
+"459",8,"Filipendulion",0,150000,4,1,80,-31,170,21,1,0,1,"aanvulling zuurgraad","GXG op basis van L1",NA,NA
+"460",8,"Filipendulion",0,150000,2,1,80,-31,170,21,1,0,1,"aanvulling zuurgraad","GXG op basis van L1",NA,NA
+"461",8,"Filipendulion",0,150000,3,1,80,-31,170,21,1,0,1,"aanvulling zuurgraad","GXG op basis van L1",NA,NA
+"462",8,"Filipendulion",0,150000,4,2,80,-31,170,21,1,0,1,"aanvulling zuurgraad","GXG op basis van L1",NA,NA
+"463",8,"Filipendulion",0,150000,2,2,80,-31,170,21,1,0,1,"aanvulling zuurgraad","GXG op basis van L1",NA,NA
+"464",8,"Filipendulion",0,150000,3,2,80,-31,170,21,1,0,1,"aanvulling zuurgraad","GXG op basis van L1",NA,NA
+"465",8,"Filipendulion",0,80000,4,1,36,-35,87,-20,1,0,1,"origineel","bovengrens volgens ZV",NA,NA
+"466",8,"Filipendulion",0,80000,2,1,36,-35,87,-20,1,0,1,"origineel","bovengrens volgens ZV",NA,NA
+"467",8,"Filipendulion",0,80000,3,1,36,-35,87,-20,1,0,1,"origineel","bovengrens volgens ZV",NA,NA
+"468",8,"Filipendulion",0,80000,4,2,36,-35,87,-20,1,0,1,"aanvulling zuurgraad","bovengrens volgens ZV",NA,NA
+"469",8,"Filipendulion",0,80000,2,2,36,-35,87,-20,1,0,1,"aanvulling zuurgraad","bovengrens volgens ZV",NA,NA
+"470",8,"Filipendulion",0,80000,3,2,36,-35,87,-20,1,0,1,"aanvulling zuurgraad","bovengrens volgens ZV",NA,NA
+"471",8,"Filipendulion",0,130000,4,1,46,-35,109,-20,1,0,1,"origineel versie 11",NA,NA,NA
+"472",8,"Filipendulion",0,130000,4,2,46,-35,109,-20,1,0,1,"origineel versie 11",NA,NA,NA
+"473",8,"Filipendulion",0,130000,2,1,46,-35,109,-20,1,0,1,"origineel versie 11",NA,NA,NA
+"474",8,"Filipendulion",0,130000,2,2,46,-35,109,-20,1,0,1,"origineel versie 11",NA,NA,NA
+"475",8,"Filipendulion",0,130000,3,1,46,-35,109,-20,1,0,1,"origineel versie 11",NA,NA,NA
+"476",8,"Filipendulion",0,130000,3,2,46,-35,109,-20,1,0,1,"origineel versie 11",NA,NA,NA
+"477",8,"Filipendulion",0,20000,4,3,45,-31,172,42,1,2,1,"origineel",NA,"GHG_max zoals L1",NA
+"478",8,"Filipendulion",0,20000,2,3,45,-31,172,42,1,2,1,"origineel",NA,"GHG_max zoals L1",NA
+"479",8,"Filipendulion",0,20000,3,3,45,-31,172,42,1,2,1,"origineel",NA,"GHG_max zoals L1",NA
+"480",8,"Filipendulion",0,20000,4,2,45,-31,172,42,1,2,1,"aanvulling zuurgraad",NA,"GHG_max zoals L1",NA
+"481",8,"Filipendulion",0,20000,2,2,45,-31,172,42,1,2,1,"aanvulling zuurgraad",NA,"GHG_max zoals L1",NA
+"482",8,"Filipendulion",0,20000,3,2,45,-31,172,42,1,2,1,"aanvulling zuurgraad",NA,"GHG_max zoals L1",NA
+"483",8,"Filipendulion",0,20000,4,1,45,-31,172,42,1,2,1,"aanvulling zuurgraad",NA,"GHG_max zoals L1",NA
+"484",8,"Filipendulion",0,20000,2,1,45,-31,172,42,1,2,1,"aanvulling zuurgraad",NA,"GHG_max zoals L1",NA
+"485",8,"Filipendulion",0,20000,3,1,45,-31,172,42,1,2,1,"aanvulling zuurgraad",NA,"GHG_max zoals L1",NA
+"486",8,"Filipendulion",0,30000,4,1,45,-31,172,42,1,2,1,"aanvulling zuurgraad","GXG op basis van K1","GHG_max zoals L1",NA
+"487",8,"Filipendulion",0,30000,2,1,45,-31,172,42,1,2,1,"aanvulling zuurgraad","GXG op basis van K1","GHG_max zoals L1",NA
+"488",8,"Filipendulion",0,30000,3,1,45,-31,172,42,1,2,1,"aanvulling zuurgraad","GXG op basis van K1","GHG_max zoals L1",NA
+"489",8,"Filipendulion",0,30000,4,2,45,-31,172,42,1,2,1,"aanvulling zuurgraad","GXG op basis van K1","GHG_max zoals L1",NA
+"490",8,"Filipendulion",0,30000,2,2,45,-31,172,42,1,2,1,"aanvulling zuurgraad","GXG op basis van K1","GHG_max zoals L1",NA
+"491",8,"Filipendulion",0,30000,3,2,45,-31,172,42,1,2,1,"aanvulling zuurgraad","GXG op basis van K1","GHG_max zoals L1",NA
+"492",8,"Filipendulion",0,140000,4,1,80,-31,170,21,1,2,1,"origineel versie 11","nieuwe GXG grenzen na correcties in de databank, versie 11",NA,NA
+"493",8,"Filipendulion",0,140000,4,2,80,-31,170,21,1,2,1,"origineel versie 11","nieuwe GXG grenzen na correcties in de databank, versie 11",NA,NA
+"494",8,"Filipendulion",0,140000,2,1,80,-31,170,21,1,2,1,"origineel versie 11","nieuwe GXG grenzen na correcties in de databank, versie 11",NA,NA
+"495",8,"Filipendulion",0,140000,2,2,80,-31,170,21,1,2,1,"origineel versie 11","nieuwe GXG grenzen na correcties in de databank, versie 11",NA,NA
+"496",8,"Filipendulion",0,140000,3,1,80,-31,170,21,1,2,1,"origineel versie 11","nieuwe GXG grenzen na correcties in de databank, versie 11",NA,NA
+"497",8,"Filipendulion",0,140000,3,2,80,-31,170,21,1,2,1,"origineel versie 11","nieuwe GXG grenzen na correcties in de databank, versie 11",NA,NA
+"498",8,"Filipendulion",0,140000,4,3,80,-31,170,21,1,2,1,"aanvulling zuurgraad","nieuwe GXG grenzen na correcties in de databank, versie 11",NA,NA
+"499",8,"Filipendulion",0,140000,2,3,80,-31,170,21,1,2,1,"aanvulling zuurgraad","nieuwe GXG grenzen na correcties in de databank, versie 11",NA,NA
+"500",8,"Filipendulion",0,140000,3,3,80,-31,170,21,1,2,1,"aanvulling zuurgraad","nieuwe GXG grenzen na correcties in de databank, versie 11",NA,NA
+"501",8,"Filipendulion",0,150000,4,1,80,-31,170,21,1,2,1,"aanvulling zuurgraad","GXG op basis van L1",NA,NA
+"502",8,"Filipendulion",0,150000,2,1,80,-31,170,21,1,2,1,"aanvulling zuurgraad","GXG op basis van L1",NA,NA
+"503",8,"Filipendulion",0,150000,3,1,80,-31,170,21,1,2,1,"aanvulling zuurgraad","GXG op basis van L1",NA,NA
+"504",8,"Filipendulion",0,150000,4,2,80,-31,170,21,1,2,1,"aanvulling zuurgraad","GXG op basis van L1",NA,NA
+"505",8,"Filipendulion",0,150000,2,2,80,-31,170,21,1,2,1,"aanvulling zuurgraad","GXG op basis van L1",NA,NA
+"506",8,"Filipendulion",0,150000,3,2,80,-31,170,21,1,2,1,"aanvulling zuurgraad","GXG op basis van L1",NA,NA
+"507",8,"Filipendulion",0,80000,4,1,36,-35,87,-20,1,2,1,"origineel","bovengrens volgens ZV",NA,NA
+"508",8,"Filipendulion",0,80000,2,1,36,-35,87,-20,1,2,1,"origineel","bovengrens volgens ZV",NA,NA
+"509",8,"Filipendulion",0,80000,3,1,36,-35,87,-20,1,2,1,"origineel","bovengrens volgens ZV",NA,NA
+"510",8,"Filipendulion",0,80000,4,2,36,-35,87,-20,1,2,1,"aanvulling zuurgraad","bovengrens volgens ZV",NA,NA
+"511",8,"Filipendulion",0,80000,2,2,36,-35,87,-20,1,2,1,"aanvulling zuurgraad","bovengrens volgens ZV",NA,NA
+"512",8,"Filipendulion",0,80000,3,2,36,-35,87,-20,1,2,1,"aanvulling zuurgraad","bovengrens volgens ZV",NA,NA
+"513",8,"Filipendulion",0,130000,4,1,46,-35,109,-20,1,2,1,"origineel versie 11",NA,NA,NA
+"514",8,"Filipendulion",0,130000,4,2,46,-35,109,-20,1,2,1,"origineel versie 11",NA,NA,NA
+"515",8,"Filipendulion",0,130000,2,1,46,-35,109,-20,1,2,1,"origineel versie 11",NA,NA,NA
+"516",8,"Filipendulion",0,130000,2,2,46,-35,109,-20,1,2,1,"origineel versie 11",NA,NA,NA
+"517",8,"Filipendulion",0,130000,3,1,46,-35,109,-20,1,2,1,"origineel versie 11",NA,NA,NA
+"518",8,"Filipendulion",0,130000,3,2,46,-35,109,-20,1,2,1,"origineel versie 11",NA,NA,NA
+"519",9,"Galio - Alliarion",0,20000,4,1,76,14,157,30,1,2,1,"aanvulling zuurgraad","K1 en L1 afgestemd",NA,"komt ruimer voor, vandaar ook deze uitbreidingen"
+"520",9,"Galio - Alliarion",0,20000,5,1,76,14,157,30,1,2,1,"aanvulling zuurgraad","K1 en L1 afgestemd",NA,"komt ruimer voor, vandaar ook deze uitbreidingen"
+"521",9,"Galio - Alliarion",0,20000,3,1,76,14,157,30,1,2,1,"aanvulling zuurgraad","K1 en L1 afgestemd","uitbreiding trofie","komt ruimer voor, vandaar ook deze uitbreidingen"
+"522",9,"Galio - Alliarion",0,20000,4,2,76,14,157,30,1,2,1,"aanvulling zuurgraad","K1 en L1 afgestemd",NA,"komt ruimer voor, vandaar ook deze uitbreidingen"
+"523",9,"Galio - Alliarion",0,20000,5,2,76,14,157,30,1,2,1,"aanvulling zuurgraad","K1 en L1 afgestemd",NA,"komt ruimer voor, vandaar ook deze uitbreidingen"
+"524",9,"Galio - Alliarion",0,20000,3,2,76,14,157,30,1,2,1,"aanvulling zuurgraad","K1 en L1 afgestemd","uitbreiding trofie","komt ruimer voor, vandaar ook deze uitbreidingen"
+"525",9,"Galio - Alliarion",0,20000,4,3,76,14,157,30,1,2,1,"aanvulling zuurgraad","K1 en L1 afgestemd",NA,"komt ruimer voor, vandaar ook deze uitbreidingen"
+"526",9,"Galio - Alliarion",0,20000,5,3,76,14,157,30,1,2,1,"aanvulling zuurgraad","K1 en L1 afgestemd",NA,"komt ruimer voor, vandaar ook deze uitbreidingen"
+"527",9,"Galio - Alliarion",0,20000,3,3,76,14,157,30,1,2,1,"aanvulling zuurgraad","K1 en L1 afgestemd","uitbreiding trofie","komt ruimer voor, vandaar ook deze uitbreidingen"
+"528",9,"Galio - Alliarion",0,140000,4,1,76,14,157,30,1,2,1,"aanvulling zuurgraad","K1 en L1 afgestemd",NA,"komt ruimer voor, vandaar ook deze uitbreidingen"
+"529",9,"Galio - Alliarion",0,140000,5,1,76,14,157,30,1,2,1,"aanvulling zuurgraad","K1 en L1 afgestemd",NA,"komt ruimer voor, vandaar ook deze uitbreidingen"
+"530",9,"Galio - Alliarion",0,140000,3,1,76,14,157,30,1,2,1,"aanvulling zuurgraad","K1 en L1 afgestemd","uitbreiding trofie","komt ruimer voor, vandaar ook deze uitbreidingen"
+"531",9,"Galio - Alliarion",0,140000,4,2,76,14,157,30,1,2,1,"aanvulling zuurgraad","K1 en L1 afgestemd",NA,"komt ruimer voor, vandaar ook deze uitbreidingen"
+"532",9,"Galio - Alliarion",0,140000,5,2,76,14,157,30,1,2,1,"aanvulling zuurgraad","K1 en L1 afgestemd",NA,"komt ruimer voor, vandaar ook deze uitbreidingen"
+"533",9,"Galio - Alliarion",0,140000,3,2,76,14,157,30,1,2,1,"aanvulling zuurgraad","K1 en L1 afgestemd","uitbreiding trofie","komt ruimer voor, vandaar ook deze uitbreidingen"
+"534",9,"Galio - Alliarion",0,140000,4,3,76,14,157,30,1,2,1,"aanvulling zuurgraad","K1 en L1 afgestemd",NA,"komt ruimer voor, vandaar ook deze uitbreidingen"
+"535",9,"Galio - Alliarion",0,140000,5,3,76,14,157,30,1,2,1,"aanvulling zuurgraad","K1 en L1 afgestemd",NA,"komt ruimer voor, vandaar ook deze uitbreidingen"
+"536",9,"Galio - Alliarion",0,140000,3,3,76,14,157,30,1,2,1,"aanvulling zuurgraad","K1 en L1 afgestemd","uitbreiding trofie","komt ruimer voor, vandaar ook deze uitbreidingen"
+"537",9,"Galio - Alliarion",0,110000,4,1,124,50,160,50,1,2,1,"origineel","GHG_max en GLG_max aangepast, vermits te kleine range, geen bron",NA,"komt ruimer voor, vandaar ook deze uitbreidingen"
+"538",9,"Galio - Alliarion",0,110000,5,1,124,50,160,50,1,2,1,"origineel","GHG_max en GLG_max aangepast, vermits te kleine range, geen bron",NA,"komt ruimer voor, vandaar ook deze uitbreidingen"
+"539",9,"Galio - Alliarion",0,110000,3,1,124,50,160,50,1,2,1,"uitbreiding ME","GHG_max en GLG_max aangepast, vermits te kleine range, geen bron",NA,"komt ruimer voor, vandaar ook deze uitbreidingen"
+"540",9,"Galio - Alliarion",0,130000,4,1,124,50,160,50,1,2,1,"uitbreiding met bodemcode ZV","GHG_max en GLG_max aangepast, vermits te kleine range, geen bron",NA,"komt ruimer voor, vandaar ook deze uitbreidingen"
+"541",9,"Galio - Alliarion",0,130000,5,1,124,50,160,50,1,2,1,"uitbreiding met bodemcode ZV","GHG_max en GLG_max aangepast, vermits te kleine range, geen bron",NA,"komt ruimer voor, vandaar ook deze uitbreidingen"
+"542",9,"Galio - Alliarion",0,130000,3,1,124,50,160,50,1,2,1,"uitbreiding met bodemcode ZV","GHG_max en GLG_max aangepast, vermits te kleine range, geen bron",NA,"komt ruimer voor, vandaar ook deze uitbreidingen"
+"543",9,"Galio - Alliarion",0,130000,4,2,124,50,160,50,1,2,1,"uitbreiding met bodemcode ZV","GHG_max en GLG_max aangepast, vermits te kleine range, geen bron",NA,"komt ruimer voor, vandaar ook deze uitbreidingen"
+"544",9,"Galio - Alliarion",0,130000,5,2,124,50,160,50,1,2,1,"uitbreiding met bodemcode ZV","GHG_max en GLG_max aangepast, vermits te kleine range, geen bron",NA,"komt ruimer voor, vandaar ook deze uitbreidingen"
+"545",9,"Galio - Alliarion",0,130000,3,2,124,50,160,50,1,2,1,"uitbreiding met bodemcode ZV","GHG_max en GLG_max aangepast, vermits te kleine range, geen bron",NA,"komt ruimer voor, vandaar ook deze uitbreidingen"
+"546",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,20000,4,3,36,-3,178,88,1,1,1,"origineel",NA,NA,"verstoord, ecologische range is daardoor moeilijker te o"
+"547",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,20000,5,3,36,-3,178,88,1,1,1,"origineel",NA,NA,"verstoord"
+"548",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,20000,4,2,36,-3,178,88,1,1,1,"aanvulling zuurgraad",NA,NA,"verstoord"
+"549",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,20000,5,2,36,-3,178,88,1,1,1,"aanvulling zuurgraad",NA,NA,"verstoord"
+"550",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,30000,4,3,36,-2,99,31,1,1,1,"origineel",NA,NA,"verstoord"
+"551",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,30000,4,2,36,-2,99,31,1,1,1,"origineel",NA,NA,"verstoord"
+"552",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,30000,5,3,36,-2,99,31,1,1,1,"origineel",NA,NA,"verstoord"
+"553",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,30000,5,2,36,-2,99,31,1,1,1,"origineel",NA,NA,"verstoord"
+"554",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,20000,4,3,36,-3,178,88,1,2,1,"origineel",NA,NA,"verstoord, ecologische range is daardoor moeilijker te o"
+"555",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,20000,5,3,36,-3,178,88,1,2,1,"origineel",NA,NA,"verstoord"
+"556",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,20000,4,2,36,-3,178,88,1,2,1,"aanvulling zuurgraad",NA,NA,"verstoord"
+"557",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,20000,5,2,36,-3,178,88,1,2,1,"aanvulling zuurgraad",NA,NA,"verstoord"
+"558",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,30000,4,3,36,-2,99,31,1,2,1,"origineel",NA,NA,"verstoord"
+"559",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,30000,4,2,36,-2,99,31,1,2,1,"origineel",NA,NA,"verstoord"
+"560",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,30000,5,3,36,-2,99,31,1,2,1,"origineel",NA,NA,"verstoord"
+"561",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,30000,5,2,36,-2,99,31,1,2,1,"origineel",NA,NA,"verstoord"
+"562",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,20000,4,3,36,-3,178,88,3,1,1,"origineel",NA,NA,"verstoord, ecologische range is daardoor moeilijker te o"
+"563",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,20000,5,3,36,-3,178,88,3,1,1,"origineel",NA,NA,"verstoord"
+"564",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,20000,4,2,36,-3,178,88,3,1,1,"aanvulling zuurgraad",NA,NA,"verstoord"
+"565",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,20000,5,2,36,-3,178,88,3,1,1,"aanvulling zuurgraad",NA,NA,"verstoord"
+"566",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,30000,4,3,36,-2,99,31,3,1,1,"origineel",NA,NA,"verstoord"
+"567",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,30000,4,2,36,-2,99,31,3,1,1,"origineel",NA,NA,"verstoord"
+"568",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,30000,5,3,36,-2,99,31,3,1,1,"origineel",NA,NA,"verstoord"
+"569",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,30000,5,2,36,-2,99,31,3,1,1,"origineel",NA,NA,"verstoord"
+"570",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,20000,4,3,36,-3,178,88,3,2,1,"origineel",NA,NA,"verstoord, ecologische range is daardoor moeilijker te o"
+"571",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,20000,5,3,36,-3,178,88,3,2,1,"origineel",NA,NA,"verstoord"
+"572",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,20000,4,2,36,-3,178,88,3,2,1,"aanvulling zuurgraad",NA,NA,"verstoord"
+"573",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,20000,5,2,36,-3,178,88,3,2,1,"aanvulling zuurgraad",NA,NA,"verstoord"
+"574",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,30000,4,3,36,-2,99,31,3,2,1,"origineel",NA,NA,"verstoord"
+"575",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,30000,4,2,36,-2,99,31,3,2,1,"origineel",NA,NA,"verstoord"
+"576",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,30000,5,3,36,-2,99,31,3,2,1,"origineel",NA,NA,"verstoord"
+"577",10,"RG Phalaris arundinacea-[Convolvulo-Filipend",0,30000,5,2,36,-2,99,31,3,2,1,"origineel",NA,NA,"verstoord"
+"578",11,"RG Juncus effusus-[Molinietalia/Lolio-Potent",0,80000,4,1,11,-44,55,-12,1,2,1,"aanvulling zuurgraad","V en ZV afgestemd","GLG_max van V (-0.26) ligt lager dan die van Z (0.12), daardoor is minstens de bovengrens van Z genomen; GHG_max van Z doorgetrokke","verstoord"
+"579",11,"RG Juncus effusus-[Molinietalia/Lolio-Potent",0,80000,4,2,11,-44,55,-12,1,2,1,"aanvulling zuurgraad","V en ZV afgestemd","GLG_max van V (-0.26) ligt lager dan die van Z (0.12), daardoor is minstens de bovengrens van Z genomen; GHG_max van Z doorgetrokke","verstoord"
+"580",11,"RG Juncus effusus-[Molinietalia/Lolio-Potent",0,80000,3,1,11,-44,55,-12,1,2,1,"uitbreiding trofie",NA,"GLG_max van V (-0.26) ligt lager dan die van Z (0.12), daardoor is minstens de bovengrens van Z genomen; GHG_max van Z doorgetrokke","verstoord"
+"581",11,"RG Juncus effusus-[Molinietalia/Lolio-Potent",0,80000,3,2,11,-44,55,-12,1,2,1,"uitbreiding trofie",NA,"GLG_max van V (-0.26) ligt lager dan die van Z (0.12), daardoor is minstens de bovengrens van Z genomen; GHG_max van Z doorgetrokke","verstoord"
+"582",11,"RG Juncus effusus-[Molinietalia/Lolio-Potent",0,110000,4,1,13,-44,82,-12,1,2,1,"origineel",NA,NA,"verstoord"
+"583",11,"RG Juncus effusus-[Molinietalia/Lolio-Potent",0,110000,3,1,13,-44,82,-12,1,2,1,"uitbreiding trofie",NA,NA,"verstoord"
+"584",11,"RG Juncus effusus-[Molinietalia/Lolio-Potent",0,120000,4,1,13,-44,82,-12,1,2,1,"interpolatie Z2",NA,NA,"verstoord"
+"585",11,"RG Juncus effusus-[Molinietalia/Lolio-Potent",0,120000,3,1,13,-44,82,-12,1,2,1,"uitbreiding trofie",NA,NA,"verstoord"
+"586",11,"RG Juncus effusus-[Molinietalia/Lolio-Potent",0,130000,4,1,11,-44,55,-12,1,2,1,"origineel","V en ZV afgestemd","GLG_max van V (-0.26) ligt lager dan die van Z (0.12), daardoor is minstens de bovengrens van Z genomen; GHG_max van Z doorgetrokke","verstoord"
+"587",11,"RG Juncus effusus-[Molinietalia/Lolio-Potent",0,130000,4,2,11,-44,55,-12,1,2,1,"uitbreiding zuurgraad",NA,"GLG_max van V (-0.26) ligt lager dan die van Z (0.12), daardoor is minstens de bovengrens van Z genomen; GHG_max van Z doorgetrokke","verstoord"
+"588",11,"RG Juncus effusus-[Molinietalia/Lolio-Potent",0,130000,3,1,11,-44,55,-12,1,2,1,"uitbreiding trofie",NA,"GLG_max van V (-0.26) ligt lager dan die van Z (0.12), daardoor is minstens de bovengrens van Z genomen; GHG_max van Z doorgetrokke","verstoord"
+"589",11,"RG Juncus effusus-[Molinietalia/Lolio-Potent",0,130000,3,2,11,-44,55,-12,1,2,1,"uitbreiding trofie",NA,"GLG_max van V (-0.26) ligt lager dan die van Z (0.12), daardoor is minstens de bovengrens van Z genomen; GHG_max van Z doorgetrokke","verstoord"
+"590",11,"RG Juncus effusus-[Molinietalia/Lolio-Potent",0,80000,4,1,11,-44,55,-12,2,2,1,"aanvulling zuurgraad","V en ZV afgestemd","GLG_max van V (-0.26) ligt lager dan die van Z (0.12), daardoor is minstens de bovengrens van Z genomen; GHG_max van Z doorgetrokke","verstoord"
+"591",11,"RG Juncus effusus-[Molinietalia/Lolio-Potent",0,80000,4,2,11,-44,55,-12,2,2,1,"aanvulling zuurgraad","V en ZV afgestemd","GLG_max van V (-0.26) ligt lager dan die van Z (0.12), daardoor is minstens de bovengrens van Z genomen; GHG_max van Z doorgetrokke","verstoord"
+"592",11,"RG Juncus effusus-[Molinietalia/Lolio-Potent",0,80000,3,1,11,-44,55,-12,2,2,1,"uitbreiding trofie",NA,"GLG_max van V (-0.26) ligt lager dan die van Z (0.12), daardoor is minstens de bovengrens van Z genomen; GHG_max van Z doorgetrokke","verstoord"
+"593",11,"RG Juncus effusus-[Molinietalia/Lolio-Potent",0,80000,3,2,11,-44,55,-12,2,2,1,"uitbreiding trofie",NA,"GLG_max van V (-0.26) ligt lager dan die van Z (0.12), daardoor is minstens de bovengrens van Z genomen; GHG_max van Z doorgetrokke","verstoord"
+"594",11,"RG Juncus effusus-[Molinietalia/Lolio-Potent",0,110000,4,1,13,-44,82,-12,2,2,1,"origineel",NA,NA,"verstoord"
+"595",11,"RG Juncus effusus-[Molinietalia/Lolio-Potent",0,110000,3,1,13,-44,82,-12,2,2,1,"uitbreiding trofie",NA,NA,"verstoord"
+"596",11,"RG Juncus effusus-[Molinietalia/Lolio-Potent",0,120000,4,1,13,-44,82,-12,2,2,1,"interpolatie Z2",NA,NA,"verstoord"
+"597",11,"RG Juncus effusus-[Molinietalia/Lolio-Potent",0,120000,3,1,13,-44,82,-12,2,2,1,"uitbreiding trofie",NA,NA,"verstoord"
+"598",11,"RG Juncus effusus-[Molinietalia/Lolio-Potent",0,130000,4,1,11,-44,55,-12,2,2,1,"origineel","V en ZV afgestemd","GLG_max van V (-0.26) ligt lager dan die van Z (0.12), daardoor is minstens de bovengrens van Z genomen; GHG_max van Z doorgetrokke","verstoord"
+"599",11,"RG Juncus effusus-[Molinietalia/Lolio-Potent",0,130000,4,2,11,-44,55,-12,2,2,1,"uitbreiding zuurgraad",NA,"GLG_max van V (-0.26) ligt lager dan die van Z (0.12), daardoor is minstens de bovengrens van Z genomen; GHG_max van Z doorgetrokke","verstoord"
+"600",11,"RG Juncus effusus-[Molinietalia/Lolio-Potent",0,130000,3,1,11,-44,55,-12,2,2,1,"uitbreiding trofie",NA,"GLG_max van V (-0.26) ligt lager dan die van Z (0.12), daardoor is minstens de bovengrens van Z genomen; GHG_max van Z doorgetrokke","verstoord"
+"601",11,"RG Juncus effusus-[Molinietalia/Lolio-Potent",0,130000,3,2,11,-44,55,-12,2,2,1,"uitbreiding trofie",NA,"GLG_max van V (-0.26) ligt lager dan die van Z (0.12), daardoor is minstens de bovengrens van Z genomen; GHG_max van Z doorgetrokke","verstoord"
+"602",12,"Magnocaricion met Phragmites",0,20000,4,3,14,-37,55,-3,1,1,1,"origineel","afstemming",NA,NA
+"603",12,"Magnocaricion met Phragmites",0,20000,2,3,14,-37,55,-3,1,1,1,"origineel","afstemming",NA,NA
+"604",12,"Magnocaricion met Phragmites",0,20000,3,3,14,-37,55,-3,1,1,1,"origineel","afstemming",NA,NA
+"605",12,"Magnocaricion met Phragmites",0,20000,4,2,14,-37,55,-3,1,1,1,"aanvulling zuurgraad","afstemming",NA,NA
+"606",12,"Magnocaricion met Phragmites",0,20000,2,2,14,-37,55,-3,1,1,1,"aanvulling zuurgraad","afstemming",NA,NA
+"607",12,"Magnocaricion met Phragmites",0,20000,3,2,14,-37,55,-3,1,1,1,"aanvulling zuurgraad","afstemming",NA,NA
+"608",12,"Magnocaricion met Phragmites",0,30000,4,3,6,-37,55,-3,1,1,1,"origineel","afstemming",NA,NA
+"609",12,"Magnocaricion met Phragmites",0,30000,4,1,6,-37,55,-3,1,1,1,"origineel","afstemming",NA,NA
+"610",12,"Magnocaricion met Phragmites",0,30000,4,2,6,-37,55,-3,1,1,1,"origineel","afstemming",NA,NA
+"611",12,"Magnocaricion met Phragmites",0,30000,2,3,6,-37,55,-3,1,1,1,"origineel","afstemming",NA,NA
+"612",12,"Magnocaricion met Phragmites",0,30000,2,1,6,-37,55,-3,1,1,1,"origineel","afstemming",NA,NA
+"613",12,"Magnocaricion met Phragmites",0,30000,2,2,6,-37,55,-3,1,1,1,"origineel","afstemming",NA,NA
+"614",12,"Magnocaricion met Phragmites",0,30000,3,3,6,-37,55,-3,1,1,1,"origineel","afstemming",NA,NA
+"615",12,"Magnocaricion met Phragmites",0,30000,3,1,6,-37,55,-3,1,1,1,"origineel","afstemming",NA,NA
+"616",12,"Magnocaricion met Phragmites",0,30000,3,2,6,-37,55,-3,1,1,1,"origineel","afstemming",NA,NA
+"617",12,"Magnocaricion met Phragmites",0,140000,4,3,14,-37,55,-3,1,1,1,"origineel","afstemming",NA,NA
+"618",12,"Magnocaricion met Phragmites",0,140000,4,2,14,-37,55,-3,1,1,1,"origineel","afstemming",NA,NA
+"619",12,"Magnocaricion met Phragmites",0,140000,2,3,14,-37,55,-3,1,1,1,"origineel","afstemming",NA,NA
+"620",12,"Magnocaricion met Phragmites",0,140000,2,2,14,-37,55,-3,1,1,1,"origineel","afstemming",NA,NA
+"621",12,"Magnocaricion met Phragmites",0,140000,3,3,14,-37,55,-3,1,1,1,"origineel","afstemming",NA,NA
+"622",12,"Magnocaricion met Phragmites",0,140000,3,2,14,-37,55,-3,1,1,1,"origineel","afstemming",NA,NA
+"623",12,"Magnocaricion met Phragmites",0,150000,4,3,14,-37,55,-3,1,1,1,"origineel","GXG op basis van L1",NA,NA
+"624",12,"Magnocaricion met Phragmites",0,150000,4,2,14,-37,55,-3,1,1,1,"interpolatie zuurgraad","GXG op basis van L1",NA,NA
+"625",12,"Magnocaricion met Phragmites",0,150000,4,1,14,-37,55,-3,1,1,1,"origineel","GXG op basis van L1",NA,NA
+"626",12,"Magnocaricion met Phragmites",0,150000,2,3,14,-37,55,-3,1,1,1,"origineel","GXG op basis van L1",NA,NA
+"627",12,"Magnocaricion met Phragmites",0,150000,2,2,14,-37,55,-3,1,1,1,"interpolatie zuurgraad","GXG op basis van L1",NA,NA
+"628",12,"Magnocaricion met Phragmites",0,150000,2,1,14,-37,55,-3,1,1,1,"origineel","GXG op basis van L1",NA,NA
+"629",12,"Magnocaricion met Phragmites",0,150000,3,3,14,-37,55,-3,1,1,1,"origineel","GXG op basis van L1",NA,NA
+"630",12,"Magnocaricion met Phragmites",0,150000,3,2,14,-37,55,-3,1,1,1,"interpolatie zuurgraad","GXG op basis van L1",NA,NA
+"631",12,"Magnocaricion met Phragmites",0,150000,3,1,14,-37,55,-3,1,1,1,"origineel","GXG op basis van L1",NA,NA
+"632",12,"Magnocaricion met Phragmites",0,80000,4,3,9,-37,45,-3,1,1,1,"origineel","afstemming",NA,NA
+"633",12,"Magnocaricion met Phragmites",0,80000,4,2,9,-37,45,-3,1,1,1,"origineel","afstemming",NA,NA
+"634",12,"Magnocaricion met Phragmites",0,80000,2,3,9,-37,45,-3,1,1,1,"origineel","afstemming",NA,NA
+"635",12,"Magnocaricion met Phragmites",0,80000,2,2,9,-37,45,-3,1,1,1,"origineel","afstemming",NA,NA
+"636",12,"Magnocaricion met Phragmites",0,80000,3,3,9,-37,45,-3,1,1,1,"origineel","afstemming",NA,NA
+"637",12,"Magnocaricion met Phragmites",0,80000,3,2,9,-37,45,-3,1,1,1,"origineel","afstemming",NA,NA
+"638",12,"Magnocaricion met Phragmites",0,80000,4,1,9,-37,45,-3,1,1,1,"aanvulling zuurgraad (op basis van type 7)",NA,NA,NA
+"639",12,"Magnocaricion met Phragmites",0,80000,2,1,9,-37,45,-3,1,1,1,"aanvulling zuurgraad (op basis van type 7)",NA,NA,NA
+"640",12,"Magnocaricion met Phragmites",0,80000,3,1,9,-37,45,-3,1,1,1,"aanvulling zuurgraad (op basis van type 7)",NA,NA,NA
+"641",12,"Magnocaricion met Phragmites",0,20000,4,3,14,-37,55,-3,1,2,1,"origineel","afstemming",NA,NA
+"642",12,"Magnocaricion met Phragmites",0,20000,2,3,14,-37,55,-3,1,2,1,"origineel","afstemming",NA,NA
+"643",12,"Magnocaricion met Phragmites",0,20000,3,3,14,-37,55,-3,1,2,1,"origineel","afstemming",NA,NA
+"644",12,"Magnocaricion met Phragmites",0,20000,4,2,14,-37,55,-3,1,2,1,"aanvulling zuurgraad","afstemming",NA,NA
+"645",12,"Magnocaricion met Phragmites",0,20000,2,2,14,-37,55,-3,1,2,1,"aanvulling zuurgraad","afstemming",NA,NA
+"646",12,"Magnocaricion met Phragmites",0,20000,3,2,14,-37,55,-3,1,2,1,"aanvulling zuurgraad","afstemming",NA,NA
+"647",12,"Magnocaricion met Phragmites",0,30000,4,3,6,-37,55,-3,1,2,1,"origineel","afstemming",NA,NA
+"648",12,"Magnocaricion met Phragmites",0,30000,4,1,6,-37,55,-3,1,2,1,"origineel","afstemming",NA,NA
+"649",12,"Magnocaricion met Phragmites",0,30000,4,2,6,-37,55,-3,1,2,1,"origineel","afstemming",NA,NA
+"650",12,"Magnocaricion met Phragmites",0,30000,2,3,6,-37,55,-3,1,2,1,"origineel","afstemming",NA,NA
+"651",12,"Magnocaricion met Phragmites",0,30000,2,1,6,-37,55,-3,1,2,1,"origineel","afstemming",NA,NA
+"652",12,"Magnocaricion met Phragmites",0,30000,2,2,6,-37,55,-3,1,2,1,"origineel","afstemming",NA,NA
+"653",12,"Magnocaricion met Phragmites",0,30000,3,3,6,-37,55,-3,1,2,1,"origineel","afstemming",NA,NA
+"654",12,"Magnocaricion met Phragmites",0,30000,3,1,6,-37,55,-3,1,2,1,"origineel","afstemming",NA,NA
+"655",12,"Magnocaricion met Phragmites",0,30000,3,2,6,-37,55,-3,1,2,1,"origineel","afstemming",NA,NA
+"656",12,"Magnocaricion met Phragmites",0,140000,4,3,14,-37,55,-3,1,2,1,"origineel","afstemming",NA,NA
+"657",12,"Magnocaricion met Phragmites",0,140000,4,2,14,-37,55,-3,1,2,1,"origineel","afstemming",NA,NA
+"658",12,"Magnocaricion met Phragmites",0,140000,2,3,14,-37,55,-3,1,2,1,"origineel","afstemming",NA,NA
+"659",12,"Magnocaricion met Phragmites",0,140000,2,2,14,-37,55,-3,1,2,1,"origineel","afstemming",NA,NA
+"660",12,"Magnocaricion met Phragmites",0,140000,3,3,14,-37,55,-3,1,2,1,"origineel","afstemming",NA,NA
+"661",12,"Magnocaricion met Phragmites",0,140000,3,2,14,-37,55,-3,1,2,1,"origineel","afstemming",NA,NA
+"662",12,"Magnocaricion met Phragmites",0,150000,4,3,14,-37,55,-3,1,2,1,"origineel","GXG op basis van L1",NA,NA
+"663",12,"Magnocaricion met Phragmites",0,150000,4,2,14,-37,55,-3,1,2,1,"interpolatie zuurgraad","GXG op basis van L1",NA,NA
+"664",12,"Magnocaricion met Phragmites",0,150000,4,1,14,-37,55,-3,1,2,1,"origineel","GXG op basis van L1",NA,NA
+"665",12,"Magnocaricion met Phragmites",0,150000,2,3,14,-37,55,-3,1,2,1,"origineel","GXG op basis van L1",NA,NA
+"666",12,"Magnocaricion met Phragmites",0,150000,2,2,14,-37,55,-3,1,2,1,"interpolatie zuurgraad","GXG op basis van L1",NA,NA
+"667",12,"Magnocaricion met Phragmites",0,150000,2,1,14,-37,55,-3,1,2,1,"origineel","GXG op basis van L1",NA,NA
+"668",12,"Magnocaricion met Phragmites",0,150000,3,3,14,-37,55,-3,1,2,1,"origineel","GXG op basis van L1",NA,NA
+"669",12,"Magnocaricion met Phragmites",0,150000,3,2,14,-37,55,-3,1,2,1,"interpolatie zuurgraad","GXG op basis van L1",NA,NA
+"670",12,"Magnocaricion met Phragmites",0,150000,3,1,14,-37,55,-3,1,2,1,"origineel","GXG op basis van L1",NA,NA
+"671",12,"Magnocaricion met Phragmites",0,80000,4,3,9,-37,45,-3,1,2,1,"origineel","afstemming",NA,NA
+"672",12,"Magnocaricion met Phragmites",0,80000,4,2,9,-37,45,-3,1,2,1,"origineel","afstemming",NA,NA
+"673",12,"Magnocaricion met Phragmites",0,80000,2,3,9,-37,45,-3,1,2,1,"origineel","afstemming",NA,NA
+"674",12,"Magnocaricion met Phragmites",0,80000,2,2,9,-37,45,-3,1,2,1,"origineel","afstemming",NA,NA
+"675",12,"Magnocaricion met Phragmites",0,80000,3,3,9,-37,45,-3,1,2,1,"origineel","afstemming",NA,NA
+"676",12,"Magnocaricion met Phragmites",0,80000,3,2,9,-37,45,-3,1,2,1,"origineel","afstemming",NA,NA
+"677",12,"Magnocaricion met Phragmites",0,80000,4,1,9,-37,45,-3,1,2,1,"aanvulling zuurgraad (op basis van type 7)",NA,NA,NA
+"678",12,"Magnocaricion met Phragmites",0,80000,2,1,9,-37,45,-3,1,2,1,"aanvulling zuurgraad (op basis van type 7)",NA,NA,NA
+"679",12,"Magnocaricion met Phragmites",0,80000,3,1,9,-37,45,-3,1,2,1,"aanvulling zuurgraad (op basis van type 7)",NA,NA,NA
+"680",13,"RG Glyceria maxima",0,20000,4,2,3,-75,75,30,1,0,1,"aanvulling zuurgraad","gegevens Kiwa","verstoord",NA
+"681",13,"RG Glyceria maxima",0,20000,2,2,3,-75,75,30,1,0,1,"aanvulling zuurgraad","gegevens Kiwa","verstoord",NA
+"682",13,"RG Glyceria maxima",0,20000,3,2,3,-75,75,30,1,0,1,"aanvulling zuurgraad","gegevens Kiwa","verstoord",NA
+"683",13,"RG Glyceria maxima",0,20000,4,3,3,-75,75,30,1,0,1,"aanvulling zuurgraad","gegevens Kiwa",NA,NA
+"684",13,"RG Glyceria maxima",0,20000,2,3,3,-75,75,30,1,0,1,"aanvulling zuurgraad","gegevens Kiwa",NA,NA
+"685",13,"RG Glyceria maxima",0,20000,3,3,3,-75,75,30,1,0,1,"aanvulling zuurgraad","gegevens Kiwa",NA,NA
+"686",13,"RG Glyceria maxima",0,140000,4,2,3,-75,75,30,1,0,1,"aanvulling zuurgraad","gegevens Kiwa","verstoord",NA
+"687",13,"RG Glyceria maxima",0,140000,2,2,3,-75,75,30,1,0,1,"aanvulling zuurgraad","gegevens Kiwa","verstoord",NA
+"688",13,"RG Glyceria maxima",0,140000,3,2,3,-75,75,30,1,0,1,"aanvulling zuurgraad","gegevens Kiwa","verstoord",NA
+"689",13,"RG Glyceria maxima",0,140000,4,3,3,-75,75,30,1,0,1,"aanvulling zuurgraad","gegevens Kiwa",NA,NA
+"690",13,"RG Glyceria maxima",0,140000,2,3,3,-75,75,30,1,0,1,"aanvulling zuurgraad","gegevens Kiwa",NA,NA
+"691",13,"RG Glyceria maxima",0,140000,3,3,3,-75,75,30,1,0,1,"aanvulling zuurgraad","gegevens Kiwa",NA,NA
+"692",13,"RG Glyceria maxima",0,20000,4,2,3,-75,75,30,1,1,1,"aanvulling zuurgraad","gegevens Kiwa","verstoord",NA
+"693",13,"RG Glyceria maxima",0,20000,2,2,3,-75,75,30,1,1,1,"aanvulling zuurgraad","gegevens Kiwa","verstoord",NA
+"694",13,"RG Glyceria maxima",0,20000,3,2,3,-75,75,30,1,1,1,"aanvulling zuurgraad","gegevens Kiwa","verstoord",NA
+"695",13,"RG Glyceria maxima",0,20000,4,3,3,-75,75,30,1,1,1,"aanvulling zuurgraad","gegevens Kiwa",NA,NA
+"696",13,"RG Glyceria maxima",0,20000,2,3,3,-75,75,30,1,1,1,"aanvulling zuurgraad","gegevens Kiwa",NA,NA
+"697",13,"RG Glyceria maxima",0,20000,3,3,3,-75,75,30,1,1,1,"aanvulling zuurgraad","gegevens Kiwa",NA,NA
+"698",13,"RG Glyceria maxima",0,140000,4,2,3,-75,75,30,1,1,1,"aanvulling zuurgraad","gegevens Kiwa","verstoord",NA
+"699",13,"RG Glyceria maxima",0,140000,2,2,3,-75,75,30,1,1,1,"aanvulling zuurgraad","gegevens Kiwa","verstoord",NA
+"700",13,"RG Glyceria maxima",0,140000,3,2,3,-75,75,30,1,1,1,"aanvulling zuurgraad","gegevens Kiwa","verstoord",NA
+"701",13,"RG Glyceria maxima",0,140000,4,3,3,-75,75,30,1,1,1,"aanvulling zuurgraad","gegevens Kiwa",NA,NA
+"702",13,"RG Glyceria maxima",0,140000,2,3,3,-75,75,30,1,1,1,"aanvulling zuurgraad","gegevens Kiwa",NA,NA
+"703",13,"RG Glyceria maxima",0,140000,3,3,3,-75,75,30,1,1,1,"aanvulling zuurgraad","gegevens Kiwa",NA,NA
+"704",13,"RG Glyceria maxima",0,20000,4,2,3,-75,75,30,1,2,1,"aanvulling zuurgraad","gegevens Kiwa","verstoord",NA
+"705",13,"RG Glyceria maxima",0,20000,2,2,3,-75,75,30,1,2,1,"aanvulling zuurgraad","gegevens Kiwa","verstoord",NA
+"706",13,"RG Glyceria maxima",0,20000,3,2,3,-75,75,30,1,2,1,"aanvulling zuurgraad","gegevens Kiwa","verstoord",NA
+"707",13,"RG Glyceria maxima",0,20000,4,3,3,-75,75,30,1,2,1,"aanvulling zuurgraad","gegevens Kiwa",NA,NA
+"708",13,"RG Glyceria maxima",0,20000,2,3,3,-75,75,30,1,2,1,"aanvulling zuurgraad","gegevens Kiwa",NA,NA
+"709",13,"RG Glyceria maxima",0,20000,3,3,3,-75,75,30,1,2,1,"aanvulling zuurgraad","gegevens Kiwa",NA,NA
+"710",13,"RG Glyceria maxima",0,140000,4,2,3,-75,75,30,1,2,1,"aanvulling zuurgraad","gegevens Kiwa","verstoord",NA
+"711",13,"RG Glyceria maxima",0,140000,2,2,3,-75,75,30,1,2,1,"aanvulling zuurgraad","gegevens Kiwa","verstoord",NA
+"712",13,"RG Glyceria maxima",0,140000,3,2,3,-75,75,30,1,2,1,"aanvulling zuurgraad","gegevens Kiwa","verstoord",NA
+"713",13,"RG Glyceria maxima",0,140000,4,3,3,-75,75,30,1,2,1,"aanvulling zuurgraad","gegevens Kiwa",NA,NA
+"714",13,"RG Glyceria maxima",0,140000,2,3,3,-75,75,30,1,2,1,"aanvulling zuurgraad","gegevens Kiwa",NA,NA
+"715",13,"RG Glyceria maxima",0,140000,3,3,3,-75,75,30,1,2,1,"aanvulling zuurgraad","gegevens Kiwa",NA,NA
+"716",14,"Caricion nigrae",0,80000,1,1,7,-22,57,4,1,0,1,"origineel","GHG_max volgens Z1",NA,NA
+"717",14,"Caricion nigrae",0,80000,2,1,7,-22,57,4,1,0,1,"aanvulling trofie","GHG_max volgens Z1",NA,NA
+"718",14,"Caricion nigrae",0,80000,1,2,7,-22,57,4,1,0,1,"aanvulling zuurgraad","GHG_max volgens Z1",NA,NA
+"719",14,"Caricion nigrae",0,80000,2,2,7,-22,57,4,1,0,1,"aanvulling zuurgraad","GHG_max volgens Z1",NA,NA
+"720",14,"Caricion nigrae",0,110000,1,1,4,-22,70,2,1,0,1,"origineel",NA,NA,NA
+"721",14,"Caricion nigrae",0,110000,2,1,4,-22,70,2,1,0,1,"aanvulling trofie",NA,NA,NA
+"722",14,"Caricion nigrae",0,120000,1,1,6,-22,74,17,1,0,1,"origineel","GHG_max volgens Z1",NA,NA
+"723",14,"Caricion nigrae",0,120000,2,1,6,-22,74,17,1,0,1,"aanvulling trofie","GHG_max volgens Z1",NA,NA
+"724",14,"Caricion nigrae",0,130000,1,1,25,-22,95,5,1,0,1,"origineel","GHG_max volgens Z1",NA,NA
+"725",14,"Caricion nigrae",0,130000,2,1,25,-22,95,5,1,0,1,"aanvulling trofie","GHG_max volgens Z1",NA,NA
+"726",14,"Caricion nigrae",0,130000,1,2,25,-22,95,5,1,0,1,"aanvulling zuurgraad","GHG_max volgens Z1",NA,NA
+"727",14,"Caricion nigrae",0,130000,2,2,25,-22,95,5,1,0,1,"aanvulling zuurgraad","GHG_max volgens Z1",NA,NA
+"728",14,"Caricion nigrae",0,80000,1,1,7,-22,57,4,3,0,1,"origineel","GHG_max volgens Z1",NA,NA
+"729",14,"Caricion nigrae",0,80000,2,1,7,-22,57,4,3,0,1,"aanvulling trofie","GHG_max volgens Z1",NA,NA
+"730",14,"Caricion nigrae",0,80000,1,2,7,-22,57,4,3,0,1,"aanvulling zuurgraad","GHG_max volgens Z1",NA,NA
+"731",14,"Caricion nigrae",0,80000,2,2,7,-22,57,4,3,0,1,"aanvulling zuurgraad","GHG_max volgens Z1",NA,NA
+"732",14,"Caricion nigrae",0,110000,1,1,4,-22,70,2,3,0,1,"origineel",NA,NA,NA
+"733",14,"Caricion nigrae",0,110000,2,1,4,-22,70,2,3,0,1,"aanvulling trofie",NA,NA,NA
+"734",14,"Caricion nigrae",0,120000,1,1,6,-22,74,17,3,0,1,"origineel","GHG_max volgens Z1",NA,NA
+"735",14,"Caricion nigrae",0,120000,2,1,6,-22,74,17,3,0,1,"aanvulling trofie","GHG_max volgens Z1",NA,NA
+"736",14,"Caricion nigrae",0,130000,1,1,25,-22,95,5,3,0,1,"origineel","GHG_max volgens Z1",NA,NA
+"737",14,"Caricion nigrae",0,130000,2,1,25,-22,95,5,3,0,1,"aanvulling trofie","GHG_max volgens Z1",NA,NA
+"738",14,"Caricion nigrae",0,130000,1,2,25,-22,95,5,3,0,1,"aanvulling zuurgraad","GHG_max volgens Z1",NA,NA
+"739",14,"Caricion nigrae",0,130000,2,2,25,-22,95,5,3,0,1,"aanvulling zuurgraad","GHG_max volgens Z1",NA,NA
+"740",15,"Caricion davallianae",0,140000,1,3,9,-1,38,7,3,0,1,"origineel","GXG op basis van Z1",NA,NA
+"741",15,"Caricion davallianae",0,140000,1,2,9,-1,38,7,3,0,1,"aanvulling zuurgraad",NA,NA,NA
+"742",15,"Caricion davallianae",0,150000,1,3,9,-1,38,7,3,0,1,"origineel","GXG op basis van Z1",NA,NA
+"743",15,"Caricion davallianae",0,150000,1,2,9,-1,38,7,3,0,1,"origineel","GXG op basis van Z1",NA,NA
+"744",15,"Caricion davallianae",0,110000,1,3,9,-1,38,7,3,0,1,"aanvulling zuurgraad","correctie Z naar ZW en B",NA,NA
+"745",15,"Caricion davallianae",0,110000,1,2,9,-1,38,7,3,0,1,NA,NA,NA,NA
+"746",15,"Caricion davallianae",0,120000,1,3,9,-1,38,7,3,0,1,"interpolatie Z2",NA,NA,NA
+"747",15,"Caricion davallianae",0,120000,1,2,9,-1,38,7,3,0,1,NA,NA,NA,NA
+"748",15,"Caricion davallianae",0,130000,1,2,9,-1,38,7,3,0,1,"aanvulling zuurgraad","GXG op basis van Z1",NA,NA
+"749",15,"Caricion davallianae",0,130000,1,3,9,-1,38,7,3,0,1,"aanvulling zuurgraad","GXG op basis van Z1",NA,NA
+"750",16,"Lolio-Potentillion anserinae",0,20000,4,1,21,-20,98,13,2,0,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"751",16,"Lolio-Potentillion anserinae",0,20000,4,2,21,-20,98,13,2,0,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"752",16,"Lolio-Potentillion anserinae",0,20000,4,3,21,-20,98,13,2,0,1,"aanvulling zuurgraad","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"753",16,"Lolio-Potentillion anserinae",0,30000,4,2,9,-14,96,36,2,0,1,"origineel",NA,NA,NA
+"754",16,"Lolio-Potentillion anserinae",0,140000,4,3,30,-26,66,-3,2,0,1,"origineel",NA,NA,NA
+"755",16,"Lolio-Potentillion anserinae",0,140000,4,2,30,-26,66,-3,2,0,1,"origineel",NA,NA,NA
+"756",16,"Lolio-Potentillion anserinae",0,140000,4,1,30,-26,66,-3,2,0,1,"aanvulling zuurgraad",NA,NA,NA
+"757",16,"Lolio-Potentillion anserinae",0,120000,4,1,6,4,72,66,2,0,1,"origineel",NA,NA,NA
+"758",16,"Lolio-Potentillion anserinae",0,20000,4,1,21,-20,98,13,2,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"759",16,"Lolio-Potentillion anserinae",0,20000,4,2,21,-20,98,13,2,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"760",16,"Lolio-Potentillion anserinae",0,20000,4,3,21,-20,98,13,2,1,1,"aanvulling zuurgraad","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"761",16,"Lolio-Potentillion anserinae",0,30000,4,2,9,-14,96,36,2,1,1,"origineel",NA,NA,NA
+"762",16,"Lolio-Potentillion anserinae",0,140000,4,3,30,-26,66,-3,2,1,1,"origineel",NA,NA,NA
+"763",16,"Lolio-Potentillion anserinae",0,140000,4,2,30,-26,66,-3,2,1,1,"origineel",NA,NA,NA
+"764",16,"Lolio-Potentillion anserinae",0,140000,4,1,30,-26,66,-3,2,1,1,"aanvulling zuurgraad",NA,NA,NA
+"765",16,"Lolio-Potentillion anserinae",0,120000,4,1,6,4,72,66,2,1,1,"origineel",NA,NA,NA
+"766",16,"Lolio-Potentillion anserinae",0,20000,4,1,21,-20,98,13,2,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"767",16,"Lolio-Potentillion anserinae",0,20000,4,2,21,-20,98,13,2,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"768",16,"Lolio-Potentillion anserinae",0,20000,4,3,21,-20,98,13,2,2,1,"aanvulling zuurgraad","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"769",16,"Lolio-Potentillion anserinae",0,30000,4,2,9,-14,96,36,2,2,1,"origineel",NA,NA,NA
+"770",16,"Lolio-Potentillion anserinae",0,140000,4,3,30,-26,66,-3,2,2,1,"origineel",NA,NA,NA
+"771",16,"Lolio-Potentillion anserinae",0,140000,4,2,30,-26,66,-3,2,2,1,"origineel",NA,NA,NA
+"772",16,"Lolio-Potentillion anserinae",0,140000,4,1,30,-26,66,-3,2,2,1,"aanvulling zuurgraad",NA,NA,NA
+"773",16,"Lolio-Potentillion anserinae",0,120000,4,1,6,4,72,66,2,2,1,"origineel",NA,NA,NA
+"774",16,"Lolio-Potentillion anserinae",0,20000,4,1,21,-20,98,13,3,0,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"775",16,"Lolio-Potentillion anserinae",0,20000,4,2,21,-20,98,13,3,0,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"776",16,"Lolio-Potentillion anserinae",0,20000,4,3,21,-20,98,13,3,0,1,"aanvulling zuurgraad","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"777",16,"Lolio-Potentillion anserinae",0,30000,4,2,9,-14,96,36,3,0,1,"origineel",NA,NA,NA
+"778",16,"Lolio-Potentillion anserinae",0,140000,4,3,30,-26,66,-3,3,0,1,"origineel",NA,NA,NA
+"779",16,"Lolio-Potentillion anserinae",0,140000,4,2,30,-26,66,-3,3,0,1,"origineel",NA,NA,NA
+"780",16,"Lolio-Potentillion anserinae",0,140000,4,1,30,-26,66,-3,3,0,1,"aanvulling zuurgraad",NA,NA,NA
+"781",16,"Lolio-Potentillion anserinae",0,120000,4,1,6,4,72,66,3,0,1,"origineel",NA,NA,NA
+"782",16,"Lolio-Potentillion anserinae",0,20000,4,1,21,-20,98,13,3,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"783",16,"Lolio-Potentillion anserinae",0,20000,4,2,21,-20,98,13,3,1,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"784",16,"Lolio-Potentillion anserinae",0,20000,4,3,21,-20,98,13,3,1,1,"aanvulling zuurgraad","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"785",16,"Lolio-Potentillion anserinae",0,30000,4,2,9,-14,96,36,3,1,1,"origineel",NA,NA,NA
+"786",16,"Lolio-Potentillion anserinae",0,140000,4,3,30,-26,66,-3,3,1,1,"origineel",NA,NA,NA
+"787",16,"Lolio-Potentillion anserinae",0,140000,4,2,30,-26,66,-3,3,1,1,"origineel",NA,NA,NA
+"788",16,"Lolio-Potentillion anserinae",0,140000,4,1,30,-26,66,-3,3,1,1,"aanvulling zuurgraad",NA,NA,NA
+"789",16,"Lolio-Potentillion anserinae",0,120000,4,1,6,4,72,66,3,1,1,"origineel",NA,NA,NA
+"790",16,"Lolio-Potentillion anserinae",0,20000,4,1,21,-20,98,13,3,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"791",16,"Lolio-Potentillion anserinae",0,20000,4,2,21,-20,98,13,3,2,1,"origineel","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"792",16,"Lolio-Potentillion anserinae",0,20000,4,3,21,-20,98,13,3,2,1,"aanvulling zuurgraad","nieuwe GXG grenzen na correcties in de databank",NA,NA
+"793",16,"Lolio-Potentillion anserinae",0,30000,4,2,9,-14,96,36,3,2,1,"origineel",NA,NA,NA
+"794",16,"Lolio-Potentillion anserinae",0,140000,4,3,30,-26,66,-3,3,2,1,"origineel",NA,NA,NA
+"795",16,"Lolio-Potentillion anserinae",0,140000,4,2,30,-26,66,-3,3,2,1,"origineel",NA,NA,NA
+"796",16,"Lolio-Potentillion anserinae",0,140000,4,1,30,-26,66,-3,3,2,1,"aanvulling zuurgraad",NA,NA,NA
+"797",16,"Lolio-Potentillion anserinae",0,120000,4,1,6,4,72,66,3,2,1,"origineel",NA,NA,NA
+"798",17,"Junco - Molinion",0,30000,2,3,16,-4,42,13,3,0,1,"origineel","afstemming",NA,NA
+"799",17,"Junco - Molinion",0,30000,1,3,16,-4,42,13,3,0,1,"origineel","afstemming",NA,NA
+"800",17,"Junco - Molinion",0,30000,2,2,16,-4,42,13,3,0,1,"aanvulling zuurgraad","afstemming",NA,NA
+"801",17,"Junco - Molinion",0,30000,1,2,16,-4,42,13,3,0,1,"aanvulling zuurgraad","afstemming",NA,NA
+"802",17,"Junco - Molinion",0,150000,2,3,16,2,42,13,3,0,1,"origineel","LV aangepast aan KV, cf. waarden heel diep en basislocaties niet volledig",NA,NA
+"803",17,"Junco - Molinion",0,150000,2,2,16,2,42,13,3,0,1,"origineel","LV aangepast aan KV, cf. waarden heel diep en basislocaties niet volledig",NA,NA
+"804",17,"Junco - Molinion",0,150000,1,3,16,2,42,13,3,0,1,"origineel","LV aangepast aan KV, cf. waarden heel diep en basislocaties niet volledig",NA,NA
+"805",17,"Junco - Molinion",0,150000,1,2,16,2,42,13,3,0,1,"origineel","LV aangepast aan KV, cf. waarden heel diep en basislocaties niet volledig",NA,NA
+"806",17,"Junco - Molinion",0,80000,2,3,16,-7,42,-1,3,0,1,"origineel","afstemming",NA,NA
+"807",17,"Junco - Molinion",0,80000,2,2,16,-7,42,-1,3,0,1,"interpolatie zuurgraad","afstemming",NA,NA
+"808",17,"Junco - Molinion",0,80000,2,1,16,-7,42,-1,3,0,1,"origineel","afstemming",NA,NA
+"809",17,"Junco - Molinion",0,80000,1,3,16,-7,42,-1,3,0,1,"origineel","afstemming",NA,NA
+"810",17,"Junco - Molinion",0,80000,1,2,16,-7,42,-1,3,0,1,"interpolatie zuurgraad","afstemming",NA,NA
+"811",17,"Junco - Molinion",0,80000,1,1,16,-7,42,-1,3,0,1,"origineel","afstemming",NA,NA
+"812",17,"Junco - Molinion",0,110000,2,2,18,6,113,86,3,0,1,"origineel",NA,NA,NA
+"813",17,"Junco - Molinion",0,110000,1,2,18,6,113,86,3,0,1,"origineel",NA,NA,NA
+"814",17,"Junco - Molinion",0,120000,2,2,18,6,113,86,3,0,1,"interpolatie Z2",NA,NA,NA
+"815",17,"Junco - Molinion",0,120000,1,2,18,6,113,86,3,0,1,NA,NA,NA,NA
+"816",17,"Junco - Molinion",0,130000,2,1,17,-1,72,7,3,0,1,"origineel",NA,NA,NA
+"817",17,"Junco - Molinion",0,130000,1,1,17,-1,72,7,3,0,1,"origineel",NA,NA,NA
+"818",17,"Junco - Molinion",0,130000,2,2,17,-1,72,7,3,0,1,"aanvulling zuurgraad",NA,NA,NA
+"819",17,"Junco - Molinion",0,130000,1,2,17,-1,72,7,3,0,1,"aanvulling zuurgraad",NA,NA,NA
+"820",18,"Calthion palustris",0,20000,2,3,25,-16,68,18,2,0,1,"origineel","GHG_max volgens KV",NA,NA
+"821",18,"Calthion palustris",0,20000,2,1,25,-16,68,18,2,0,1,"origineel","GHG_max volgens KV",NA,NA
+"822",18,"Calthion palustris",0,20000,2,2,25,-16,68,18,2,0,1,"origineel","GHG_max volgens KV",NA,NA
+"823",18,"Calthion palustris",0,20000,3,3,25,-16,68,18,2,0,1,"origineel","GHG_max volgens KV",NA,NA
+"824",18,"Calthion palustris",0,20000,3,1,25,-16,68,18,2,0,1,"origineel","GHG_max volgens KV",NA,NA
+"825",18,"Calthion palustris",0,20000,3,2,25,-16,68,18,2,0,1,"origineel","GHG_max volgens KV",NA,NA
+"826",18,"Calthion palustris",0,30000,2,3,8,-16,61,-7,2,0,1,"origineel",NA,NA,NA
+"827",18,"Calthion palustris",0,30000,2,1,8,-16,61,-7,2,0,1,"origineel",NA,NA,NA
+"828",18,"Calthion palustris",0,30000,2,2,8,-16,61,-7,2,0,1,"origineel",NA,NA,NA
+"829",18,"Calthion palustris",0,30000,3,3,8,-16,61,-7,2,0,1,"origineel",NA,NA,NA
+"830",18,"Calthion palustris",0,30000,3,1,8,-16,61,-7,2,0,1,"origineel",NA,NA,NA
+"831",18,"Calthion palustris",0,30000,3,2,8,-16,61,-7,2,0,1,"origineel",NA,NA,NA
+"832",18,"Calthion palustris",0,140000,2,3,51,-16,123,15,2,0,1,"origineel","GHG_max volgens KV",NA,NA
+"833",18,"Calthion palustris",0,140000,2,1,51,-16,123,15,2,0,1,"origineel","GHG_max volgens KV",NA,NA
+"834",18,"Calthion palustris",0,140000,2,2,51,-16,123,15,2,0,1,"origineel","GHG_max volgens KV",NA,NA
+"835",18,"Calthion palustris",0,140000,3,3,51,-16,123,15,2,0,1,"origineel","GHG_max volgens KV",NA,NA
+"836",18,"Calthion palustris",0,140000,3,1,51,-16,123,15,2,0,1,"origineel","GHG_max volgens KV",NA,NA
+"837",18,"Calthion palustris",0,140000,3,2,51,-16,123,15,2,0,1,"origineel","GHG_max volgens KV",NA,NA
+"838",18,"Calthion palustris",0,150000,2,3,5,-16,117,16,2,0,1,"origineel","GHG_max volgens KV",NA,NA
+"839",18,"Calthion palustris",0,150000,2,2,5,-16,117,16,2,0,1,"origineel","GHG_max volgens KV",NA,NA
+"840",18,"Calthion palustris",0,150000,3,3,5,-16,117,16,2,0,1,"origineel","GHG_max volgens KV",NA,NA
+"841",18,"Calthion palustris",0,150000,3,2,5,-16,117,16,2,0,1,"origineel","GHG_max volgens KV",NA,NA
+"842",18,"Calthion palustris",0,150000,2,1,5,-16,117,16,2,0,1,"aanvulling zuurgraad","GHG_max volgens KV",NA,NA
+"843",18,"Calthion palustris",0,150000,3,1,5,-16,117,16,2,0,1,"aanvulling zuurgraad","GHG_max volgens KV",NA,NA
+"844",18,"Calthion palustris",0,80000,2,1,25,-33,81,-19,2,0,1,"origineel",NA,NA,NA
+"845",18,"Calthion palustris",0,80000,2,2,25,-33,81,-19,2,0,1,"origineel",NA,NA,NA
+"846",18,"Calthion palustris",0,80000,3,1,25,-33,81,-19,2,0,1,"origineel",NA,NA,NA
+"847",18,"Calthion palustris",0,80000,3,2,25,-33,81,-19,2,0,1,"origineel",NA,NA,NA
+"848",18,"Calthion palustris",0,110000,2,3,51,1,102,46,2,0,1,"origineel","GHG_min zoals L1, cf. alles zakte dieper weg dan Z1 onlogisch",NA,NA
+"849",18,"Calthion palustris",0,110000,2,2,51,1,102,46,2,0,1,"interpolatie zuurgraad","GHG_min zoals L1, cf. alles zakte dieper weg dan Z1 onlogisch",NA,NA
+"850",18,"Calthion palustris",0,110000,2,1,51,1,102,46,2,0,1,"origineel","GHG_min zoals L1, cf. alles zakte dieper weg dan Z1 onlogisch",NA,NA
+"851",18,"Calthion palustris",0,110000,3,3,51,1,102,46,2,0,1,"origineel","GHG_min zoals L1, cf. alles zakte dieper weg dan Z1 onlogisch",NA,NA
+"852",18,"Calthion palustris",0,110000,3,2,51,1,102,46,2,0,1,"interpolatie zuurgraad","GHG_min zoals L1, cf. alles zakte dieper weg dan Z1 onlogisch",NA,NA
+"853",18,"Calthion palustris",0,110000,3,1,51,1,102,46,2,0,1,"origineel","GHG_min zoals L1, cf. alles zakte dieper weg dan Z1 onlogisch",NA,NA
+"854",18,"Calthion palustris",0,120000,2,1,51,-12,99,51,2,0,1,"origineel","GHG_min zoals Z1",NA,NA
+"855",18,"Calthion palustris",0,120000,3,1,51,-12,99,51,2,0,1,"origineel","GHG_min zoals Z1",NA,NA
+"856",18,"Calthion palustris",0,130000,2,1,7,-9,46,23,2,0,1,"origineel",NA,NA,NA
+"857",18,"Calthion palustris",0,130000,3,1,7,-9,46,23,2,0,1,"origineel",NA,NA,NA
+"858",18,"Calthion palustris",0,130000,2,2,7,-9,46,23,2,0,1,"aanvulling zuurgraad",NA,NA,NA
+"859",18,"Calthion palustris",0,130000,3,2,7,-9,46,23,2,0,1,"aanvulling zuurgraad",NA,NA,NA
+"860",18,"Calthion palustris",0,20000,2,3,25,-16,68,18,2,2,1,"origineel","GHG_max volgens KV",NA,NA
+"861",18,"Calthion palustris",0,20000,2,1,25,-16,68,18,2,2,1,"origineel","GHG_max volgens KV",NA,NA
+"862",18,"Calthion palustris",0,20000,2,2,25,-16,68,18,2,2,1,"origineel","GHG_max volgens KV",NA,NA
+"863",18,"Calthion palustris",0,20000,3,3,25,-16,68,18,2,2,1,"origineel","GHG_max volgens KV",NA,NA
+"864",18,"Calthion palustris",0,20000,3,1,25,-16,68,18,2,2,1,"origineel","GHG_max volgens KV",NA,NA
+"865",18,"Calthion palustris",0,20000,3,2,25,-16,68,18,2,2,1,"origineel","GHG_max volgens KV",NA,NA
+"866",18,"Calthion palustris",0,30000,2,3,8,-16,61,-7,2,2,1,"origineel",NA,NA,NA
+"867",18,"Calthion palustris",0,30000,2,1,8,-16,61,-7,2,2,1,"origineel",NA,NA,NA
+"868",18,"Calthion palustris",0,30000,2,2,8,-16,61,-7,2,2,1,"origineel",NA,NA,NA
+"869",18,"Calthion palustris",0,30000,3,3,8,-16,61,-7,2,2,1,"origineel",NA,NA,NA
+"870",18,"Calthion palustris",0,30000,3,1,8,-16,61,-7,2,2,1,"origineel",NA,NA,NA
+"871",18,"Calthion palustris",0,30000,3,2,8,-16,61,-7,2,2,1,"origineel",NA,NA,NA
+"872",18,"Calthion palustris",0,140000,2,3,51,-16,123,15,2,2,1,"origineel","GHG_max volgens KV",NA,NA
+"873",18,"Calthion palustris",0,140000,2,1,51,-16,123,15,2,2,1,"origineel","GHG_max volgens KV",NA,NA
+"874",18,"Calthion palustris",0,140000,2,2,51,-16,123,15,2,2,1,"origineel","GHG_max volgens KV",NA,NA
+"875",18,"Calthion palustris",0,140000,3,3,51,-16,123,15,2,2,1,"origineel","GHG_max volgens KV",NA,NA
+"876",18,"Calthion palustris",0,140000,3,1,51,-16,123,15,2,2,1,"origineel","GHG_max volgens KV",NA,NA
+"877",18,"Calthion palustris",0,140000,3,2,51,-16,123,15,2,2,1,"origineel","GHG_max volgens KV",NA,NA
+"878",18,"Calthion palustris",0,150000,2,3,5,-16,117,16,2,2,1,"origineel","GHG_max volgens KV",NA,NA
+"879",18,"Calthion palustris",0,150000,2,2,5,-16,117,16,2,2,1,"origineel","GHG_max volgens KV",NA,NA
+"880",18,"Calthion palustris",0,150000,3,3,5,-16,117,16,2,2,1,"origineel","GHG_max volgens KV",NA,NA
+"881",18,"Calthion palustris",0,150000,3,2,5,-16,117,16,2,2,1,"origineel","GHG_max volgens KV",NA,NA
+"882",18,"Calthion palustris",0,150000,2,1,5,-16,117,16,2,2,1,"aanvulling zuurgraad","GHG_max volgens KV",NA,NA
+"883",18,"Calthion palustris",0,150000,3,1,5,-16,117,16,2,2,1,"aanvulling zuurgraad","GHG_max volgens KV",NA,NA
+"884",18,"Calthion palustris",0,80000,2,1,25,-33,81,-19,2,2,1,"origineel",NA,NA,NA
+"885",18,"Calthion palustris",0,80000,2,2,25,-33,81,-19,2,2,1,"origineel",NA,NA,NA
+"886",18,"Calthion palustris",0,80000,3,1,25,-33,81,-19,2,2,1,"origineel",NA,NA,NA
+"887",18,"Calthion palustris",0,80000,3,2,25,-33,81,-19,2,2,1,"origineel",NA,NA,NA
+"888",18,"Calthion palustris",0,110000,2,3,51,1,102,46,2,2,1,"origineel","GHG_min zoals L1, cf. alles zakte dieper weg dan Z1 onlogisch",NA,NA
+"889",18,"Calthion palustris",0,110000,2,2,51,1,102,46,2,2,1,"interpolatie zuurgraad","GHG_min zoals L1, cf. alles zakte dieper weg dan Z1 onlogisch",NA,NA
+"890",18,"Calthion palustris",0,110000,2,1,51,1,102,46,2,2,1,"origineel","GHG_min zoals L1, cf. alles zakte dieper weg dan Z1 onlogisch",NA,NA
+"891",18,"Calthion palustris",0,110000,3,3,51,1,102,46,2,2,1,"origineel","GHG_min zoals L1, cf. alles zakte dieper weg dan Z1 onlogisch",NA,NA
+"892",18,"Calthion palustris",0,110000,3,2,51,1,102,46,2,2,1,"interpolatie zuurgraad","GHG_min zoals L1, cf. alles zakte dieper weg dan Z1 onlogisch",NA,NA
+"893",18,"Calthion palustris",0,110000,3,1,51,1,102,46,2,2,1,"origineel","GHG_min zoals L1, cf. alles zakte dieper weg dan Z1 onlogisch",NA,NA
+"894",18,"Calthion palustris",0,120000,2,1,51,-12,99,51,2,2,1,"origineel","GHG_min zoals Z1",NA,NA
+"895",18,"Calthion palustris",0,120000,3,1,51,-12,99,51,2,2,1,"origineel","GHG_min zoals Z1",NA,NA
+"896",18,"Calthion palustris",0,130000,2,1,7,-9,46,23,2,2,1,"origineel",NA,NA,NA
+"897",18,"Calthion palustris",0,130000,3,1,7,-9,46,23,2,2,1,"origineel",NA,NA,NA
+"898",18,"Calthion palustris",0,130000,2,2,7,-9,46,23,2,2,1,"aanvulling zuurgraad",NA,NA,NA
+"899",18,"Calthion palustris",0,130000,3,2,7,-9,46,23,2,2,1,"aanvulling zuurgraad",NA,NA,NA
+"900",18,"Calthion palustris",0,20000,2,3,25,-16,68,18,3,0,1,"origineel","GHG_max volgens KV",NA,NA
+"901",18,"Calthion palustris",0,20000,2,1,25,-16,68,18,3,0,1,"origineel","GHG_max volgens KV",NA,NA
+"902",18,"Calthion palustris",0,20000,2,2,25,-16,68,18,3,0,1,"origineel","GHG_max volgens KV",NA,NA
+"903",18,"Calthion palustris",0,20000,3,3,25,-16,68,18,3,0,1,"origineel","GHG_max volgens KV",NA,NA
+"904",18,"Calthion palustris",0,20000,3,1,25,-16,68,18,3,0,1,"origineel","GHG_max volgens KV",NA,NA
+"905",18,"Calthion palustris",0,20000,3,2,25,-16,68,18,3,0,1,"origineel","GHG_max volgens KV",NA,NA
+"906",18,"Calthion palustris",0,30000,2,3,8,-16,61,-7,3,0,1,"origineel",NA,NA,NA
+"907",18,"Calthion palustris",0,30000,2,1,8,-16,61,-7,3,0,1,"origineel",NA,NA,NA
+"908",18,"Calthion palustris",0,30000,2,2,8,-16,61,-7,3,0,1,"origineel",NA,NA,NA
+"909",18,"Calthion palustris",0,30000,3,3,8,-16,61,-7,3,0,1,"origineel",NA,NA,NA
+"910",18,"Calthion palustris",0,30000,3,1,8,-16,61,-7,3,0,1,"origineel",NA,NA,NA
+"911",18,"Calthion palustris",0,30000,3,2,8,-16,61,-7,3,0,1,"origineel",NA,NA,NA
+"912",18,"Calthion palustris",0,140000,2,3,51,-16,123,15,3,0,1,"origineel","GHG_max volgens KV",NA,NA
+"913",18,"Calthion palustris",0,140000,2,1,51,-16,123,15,3,0,1,"origineel","GHG_max volgens KV",NA,NA
+"914",18,"Calthion palustris",0,140000,2,2,51,-16,123,15,3,0,1,"origineel","GHG_max volgens KV",NA,NA
+"915",18,"Calthion palustris",0,140000,3,3,51,-16,123,15,3,0,1,"origineel","GHG_max volgens KV",NA,NA
+"916",18,"Calthion palustris",0,140000,3,1,51,-16,123,15,3,0,1,"origineel","GHG_max volgens KV",NA,NA
+"917",18,"Calthion palustris",0,140000,3,2,51,-16,123,15,3,0,1,"origineel","GHG_max volgens KV",NA,NA
+"918",18,"Calthion palustris",0,150000,2,3,5,-16,117,16,3,0,1,"origineel","GHG_max volgens KV",NA,NA
+"919",18,"Calthion palustris",0,150000,2,2,5,-16,117,16,3,0,1,"origineel","GHG_max volgens KV",NA,NA
+"920",18,"Calthion palustris",0,150000,3,3,5,-16,117,16,3,0,1,"origineel","GHG_max volgens KV",NA,NA
+"921",18,"Calthion palustris",0,150000,3,2,5,-16,117,16,3,0,1,"origineel","GHG_max volgens KV",NA,NA
+"922",18,"Calthion palustris",0,150000,2,1,5,-16,117,16,3,0,1,"aanvulling zuurgraad","GHG_max volgens KV",NA,NA
+"923",18,"Calthion palustris",0,150000,3,1,5,-16,117,16,3,0,1,"aanvulling zuurgraad","GHG_max volgens KV",NA,NA
+"924",18,"Calthion palustris",0,80000,2,1,25,-33,81,-19,3,0,1,"origineel",NA,NA,NA
+"925",18,"Calthion palustris",0,80000,2,2,25,-33,81,-19,3,0,1,"origineel",NA,NA,NA
+"926",18,"Calthion palustris",0,80000,3,1,25,-33,81,-19,3,0,1,"origineel",NA,NA,NA
+"927",18,"Calthion palustris",0,80000,3,2,25,-33,81,-19,3,0,1,"origineel",NA,NA,NA
+"928",18,"Calthion palustris",0,110000,2,3,51,1,102,46,3,0,1,"origineel","GHG_min zoals L1, cf. alles zakte dieper weg dan Z1 onlogisch",NA,NA
+"929",18,"Calthion palustris",0,110000,2,2,51,1,102,46,3,0,1,"interpolatie zuurgraad","GHG_min zoals L1, cf. alles zakte dieper weg dan Z1 onlogisch",NA,NA
+"930",18,"Calthion palustris",0,110000,2,1,51,1,102,46,3,0,1,"origineel","GHG_min zoals L1, cf. alles zakte dieper weg dan Z1 onlogisch",NA,NA
+"931",18,"Calthion palustris",0,110000,3,3,51,1,102,46,3,0,1,"origineel","GHG_min zoals L1, cf. alles zakte dieper weg dan Z1 onlogisch",NA,NA
+"932",18,"Calthion palustris",0,110000,3,2,51,1,102,46,3,0,1,"interpolatie zuurgraad","GHG_min zoals L1, cf. alles zakte dieper weg dan Z1 onlogisch",NA,NA
+"933",18,"Calthion palustris",0,110000,3,1,51,1,102,46,3,0,1,"origineel","GHG_min zoals L1, cf. alles zakte dieper weg dan Z1 onlogisch",NA,NA
+"934",18,"Calthion palustris",0,120000,2,1,51,-12,99,51,3,0,1,"origineel","GHG_min zoals Z1",NA,NA
+"935",18,"Calthion palustris",0,120000,3,1,51,-12,99,51,3,0,1,"origineel","GHG_min zoals Z1",NA,NA
+"936",18,"Calthion palustris",0,130000,2,1,7,-9,46,23,3,0,1,"origineel",NA,NA,NA
+"937",18,"Calthion palustris",0,130000,3,1,7,-9,46,23,3,0,1,"origineel",NA,NA,NA
+"938",18,"Calthion palustris",0,130000,2,2,7,-9,46,23,3,0,1,"aanvulling zuurgraad",NA,NA,NA
+"939",18,"Calthion palustris",0,130000,3,2,7,-9,46,23,3,0,1,"aanvulling zuurgraad",NA,NA,NA
+"940",18,"Calthion palustris",0,20000,2,3,25,-16,68,18,3,2,1,"origineel","GHG_max volgens KV",NA,NA
+"941",18,"Calthion palustris",0,20000,2,1,25,-16,68,18,3,2,1,"origineel","GHG_max volgens KV",NA,NA
+"942",18,"Calthion palustris",0,20000,2,2,25,-16,68,18,3,2,1,"origineel","GHG_max volgens KV",NA,NA
+"943",18,"Calthion palustris",0,20000,3,3,25,-16,68,18,3,2,1,"origineel","GHG_max volgens KV",NA,NA
+"944",18,"Calthion palustris",0,20000,3,1,25,-16,68,18,3,2,1,"origineel","GHG_max volgens KV",NA,NA
+"945",18,"Calthion palustris",0,20000,3,2,25,-16,68,18,3,2,1,"origineel","GHG_max volgens KV",NA,NA
+"946",18,"Calthion palustris",0,30000,2,3,8,-16,61,-7,3,2,1,"origineel",NA,NA,NA
+"947",18,"Calthion palustris",0,30000,2,1,8,-16,61,-7,3,2,1,"origineel",NA,NA,NA
+"948",18,"Calthion palustris",0,30000,2,2,8,-16,61,-7,3,2,1,"origineel",NA,NA,NA
+"949",18,"Calthion palustris",0,30000,3,3,8,-16,61,-7,3,2,1,"origineel",NA,NA,NA
+"950",18,"Calthion palustris",0,30000,3,1,8,-16,61,-7,3,2,1,"origineel",NA,NA,NA
+"951",18,"Calthion palustris",0,30000,3,2,8,-16,61,-7,3,2,1,"origineel",NA,NA,NA
+"952",18,"Calthion palustris",0,140000,2,3,51,-16,123,15,3,2,1,"origineel","GHG_max volgens KV",NA,NA
+"953",18,"Calthion palustris",0,140000,2,1,51,-16,123,15,3,2,1,"origineel","GHG_max volgens KV",NA,NA
+"954",18,"Calthion palustris",0,140000,2,2,51,-16,123,15,3,2,1,"origineel","GHG_max volgens KV",NA,NA
+"955",18,"Calthion palustris",0,140000,3,3,51,-16,123,15,3,2,1,"origineel","GHG_max volgens KV",NA,NA
+"956",18,"Calthion palustris",0,140000,3,1,51,-16,123,15,3,2,1,"origineel","GHG_max volgens KV",NA,NA
+"957",18,"Calthion palustris",0,140000,3,2,51,-16,123,15,3,2,1,"origineel","GHG_max volgens KV",NA,NA
+"958",18,"Calthion palustris",0,150000,2,3,5,-16,117,16,3,2,1,"origineel","GHG_max volgens KV",NA,NA
+"959",18,"Calthion palustris",0,150000,2,2,5,-16,117,16,3,2,1,"origineel","GHG_max volgens KV",NA,NA
+"960",18,"Calthion palustris",0,150000,3,3,5,-16,117,16,3,2,1,"origineel","GHG_max volgens KV",NA,NA
+"961",18,"Calthion palustris",0,150000,3,2,5,-16,117,16,3,2,1,"origineel","GHG_max volgens KV",NA,NA
+"962",18,"Calthion palustris",0,150000,2,1,5,-16,117,16,3,2,1,"aanvulling zuurgraad","GHG_max volgens KV",NA,NA
+"963",18,"Calthion palustris",0,150000,3,1,5,-16,117,16,3,2,1,"aanvulling zuurgraad","GHG_max volgens KV",NA,NA
+"964",18,"Calthion palustris",0,80000,2,1,25,-33,81,-19,3,2,1,"origineel",NA,NA,NA
+"965",18,"Calthion palustris",0,80000,2,2,25,-33,81,-19,3,2,1,"origineel",NA,NA,NA
+"966",18,"Calthion palustris",0,80000,3,1,25,-33,81,-19,3,2,1,"origineel",NA,NA,NA
+"967",18,"Calthion palustris",0,80000,3,2,25,-33,81,-19,3,2,1,"origineel",NA,NA,NA
+"968",18,"Calthion palustris",0,110000,2,3,51,1,102,46,3,2,1,"origineel","GHG_min zoals L1, cf. alles zakte dieper weg dan Z1 onlogisch",NA,NA
+"969",18,"Calthion palustris",0,110000,2,2,51,1,102,46,3,2,1,"interpolatie zuurgraad","GHG_min zoals L1, cf. alles zakte dieper weg dan Z1 onlogisch",NA,NA
+"970",18,"Calthion palustris",0,110000,2,1,51,1,102,46,3,2,1,"origineel","GHG_min zoals L1, cf. alles zakte dieper weg dan Z1 onlogisch",NA,NA
+"971",18,"Calthion palustris",0,110000,3,3,51,1,102,46,3,2,1,"origineel","GHG_min zoals L1, cf. alles zakte dieper weg dan Z1 onlogisch",NA,NA
+"972",18,"Calthion palustris",0,110000,3,2,51,1,102,46,3,2,1,"interpolatie zuurgraad","GHG_min zoals L1, cf. alles zakte dieper weg dan Z1 onlogisch",NA,NA
+"973",18,"Calthion palustris",0,110000,3,1,51,1,102,46,3,2,1,"origineel","GHG_min zoals L1, cf. alles zakte dieper weg dan Z1 onlogisch",NA,NA
+"974",18,"Calthion palustris",0,120000,2,1,51,-12,99,51,3,2,1,"origineel","GHG_min zoals Z1",NA,NA
+"975",18,"Calthion palustris",0,120000,3,1,51,-12,99,51,3,2,1,"origineel","GHG_min zoals Z1",NA,NA
+"976",18,"Calthion palustris",0,130000,2,1,7,-9,46,23,3,2,1,"origineel",NA,NA,NA
+"977",18,"Calthion palustris",0,130000,3,1,7,-9,46,23,3,2,1,"origineel",NA,NA,NA
+"978",18,"Calthion palustris",0,130000,2,2,7,-9,46,23,3,2,1,"aanvulling zuurgraad",NA,NA,NA
+"979",18,"Calthion palustris",0,130000,3,2,7,-9,46,23,3,2,1,"aanvulling zuurgraad",NA,NA,NA
+"980",19,"Alopecurion pratensis",0,20000,4,1,23,-3,90,52,2,1,1,"origineel",NA,NA,NA
+"981",19,"Alopecurion pratensis",0,20000,2,1,23,-3,90,52,2,1,1,"origineel",NA,NA,NA
+"982",19,"Alopecurion pratensis",0,20000,3,1,23,-3,90,52,2,1,1,"origineel",NA,NA,NA
+"983",19,"Alopecurion pratensis",0,20000,4,2,23,-3,90,52,2,1,1,"aanvulling zuurgraad",NA,NA,NA
+"984",19,"Alopecurion pratensis",0,20000,2,2,23,-3,90,52,2,1,1,"aanvulling zuurgraad",NA,NA,NA
+"985",19,"Alopecurion pratensis",0,20000,3,2,23,-3,90,52,2,1,1,"aanvulling zuurgraad",NA,NA,NA
+"986",19,"Alopecurion pratensis",0,20000,4,3,23,-3,90,52,2,1,1,"aanvulling zuurgraad","Vegetatie van Nederland + pH bodem",NA,NA
+"987",19,"Alopecurion pratensis",0,20000,2,3,23,-3,90,52,2,1,1,"aanvulling zuurgraad",NA,NA,NA
+"988",19,"Alopecurion pratensis",0,20000,3,3,23,-3,90,52,2,1,1,"aanvulling zuurgraad",NA,NA,NA
+"989",19,"Alopecurion pratensis",0,30000,4,1,23,-3,90,52,2,1,1,"origineel","GXG op basis van K1",NA,NA
+"990",19,"Alopecurion pratensis",0,30000,2,1,23,-3,90,52,2,1,1,"origineel","GXG op basis van K1",NA,NA
+"991",19,"Alopecurion pratensis",0,30000,3,1,23,-3,90,52,2,1,1,"origineel","GXG op basis van K1",NA,NA
+"992",19,"Alopecurion pratensis",0,30000,4,2,23,-3,90,52,2,1,1,"aanvulling zuurgraad",NA,NA,NA
+"993",19,"Alopecurion pratensis",0,30000,2,2,23,-3,90,52,2,1,1,"aanvulling zuurgraad",NA,NA,NA
+"994",19,"Alopecurion pratensis",0,30000,3,2,23,-3,90,52,2,1,1,"aanvulling zuurgraad",NA,NA,NA
+"995",19,"Alopecurion pratensis",0,140000,4,1,21,-9,109,35,2,1,1,"origineel",NA,NA,NA
+"996",19,"Alopecurion pratensis",0,140000,4,2,21,-9,109,35,2,1,1,"origineel",NA,NA,NA
+"997",19,"Alopecurion pratensis",0,140000,2,1,21,-9,109,35,2,1,1,"origineel",NA,NA,NA
+"998",19,"Alopecurion pratensis",0,140000,2,2,21,-9,109,35,2,1,1,"origineel",NA,NA,NA
+"999",19,"Alopecurion pratensis",0,140000,3,1,21,-9,109,35,2,1,1,"origineel",NA,NA,NA
+"1000",19,"Alopecurion pratensis",0,140000,3,2,21,-9,109,35,2,1,1,"origineel",NA,NA,NA
+"1001",19,"Alopecurion pratensis",0,110000,4,1,23,-3,90,52,2,1,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1002",19,"Alopecurion pratensis",0,110000,2,1,23,-3,90,52,2,1,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1003",19,"Alopecurion pratensis",0,110000,3,1,23,-3,90,52,2,1,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1004",19,"Alopecurion pratensis",0,120000,4,1,23,-3,90,52,2,1,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1005",19,"Alopecurion pratensis",0,120000,2,1,23,-3,90,52,2,1,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1006",19,"Alopecurion pratensis",0,120000,3,1,23,-3,90,52,2,1,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1007",19,"Alopecurion pratensis",0,130000,4,1,23,-3,90,52,2,1,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1008",19,"Alopecurion pratensis",0,130000,4,2,23,-3,90,52,2,1,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1009",19,"Alopecurion pratensis",0,130000,2,1,23,-3,90,52,2,1,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1010",19,"Alopecurion pratensis",0,130000,2,2,23,-3,90,52,2,1,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1011",19,"Alopecurion pratensis",0,130000,3,1,23,-3,90,52,2,1,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1012",19,"Alopecurion pratensis",0,130000,3,2,23,-3,90,52,2,1,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1013",19,"Alopecurion pratensis",0,20000,4,1,23,-3,90,52,2,2,1,"origineel",NA,NA,NA
+"1014",19,"Alopecurion pratensis",0,20000,2,1,23,-3,90,52,2,2,1,"origineel",NA,NA,NA
+"1015",19,"Alopecurion pratensis",0,20000,3,1,23,-3,90,52,2,2,1,"origineel",NA,NA,NA
+"1016",19,"Alopecurion pratensis",0,20000,4,2,23,-3,90,52,2,2,1,"aanvulling zuurgraad",NA,NA,NA
+"1017",19,"Alopecurion pratensis",0,20000,2,2,23,-3,90,52,2,2,1,"aanvulling zuurgraad",NA,NA,NA
+"1018",19,"Alopecurion pratensis",0,20000,3,2,23,-3,90,52,2,2,1,"aanvulling zuurgraad",NA,NA,NA
+"1019",19,"Alopecurion pratensis",0,20000,4,3,23,-3,90,52,2,2,1,"aanvulling zuurgraad","Vegetatie van Nederland + pH bodem",NA,NA
+"1020",19,"Alopecurion pratensis",0,20000,2,3,23,-3,90,52,2,2,1,"aanvulling zuurgraad",NA,NA,NA
+"1021",19,"Alopecurion pratensis",0,20000,3,3,23,-3,90,52,2,2,1,"aanvulling zuurgraad",NA,NA,NA
+"1022",19,"Alopecurion pratensis",0,30000,4,1,23,-3,90,52,2,2,1,"origineel","GXG op basis van K1",NA,NA
+"1023",19,"Alopecurion pratensis",0,30000,2,1,23,-3,90,52,2,2,1,"origineel","GXG op basis van K1",NA,NA
+"1024",19,"Alopecurion pratensis",0,30000,3,1,23,-3,90,52,2,2,1,"origineel","GXG op basis van K1",NA,NA
+"1025",19,"Alopecurion pratensis",0,30000,4,2,23,-3,90,52,2,2,1,"aanvulling zuurgraad",NA,NA,NA
+"1026",19,"Alopecurion pratensis",0,30000,2,2,23,-3,90,52,2,2,1,"aanvulling zuurgraad",NA,NA,NA
+"1027",19,"Alopecurion pratensis",0,30000,3,2,23,-3,90,52,2,2,1,"aanvulling zuurgraad",NA,NA,NA
+"1028",19,"Alopecurion pratensis",0,140000,4,1,21,-9,109,35,2,2,1,"origineel",NA,NA,NA
+"1029",19,"Alopecurion pratensis",0,140000,4,2,21,-9,109,35,2,2,1,"origineel",NA,NA,NA
+"1030",19,"Alopecurion pratensis",0,140000,2,1,21,-9,109,35,2,2,1,"origineel",NA,NA,NA
+"1031",19,"Alopecurion pratensis",0,140000,2,2,21,-9,109,35,2,2,1,"origineel",NA,NA,NA
+"1032",19,"Alopecurion pratensis",0,140000,3,1,21,-9,109,35,2,2,1,"origineel",NA,NA,NA
+"1033",19,"Alopecurion pratensis",0,140000,3,2,21,-9,109,35,2,2,1,"origineel",NA,NA,NA
+"1034",19,"Alopecurion pratensis",0,110000,4,1,23,-3,90,52,2,2,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1035",19,"Alopecurion pratensis",0,110000,2,1,23,-3,90,52,2,2,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1036",19,"Alopecurion pratensis",0,110000,3,1,23,-3,90,52,2,2,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1037",19,"Alopecurion pratensis",0,120000,4,1,23,-3,90,52,2,2,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1038",19,"Alopecurion pratensis",0,120000,2,1,23,-3,90,52,2,2,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1039",19,"Alopecurion pratensis",0,120000,3,1,23,-3,90,52,2,2,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1040",19,"Alopecurion pratensis",0,130000,4,1,23,-3,90,52,2,2,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1041",19,"Alopecurion pratensis",0,130000,4,2,23,-3,90,52,2,2,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1042",19,"Alopecurion pratensis",0,130000,2,1,23,-3,90,52,2,2,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1043",19,"Alopecurion pratensis",0,130000,2,2,23,-3,90,52,2,2,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1044",19,"Alopecurion pratensis",0,130000,3,1,23,-3,90,52,2,2,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1045",19,"Alopecurion pratensis",0,130000,3,2,23,-3,90,52,2,2,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1046",19,"Alopecurion pratensis",0,20000,4,1,23,-3,90,52,3,1,1,"origineel",NA,NA,NA
+"1047",19,"Alopecurion pratensis",0,20000,2,1,23,-3,90,52,3,1,1,"origineel",NA,NA,NA
+"1048",19,"Alopecurion pratensis",0,20000,3,1,23,-3,90,52,3,1,1,"origineel",NA,NA,NA
+"1049",19,"Alopecurion pratensis",0,20000,4,2,23,-3,90,52,3,1,1,"aanvulling zuurgraad",NA,NA,NA
+"1050",19,"Alopecurion pratensis",0,20000,2,2,23,-3,90,52,3,1,1,"aanvulling zuurgraad",NA,NA,NA
+"1051",19,"Alopecurion pratensis",0,20000,3,2,23,-3,90,52,3,1,1,"aanvulling zuurgraad",NA,NA,NA
+"1052",19,"Alopecurion pratensis",0,20000,4,3,23,-3,90,52,3,1,1,"aanvulling zuurgraad","Vegetatie van Nederland + pH bodem",NA,NA
+"1053",19,"Alopecurion pratensis",0,20000,2,3,23,-3,90,52,3,1,1,"aanvulling zuurgraad",NA,NA,NA
+"1054",19,"Alopecurion pratensis",0,20000,3,3,23,-3,90,52,3,1,1,"aanvulling zuurgraad",NA,NA,NA
+"1055",19,"Alopecurion pratensis",0,30000,4,1,23,-3,90,52,3,1,1,"origineel","GXG op basis van K1",NA,NA
+"1056",19,"Alopecurion pratensis",0,30000,2,1,23,-3,90,52,3,1,1,"origineel","GXG op basis van K1",NA,NA
+"1057",19,"Alopecurion pratensis",0,30000,3,1,23,-3,90,52,3,1,1,"origineel","GXG op basis van K1",NA,NA
+"1058",19,"Alopecurion pratensis",0,30000,4,2,23,-3,90,52,3,1,1,"aanvulling zuurgraad",NA,NA,NA
+"1059",19,"Alopecurion pratensis",0,30000,2,2,23,-3,90,52,3,1,1,"aanvulling zuurgraad",NA,NA,NA
+"1060",19,"Alopecurion pratensis",0,30000,3,2,23,-3,90,52,3,1,1,"aanvulling zuurgraad",NA,NA,NA
+"1061",19,"Alopecurion pratensis",0,140000,4,1,21,-9,109,35,3,1,1,"origineel",NA,NA,NA
+"1062",19,"Alopecurion pratensis",0,140000,4,2,21,-9,109,35,3,1,1,"origineel",NA,NA,NA
+"1063",19,"Alopecurion pratensis",0,140000,2,1,21,-9,109,35,3,1,1,"origineel",NA,NA,NA
+"1064",19,"Alopecurion pratensis",0,140000,2,2,21,-9,109,35,3,1,1,"origineel",NA,NA,NA
+"1065",19,"Alopecurion pratensis",0,140000,3,1,21,-9,109,35,3,1,1,"origineel",NA,NA,NA
+"1066",19,"Alopecurion pratensis",0,140000,3,2,21,-9,109,35,3,1,1,"origineel",NA,NA,NA
+"1067",19,"Alopecurion pratensis",0,110000,4,1,23,-3,90,52,3,1,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1068",19,"Alopecurion pratensis",0,110000,2,1,23,-3,90,52,3,1,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1069",19,"Alopecurion pratensis",0,110000,3,1,23,-3,90,52,3,1,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1070",19,"Alopecurion pratensis",0,120000,4,1,23,-3,90,52,3,1,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1071",19,"Alopecurion pratensis",0,120000,2,1,23,-3,90,52,3,1,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1072",19,"Alopecurion pratensis",0,120000,3,1,23,-3,90,52,3,1,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1073",19,"Alopecurion pratensis",0,130000,4,1,23,-3,90,52,3,1,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1074",19,"Alopecurion pratensis",0,130000,4,2,23,-3,90,52,3,1,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1075",19,"Alopecurion pratensis",0,130000,2,1,23,-3,90,52,3,1,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1076",19,"Alopecurion pratensis",0,130000,2,2,23,-3,90,52,3,1,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1077",19,"Alopecurion pratensis",0,130000,3,1,23,-3,90,52,3,1,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1078",19,"Alopecurion pratensis",0,130000,3,2,23,-3,90,52,3,1,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1079",19,"Alopecurion pratensis",0,20000,4,1,23,-3,90,52,3,2,1,"origineel",NA,NA,NA
+"1080",19,"Alopecurion pratensis",0,20000,2,1,23,-3,90,52,3,2,1,"origineel",NA,NA,NA
+"1081",19,"Alopecurion pratensis",0,20000,3,1,23,-3,90,52,3,2,1,"origineel",NA,NA,NA
+"1082",19,"Alopecurion pratensis",0,20000,4,2,23,-3,90,52,3,2,1,"aanvulling zuurgraad",NA,NA,NA
+"1083",19,"Alopecurion pratensis",0,20000,2,2,23,-3,90,52,3,2,1,"aanvulling zuurgraad",NA,NA,NA
+"1084",19,"Alopecurion pratensis",0,20000,3,2,23,-3,90,52,3,2,1,"aanvulling zuurgraad",NA,NA,NA
+"1085",19,"Alopecurion pratensis",0,20000,4,3,23,-3,90,52,3,2,1,"aanvulling zuurgraad","Vegetatie van Nederland + pH bodem",NA,NA
+"1086",19,"Alopecurion pratensis",0,20000,2,3,23,-3,90,52,3,2,1,"aanvulling zuurgraad",NA,NA,NA
+"1087",19,"Alopecurion pratensis",0,20000,3,3,23,-3,90,52,3,2,1,"aanvulling zuurgraad",NA,NA,NA
+"1088",19,"Alopecurion pratensis",0,30000,4,1,23,-3,90,52,3,2,1,"origineel","GXG op basis van K1",NA,NA
+"1089",19,"Alopecurion pratensis",0,30000,2,1,23,-3,90,52,3,2,1,"origineel","GXG op basis van K1",NA,NA
+"1090",19,"Alopecurion pratensis",0,30000,3,1,23,-3,90,52,3,2,1,"origineel","GXG op basis van K1",NA,NA
+"1091",19,"Alopecurion pratensis",0,30000,4,2,23,-3,90,52,3,2,1,"aanvulling zuurgraad",NA,NA,NA
+"1092",19,"Alopecurion pratensis",0,30000,2,2,23,-3,90,52,3,2,1,"aanvulling zuurgraad",NA,NA,NA
+"1093",19,"Alopecurion pratensis",0,30000,3,2,23,-3,90,52,3,2,1,"aanvulling zuurgraad",NA,NA,NA
+"1094",19,"Alopecurion pratensis",0,140000,4,1,21,-9,109,35,3,2,1,"origineel",NA,NA,NA
+"1095",19,"Alopecurion pratensis",0,140000,4,2,21,-9,109,35,3,2,1,"origineel",NA,NA,NA
+"1096",19,"Alopecurion pratensis",0,140000,2,1,21,-9,109,35,3,2,1,"origineel",NA,NA,NA
+"1097",19,"Alopecurion pratensis",0,140000,2,2,21,-9,109,35,3,2,1,"origineel",NA,NA,NA
+"1098",19,"Alopecurion pratensis",0,140000,3,1,21,-9,109,35,3,2,1,"origineel",NA,NA,NA
+"1099",19,"Alopecurion pratensis",0,140000,3,2,21,-9,109,35,3,2,1,"origineel",NA,NA,NA
+"1100",19,"Alopecurion pratensis",0,110000,4,1,23,-3,90,52,3,2,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1101",19,"Alopecurion pratensis",0,110000,2,1,23,-3,90,52,3,2,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1102",19,"Alopecurion pratensis",0,110000,3,1,23,-3,90,52,3,2,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1103",19,"Alopecurion pratensis",0,120000,4,1,23,-3,90,52,3,2,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1104",19,"Alopecurion pratensis",0,120000,2,1,23,-3,90,52,3,2,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1105",19,"Alopecurion pratensis",0,120000,3,1,23,-3,90,52,3,2,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1106",19,"Alopecurion pratensis",0,130000,4,1,23,-3,90,52,3,2,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1107",19,"Alopecurion pratensis",0,130000,4,2,23,-3,90,52,3,2,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1108",19,"Alopecurion pratensis",0,130000,2,1,23,-3,90,52,3,2,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1109",19,"Alopecurion pratensis",0,130000,2,2,23,-3,90,52,3,2,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1110",19,"Alopecurion pratensis",0,130000,3,1,23,-3,90,52,3,2,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1111",19,"Alopecurion pratensis",0,130000,3,2,23,-3,90,52,3,2,1,"uitbreiding bodemcodes, met GXG van K1 bij gebrek aan beter, gegevens op zandgronden o",NA,NA,NA
+"1112",20,"Arrhenatherion elatioris",0,20000,2,1,85,25,250,50,2,0,1,"aanvulling zuurgraad","aangepast tot -2.5",NA,"GHG_MAX VLINA"
+"1113",20,"Arrhenatherion elatioris",0,20000,3,1,85,25,250,50,2,0,1,"aanvulling zuurgraad","aangepast tot -2.5",NA,"GHG_MAX VLINA"
+"1114",20,"Arrhenatherion elatioris",0,20000,2,2,85,25,250,50,2,0,1,"aanvulling zuurgraad","aangepast tot -2.5",NA,"GHG_MAX VLINA"
+"1115",20,"Arrhenatherion elatioris",0,20000,3,2,85,25,250,50,2,0,1,"aanvulling zuurgraad","aangepast tot -2.5",NA,"GHG_MAX VLINA"
+"1116",20,"Arrhenatherion elatioris",0,20000,2,3,85,25,250,50,2,0,1,"aanvulling zuurgraad","aangepast tot -2.5","Vegetatie van Nederland + pH bodem","GHG_MAX VLINA"
+"1117",20,"Arrhenatherion elatioris",0,20000,3,3,85,25,250,50,2,0,1,"aanvulling zuurgraad","aangepast tot -2.5",NA,"GHG_MAX VLINA"
+"1118",20,"Arrhenatherion elatioris",0,140000,2,1,105,25,250,50,2,0,1,"origineel","aangepast tot -2.5","GLG_max en GHG_max zoals K1","GHG_MAX VLINA"
+"1119",20,"Arrhenatherion elatioris",0,140000,3,1,105,25,250,50,2,0,1,"origineel","aangepast tot -2.5","GLG_max en GHG_max zoals K1","GHG_MAX VLINA"
+"1120",20,"Arrhenatherion elatioris",0,140000,2,2,105,25,250,50,2,0,1,"aanvulling zuurgraad","aangepast tot -2.5","GLG_max en GHG_max zoals K1","GHG_MAX VLINA"
+"1121",20,"Arrhenatherion elatioris",0,140000,3,2,105,25,250,50,2,0,1,"aanvulling zuurgraad","aangepast tot -2.5","GLG_max en GHG_max zoals K1","GHG_MAX VLINA"
+"1122",20,"Arrhenatherion elatioris",0,110000,2,1,139,25,250,187,2,0,1,"aanvulling zuurgraad","aangepast tot -2.5",NA,"GHG_MAX VLINA"
+"1123",20,"Arrhenatherion elatioris",0,110000,3,1,139,25,250,187,2,0,1,"aanvulling zuurgraad","aangepast tot -2.5",NA,"GHG_MAX VLINA"
+"1124",20,"Arrhenatherion elatioris",0,20000,2,1,85,25,250,50,3,0,1,"aanvulling zuurgraad","aangepast tot -2.5",NA,"GHG_MAX VLINA"
+"1125",20,"Arrhenatherion elatioris",0,20000,3,1,85,25,250,50,3,0,1,"aanvulling zuurgraad","aangepast tot -2.5",NA,"GHG_MAX VLINA"
+"1126",20,"Arrhenatherion elatioris",0,20000,2,2,85,25,250,50,3,0,1,"aanvulling zuurgraad","aangepast tot -2.5",NA,"GHG_MAX VLINA"
+"1127",20,"Arrhenatherion elatioris",0,20000,3,2,85,25,250,50,3,0,1,"aanvulling zuurgraad","aangepast tot -2.5",NA,"GHG_MAX VLINA"
+"1128",20,"Arrhenatherion elatioris",0,20000,2,3,85,25,250,50,3,0,1,"aanvulling zuurgraad","aangepast tot -2.5","Vegetatie van Nederland + pH bodem","GHG_MAX VLINA"
+"1129",20,"Arrhenatherion elatioris",0,20000,3,3,85,25,250,50,3,0,1,"aanvulling zuurgraad","aangepast tot -2.5",NA,"GHG_MAX VLINA"
+"1130",20,"Arrhenatherion elatioris",0,140000,2,1,105,25,250,50,3,0,1,"origineel","aangepast tot -2.5","GLG_max en GHG_max zoals K1","GHG_MAX VLINA"
+"1131",20,"Arrhenatherion elatioris",0,140000,3,1,105,25,250,50,3,0,1,"origineel","aangepast tot -2.5","GLG_max en GHG_max zoals K1","GHG_MAX VLINA"
+"1132",20,"Arrhenatherion elatioris",0,140000,2,2,105,25,250,50,3,0,1,"aanvulling zuurgraad","aangepast tot -2.5","GLG_max en GHG_max zoals K1","GHG_MAX VLINA"
+"1133",20,"Arrhenatherion elatioris",0,140000,3,2,105,25,250,50,3,0,1,"aanvulling zuurgraad","aangepast tot -2.5","GLG_max en GHG_max zoals K1","GHG_MAX VLINA"
+"1134",20,"Arrhenatherion elatioris",0,110000,2,1,139,25,250,187,3,0,1,"aanvulling zuurgraad","aangepast tot -2.5",NA,"GHG_MAX VLINA"
+"1135",20,"Arrhenatherion elatioris",0,110000,3,1,139,25,250,187,3,0,1,"aanvulling zuurgraad","aangepast tot -2.5",NA,"GHG_MAX VLINA"
+"1136",21,"Cynosurion cristati",0,20000,2,1,70,-14,152,33,2,0,1,"origineel","GXG op basis van L1","nieuwe GXG grenzen na correcties in de databank",NA
+"1137",21,"Cynosurion cristati",0,20000,3,1,70,-14,152,33,2,0,1,"origineel","GXG op basis van L1","nieuwe GXG grenzen na correcties in de databank",NA
+"1138",21,"Cynosurion cristati",0,20000,2,2,70,-14,152,33,2,0,1,"aanvulling zuurgraad",NA,"nieuwe GXG grenzen na correcties in de databank",NA
+"1139",21,"Cynosurion cristati",0,20000,3,2,70,-14,152,33,2,0,1,"aanvulling zuurgraad",NA,"nieuwe GXG grenzen na correcties in de databank",NA
+"1140",21,"Cynosurion cristati",0,20000,2,3,70,-14,152,33,2,0,1,"aanvulling zuurgraad",NA,"nieuwe GXG grenzen na correcties in de databank",NA
+"1141",21,"Cynosurion cristati",0,20000,3,3,70,-14,152,33,2,0,1,"aanvulling zuurgraad",NA,"nieuwe GXG grenzen na correcties in de databank",NA
+"1142",21,"Cynosurion cristati",0,30000,2,2,70,-14,152,33,2,0,1,"origineel","GXG op basis van L1","nieuwe GXG grenzen na correcties in de databank",NA
+"1143",21,"Cynosurion cristati",0,30000,3,2,70,-14,152,33,2,0,1,"origineel","GXG op basis van L1","nieuwe GXG grenzen na correcties in de databank",NA
+"1144",21,"Cynosurion cristati",0,140000,2,3,70,-14,152,33,2,0,1,"origineel",NA,"nieuwe GXG grenzen na correcties in de databank",NA
+"1145",21,"Cynosurion cristati",0,140000,2,1,70,-14,152,33,2,0,1,"origineel",NA,"nieuwe GXG grenzen na correcties in de databank",NA
+"1146",21,"Cynosurion cristati",0,140000,2,2,70,-14,152,33,2,0,1,"origineel",NA,"nieuwe GXG grenzen na correcties in de databank",NA
+"1147",21,"Cynosurion cristati",0,140000,3,3,70,-14,152,33,2,0,1,"origineel",NA,"nieuwe GXG grenzen na correcties in de databank",NA
+"1148",21,"Cynosurion cristati",0,140000,3,1,70,-14,152,33,2,0,1,"origineel",NA,"nieuwe GXG grenzen na correcties in de databank",NA
+"1149",21,"Cynosurion cristati",0,140000,3,2,70,-14,152,33,2,0,1,"origineel",NA,"nieuwe GXG grenzen na correcties in de databank",NA
+"1150",21,"Cynosurion cristati",0,110000,2,1,80,13,152,89,2,0,1,"origineel","GLG_min volgens de rest",NA,NA
+"1151",21,"Cynosurion cristati",0,110000,2,2,80,13,152,89,2,0,1,"origineel","GLG_min volgens de rest",NA,NA
+"1152",21,"Cynosurion cristati",0,110000,3,1,80,13,152,89,2,0,1,"origineel","GLG_min volgens de rest",NA,NA
+"1153",21,"Cynosurion cristati",0,110000,3,2,80,13,152,89,2,0,1,"origineel","GLG_min volgens de rest",NA,NA
+"1154",21,"Cynosurion cristati",0,20000,2,1,70,-14,152,33,3,0,1,"origineel","GXG op basis van L1","nieuwe GXG grenzen na correcties in de databank",NA
+"1155",21,"Cynosurion cristati",0,20000,3,1,70,-14,152,33,3,0,1,"origineel","GXG op basis van L1","nieuwe GXG grenzen na correcties in de databank",NA
+"1156",21,"Cynosurion cristati",0,20000,2,2,70,-14,152,33,3,0,1,"aanvulling zuurgraad",NA,"nieuwe GXG grenzen na correcties in de databank",NA
+"1157",21,"Cynosurion cristati",0,20000,3,2,70,-14,152,33,3,0,1,"aanvulling zuurgraad",NA,"nieuwe GXG grenzen na correcties in de databank",NA
+"1158",21,"Cynosurion cristati",0,20000,2,3,70,-14,152,33,3,0,1,"aanvulling zuurgraad",NA,"nieuwe GXG grenzen na correcties in de databank",NA
+"1159",21,"Cynosurion cristati",0,20000,3,3,70,-14,152,33,3,0,1,"aanvulling zuurgraad",NA,"nieuwe GXG grenzen na correcties in de databank",NA
+"1160",21,"Cynosurion cristati",0,30000,2,2,70,-14,152,33,3,0,1,"origineel","GXG op basis van L1","nieuwe GXG grenzen na correcties in de databank",NA
+"1161",21,"Cynosurion cristati",0,30000,3,2,70,-14,152,33,3,0,1,"origineel","GXG op basis van L1","nieuwe GXG grenzen na correcties in de databank",NA
+"1162",21,"Cynosurion cristati",0,140000,2,3,70,-14,152,33,3,0,1,"origineel",NA,"nieuwe GXG grenzen na correcties in de databank",NA
+"1163",21,"Cynosurion cristati",0,140000,2,1,70,-14,152,33,3,0,1,"origineel",NA,"nieuwe GXG grenzen na correcties in de databank",NA
+"1164",21,"Cynosurion cristati",0,140000,2,2,70,-14,152,33,3,0,1,"origineel",NA,"nieuwe GXG grenzen na correcties in de databank",NA
+"1165",21,"Cynosurion cristati",0,140000,3,3,70,-14,152,33,3,0,1,"origineel",NA,"nieuwe GXG grenzen na correcties in de databank",NA
+"1166",21,"Cynosurion cristati",0,140000,3,1,70,-14,152,33,3,0,1,"origineel",NA,"nieuwe GXG grenzen na correcties in de databank",NA
+"1167",21,"Cynosurion cristati",0,140000,3,2,70,-14,152,33,3,0,1,"origineel",NA,"nieuwe GXG grenzen na correcties in de databank",NA
+"1168",21,"Cynosurion cristati",0,110000,2,1,80,13,152,89,3,0,1,"origineel","GLG_min volgens de rest",NA,NA
+"1169",21,"Cynosurion cristati",0,110000,2,2,80,13,152,89,3,0,1,"origineel","GLG_min volgens de rest",NA,NA
+"1170",21,"Cynosurion cristati",0,110000,3,1,80,13,152,89,3,0,1,"origineel","GLG_min volgens de rest",NA,NA
+"1171",21,"Cynosurion cristati",0,110000,3,2,80,13,152,89,3,0,1,"origineel","GLG_min volgens de rest",NA,NA
+"1172",22,"Ericion tetralicis",0,110000,1,1,47,-20,166,1,1,0,1,"nieuwe GXG's versie 6",NA,NA,NA
+"1173",22,"Ericion tetralicis",0,120000,1,1,46,-3,117,36,1,0,1,"nieuwe GXG's versie 6",NA,NA,NA
+"1174",22,"Ericion tetralicis",0,110000,1,1,47,-20,166,1,1,2,1,"nieuwe GXG's versie 6",NA,NA,NA
+"1175",22,"Ericion tetralicis",0,120000,1,1,46,-3,117,36,1,2,1,"nieuwe GXG's versie 6",NA,NA,NA
+"1176",23,"Venige heide",0,80000,1,1,20,-6,74,13,1,0,1,"nieuwe GXG's versie 6","GXG op basis van ZV",NA,NA
+"1177",23,"Venige heide",0,80000,1,2,20,-6,74,13,1,0,1,"nieuwe GXG's versie 6","aanvulling zuurgraad",NA,NA
+"1178",23,"Venige heide",0,110000,1,1,20,1,74,29,1,0,1,"nieuwe GXG's versie 6","GHG_min en GLG_min aangepast, Z moet zeker zo diep wegzakken als V of ZV",NA,NA
+"1179",23,"Venige heide",0,120000,1,1,20,1,74,29,1,0,1,"interpolatie Z2","GHG_min en GLG_min aangepast, Z moet zeker zo diep wegzakken als V of ZV",NA,NA
+"1180",23,"Venige heide",0,130000,1,1,20,-6,74,13,1,0,1,"nieuwe GXG's versie 6",NA,NA,NA
+"1181",23,"Venige heide",0,130000,1,2,20,-6,74,13,1,0,1,"nieuwe GXG's versie 6",NA,NA,NA
+"1182",24,"Oxycocco - Ericion",0,80000,1,1,13,-17,43,-8,0,0,1,"origineel","GLG_max en GHG_max volgens ZV",NA,NA
+"1183",24,"Oxycocco - Ericion",0,80000,1,2,13,-17,43,-8,0,0,1,"aanvulling zuurgraad","GLG_max en GHG_max volgens ZV",NA,NA
+"1184",24,"Oxycocco - Ericion",0,110000,1,1,16,-11,23,7,0,0,1,"origineel",NA,NA,NA
+"1185",24,"Oxycocco - Ericion",0,120000,1,1,16,-11,23,11,0,0,1,"origineel","idem als Z1",NA,NA
+"1186",24,"Oxycocco - Ericion",0,130000,1,1,13,-17,3,-8,0,0,1,"origineel","GHG_min volgens V",NA,NA
+"1187",24,"Oxycocco - Ericion",0,130000,1,2,13,-17,3,-8,0,0,1,"origineel","GHG_min volgens V",NA,NA
+"1188",25,"Rynchosporion albae",0,110000,1,1,-2,-44,66,-12,0,0,1,"origineel",NA,NA,NA
+"1189",25,"Rynchosporion albae",0,110000,1,1,-2,-44,66,-12,0,2,1,"origineel",NA,NA,NA
+"1190",25,"Rynchosporion albae",0,110000,1,1,-2,-44,66,-12,1,0,1,"origineel",NA,NA,NA
+"1191",25,"Rynchosporion albae",0,110000,1,1,-2,-44,66,-12,1,2,1,"origineel",NA,NA,NA
+"1192",26,"RG Molinia caerulea [Oxycocco-sphagnetea]",0,110000,2,1,100,-9,127,7,1,0,1,"nieuwe GXG's versie 6","aangepast op basis van ZV + locatie HOU extreem","verstoord",NA
+"1193",26,"RG Molinia caerulea [Oxycocco-sphagnetea]",0,110000,3,1,100,-9,127,7,1,0,1,"nieuwe GXG's versie 6","aangepast op basis van ZV + locatie HOU extreem","verstoord",NA
+"1194",26,"RG Molinia caerulea [Oxycocco-sphagnetea]",0,120000,2,1,100,-9,127,7,1,0,1,"interpolatie Z2","aangepast op basis van ZV + locatie HOU extreem",NA,NA
+"1195",26,"RG Molinia caerulea [Oxycocco-sphagnetea]",0,120000,3,1,100,-9,127,7,1,0,1,NA,"aangepast op basis van ZV + locatie HOU extreem",NA,NA
+"1196",26,"RG Molinia caerulea [Oxycocco-sphagnetea]",0,130000,2,1,5,-9,67,7,1,0,1,"nieuwe GXG's versie 6",NA,"verstoord",NA
+"1197",26,"RG Molinia caerulea [Oxycocco-sphagnetea]",0,130000,3,1,5,-9,67,7,1,0,1,"nieuwe GXG's versie 6",NA,"verstoord",NA
+"1198",26,"RG Molinia caerulea [Oxycocco-sphagnetea]",0,130000,2,2,5,-9,67,7,1,0,1,"nieuwe GXG's versie 6","aanvulling zuurgraad",NA,NA
+"1199",26,"RG Molinia caerulea [Oxycocco-sphagnetea]",0,130000,3,2,5,-9,67,7,1,0,1,"nieuwe GXG's versie 6","aanvulling zuurgraad",NA,NA
+"1200",27,"RG Myrica gale [Ericion tetralicis]",0,80000,1,1,60,-16,126,2,1,0,1,NA,"mesotroof verwijderd",NA,NA
+"1201",27,"RG Myrica gale [Ericion tetralicis]",0,80000,1,2,60,-16,126,2,1,0,1,"aanvulling zuurgraad","mesotroof verwijderd",NA,NA
+"1202",27,"RG Myrica gale [Ericion tetralicis]",0,110000,1,1,76,-10,126,3,1,0,1,"aanpassing GLG_min, zakken te diep weg door uitz. Jaar","mesotroof verwijderd",NA,NA
+"1203",27,"RG Myrica gale [Ericion tetralicis]",0,120000,1,1,76,-2,126,33,1,0,1,NA,"mesotroof verwijderd",NA,NA
+"1204",27,"RG Myrica gale [Ericion tetralicis]",0,130000,1,1,22,-3,126,9,1,0,1,NA,"mesotroof verwijderd",NA,NA
+"1205",27,"RG Myrica gale [Ericion tetralicis]",0,130000,1,2,22,-3,126,9,1,0,1,"aanvulling zuurgraad","mesotroof verwijderd",NA,NA
+"1206",28,"Calluno - Genistion pilosae",0,110000,1,1,172,51,196,114,1,0,1,"origineel",NA,NA,NA
