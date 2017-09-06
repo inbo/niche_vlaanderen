@@ -2,7 +2,17 @@
 Berekening Trofie
 ################################
 
-De Trofie is de mate van voedselrijkdom van de bodem. Deze wordt in NICHE weergegeven als een klassevariabele met waarden tussen 1 en 5.
+De Trofie is de mate van voedselrijkdom van de bodem. Deze wordt in NICHE weergegeven als een klassevariabele met waarden tussen 1 en 5. Mogelijke waarden worden gegeven in de tabel `Trofie.csv <https://github.com/inbo/niche-vlaanderen/blob/master/SystemTables/Trofie.csv>`_.
+
+.. csv-table:: Trofie klassen
+  :header: nr,Code,Trofieniveau
+
+  1,O,oligotroof
+  2,M,mesotroof
+  3,ME,meso‐eutroof
+  4,E,eutroof
+  5,HE,hypereutroof
+
 
 De berekening gebeurt in volgende 4 stappen:
  * `Bepaling Stikstofmineralisatie`_
