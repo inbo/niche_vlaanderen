@@ -1,0 +1,19 @@
+bodemcode,bodemcijfercode,beschrijving
+HV,10000,hoogveen
+K,20000,klei
+KV,30000,venige klei
+KX,40000,keileem
+L,50000,leem
+MK,60000,maritieme klei
+P,70000,petgat
+V,80000,veen
+V2,90000,zand op veen
+W,100000,water
+Z1,110000,humusarm zand
+Z2,120000,humusrijk zand
+ZV,130000,venig zand
+L1,140000,leem
+LV,150000,venige leem
+D,100000,droog
+B,100000,bebouwd
+NG,100000,niet gedefinieerd
