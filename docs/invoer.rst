@@ -13,7 +13,7 @@ Bodemkaart
 
 Bodemkaart met toegekende NICHE-bodemcodes op basis van een vertaalsleutel of een bodemraster gebaseerd op veldgegevens.
 
-Mogelijke waarden worden gegeven in de tabel `BodemCodes https://github.com/INBO/niche-vlaanderen/blob/master/SystemTables/BodemCodes.csv`_, kolom bodemcijfercode.
+Mogelijke waarden worden gegeven in de tabel `BodemCodes <https://github.com/INBO/niche-vlaanderen/blob/master/SystemTables/BodemCodes.csv>`_, kolom bodemcijfercode.
 
 Kwel
 ====
@@ -68,25 +68,22 @@ Kunstmest
 Toepassen van kunstmest, N kg/ha/j
 Er wordt een kaart aangemaakt met voor elke grid de waarde van de hoeveelheid kunstmest in kg-N/ha/jaar. Dit kunnen reële gegevens zijn, of schattingen zoals deze die voor de Nederlandse landgebruikskaart werden ontwikkeld.
 
-+---------------------------------------------------+-----------------------------------------------+-----------------------------------------------------------------------------------------------+
-| Landgebruik                                       | Bemesting                                     | Omschrijving                                                                                  |
-+---------------------------------------------------+-----------------------------------------------+-----------------------------------------------------------------------------------------------+
-| Natuurgebieden                                    | 0 kg N/ha jaar                                | rietruigten, naaldbossen, loofbossen (broekbossen, populierenaanplanten…)                     |
-|                                                   |                                               |                                                                                               |
-|                                                   | geen enkele vorm van bemesting                | extensief begraasde gronden                                                                   |
-|                                                   |                                               +-----------------------------------------------------------------------------------------------+
-|                                                   |                                               | natuurlijke graslanden, niet bemeste hooilanden                                               |
-+---------------------------------------------------|-----------------------------------------------+-----------------------------------------------------------------------------------------------+
-| Extensief landgebruik                             | 75 kg N/ha jaar                               | intensief begraasde gronden                                                                   |
-|                                                   |                                               |                                                                                               |
-|                                                   | Extensieve bemestingsdruk (veelal dierlijk)   |                                                                                               |
-|                                                   |                                               +-----------------------------------------------------------------------------------------------+
-|                                                   |                                               | weinig bemeste hooilanden                                                                     |
-+---------------------------------------------------+-----------------------------------------------+-----------------------------------------------------------------------------------------------+
-| Intensief landgebruik                             | 350 kg N/ha jaar (dierlijke mest)             | het maaibeheer heeft door de hoge nutriënten-input geen invloed op de trofieberekening meer   |
-|                                                   |                                               |                                                                                               |
-|                                                   | + 250 kg N/ha jaar (kunstmest)                |                                                                                               |
-+---------------------------------------------------+-----------------------------------------------+-----------------------------------------------------------------------------------------------+
++--------------------------------------------------+-----------------------------------------------+-----------------------------------------------------------------------------------------------+
+| Landgebruik                                      | Bemesting                                     | Omschrijving                                                                                  |
++==================================================+===============================================+===============================================================================================+
+| Natuurgebieden                                   | 0 kg N/ha jaar                                | rietruigten, naaldbossen, loofbossen (broekbossen, populierenaanplanten,…)                    |
+|                                                  | geen enkele vorm van bemesting                | extensief begraasde gronden                                                                   |
+|                                                  |                                               +-----------------------------------------------------------------------------------------------+
+|                                                  |                                               | natuurlijke graslanden, niet bemeste hooilanden                                               |
++--------------------------------------------------+-----------------------------------------------+-----------------------------------------------------------------------------------------------+
+| Extensief landgebruik                            | 75 kg N/ha jaar                               | intensief begraasde gronden                                                                   |
+|                                                  | Extensieve bemestingsdruk (veelal dierlijk)   |                                                                                               |
+|                                                  |                                               +-----------------------------------------------------------------------------------------------+
+|                                                  |                                               | weinig bemeste hooilanden                                                                     |
++--------------------------------------------------+-----------------------------------------------+-----------------------------------------------------------------------------------------------+
+| Intensief landgebruik                            | 350 kg N/ha jaar (dierlijke mest)             | het maaibeheer heeft door de hoge nutriënten-input geen invloed op de trofieberekening meer   |
+|                                                  | + 250 kg N/ha jaar (kunstmest)                |                                                                                               |
++--------------------------------------------------+-----------------------------------------------+-----------------------------------------------------------------------------------------------+
 
 Beheer
 ======
@@ -99,7 +96,9 @@ Bij de bepaling van trofie wordt enkel rekening gehouden met het hoog frequent b
 Bij maaibeheer wordt de trofie één klasse verlaagd. 
 Bij bepaling van het potentieel vegetatietype spelen alle beheersklassen een belangrijke rol. 
 
- * Mogelijke waarden: `Beheer https://github.com/INBO/niche-vlaanderen/blob/master/SystemTables/Beheer.csv`_, kolom bodemcijfercode.
+ * Mogelijke waarden: `Beheer <https://github.com/INBO/niche-vlaanderen/blob/master/SystemTables/Beheer.csv>`_, kolom bodemcijfercode.
+
+.. _mineraalrijkdom:
 
 Mineraalrijkdom
 ===============
@@ -113,6 +112,9 @@ Voor dit invoergrid kunnen de reële conductiviteitswaarden worden gebruikt, uit
 Indien geen metingen voorhanden zijn, kan er op basis van expertkennis in een aantal gevallen toch een kaart worden aangemaakt. Zones met basenrijk grondwater krijgen waarden 501 of groter, zones met basenarm grondwater krijgen een waarde kleiner dan 500 bv 0.
 
  * Mogelijke waarden: Reële waarden
+
+
+.. _regenlens:
 
 Regenlens
 =========
@@ -134,9 +136,11 @@ Overstroming Vegetatie
 
 Overstromingskaart met invloed op een selectie van vegetatietypes. Er wordt nagegaan welke vegetatietypes kunnen voorkomen bij overstroming en welke niet.
 Deze overstromingskaart wordt enkel gebruikt bij het aftoetsen van de vegetatietypes aan de standplaats, op basis van de NICHE-tabel. Er wordt nagegaan welke vegetatietypes kunnen voorkomen bij overstroming en welke niet. Er zijn 3 klassen onderscheiden, nl:
+
  * 0 = geen overstroming
  * 1 = regelmatig
  * 2 = incidenteel
+
 Deze overstromingskaart is een samenstelling van overstromingskaarten met verschillende retourperiodes (regelmatig= retourperiode 1 tot 2 jaar, incidenteel =  retourperiode van 5 jaar). 
 
  * Mogelijke waarden: 0,1 of 2

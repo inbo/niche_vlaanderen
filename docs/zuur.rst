@@ -36,7 +36,7 @@ In eerste instantie worden 3 bodemgroepen onderscheiden (opm: volgens eindrappor
 Elke bodemcode wordt aan een bodemgroep gekoppeld in de tabel `BodemCodes.csv <https://github.com/inbo/niche-vlaanderen/blob/master/SystemTables/BodemCodes.csv>`_.
 
 Op basis van de bodemgroep en de GLG wordt de bodem_glg klasse bepaald.
-Dit gebeurt aan de hand van de tabel `SoilGLGClass.csv <https://github.com/inbo/niche-vlaanderen/blob/master/SystemTables/SoilGLGClass.csv`_.
+Dit gebeurt aan de hand van de tabel `SoilGLGClass.csv <https://github.com/inbo/niche-vlaanderen/blob/master/SystemTables/SoilGLGClass.csv>`_.
 
 .. topic:: Voorbeeld
 
@@ -56,17 +56,39 @@ Dit gebeurt aan de hand van de tabel `SoilGLGClass.csv <https://github.com/inbo/
     BodemGroep,GLG_min,GLG_max,BodemGlgKlasse
     1,-999,80,**1**
 
+Bepaling Mineraalrijkdom_klasse
+===============================
+
+De reële waarden uit het grid :ref:`mineraalrijkdom` worden geklasseerd op basis van 1 drempelwaarde:
+Indien groter dan 500 µS/cm krijgt deze de waarde 2, anders de waarde 1.
+
+.. topic:: Voorbeeld
+
+  In het voorbeeld werd de waarde 400 µS/cm gebruikt. Dit wordt dus klasse 1.
+
 Bepaling Zuurcode
 =================
 
-Aan de hand van deze BodemGLGKlasse en de gegevens regenlenzen, overstroming, kwel wordt de zuurcode bepaald.
+Aan de hand van deze BodemGLGKlasse, de mineralenrijkdom en de gegevens :ref:`regenlens`, overstroming, kwel wordt de zuurcode bepaald.
 Dit gebeurt aan de hand van de tabel `Zuurclass.csv <https://github.com/inbo/niche-vlaanderen/blob/master/SystemTables/ZuurClass.csv>`_.
 
-
 .. topic:: Voorbeeld
-  In de vorige stap werd de BodemGLGKlasse bepaald op 1. Andere invoerwaarden zijn:
-   * Kwel = 1
-   * Regenlens = 1 (niet aanwezig)
 
+  In de vorige stap werd de BodemGLGKlasse bepaald op 1. Andere invoerwaarden zijn:
+   * Regenlens = 1 (niet aanwezig)
+   * Mineralenrijkdom: 1
+   * Overstroming_zuurgraad = 1
+   * Kwel = 1
+
+   Zoeken we deze waarde op in de tabel Zuurclass.csv krijgen we:
+
+   .. csv-table:: Zuurklasse
+     :header-rows: 1
+    
+     Regenlens,Mineralenrijkdom,Overstroming,Flux,BodemGLGKlasse,Zuurgraad
+     1,1,1,1,1,3
+
+  De bepaalde zuurgraad is dus **3** (neutraal/basisch)
+   
 
 

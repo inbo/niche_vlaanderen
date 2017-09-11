@@ -15,8 +15,11 @@ De berekening gebeurt in 3 stappen:
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+  :maxdepth: 2
 
+  invoer
+  trofie
+  zuur
 
 
 Indices and tables
