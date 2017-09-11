@@ -15,7 +15,7 @@ De Trofie is de mate van voedselrijkdom van de bodem. Deze wordt in NICHE weerge
 
 
 De berekening gebeurt in volgende 4 stappen:
- * `Bepaling Stikstofmineralisatie`_
+ * `Stikstofmineralisatie`_
  * `Bepaling Totale Stikstof`_
  * `Bepaling gecodeerde Trofie`_
  * `Invloed Overstroming`_
@@ -34,13 +34,15 @@ TODO: figuur
    * Management: begrazing (2) 
    * Invloed overstroming: 1
 
-Bepaling Stikstofmineralisatie
-==============================
+.. _stikstofmineralisatie:
+
+Stikstofmineralisatie
+=====================
 
 De stikstofmineralisatie (N_mineralisatie) wordt berekend aan de hand van volgende invoergegevens:
 
-* GVG (Gemiddeld Vroegste grondwaterstand)
-* Bodemklasse
+* :ref:`gvg`
+* :ref:`bodemklasse`
 
 In combinatie met de tabel `N_mineralisatie <https://github.com/inbo/niche-vlaanderen/blob/master/SystemTables/N_mineralisatie.csv>`_. Daar wordt de N_mineralisatie bepaald met de bodemcijfercode en de min en max waarde voor gvg.
 
@@ -59,10 +61,10 @@ Bepaling Totale Stikstof
 
 De totale Stikstof (N_tot) wordt bepaald als de som van volgende stikstofbronnen:
 
-* N_mineralisatie: Stikstofmineralisatie (vorige stap)
-* N_Atm_Deposit: Atmosferische Stikstofdepositie
-* N_Mest_Kunst: Kunstmest
-* N_Mest_Dier: Dierlijke input 
+* :ref:`stikstofmineralisatie` (vorige stap)
+* :ref:`atmosferische_depositie` (input raster)
+* N_Mest_Kunst: Kunstmest (input raster)
+* N_Mest_Dier: Dierlijke input (input raster)
 
 .. topic:: Voorbeeld
   

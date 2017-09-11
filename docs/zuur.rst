@@ -2,14 +2,11 @@
 Bepaling van de zuurgraadklasse
 ################################
 
-? In rapport sprake van zuurgraad en klassen basenverzadiging. Is dit hetzelfde?
-
 .. csv-table:: Zuurgraadklassen in NICHE
   :header-rows: 1
   :file: ../SystemTables/Zuur.csv
 
-NICHE berekent de zuurgraad van de standplaats op basis van de Gemiddelde Laagste
-Grondwaterstand (GLG) en het bodemtype. Verdere aanvullingen gebeuren door het in
+NICHE berekent de zuurgraad van de standplaats op basis van de :ref:`glg` en het bodemtype. Verdere aanvullingen gebeuren door het in
 rekening brengen van overstroming, kwel, en het eventueel voorhanden zijn van
 regenwaterlenzen.
 
@@ -18,20 +15,20 @@ door de kenmerken van het grondwater. Bij lage grondwaterstanden kan regenwater
 infiltreren en wordt de standplaats zuurder.
 
 Invoergegevens zijn dus:
- * Bodemtype
- * GLG
- * Overstroming
- * Kwel
- * Aanwezigheid van regenlenzen
+ * :ref:`bodemklasse`
+ * :ref:`glg`
+ * :ref:`overstroming_zuur`
+ * :ref:`kwel`
+ * :ref:`regenlens`
 
 Bepaling Bodem GLG klasse
 =========================
 
 In eerste instantie worden 3 bodemgroepen onderscheiden (opm: volgens eindrapport waren dit er 4).
 
- − Z1 of Z2 of ZV of L of K of KV (minerale bodems);
- − V of V2 (organische bodems);
- − P, HV of KX (hoogveen of keileemgronden).
+ * Z1 of Z2 of ZV of L of K of KV (minerale bodems);
+ * V of V2 (organische bodems);
+ * P, HV of KX (hoogveen of keileemgronden).
 
 Elke bodemcode wordt aan een bodemgroep gekoppeld in de tabel `BodemCodes.csv <https://github.com/inbo/niche-vlaanderen/blob/master/SystemTables/BodemCodes.csv>`_.
 
@@ -86,7 +83,7 @@ Dit gebeurt aan de hand van de tabel `Zuurclass.csv <https://github.com/inbo/nic
      :header-rows: 1
     
      Regenlens,Mineralenrijkdom,Overstroming,Flux,BodemGLGKlasse,Zuurgraad
-     1,1,1,1,1,3
+     1,1,1,1,1,**3**
 
   De bepaalde zuurgraad is dus **3** (neutraal/basisch)
    

@@ -8,12 +8,53 @@ De graad van nauwkeurigheid daarvan bepaalt de kwaliteit van de NICHE berekening
 
 Alle invoerdatalagen worden aangeleverd onder de vorm van rasters (grids). Afhankelijk van de grootte van het studiegebied wordt een voorstel gedaan voor de afmetingen van dit grid. De voorkeur wordt gegeven aan één standaardgrid met één vaste rasterafmeting voor alle invoerdatalagen, dit om extra versnijdingen van de resultaten te vermijden. Om NICHE toe te passen, zijn 17 invoergrids noodzakelijk.
 
-Bodemkaart
-==========
+
+.. _bodemklasse:
+
+Bodemklasse
+===========
 
 Bodemkaart met toegekende NICHE-bodemcodes op basis van een vertaalsleutel of een bodemraster gebaseerd op veldgegevens.
 
-Mogelijke waarden worden gegeven in de tabel `BodemCodes <https://github.com/INBO/niche-vlaanderen/blob/master/SystemTables/BodemCodes.csv>`_, kolom bodemcijfercode.
+ * Mogelijke waarden worden gegeven in de tabel `BodemCodes <https://github.com/INBO/niche-vlaanderen/blob/master/SystemTables/BodemCodes.csv>`_, kolom bodemcijfercode.
+
+GxG
+===
+
+De gemiddelde grondwaterstanden zitten vervat in drie afzonderlijke invoerrasters, nl. de Gemiddelde Laagste Grondwaterstand (GLG), de Gemiddelde Voorjaarsgrondwaterstand (GVG) en de Gemiddelde Hoogste Grondwaterstand (GHG), in die volgorde.
+Voor de NICHE versie onder ArcGIS moeten de waarden van de gemiddelde grondwaterstanden omgezet worden naar centimeter! Op deze manier kan er met afgeronde getallen gewerkt worden (integer waarden), want cijfers met kommagetallen maken berekeningen met rasters onmogelijk. Een tweede aandachtspunt is het teken van de waarden. Bij NICHE worden GXG-waarden boven het maaiveld negatief weergegeven, waterstanden onder maaiveld positief. 
+Indien nodig, moeten de oorspronkelijke waarden omgezet worden naar dit systeem. Voor Vlaanderen zal dit meestal het geval zijn, vermits waarden boven het maaiveld vaak als positief worden uitgedrukt (bvb. in de WATINA databank).
+
+De waterstandsparameters worden als volgt gedefinieerd (van der Veen et al., 1994)
+
+.. _ghg:
+
+GHG
+---
+GHG - gemiddeld hoogste grondwaterstand: het gemiddelde van de drie hoogste grondwaterstanden (GH3) in de winterperiode (1 oktober tot 1 april) over tenminste 5 jaar bij kleine variatie tussen GH3 en LG3 en over 8 jaar bij grote variatie tussen GH3 en LG3. Het is maat voor het hoogste grondwaterniveau in een normale winter;
+
+ * Mogelijke waarden: reële waarden, uitgedruikt in cm onder maaiveld
+
+.. _glg:
+
+GLG (gemiddeld laagste grondwaterstand)
+---------------------------------------
+
+GLG - gemiddeld laagste grondwaterstand: het gemiddelde van de drie laagste grondwaterstanden (GL3) in de zomerperiode (1 april tot 1 oktober) over tenminste 5 jaar bij kleine variatie tussen GH3 en LG3 en over 8 jaar bij grote variatie tussen GH3 en LG3. Het is een maat voor het laagste niveau in een gemiddelde zomer;
+
+ * Mogelijke waarden: reële waarden, uitgedruikt in cm onder maaiveld
+
+.. _gvg:
+
+GVG
+---
+
+GVG - gemiddelde voorjaarsgrondwaterstand: de gemiddelde grondwaterstand aan het begin van het groeiseizoen (1 april).
+Indien niet gekend kan de GVG afgeleid worden uit de formule: GVG = 5,4 + 0,83*GHG + 0,19*GLG (in cm).
+
+ * Mogelijke waarden: reële waarden, uitgedruikt in cm onder maaiveld
+
+.. _kwel:
 
 Kwel
 ====
@@ -25,6 +66,8 @@ NICHE rekent met volgende klassegrenzen:
  * kwel –0.1 ‐ 0.1 mm/dag stagnatie
  * kwel < ‐0.1 mm/dag infiltratie
 
+.. _overstroming_trofie:
+
 Overstroming_trofie
 ===================
 Overstromingskaart – invloed op trofiebepaling
@@ -35,6 +78,8 @@ Indien het overstromingswater betreft met weinig nutriënten, of wanneer er geen
 
 * Mogelijke waarden: 0 of 1
 
+.. _overstroming_zuur:
+
 Overstroming_zuurgraad
 ======================
 Overstromingskaart – invloed op pH
@@ -43,7 +88,9 @@ Overstromingen hebben in NICHE-Vlaanderen een effect op de zuurgraad van de stan
 Indien het overstromingen betreft met mineraalarm/zuur water (bvb in veengebieden) wordt overal een de waarde 0  gebruikt.
 
  * Mogelijke waarden: 0 of 1
- 
+
+.. _atmosferische_depositie:
+
 Atmosferische depositie
 =======================
 Kaart met overal dezelfde waarde voor atmosferische stikstof depositie (bv 30 N kg/ha/j) of een onderscheid in bossen en graslanden (op basis van het VMM depositiemeetnet).
@@ -112,7 +159,6 @@ Voor dit invoergrid kunnen de reële conductiviteitswaarden worden gebruikt, uit
 Indien geen metingen voorhanden zijn, kan er op basis van expertkennis in een aantal gevallen toch een kaart worden aangemaakt. Zones met basenrijk grondwater krijgen waarden 501 of groter, zones met basenarm grondwater krijgen een waarde kleiner dan 500 bv 0.
 
  * Mogelijke waarden: Reële waarden
-
 
 .. _regenlens:
 
