@@ -228,4 +228,4 @@ dummy:
 .PHONY: publish
 publish: html
 	ghp-import _build/html -m "update docs at $(GITREF)"
-	git push johanvdw gh-pages
+	git push origin gh-pages
