@@ -6,6 +6,7 @@ SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 PAPER         =
 BUILDDIR      = _build
+GITREF := $(/bin/bash git rev-parse --abbrev-ref HEAD)
 
 # Internal variables.
 PAPEROPT_a4     = -D latex_paper_size=a4
@@ -223,3 +224,8 @@ dummy:
 	$(SPHINXBUILD) -b dummy $(ALLSPHINXOPTS) $(BUILDDIR)/dummy
 	@echo
 	@echo "Build finished. Dummy builder generates no files."
+
+.PHONY: publish
+publish: html
+	ghp-import _build/html )m "update docs at $(GITREF)"
+	git push johanvdw gh-pages
