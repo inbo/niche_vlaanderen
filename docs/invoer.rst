@@ -6,7 +6,7 @@ De betrouwbaarheid van de berekeningen wordt sterk bepaald door de kwaliteit van
 De hydrologische informatie (grondwaterstanden, overstromingen, kwel) speelt een cruciale rol, aangezien zij doorweegt in zowel beslisregels als berekening van vegetatietypen zelf.
 De graad van nauwkeurigheid daarvan bepaalt de kwaliteit van de NICHE berekeningen.
 
-Alle invoerdatalagen worden aangeleverd onder de vorm van rasters (grids). Afhankelijk van de grootte van het studiegebied wordt een voorstel gedaan voor de afmetingen van dit grid. De voorkeur wordt gegeven aan één standaardgrid met één vaste rasterafmeting voor alle invoerdatalagen, dit om extra versnijdingen van de resultaten te vermijden. Om NICHE toe te passen, zijn 17 invoergrids noodzakelijk.
+Alle invoerdatalagen worden aangeleverd onder de vorm van rasters (grids). Afhankelijk van de grootte van het studiegebied wordt een voorstel gedaan voor de afmetingen van dit grid. De voorkeur wordt gegeven aan één standaardgrid met één vaste rasterafmeting voor alle invoerdatalagen, dit om extra versnijdingen van de resultaten te vermijden. Om NICHE toe te passen, zijn 14 invoergrids noodzakelijk.
 
 
 .. _bodemklasse:
@@ -22,16 +22,20 @@ GxG
 ===
 
 De gemiddelde grondwaterstanden zitten vervat in drie afzonderlijke invoerrasters, nl. de Gemiddelde Laagste Grondwaterstand (GLG), de Gemiddelde Voorjaarsgrondwaterstand (GVG) en de Gemiddelde Hoogste Grondwaterstand (GHG), in die volgorde.
-Voor de NICHE versie onder ArcGIS moeten de waarden van de gemiddelde grondwaterstanden omgezet worden naar centimeter! Op deze manier kan er met afgeronde getallen gewerkt worden (integer waarden), want cijfers met kommagetallen maken berekeningen met rasters onmogelijk. Een tweede aandachtspunt is het teken van de waarden. Bij NICHE worden GXG-waarden boven het maaiveld negatief weergegeven, waterstanden onder maaiveld positief. 
-Indien nodig, moeten de oorspronkelijke waarden omgezet worden naar dit systeem. Voor Vlaanderen zal dit meestal het geval zijn, vermits waarden boven het maaiveld vaak als positief worden uitgedrukt (bvb. in de WATINA databank).
+Voor de NICHE versie onder ArcGIS moeten de waarden van de gemiddelde grondwaterstanden omgezet worden naar centimeter.
+Een tweede aandachtspunt is het teken van de waarden.
+Bij NICHE worden GXG-waarden boven het maaiveld negatief weergegeven, waterstanden onder maaiveld positief. 
+Indien nodig, moeten de oorspronkelijke waarden omgezet worden naar dit systeem.
+Voor Vlaanderen zal dit meestal het geval zijn, vermits waarden boven het maaiveld vaak als positief worden uitgedrukt (bvb. in de WATINA databank).
 
 De waterstandsparameters worden als volgt gedefinieerd (van der Veen et al., 1994)
 
 .. _ghg:
 
-GHG
+GHG (Gemiddeld hoogste grondwaterstand)
 ---
-GHG - gemiddeld hoogste grondwaterstand: het gemiddelde van de drie hoogste grondwaterstanden (GH3) in de winterperiode (1 oktober tot 1 april) over tenminste 5 jaar bij kleine variatie tussen GH3 en LG3 en over 8 jaar bij grote variatie tussen GH3 en LG3. Het is maat voor het hoogste grondwaterniveau in een normale winter;
+GHG - gemiddeld hoogste grondwaterstand: het gemiddelde van de drie hoogste grondwaterstanden (GH3) in de winterperiode (1 oktober tot 1 april) over tenminste 5 jaar bij kleine variatie tussen GH3 en LG3 en over 8 jaar bij grote variatie tussen GH3 en LG3.
+Het is maat voor het hoogste grondwaterniveau in een normale winter.
 
  * Mogelijke waarden: reële waarden, uitgedruikt in cm onder maaiveld
 
@@ -40,14 +44,15 @@ GHG - gemiddeld hoogste grondwaterstand: het gemiddelde van de drie hoogste gron
 GLG (gemiddeld laagste grondwaterstand)
 ---------------------------------------
 
-GLG - gemiddeld laagste grondwaterstand: het gemiddelde van de drie laagste grondwaterstanden (GL3) in de zomerperiode (1 april tot 1 oktober) over tenminste 5 jaar bij kleine variatie tussen GH3 en LG3 en over 8 jaar bij grote variatie tussen GH3 en LG3. Het is een maat voor het laagste niveau in een gemiddelde zomer;
+GLG - gemiddeld laagste grondwaterstand: het gemiddelde van de drie laagste grondwaterstanden (GL3) in de zomerperiode (1 april tot 1 oktober) over tenminste 5 jaar bij kleine variatie tussen GH3 en LG3 en over 8 jaar bij grote variatie tussen GH3 en LG3.
+Het is een maat voor het laagste niveau in een gemiddelde zomer.
 
  * Mogelijke waarden: reële waarden, uitgedruikt in cm onder maaiveld
 
 .. _gvg:
 
-GVG
----
+GVG (gemiddeld voorjaarsgrondwaterstand)
+----------------------------------------
 
 GVG - gemiddelde voorjaarsgrondwaterstand: de gemiddelde grondwaterstand aan het begin van het groeiseizoen (1 april).
 Indien niet gekend kan de GVG afgeleid worden uit de formule: GVG = 5,4 + 0,83*GHG + 0,19*GLG (in cm).
@@ -101,6 +106,8 @@ Indien men beschikt over de gegevens van de meetstations uit het depositiemeetne
 
 * Mogelijke waarden: Reële waarden
 
+.. _dierlijke_bemesting:
+
 Dierlijke bemesting
 ===================
 
@@ -108,6 +115,8 @@ Dierlijke bemesting, N kg/ha/j
 Er wordt een kaart aangemaakt met voor elke grid de waarde van de hoeveelheid dierlijke mest in kg-N/ha/jaar. Dit kunnen reële gegevens zijn, of schattingen zoals deze die voor de Nederlandse landgebruikskaart werden ontwikkeld.
 
  * Mogelijke waarden: Reële waarden
+
+.. _kunstmest:
 
 Kunstmest
 =========
@@ -132,6 +141,8 @@ Er wordt een kaart aangemaakt met voor elke grid de waarde van de hoeveelheid ku
 |                                                  | + 250 kg N/ha jaar (kunstmest)                |                                                                                               |
 +--------------------------------------------------+-----------------------------------------------+-----------------------------------------------------------------------------------------------+
 
+.. _beheer:
+
 Beheer
 ======
 
@@ -143,7 +154,7 @@ Bij de bepaling van trofie wordt enkel rekening gehouden met het hoog frequent b
 Bij maaibeheer wordt de trofie één klasse verlaagd. 
 Bij bepaling van het potentieel vegetatietype spelen alle beheersklassen een belangrijke rol. 
 
- * Mogelijke waarden: `Beheer <https://github.com/INBO/niche-vlaanderen/blob/master/SystemTables/Beheer.csv>`_, kolom bodemcijfercode.
+ * Mogelijke waarden: `Beheer.csv <https://github.com/INBO/niche-vlaanderen/blob/master/SystemTables/Beheer.csv>`_, kolom bodemcijfercode.
 
 .. _mineraalrijkdom:
 
@@ -153,7 +164,7 @@ Mineraalrijkdom
 Elektrische conductiviteit van het grondwater in µS/cm.
 
 De mineraalrijkdom van het grondwater bepaalt mede de zuurgraad van de standplaats.
-et bepalen of een standplaats mineraalrijk dan wel mineraalarm grondwater heeft, kan afgeleid worden uit verschillende variabelen zoals de HCO3- en Ca2+- concentraties of elektrische conductiviteit van het grondwater. 
+et bepalen of een standplaats mineraalrijk dan wel mineraalarm grondwater heeft, kan afgeleid worden uit verschillende variabelen zoals de HCO\ :sup:`3-` en Ca\ :sup:`2+`- concentraties of elektrische conductiviteit van het grondwater. 
 In NICHE-Vlaanderen wordt gekozen voor de elektrische conductiviteit, welke rechtstreeks in het veld meetbaar is.
 Voor dit invoergrid kunnen de reële conductiviteitswaarden worden gebruikt, uitgedrukt in µS/cm. Op het niveau van de systemtables voor conductiviteit (CondClass500) wordt echter een onderscheid gemaakt in 2 klassen, waarbij de grens ingesteld is bij een conductiviteit van 500µS/cm. Hoewel dus de conductiviteitswaarde wordt ingegeven is in feite enkel de grenswaarde essentieel. 
 Indien geen metingen voorhanden zijn, kan er op basis van expertkennis in een aantal gevallen toch een kaart worden aangemaakt. Zones met basenrijk grondwater krijgen waarden 501 of groter, zones met basenarm grondwater krijgen een waarde kleiner dan 500 bv 0.
@@ -176,6 +187,8 @@ Als de nodige informatie voorhanden is, kunnen de voorziene beslisregels worden 
 Bij gebrek aan informatie krijgen alle gridcellen een waarde 0. 
 
  * Mogelijke waarden: 0 of 1
+
+.. _overstroming_vegetatie:
 
 Overstroming Vegetatie
 ======================

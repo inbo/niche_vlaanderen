@@ -6,6 +6,9 @@ Na de bepaling van de trofie en de zuurgraadklasse kan de eigenlijke bepaling va
 
 Dit gebeurt aan de hand van de tabel `NicheVlTabel <https://github.com/inbo/niche-vlaanderen/blob/master/SystemTables/NicheVlTabel.csv>`_.
 
+Optioneel kunnen :ref:`beheer` en de :ref:`overstroming_vegetatie` mee als selectiefactor gebruikt worden.
+
+
 .. topic:: Voorbeeld
 
   Gaan we uit van het voorbeeld dan hebben we in vorige stappen bepaald:
@@ -44,3 +47,5 @@ Dit gebeurt aan de hand van de tabel `NicheVlTabel <https://github.com/inbo/nich
     16,Lolio-Potentillion anserinae,140000,4,3,30,-26,66,-3,3,2,1
 
   Volgende vegetatiecodes kunnen dus voorkomen: 7, 8, 9, 12, 13 en 16.
+
+  Indien ook nog inundantie wordt meegerekend, bvb regelmatig overstromen (1) valt een aantal mogelijke codes weg. Mogelijke codes zijn dan 7, 9, 12, 13 en 16.

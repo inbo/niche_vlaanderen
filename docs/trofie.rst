@@ -63,8 +63,8 @@ De totale Stikstof (N_tot) wordt bepaald als de som van volgende stikstofbronnen
 
 * :ref:`stikstofmineralisatie` (vorige stap)
 * :ref:`atmosferische_depositie` (input raster)
-* N_Mest_Kunst: Kunstmest (input raster)
-* N_Mest_Dier: Dierlijke input (input raster)
+* :ref:`kunstmest` (input raster)
+* :ref:`dierlijke_bemesting` (input raster)
 
 .. topic:: Voorbeeld
   
