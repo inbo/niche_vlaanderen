@@ -11,6 +11,7 @@ Niche Vlaanderen laat de gebruiker toe om op basis van een aantal `invoergrids <
 De berekening gebeurt in 3 stappen:
  * `Bepaling van de Trofie <trofie.html>`_
  * `Bepaling van de zuurgraad <zuur.html>`_
+ * `Bepaling van de vegetatie <vegetatie.html>`_
 
 Contents:
 
@@ -20,6 +21,7 @@ Contents:
   invoer
   trofie
   zuur
+  vegetatie
 
 
 Indices and tables
