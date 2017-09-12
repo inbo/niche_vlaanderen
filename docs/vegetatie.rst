@@ -1,3 +1,5 @@
+.. _vegetatie:
+
 ##################
 Bepaling vegetatie
 ##################

@@ -9,9 +9,9 @@ Welcome to niche-vlaanderen's documentation!
 Niche Vlaanderen laat de gebruiker toe om op basis van een aantal `invoergrids <invoer.html>`_ de mogelijke vegetatietypes te berekenen.
 
 De berekening gebeurt in 3 stappen:
- * `Bepaling van de Trofie <trofie.html>`_
- * `Bepaling van de zuurgraad <zuur.html>`_
- * `Bepaling van de vegetatie <vegetatie.html>`_
+ * :ref:`trofie`
+ * :ref:`zuur` 
+ * :ref:`vegetatie`
 
 Contents:
 
@@ -22,6 +22,7 @@ Contents:
   trofie
   zuur
   vegetatie
+  codetables
 
 
 Indices and tables

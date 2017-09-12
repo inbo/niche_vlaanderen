@@ -1,3 +1,5 @@
+.. _zuur:
+
 ################################
 Bepaling van de zuurgraadklasse
 ################################
@@ -20,6 +22,8 @@ Invoergegevens zijn dus:
  * :ref:`overstroming_zuur`
  * :ref:`kwel`
  * :ref:`regenlens`
+
+.. _soil_glg_class:
 
 Bepaling Bodem GLG klasse
 =========================
@@ -87,5 +91,3 @@ Dit gebeurt aan de hand van de tabel `Zuurclass.csv <https://github.com/inbo/nic
 
   De bepaalde zuurgraad is dus **3** (neutraal/basisch)
    
-
-

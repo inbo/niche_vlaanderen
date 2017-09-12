@@ -16,7 +16,7 @@ Bodemklasse
 
 Bodemkaart met toegekende NICHE-bodemcodes op basis van een vertaalsleutel of een bodemraster gebaseerd op veldgegevens.
 
- * Mogelijke waarden worden gegeven in de tabel `BodemCodes <https://github.com/INBO/niche-vlaanderen/blob/master/SystemTables/BodemCodes.csv>`_, kolom bodemcijfercode.
+ * Mogelijke waarden: :ref:`soil_codes`, kolom soil_code
 
 GxG
 ===
@@ -154,7 +154,7 @@ Bij de bepaling van trofie wordt enkel rekening gehouden met het hoog frequent b
 Bij maaibeheer wordt de trofie één klasse verlaagd. 
 Bij bepaling van het potentieel vegetatietype spelen alle beheersklassen een belangrijke rol. 
 
- * Mogelijke waarden: `Beheer.csv <https://github.com/INBO/niche-vlaanderen/blob/master/SystemTables/Beheer.csv>`_, kolom bodemcijfercode.
+ * Mogelijke waarden: :ref:`management`, kolom management.
 
 .. _mineraalrijkdom:
 

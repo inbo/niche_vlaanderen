@@ -1,3 +1,5 @@
+.. _trofie:
+
 ################################
 Berekening Trofie
 ################################
@@ -71,6 +73,8 @@ De totale Stikstof (N_tot) wordt bepaald als de som van volgende stikstofbronnen
   .. math:: N_{tot} &= N_{mineralisatie} + N_{Atm\_Deposit} + N_{Mest\_Kunst} + N_{Mest\_Dier} \\
                   &= (75 + 20 + 350 + 0) \\
                   &= 445
+
+.. trofie_code:
   
 Bepaling gecodeerde Trofie
 ==========================
