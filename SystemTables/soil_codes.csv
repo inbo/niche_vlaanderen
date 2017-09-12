@@ -1,0 +1,16 @@
+soil_code,short_name,description,soil_group
+10000,HV,hoogveen,3
+20000,K,klei,1
+30000,KV,venige klei,2
+40000,KX,keileem,3
+50000,L,leem,1
+60000,MK,maritieme klei,1
+70000,P,petgat,3
+80000,V,veen,2
+90000,V2,zand op veen,2
+100000,W,undefined (not soil),1
+110000,Z1,humusarm zand,1
+120000,Z2,humusrijk zand,1
+130000,ZV,venig zand,2
+140000,L1,leem,1
+150000,LV,venige leem,2
