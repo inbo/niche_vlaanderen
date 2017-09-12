@@ -1,0 +1,3 @@
+conductivity_min,conductivity_max,minerality
+0, 500, 1
+500,999999, 2
