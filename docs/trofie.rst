@@ -76,16 +76,12 @@ Bepaling gecodeerde Trofie
 ==========================
 
 De totale stikstof wordt gecombineerd met het management en het bodemtype om de gecodeerde Trofie te berekenen.
-Mogelijke waarden van beheer worden gegeven in de tabel `Beheer <https://github.com/inbo/niche-vlaanderen/blob/master/SystemTables/Beheer.csv>`_. 
+Mogelijke waarden van beheer worden gegeven in de tabel `Management <https://github.com/inbo/niche-vlaanderen/blob/master/SystemTables/management.csv>`_. 
 
-========== ============= =========
-Cijfercode Beheer        Invloed
----------- ------------- ---------
-0          geen          0
-1          Laagfrequent  0
-2          begrazing     1
-3          hoogfrequent  1
-========== ============= =========
+.. csv-table:: Management
+  :header-rows: 1
+  :file: ../SystemTables/management.csv
+
 
 De Invloed die correspondeert met het gekozen management kan met het bodemtype en de totale stikstof gebruikt worden om in de tabel `Bodemtrofie <https://github.com/inbo/niche-vlaanderen/blob/master/SystemTables/BodemTrofie.csv>`_ de gecodeerde trofie te berekenen
 
