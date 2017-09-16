@@ -29,7 +29,6 @@ TODO: figuur
   De berekening van de Trofie wordt in de volgende paragrafen geïllustreerd aan de hand van volgende waarden:
    * GVG: 33 cm
    * bodemcode: L1
-   * N_mineralisatie: 75
    * N_Atm_Deposit: 20
    * N_Mest_Kunst: 350
    * N_Mest_Dier: 445
