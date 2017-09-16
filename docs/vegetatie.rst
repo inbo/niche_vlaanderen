@@ -6,7 +6,7 @@ Bepaling vegetatie
 
 Na de bepaling van de trofie en de zuurgraadklasse kan de eigenlijke bepaling van de mogelijke vegetatie gebeuren.
 
-Dit gebeurt aan de hand van de tabel `NicheVlTabel <https://github.com/inbo/niche-vlaanderen/blob/master/SystemTables/NicheVlTabel.csv>`_.
+Dit gebeurt aan de hand van de tabel `NicheVlTabel <https://github.com/inbo/niche_vlaanderen/blob/master/SystemTables/NicheVlTabel.csv>`_.
 
 Optioneel kunnen :ref:`beheer` en de :ref:`overstroming_vegetatie` mee als selectiefactor gebruikt worden.
 

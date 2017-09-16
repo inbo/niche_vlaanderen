@@ -4,7 +4,7 @@
 Berekening Trofie
 ################################
 
-De Trofie is de mate van voedselrijkdom van de bodem. Deze wordt in NICHE weergegeven als een klassevariabele met waarden tussen 1 en 5. Mogelijke waarden worden gegeven in de tabel `Trofie.csv <https://github.com/inbo/niche-vlaanderen/blob/master/SystemTables/Trofie.csv>`_.
+De Trofie is de mate van voedselrijkdom van de bodem. Deze wordt in NICHE weergegeven als een klassevariabele met waarden tussen 1 en 5. Mogelijke waarden worden gegeven in de tabel `Trofie.csv <https://github.com/inbo/niche_vlaanderen/blob/master/SystemTables/Trofie.csv>`_.
 
 .. csv-table:: Trofie klassen
   :header: nr,Code,Trofieniveau
@@ -45,7 +45,7 @@ De stikstofmineralisatie (N_mineralisatie) wordt berekend aan de hand van volgen
 * :ref:`gvg`
 * :ref:`bodemklasse`
 
-In combinatie met de tabel `N_mineralisatie <https://github.com/inbo/niche-vlaanderen/blob/master/SystemTables/N_mineralisatie.csv>`_. Daar wordt de N_mineralisatie bepaald met de bodemcijfercode en de min en max waarde voor gvg.
+In combinatie met de tabel `N_mineralisatie <https://github.com/inbo/niche_vlaanderen/blob/master/SystemTables/N_mineralisatie.csv>`_. Daar wordt de N_mineralisatie bepaald met de bodemcijfercode en de min en max waarde voor gvg.
 
 .. topic:: Voorbeeld
   
@@ -79,14 +79,14 @@ Bepaling gecodeerde Trofie
 ==========================
 
 De totale stikstof wordt gecombineerd met het management en het bodemtype om de gecodeerde Trofie te berekenen.
-Mogelijke waarden van beheer worden gegeven in de tabel `Management <https://github.com/inbo/niche-vlaanderen/blob/master/SystemTables/management.csv>`_. 
+Mogelijke waarden van beheer worden gegeven in de tabel `Management <https://github.com/inbo/niche_vlaanderen/blob/master/SystemTables/management.csv>`_. 
 
 .. csv-table:: Management
   :header-rows: 1
   :file: ../SystemTables/management.csv
 
 
-De Invloed die correspondeert met het gekozen management kan met het bodemtype en de totale stikstof gebruikt worden om in de tabel `Bodemtrofie <https://github.com/inbo/niche-vlaanderen/blob/master/SystemTables/BodemTrofie.csv>`_ de gecodeerde trofie te berekenen
+De Invloed die correspondeert met het gekozen management kan met het bodemtype en de totale stikstof gebruikt worden om in de tabel `Bodemtrofie <https://github.com/inbo/niche_vlaanderen/blob/master/SystemTables/BodemTrofie.csv>`_ de gecodeerde trofie te berekenen
 
 .. topic:: Voorbeeld
 

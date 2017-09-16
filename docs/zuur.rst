@@ -34,10 +34,10 @@ In eerste instantie worden 3 bodemgroepen onderscheiden (opm: volgens eindrappor
  * V of V2 (organische bodems);
  * P, HV of KX (hoogveen of keileemgronden).
 
-Elke bodemcode wordt aan een bodemgroep gekoppeld in de tabel `BodemCodes.csv <https://github.com/inbo/niche-vlaanderen/blob/master/SystemTables/BodemCodes.csv>`_.
+Elke bodemcode wordt aan een bodemgroep gekoppeld in de tabel `BodemCodes.csv <https://github.com/inbo/niche_vlaanderen/blob/master/SystemTables/BodemCodes.csv>`_.
 
 Op basis van de bodemgroep en de GLG wordt de bodem_glg klasse bepaald.
-Dit gebeurt aan de hand van de tabel `SoilGLGClass.csv <https://github.com/inbo/niche-vlaanderen/blob/master/SystemTables/SoilGLGClass.csv>`_.
+Dit gebeurt aan de hand van de tabel `SoilGLGClass.csv <https://github.com/inbo/niche_vlaanderen/blob/master/SystemTables/SoilGLGClass.csv>`_.
 
 .. topic:: Voorbeeld
 
@@ -71,7 +71,7 @@ Bepaling Zuurcode
 =================
 
 Aan de hand van deze BodemGLGKlasse, de mineralenrijkdom en de gegevens :ref:`regenlens`, overstroming, kwel wordt de zuurcode bepaald.
-Dit gebeurt aan de hand van de tabel `Zuurclass.csv <https://github.com/inbo/niche-vlaanderen/blob/master/SystemTables/ZuurClass.csv>`_.
+Dit gebeurt aan de hand van de tabel `Zuurclass.csv <https://github.com/inbo/niche_vlaanderen/blob/master/SystemTables/ZuurClass.csv>`_.
 
 .. topic:: Voorbeeld
 
