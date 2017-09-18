@@ -17,5 +17,6 @@ setup(name='niche_vlaanderen',
           'License :: OSI Approved :: MIT License',
           'Programming Language :: Python :: 3.5'
       ],
-      include_package_data=True
+      include_package_data=True,
+      tests_require=['pytest'],
 )
