@@ -1,10 +1,12 @@
+from pkg_resources import resource_filename
+
 import numpy as np
 import pandas as pd
 
 class NitrogenMineralisation(object):
     ''' class to calculate mineralisation
     '''
-    def __init__(self, code_table = "../SystemTables/nitrogen_mineralisation.csv"):
+    def __init__(self, code_table = resource_filename("niche_vlaanderen","../SystemTables/nitrogen_mineralisation.csv")):
         self.table = pd.read_csv(code_table)
         
         # convert the mineralisation columns to float so we can use np.nan for nodata
@@ -41,8 +43,9 @@ class TrofieCode(object):
     '''
      Class to calculate the coded Trofie
     '''
-    def __init__(self, code_table_trofie = "../SystemTables/lnk_soil_trofie.csv",
-            code_table_management = "../SystemTables/management.csv"):
+    def __init__(self, 
+            code_table_trofie = resource_filename("niche_vlaanderen", "../SystemTables/lnk_soil_trofie.csv"),
+            code_table_management = resource_filename("niche_vlaanderen", "../SystemTables/management.csv")):
         self.table_trofie = pd.read_csv(code_table_trofie)
         self.table_management = pd.read_csv(code_table_management)
 
@@ -58,9 +61,9 @@ class TrofieCode(object):
 
        # influence inundation
 
-       # check inundation is 0 or 1 - else fail - do it here or somewhere else?
+       # TODO: return nan or error if inundation is not in 0,1 ?
 
-       trofie = min(trofie + inundation_trofie, 5)
+       trofie = min(trofie + inundation_trofie, 5) if inundation_trofie in [0,1] else np.nan
        return trofie
 
 
