@@ -11,11 +11,11 @@ class testNutrientLevel(TestCase):
         self.assertEqual(75, result)
     
     def test_nitrogen_mineralisation_array_oneelement(self):
-        soil_codes = np.array(140000)
-        msw = np.array(33)
+        soil_codes = np.array([140000])
+        msw = np.array([33])
         nl = niche_vlaanderen.NutrientLevel()
         result = nl._get_mineralisation_array(soil_codes, msw)
-        np.testing.assert_equal(np.array(75), result)
+        np.testing.assert_equal(np.array([75]), result)
 
     def test__get(self):
         '''
@@ -39,9 +39,22 @@ class testNutrientLevel(TestCase):
         result = nl._get_array(management, soil_code, nitrogen, inundation)
         np.testing.assert_equal(np.array(5), result)
 
-
     def test_get(self):
         nl = niche_vlaanderen.NutrientLevel()
         result = nl.get(140000,33,20,445,350,2,1)
         
         self.assertEqual(5, result)
+
+    def test_get_array(self):
+        nl = niche_vlaanderen.NutrientLevel()
+        management = np.array([2])
+        soil_code = np.array([140000])
+        msw = np.array([33])
+        nitrogen_deposition = np.array([20])
+        nitrogen_animal = np.array([445])
+        nitrogen_fertilizer = np.array([350])
+        inundation = np.array([1])
+        result = nl.get_array(soil_code, msw, nitrogen_deposition, nitrogen_animal,
+                nitrogen_fertilizer, management, inundation)
+
+        np.testing.assert_equal(np.array([5]), result)

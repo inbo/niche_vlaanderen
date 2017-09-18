@@ -100,3 +100,12 @@ class NutrientLevel(object):
         nutrient_level = self._get(management, soil_code, total_nitrogen, inundation)
         return nutrient_level
 
+    def get_array(self, soil_code, msw, nitrogen_atmospheric, nitrogen_animal, nitrogen_fertilizer, management, inundation):
+        """
+        Calculates the Nutrient level based on numpy arrays
+        """
+        nitrogen_mineralisation = self._get_mineralisation_array(soil_code, msw)
+        total_nitrogen = nitrogen_mineralisation + nitrogen_atmospheric\
+                + nitrogen_animal + nitrogen_fertilizer
+        nutrient_level = self._get_array(management, soil_code, total_nitrogen, inundation)
+        return nutrient_level
