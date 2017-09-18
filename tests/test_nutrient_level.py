@@ -26,6 +26,20 @@ class testNutrientLevel(TestCase):
 
         self.assertEqual(5, result)
 
+    def test__get_array(self):
+        '''
+         Array version of the documentation test
+        '''
+        management = np.array([2])
+        soil_code = np.array([140000])
+        nitrogen = np.array([445])
+        inundation = np.array([1])
+        
+        nl = niche_vlaanderen.NutrientLevel()
+        result = nl._get_array(management, soil_code, nitrogen, inundation)
+        np.testing.assert_equal(np.array(5), result)
+
+
     def test_get(self):
         nl = niche_vlaanderen.NutrientLevel()
         result = nl.get(140000,33,20,445,350,2,1)
