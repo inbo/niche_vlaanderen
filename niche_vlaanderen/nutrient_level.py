@@ -39,31 +39,31 @@ class NitrogenMineralisation(object):
                                       )
         return result
 
-class TrofieCode(object):
+class NutrientLevel(object):
     '''
-     Class to calculate the coded Trofie
+     Class to calculate the coded NutrientLevel
     '''
     def __init__(self, 
-            code_table_trofie = resource_filename("niche_vlaanderen", "../SystemTables/lnk_soil_trofie.csv"),
+            code_table_nutrient_level = resource_filename("niche_vlaanderen", "../SystemTables/lnk_soil_nutrient_level.csv"),
             code_table_management = resource_filename("niche_vlaanderen", "../SystemTables/management.csv")):
-        self.table_trofie = pd.read_csv(code_table_trofie)
+        self.table_nutrient_level = pd.read_csv(code_table_nutrient_level)
         self.table_management = pd.read_csv(code_table_management)
 
-    def get(self, management, soil_code, nitrogen, inundation_trofie):
+    def get(self, management, soil_code, nitrogen, inundation_nutrient_level):
        management_influence = self.table_management[self.table_management.code == management].influence.values[0]
-       selection = ((self.table_trofie.management_influence == management_influence)
-                   & (self.table_trofie.soil_code == soil_code)
-                   & (self.table_trofie.total_nitrogen_min <= nitrogen)
-                   & (self.table_trofie.total_nitrogen_max > nitrogen))
-       result = self.table_trofie[(selection)].trofie_code.values
+       selection = ((self.table_nutrient_level.management_influence == management_influence)
+                   & (self.table_nutrient_level.soil_code == soil_code)
+                   & (self.table_nutrient_level.total_nitrogen_min <= nitrogen)
+                   & (self.table_nutrient_level.total_nitrogen_max > nitrogen))
+       result = self.table_nutrient_level[(selection)].nutrient_level.values
        
-       trofie = result[0] if result.size>0 else np.nan
+       nutrient_level = result[0] if result.size>0 else np.nan
 
        # influence inundation
 
        # TODO: return nan or error if inundation is not in 0,1 ?
 
-       trofie = min(trofie + inundation_trofie, 5) if inundation_trofie in [0,1] else np.nan
-       return trofie
+       nutrient_level = min(nutrient_level + inundation_nutrient_level, 5) if inundation_nutrient_level in [0,1] else np.nan
+       return nutrient_level
 
 

@@ -1,4 +1,4 @@
-management_influence,soil_code,total_nitrogen_min,total_nitrogen_max,trofie_code
+management_influence,soil_code,total_nitrogen_min,total_nitrogen_max,nutrient_level
 0,10000,0,60,1
 0,10000,60,156,2
 0,10000,156,293,3
