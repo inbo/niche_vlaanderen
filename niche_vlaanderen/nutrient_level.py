@@ -66,10 +66,28 @@ class NutrientLevel(object):
         nutrient_level = result[0] if result.size>0 else np.nan
 
         # influence inundation
-        # TODO: return nan or error if inundation is not in 0,1 ?
+        # TODO: return nan or throw error if inundation is not in 0,1 ?
 
         nutrient_level = min(nutrient_level + inundation, 5) if inundation in [0,1] else np.nan
         return nutrient_level
+
+    def _get_array(self, management, soil_code, nitrogen, inundation):
+        # TODO: we assume arrays have the same shape - add check on get_array
+
+        # calculate management influence
+        influence = np.full(management.shape, -99) # -99 used as no data value
+        for i in self._ct_management.code.unique():
+            influence[management == i] = self._ct_management[self._ct_management.code == i].influence.values[0] 
+        
+        # search for classification values in nutrient level codetable
+        result = np.full(management.shape, -99)
+        for name, group in self._ct_nutrient_level.groupby(["soil_code","management_influence"]):
+            soil_selected, influence_selected = name
+            table_sel = group.copy(deep=True).reset_index(drop=True)
+            index = np.digitize(nitrogen, table_sel.total_nitrogen_max)
+            selection = (soil_code == soil_selected) & (influence == influence_selected)
+            result[selection] = table_sel.nutrient_level[index]
+        return result
 
     def get(self, soil_code, msw, nitrogen_atmospheric, nitrogen_animal, nitrogen_fertilizer, management, inundation):
         """
