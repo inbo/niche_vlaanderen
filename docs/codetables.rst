@@ -14,7 +14,7 @@ The table `soil_codes.csv <https://github.com/INBO/niche_vlaanderen/blob/master/
 management_codes
 ================
 
-The table `management_codes.csv  <https://github.com/INBO/niche_vlaanderen/blob/master/SystemTables/management_codes.csv>` contains the supported management_codes in NICHE.
+The table `management_codes.csv  <https://github.com/INBO/niche_vlaanderen/blob/master/SystemTables/management_codes.csv>`_ contains the supported management_codes in NICHE.
 It also contains a column `influence` which is used in :ref:`trofie_code`.
 
 
