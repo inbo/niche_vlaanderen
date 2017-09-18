@@ -4,7 +4,9 @@
 Berekening Trofie
 ################################
 
-De Trofie is de mate van voedselrijkdom van de bodem. Deze wordt in NICHE weergegeven als een klassevariabele met waarden tussen 1 en 5. Mogelijke waarden worden gegeven in de tabel `Trofie.csv <https://github.com/inbo/niche_vlaanderen/blob/master/SystemTables/Trofie.csv>`_.
+De Trofie is de mate van voedselrijkdom van de bodem.
+Deze wordt in NICHE weergegeven als een klassevariabele met waarden tussen 1 en 5.
+Mogelijke waarden worden gegeven in de tabel `Trofie.csv <https://github.com/inbo/niche_vlaanderen/blob/master/SystemTables/Trofie.csv>`_.
 
 .. csv-table:: Trofie klassen
   :header: nr,Code,Trofieniveau
@@ -45,7 +47,8 @@ De stikstofmineralisatie (N_mineralisatie) wordt berekend aan de hand van volgen
 * :ref:`gvg`
 * :ref:`bodemklasse`
 
-In combinatie met de tabel `N_mineralisatie <https://github.com/inbo/niche_vlaanderen/blob/master/SystemTables/N_mineralisatie.csv>`_. Daar wordt de N_mineralisatie bepaald met de bodemcijfercode en de min en max waarde voor gvg.
+In combinatie met de tabel `N_mineralisatie <https://github.com/inbo/niche_vlaanderen/blob/master/SystemTables/N_mineralisatie.csv>`_.
+Daar wordt de N_mineralisatie bepaald met de bodemcijfercode en de min en max waarde voor gvg.
 
 .. topic:: Voorbeeld
   
@@ -105,8 +108,10 @@ De Invloed die correspondeert met het gekozen management kan met het bodemtype e
 Invloed Overstroming
 ====================
 
-De waarden voor trofie die in de vorige stap berekend werden worden met 1 verhoogd indien er zich overstromingen voordoen. Het is echter niet mogelijk dat de waarde hoger wordt dan 5.
+De waarden voor trofie die in de vorige stap berekend werden worden met 1 verhoogd indien er zich overstromingen voordoen.
+Het is echter niet mogelijk dat de waarde hoger wordt dan 5.
 
 .. topic:: Voorbeeld
 
-  De oorspronkelijk gecodeerde trofie is 4. Door invloed van overstroming wordt dit 5.
+  De oorspronkelijk gecodeerde trofie is 4.
+  Door invloed van overstroming wordt dit 5.
