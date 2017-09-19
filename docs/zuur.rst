@@ -36,8 +36,8 @@ In eerste instantie worden 3 bodemgroepen onderscheiden (opm: volgens eindrappor
 
 Elke bodemcode wordt aan een bodemgroep gekoppeld in de tabel `soil_codes.csv <https://github.com/inbo/niche_vlaanderen/blob/master/SystemTables/soil_codes.csv>`_.
 
-Op basis van de bodemgroep en de GLG wordt de bodem_glg klasse bepaald.
-Dit gebeurt aan de hand van de tabel `soil_glg_class.csv <https://github.com/inbo/niche_vlaanderen/blob/master/SystemTables/soil_glg_class.csv>`_.
+Op basis van de bodemgroep en de GLG wordt de soil_mlw klasse bepaald.
+Dit gebeurt aan de hand van de tabel `soil_mlw_class.csv <https://github.com/inbo/niche_vlaanderen/blob/master/SystemTables/soil_mlw_class.csv>`_.
 
 .. topic:: Voorbeeld
 
