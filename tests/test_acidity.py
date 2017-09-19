@@ -2,8 +2,7 @@
 from unittest import TestCase
 
 import numpy as np
-import gdal
-import osr
+
 
 import niche_vlaanderen
 

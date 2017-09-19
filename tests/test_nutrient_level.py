@@ -1,8 +1,9 @@
 from unittest import TestCase
 
 import numpy as np
-import gdal
-import osr
+
+from osgeo import gdal
+from osgeo import osr
 
 import niche_vlaanderen
 
