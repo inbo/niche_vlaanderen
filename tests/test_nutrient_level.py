@@ -79,7 +79,7 @@ class testNutrientLevel(TestCase):
         msw = raster_to_numpy("testcase/input/msw.asc")
         nitrogen_deposition = raster_to_numpy("testcase/input/nitrogen_atmospheric.asc")
         nitrogen_animal = raster_to_numpy("testcase/input/nitrogen_animal.asc")
-        nitrogen_fertilizer = raster_to_numpy("testcase/input/nitrogen_fertilizer.asc")
+        nitrogen_fertilizer = raster_to_numpy("testcase/input/nullgrid.asc")
         inundation = raster_to_numpy("testcase/input/inundation_nutrient_level.asc")
         management = raster_to_numpy("testcase/input/management.asc")
 
