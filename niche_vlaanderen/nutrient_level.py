@@ -8,14 +8,17 @@ class NutrientLevel(object):
      Class to calculate the NutrientLevel
     '''
     def __init__(self, 
-            code_table_nutrient_level = resource_filename("niche_vlaanderen", "../SystemTables/lnk_soil_nutrient_level.csv"),
-            code_table_management = resource_filename("niche_vlaanderen", "../SystemTables/management.csv"),
-            code_table_mineralisation = resource_filename("niche_vlaanderen","../SystemTables/nitrogen_mineralisation.csv")
+            ct_nutrient_level = resource_filename(
+                "niche_vlaanderen", "../SystemTables/lnk_soil_nutrient_level.csv"),
+            ct_management = resource_filename(
+                "niche_vlaanderen", "../SystemTables/management.csv"),
+            ct_mineralisation = resource_filename(
+                "niche_vlaanderen","../SystemTables/nitrogen_mineralisation.csv")
             ):
         
-        self._ct_nutrient_level = pd.read_csv(code_table_nutrient_level)
-        self._ct_management = pd.read_csv(code_table_management)
-        self._ct_mineralisation = pd.read_csv(code_table_mineralisation)
+        self._ct_nutrient_level = pd.read_csv(ct_nutrient_level)
+        self._ct_management = pd.read_csv(ct_management)
+        self._ct_mineralisation = pd.read_csv(ct_mineralisation)
 
         # convert the mineralisation columns to float so we can use np.nan for nodata
         self._ct_mineralisation = self._ct_mineralisation.astype("float64")
