@@ -3,24 +3,26 @@ from pkg_resources import resource_filename
 import numpy as np
 import pandas as pd
 
+
 class NutrientLevel(object):
     '''
      Class to calculate the NutrientLevel
     '''
-    def __init__(self, 
-            ct_nutrient_level = resource_filename(
+    def __init__(
+            self,
+            ct_nutrient_level=resource_filename(
                 "niche_vlaanderen", "../SystemTables/lnk_soil_nutrient_level.csv"),
-            ct_management = resource_filename(
+            ct_management=resource_filename(
                 "niche_vlaanderen", "../SystemTables/management.csv"),
-            ct_mineralisation = resource_filename(
-                "niche_vlaanderen","../SystemTables/nitrogen_mineralisation.csv")
+            ct_mineralisation=resource_filename(
+                "niche_vlaanderen", "../SystemTables/nitrogen_mineralisation.csv")
             ):
-        
+
         self._ct_nutrient_level = pd.read_csv(ct_nutrient_level)
         self._ct_management = pd.read_csv(ct_management)
         self._ct_mineralisation = pd.read_csv(ct_mineralisation)
 
-        # convert the mineralisation columns to float so we can use np.nan for nodata
+        # convert the mineralisation to float so we can use np.nan for nodata
         self._ct_mineralisation = self._ct_mineralisation.astype("float64")
 
     def _get_mineralisation_array(self, soil_code_array, msw_array):
@@ -31,27 +33,28 @@ class NutrientLevel(object):
         soil_code_array = soil_code_array.flatten()
         msw_array = msw_array.flatten()
         result = np.empty(soil_code_array.shape)
-        result[:]= np.nan
-        
+        result[:] = np.nan
+
         for code in self._ct_mineralisation.soil_code.unique():
-            # we must reset the index because digitize will give indexes compared to the new table.
-            table_sel = self._ct_mineralisation[self._ct_mineralisation.soil_code == code].copy(deep=True).reset_index(drop=True)
+            # we must reset the index because digitize will give indexes
+            # compared to the new table.
+            selection = self._ct_mineralisation.soil_code == code
+            table_sel = self._ct_mineralisation[selection].copy().reset_index(drop=True)
             soil_code_sel = (soil_code_array == code)
             index = np.digitize(msw_array[soil_code_sel], table_sel.msw_max, right=True)
-          
+
             result[soil_code_sel] = table_sel.nitrogen_mineralisation[index]
-            
-        result = result.reshape(orig_shape
-                                      )
+
+        result = result.reshape(orig_shape)
         return result
 
     def _get_array(self, management, soil_code, nitrogen, inundation):
 
         # calculate management influence
-        influence = np.full(management.shape, -99) # -99 used as no data value
+        influence = np.full(management.shape, -99)  # -99 used as no data value
         for i in self._ct_management.code.unique():
-            influence[management == i] = self._ct_management[self._ct_management.code == i].influence.values[0] 
-       
+            influence[management == i] = self._ct_management[self._ct_management.code == i].influence.values[0]
+
         # flatten all input layers (necessary for digitize)
         orig_shape = soil_code.shape
         soil_code = soil_code.flatten()
@@ -71,17 +74,20 @@ class NutrientLevel(object):
 
         # TODO: there is some discrepancy between the documentation and the ArcGIS implementation
         # the arcgis implementation only adds inundation if values for nutrion_level are 3 or lower
-        # the documentation says: 
+        # the documentation says:
 
         # Wanneer het hydrologisch model toevoer van gebiedsvreemd water berekent naar een
         # gebied waar nog geen waterinlaat plaatsvindt, dan wordt in NICHE aangenomen dat de
         # voedselrijkdom daardoor met 1 trofieklasse (extra) toeneemt. (pg 15)
-        
-        result[((result <4) & (result > -99))] = (result + (inundation>0))[((result<4) & (result >-99))]
+
+        # values lower than 4 and larger than -99 (no data) are increased
+        selection =((result <4) & (result > -99))
+        result[selection] = (result + (inundation>0))[selection]
         result = result.reshape(orig_shape)
         return result
 
-    def get_array(self, soil_code, msw, nitrogen_atmospheric, nitrogen_animal, nitrogen_fertilizer, management, inundation):
+    def get_array(self, soil_code, msw, nitrogen_atmospheric, nitrogen_animal,
+            nitrogen_fertilizer, management, inundation):
         """
         Calculates the Nutrient level based on numpy arrays
         """
