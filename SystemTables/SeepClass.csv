@@ -1,4 +1,0 @@
-seep_min, seep_max, seep_code, description
--999, -1,3, seep
--1,-0.1,2, stagnation
--0.1,999,1, infiltration
