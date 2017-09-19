@@ -23,16 +23,6 @@ class NutrientLevel(object):
         # convert the mineralisation columns to float so we can use np.nan for nodata
         self._ct_mineralisation = self._ct_mineralisation.astype("float64")
 
-    def _get_mineralisation(self,soil_code, msw):
-        """
-        get nitrogen mineralisation for single values
-        """
-        result= self._ct_mineralisation[
-                ((self._ct_mineralisation.soil_code == soil_code) 
-                & (self._ct_mineralisation.msw_min <= msw )
-                & (self._ct_mineralisation.msw_max >msw))].nitrogen_mineralisation.values
-        return result[0] if result.size >0 else np.nan
-        
     def _get_mineralisation_array(self, soil_code_array, msw_array):
         """
         get nitrogen mineralisation for numpy arrays
@@ -54,25 +44,6 @@ class NutrientLevel(object):
         result = result.reshape(orig_shape
                                       )
         return result
-
-    def _get(self, management, soil_code, nitrogen, inundation):
-        """
-        Calculates the nutrient level based on management, total nitrogen and inundation
-        """
-        management_influence = self._ct_management[self._ct_management.code == management].influence.values[0]
-        selection = ( (self._ct_nutrient_level.management_influence == management_influence)
-                    & (self._ct_nutrient_level.soil_code == soil_code)
-                    & (self._ct_nutrient_level.total_nitrogen_min <= nitrogen)
-                    & (self._ct_nutrient_level.total_nitrogen_max > nitrogen))
-        result = self._ct_nutrient_level[(selection)].nutrient_level.values
-        
-        nutrient_level = result[0] if result.size>0 else np.nan
-
-        # influence inundation
-        # TODO: return nan or throw error if inundation is not in 0,1 ?
-
-        nutrient_level = min(nutrient_level + inundation, 5) if inundation in [0,1] else np.nan
-        return nutrient_level
 
     def _get_array(self, management, soil_code, nitrogen, inundation):
 
@@ -109,17 +80,6 @@ class NutrientLevel(object):
         result[((result <4) & (result > -99))] = (result + (inundation>0))[((result<4) & (result >-99))]
         result = result.reshape(orig_shape)
         return result
-
-    def get(self, soil_code, msw, nitrogen_atmospheric, nitrogen_animal, nitrogen_fertilizer, management, inundation):
-        """
-        Calculates the Nutrient level based on single values
-        """
-        # First step: get the nitrogen mineralisation
-        nitrogen_mineralisation = self._get_mineralisation(soil_code, msw)
-        total_nitrogen = nitrogen_mineralisation + nitrogen_atmospheric\
-                + nitrogen_animal + nitrogen_fertilizer
-        nutrient_level = self._get(management, soil_code, total_nitrogen, inundation)
-        return nutrient_level
 
     def get_array(self, soil_code, msw, nitrogen_atmospheric, nitrogen_animal, nitrogen_fertilizer, management, inundation):
         """
