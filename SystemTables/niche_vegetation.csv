@@ -1,4 +1,4 @@
-,VEG_CODE,VEG_TYPE,SOIL,TROFIE,ZUURGRAAD,GHG_MIN,GHG_MAX,GLG_MIN,GLG_MAX,MANAGEMENT,INUNDATIE,NAT_SCORE,OPM1,OPM2,OPM3,OPM4
+,veg_code,veg_type,soil_code,nutrient_level,acidity,mhw_min,mhw_max,mlw_min,mlw_max,management,inundation,nat_score,opm1,opm2,opm3,opm4
 1,1,Sphagno-Betuletum,30000,2,1,20,1,38,20,0,0,1,origineel,NA,NA,NA
 2,1,Sphagno-Betuletum,30000,1,1,20,1,38,20,0,0,1,origineel,NA,NA,NA
 3,1,Sphagno-Betuletum,30000,2,2,20,1,38,20,0,0,1,aanvulling zuurgraad,NA,NA,NA
