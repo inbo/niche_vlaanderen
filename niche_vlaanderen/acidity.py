@@ -33,7 +33,7 @@ class Acidity(object):
         soil_group = self._ct_soil_codes.soil_group[soil_code].values.astype("int8")
         # the function above gives 0 for no data
         soil_group[soil_group == 0] = -99
-        
+
         print(soil_group.size)
 
         result = np.full(soil_code.shape, -99)
@@ -54,16 +54,16 @@ class Acidity(object):
         return reclass
 
     def _get_acidity(self, regenlens, mineral_richness, inundation, seepage, soil_mlw_class):
-        
-        orig_shape = soil_mlw_class.shape
+
+        orig_shape = inundation.shape
         regenlens = regenlens.flatten()
         mineral_richness = mineral_richness.flatten()
         inundation = inundation.flatten()
         seepage = seepage.flatten()
         soil_mlw_class = soil_mlw_class.flatten()
-        
-        result = np.full(orig_shape, -99)
-        for labels, subtable in self._lnk_acidity.groupby(["regenlens", 
+
+        result = np.full(soil_mlw_class.shape, -99)
+        for labels, subtable in self._lnk_acidity.groupby(["regenlens",
             "mineral_richness", "inundation", "seepage", "soil_mlw_class"]):
             sel_regenlens, sel_mr, sel_inundation, sel_seepage, sel_soil_mlw_class = labels
             subtable = subtable.copy().reset_index(drop=True)
@@ -71,25 +71,22 @@ class Acidity(object):
                 & (inundation == sel_inundation) & (seepage == sel_seepage)
                 & (soil_mlw_class == sel_soil_mlw_class))
             result[(selection)] = subtable.acidity[0]
-        result.reshape(orig_shape)
+        result = result.reshape(orig_shape)
         return result
-        
+
     def _get_seepage_code(self, seepage):
         orig_shape = seepage.shape
         seepage = seepage.flatten()
         index = np.digitize(seepage, self._ct_seepage.seepage_max, right=True)
         seepage_code = self._ct_seepage.seepage_code[index]
         return seepage_code.values.reshape(orig_shape)
-        
-    
+
+
     def get_acidity(self, soil_class, mlw, inundation, seepage, regenlens, conductivity):
         soil_mlw = self._get_soil_mlw(soil_class, mlw)
         mineral_richness = self._get_mineral_richness_class(conductivity)
         seepage_code = self._get_seepage_code(seepage)
-        print (soil_mlw)
-        print(mineral_richness)
-        print(seepage_code)
         acidity = self._get_acidity(regenlens, mineral_richness, inundation, seepage_code, soil_mlw)
         return acidity
-        
-        
+
+
