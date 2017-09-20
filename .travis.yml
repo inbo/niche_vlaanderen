@@ -8,7 +8,7 @@ python:
 script: pytest
 
 before_install:
-  - export CFLAGS=`gdal-config --cflags`
+  - export CPPFLAGS=`gdal-config --cflags`
   - export LDFLAGS=`gdal-config --libs`
   - export PROJ_LIB=/usr/share/proj
 
