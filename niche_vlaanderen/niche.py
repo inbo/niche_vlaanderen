@@ -1,4 +1,4 @@
-from osgeo import gdal
+import rasterio
 
 from .input_types import InputLayerTypes as it
 
@@ -39,9 +39,9 @@ class Niche(object):
                 return False
 
         # check boundaries overlap with study area + same grid
+        # we should also check for files top/bottom and bottom/top
         for f in self._inputfiles:
-            ds = gdal.Open(f)
-            gt = ds.GetGeoTransform()
+            dst = rasterio.open(f)
 
 
         pass

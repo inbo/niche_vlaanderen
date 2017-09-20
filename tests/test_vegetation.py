@@ -1,8 +1,7 @@
 from unittest import TestCase
-from osgeo import gdal
-from osgeo import osr
 
 import numpy as np
+import rasterio
 
 import niche_vlaanderen
 
@@ -15,26 +14,18 @@ def raster_to_numpy(filename):
     ------
     No-data values are -99 for integer types and np.nan for real types.
     '''
-    # Read the raster file with GDAL
-    ds = gdal.Open(filename)
+    with rasterio.open(filename) as ds:
+        data = ds.read(1)
+        proj = ds.crs #eventueel .tostring
+        gt = ds.transform
+        nodata = ds.nodatavals[0]
 
-    #  Extract the data, transformation and projection information
-    data = ds.ReadAsArray()
-    gt = ds.GetGeoTransform()
-    raster_wkt = ds.GetProjection()
-    spatial_ref = osr.SpatialReference()
-    spatial_ref.ImportFromWkt(raster_wkt)
-    proj = spatial_ref.ExportToProj4()
-
-    nodata = ds.GetRasterBand(1).GetNoDataValue()
     # create a mask for no-data values, taking into account the data-types
     if data.dtype == 'float32':
         data[data == nodata] = np.nan
     else:
         data[data == nodata] = -99
 
-    # destroy the gdal object
-    del ds
     return data
 
 class testVegetation(TestCase):
