@@ -11,11 +11,13 @@ class NutrientLevel(object):
     def __init__(
             self,
             ct_nutrient_level=resource_filename(
-                "niche_vlaanderen", "../SystemTables/lnk_soil_nutrient_level.csv"),
+                "niche_vlaanderen",
+                "../SystemTables/lnk_soil_nutrient_level.csv"),
             ct_management=resource_filename(
                 "niche_vlaanderen", "../SystemTables/management.csv"),
             ct_mineralisation=resource_filename(
-                "niche_vlaanderen", "../SystemTables/nitrogen_mineralisation.csv")
+                "niche_vlaanderen",
+                "../SystemTables/nitrogen_mineralisation.csv")
             ):
 
         self._ct_nutrient_level = pd.read_csv(ct_nutrient_level)
@@ -36,14 +38,16 @@ class NutrientLevel(object):
         result[:] = np.nan
 
         for code in self._ct_mineralisation.soil_code.unique():
-            # we must reset the index because digitize will give indexes
+            # We must reset the index because digitize will give indexes
             # compared to the new table.
-            selection = self._ct_mineralisation.soil_code == code
-            table_sel = self._ct_mineralisation[selection].copy().reset_index(drop=True)
-            soil_code_sel = (soil_code_array == code)
-            index = np.digitize(msw_array[soil_code_sel], table_sel.msw_max, right=True)
+            select = self._ct_mineralisation.soil_code == code
+            table_sel = self._ct_mineralisation[select].copy()
+            table_sel = table_sel.reset_index(drop=True)
+            soil_sel = (soil_code_array == code)
+            index = np.digitize(msw_array[soil_sel], table_sel.msw_max,
+                                right=True)
 
-            result[soil_code_sel] = table_sel.nitrogen_mineralisation[index]
+            result[soil_sel] = table_sel.nitrogen_mineralisation[index]
 
         result = result.reshape(orig_shape)
         return result
@@ -53,7 +57,9 @@ class NutrientLevel(object):
         # calculate management influence
         influence = np.full(management.shape, -99)  # -99 used as no data value
         for i in self._ct_management.code.unique():
-            influence[management == i] = self._ct_management[self._ct_management.code == i].influence.values[0]
+            sel_grid = (management == i)
+            sel_ct = (self._ct_management.code == i)
+            influence[sel_grid] = self._ct_management[sel_ct].influence.values[0]
 
         # flatten all input layers (necessary for digitize)
         orig_shape = soil_code.shape
@@ -64,9 +70,12 @@ class NutrientLevel(object):
 
         # search for classification values in nutrient level codetable
         result = np.full(influence.shape, -99)
-        for name, group in self._ct_nutrient_level.groupby(["soil_code","management_influence"]):
+
+        for name, subtable in self._ct_nutrient_level.groupby(
+                ["soil_code","management_influence"]):
+
             soil_selected, influence_selected = name
-            table_sel = group.copy(deep=True).reset_index(drop=True)
+            table_sel = subtable.copy(deep=True).reset_index(drop=True)
             index = np.digitize(nitrogen, table_sel.total_nitrogen_max,right = True)
             selection = (soil_code == soil_selected) & (influence == influence_selected)
             result[selection] = table_sel.nutrient_level[index][selection]
