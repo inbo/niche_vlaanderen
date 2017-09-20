@@ -71,7 +71,7 @@ Bepaling Zuurcode
 =================
 
 Aan de hand van deze BodemGLGKlasse, de mineralenrijkdom en de gegevens :ref:`regenlens`, overstroming, kwel wordt de zuurcode bepaald.
-Dit gebeurt aan de hand van de tabel `Zuurclass.csv <https://github.com/inbo/niche_vlaanderen/blob/master/SystemTables/ZuurClass.csv>`_.
+Dit gebeurt aan de hand van de tabel `lnk_acidity.csv <https://github.com/inbo/niche_vlaanderen/blob/master/SystemTables/lnk_acidity.csv>`_.
 
 .. topic:: Voorbeeld
 

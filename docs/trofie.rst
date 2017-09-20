@@ -47,7 +47,7 @@ De stikstofmineralisatie (N_mineralisatie) wordt berekend aan de hand van volgen
 * :ref:`gvg`
 * :ref:`bodemklasse`
 
-In combinatie met de tabel `N_mineralisatie <https://github.com/inbo/niche_vlaanderen/blob/master/SystemTables/N_mineralisatie.csv>`_.
+In combinatie met de tabel `nitrogen_mineralisation <https://github.com/inbo/niche_vlaanderen/blob/master/SystemTables/nitrogen_mineralisation.csv>`_.
 Daar wordt de N_mineralisatie bepaald met de bodemcijfercode en de min en max waarde voor gvg.
 
 .. topic:: Voorbeeld
@@ -89,7 +89,7 @@ Mogelijke waarden van beheer worden gegeven in de tabel `Management <https://git
   :file: ../SystemTables/management.csv
 
 
-De Invloed die correspondeert met het gekozen management kan met het bodemtype en de totale stikstof gebruikt worden om in de tabel `Bodemtrofie <https://github.com/inbo/niche_vlaanderen/blob/master/SystemTables/BodemTrofie.csv>`_ de gecodeerde trofie te berekenen
+De Invloed die correspondeert met het gekozen management kan met het bodemtype en de totale stikstof gebruikt worden om in de tabel `nutrient_level <https://github.com/inbo/niche_vlaanderen/blob/master/SystemTables/nutrient_level.csv>`_ de gecodeerde trofie te berekenen
 
 .. topic:: Voorbeeld
 

@@ -154,7 +154,7 @@ Bij de bepaling van trofie wordt enkel rekening gehouden met het hoog frequent b
 Bij maaibeheer wordt de trofie één klasse verlaagd. 
 Bij bepaling van het potentieel vegetatietype spelen alle beheersklassen een belangrijke rol. 
 
- * Mogelijke waarden: :ref:`management`, kolom management.
+ * Mogelijke waarden: :ref:`management_codes`, kolom management.
 
 .. _mineraalrijkdom:
 
