@@ -4,7 +4,10 @@ environment:
       PYTHON_ARCH: "64"
       CONDA_PY: "36"
       CONDA_INSTALL_LOCN: "C:\\Miniconda36-x64"
-
+    - PYTHON_VERSION: "2.7"
+      PYTHON_ARCH: "32"
+      CONDA_PY: "27"
+      CONDA_INSTALL_LOCN: "C:\\Miniconda27"
 install:
     # Use the pre-installed Miniconda for the desired arch
     - cmd: call %CONDA_INSTALL_LOCN%\Scripts\activate.bat
