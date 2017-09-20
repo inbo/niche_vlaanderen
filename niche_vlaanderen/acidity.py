@@ -34,8 +34,6 @@ class Acidity(object):
         # the function above gives 0 for no data
         soil_group[soil_group == 0] = -99
 
-        print(soil_group.size)
-
         result = np.full(soil_code.shape, -99)
         for sel_soil_group, subtable in self._ct_soil_mlw.groupby(["soil_group"]):
 
@@ -45,7 +43,7 @@ class Acidity(object):
 
             result[selection] = subtable.soil_mlw_class[index][selection]
 
-        result.reshape(orig_shape)
+        result = result.reshape(orig_shape)
         return result
 
     def _get_mineral_richness_class(self, conductivity):
@@ -67,8 +65,11 @@ class Acidity(object):
             "mineral_richness", "inundation", "seepage", "soil_mlw_class"]):
             sel_regenlens, sel_mr, sel_inundation, sel_seepage, sel_soil_mlw_class = labels
             subtable = subtable.copy().reset_index(drop=True)
-            selection = ((regenlens == sel_regenlens) & (mineral_richness == sel_mr )
-                & (inundation == sel_inundation) & (seepage == sel_seepage)
+
+            # TODO: 1 is added to regenlens and inundation because a different convention
+            # is used between the code table and the actual grid - we should sort this out
+            selection = ((regenlens + 1 == sel_regenlens) & (mineral_richness == sel_mr )
+                & (inundation + 1 == sel_inundation) & (seepage == sel_seepage)
                 & (soil_mlw_class == sel_soil_mlw_class))
             result[(selection)] = subtable.acidity[0]
         result = result.reshape(orig_shape)

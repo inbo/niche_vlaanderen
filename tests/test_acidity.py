@@ -1,39 +1,10 @@
 from unittest import TestCase
-from osgeo import gdal
-from osgeo import osr
 
 import numpy as np
 
 import niche_vlaanderen
 
-def raster_to_numpy(filename):
-    '''Read a GDAL grid as numpy array
-
-    Notes
-    ------
-    No-data values are -99 for integer types and np.nan for real types.
-    '''
-    # Read the raster file with GDAL
-    ds = gdal.Open(filename)
-
-    #  Extract the data, transformation and projection information
-    data = ds.ReadAsArray()
-    gt = ds.GetGeoTransform()
-    raster_wkt = ds.GetProjection()
-    spatial_ref = osr.SpatialReference()
-    spatial_ref.ImportFromWkt(raster_wkt)
-    proj = spatial_ref.ExportToProj4()
-
-    nodata = ds.GetRasterBand(1).GetNoDataValue()
-    # create a mask for no-data values, taking into account the data-types
-    if data.dtype == 'float32':
-        data[data == nodata] = np.nan
-    else:
-        data[data == nodata] = -99
-
-    # destroy the gdal object
-    del ds
-    return data
+from util import *
 
 class testAcidity(TestCase):
 
@@ -53,7 +24,7 @@ class testAcidity(TestCase):
         np.testing.assert_equal(np.array([2,1,-99, 2]), result)
 
     def test_acidity_partial(self):
-        regenlens = np.array([1])
+        regenlens = np.array([0])
         mineral_richness = np.array([1])
         inundation = np.array([1])
         seepage = np.array([1])
@@ -77,7 +48,7 @@ class testAcidity(TestCase):
         np.testing.assert_equal(expected, result)
 
     def test_acidity(self):
-        regenlens = np.array([1])
+        regenlens = np.array([0])
         conductivity = np.array([400])
         soilcode = np.array([140000])
         inundation = np.array([1])
