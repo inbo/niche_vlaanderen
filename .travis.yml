@@ -15,7 +15,7 @@ before_install:
 addons:
   apt:
     sources:
-    - sourceline: 'ppa:ubuntugis/ubuntugis-unstable'
+    - sourceline: 'ppa:johanvdw/gdal'
     packages:
       - libgdal-dev
       - gdal-bin
