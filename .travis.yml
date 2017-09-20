@@ -13,6 +13,7 @@ before_install:
   - export PROJ_LIB=/usr/share/proj
 
 install:
+  - apt-get build-dep rasterio
   - pip install -r dev-requirements.txt
   - pip install .
 
