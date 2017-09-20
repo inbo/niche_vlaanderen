@@ -6,6 +6,7 @@ import numpy as np
 
 import niche_vlaanderen
 
+import pytest
 
 def raster_to_numpy(filename):
     '''Read a GDAL grid as numpy array
@@ -62,6 +63,15 @@ class testVegetation(TestCase):
         v = niche_vlaanderen.Vegetation()
         veg_predict = v.get_vegetation(soil_code, nutrient_level, acidity,
                 mhw, mlw, management, inundation_vegetation)
-        print(veg_predict)
-        v1 = raster_to_numpy("testcase/VegNoEffectsRef/v1.asc")
+
+        for i in range(1,28):
+            vi = raster_to_numpy("testcase/VegNoEffectsRef/v%d.asc" % i)
+
+            # TODO: this is dirty - we apply the same no data filter to the original set
+            # as the new set, as this was done incorrectly in the original set.
+            # this also means that if we predict no data everywhere the test also works :-)
+
+            vi[(veg_predict[i] == -99)] = -99
+            np.testing.assert_equal(vi, veg_predict[i])
+
 

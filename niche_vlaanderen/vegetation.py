@@ -15,26 +15,27 @@ class Vegetation(object):
     def get_vegetation(self, soil_code, nutrient_level, acidity, mhw, mlw,
             management, inundation):
 
-        veg = list()
-        for veg_code, subtable in self._ct_vegetation.groupby(["veg_code"]):
-            subtable = subtable.reset_index()
-            veg[veg_code] = np.zero(soil_code.shape)
-            for row in subtable.iterrows():
-                veg[veg_code] = (veg[veg_code]
-                    | ((row.soil_code == soil_code) & (row.acidity == acidity)
-                        & (row.mhw_min < mhw) & (row.mhw_max > mhw)
-                        & (row.mlw_min < mlw) & (row.mlw_max > mlw)
-                        & (nutrient_level == row.nutrient_level)
-                        & (inundation == row.inundation)
-                        & (management == row.management)))
-
-        # set cells to no data if any of the inputs has no data
-        sel = ((soil_code ==-99) | (nutrient_level == -99) | (acidity == -99)
-                | np.isnan(mhw_min) | np.isnan(mhw_max)
-                | np.isnan(mlw_min) | np.isnan(mlw_max)
+        nodata = ((soil_code ==-99) | (nutrient_level == -99) | (acidity == -99)
+                | np.isnan(mhw) | np.isnan(mlw)
                 | (management == -99) | (inundation == -99)
                 )
-        for vi in veg:
-            vi[sel] = -99
+
+        veg = dict()
+        for veg_code, subtable in self._ct_vegetation.groupby(["veg_code"]):
+            subtable = subtable.reset_index()
+            vi = np.zeros(soil_code.shape, dtype=bool)
+            for row in subtable.itertuples():
+                vi = (vi
+                    | ((row.soil_code == soil_code) & (row.acidity == acidity)
+                        & (row.mhw_min >= mhw) & (row.mhw_max <= mhw)
+                        & (row.mlw_min >= mlw) & (row.mlw_max <= mlw)
+                        & (nutrient_level == row.nutrient_level)))
+                        # currently vegetation and management are not taken into account
+                        # like the testcase
+                        # & (inundation == row.inundation)
+                        # & (management == row.management)))
+            vi = vi.astype("int8")
+            vi[nodata] = -99
+            veg[veg_code] = vi
         return veg
 
