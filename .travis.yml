@@ -12,6 +12,10 @@ before_install:
   - export LDFLAGS=`gdal-config --libs`
   - export PROJ_LIB=/usr/share/proj
 
+install:
+  - pip install -r dev-requirements.txt
+  - pip install .
+
 addons:
   apt:
     sources:
