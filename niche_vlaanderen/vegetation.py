@@ -39,6 +39,7 @@ class Vegetation(object):
         veg: dict
             A dictionary containing the different output arrays per
             veg_code value.
+            -99 is used for nodata values
 
         """
         nodata = ((soil_code == -99) | (nutrient_level == -99)
@@ -52,21 +53,23 @@ class Vegetation(object):
         veg = dict()
         for veg_code, subtable in self._ct_vegetation.groupby(["veg_code"]):
             subtable = subtable.reset_index()
-            vi = np.zeros(soil_code.shape, dtype=bool)
+            # vegi is the prediction for the current veg_code
+            # it is a logical or of the result of every row
+            vegi = np.zeros(soil_code.shape, dtype=bool)
             for row in subtable.itertuples():
-                vi = (vi
-                      | ((row.soil_code == soil_code)
-                         & (row.acidity == acidity)
-                         & (row.mhw_min >= mhw) & (row.mhw_max <= mhw)
-                         & (row.mlw_min >= mlw) & (row.mlw_max <= mlw)
-                         & (nutrient_level == row.nutrient_level)
-                         )
-                      )
+                current_row = ((row.soil_code == soil_code)
+                              & (row.acidity == acidity)
+                              & (row.mhw_min >= mhw) & (row.mhw_max <= mhw)
+                              & (row.mlw_min >= mlw) & (row.mlw_max <= mlw)
+                              & (nutrient_level == row.nutrient_level)
+                              )
+
                 if inundation is not None:
-                    vi = vi & (inundation == row.inundation)
+                    current_row = current_row & (row.inundation == inundation)
                 if management is not None:
-                    vi = vi & (management == row.management)
-            vi = vi.astype("int8")
-            vi[nodata] = -99
-            veg[veg_code] = vi
+                    current_row = current_row & (row.management == management)
+                vegi = vegi | current_row
+            vegi = vegi.astype("int8")
+            vegi[nodata] = -99
+            veg[veg_code] = vegi
         return veg

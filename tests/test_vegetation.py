@@ -53,6 +53,7 @@ class testVegetation(TestCase):
             else:
                 np.testing.assert_equal(np.array([0]),veg_predict[vi])
 
+
     def test_simple_doc_inundation(self):
         nutrient_level = np.array([4])
         acidity = np.array([3])
