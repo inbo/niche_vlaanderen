@@ -14,8 +14,6 @@ def raster_to_numpy(filename):
     '''
     with rasterio.open(filename) as ds:
         data = ds.read(1)
-        proj = ds.crs #eventueel .tostring
-        gt = ds.transform
         nodata = ds.nodatavals[0]
 
     # create a mask for no-data values, taking into account the data-types
