@@ -95,8 +95,8 @@ class NutrientLevel(object):
         result = result.reshape(orig_shape)
         return result
 
-    def get(self, soil_code, msw, nitrogen_atmospheric, nitrogen_animal,
-            nitrogen_fertilizer, management, inundation):
+    def calculate(self, soil_code, msw, nitrogen_atmospheric, nitrogen_animal,
+                  nitrogen_fertilizer, management, inundation):
         """
         Calculates the Nutrient level based on numpy arrays
         """

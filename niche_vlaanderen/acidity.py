@@ -84,7 +84,7 @@ class Acidity(object):
         return seepage_code.values.reshape(orig_shape)
 
 
-    def get_acidity(self, soil_class, mlw, inundation, seepage, regenlens, conductivity):
+    def calculate(self, soil_class, mlw, inundation, seepage, regenlens, conductivity):
         soil_mlw = self._get_soil_mlw(soil_class, mlw)
         mineral_richness = self._get_mineral_richness_class(conductivity)
         seepage_code = self._get_seepage_code(seepage)

@@ -60,7 +60,7 @@ Example
     >>> mhw = np.array([10])
     >>> soil_codes = np.array([140000])
     >>> nv = niche_vlaanderen.Vegetation()
-    >>> veg_predict = nv.get_vegetation(soil_codes, nutrient_level, acidity, mhw, mlw)
+    >>> veg_predict = nv.calculate(soil_codes, nutrient_level, acidity, mhw, mlw)
     >>> for v in veg_predict:
     ...     if (veg_predict[v] == np.array([1])):
     ...             print(v)
@@ -74,8 +74,9 @@ Gebruiken we ook de waarde voor overstromingen dan wordt dit.
  .. code-block:: pycon
 
     >>> inundation = np.array([1])
-    >>> veg_predict = nv.get_vegetation(soil_codes, nutrient_level, acidity, 
+    >>> veg_predict = nv.calculate(soil_codes, nutrient_level, acidity,
     ...                 mhw, mlw, inundation=inundation)
     7
     12
     16
+

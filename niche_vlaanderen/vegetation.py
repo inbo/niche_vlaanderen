@@ -30,8 +30,8 @@ class Vegetation(object):
         """
         self._ct_vegetation = pd.read_csv(ct_vegetation)
 
-    def get_vegetation(self, soil_code, nutrient_level, acidity, mhw, mlw,
-                       management=None, inundation=None):
+    def calculate(self, soil_code, nutrient_level, acidity, mhw, mlw,
+                  management=None, inundation=None):
         """ Calculate vegetation types based on input arrays
 
         Returns

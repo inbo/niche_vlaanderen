@@ -15,8 +15,6 @@ def raster_to_numpy(filename):
     '''
     with rasterio.open(filename) as ds:
         data = ds.read(1)
-        proj = ds.crs #eventueel .tostring
-        gt = ds.transform
         nodata = ds.nodatavals[0]
 
     # create a mask for no-data values, taking into account the data-types
@@ -59,8 +57,8 @@ class testNutrientLevel(TestCase):
         nitrogen_animal = np.array([445])
         nitrogen_fertilizer = np.array([350])
         inundation = np.array([1])
-        result = nl.get(soil_code, msw, nitrogen_deposition, nitrogen_animal,
-                nitrogen_fertilizer, management, inundation)
+        result = nl.calculate(soil_code, msw, nitrogen_deposition, nitrogen_animal,
+                              nitrogen_fertilizer, management, inundation)
 
         np.testing.assert_equal(np.array([5]), result)
 
@@ -75,7 +73,7 @@ class testNutrientLevel(TestCase):
         management = raster_to_numpy("testcase/input/management.asc")
 
         nutrient_level = raster_to_numpy("testcase/intermediate/nutrient_level.asc")
-        result = nl.get(soil_code, msw, nitrogen_deposition, nitrogen_animal,
-                nitrogen_fertilizer, management, inundation)
+        result = nl.calculate(soil_code, msw, nitrogen_deposition, nitrogen_animal,
+                              nitrogen_fertilizer, management, inundation)
 
         np.testing.assert_equal(nutrient_level, result)

@@ -76,7 +76,7 @@ class testAcidity(TestCase):
         mlw = np.array([50])
 
         a = niche_vlaanderen.Acidity()
-        result = a.get_acidity(soilcode, mlw, inundation, seepage, regenlens, conductivity)
+        result = a.calculate(soilcode, mlw, inundation, seepage, regenlens, conductivity)
         np.testing.assert_equal(3, result)
 
     def test_acidity_testcase(self):
@@ -91,6 +91,6 @@ class testAcidity(TestCase):
 
         acidity = raster_to_numpy("testcase/intermediate/ph.asc")
         acidity[np.isnan(acidity)] = -99
-        result = a.get_acidity(soil_code, mlw, inundation, seepage, regenlens, conductivity)
+        result = a.calculate(soil_code, mlw, inundation, seepage, regenlens, conductivity)
 
         np.testing.assert_equal(acidity, result)

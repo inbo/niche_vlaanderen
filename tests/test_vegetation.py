@@ -16,8 +16,6 @@ def raster_to_numpy(filename):
     '''
     with rasterio.open(filename) as ds:
         data = ds.read(1)
-        proj = ds.crs #eventueel .tostring
-        gt = ds.transform
         nodata = ds.nodatavals[0]
 
     # create a mask for no-data values, taking into account the data-types
@@ -36,7 +34,7 @@ class testVegetation(TestCase):
         mhw = np.array([10])
         soil_codes = np.array([140000])
         v = niche_vlaanderen.Vegetation()
-        veg_predict = v.get_vegetation(soil_codes, nutrient_level, acidity, mhw, mlw)
+        veg_predict = v.calculate(soil_codes, nutrient_level, acidity, mhw, mlw)
         correct = [7,8,12,16]
         for vi in veg_predict:
             if vi in correct:
@@ -53,8 +51,8 @@ class testVegetation(TestCase):
         soil_codes = np.array([140000])
         inundation = np.array([1])
         v = niche_vlaanderen.Vegetation()
-        veg_predict = v.get_vegetation(soil_codes, nutrient_level, acidity, mhw,
-                mlw, inundation=inundation)
+        veg_predict = v.calculate(soil_codes, nutrient_level, acidity, mhw,
+                                  mlw, inundation=inundation)
         correct = [7,12,16]
         for vi in veg_predict:
             print (vi)
@@ -79,15 +77,15 @@ class testVegetation(TestCase):
         management = raster_to_numpy("testcase/input/management.asc")
 
         nl = niche_vlaanderen.NutrientLevel()
-        nutrient_level = nl.get(soil_code, msw, nitrogen_deposition, nitrogen_animal,
-                nitrogen_fertilizer, management, inundation)
+        nutrient_level = nl.calculate(soil_code, msw, nitrogen_deposition, nitrogen_animal,
+                                      nitrogen_fertilizer, management, inundation)
 
         a = niche_vlaanderen.Acidity()
-        acidity = a.get_acidity(soil_code, mlw, inundation, seepage, regenlens, conductivity)
+        acidity = a.calculate(soil_code, mlw, inundation, seepage, regenlens, conductivity)
 
         v = niche_vlaanderen.Vegetation()
-        veg_predict = v.get_vegetation(soil_code, nutrient_level, acidity,
-                mhw, mlw)
+        veg_predict = v.calculate(soil_code, nutrient_level, acidity,
+                                  mhw, mlw)
 
         for i in range(1,28):
             vi = raster_to_numpy("testcase/VegNoEffectsRef/v%d.asc" % i)
