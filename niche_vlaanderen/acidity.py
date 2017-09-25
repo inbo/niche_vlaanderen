@@ -51,10 +51,10 @@ class Acidity(object):
         reclass[np.isnan(conductivity)] = -99
         return reclass
 
-    def _get_acidity(self, regenlens, mineral_richness, inundation, seepage, soil_mlw_class):
+    def _get_acidity(self, rainwater, mineral_richness, inundation, seepage, soil_mlw_class):
 
         orig_shape = inundation.shape
-        regenlens = regenlens.flatten()
+        rainwater = rainwater.flatten()
         mineral_richness = mineral_richness.flatten()
         inundation = inundation.flatten()
         seepage = seepage.flatten()
@@ -69,9 +69,9 @@ class Acidity(object):
             # TODO: 1 is added to regenlens and inundation because a different convention
             # is used between the code table and the actual grid - we should sort this out
             # https://github.com/inbo/niche_vlaanderen/issues/13
-            selection = ((regenlens + 1 == sel_regenlens) & (mineral_richness == sel_mr )
-                & (inundation + 1 == sel_inundation) & (seepage == sel_seepage)
-                & (soil_mlw_class == sel_soil_mlw_class))
+            selection = ((rainwater + 1 == sel_regenlens) & (mineral_richness == sel_mr)
+                         & (inundation + 1 == sel_inundation) & (seepage == sel_seepage)
+                         & (soil_mlw_class == sel_soil_mlw_class))
             result[(selection)] = subtable.acidity[0]
         result = result.reshape(orig_shape)
         return result
@@ -84,11 +84,11 @@ class Acidity(object):
         return seepage_code.values.reshape(orig_shape)
 
 
-    def calculate(self, soil_class, mlw, inundation, seepage, regenlens, conductivity):
+    def calculate(self, soil_class, mlw, inundation, seepage, rainwater, conductivity):
         soil_mlw = self._get_soil_mlw(soil_class, mlw)
         mineral_richness = self._get_mineral_richness_class(conductivity)
         seepage_code = self._get_seepage_code(seepage)
-        acidity = self._get_acidity(regenlens, mineral_richness, inundation, seepage_code, soil_mlw)
+        acidity = self._get_acidity(rainwater, mineral_richness, inundation, seepage_code, soil_mlw)
         return acidity
 
 

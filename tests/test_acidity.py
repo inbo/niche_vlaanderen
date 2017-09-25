@@ -44,14 +44,14 @@ class testAcidity(TestCase):
         np.testing.assert_equal(np.array([2,1,-99, 2]), result)
 
     def test_acidity_partial(self):
-        regenlens = np.array([0])
+        rainwater = np.array([0])
         mineral_richness = np.array([1])
         inundation = np.array([1])
         seepage = np.array([1])
         soil_mlw = np.array([1])
 
         a = niche_vlaanderen.Acidity()
-        result = a._get_acidity(regenlens, mineral_richness, inundation,
+        result = a._get_acidity(rainwater, mineral_richness, inundation,
             seepage, soil_mlw)
 
         np.testing.assert_equal(np.array([3]), result)
@@ -68,7 +68,7 @@ class testAcidity(TestCase):
         np.testing.assert_equal(expected, result)
 
     def test_acidity(self):
-        regenlens = np.array([0])
+        rainwater = np.array([0])
         conductivity = np.array([400])
         soilcode = np.array([140000])
         inundation = np.array([1])
@@ -76,7 +76,7 @@ class testAcidity(TestCase):
         mlw = np.array([50])
 
         a = niche_vlaanderen.Acidity()
-        result = a.calculate(soilcode, mlw, inundation, seepage, regenlens, conductivity)
+        result = a.calculate(soilcode, mlw, inundation, seepage, rainwater, conductivity)
         np.testing.assert_equal(3, result)
 
     def test_acidity_testcase(self):
@@ -84,13 +84,13 @@ class testAcidity(TestCase):
         soil_code = raster_to_numpy("testcase/input/soil_codes.asc")
         mlw = raster_to_numpy("testcase/input/mlw.asc")
         inundation = raster_to_numpy("testcase/input/inundation_nutrient_level.asc")
-        regenlens = raster_to_numpy("testcase/input/nullgrid.asc")
+        rainwater = raster_to_numpy("testcase/input/nullgrid.asc")
         seepage = raster_to_numpy("testcase/input/seepage.asc")
         conductivity = raster_to_numpy("testcase/input/conductivity.asc")
 
 
         acidity = raster_to_numpy("testcase/intermediate/ph.asc")
         acidity[np.isnan(acidity)] = -99
-        result = a.calculate(soil_code, mlw, inundation, seepage, regenlens, conductivity)
+        result = a.calculate(soil_code, mlw, inundation, seepage, rainwater, conductivity)
 
         np.testing.assert_equal(acidity, result)
