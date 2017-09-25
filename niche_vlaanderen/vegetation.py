@@ -13,12 +13,15 @@ class Vegetation(object):
         self._ct_vegetation = pd.read_csv(ct_vegetation)
 
     def get_vegetation(self, soil_code, nutrient_level, acidity, mhw, mlw,
-                       management, inundation):
+                       management=None, inundation=None):
 
         nodata = ((soil_code == -99) | (nutrient_level == -99)
-                  | (acidity == -99) | np.isnan(mhw) | np.isnan(mlw)
-                  | (management == -99) | (inundation == -99)
-                  )
+                  | (acidity == -99) | np.isnan(mhw) | np.isnan(mlw))
+
+        if inundation is not None:
+            nodata = nodata | (inundation == -99)
+        if management is not None:
+            nodata = nodata | (management == -99)
 
         veg = dict()
         for veg_code, subtable in self._ct_vegetation.groupby(["veg_code"]):
@@ -31,12 +34,12 @@ class Vegetation(object):
                          & (row.mhw_min >= mhw) & (row.mhw_max <= mhw)
                          & (row.mlw_min >= mlw) & (row.mlw_max <= mlw)
                          & (nutrient_level == row.nutrient_level)
-                         # currently vegetation and management are not taken
-                         # into account like the testcase
-                         # & (inundation == row.inundation)
-                         # & (management == row.management))
                          )
                       )
+                if inundation is not None:
+                    vi = vi & (inundation == row.inundation)
+                if management is not None:
+                    vi = vi & (management == row.management)
             vi = vi.astype("int8")
             vi[nodata] = -99
             veg[veg_code] = vi

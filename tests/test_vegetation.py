@@ -62,7 +62,7 @@ class testVegetation(TestCase):
 
         v = niche_vlaanderen.Vegetation()
         veg_predict = v.get_vegetation(soil_code, nutrient_level, acidity,
-                mhw, mlw, management, inundation_vegetation)
+                mhw, mlw)
 
         for i in range(1,28):
             vi = raster_to_numpy("testcase/VegNoEffectsRef/v%d.asc" % i)
