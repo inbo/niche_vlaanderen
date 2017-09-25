@@ -35,12 +35,8 @@ Optioneel kunnen :ref:`beheer` en de :ref:`overstroming_vegetatie` mee als selec
     7,Caricion gracilis,140000,4,3,31,-32,73,-1,3,2,1
     8,Filipendulion,140000,4,3,80,-31,170,21,1,0,1
     8,Filipendulion,140000,4,3,80,-31,170,21,1,2,1
-    9,Galio - Alliarion,140000,4,3,76,14,157,30,1,2,1
     12,Magnocaricion met Phragmites,140000,4,3,14,-37,55,-3,1,1,1
     12,Magnocaricion met Phragmites,140000,4,3,14,-37,55,-3,1,2,1
-    13,RG Glyceria maxima,140000,4,3,3,-75,75,30,1,0,1
-    13,RG Glyceria maxima,140000,4,3,3,-75,75,30,1,1,1
-    13,RG Glyceria maxima,140000,4,3,3,-75,75,30,1,2,1
     16,Lolio-Potentillion anserinae,140000,4,3,30,-26,66,-3,2,0,1
     16,Lolio-Potentillion anserinae,140000,4,3,30,-26,66,-3,2,1,1
     16,Lolio-Potentillion anserinae,140000,4,3,30,-26,66,-3,2,2,1
@@ -48,6 +44,38 @@ Optioneel kunnen :ref:`beheer` en de :ref:`overstroming_vegetatie` mee als selec
     16,Lolio-Potentillion anserinae,140000,4,3,30,-26,66,-3,3,1,1
     16,Lolio-Potentillion anserinae,140000,4,3,30,-26,66,-3,3,2,1
 
-  Volgende vegetatiecodes kunnen dus voorkomen: 7, 8, 9, 12, 13 en 16.
+  Volgende vegetatiecodes kunnen dus voorkomen: 7, 8, 12 en 16.
 
-  Indien ook nog inundantie wordt meegerekend, bvb regelmatig overstromen (1) valt een aantal mogelijke codes weg. Mogelijke codes zijn dan 7, 9, 12, 13 en 16.
+  Indien ook nog inundantie wordt meegerekend, bvb regelmatig overstromen (1) valt een aantal mogelijke codes weg. Mogelijke codes zijn dan 7, 12 en 16.
+
+Example
+=======
+ .. code-block:: pycon
+
+    >>> import numpy as np
+    >>> import niche_vlaanderen
+    >>> nutrient_level = np.array([4])
+    >>> acidity = np.array([3])
+    >>> mlw = np.array([50])
+    >>> mhw = np.array([10])
+    >>> soil_codes = np.array([140000])
+    >>> nv = niche_vlaanderen.Vegetation()
+    >>> veg_predict = nv.get_vegetation(soil_codes, nutrient_level, acidity, mhw, mlw)
+    >>> for v in veg_predict:
+    ...     if (veg_predict[v] == np.array([1])):
+    ...             print(v)
+    7
+    8
+    12
+    16
+
+Gebruiken we ook de waarde voor overstromingen dan wordt dit.
+
+ .. code-block:: pycon
+
+    >>> inundation = np.array([1])
+    >>> veg_predict = nv.get_vegetation(soil_codes, nutrient_level, acidity, 
+    ...                 mhw, mlw, inundation=inundation)
+    7
+    12
+    16
