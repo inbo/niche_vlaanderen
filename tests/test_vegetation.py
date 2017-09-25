@@ -53,6 +53,23 @@ class testVegetation(TestCase):
             else:
                 np.testing.assert_equal(np.array([0]),veg_predict[vi])
 
+    def test_simple_doc_inundation(self):
+        nutrient_level = np.array([4])
+        acidity = np.array([3])
+        mlw = np.array([50])
+        mhw = np.array([10])
+        soil_codes = np.array([140000])
+        inundation = np.array([1])
+        v = niche_vlaanderen.Vegetation()
+        veg_predict = v.get_vegetation(soil_codes, nutrient_level, acidity, mhw,
+                mlw, inundation=inundation)
+        correct = [7,12,16]
+        for vi in veg_predict:
+            print (vi)
+            if vi in correct:
+                np.testing.assert_equal(np.array([1]),veg_predict[vi])
+            else:
+                np.testing.assert_equal(np.array([0]),veg_predict[vi])
 
     def test_testcase(self):
         soil_code = raster_to_numpy("testcase/input/soil_codes.asc")
