@@ -1,4 +1,14 @@
 language: python
+sudo: false
+cache:
+  directories:
+    - ~/.cache/pip
+
+env:
+  global:
+    - PIP_WHEEL_DIR=$HOME/.cache/pip/wheels
+    - PIP_FIND_LINKS=file://$HOME/.cache/pip/wheels
+
 python:
   - "2.7"
   - "3.5"
