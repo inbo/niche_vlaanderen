@@ -82,7 +82,8 @@ class NutrientLevel(object):
 
 
         # TODO: there is some discrepancy between the documentation and the ArcGIS implementation
-        # the arcgis implementation only adds inundation if values for nutrion_level are 3 or lower
+        # https://github.com/inbo/niche_vlaanderen/issues/8
+        # the ArcGIS implementation only adds inundation if values for nutrion_level are 3 or lower
         # the documentation says:
 
         # Wanneer het hydrologisch model toevoer van gebiedsvreemd water berekent naar een
