@@ -27,7 +27,7 @@ class NutrientLevel(object):
         # convert the mineralisation to float so we can use np.nan for nodata
         self._ct_mineralisation = self._ct_mineralisation.astype("float64")
 
-    def _get_mineralisation_array(self, soil_code_array, msw_array):
+    def _get_mineralisation(self, soil_code_array, msw_array):
         """
         get nitrogen mineralisation for numpy arrays
         """
@@ -52,7 +52,7 @@ class NutrientLevel(object):
         result = result.reshape(orig_shape)
         return result
 
-    def _get_array(self, management, soil_code, nitrogen, inundation):
+    def _get(self, management, soil_code, nitrogen, inundation):
 
         # calculate management influence
         influence = np.full(management.shape, -99)  # -99 used as no data value
@@ -95,14 +95,14 @@ class NutrientLevel(object):
         result = result.reshape(orig_shape)
         return result
 
-    def get_array(self, soil_code, msw, nitrogen_atmospheric, nitrogen_animal,
+    def get(self, soil_code, msw, nitrogen_atmospheric, nitrogen_animal,
             nitrogen_fertilizer, management, inundation):
         """
         Calculates the Nutrient level based on numpy arrays
         """
 
-        nitrogen_mineralisation = self._get_mineralisation_array(soil_code, msw)
+        nitrogen_mineralisation = self._get_mineralisation(soil_code, msw)
         total_nitrogen = nitrogen_mineralisation + nitrogen_atmospheric\
                 + nitrogen_animal + nitrogen_fertilizer
-        nutrient_level = self._get_array(management, soil_code, total_nitrogen, inundation)
+        nutrient_level = self._get(management, soil_code, total_nitrogen, inundation)
         return nutrient_level

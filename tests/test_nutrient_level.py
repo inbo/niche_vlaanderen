@@ -33,7 +33,7 @@ class testNutrientLevel(TestCase):
         soil_codes = np.array([140000])
         msw = np.array([33])
         nl = niche_vlaanderen.NutrientLevel()
-        result = nl._get_mineralisation_array(soil_codes, msw)
+        result = nl._get_mineralisation(soil_codes, msw)
         np.testing.assert_equal(np.array([75]), result)
 
     def test__get_array(self):
@@ -46,7 +46,7 @@ class testNutrientLevel(TestCase):
         inundation = np.array([1])
         
         nl = niche_vlaanderen.NutrientLevel()
-        result = nl._get_array(management, soil_code, nitrogen, inundation)
+        result = nl._get(management, soil_code, nitrogen, inundation)
         np.testing.assert_equal(np.array(5), result)
 
 
@@ -59,7 +59,7 @@ class testNutrientLevel(TestCase):
         nitrogen_animal = np.array([445])
         nitrogen_fertilizer = np.array([350])
         inundation = np.array([1])
-        result = nl.get_array(soil_code, msw, nitrogen_deposition, nitrogen_animal,
+        result = nl.get(soil_code, msw, nitrogen_deposition, nitrogen_animal,
                 nitrogen_fertilizer, management, inundation)
 
         np.testing.assert_equal(np.array([5]), result)
@@ -75,7 +75,7 @@ class testNutrientLevel(TestCase):
         management = raster_to_numpy("testcase/input/management.asc")
 
         nutrient_level = raster_to_numpy("testcase/intermediate/nutrient_level.asc")
-        result = nl.get_array(soil_code, msw, nitrogen_deposition, nitrogen_animal,
+        result = nl.get(soil_code, msw, nitrogen_deposition, nitrogen_animal,
                 nitrogen_fertilizer, management, inundation)
 
         np.testing.assert_equal(nutrient_level, result)

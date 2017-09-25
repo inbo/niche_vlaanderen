@@ -79,7 +79,7 @@ class testVegetation(TestCase):
         management = raster_to_numpy("testcase/input/management.asc")
 
         nl = niche_vlaanderen.NutrientLevel()
-        nutrient_level = nl.get_array(soil_code, msw, nitrogen_deposition, nitrogen_animal,
+        nutrient_level = nl.get(soil_code, msw, nitrogen_deposition, nitrogen_animal,
                 nitrogen_fertilizer, management, inundation)
 
         a = niche_vlaanderen.Acidity()
