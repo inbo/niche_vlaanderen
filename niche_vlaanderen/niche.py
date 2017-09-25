@@ -1,48 +1,176 @@
 import rasterio
 
-from .input_types import InputLayerTypes as it
+import numpy as np
+
+from .vegetation import Vegetation
+from .acidity import Acidity
+from .nutrient_level import NutrientLevel
 
 import logging
 import os.path
+
+_allowed_input = ["soil_code", "mlw", "msw", "mhw", "seepage", "nutrient_level", "inundation_acidity",
+                  "nitrogen_atmospheric", "nitrogen_animal", "nitrogen_fertilizer", "management",
+                  "conductivity", "rainwater", "inundation_vegetation"]
+
+_minimal_input = ["soil_code", "mlw", "msw", "mhw", "seepage", "inundation_acidity", "nitrogen_atmospheric",
+                  "nitrogen_animal", "nitrogen_fertilizer", "management", "conductivity", "rainwater",
+                  "inundation_vegetation"]
+
+logging.basicConfig()
+
+class SpatialContext(object):
+    """Stores the spatial context of the grids in niche
+    """
+
+    def __init__(self, dst):
+        self.affine = dst.affine
+        self.width = dst.width
+        self.heigth = dst.height
+        self.crs = dst.crs
 
 class Niche(object):
     '''
     '''
     def __init__(self):
         self._inputfiles = dict()
+        self._inputarray = dict()
+        self._abiotic = dict()
+        self._result = dict()
         self.log = logging.getLogger()
+        self._context = None
 
+    def set_input(self, type, path, set_spatial_context=False):
 
-    def set_input(self,type, file):
-        # check type is valid value from enum
-        if not isinstance(type, it):
-            self.log.error("Invalid input type")
+        if not set_spatial_context and self._context is None:
+            self.log.error("Spatial context not yet set")
+            return False
+
+        if set_spatial_context and self._context is True:
+            self.log.error("Spatial context can only be set once")
+            return False
+
+        # check type is valid value from list
+        if (type not in _allowed_input):
+            self.log.error("Unrecognized type %s" % type)
             return False
 
         # check file exists
-        if not os.path.exists(file):
-            self.log.error("File %s does not exist" % file)
+        if not os.path.exists(path):
+            self.log.error("File %s does not exist" % path)
             return False
 
-        self._inputfiles[type] = file
+        with rasterio.open(path) as dst:
+            if set_spatial_context:
+                self._context = SpatialContext(dst)
+            else:
+                if dst.affine != self._context.affine:
+                    self.log.error("Spatial context differs")
+                    return False
+
+        self._inputfiles[type] = path
         return True
 
     def _check_input_files(self):
+        """ basic input checks (valid files etc)
+
+        """
         # check all necessary files are set
-        if not [it.MHW, it.MLW] in self._inputfiles.keys():
+        if not ["mhw","mlw"] in self._inputfiles.keys():
             self.log.error("MHW and MLW must be defined")
 
         # check files exist
         for f in self._inputfiles:
-            if not os.path.exists(file):
-                self.log.error("File %s does not exist" % file)
+            if not os.path.exists(f):
+                self.log.error("File %s does not exist" % f)
                 return False
 
         # check boundaries overlap with study area + same grid
         # we should also check for files top/bottom and bottom/top
         for f in self._inputfiles:
-            dst = rasterio.open(f)
+            try:
+                dst = rasterio.open(f)
+            except:
+                self.log.error("Error while opening file %s" % f)
 
 
-        pass
+        # Load every input_file in the input_array
+        inputarray = dict()
+        for f in self._inputfiles:
+            dst = rasterio.open(self._inputfiles[f])
+            nodata = dst.nodatavals[0]
+
+            band = dst.read(1)
+            # create a mask for no-data values, taking into account the data-types
+            if band.dtype == 'float32':
+                band[band == nodata] = np.nan
+            else:
+                band[band == nodata] = -99
+
+            inputarray[f] = band
+
+        # check if valid values are used in inputarrays
+        if np.any(inputarray.mhw<=inputarray.mlw):
+            self.log.error("Error: not all MHW values are higher than MLW")
+            return False
+
+        # if all is succesfull:
+        self._inputarray = inputarray
+
+        return(True)
+
+    def run(self):
+        """
+        Runs niche Vlaanderen and saves the predicted vegetation to 17 grids.
+        """
+        missing_keys = set(_minimal_input) - set(self._inputfiles.keys())
+        if len(missing_keys) > 0:
+            print("error, different obliged keys are missing")
+            print(missing_keys)
+            return False
+
+        self._check_input_files
+
+        # Load every input_file in the input_array
+        for f in self._inputfiles:
+            dst = rasterio.open(self._inputfiles[f])
+            self._inputarray[f] = dst.read(1)
+
+        nl = NutrientLevel()
+        # TODO: error handling
+        self._abiotic["nutrient_level"] = \
+            nl.calculate(self._inputarray["soil_code"], self._inputarray["msw"],
+                     self._inputarray["nitrogen_atmospheric"], self._inputarray["nitrogen_animal"],
+                     self._inputarray["nitrogen_fertilizer"], self._inputarray["management"],
+                     self._inputarray["inundation_acidity"]
+                         )
+        acidity = Acidity()
+        self._abiotic["acidity"] = acidity.calculate(
+            self._inputarray["soil_code"], self._inputarray["mlw"], self._inputarray["inundation_acidity"],
+            self._inputarray["seepage"], self._inputarray["rainwater"], self._inputarray["conductivity"])
+
+        vegetation = Vegetation()
+        self._vegetation = vegetation.calculate(
+            soil_code=self._inputarray["soil_code"], nutrient_level=self._abiotic["nutrient_level"],
+            acidity=self._abiotic["acidity"], inundation=self._inputarray["inundation_vegetation"],
+            mhw=self._inputarray["mhw"], mlw=self._inputarray["mlw"]
+        )
+
+
+    def write(self, folder):
+
+        # check calculate has been done
+
+        for vi in self._vegetation:
+            with rasterio.open(folder+'/V%s.tif'%vi, 'w', driver='GTiff',  height=self._context.heigth,
+                          width = self._context.width, crs = self._context.crs,
+                          affine = self._context.affine, count=1, dtype="int16") as dst:
+                dst.write(self._vegetation[vi], 1)
+
+        with rasterio.open(folder+'/nutrient_level.tif', 'w', driver='GTiff',  height=self._context.heigth,
+                          width = self._context.width, crs = self._context.crs,
+                          affine = self._context.affine, count=1, dtype="int16") as dst:
+            nutrient_level = self._abiotic["nutrient_level"].astype("int16")
+            dst.write(nutrient_level, 1)
+
 
