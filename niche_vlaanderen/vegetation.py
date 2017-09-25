@@ -69,7 +69,7 @@ class Vegetation(object):
                 if management is not None:
                     current_row = current_row & (row.management == management)
                 vegi = vegi | current_row
-            vegi = vegi.astype("int8")
+            vegi = vegi.astype("int16")
             vegi[nodata] = -99
             veg[veg_code] = vegi
         return veg
