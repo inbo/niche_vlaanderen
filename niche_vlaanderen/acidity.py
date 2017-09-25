@@ -68,6 +68,7 @@ class Acidity(object):
 
             # TODO: 1 is added to regenlens and inundation because a different convention
             # is used between the code table and the actual grid - we should sort this out
+            # https://github.com/inbo/niche_vlaanderen/issues/13
             selection = ((regenlens + 1 == sel_regenlens) & (mineral_richness == sel_mr )
                 & (inundation + 1 == sel_inundation) & (seepage == sel_seepage)
                 & (soil_mlw_class == sel_soil_mlw_class))
