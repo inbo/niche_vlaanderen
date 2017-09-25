@@ -38,6 +38,22 @@ def raster_to_numpy(filename):
     return data
 
 class testVegetation(TestCase):
+    def test_simple_doc(self):
+        nutrient_level = np.array([4])
+        acidity = np.array([3])
+        mlw = np.array([50])
+        mhw = np.array([10])
+        soil_codes = np.array([140000])
+        v = niche_vlaanderen.Vegetation()
+        veg_predict = v.get_vegetation(soil_codes, nutrient_level, acidity, mhw, mlw)
+        correct = [7,8,12,16]
+        for vi in veg_predict:
+            if vi in correct:
+                np.testing.assert_equal(np.array([1]),veg_predict[vi])
+            else:
+                np.testing.assert_equal(np.array([0]),veg_predict[vi])
+
+
     def test_testcase(self):
         soil_code = raster_to_numpy("testcase/input/soil_codes.asc")
         msw = raster_to_numpy("testcase/input/msw.asc")
