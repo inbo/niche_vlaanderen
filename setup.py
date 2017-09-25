@@ -5,6 +5,7 @@ import sys
 requirements = [
         'pandas',
         'numpy',
+        'rasterio'
         ]
 
 if sys.version_info < (3, 4):
