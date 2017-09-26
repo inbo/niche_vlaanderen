@@ -8,9 +8,6 @@ requirements = [
         'rasterio'
         ]
 
-if sys.version_info < (3, 4):
-    requirements.append('enum34')
-
 setup(name='niche_vlaanderen',
       version="0.0.1",
       description='NICHE Vlaanderen',
