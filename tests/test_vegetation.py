@@ -34,7 +34,7 @@ class testVegetation(TestCase):
         mhw = np.array([10])
         soil_codes = np.array([140000])
         v = niche_vlaanderen.Vegetation()
-        veg_predict = v.calculate(soil_codes, nutrient_level, acidity, mhw, mlw)
+        veg_predict, veg_occurence = v.calculate(soil_codes, nutrient_level, acidity, mhw, mlw)
         correct = [7,8,12,16]
         for vi in veg_predict:
             if vi in correct:
@@ -51,7 +51,7 @@ class testVegetation(TestCase):
         soil_codes = np.array([140000])
         inundation = np.array([1])
         v = niche_vlaanderen.Vegetation()
-        veg_predict = v.calculate(soil_codes, nutrient_level, acidity, mhw,
+        veg_predict, veg_occurence = v.calculate(soil_codes, nutrient_level, acidity, mhw,
                                   mlw, inundation=inundation)
         correct = [7,12,16]
         for vi in veg_predict:
@@ -84,7 +84,7 @@ class testVegetation(TestCase):
         acidity = a.calculate(soil_code, mlw, inundation, seepage, conductivity, regenlens)
 
         v = niche_vlaanderen.Vegetation()
-        veg_predict = v.calculate(soil_code, nutrient_level, acidity,
+        veg_predict, veg_occurence = v.calculate(soil_code, nutrient_level, acidity,
                                   mhw, mlw)
 
         for i in range(1,28):

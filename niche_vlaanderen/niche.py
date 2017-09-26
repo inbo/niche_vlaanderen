@@ -1,6 +1,7 @@
 import rasterio
 
 import numpy as np
+import pandas as pd
 
 from .vegetation import Vegetation
 from .acidity import Acidity
@@ -87,7 +88,7 @@ class Niche(object):
                 self._context = sc_new
             else:
                 if self._context != sc_new:
-                    self.log.error("Spatial context differs")
+                    self.log.error("Spatial context differs (%s)" % path)
                     self._context.affine
                     sc_new.affine
                     return False
@@ -176,11 +177,12 @@ class Niche(object):
             self._inputarray["conductivity"], self._inputarray["rainwater"])
 
         vegetation = Vegetation()
-        self._vegetation = vegetation.calculate(
+        self._vegetation, veg_occurrence = vegetation.calculate(
             soil_code=self._inputarray["soil_code"], nutrient_level=self._abiotic["nutrient_level"],
             acidity=self._abiotic["acidity"], inundation=self._inputarray["inundation_vegetation"],
-            mhw=self._inputarray["mhw"], mlw=self._inputarray["mlw"]
-        )
+            mhw=self._inputarray["mhw"], mlw=self._inputarray["mlw"])
+
+        print(pd.DataFrame.from_dict(veg_occurrence, orient="index"))
 
     def write(self, folder):
 
@@ -190,11 +192,11 @@ class Niche(object):
         for vi in self._vegetation:
             with rasterio.open(folder + '/V%s.tif' % vi, 'w', driver='GTiff',  height=self._context.heigth,
                                width=self._context.width, crs=self._context.crs,
-                               affine=self._context.affine, count=1, dtype="int16") as dst:
+                               affine=self._context.affine, count=1, dtype="int16", nodata=-99, compress="DEFLATE") as dst:
                 dst.write(self._vegetation[vi], 1)
 
         with rasterio.open(folder+'/nutrient_level.tif', 'w', driver='GTiff',  height=self._context.heigth,
                            width=self._context.width, crs=self._context.crs,
-                           affine=self._context.affine, count=1, dtype="int16") as dst:
+                           affine=self._context.affine, count=1, dtype="int16", nodata=-99, compress="DEFLATE") as dst:
             nutrient_level = self._abiotic["nutrient_level"].astype("int16")
             dst.write(nutrient_level, 1)

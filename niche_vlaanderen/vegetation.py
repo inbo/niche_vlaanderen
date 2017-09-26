@@ -50,11 +50,14 @@ class Vegetation(object):
         if management is not None:
             nodata = nodata | (management == -99)
 
-        veg = dict()
+        veg_bands = dict()
+        veg_occurence = dict()
+
         for veg_code, subtable in self._ct_vegetation.groupby(["veg_code"]):
             subtable = subtable.reset_index()
             # vegi is the prediction for the current veg_code
-            # it is a logical or of the result of every row
+            # it is a logical or of the result of every row:
+            # if a row is true for a pixel, that vegetation can occur
             vegi = np.zeros(soil_code.shape, dtype=bool)
             for row in subtable.itertuples():
                 current_row = ((row.soil_code == soil_code)
@@ -70,5 +73,10 @@ class Vegetation(object):
                 vegi = vegi | current_row
             vegi = vegi.astype("int16")
             vegi[nodata] = -99
-            veg[veg_code] = vegi
-        return veg
+
+            if return_all or np.any(vegi):
+                veg_bands[veg_code] = vegi
+
+            if np.any(vegi == 1):
+                veg_occurence[veg_code] = np.sum(vegi==1) / (vegi.size - np.sum(nodata))
+        return veg_bands, veg_occurence
