@@ -28,7 +28,6 @@ class testNiche(TestCase):
         myniche.set_input("mhw", "testcase/input/mhw.asc")
         myniche.set_input("mlw", "testcase/input/mlw.asc")
         myniche.set_input("msw", "testcase/input/msw.asc")
-        myniche.set_input("msw", "testcase/input/msw.asc")
         myniche.set_input("conductivity", "testcase/input/conductivity.asc")
         myniche.set_input("nitrogen_atmospheric", "testcase/input/nitrogen_atmospheric.asc")
         myniche.set_input("nitrogen_animal", "testcase/input/nitrogen_animal.asc")
