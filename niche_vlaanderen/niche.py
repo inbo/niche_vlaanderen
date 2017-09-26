@@ -10,12 +10,12 @@ import logging
 import os.path
 
 _allowed_input = ["soil_code", "mlw", "msw", "mhw", "seepage", "nutrient_level", "inundation_acidity",
-                  "nitrogen_atmospheric", "nitrogen_animal", "nitrogen_fertilizer", "management",
+                  "inundation_nutrient","nitrogen_atmospheric", "nitrogen_animal", "nitrogen_fertilizer", "management",
                   "conductivity", "rainwater", "inundation_vegetation"]
 
 _minimal_input = ["soil_code", "mlw", "msw", "mhw", "seepage", "inundation_acidity", "nitrogen_atmospheric",
                   "nitrogen_animal", "nitrogen_fertilizer", "management", "conductivity", "rainwater",
-                  "inundation_vegetation"]
+                  "inundation_vegetation", "inundation_nutrient"]
 
 logging.basicConfig()
 
@@ -28,6 +28,19 @@ class SpatialContext(object):
         self.width = dst.width
         self.heigth = dst.height
         self.crs = dst.crs
+
+    def compare(self, other):
+        """Compare two SpatialContexts
+
+        Small differences (<1cm are allowed)
+        """
+
+        if self.affine.almost_equals(other.affine, precision=0.01):
+            return True
+        else:
+            print(self.affine)
+            print(other.affine)
+            return False
 
 class Niche(object):
     '''
@@ -61,11 +74,14 @@ class Niche(object):
             return False
 
         with rasterio.open(path) as dst:
+            sc_new =  SpatialContext(dst)
             if set_spatial_context:
-                self._context = SpatialContext(dst)
+                self._context = sc_new
             else:
-                if dst.affine != self._context.affine:
+                if not self._context.compare(sc_new):
                     self.log.error("Spatial context differs")
+                    self._context.affine
+                    sc_new.affine
                     return False
 
         self._inputfiles[type] = path
@@ -110,6 +126,7 @@ class Niche(object):
             inputarray[f] = band
 
         # check if valid values are used in inputarrays
+        # check for valid datatypes - values will be checked in the low-level api (eg soilcode present in codetable)
         if np.any(inputarray.mhw<=inputarray.mlw):
             self.log.error("Error: not all MHW values are higher than MLW")
             return False
@@ -142,12 +159,13 @@ class Niche(object):
             nl.calculate(self._inputarray["soil_code"], self._inputarray["msw"],
                      self._inputarray["nitrogen_atmospheric"], self._inputarray["nitrogen_animal"],
                      self._inputarray["nitrogen_fertilizer"], self._inputarray["management"],
-                     self._inputarray["inundation_acidity"]
+                     self._inputarray["inundation_nutrient"]
                          )
         acidity = Acidity()
-        self._abiotic["acidity"] = acidity.calculate(
-            self._inputarray["soil_code"], self._inputarray["mlw"], self._inputarray["inundation_acidity"],
-            self._inputarray["seepage"], self._inputarray["rainwater"], self._inputarray["conductivity"])
+        self._abiotic["acidity"] = acidity.calculate(self._inputarray["soil_code"], self._inputarray["mlw"],
+                                                     self._inputarray["inundation_acidity"],
+                                                     self._inputarray["seepage"], self._inputarray["conductivity"],
+                                                     self._inputarray["rainwater"])
 
         vegetation = Vegetation()
         self._vegetation = vegetation.calculate(
@@ -159,7 +177,7 @@ class Niche(object):
 
     def write(self, folder):
 
-        # check calculate has been done
+        # TODO: check calculate has been done
 
         for vi in self._vegetation:
             with rasterio.open(folder+'/V%s.tif'%vi, 'w', driver='GTiff',  height=self._context.heigth,
