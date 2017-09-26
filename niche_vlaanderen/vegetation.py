@@ -31,7 +31,7 @@ class Vegetation(object):
         self._ct_vegetation = pd.read_csv(ct_vegetation)
 
     def calculate(self, soil_code, nutrient_level, acidity, mhw, mlw,
-                  management=None, inundation=None):
+                  management=None, inundation=None, return_all=True):
         """ Calculate vegetation types based on input arrays
 
         Returns
@@ -58,11 +58,10 @@ class Vegetation(object):
             vegi = np.zeros(soil_code.shape, dtype=bool)
             for row in subtable.itertuples():
                 current_row = ((row.soil_code == soil_code)
-                              & (row.acidity == acidity)
-                              & (row.mhw_min >= mhw) & (row.mhw_max <= mhw)
-                              & (row.mlw_min >= mlw) & (row.mlw_max <= mlw)
-                              & (nutrient_level == row.nutrient_level)
-                              )
+                               & (row.acidity == acidity)
+                               & (row.mhw_min >= mhw) & (row.mhw_max <= mhw)
+                               & (row.mlw_min >= mlw) & (row.mlw_max <= mlw)
+                               & (nutrient_level == row.nutrient_level))
 
                 if inundation is not None:
                     current_row = current_row & (row.inundation == inundation)

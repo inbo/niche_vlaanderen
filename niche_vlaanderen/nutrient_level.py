@@ -72,14 +72,13 @@ class NutrientLevel(object):
         result = np.full(influence.shape, -99)
 
         for name, subtable in self._ct_nutrient_level.groupby(
-                ["soil_code","management_influence"]):
+                ["soil_code", "management_influence"]):
 
             soil_selected, influence_selected = name
             table_sel = subtable.copy(deep=True).reset_index(drop=True)
-            index = np.digitize(nitrogen, table_sel.total_nitrogen_max,right = True)
+            index = np.digitize(nitrogen, table_sel.total_nitrogen_max, right=True)
             selection = (soil_code == soil_selected) & (influence == influence_selected)
             result[selection] = table_sel.nutrient_level[index][selection]
-
 
         # TODO: there is some discrepancy between the documentation and the ArcGIS implementation
         # https://github.com/inbo/niche_vlaanderen/issues/8
@@ -91,8 +90,8 @@ class NutrientLevel(object):
         # voedselrijkdom daardoor met 1 trofieklasse (extra) toeneemt. (pg 15)
 
         # values lower than 4 and larger than -99 (no data) are increased
-        selection =((result <4) & (result > -99))
-        result[selection] = (result + (inundation>0))[selection]
+        selection = ((result < 4) & (result > -99))
+        result[selection] = (result + (inundation > 0))[selection]
         result = result.reshape(orig_shape)
         return result
 
@@ -104,6 +103,6 @@ class NutrientLevel(object):
 
         nitrogen_mineralisation = self._get_mineralisation(soil_code, msw)
         total_nitrogen = nitrogen_mineralisation + nitrogen_atmospheric\
-                + nitrogen_animal + nitrogen_fertilizer
+                         + nitrogen_animal + nitrogen_fertilizer
         nutrient_level = self._get(management, soil_code, total_nitrogen, inundation)
         return nutrient_level

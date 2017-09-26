@@ -9,15 +9,17 @@ from .nutrient_level import NutrientLevel
 import logging
 import os.path
 
-_allowed_input = ["soil_code", "mlw", "msw", "mhw", "seepage", "nutrient_level", "inundation_acidity",
-                  "inundation_nutrient","nitrogen_atmospheric", "nitrogen_animal", "nitrogen_fertilizer", "management",
-                  "conductivity", "rainwater", "inundation_vegetation"]
+_allowed_input = ["soil_code", "mlw", "msw", "mhw", "seepage", "nutrient_level",
+                  "inundation_acidity", "inundation_nutrient", "nitrogen_atmospheric",
+                  "nitrogen_animal", "nitrogen_fertilizer", "management", "conductivity",
+                  "rainwater", "inundation_vegetation"]
 
 _minimal_input = ["soil_code", "mlw", "msw", "mhw", "seepage", "inundation_acidity", "nitrogen_atmospheric",
                   "nitrogen_animal", "nitrogen_fertilizer", "management", "conductivity", "rainwater",
                   "inundation_vegetation", "inundation_nutrient"]
 
 logging.basicConfig()
+
 
 class SpatialContext(object):
     """Stores the spatial context of the grids in niche
@@ -40,6 +42,7 @@ class SpatialContext(object):
             return True
         else:
             return False
+
 
 class Niche(object):
     '''
@@ -73,11 +76,11 @@ class Niche(object):
             return False
 
         with rasterio.open(path) as dst:
-            sc_new =  SpatialContext(dst)
+            sc_new = SpatialContext(dst)
             if set_spatial_context:
                 self._context = sc_new
             else:
-                if not self._context!=sc_new:
+                if not self._context != sc_new:
                     self.log.error("Spatial context differs")
                     self._context.affine
                     sc_new.affine
@@ -90,9 +93,6 @@ class Niche(object):
         """ basic input checks (valid files etc)
 
         """
-        # check all necessary files are set
-        if not ["mhw","mlw"] in self._inputfiles.keys():
-            self.log.error("MHW and MLW must be defined")
 
         # check files exist
         for f in self._inputfiles:
@@ -107,7 +107,6 @@ class Niche(object):
                 dst = rasterio.open(f)
             except:
                 self.log.error("Error while opening file %s" % f)
-
 
         # Load every input_file in the input_array
         inputarray = dict()
@@ -125,12 +124,14 @@ class Niche(object):
             inputarray[f] = band
 
         # check if valid values are used in inputarrays
-        # check for valid datatypes - values will be checked in the low-level api (eg soilcode present in codetable)
-        if np.any(inputarray.mhw<=inputarray.mlw):
+        # check for valid datatypes - values will be checked in the low-level
+        # api (eg soilcode present in codetable)
+
+        if np.any(inputarray.mhw <= inputarray.mlw):
             self.log.error("Error: not all MHW values are higher than MLW")
             return False
 
-        # if all is succesfull:
+        # if all is successful:
         self._inputarray = inputarray
 
         return(True)
@@ -139,32 +140,34 @@ class Niche(object):
         """
         Runs niche Vlaanderen and saves the predicted vegetation to 17 grids.
         """
+
         missing_keys = set(_minimal_input) - set(self._inputfiles.keys())
         if len(missing_keys) > 0:
             print("error, different obliged keys are missing")
             print(missing_keys)
             return False
 
-        self._check_input_files
+        if self._check_input_files is False:
+            return False
 
         # Load every input_file in the input_array
         for f in self._inputfiles:
-            dst = rasterio.open(self._inputfiles[f])
-            self._inputarray[f] = dst.read(1)
+            with rasterio.open(self._inputfiles[f]) as dst:
+                self._inputarray[f] = dst.read(1)
 
         nl = NutrientLevel()
         # TODO: error handling
-        self._abiotic["nutrient_level"] = \
-            nl.calculate(self._inputarray["soil_code"], self._inputarray["msw"],
-                     self._inputarray["nitrogen_atmospheric"], self._inputarray["nitrogen_animal"],
-                     self._inputarray["nitrogen_fertilizer"], self._inputarray["management"],
-                     self._inputarray["inundation_nutrient"]
-                         )
+        self._abiotic["nutrient_level"] = nl.calculate(
+            self._inputarray["soil_code"], self._inputarray["msw"],
+            self._inputarray["nitrogen_atmospheric"], self._inputarray["nitrogen_animal"],
+            self._inputarray["nitrogen_fertilizer"], self._inputarray["management"],
+            self._inputarray["inundation_nutrient"])
+
         acidity = Acidity()
-        self._abiotic["acidity"] = acidity.calculate(self._inputarray["soil_code"], self._inputarray["mlw"],
-                                                     self._inputarray["inundation_acidity"],
-                                                     self._inputarray["seepage"], self._inputarray["conductivity"],
-                                                     self._inputarray["rainwater"])
+        self._abiotic["acidity"] = acidity.calculate(
+            self._inputarray["soil_code"], self._inputarray["mlw"],
+            self._inputarray["inundation_acidity"], self._inputarray["seepage"],
+            self._inputarray["conductivity"], self._inputarray["rainwater"])
 
         vegetation = Vegetation()
         self._vegetation = vegetation.calculate(
@@ -173,21 +176,19 @@ class Niche(object):
             mhw=self._inputarray["mhw"], mlw=self._inputarray["mlw"]
         )
 
-
     def write(self, folder):
 
-        # TODO: check calculate has been done
+        if not hasattr(self, "_vegetation"):
+            self.log.error("A valid run must be done before writing the output.")
 
         for vi in self._vegetation:
-            with rasterio.open(folder+'/V%s.tif'%vi, 'w', driver='GTiff',  height=self._context.heigth,
-                          width = self._context.width, crs = self._context.crs,
-                          affine = self._context.affine, count=1, dtype="int16") as dst:
+            with rasterio.open(folder + '/V%s.tif' % vi, 'w', driver='GTiff',  height=self._context.heigth,
+                               width=self._context.width, crs=self._context.crs,
+                               affine=self._context.affine, count=1, dtype="int16") as dst:
                 dst.write(self._vegetation[vi], 1)
 
         with rasterio.open(folder+'/nutrient_level.tif', 'w', driver='GTiff',  height=self._context.heigth,
-                          width = self._context.width, crs = self._context.crs,
-                          affine = self._context.affine, count=1, dtype="int16") as dst:
+                           width=self._context.width, crs=self._context.crs,
+                           affine=self._context.affine, count=1, dtype="int16") as dst:
             nutrient_level = self._abiotic["nutrient_level"].astype("int16")
             dst.write(nutrient_level, 1)
-
-
