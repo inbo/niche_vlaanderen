@@ -1,3 +1,4 @@
+from __future__ import division
 from unittest import TestCase
 
 import numpy as np
@@ -60,6 +61,23 @@ class testVegetation(TestCase):
                 np.testing.assert_equal(np.array([1]),veg_predict[vi])
             else:
                 np.testing.assert_equal(np.array([0]),veg_predict[vi])
+
+    def test_occurence(self):
+        nutrient_level = np.array([[4,4],[4,5]])
+        acidity = np.array([[3,3],[3,-99]])
+        mlw = np.array([[50,50],[50,50]])
+        mhw = np.array([[31,30],[10,4]])
+        soil_code = np.array([[140000, 140000],[140000,140000]])
+        inundation = np.array([[1,1],[1,1]])
+        v = niche_vlaanderen.Vegetation()
+        veg_predict, veg_occurence = v.calculate(soil_code=soil_code, nutrient_level=nutrient_level, acidity=acidity,
+                                                 mhw=mhw, mlw=mlw, inundation=inundation)
+        # check no data propagates nicely
+        self.assertEqual(-99, veg_predict[1][1,1])
+        self.assertEqual(1 / 3, veg_occurence[12])
+        self.assertEqual(1, veg_occurence[7])
+        self.assertEqual(2 / 3, veg_occurence[16])
+
 
     def test_testcase(self):
         soil_code = raster_to_numpy("testcase/input/soil_codes.asc")
