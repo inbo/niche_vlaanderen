@@ -43,6 +43,12 @@ class SpatialContext(object):
         else:
             return False
 
+    def __ne__(self, other):
+        if self.affine.almost_equals(other.affine, precision=0.01)\
+                and self.width == other.width and self.heigth == other.heigth:
+            return False
+        else:
+            return True
 
 class Niche(object):
     '''
@@ -80,7 +86,7 @@ class Niche(object):
             if set_spatial_context:
                 self._context = sc_new
             else:
-                if not self._context != sc_new:
+                if self._context != sc_new:
                     self.log.error("Spatial context differs")
                     self._context.affine
                     sc_new.affine
