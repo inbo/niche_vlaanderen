@@ -29,17 +29,16 @@ class SpatialContext(object):
         self.heigth = dst.height
         self.crs = dst.crs
 
-    def compare(self, other):
+    def __eq__(self, other):
         """Compare two SpatialContexts
 
         Small differences (<1cm are allowed)
         """
 
-        if self.affine.almost_equals(other.affine, precision=0.01):
+        if self.affine.almost_equals(other.affine, precision=0.01)\
+                and self.width == other.width and self.heigth == other.heigth:
             return True
         else:
-            print(self.affine)
-            print(other.affine)
             return False
 
 class Niche(object):
@@ -78,7 +77,7 @@ class Niche(object):
             if set_spatial_context:
                 self._context = sc_new
             else:
-                if not self._context.compare(sc_new):
+                if not self._context!=sc_new:
                     self.log.error("Spatial context differs")
                     self._context.affine
                     sc_new.affine
