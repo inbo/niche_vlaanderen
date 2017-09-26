@@ -67,9 +67,9 @@ Kwel
 Gemiddelde kwel in mm/dag en negatieve waarden (negatieve waarden worden gebruikt voor plaatsen waar grondwater uittreedt). Positieve waarden duiden op infiltratie.
 NICHE rekent met volgende klassegrenzen:
 
- * kwel > 0.1 mm/dag kwel
- * kwel –0.1 ‐ 0.1 mm/dag stagnatie
- * kwel < ‐0.1 mm/dag infiltratie
+ * kwel < -1 mm/dag veel kwel
+ * kwel -1 - -0.1 mm/dag weinig kwel
+ * kwel > 0.1 mm/dag geen kwel
 
 .. _overstroming_trofie:
 

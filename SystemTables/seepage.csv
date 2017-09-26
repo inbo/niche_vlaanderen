@@ -1,4 +1,4 @@
 seepage_code,seepage_min,seepage_max,description
-3,-999,-1, seep
-2,-1,-0.1, stagnation
+3,-999,-1, much seepage
+2,-1,-0.1, little seepage
 1,-0.1,999, infiltration
