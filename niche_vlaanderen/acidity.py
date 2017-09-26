@@ -47,7 +47,10 @@ class Acidity(object):
         return result
 
     def _get_mineral_richness_class(self, conductivity):
-        reclass = (conductivity >= 500).astype("int8") + 1
+        # conductivity may contain np.nan values - we ignore the numpy warnings about the
+        # fact that these can not be compared.
+        with np.errstate(invalid='ignore'):
+            reclass = (conductivity >= 500).astype("int8") + 1
         reclass[np.isnan(conductivity)] = -99
         return reclass
 
@@ -83,12 +86,9 @@ class Acidity(object):
         seepage_code = self._ct_seepage.seepage_code[index]
         return seepage_code.values.reshape(orig_shape)
 
-
-    def calculate(self, soil_class, mlw, inundation, seepage, rainwater, conductivity):
+    def calculate(self, soil_class, mlw, inundation, seepage, conductivity, rainwater):
         soil_mlw = self._get_soil_mlw(soil_class, mlw)
         mineral_richness = self._get_mineral_richness_class(conductivity)
         seepage_code = self._get_seepage_code(seepage)
         acidity = self._get_acidity(rainwater, mineral_richness, inundation, seepage_code, soil_mlw)
         return acidity
-
-

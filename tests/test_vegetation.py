@@ -81,7 +81,7 @@ class testVegetation(TestCase):
                                       nitrogen_fertilizer, management, inundation)
 
         a = niche_vlaanderen.Acidity()
-        acidity = a.calculate(soil_code, mlw, inundation, seepage, regenlens, conductivity)
+        acidity = a.calculate(soil_code, mlw, inundation, seepage, conductivity, regenlens)
 
         v = niche_vlaanderen.Vegetation()
         veg_predict = v.calculate(soil_code, nutrient_level, acidity,
