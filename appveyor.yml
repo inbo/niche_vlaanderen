@@ -20,5 +20,5 @@ install:
 build: false
 
 test_script:
-  - pytest
+  - pytest --cov niche_vlaanderen
 

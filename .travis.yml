@@ -15,7 +15,7 @@ python:
   - "3.6"
 # - "nightly"
 
-script: pytest
+script: pytest --cov niche_vlaanderen
 
 before_install:
   - export CPPFLAGS=`gdal-config --cflags`
