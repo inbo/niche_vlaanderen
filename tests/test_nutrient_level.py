@@ -26,8 +26,8 @@ def raster_to_numpy(filename):
     return data
 
 class testNutrientLevel(TestCase):
-    
-    def test_nitrogen_mineralisation_array_oneelement(self):
+
+    def test_nitrogen_mineralisation(self):
         soil_codes = np.array([140000])
         msw = np.array([33])
         nl = niche_vlaanderen.NutrientLevel()
@@ -42,20 +42,20 @@ class testNutrientLevel(TestCase):
         soil_code = np.array([140000])
         nitrogen = np.array([445])
         inundation = np.array([1])
-        
+
         nl = niche_vlaanderen.NutrientLevel()
         result = nl._get(management, soil_code, nitrogen, inundation)
         np.testing.assert_equal(np.array(5), result)
 
 
-    def test_get_array(self):
+    def test_calculate(self):
         nl = niche_vlaanderen.NutrientLevel()
         management = np.array([2])
         soil_code = np.array([140000])
         msw = np.array([33])
         nitrogen_deposition = np.array([20])
-        nitrogen_animal = np.array([445])
-        nitrogen_fertilizer = np.array([350])
+        nitrogen_animal = np.array([350])
+        nitrogen_fertilizer = np.array([0])
         inundation = np.array([1])
         result = nl.calculate(soil_code, msw, nitrogen_deposition, nitrogen_animal,
                               nitrogen_fertilizer, management, inundation)

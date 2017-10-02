@@ -89,19 +89,19 @@ Mogelijke waarden van beheer worden gegeven in de tabel `Management <https://git
   :file: ../SystemTables/management.csv
 
 
-De Invloed die correspondeert met het gekozen management kan met het bodemtype en de totale stikstof gebruikt worden om in de tabel `nutrient_level <https://github.com/inbo/niche_vlaanderen/blob/master/SystemTables/nutrient_level.csv>`_ de gecodeerde trofie te berekenen
+De Invloed die correspondeert met het gekozen management kan met het bodemtype en de totale stikstof gebruikt worden om in de tabel `lnk_soil_nutrient_level <https://github.com/inbo/niche_vlaanderen/blob/master/SystemTables/lnk_soil_nutrient_level.csv>`_ de gecodeerde trofie te berekenen
 
 .. topic:: Voorbeeld
 
-  * Beheer = begrazing(2) dus Invloed =1
+  * Beheer = begrazing(2) dus Invloed = 0
   * Bodemtype = 140000
   * N_tot = 445
   
-  ================== =============== ======== ======== ===========  
-  invloed_management bodemcijfercode Ntot_min Ntot_max trofie_code
-  ------------------ --------------- -------- -------- -----------
-  1                  140000          418      569         **4**   
-  ================== =============== ======== ======== ===========
+  ==================== ========= ================== ================== ===========  
+  management_influence soil_code total_nitrogen_min total_nitrogen_max nutrient_level
+  -------------------- --------- ------------------ ------------------ -----------
+  0                    140000    400                10000                 **5**   
+  ==================== ========= ================== ================== ===========
   
   De gecodeerde trofie is dus 4.
 
@@ -114,5 +114,5 @@ Opmerking: het Vlaamse model wijkt hier af van het oorspronkelijke Nederlandse N
 
 .. topic:: Voorbeeld
 
-  De oorspronkelijk gecodeerde trofie is 4.
-  Door invloed van overstroming blijft dit 4.
+  De oorspronkelijk gecodeerde trofie is 5.
+  Door invloed van overstroming blijft dit 5.
