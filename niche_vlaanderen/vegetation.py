@@ -43,8 +43,8 @@ class Vegetation(object):
             veg_code value.
             -99 is used for nodata values
         veg_occurence: dict
-            A dictionary containing the percentage of the area where the vegetation
-            can occur.
+            A dictionary containing the percentage of the area where the
+            vegetation can occur.
 
         """
         nodata = ((soil_code == -99) | (nutrient_level == -99)
@@ -56,7 +56,7 @@ class Vegetation(object):
             nodata = nodata | (management == -99)
 
         veg_bands = dict()
-        veg_occurence = dict()
+        occurence = dict()
 
         for veg_code, subtable in self._ct_vegetation.groupby(["veg_code"]):
             subtable = subtable.reset_index()
@@ -83,5 +83,6 @@ class Vegetation(object):
                 veg_bands[veg_code] = vegi
 
             if np.any(vegi == 1):
-                veg_occurence[veg_code] = np.sum(vegi==1) / (vegi.size - np.sum(nodata))
-        return veg_bands, veg_occurence
+                occurence[veg_code] = (np.sum(vegi == 1)
+                                       / (vegi.size - np.sum(nodata)))
+        return veg_bands, occurence

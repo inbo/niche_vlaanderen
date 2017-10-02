@@ -59,7 +59,8 @@ class NutrientLevel(object):
         for i in self._ct_management.code.unique():
             sel_grid = (management == i)
             sel_ct = (self._ct_management.code == i)
-            influence[sel_grid] = self._ct_management[sel_ct].influence.values[0]
+            influence[sel_grid] = \
+                self._ct_management[sel_ct].influence.values[0]
 
         # flatten all input layers (necessary for digitize)
         orig_shape = soil_code.shape
@@ -76,20 +77,14 @@ class NutrientLevel(object):
 
             soil_selected, influence_selected = name
             table_sel = subtable.copy(deep=True).reset_index(drop=True)
-            index = np.digitize(nitrogen, table_sel.total_nitrogen_max, right=True)
-            selection = (soil_code == soil_selected) & (influence == influence_selected)
+            index = np.digitize(nitrogen, table_sel.total_nitrogen_max,
+                                right=True)
+            selection = ((soil_code == soil_selected) &
+                         (influence == influence_selected))
             result[selection] = table_sel.nutrient_level[index][selection]
 
-        # TODO: there is some discrepancy between the documentation and the ArcGIS implementation
-        # https://github.com/inbo/niche_vlaanderen/issues/8
-        # the ArcGIS implementation only adds inundation if values for nutrion_level are 3 or lower
-        # the documentation says:
-
-        # Wanneer het hydrologisch model toevoer van gebiedsvreemd water berekent naar een
-        # gebied waar nog geen waterinlaat plaatsvindt, dan wordt in NICHE aangenomen dat de
-        # voedselrijkdom daardoor met 1 trofieklasse (extra) toeneemt. (pg 15)
-
-        # values lower than 4 and larger than -99 (no data) are increased
+        # Note that niche_vlaanderen is different from the original model here:
+        # only if nutrient_level <4 the inundation rule is applied.
         selection = ((result < 4) & (result > -99))
         result[selection] = (result + (inundation > 0))[selection]
         result = result.reshape(orig_shape)
@@ -102,7 +97,8 @@ class NutrientLevel(object):
         """
 
         nitrogen_mineralisation = self._get_mineralisation(soil_code, msw)
-        total_nitrogen = nitrogen_mineralisation + nitrogen_atmospheric\
-                         + nitrogen_animal + nitrogen_fertilizer
-        nutrient_level = self._get(management, soil_code, total_nitrogen, inundation)
+        total_nitrogen = (nitrogen_mineralisation + nitrogen_atmospheric
+                          + nitrogen_animal + nitrogen_fertilizer)
+        nutrient_level = self._get(management, soil_code, total_nitrogen,
+                                   inundation)
         return nutrient_level

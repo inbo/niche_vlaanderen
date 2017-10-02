@@ -196,7 +196,7 @@ class Niche(object):
 
         occ_table['occurence'] = pd.Series(
             ["{0:.2f}%".format(v * 100) for v in occ_table['occurence']],
-            index= occ_table.index)
+            index=occ_table.index)
         print(occ_table)
 
     def write(self, folder):
