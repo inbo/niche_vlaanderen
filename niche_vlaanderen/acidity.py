@@ -63,16 +63,16 @@ class Acidity(object):
         seepage = seepage.flatten()
         soil_mlw_class = soil_mlw_class.flatten()
 
-        result = np.full(soil_mlw_class.shape, -99)
-        for labels, subtable in self._lnk_acidity.groupby(["regenlens",
+        result = np.full(soil_mlw_class.shape, -99, dtype="int16")
+        for labels, subtable in self._lnk_acidity.groupby(["rainwater",
             "mineral_richness", "inundation", "seepage", "soil_mlw_class"]):
-            sel_regenlens, sel_mr, sel_inundation, sel_seepage, sel_soil_mlw_class = labels
+            sel_rainwater, sel_mr, sel_inundation, sel_seepage, sel_soil_mlw_class = labels
             subtable = subtable.copy().reset_index(drop=True)
 
-            # TODO: 1 is added to regenlens and inundation because a different convention
+            # TODO: 1 is added to rainwater and inundation because a different convention
             # is used between the code table and the actual grid - we should sort this out
             # https://github.com/inbo/niche_vlaanderen/issues/13
-            selection = ((rainwater + 1 == sel_regenlens) & (mineral_richness == sel_mr)
+            selection = ((rainwater + 1 == sel_rainwater) & (mineral_richness == sel_mr)
                          & (inundation + 1 == sel_inundation) & (seepage == sel_seepage)
                          & (soil_mlw_class == sel_soil_mlw_class))
             result[(selection)] = subtable.acidity[0]
