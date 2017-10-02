@@ -1,30 +1,23 @@
 .. _trofie:
 
 ################################
-Berekening Trofie
+Berekening Trofie (nutrient_level)
 ################################
 
-De Trofie is de mate van voedselrijkdom van de bodem.
+De Trofie (`nutrient_level`) is de mate van voedselrijkdom van de bodem.
 Deze wordt in NICHE weergegeven als een klassevariabele met waarden tussen 1 en 5.
 Mogelijke waarden worden gegeven in de tabel `nutrient_level.csv <https://github.com/inbo/niche_vlaanderen/blob/master/SystemTables/nutrient_level.csv>`_.
 
 .. csv-table:: Trofie klassen
-  :header: nr,Code,Trofieniveau
-
-  1,O,oligotroof
-  2,M,mesotroof
-  3,ME,meso‐eutroof
-  4,E,eutroof
-  5,HE,hypereutroof
+  :header-rows: 1
+  :file: ../SystemTables/nutrient_level.csv
 
 
 De berekening gebeurt in volgende 4 stappen:
  * `Stikstofmineralisatie`_
  * `Bepaling Totale Stikstof`_
- * `Bepaling gecodeerde Trofie`_
+ * :ref:`trofie_code`
  * `Invloed Overstroming`_
-
-TODO: figuur
 
 .. topic:: Voorbeeld
 
@@ -32,8 +25,8 @@ TODO: figuur
    * GVG: 33 cm
    * bodemcode: L1
    * N_Atm_Deposit: 20
-   * N_Mest_Kunst: 350
-   * N_Mest_Dier: 445
+   * N_Mest_Kunst: 0
+   * N_Mest_Dier: 350
    * Management: begrazing (2) 
    * Invloed overstroming: 1
 
@@ -42,7 +35,7 @@ TODO: figuur
 Stikstofmineralisatie
 =====================
 
-De stikstofmineralisatie (N_mineralisatie) wordt berekend aan de hand van volgende invoergegevens:
+De stikstofmineralisatie (`nitrogen_mineralisation`) wordt berekend aan de hand van volgende invoergegevens:
 
 * :ref:`gvg`
 * :ref:`bodemklasse`
@@ -54,11 +47,11 @@ Daar wordt de N_mineralisatie bepaald met de bodemcijfercode en de min en max wa
   
   Voor een leembodem (bodemcode L1, bodemcijfercode 140000) en een GVG van 33 cm krijgen we waarde: 75
   
-  =============== ======= ======= ===============
-  bodemcijfercode gvg_min gvg_max N_mineralisatie
-  --------------- ------- ------- ---------------
+  =============== ======= ======= =======================
+  soil_code       msw_min msw_max nitrogen_mineralisation
+  --------------- ------- ------- -----------------------
   140000          30      35       **75**        
-  =============== ======= ======= ===============
+  =============== ======= ======= =======================
 
 Bepaling Totale Stikstof
 ========================
@@ -73,11 +66,11 @@ De totale Stikstof (N_tot) wordt bepaald als de som van volgende stikstofbronnen
 .. topic:: Voorbeeld
   
   .. math:: N_{tot} &= N_{mineralisatie} + N_{Atm\_Deposit} + N_{Mest\_Kunst} + N_{Mest\_Dier} \\
-                  &= (75 + 20 + 350 + 0) \\
+                  &= (75 + 20 + 0 + 350) \\
                   &= 445
 
-.. trofie_code:
-  
+.. _trofie_code:
+
 Bepaling gecodeerde Trofie
 ==========================
 
@@ -103,7 +96,7 @@ De Invloed die correspondeert met het gekozen management kan met het bodemtype e
   0                    140000    400                10000                 **5**   
   ==================== ========= ================== ================== ===========
   
-  De gecodeerde trofie is dus 4.
+  De gecodeerde trofie is dus 5.
 
 Invloed Overstroming
 ====================

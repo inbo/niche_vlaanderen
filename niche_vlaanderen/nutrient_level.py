@@ -69,7 +69,7 @@ class NutrientLevel(object):
         influence = influence.flatten()
 
         # search for classification values in nutrient level codetable
-        result = np.full(influence.shape, -99)
+        result = np.full(influence.shape, -99, dtype='int16')
 
         for name, subtable in self._ct_nutrient_level.groupby(
                 ["soil_code", "management_influence"]):

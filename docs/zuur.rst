@@ -28,7 +28,7 @@ Invoergegevens zijn dus:
 Bepaling Bodem GLG klasse
 =========================
 
-In eerste instantie worden 3 bodemgroepen onderscheiden (opm: volgens eindrapport waren dit er 4).
+In eerste instantie worden 3 bodemgroepen onderscheiden (opm: in het Nederlands model waren dit er 4).
 
  * Z1 of Z2 of ZV of L of K of KV (minerale bodems);
  * V of V2 (organische bodems);
@@ -46,15 +46,15 @@ Dit gebeurt aan de hand van de tabel `soil_mlw_class.csv <https://github.com/inb
   .. csv-table:: bodemgroep op basis van bodemcode
     :header-rows: 1
 
-    bodemcode,bodemcijfercode,beschrijving,bodemgroep
-    L1,140000,leem,**1**
+    soil_code,short_code,beschrijving,soil_group
+    140000,L1,leem,**1**
 
-  Kijken we verder in de tabel SoilGLGClass met deze bodemgroep (1) en de GLG van 50 cm krijgen we:
+  Kijken we verder in de tabel soil_mlw_class met deze bodemgroep (1) en de GLG van 50 cm krijgen we:
 
-  .. csv-table:: SoilGLGClass op basis van bodemtype en GLG
+  .. csv-table:: soil_mlw_class op basis van bodemtype en GLG
     :header-rows: 1
 
-    BodemGroep,GLG_min,GLG_max,BodemGlgKlasse
+    soil_group,mlw_min,mlw_max,soil_mlw_class
     1,-999,80,**1**
 
 Bepaling Mineraalrijkdom_klasse
@@ -81,12 +81,12 @@ Dit gebeurt aan de hand van de tabel `lnk_acidity.csv <https://github.com/inbo/n
    * Overstroming_zuurgraad = 1
    * Kwel = 1
 
-   Zoeken we deze waarde op in de tabel Zuurclass.csv krijgen we:
+   Zoeken we deze waarde op in de tabel lnk_acidity.csv krijgen we:
 
-   .. csv-table:: Zuurklasse
+   .. csv-table:: lnk_acidity
      :header-rows: 1
     
-     Regenlens,Mineralenrijkdom,Overstroming,Flux,BodemGLGKlasse,Zuurgraad
+     rainwater,mineral_richness,inundation,seepage,soil_mlw_class,acidity
      1,1,1,1,1,**3**
 
   De bepaalde zuurgraad is dus **3** (neutraal/basisch)
