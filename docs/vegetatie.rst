@@ -1,4 +1,3 @@
-.. module:: niche_vlaanderen
 
 .. _vegetatie:
 
@@ -49,52 +48,3 @@ Optioneel kunnen :ref:`beheer` en de :ref:`overstroming_vegetatie` mee als selec
   Volgende vegetatiecodes kunnen dus voorkomen: 7, 8, 12 en 16.
 
   Indien ook nog inundantie wordt meegerekend, bvb regelmatig overstromen (1) valt een aantal mogelijke codes weg. Mogelijke codes zijn dan 7, 12 en 16.
-
-Low-level interface
-=============================
-
-In de low level interface kan de vegetatie bepaald worden met het Vegetation() object.
-
-.. autoclass:: Vegetation
-    :members:
-
-    .. automethod:: __init__
-
-
-Voorbeeld
-~~~~~~~~~
-
- .. code-block:: pycon
-
-    >>> import numpy as np
-    >>> import niche_vlaanderen
-    >>> nutrient_level = np.array([4])
-    >>> acidity = np.array([3])
-    >>> mlw = np.array([50])
-    >>> mhw = np.array([10])
-    >>> soil_codes = np.array([140000])
-    >>> nv = niche_vlaanderen.Vegetation()
-    >>> veg_predict, veg_occurence = nv.calculate(soil_codes, nutrient_level, acidity, mhw, mlw)
-    >>> veg_occurence
-    {7: 1.0, 8: 1.0, 12: 1.0, 16: 1.0}
-
-De waarden die voorkomen (in 100% van het gebied, we hebben immers maar 1 pixel) zijn 7, 8, 12 en 16.
-
-Gebruiken we ook de waarde voor overstromingen dan wordt dit.
-
- .. code-block:: pycon
-
-    >>> import numpy as np
-    >>> import niche_vlaanderen
-    >>> nutrient_level = np.array([4])
-    >>> acidity = np.array([3])
-    >>> mlw = np.array([50])
-    >>> mhw = np.array([10])
-    >>> soil_codes = np.array([140000])
-    >>> nv = niche_vlaanderen.Vegetation()
-    >>> inundation = np.array([1])
-    >>> veg_predict, veg_occurence = nv.calculate(soil_codes,nutrient_level,acidity,mhw,mlw, inundation=inundation)
-    >>> veg_occurence
-    {7: 1.0, 12: 1.0, 16: 1.0}
-
-Vegetatietype 8 is nu niet meer mogelijk.

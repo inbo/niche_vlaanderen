@@ -1,5 +1,5 @@
 ###########################
-Beschrijving invoer rasters
+Invoer rasters
 ###########################
 
 De betrouwbaarheid van de berekeningen wordt sterk bepaald door de kwaliteit van de invoergegevens. Het is dan ook nodig te streven naar zo nauwkeurig mogelijke invoergegevens.
@@ -33,7 +33,8 @@ De waterstandsparameters worden als volgt gedefinieerd (van der Veen et al., 199
 .. _ghg:
 
 GHG (Gemiddeld hoogste grondwaterstand)
----
+---------------------------------------
+
 GHG - gemiddeld hoogste grondwaterstand: het gemiddelde van de drie hoogste grondwaterstanden (GH3) in de winterperiode (1 oktober tot 1 april) over tenminste 5 jaar bij kleine variatie tussen GH3 en LG3 en over 8 jaar bij grote variatie tussen GH3 en LG3.
 Het is maat voor het hoogste grondwaterniveau in een normale winter.
 
