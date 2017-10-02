@@ -6,14 +6,14 @@ import pandas as pd
 
 
 class Vegetation(object):
-    '''Helper class to calculate vegetation based on input arrays
+    """Helper class to calculate vegetation based on input arrays
 
     This class helps predicting vegetation based on a number of input arrays.
     On initialization the input codetables are parsed (and validated).
 
     Note that to use grid inputs (eg raster files) it is recommended to use
     the Niche Class
-    '''
+    """
     def __init__(self, ct_vegetation=resource_filename(
                     "niche_vlaanderen",
                     "../SystemTables/niche_vegetation.csv")):
@@ -23,11 +23,12 @@ class Vegetation(object):
         the codetables supplied by the niche_vlaanderen package. It is possible
         to overwrite this by supplying the niche_vlaanderen parameter
 
-        Parameter
-        ---------
-        ct_vegetation: optional alternative classification table. Must contain
-        the columns mentioned in the documentation:
-         https://inbo.github.io/niche_vlaanderen/codetables.html#niche_vlaanderen
+        Parameters
+        ----------
+        ct_vegetation: filename, .csv
+            optional alternative classification table
+            Must contain the columns mentioned in the documentation:
+            https://inbo.github.io/niche_vlaanderen/codetables.html#niche_vlaanderen
         """
         self._ct_vegetation = pd.read_csv(ct_vegetation)
 
@@ -41,6 +42,9 @@ class Vegetation(object):
             A dictionary containing the different output arrays per
             veg_code value.
             -99 is used for nodata values
+        veg_occurence: dict
+            A dictionary containing the percentage of the area where the vegetation
+            can occur.
 
         """
         nodata = ((soil_code == -99) | (nutrient_level == -99)
