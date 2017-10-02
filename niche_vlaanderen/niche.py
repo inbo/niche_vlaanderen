@@ -10,14 +10,17 @@ from .nutrient_level import NutrientLevel
 import logging
 import os.path
 
-_allowed_input = ["soil_code", "mlw", "msw", "mhw", "seepage", "nutrient_level",
-                  "inundation_acidity", "inundation_nutrient", "nitrogen_atmospheric",
-                  "nitrogen_animal", "nitrogen_fertilizer", "management", "conductivity",
-                  "rainwater", "inundation_vegetation"]
+_allowed_input = [
+    "soil_code", "mlw", "msw", "mhw", "seepage", "nutrient_level",
+    "inundation_acidity", "inundation_nutrient", "nitrogen_atmospheric",
+    "nitrogen_animal", "nitrogen_fertilizer", "management", "conductivity",
+    "rainwater", "inundation_vegetation"]
 
-_minimal_input = ["soil_code", "mlw", "msw", "mhw", "seepage", "inundation_acidity", "nitrogen_atmospheric",
-                  "nitrogen_animal", "nitrogen_fertilizer", "management", "conductivity", "rainwater",
-                  "inundation_vegetation", "inundation_nutrient"]
+_minimal_input = [
+    "soil_code", "mlw", "msw", "mhw", "seepage", "inundation_acidity",
+    "nitrogen_atmospheric", "nitrogen_animal", "nitrogen_fertilizer",
+    "management", "conductivity", "rainwater", "inundation_vegetation",
+    "inundation_nutrient"]
 
 logging.basicConfig()
 
@@ -50,6 +53,7 @@ class SpatialContext(object):
             return False
         else:
             return True
+
 
 class Niche(object):
     '''
@@ -122,7 +126,7 @@ class Niche(object):
             nodata = dst.nodatavals[0]
 
             band = dst.read(1)
-            # create a mask for no-data values, taking into account the data-types
+            # create a mask for no-data values, taking into account data-types
             if band.dtype == 'float32':
                 band[band == nodata] = np.nan
             else:
@@ -166,37 +170,56 @@ class Niche(object):
         # TODO: error handling
         self._abiotic["nutrient_level"] = nl.calculate(
             self._inputarray["soil_code"], self._inputarray["msw"],
-            self._inputarray["nitrogen_atmospheric"], self._inputarray["nitrogen_animal"],
-            self._inputarray["nitrogen_fertilizer"], self._inputarray["management"],
+            self._inputarray["nitrogen_atmospheric"],
+            self._inputarray["nitrogen_animal"],
+            self._inputarray["nitrogen_fertilizer"],
+            self._inputarray["management"],
             self._inputarray["inundation_nutrient"])
 
         acidity = Acidity()
         self._abiotic["acidity"] = acidity.calculate(
             self._inputarray["soil_code"], self._inputarray["mlw"],
-            self._inputarray["inundation_acidity"], self._inputarray["seepage"],
+            self._inputarray["inundation_acidity"],
+            self._inputarray["seepage"],
             self._inputarray["conductivity"], self._inputarray["rainwater"])
 
         vegetation = Vegetation()
-        self._vegetation, veg_occurrence = vegetation.calculate(
-            soil_code=self._inputarray["soil_code"], nutrient_level=self._abiotic["nutrient_level"],
-            acidity=self._abiotic["acidity"], inundation=self._inputarray["inundation_vegetation"],
-            mhw=self._inputarray["mhw"], mlw=self._inputarray["mlw"])
-
-        print(pd.DataFrame.from_dict(veg_occurrence, orient="index"))
+        self._vegetation, veg_occurence = vegetation.calculate(
+            soil_code=self._inputarray["soil_code"],
+            nutrient_level=self._abiotic["nutrient_level"],
+            acidity=self._abiotic["acidity"],
+            inundation=self._inputarray["inundation_vegetation"],
+            mhw=self._inputarray["mhw"],
+            mlw=self._inputarray["mlw"])
+        occurence_table = pd.DataFrame.from_dict(veg_occurence, orient="index")
+        occurence_table.columns = ['occurence']
+        occurence_table.style.format({
+            'occurence': '{:,.2%}'.format})
+        print(occurence_table)
 
     def write(self, folder):
 
         if not hasattr(self, "_vegetation"):
-            self.log.error("A valid run must be done before writing the output.")
+            self.log.error(
+                "A valid run must be done before writing the output.")
+
+        params = dict(
+            driver='GTiff',
+            height=self._context.heigth,
+            width=self._context.width,
+            crs=self._context.crs,
+            affine=self._context.affine,
+            count=1,
+            dtype="int16",
+            nodata=-99,
+            compress="DEFLATE"
+        )
 
         for vi in self._vegetation:
-            with rasterio.open(folder + '/V%s.tif' % vi, 'w', driver='GTiff',  height=self._context.heigth,
-                               width=self._context.width, crs=self._context.crs,
-                               affine=self._context.affine, count=1, dtype="int16", nodata=-99, compress="DEFLATE") as dst:
+            with rasterio.open(folder + '/V%s.tif' % vi, 'w', **params) as dst:
                 dst.write(self._vegetation[vi], 1)
 
-        with rasterio.open(folder+'/nutrient_level.tif', 'w', driver='GTiff',  height=self._context.heigth,
-                           width=self._context.width, crs=self._context.crs,
-                           affine=self._context.affine, count=1, dtype="int16", nodata=-99, compress="DEFLATE") as dst:
-            nutrient_level = self._abiotic["nutrient_level"].astype("int16")
-            dst.write(nutrient_level, 1)
+        # also save the abiotic grids
+        for vi in self._abiotic:
+            with rasterio.open(folder + '/%s.tif' % vi, 'w', **params) as dst:
+                dst.write(self._abiotic[vi], 1)
