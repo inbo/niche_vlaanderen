@@ -191,11 +191,13 @@ class Niche(object):
             inundation=self._inputarray["inundation_vegetation"],
             mhw=self._inputarray["mhw"],
             mlw=self._inputarray["mlw"])
-        occurence_table = pd.DataFrame.from_dict(veg_occurence, orient="index")
-        occurence_table.columns = ['occurence']
-        occurence_table.style.format({
-            'occurence': '{:,.2%}'.format})
-        print(occurence_table)
+        occ_table = pd.DataFrame.from_dict(veg_occurence, orient="index")
+        occ_table.columns = ['occurence']
+
+        occ_table['occurence'] = pd.Series(
+            ["{0:.2f}%".format(v * 100) for v in occ_table['occurence']],
+            index= occ_table.index)
+        print(occ_table)
 
     def write(self, folder):
 
