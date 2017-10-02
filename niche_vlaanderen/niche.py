@@ -27,6 +27,19 @@ logging.basicConfig()
 
 class SpatialContext(object):
     """Stores the spatial context of the grids in niche
+
+    This class is based on the rasterio model of a grid.
+
+    Attributes
+    affine: Affine
+        Matrix that contains the affine transformation of the plane to convert
+        grid coordinates to real world coordinates.
+        https://pypi.python.org/pypi/affine/1.0
+    width, height: int
+        Integer numbers containing the width and height of the raster
+    crs: rasterio.CRS
+        Container class for coordinate reference system info
+
     """
 
     def __init__(self, dst):
@@ -56,8 +69,15 @@ class SpatialContext(object):
 
 
 class Niche(object):
-    '''
-    '''
+    """ Creates a new Niche object
+
+    A niche object can be used to predict vegetation types according to the
+    NICHE Vlaanderen model.
+
+    The default codetables are used unless other tables are supplied to the
+    constructor.
+
+    """
     def __init__(self):
         self._inputfiles = dict()
         self._inputarray = dict()
@@ -67,7 +87,24 @@ class Niche(object):
         self._context = None
 
     def set_input(self, type, path, set_spatial_context=False):
+        """ Adds a raster as input layer
 
+        Parameters
+        ----------
+        type: string
+            The type of grid that you want to assign (eg msw, soil_code, ...).
+            Possible options are listed in _allowed_input
+        path: string
+            Path to a file containing the grid. Can also be a folder for
+            certain grid types (eg arcgis rasters).
+
+        Returns
+        -------
+        bool
+            Boolean that will be true if the file was added successfully and
+            false otherwise.
+
+        """
         if not set_spatial_context and self._context is None:
             self.log.error("Spatial context not yet set")
             return False
@@ -111,8 +148,6 @@ class Niche(object):
                 self.log.error("File %s does not exist" % f)
                 return False
 
-        # check boundaries overlap with study area + same grid
-        # we should also check for files top/bottom and bottom/top
         for f in self._inputfiles:
             try:
                 dst = rasterio.open(f)
@@ -148,8 +183,16 @@ class Niche(object):
         return(True)
 
     def run(self):
-        """
-        Runs niche Vlaanderen and saves the predicted vegetation to 17 grids.
+        """Run the niche model
+
+        Runs niche Vlaanderen model. Requires that the necessary input values
+        have been added using set_input.
+
+        Returns
+        -------
+
+        bool:
+            Returns true if the calculation was succesfull.
         """
 
         missing_keys = set(_minimal_input) - set(self._inputfiles.keys())
@@ -200,6 +243,26 @@ class Niche(object):
         print(occ_table)
 
     def write(self, folder):
+        """Saves the model results to a folder
+
+        Saves the model results to a folder. Files will be written as geotiff.
+        Vegetation files have names V1 ... V28
+        Abiotic files are exported as well (nutrient_level.tif and
+        acidity.tif).
+
+        Parameters
+        ----------
+
+        Folder: string
+            Output folder to which files will be written. Parent directory must
+            exist already.
+
+        Returns
+        -------
+
+        bool:
+            Returns True on success.
+        """
 
         if not hasattr(self, "_vegetation"):
             self.log.error(
