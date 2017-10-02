@@ -1,17 +1,18 @@
 from unittest import TestCase
-import rasterio
 
+import rasterio
 import numpy as np
 
 import niche_vlaanderen
 
+
 def raster_to_numpy(filename):
-    '''Read a GDAL grid as numpy array
+    """Read a GDAL grid as numpy array
 
     Notes
     ------
     No-data values are -99 for integer types and np.nan for real types.
-    '''
+    """
     with rasterio.open(filename) as ds:
         data = ds.read(1)
         nodata = ds.nodatavals[0]
@@ -24,10 +25,11 @@ def raster_to_numpy(filename):
 
     return data
 
+
 class testAcidity(TestCase):
 
     def test_get_soil_mlw(self):
-        mlw = np.array([50,66])
+        mlw = np.array([50, 66])
         soil_codes = np.array([140000, 40000])
         a = niche_vlaanderen.Acidity()
         result = a._get_soil_mlw(soil_codes, mlw)
@@ -39,7 +41,7 @@ class testAcidity(TestCase):
         a = niche_vlaanderen.Acidity()
         result = a._get_mineral_richness_class(conductivity)
 
-        np.testing.assert_equal(np.array([2,1,-99, 2]), result)
+        np.testing.assert_equal(np.array([2, 1, -99, 2]), result)
 
     def test_acidity_partial(self):
         rainwater = np.array([0])
@@ -50,7 +52,7 @@ class testAcidity(TestCase):
 
         a = niche_vlaanderen.Acidity()
         result = a._get_acidity(rainwater, mineral_richness, inundation,
-            seepage, soil_mlw)
+                                seepage, soil_mlw)
 
         np.testing.assert_equal(np.array([3]), result)
 
@@ -59,10 +61,7 @@ class testAcidity(TestCase):
         a = niche_vlaanderen.Acidity()
         result = a._get_seepage_code(seepage)
 
-        # expected below is what you expect from original codetable
-        # this is different from the documentation
-        # https://github.com/inbo/niche_vlaanderen/issues/9
-        expected = np.array([1,1,1,1,2,3])
+        expected = np.array([1, 1, 1, 1, 2, 3])
         np.testing.assert_equal(expected, result)
 
     def test_acidity(self):
@@ -74,19 +73,22 @@ class testAcidity(TestCase):
         mlw = np.array([50])
 
         a = niche_vlaanderen.Acidity()
-        result = a.calculate(soilcode, mlw, inundation, seepage, conductivity, rainwater)
+        result = a.calculate(soilcode, mlw, inundation, seepage, conductivity,
+                             rainwater)
         np.testing.assert_equal(3, result)
 
     def test_acidity_testcase(self):
         a = niche_vlaanderen.Acidity()
         soil_code = raster_to_numpy("testcase/input/soil_codes.asc")
         mlw = raster_to_numpy("testcase/input/mlw.asc")
-        inundation = raster_to_numpy("testcase/input/inundation_nutrient_level.asc")
+        inundation = \
+            raster_to_numpy("testcase/input/inundation_nutrient_level.asc")
         rainwater = raster_to_numpy("testcase/input/nullgrid.asc")
         seepage = raster_to_numpy("testcase/input/seepage.asc")
         conductivity = raster_to_numpy("testcase/input/conductivity.asc")
         acidity = raster_to_numpy("testcase/intermediate/ph.asc")
         acidity[np.isnan(acidity)] = -99
-        result = a.calculate(soil_code, mlw, inundation, seepage, conductivity, rainwater)
+        result = a.calculate(soil_code, mlw, inundation, seepage,
+                             conductivity, rainwater)
 
         np.testing.assert_equal(acidity, result)

@@ -1,10 +1,10 @@
 from unittest import TestCase
 
 import numpy as np
-
 import rasterio
 
 import niche_vlaanderen
+
 
 def raster_to_numpy(filename):
     '''Read a GDAL grid as numpy array
@@ -24,6 +24,7 @@ def raster_to_numpy(filename):
         data[data == nodata] = -99
 
     return data
+
 
 class testNutrientLevel(TestCase):
 
@@ -47,7 +48,6 @@ class testNutrientLevel(TestCase):
         result = nl._get(management, soil_code, nitrogen, inundation)
         np.testing.assert_equal(np.array(5), result)
 
-
     def test_calculate(self):
         nl = niche_vlaanderen.NutrientLevel()
         management = np.array([2])
@@ -57,8 +57,9 @@ class testNutrientLevel(TestCase):
         nitrogen_animal = np.array([350])
         nitrogen_fertilizer = np.array([0])
         inundation = np.array([1])
-        result = nl.calculate(soil_code, msw, nitrogen_deposition, nitrogen_animal,
-                              nitrogen_fertilizer, management, inundation)
+        result = nl.calculate(soil_code, msw, nitrogen_deposition,
+                              nitrogen_animal, nitrogen_fertilizer, management,
+                              inundation)
 
         np.testing.assert_equal(np.array([5]), result)
 
@@ -66,14 +67,18 @@ class testNutrientLevel(TestCase):
         nl = niche_vlaanderen.NutrientLevel()
         soil_code = raster_to_numpy("testcase/input/soil_codes.asc")
         msw = raster_to_numpy("testcase/input/msw.asc")
-        nitrogen_deposition = raster_to_numpy("testcase/input/nitrogen_atmospheric.asc")
+        nitrogen_deposition = \
+            raster_to_numpy("testcase/input/nitrogen_atmospheric.asc")
         nitrogen_animal = raster_to_numpy("testcase/input/nitrogen_animal.asc")
         nitrogen_fertilizer = raster_to_numpy("testcase/input/nullgrid.asc")
-        inundation = raster_to_numpy("testcase/input/inundation_nutrient_level.asc")
+        inundation = \
+            raster_to_numpy("testcase/input/inundation_nutrient_level.asc")
         management = raster_to_numpy("testcase/input/management.asc")
 
-        nutrient_level = raster_to_numpy("testcase/intermediate/nutrient_level.asc")
-        result = nl.calculate(soil_code, msw, nitrogen_deposition, nitrogen_animal,
-                              nitrogen_fertilizer, management, inundation)
+        nutrient_level = \
+            raster_to_numpy("testcase/intermediate/nutrient_level.asc")
+        result = nl.calculate(soil_code, msw, nitrogen_deposition,
+                              nitrogen_animal, nitrogen_fertilizer, management,
+                              inundation)
 
         np.testing.assert_equal(nutrient_level, result)
