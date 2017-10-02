@@ -108,10 +108,11 @@ De Invloed die correspondeert met het gekozen management kan met het bodemtype e
 Invloed Overstroming
 ====================
 
-De waarden voor trofie die in de vorige stap berekend werden worden met 1 verhoogd indien er zich overstromingen voordoen.
-Het is echter niet mogelijk dat de waarde hoger wordt dan 5.
+De waarden voor trofie die in de vorige stap berekend werden worden met 1 verhoogd indien er zich overstromingen voordoen én de trofie 3 of lager is.
+
+Opmerking: het Vlaamse model wijkt hier af van het oorspronkelijke Nederlandse Niche model waarbij ook waarden van 4 stijgen tot 5 bij overstroming.
 
 .. topic:: Voorbeeld
 
   De oorspronkelijk gecodeerde trofie is 4.
-  Door invloed van overstroming wordt dit 5.
+  Door invloed van overstroming blijft dit 4.
