@@ -19,7 +19,7 @@ _allowed_input = [
 _minimal_input = [
     "soil_code", "mlw", "msw", "mhw", "seepage", "inundation_acidity",
     "nitrogen_atmospheric", "nitrogen_animal", "nitrogen_fertilizer",
-    "management", "conductivity", "rainwater", "inundation_vegetation",
+    "management", "conductivity", "rainwater",
     "inundation_nutrient"]
 
 logging.basicConfig()
@@ -227,11 +227,13 @@ class Niche(object):
             self._inputarray["conductivity"], self._inputarray["rainwater"])
 
         vegetation = Vegetation()
+        if "inundation_vegetation" not in self._inputarray:
+            self._inputarray["inundation_vegetation"] = None
+
         self._vegetation, veg_occurence = vegetation.calculate(
             soil_code=self._inputarray["soil_code"],
             nutrient_level=self._abiotic["nutrient_level"],
             acidity=self._abiotic["acidity"],
-            inundation=self._inputarray["inundation_vegetation"],
             mhw=self._inputarray["mhw"],
             mlw=self._inputarray["mlw"])
         occ_table = pd.DataFrame.from_dict(veg_occurence, orient="index")
