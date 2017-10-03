@@ -51,7 +51,7 @@ class Acidity(object):
         # conductivity may contain np.nan values - we ignore the numpy warnings
         # about the fact that these can not be compared.
         with np.errstate(invalid='ignore'):
-            reclass = (conductivity >= 500).astype("int8") + 1
+            reclass = (conductivity >= 500).astype("int8")
         reclass[np.isnan(conductivity)] = -99
         return reclass
 
@@ -73,13 +73,9 @@ class Acidity(object):
                 sel_seepage, sel_soil_mlw_class = labels
             subtable = subtable.copy().reset_index(drop=True)
 
-            # TODO: 1 is added to rainwater and inundation because a different
-            # convention is used between the code table and the actual grid
-            # we should sort this out.
-            # https://github.com/inbo/niche_vlaanderen/issues/13
-            selection = ((rainwater + 1 == sel_rainwater)
+            selection = ((rainwater == sel_rainwater)
                          & (mineral_richness == sel_mr)
-                         & (inundation + 1 == sel_inundation)
+                         & (inundation == sel_inundation)
                          & (seepage == sel_seepage)
                          & (soil_mlw_class == sel_soil_mlw_class))
             result[(selection)] = subtable.acidity[0]

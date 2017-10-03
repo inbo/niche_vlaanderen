@@ -41,7 +41,7 @@ class testAcidity(TestCase):
         a = niche_vlaanderen.Acidity()
         result = a._get_mineral_richness_class(conductivity)
 
-        np.testing.assert_equal(np.array([2, 1, -99, 2]), result)
+        np.testing.assert_equal(np.array([1, 0, -99, 1]), result)
 
     def test_acidity_partial(self):
         rainwater = np.array([0])
