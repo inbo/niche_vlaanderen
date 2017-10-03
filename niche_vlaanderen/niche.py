@@ -236,10 +236,9 @@ class Niche(object):
 
         self._vegetation, veg_occurence = vegetation.calculate(
             soil_code=self._inputarray["soil_code"],
+            mhw=self._inputarray["mhw"], mlw=self._inputarray["mlw"],
             nutrient_level=self._abiotic["nutrient_level"],
-            acidity=self._abiotic["acidity"],
-            mhw=self._inputarray["mhw"],
-            mlw=self._inputarray["mlw"])
+            acidity=self._abiotic["acidity"])
         occ_table = pd.DataFrame.from_dict(veg_occurence, orient="index")
         occ_table.columns = ['occurence']
 

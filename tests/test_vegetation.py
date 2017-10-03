@@ -35,9 +35,23 @@ class testVegetation(TestCase):
         mhw = np.array([10])
         soil_codes = np.array([140000])
         v = niche_vlaanderen.Vegetation()
-        veg_predict, veg_occurence = v.calculate(soil_codes, nutrient_level,
-                                                 acidity, mhw, mlw)
+        veg_predict, veg_occurence = v.calculate(soil_codes, mhw, mlw,
+                                                 nutrient_level, acidity)
         correct = [7, 8, 12, 16]
+        for vi in veg_predict:
+            if vi in correct:
+                np.testing.assert_equal(np.array([1]), veg_predict[vi])
+            else:
+                np.testing.assert_equal(np.array([0]), veg_predict[vi])
+
+    def test_one_value_simple(self):
+        mlw = np.array([50])
+        mhw = np.array([10])
+        soil_codes = np.array([80000])
+        v = niche_vlaanderen.Vegetation()
+        veg_predict, veg_occurence = v.calculate(soil_codes,
+                                                 mhw, mlw, full_model=False)
+        correct = [3, 8, 11, 18, 23, 27]
         for vi in veg_predict:
             if vi in correct:
                 np.testing.assert_equal(np.array([1]), veg_predict[vi])
@@ -51,8 +65,8 @@ class testVegetation(TestCase):
         mhw = np.array([10])
         soil_codes = np.array([140000])
         v = niche_vlaanderen.Vegetation()
-        veg_predict, veg_occurence = v.calculate(soil_codes, nutrient_level,
-                                                 acidity, mhw, mlw)
+        veg_predict, veg_occurence = v.calculate(soil_codes, mhw, mlw,
+                                                 nutrient_level, acidity)
         correct = [] # no types should match
         for vi in veg_predict:
             if vi in correct:
@@ -69,8 +83,8 @@ class testVegetation(TestCase):
         inundation = np.array([1])
         v = niche_vlaanderen.Vegetation()
         veg_predict, veg_occurence = \
-            v.calculate(soil_codes, nutrient_level, acidity, mhw,
-                        mlw, inundation=inundation)
+            v.calculate(soil_codes, mhw, mlw, nutrient_level, acidity,
+                        inundation=inundation)
         correct = [7, 12, 16]
         for vi in veg_predict:
             if vi in correct:
@@ -86,10 +100,10 @@ class testVegetation(TestCase):
         soil_code = np.array([[140000, 140000], [140000, 140000]])
         inundation = np.array([[1, 1], [1, 1]])
         v = niche_vlaanderen.Vegetation()
-        veg_predict, veg_occurence = v.calculate(soil_code=soil_code,
+        veg_predict, veg_occurence = v.calculate(soil_code=soil_code, mhw=mhw,
+                                                 mlw=mlw,
                                                  nutrient_level=nutrient_level,
                                                  acidity=acidity,
-                                                 mhw=mhw, mlw=mlw,
                                                  inundation=inundation)
         # check no data propagates nicely
         self.assertEqual(-99, veg_predict[1][1, 1])
@@ -123,8 +137,8 @@ class testVegetation(TestCase):
                               conductivity, regenlens)
 
         v = niche_vlaanderen.Vegetation()
-        veg_predict, veg_occurence = v.calculate(soil_code, nutrient_level,
-                                                 acidity, mhw, mlw)
+        veg_predict, veg_occurence = v.calculate(soil_code, mhw, mlw,
+                                                 nutrient_level, acidity)
 
         for i in range(1, 28):
             vi = raster_to_numpy("testcase/VegNoEffectsRef/v%d.asc" % i)

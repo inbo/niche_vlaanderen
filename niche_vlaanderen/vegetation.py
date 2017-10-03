@@ -32,7 +32,7 @@ class Vegetation(object):
         """
         self._ct_vegetation = pd.read_csv(ct_vegetation)
 
-    def calculate(self, soil_code, nutrient_level, acidity, mhw, mlw,
+    def calculate(self, soil_code, mhw, mlw, nutrient_level=None, acidity=None,
                   management=None, inundation=None, return_all=True,
                   full_model=True):
         """ Calculate vegetation types based on input arrays
@@ -48,8 +48,10 @@ class Vegetation(object):
             vegetation can occur.
 
         """
-        nodata = ((soil_code == -99) | (nutrient_level == -99)
-                  | (acidity == -99) | np.isnan(mhw) | np.isnan(mlw))
+        nodata = ((soil_code == -99) | np.isnan(mhw) | np.isnan(mlw))
+
+        if full_model:
+            nodata = nodata | (nutrient_level == -99) | (acidity == -99)
 
         if inundation is not None:
             nodata = nodata | (inundation == -99)
