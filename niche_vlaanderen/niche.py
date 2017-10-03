@@ -177,6 +177,10 @@ class Niche(object):
             self.log.error("Error: not all MHW values are higher than MLW")
             return False
 
+        if np.any(inputarray.msw <= inputarray.mlw):
+            self.log.error("Error: not all MSW values are higher than MLW")
+            return False
+
         # if all is successful:
         self._inputarray = inputarray
 
