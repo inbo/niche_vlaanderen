@@ -35,10 +35,31 @@ class testNutrientLevel(TestCase):
         result = nl._get_mineralisation(soil_codes, msw)
         np.testing.assert_equal(np.array([75]), result)
 
-    def test__get_array(self):
-        '''
-         Array version of the documentation test
-        '''
+    def test_borders(self):
+        soil_codes = np.array([10000, 10000, 10000, 10000, 10000])
+        msw = np.array([4, 5, 7, 10, 11])
+        nl = niche_vlaanderen.NutrientLevel()
+        result_nm = nl._get_mineralisation(soil_codes, msw)
+        expected_nm = np.array([50, 50, 55, 55, 76])
+        np.testing.assert_equal(expected_nm, result_nm)
+        nuls = np.array([0, 0, 0, 0, 0])
+        # we want to check the boundaries ]156, 293]
+        nitrogen_sum = np.array([155, 156, 200, 293,294])
+        # so we substract the nitrogen_sum from the expected mineralisation
+        nitrogen_animal = nitrogen_sum - expected_nm
+        management = np.array([2, 2, 2, 2, 2])
+        result = nl.calculate(soil_code=soil_codes,
+                     msw=msw,
+                     management=management,
+                     nitrogen_animal=nitrogen_animal,
+                     nitrogen_atmospheric=nuls,
+                     nitrogen_fertilizer=nuls,
+                     inundation=nuls)
+        expected = np.array([2, 2, 3, 3, 4])
+        np.testing.assert_equal(expected, result)
+
+    def test__get(self):
+
         management = np.array([2])
         soil_code = np.array([140000])
         nitrogen = np.array([445])

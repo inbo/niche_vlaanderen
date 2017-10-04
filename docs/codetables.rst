@@ -2,6 +2,25 @@
 Code Tables
 #################
 
+The logic of Niche is largely based on code tables.
+They convert values (eg mlw, ...) to another (eg soil_mlw_class).
+For categorical data, this happens directly. For continuous data such as
+nitrogren or mhw, minimum and maximum values are used.
+
+  .. csv-table:: interpretation of minimum and maximum values
+    :header-rows: 1
+
+    soil_code,msw_min,msw_max,nitrogen_mineralisation
+    10000,-5000,5,50
+    10000,5,10,55
+    10000,10,15,76
+
+Niche will use the values from the _max column to determine to which category a value has to be added.
+In this particular case, with a soil_code of 10000 an MSW values ]5,10] will give the value 55: the upper limit is included, the lower limit is not.
+A value of msw=5 will give nitrogen_mineralisation=50 as a result, a value of msw10 will lead to nitrogen_mineralisation=55.
+
+By default the codetables of the niche_vlaanderen package are used, but the user can supply one or more own codetables.
+
 .. _soil_codes:
 
 soil_codes
@@ -33,3 +52,13 @@ Required columns are:
  * inundation
 
 Other columns can exist but are ignored.
+
+The lower and upper limits of mhw and mlw are included when classifying.
+
+  .. csv-table:: interpretation of minimum and maximum values
+    :header-rows: 1
+
+    veg_code,veg_type,soil_code,nutrient_level,acidity,mhw_min,mhw_max,mlw_min,mlw_max
+    1,Sphagno-Betuletum,30000,2,1,20,1,38,20
+
+In the above case, both mhw values 20 and 1 both fullfill the required range.

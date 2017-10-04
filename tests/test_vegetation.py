@@ -58,6 +58,15 @@ class testVegetation(TestCase):
             else:
                 np.testing.assert_equal(np.array([0]), veg_predict[vi])
 
+    def test_borders(self):
+        soil_code = np.array([30000, 30000, 30000, 30000, 30000])
+        mhw = np.array([21, 20, 10, 1,0])
+        mlw = np.array([30, 30, 30, 30, 30])
+        v = niche_vlaanderen.Vegetation()
+        veg_predict, _ = v.calculate(soil_code, mhw, mlw, full_model=False)
+        expected = [0,1,1,1,0]
+        np.testing.assert_equal(expected, veg_predict[1])
+
     def test_one_value(self):
         nutrient_level = np.array([5])
         acidity = np.array([3])
