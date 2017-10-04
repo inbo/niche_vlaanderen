@@ -68,3 +68,38 @@ class testNiche(TestCase):
             self.assertCountEqual(expected_files, dir)
 
         shutil.rmtree(tmpdir)
+
+    def test_testcase_simple(self):
+        """
+        This tests runs the data from the testcase.
+        TODO no actual validation is done!
+
+        # on linux this could be done with gdalcompare.py
+
+        """
+
+        myniche = niche_vlaanderen.Niche()
+        myniche.set_input("soil_code",
+                          "testcase/input/soil_codes.asc",
+                          set_spatial_context=True)
+        myniche.set_input("mhw", "testcase/input/mhw.asc")
+        myniche.set_input("mlw", "testcase/input/mlw.asc")
+        myniche.run(full_model=False)
+        tmpdir = tempfile.mkdtemp()
+        myniche.write(tmpdir)
+        # check tempdir contains the vegation and the abiotic files
+        expected_files = [
+             'V1.tif', 'V2.tif', 'V3.tif', 'V4.tif', 'V5.tif', 'V6.tif',
+             'V7.tif', 'V8.tif', 'V9.tif', 'V10.tif', 'V11.tif', 'V12.tif',
+             'V13.tif', 'V14.tif', 'V15.tif', 'V16.tif', 'V17.tif', 'V18.tif',
+             'V19.tif', 'V20.tif', 'V21.tif', 'V22.tif', 'V23.tif', 'V24.tif',
+             'V25.tif', 'V26.tif', 'V27.tif', 'V28.tif']
+
+        dir = os.listdir(tmpdir)
+
+        if sys.version_info < (3, 2):
+            self.assertItemsEqual(expected_files, dir)
+        else:
+            self.assertCountEqual(expected_files, dir)
+
+        shutil.rmtree(tmpdir)

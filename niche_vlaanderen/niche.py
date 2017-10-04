@@ -51,7 +51,7 @@ class SpatialContext(object):
     def __eq__(self, other):
         """Compare two SpatialContexts
 
-        Small differences (<1cm are allowed)
+        Equal to: Small differences (<1cm are allowed)
         """
 
         if self.affine.almost_equals(other.affine, precision=0.01)\
@@ -61,6 +61,10 @@ class SpatialContext(object):
             return False
 
     def __ne__(self, other):
+        """ Compare two SpatialContexts
+
+        Not equal to: Small differences are allowed
+        """
         if self.affine.almost_equals(other.affine, precision=0.01)\
                 and self.width == other.width and self.heigth == other.heigth:
             return False
@@ -186,7 +190,7 @@ class Niche(object):
 
         return(True)
 
-    def run(self):
+    def run(self, full_model=True):
         """Run the niche model
 
         Runs niche Vlaanderen model. Requires that the necessary input values
@@ -198,50 +202,60 @@ class Niche(object):
         bool:
             Returns true if the calculation was succesfull.
         """
+        if full_model:
+            missing_keys = set(_minimal_input) - set(self._inputfiles.keys())
+            if len(missing_keys) > 0:
+                print("error, different obliged keys are missing")
+                print(missing_keys)
+                return False
 
-        missing_keys = set(_minimal_input) - set(self._inputfiles.keys())
-        if len(missing_keys) > 0:
-            print("error, different obliged keys are missing")
-            print(missing_keys)
-            return False
-
-        if self._check_input_files is False:
-            return False
+            if self._check_input_files is False:
+                return False
 
         # Load every input_file in the input_array
         for f in self._inputfiles:
             with rasterio.open(self._inputfiles[f]) as dst:
                 self._inputarray[f] = dst.read(1)
 
-        nl = NutrientLevel()
-        # TODO: error handling
-        self._abiotic["nutrient_level"] = nl.calculate(
-            self._inputarray["soil_code"], self._inputarray["msw"],
-            self._inputarray["nitrogen_atmospheric"],
-            self._inputarray["nitrogen_animal"],
-            self._inputarray["nitrogen_fertilizer"],
-            self._inputarray["management"],
-            self._inputarray["inundation_nutrient"])
+        if full_model:
+            nl = NutrientLevel()
 
-        acidity = Acidity()
-        self._abiotic["acidity"] = acidity.calculate(
-            self._inputarray["soil_code"], self._inputarray["mlw"],
-            self._inputarray["inundation_acidity"],
-            self._inputarray["seepage"],
-            self._inputarray["conductivity"], self._inputarray["rainwater"])
+            self._abiotic["nutrient_level"] = nl.calculate(
+                self._inputarray["soil_code"], self._inputarray["msw"],
+                self._inputarray["nitrogen_atmospheric"],
+                self._inputarray["nitrogen_animal"],
+                self._inputarray["nitrogen_fertilizer"],
+                self._inputarray["management"],
+                self._inputarray["inundation_nutrient"])
+
+            acidity = Acidity()
+            self._abiotic["acidity"] = acidity.calculate(
+                self._inputarray["soil_code"], self._inputarray["mlw"],
+                self._inputarray["inundation_acidity"],
+                self._inputarray["seepage"],
+                self._inputarray["conductivity"], self._inputarray["rainwater"])
 
         vegetation = Vegetation()
         if "inundation_vegetation" not in self._inputarray:
             self._inputarray["inundation_vegetation"] = None
 
+        veg_arguments = dict(soil_code=self._inputarray["soil_code"],
+                mhw=self._inputarray["mhw"], mlw=self._inputarray["mlw"])
+
+        if full_model:
+            veg_arguments.update(
+                nutrient_level=self._abiotic["nutrient_level"],
+                acidity=self._abiotic["acidity"])
+
         self._vegetation, veg_occurence = vegetation.calculate(
-            soil_code=self._inputarray["soil_code"],
-            mhw=self._inputarray["mhw"], mlw=self._inputarray["mlw"],
-            nutrient_level=self._abiotic["nutrient_level"],
-            acidity=self._abiotic["acidity"])
+            full_model=full_model, **veg_arguments)
+
+
         occ_table = pd.DataFrame.from_dict(veg_occurence, orient="index")
         occ_table.columns = ['occurence']
 
+        # we convert the occurence values to a table to have a pretty print
+        # the values are shown as a percentage
         occ_table['occurence'] = pd.Series(
             ["{0:.2f}%".format(v * 100) for v in occ_table['occurence']],
             index=occ_table.index)
