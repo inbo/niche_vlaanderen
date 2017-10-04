@@ -61,4 +61,4 @@ The lower and upper limits of mhw and mlw are included when classifying.
     veg_code,veg_type,soil_code,nutrient_level,acidity,mhw_min,mhw_max,mlw_min,mlw_max
     1,Sphagno-Betuletum,30000,2,1,20,1,38,20
 
-In the above case, both mhw values 20 and 1 both fullfill the required range.
+In the above case, mhw values 20 and 1 both fullfill the required range.

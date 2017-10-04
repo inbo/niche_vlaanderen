@@ -1,8 +1,8 @@
 .. _trofie:
 
-################################
+##################################
 Berekening Trofie (nutrient_level)
-################################
+##################################
 
 De Trofie (`nutrient_level`) is de mate van voedselrijkdom van de bodem.
 Deze wordt in NICHE weergegeven als een klassevariabele met waarden tussen 1 en 5.
