@@ -1,4 +1,5 @@
 import rasterio
+from affine import Affine
 
 import numpy as np
 import pandas as pd
@@ -45,7 +46,7 @@ class SpatialContext(object):
     def __init__(self, dst):
         self.affine = dst.affine
         self.width = dst.width
-        self.heigth = dst.height
+        self.height = dst.height
         self.crs = dst.crs
 
     def __eq__(self, other):
@@ -55,7 +56,7 @@ class SpatialContext(object):
         """
 
         if self.affine.almost_equals(other.affine, precision=0.01)\
-                and self.width == other.width and self.heigth == other.heigth:
+                and self.width == other.width and self.height == other.height:
             return True
         else:
             return False
@@ -66,10 +67,85 @@ class SpatialContext(object):
         Not equal to: Small differences are allowed
         """
         if self.affine.almost_equals(other.affine, precision=0.01)\
-                and self.width == other.width and self.heigth == other.heigth:
+                and self.width == other.width and self.height == other.height:
             return False
         else:
             return True
+
+    def check_overlap(self, new_sc):
+        if not ((self.affine[0] == new_sc.affine[0])
+                and (self.affine[1] == new_sc.affine[1])
+                and (self.affine[3] == new_sc.affine[3])
+                and (self.affine[4] == new_sc.affine[4])):
+            print("error: different grid size or orientation")
+            return False
+
+            # check cells overlap
+        dgx = (~self.affine)[2] - (~new_sc.affine)[2]
+        dgy = (~self.affine)[5] - (~new_sc.affine)[5]
+
+        # if this differences are not integer numbers, cells do not overlap
+
+        if (dgx - round(dgx)) != 0 or (dgy - round(dgy)) != 0:
+            print("cells do not overlap")
+            return False
+        else:
+            return True
+
+    def set_overlap(self, new_sc):
+        """ Gets the window to be read from a different SpatialContext
+
+        """
+        # Check orientation and cell size are equal
+        if not self.check_overlap(new_sc):
+            return None
+
+        # determine the extent in the old and new system
+        extent_self = (self.affine) * (0,0), \
+                      (self.affine) * (self.width, self.height)
+        print(extent_self)
+        extent_new = (new_sc.affine) * (0,0),\
+                     (new_sc.affine) * (new_sc.width, new_sc.height)
+        print(extent_new)
+        # The startpoint of the combined raster is the left coordinate
+        # (if the 0th coefficient of affine is positive). and the bottom
+        # coordinate (if the 4th coefficient is negative)
+
+
+        if self.affine[0] > 0:
+            extent_x = (max(extent_self[0][0], extent_new[0][0]), min(extent_self[1][0], extent_new[1][0]))
+        else:
+            extent_x = (min(extent_self[0][0], extent_new[0][0]), max(extent_self[1][0], extent_new[1][0]))
+
+        if self.affine[4] > 0:
+            extent_y = max(extent_self[0][1], extent_new[0][1]), min(extent_self[1][1], extent_new[1][1])
+        else:
+            extent_y = min(extent_self[0][1], extent_new[0][1]), max(extent_self[1][1], extent_new[1][1])
+
+        print(extent_x)
+        print(extent_y)
+
+        self.width = round((extent_x[1] - extent_x[0]) / self.affine[0])
+        self.height = round((extent_y[1] - extent_y[0]) / self.affine[4])
+
+        self.affine = Affine(self.affine[0], self.affine[1], extent_x[0],
+                             self.affine[3], self.affine[4], extent_y[0])
+
+        return True
+
+    def get_read_window(self, new_sc):
+        if not self.check_overlap(new_sc):
+            return None
+
+        gminxy = (~new_sc.affine) *((0,0) * self.affine)
+        gmaxxy = (~new_sc.affine) *(
+            (self.width, self.height) * self.affine)
+
+        print(gminxy, gmaxxy)
+        # return (gminxy, gmaxxy)
+        return (gminxy[1], gmaxxy[1]), (gminxy[0], gmaxxy[0])
+
+
 
 
 class Niche(object):
@@ -289,7 +365,7 @@ class Niche(object):
 
         params = dict(
             driver='GTiff',
-            height=self._context.heigth,
+            height=self._context.height,
             width=self._context.width,
             crs=self._context.crs,
             affine=self._context.affine,
@@ -307,3 +383,13 @@ class Niche(object):
         for vi in self._abiotic:
             with rasterio.open(folder + '/%s.tif' % vi, 'w', **params) as dst:
                 dst.write(self._abiotic[vi], 1)
+
+    def _readInputPartial(self, path):
+        """Reads a window of a raster file based on the current SpatialContext
+        """
+        if self._context is None:
+            self.log.error("Spatial context not yet set")
+            return False
+
+        with rasterio.open(path) as dst:
+            sc_new = SpatialContext(dst)
