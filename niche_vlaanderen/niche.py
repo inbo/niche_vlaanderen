@@ -160,7 +160,8 @@ class SpatialContext(object):
         gmaxxy = (~new_sc.affine) *(
             (self.width, self.height) * self.affine)
 
-        return (gminxy[1], gmaxxy[1]), (gminxy[0], gmaxxy[0])
+        return (round(gminxy[1]), round(gmaxxy[1])),\
+               (round(gminxy[0]), round(gmaxxy[0]))
 
 
 
