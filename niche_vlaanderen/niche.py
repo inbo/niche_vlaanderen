@@ -100,9 +100,10 @@ class SpatialContext(object):
         dgy = (~self.affine)[5] - (~new_sc.affine)[5]
 
         # if this differences are not integer numbers, cells do not overlap
-
-        if (dgx - round(dgx)) != 0 or (dgy - round(dgy)) != 0:
+        # we 0.01 m
+        if abs(dgx - round(dgx)) > 0.01 or abs(dgy - round(dgy)) > 0.01:
             print("cells do not overlap")
+            print(dgx, dgy)
             return False
         else:
             return True
@@ -205,10 +206,6 @@ class Niche(object):
             self.log.error("Spatial context not yet set")
             return False
 
-        if set_spatial_context and self._context is True:
-            self.log.error("Spatial context can only be set once")
-            return False
-
         # check type is valid value from list
         if (type not in _allowed_input):
             self.log.error("Unrecognized type %s" % type)
@@ -221,14 +218,11 @@ class Niche(object):
 
         with rasterio.open(path) as dst:
             sc_new = SpatialContext(dst)
-            if set_spatial_context:
-                self._context = sc_new
-            else:
-                if self._context != sc_new:
-                    self.log.error("Spatial context differs (%s)" % path)
-                    self._context.affine
-                    sc_new.affine
-                    return False
+        if set_spatial_context:
+            self._context = sc_new
+        else:
+            if self._context != sc_new:
+                self._context.set_overlap(sc_new)
 
         self._inputfiles[type] = path
         return True
@@ -307,7 +301,9 @@ class Niche(object):
         # Load every input_file in the input_array
         for f in self._inputfiles:
             with rasterio.open(self._inputfiles[f]) as dst:
-                self._inputarray[f] = dst.read(1)
+                window = self._context.get_read_window(SpatialContext(dst))
+                self._inputarray[f] = dst.read(
+                    1, window = window)
 
         if full_model:
             nl = NutrientLevel()
@@ -325,7 +321,8 @@ class Niche(object):
                 self._inputarray["soil_code"], self._inputarray["mlw"],
                 self._inputarray["inundation_acidity"],
                 self._inputarray["seepage"],
-                self._inputarray["conductivity"], self._inputarray["rainwater"])
+                self._inputarray["conductivity"],
+                self._inputarray["rainwater"])
 
         vegetation = Vegetation()
         if "inundation_vegetation" not in self._inputarray:
