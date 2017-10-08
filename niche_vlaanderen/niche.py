@@ -49,6 +49,13 @@ class SpatialContext(object):
         self.height = dst.height
         self.crs = dst.crs
 
+    def __repr__(self):
+        s = "%s" \
+        "width: %d, height: %d" \
+        "%s" % (self.affine, self.width, self.height, self.crs)
+        return s
+
+
     def __eq__(self, other):
         """Compare two SpatialContexts
 
@@ -73,6 +80,14 @@ class SpatialContext(object):
             return True
 
     def check_overlap(self, new_sc):
+        """Checks whether two SpatialContexts overlap
+
+        Overlapping spatial contexts are SpatialContexts with the same grid
+        dimensions (no resampling is needed to convert them).
+
+        Overlapping SpatialContexts can be used to intersect (set_overlap) or
+        can be used to define a read window.
+        """
         if not ((self.affine[0] == new_sc.affine[0])
                 and (self.affine[1] == new_sc.affine[1])
                 and (self.affine[3] == new_sc.affine[3])
@@ -103,27 +118,28 @@ class SpatialContext(object):
         # determine the extent in the old and new system
         extent_self = (self.affine) * (0,0), \
                       (self.affine) * (self.width, self.height)
-        print(extent_self)
+
         extent_new = (new_sc.affine) * (0,0),\
                      (new_sc.affine) * (new_sc.width, new_sc.height)
-        print(extent_new)
+
         # The startpoint of the combined raster is the left coordinate
         # (if the 0th coefficient of affine is positive). and the bottom
         # coordinate (if the 4th coefficient is negative)
 
 
         if self.affine[0] > 0:
-            extent_x = (max(extent_self[0][0], extent_new[0][0]), min(extent_self[1][0], extent_new[1][0]))
+            extent_x = (max(extent_self[0][0], extent_new[0][0]),
+                        min(extent_self[1][0], extent_new[1][0]))
         else:
-            extent_x = (min(extent_self[0][0], extent_new[0][0]), max(extent_self[1][0], extent_new[1][0]))
+            extent_x = (min(extent_self[0][0], extent_new[0][0]),
+                        max(extent_self[1][0], extent_new[1][0]))
 
         if self.affine[4] > 0:
-            extent_y = max(extent_self[0][1], extent_new[0][1]), min(extent_self[1][1], extent_new[1][1])
+            extent_y = max(extent_self[0][1], extent_new[0][1]),\
+                       min(extent_self[1][1], extent_new[1][1])
         else:
-            extent_y = min(extent_self[0][1], extent_new[0][1]), max(extent_self[1][1], extent_new[1][1])
-
-        print(extent_x)
-        print(extent_y)
+            extent_y = min(extent_self[0][1], extent_new[0][1]),\
+                       max(extent_self[1][1], extent_new[1][1])
 
         self.width = round((extent_x[1] - extent_x[0]) / self.affine[0])
         self.height = round((extent_y[1] - extent_y[0]) / self.affine[4])
@@ -137,12 +153,12 @@ class SpatialContext(object):
         if not self.check_overlap(new_sc):
             return None
 
+        # TODO: error on negative values
+
         gminxy = (~new_sc.affine) *((0,0) * self.affine)
         gmaxxy = (~new_sc.affine) *(
             (self.width, self.height) * self.affine)
 
-        print(gminxy, gmaxxy)
-        # return (gminxy, gmaxxy)
         return (gminxy[1], gmaxxy[1]), (gminxy[0], gmaxxy[0])
 
 
