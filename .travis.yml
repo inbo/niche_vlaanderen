@@ -33,3 +33,6 @@ addons:
     packages:
       - libgdal-dev
       - gdal-bin
+
+after_success:
+  - coveralls || echo "coveralls failure"
