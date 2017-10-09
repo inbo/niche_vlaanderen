@@ -1,6 +1,6 @@
 soil_code,short_name,description,soil_group
 10000,HV,hoogveen,3
-20000,K,klei,1
+20000,K1;klei,1
 30000,KV,venige klei,2
 40000,KX,keileem,3
 50000,L,leem,1
