@@ -7,6 +7,9 @@ import pandas as pd
 class Acidity(object):
     '''
     '''
+
+    nodata = 255 # uint8 data type
+
     def __init__(self, ct_acidity=resource_filename(
             "niche_vlaanderen", "../SystemTables/acidity.csv"),
             ct_soil_mlw_class=resource_filename(
@@ -65,7 +68,7 @@ class Acidity(object):
         seepage = seepage.flatten()
         soil_mlw_class = soil_mlw_class.flatten()
 
-        result = np.full(soil_mlw_class.shape, -99, dtype="int16")
+        result = np.full(soil_mlw_class.shape, self.nodata, dtype="uint8")
         for labels, subtable in self._lnk_acidity.groupby(
                 ["rainwater", "mineral_richness", "inundation", "seepage",
                  "soil_mlw_class"]):

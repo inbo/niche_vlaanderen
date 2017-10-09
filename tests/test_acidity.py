@@ -21,7 +21,7 @@ def raster_to_numpy(filename):
     if data.dtype == 'float32':
         data[data == nodata] = np.nan
     else:
-        data[data == nodata] = -99
+        data[data == nodata] = nodata
 
     return data
 
@@ -95,7 +95,7 @@ class testAcidity(TestCase):
         seepage = raster_to_numpy("testcase/grote_nete/input/seepage.asc")
         conductivity = raster_to_numpy("testcase/grote_nete/input/conductivity.asc")
         acidity = raster_to_numpy("testcase/grote_nete/intermediate/ph.asc")
-        acidity[np.isnan(acidity)] = -99
+        acidity[np.isnan(acidity)] = 255
         result = a.calculate(soil_code, mlw, inundation, seepage,
                              conductivity, rainwater)
 

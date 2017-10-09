@@ -392,8 +392,8 @@ class Niche(object):
             crs=self._context.crs,
             affine=self._context.affine,
             count=1,
-            dtype="int16",
-            nodata=-99,
+            dtype="uint8",
+            nodata=255,
             compress="DEFLATE"
         )
 

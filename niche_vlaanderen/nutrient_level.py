@@ -8,6 +8,9 @@ class NutrientLevel(object):
     '''
      Class to calculate the NutrientLevel
     '''
+
+    nodata = 255 # unsigned 8 bit type is used
+
     def __init__(
             self,
             ct_nutrient_level=resource_filename(
@@ -70,7 +73,7 @@ class NutrientLevel(object):
         influence = influence.flatten()
 
         # search for classification values in nutrient level codetable
-        result = np.full(influence.shape, -99, dtype='int16')
+        result = np.full(influence.shape, self.nodata, dtype='uint8')
 
         for name, subtable in self._ct_nutrient_level.groupby(
                 ["soil_code", "management_influence"]):
@@ -85,7 +88,7 @@ class NutrientLevel(object):
 
         # Note that niche_vlaanderen is different from the original model here:
         # only if nutrient_level <4 the inundation rule is applied.
-        selection = ((result < 4) & (result > -99))
+        selection = ((result < 4) & (result != self.nodata))
         result[selection] = (result + (inundation > 0))[selection]
         result = result.reshape(orig_shape)
         return result

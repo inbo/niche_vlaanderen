@@ -4,6 +4,9 @@ from pkg_resources import resource_filename
 import numpy as np
 import pandas as pd
 
+from .nutrient_level import NutrientLevel
+from .acidity import Acidity
+
 
 class Vegetation(object):
     """Helper class to calculate vegetation based on input arrays
@@ -14,6 +17,9 @@ class Vegetation(object):
     Note that to use grid inputs (eg raster files) it is recommended to use
     the Niche Class
     """
+
+    nodata = 255 # uint8
+
     def __init__(self, ct_vegetation=resource_filename(
                     "niche_vlaanderen",
                     "../SystemTables/niche_vegetation.csv")):
@@ -51,7 +57,8 @@ class Vegetation(object):
         nodata = ((soil_code == -99) | np.isnan(mhw) | np.isnan(mlw))
 
         if full_model:
-            nodata = nodata | (nutrient_level == -99) | (acidity == -99)
+            nodata = nodata | (nutrient_level == NutrientLevel.nodata) \
+                     | (acidity == Acidity.nodata)
 
         if inundation is not None:
             nodata = nodata | (inundation == -99)
@@ -81,8 +88,8 @@ class Vegetation(object):
                 if management is not None:
                     current_row = current_row & (row.management == management)
                 vegi = vegi | current_row
-            vegi = vegi.astype("int16")
-            vegi[nodata] = -99
+            vegi = vegi.astype("uint8")
+            vegi[nodata] = self.nodata
 
             if return_all or np.any(vegi):
                 veg_bands[veg_code] = vegi

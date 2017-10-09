@@ -22,7 +22,7 @@ def raster_to_numpy(filename):
     if data.dtype == 'float32':
         data[data == nodata] = np.nan
     else:
-        data[data == nodata] = -99
+        data[data == nodata] = nodata
 
     return data
 
@@ -103,7 +103,7 @@ class testVegetation(TestCase):
 
     def test_occurence(self):
         nutrient_level = np.array([[4, 4], [4, 5]])
-        acidity = np.array([[3, 3], [3, -99]])
+        acidity = np.array([[3, 3], [3, 255]])
         mlw = np.array([[50, 50], [50, 50]])
         mhw = np.array([[31, 30], [10, 4]])
         soil_code = np.array([[140000, 140000], [140000, 140000]])
@@ -115,7 +115,7 @@ class testVegetation(TestCase):
                                                  acidity=acidity,
                                                  inundation=inundation)
         # check no data propagates nicely
-        self.assertEqual(-99, veg_predict[1][1, 1])
+        self.assertEqual(255, veg_predict[1][1, 1])
         self.assertEqual(1 / 3, veg_occurence[12])
         self.assertEqual(1, veg_occurence[7])
         self.assertEqual(2 / 3, veg_occurence[16])
@@ -158,5 +158,5 @@ class testVegetation(TestCase):
             # this also means that if we predict no data everywhere the test
             #  also works :-)
 
-            vi[(veg_predict[i] == -99)] = -99
+            vi[(veg_predict[i] == 255)] = 255
             np.testing.assert_equal(vi, veg_predict[i])
