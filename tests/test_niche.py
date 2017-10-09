@@ -1,5 +1,5 @@
 from unittest import TestCase
-
+import pytest
 
 import niche_vlaanderen
 
@@ -8,6 +8,8 @@ import shutil
 import os
 import sys
 
+import distutils.spawn
+import subprocess
 
 class testNiche(TestCase):
 
@@ -102,15 +104,7 @@ class testNiche(TestCase):
 
         shutil.rmtree(tmpdir)
         
-    def test_grobbendonk(self):
-        """
-        This tests runs the data from the testcase/grobbendonk.
-        TODO no actual validation is done!
-
-        # on linux this could be done with gdalcompare.py
-
-        """
-
+    def create_grobbendonk_niche(self):
         myniche = niche_vlaanderen.Niche()
         myniche.set_input("soil_code",
                           "testcase/grobbendonk/input/soil_codes.asc",
@@ -136,6 +130,18 @@ class testNiche(TestCase):
                           "testcase/grobbendonk/input/seepage.asc")
         myniche.set_input("rainwater",
                           "testcase/grobbendonk/input/nullgrid.asc")
+        return myniche
+
+    def test_grobbendonk(self):
+        """
+        This tests runs the data from the testcase/grobbendonk.
+        TODO no actual validation is done!
+
+        # on linux this could be done with gdalcompare.py
+
+        """
+
+        myniche = self.create_grobbendonk_niche()
         myniche.run()
         tmpdir = tempfile.mkdtemp()
         myniche.write(tmpdir)
@@ -153,5 +159,26 @@ class testNiche(TestCase):
             self.assertItemsEqual(expected_files, dir)
         else:
             self.assertCountEqual(expected_files, dir)
+
+        shutil.rmtree(tmpdir)
+
+    @pytest.mark.skipif(
+        distutils.spawn.find_executable("gdalinfo") is None,
+        reason="gdalinfo not available in the environment.")
+    def test_grobbendonk_validate(self):
+        myniche = self.create_grobbendonk_niche()
+        myniche.run()
+        tmpdir = tempfile.mkdtemp()
+        myniche.write(tmpdir)
+
+        info = subprocess.check_output(
+            ["gdalinfo",
+             "-stats",
+            os.path.join(tmpdir, 'V1.tif')]
+        ).decode('utf-8')
+        assert ("Origin = (164937.500000000000000,216162.500000000000000)" in
+                info)
+        assert ("STATISTICS_MAXIMUM=1" in info)
+        assert ("STATISTICS_MINIMUM=0" in info)
 
         shutil.rmtree(tmpdir)
