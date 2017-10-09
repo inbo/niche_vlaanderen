@@ -272,7 +272,7 @@ class Niche(object):
         Parameters
         ----------
 
-        Folder: string
+        folder: string
             Output folder to which files will be written. Parent directory must
             exist already.
 
@@ -286,6 +286,14 @@ class Niche(object):
         if not hasattr(self, "_vegetation"):
             self.log.error(
                 "A valid run must be done before writing the output.")
+            return False
+
+        if not os.path.exists(folder):
+            try:
+                os.makedirs(folder)
+            except OSError as e:
+                self.log.error("Error creating path")
+                return False
 
         params = dict(
             driver='GTiff',
