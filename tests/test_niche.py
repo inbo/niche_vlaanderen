@@ -101,3 +101,57 @@ class testNiche(TestCase):
             self.assertCountEqual(expected_files, dir)
 
         shutil.rmtree(tmpdir)
+        
+    def test_grobbendonk(self):
+        """
+        This tests runs the data from the testcase/grobbendonk.
+        TODO no actual validation is done!
+
+        # on linux this could be done with gdalcompare.py
+
+        """
+
+        myniche = niche_vlaanderen.Niche()
+        myniche.set_input("soil_code",
+                          "testcase/grobbendonk/input/soil_codes.asc",
+                          set_spatial_context=True)
+        myniche.set_input("mhw", "testcase/grobbendonk/input/mhw.asc")
+        myniche.set_input("mlw", "testcase/grobbendonk/input/mlw.asc")
+        myniche.set_input("msw", "testcase/grobbendonk/input/msw.asc")
+        myniche.set_input("conductivity",
+                          "testcase/grobbendonk/input/conductivity.asc")
+        myniche.set_input("nitrogen_atmospheric",
+                          "testcase/grobbendonk/input/nitrogen_atmospheric.asc")
+        myniche.set_input("nitrogen_animal",
+                          "testcase/grobbendonk/input/nitrogen_animal.asc")
+        myniche.set_input("nitrogen_fertilizer",
+                          "testcase/grobbendonk/input/nullgrid.asc")
+        myniche.set_input("management",
+                          "testcase/grobbendonk/input/management.asc")
+        myniche.set_input("inundation_nutrient",
+                          "testcase/grobbendonk/input/inundation_nutrient.asc")
+        myniche.set_input("inundation_acidity",
+                          "testcase/grobbendonk/input/inundation_nutrient.asc")
+        myniche.set_input("seepage",
+                          "testcase/grobbendonk/input/seepage.asc")
+        myniche.set_input("rainwater",
+                          "testcase/grobbendonk/input/nullgrid.asc")
+        myniche.run()
+        tmpdir = tempfile.mkdtemp()
+        myniche.write(tmpdir)
+        # check tempdir contains the vegation and the abiotic files
+        expected_files = ["nutrient_level.tif", "acidity.tif",
+             'V1.tif', 'V2.tif', 'V3.tif', 'V4.tif', 'V5.tif', 'V6.tif',
+             'V7.tif', 'V8.tif', 'V9.tif', 'V10.tif', 'V11.tif', 'V12.tif',
+             'V13.tif', 'V14.tif', 'V15.tif', 'V16.tif', 'V17.tif', 'V18.tif',
+             'V19.tif', 'V20.tif', 'V21.tif', 'V22.tif', 'V23.tif', 'V24.tif',
+             'V25.tif', 'V26.tif', 'V27.tif', 'V28.tif']
+
+        dir = os.listdir(tmpdir)
+
+        if sys.version_info < (3, 2):
+            self.assertItemsEqual(expected_files, dir)
+        else:
+            self.assertCountEqual(expected_files, dir)
+
+        shutil.rmtree(tmpdir)
