@@ -69,13 +69,11 @@ class testNiche(TestCase):
 
         shutil.rmtree(tmpdir)
 
-    def test_testcase(self):
+    def test_testcase_simple(self):
         """
         This tests runs the data from the testcase/grote_nete.
         TODO no actual validation is done!
-
-        # on linux this could be done with gdalcompare.py
-
+  
         """
 
         myniche = niche_vlaanderen.Niche()
