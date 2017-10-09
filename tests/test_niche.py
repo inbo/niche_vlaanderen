@@ -18,7 +18,7 @@ class testNiche(TestCase):
 
     def test_testcase(self):
         """
-        This tests runs the data from the testcase.
+        This tests runs the data from the testcase/grote_nete.
         TODO no actual validation is done!
 
         # on linux this could be done with gdalcompare.py
@@ -27,28 +27,28 @@ class testNiche(TestCase):
 
         myniche = niche_vlaanderen.Niche()
         myniche.set_input("soil_code",
-                          "testcase/input/soil_codes.asc",
+                          "testcase/grote_nete/input/soil_codes.asc",
                           set_spatial_context=True)
-        myniche.set_input("mhw", "testcase/input/mhw.asc")
-        myniche.set_input("mlw", "testcase/input/mlw.asc")
-        myniche.set_input("msw", "testcase/input/msw.asc")
+        myniche.set_input("mhw", "testcase/grote_nete/input/mhw.asc")
+        myniche.set_input("mlw", "testcase/grote_nete/input/mlw.asc")
+        myniche.set_input("msw", "testcase/grote_nete/input/msw.asc")
         myniche.set_input("conductivity",
-                          "testcase/input/conductivity.asc")
+                          "testcase/grote_nete/input/conductivity.asc")
         myniche.set_input("nitrogen_atmospheric",
-                          "testcase/input/nitrogen_atmospheric.asc")
+                          "testcase/grote_nete/input/nitrogen_atmospheric.asc")
         myniche.set_input("nitrogen_animal",
-                          "testcase/input/nitrogen_animal.asc")
+                          "testcase/grote_nete/input/nitrogen_animal.asc")
         myniche.set_input("nitrogen_fertilizer",
-                          "testcase/input/nullgrid.asc")
-        myniche.set_input("management", "testcase/input/management.asc")
+                          "testcase/grote_nete/input/nullgrid.asc")
+        myniche.set_input("management", "testcase/grote_nete/input/management.asc")
         myniche.set_input("inundation_nutrient",
-                          "testcase/input/inundation_nutrient_level.asc")
+                          "testcase/grote_nete/input/inundation_nutrient_level.asc")
         myniche.set_input("inundation_acidity",
-                          "testcase/input/inundation_nutrient_level.asc")
+                          "testcase/grote_nete/input/inundation_nutrient_level.asc")
         myniche.set_input("inundation_vegetation",
-                          "testcase/input/inundation_vegetation.asc")
-        myniche.set_input("seepage", "testcase/input/seepage.asc")
-        myniche.set_input("rainwater", "testcase/input/nullgrid.asc")
+                          "testcase/grote_nete/input/inundation_vegetation.asc")
+        myniche.set_input("seepage", "testcase/grote_nete/input/seepage.asc")
+        myniche.set_input("rainwater", "testcase/grote_nete/input/nullgrid.asc")
         myniche.run()
         tmpdir = tempfile.mkdtemp()
         myniche.write(tmpdir)
@@ -69,9 +69,9 @@ class testNiche(TestCase):
 
         shutil.rmtree(tmpdir)
 
-    def test_testcase_simple(self):
+    def test_testcase(self):
         """
-        This tests runs the data from the testcase.
+        This tests runs the data from the testcase/grote_nete.
         TODO no actual validation is done!
 
         # on linux this could be done with gdalcompare.py
@@ -80,10 +80,10 @@ class testNiche(TestCase):
 
         myniche = niche_vlaanderen.Niche()
         myniche.set_input("soil_code",
-                          "testcase/input/soil_codes.asc",
+                          "testcase/grote_nete/input/soil_codes.asc",
                           set_spatial_context=True)
-        myniche.set_input("mhw", "testcase/input/mhw.asc")
-        myniche.set_input("mlw", "testcase/input/mlw.asc")
+        myniche.set_input("mhw", "testcase/grote_nete/input/mhw.asc")
+        myniche.set_input("mlw", "testcase/grote_nete/input/mlw.asc")
         myniche.run(full_model=False)
         tmpdir = tempfile.mkdtemp()
         myniche.write(tmpdir)

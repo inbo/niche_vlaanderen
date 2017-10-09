@@ -87,14 +87,14 @@ class testAcidity(TestCase):
 
     def test_acidity_testcase(self):
         a = niche_vlaanderen.Acidity()
-        soil_code = raster_to_numpy("testcase/input/soil_codes.asc")
-        mlw = raster_to_numpy("testcase/input/mlw.asc")
+        soil_code = raster_to_numpy("testcase/grote_nete/input/soil_codes.asc")
+        mlw = raster_to_numpy("testcase/grote_nete/input/mlw.asc")
         inundation = \
-            raster_to_numpy("testcase/input/inundation_nutrient_level.asc")
-        rainwater = raster_to_numpy("testcase/input/nullgrid.asc")
-        seepage = raster_to_numpy("testcase/input/seepage.asc")
-        conductivity = raster_to_numpy("testcase/input/conductivity.asc")
-        acidity = raster_to_numpy("testcase/intermediate/ph.asc")
+            raster_to_numpy("testcase/grote_nete/input/inundation_nutrient_level.asc")
+        rainwater = raster_to_numpy("testcase/grote_nete/input/nullgrid.asc")
+        seepage = raster_to_numpy("testcase/grote_nete/input/seepage.asc")
+        conductivity = raster_to_numpy("testcase/grote_nete/input/conductivity.asc")
+        acidity = raster_to_numpy("testcase/grote_nete/intermediate/ph.asc")
         acidity[np.isnan(acidity)] = -99
         result = a.calculate(soil_code, mlw, inundation, seepage,
                              conductivity, rainwater)

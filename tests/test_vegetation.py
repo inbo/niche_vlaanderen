@@ -121,20 +121,20 @@ class testVegetation(TestCase):
         self.assertEqual(2 / 3, veg_occurence[16])
 
     def test_testcase(self):
-        soil_code = raster_to_numpy("testcase/input/soil_codes.asc")
-        msw = raster_to_numpy("testcase/input/msw.asc")
-        mhw = raster_to_numpy("testcase/input/mhw.asc")
-        mlw = raster_to_numpy("testcase/input/mlw.asc")
+        soil_code = raster_to_numpy("testcase/grote_nete/input/soil_codes.asc")
+        msw = raster_to_numpy("testcase/grote_nete/input/msw.asc")
+        mhw = raster_to_numpy("testcase/grote_nete/input/mhw.asc")
+        mlw = raster_to_numpy("testcase/grote_nete/input/mlw.asc")
         inundation = \
-            raster_to_numpy("testcase/input/inundation_nutrient_level.asc")
-        regenlens = raster_to_numpy("testcase/input/nullgrid.asc")
-        seepage = raster_to_numpy("testcase/input/seepage.asc")
-        conductivity = raster_to_numpy("testcase/input/conductivity.asc")
+            raster_to_numpy("testcase/grote_nete/input/inundation_nutrient_level.asc")
+        regenlens = raster_to_numpy("testcase/grote_nete/input/nullgrid.asc")
+        seepage = raster_to_numpy("testcase/grote_nete/input/seepage.asc")
+        conductivity = raster_to_numpy("testcase/grote_nete/input/conductivity.asc")
         nitrogen_deposition = \
-            raster_to_numpy("testcase/input/nitrogen_atmospheric.asc")
-        nitrogen_animal = raster_to_numpy("testcase/input/nitrogen_animal.asc")
-        nitrogen_fertilizer = raster_to_numpy("testcase/input/nullgrid.asc")
-        management = raster_to_numpy("testcase/input/management.asc")
+            raster_to_numpy("testcase/grote_nete/input/nitrogen_atmospheric.asc")
+        nitrogen_animal = raster_to_numpy("testcase/grote_nete/input/nitrogen_animal.asc")
+        nitrogen_fertilizer = raster_to_numpy("testcase/grote_nete/input/nullgrid.asc")
+        management = raster_to_numpy("testcase/grote_nete/input/management.asc")
 
         nl = niche_vlaanderen.NutrientLevel()
         nutrient_level = nl.calculate(soil_code, msw, nitrogen_deposition,
@@ -150,7 +150,7 @@ class testVegetation(TestCase):
                                                  nutrient_level, acidity)
 
         for i in range(1, 28):
-            vi = raster_to_numpy("testcase/VegNoEffectsRef/v%d.asc" % i)
+            vi = raster_to_numpy("testcase/grote_nete/VegNoEffectsRef/v%d.asc" % i)
 
             # TODO: this is dirty - we apply the same no data filter to the
             # original set the new set, as this was done incorrectly in the

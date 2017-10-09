@@ -86,18 +86,18 @@ class testNutrientLevel(TestCase):
 
     def test_nutrient_level_testcase(self):
         nl = niche_vlaanderen.NutrientLevel()
-        soil_code = raster_to_numpy("testcase/input/soil_codes.asc")
-        msw = raster_to_numpy("testcase/input/msw.asc")
+        soil_code = raster_to_numpy("testcase/grote_nete/input/soil_codes.asc")
+        msw = raster_to_numpy("testcase/grote_nete/input/msw.asc")
         nitrogen_deposition = \
-            raster_to_numpy("testcase/input/nitrogen_atmospheric.asc")
-        nitrogen_animal = raster_to_numpy("testcase/input/nitrogen_animal.asc")
-        nitrogen_fertilizer = raster_to_numpy("testcase/input/nullgrid.asc")
+            raster_to_numpy("testcase/grote_nete/input/nitrogen_atmospheric.asc")
+        nitrogen_animal = raster_to_numpy("testcase/grote_nete/input/nitrogen_animal.asc")
+        nitrogen_fertilizer = raster_to_numpy("testcase/grote_nete/input/nullgrid.asc")
         inundation = \
-            raster_to_numpy("testcase/input/inundation_nutrient_level.asc")
-        management = raster_to_numpy("testcase/input/management.asc")
+            raster_to_numpy("testcase/grote_nete/input/inundation_nutrient_level.asc")
+        management = raster_to_numpy("testcase/grote_nete/input/management.asc")
 
         nutrient_level = \
-            raster_to_numpy("testcase/intermediate/nutrient_level.asc")
+            raster_to_numpy("testcase/grote_nete/intermediate/nutrient_level.asc")
         result = nl.calculate(soil_code, msw, nitrogen_deposition,
                               nitrogen_animal, nitrogen_fertilizer, management,
                               inundation)
