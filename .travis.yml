@@ -24,6 +24,7 @@ before_install:
 
 install:
   - pip install --use-wheel -r dev-requirements.txt
+  - pip install coveralls
   - pip install .
 
 addons:
