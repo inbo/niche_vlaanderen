@@ -35,7 +35,7 @@ class SpatialContext(object):
     affine: Affine
         Matrix that contains the affine transformation of the plane to convert
         grid coordinates to real world coordinates.
-        https://pypi.python.org/pypi/affine/1.0
+        https://github.com/sgillies/affine
     width, height: int
         Integer numbers containing the width and height of the raster
     crs: rasterio.CRS
@@ -55,12 +55,20 @@ class SpatialContext(object):
         "%s" % (self.affine, self.width, self.height, self.crs)
         return s
 
-
     def __eq__(self, other):
         """Compare two SpatialContexts
 
         Equal to: Small differences (<1cm are allowed)
         """
+
+        if self.width != other.width:
+            return False
+
+        if self.height != other.height:
+            return False
+
+        if self.crs.to_string() != other.crs.to_string():
+            return False
 
         if self.affine.almost_equals(other.affine, precision=0.01)\
                 and self.width == other.width and self.height == other.height:
@@ -73,6 +81,15 @@ class SpatialContext(object):
 
         Not equal to: Small differences are allowed
         """
+        if self.width != other.width:
+            return True
+
+        if self.height != other.height:
+            return True
+
+        if self.crs.to_string() != other.crs.to_string():
+            return True
+
         if self.affine.almost_equals(other.affine, precision=0.01)\
                 and self.width == other.width and self.height == other.height:
             return False
@@ -109,7 +126,11 @@ class SpatialContext(object):
             return True
 
     def set_overlap(self, new_sc):
-        """ Gets the window to be read from a different SpatialContext
+        """ Sets the spatial context to the overlap of both SpatialContexts
+
+        Parameters
+        ==========
+        new_sc: SpatialContext
 
         """
         # Check orientation and cell size are equal
@@ -151,14 +172,31 @@ class SpatialContext(object):
         return True
 
     def get_read_window(self, new_sc):
+        """Gets the read window that overlap with a different SpatialContext
+
+        Gets the window to be read from a new SpatialContext to
+        overlap with the current (equally large or larger) SpatialContext
+
+        Parameters
+        ==========
+
+        new_sc: SpatialContext
+            Spatial context for which a read window is to be determined,
+            based on the extent of the overall (equally large or larger
+            base SpatialContext)
+        """
         if not self.check_overlap(new_sc):
             return None
-
-        # TODO: error on negative values
 
         gminxy = (~new_sc.affine) *((0,0) * self.affine)
         gmaxxy = (~new_sc.affine) *(
             (self.width, self.height) * self.affine)
+
+        if (gminxy[0] <0 or gminxy[1] < 0
+            or gmaxxy[0] > new_sc.width or gmaxxy[1] > new_sc.height):
+            print("Error: new SpatialContexts is larger than current context\n"
+                  "Can not determine a read window")
+            return None
 
         return (round(gminxy[1]), round(gmaxxy[1])),\
                (round(gminxy[0]), round(gmaxxy[0]))

@@ -165,6 +165,7 @@ class testNiche(TestCase):
     @pytest.mark.skipif(
         distutils.spawn.find_executable("gdalinfo") is None,
         reason="gdalinfo not available in the environment.")
+
     def test_grobbendonk_validate(self):
         myniche = self.create_grobbendonk_niche()
         myniche.run()
