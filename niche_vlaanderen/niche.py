@@ -266,30 +266,31 @@ class Niche(object):
         self._inputfiles[type] = path
         return True
 
-    def _check_input_files(self):
+    def _check_input_files(self, full_model):
         """ basic input checks (valid files etc)
 
         """
 
         # check files exist
         for f in self._inputfiles:
-            if not os.path.exists(f):
-                self.log.error("File %s does not exist" % f)
+            p = self._inputfiles[f]
+            if not os.path.exists(p):
+                self.log.error("File %s does not exist" % p)
                 return False
-
-        for f in self._inputfiles:
-            try:
-                dst = rasterio.open(f)
-            except:
-                self.log.error("Error while opening file %s" % f)
 
         # Load every input_file in the input_array
         inputarray = dict()
         for f in self._inputfiles:
-            dst = rasterio.open(self._inputfiles[f])
+            try:
+                dst = rasterio.open(self._inputfiles[f])
+            except:
+                self.log.error("Error while opening file %s" % f)
+                return False
+
             nodata = dst.nodatavals[0]
 
-            band = dst.read(1)
+            window = self._context.get_read_window(SpatialContext(dst))
+            band = dst.read(1, window = window)
             # create a mask for no-data values, taking into account data-types
             if band.dtype == 'float32':
                 band[band == nodata] = np.nan
@@ -302,13 +303,35 @@ class Niche(object):
         # check for valid datatypes - values will be checked in the low-level
         # api (eg soilcode present in codetable)
 
-        if np.any(inputarray.mhw <= inputarray.mlw):
-            self.log.error("Error: not all MHW values are higher than MLW")
-            return False
+        if np.any((inputarray['mhw'] > inputarray['mlw'])
+                          & (inputarray["mhw"] != -99)):
+            self.log.error("Error: not all MHW values are lower than MLW")
+            badpoints = np.where(inputarray['mhw'] > inputarray['mlw'])
+            print (badpoints * self._context.affine)
+            # return False # TODO: temporarily disabled to allow grobbendonk case
 
-        if np.any(inputarray.msw <= inputarray.mlw):
-            self.log.error("Error: not all MSW values are higher than MLW")
-            return False
+        if full_model:
+            if np.any(inputarray['msw'] > inputarray['mlw']):
+                self.log.error("Error: not all MSW values are lower than MLW")
+                #return False
+
+            # if np.any(inputarray['nitrogen_animal'] < 0
+            #         | inputarray['nitrogen_animal'] > 10000
+            #         | inputarray['nitrogen_fertilizer'] < 0
+            #         | inputarray['nitrogen_fertilizer'] > 10000
+            #         | inputarray['nitrogen_atmospheric'] < 0
+            #         | inputarray['nitrogen_atmospheric'] > 10000):
+            #     self.log.error("Error: nitrogen values must be >0 and <10000")
+            #     return False
+
+        # check that only valid soiltypes are present
+        # soil_codes = [1,2,3]
+        # if not np.all(np.in1d(input['soil_code'], soil_codes)):
+        #     self.log.error("invalid soil codes are used")
+        #     used_codes = np.unique(input['soil_code'])
+        #     index = ~ np.in1d(used_codes, soil_codes)
+        #     self.log.error(used_codes[index])
+        #     return False
 
         # if all is successful:
         self._inputarray = inputarray
@@ -334,15 +357,8 @@ class Niche(object):
                 print(missing_keys)
                 return False
 
-            if self._check_input_files is False:
-                return False
-
-        # Load every input_file in the input_array
-        for f in self._inputfiles:
-            with rasterio.open(self._inputfiles[f]) as dst:
-                window = self._context.get_read_window(SpatialContext(dst))
-                self._inputarray[f] = dst.read(
-                    1, window = window)
+        if self._check_input_files(full_model) is False:
+            return False
 
         if full_model:
             nl = NutrientLevel()
