@@ -291,6 +291,17 @@ class Niche(object):
 
             window = self._context.get_read_window(SpatialContext(dst))
             band = dst.read(1, window = window)
+
+            if band.dtype == "uint8":
+                band = band.astype(int)
+
+            if f in ('mhw','mlw','msw'):
+                band = band.astype(int)
+
+            if f in ("nitrogen_animal", "nitrogen_fertilizer",
+                     "nitrogen_atmospheric"):
+                band = band.astype('float32')
+
             # create a mask for no-data values, taking into account data-types
             if band.dtype == 'float32':
                 band[band == nodata] = np.nan
@@ -308,30 +319,22 @@ class Niche(object):
             self.log.error("Error: not all MHW values are lower than MLW")
             badpoints = np.where(inputarray['mhw'] > inputarray['mlw'])
             print (badpoints * self._context.affine)
-            # return False # TODO: temporarily disabled to allow grobbendonk case
+            return False
 
         if full_model:
             if np.any(inputarray['msw'] > inputarray['mlw']):
                 self.log.error("Error: not all MSW values are lower than MLW")
-                #return False
-
-            # if np.any(inputarray['nitrogen_animal'] < 0
-            #         | inputarray['nitrogen_animal'] > 10000
-            #         | inputarray['nitrogen_fertilizer'] < 0
-            #         | inputarray['nitrogen_fertilizer'] > 10000
-            #         | inputarray['nitrogen_atmospheric'] < 0
-            #         | inputarray['nitrogen_atmospheric'] > 10000):
-            #     self.log.error("Error: nitrogen values must be >0 and <10000")
-            #     return False
-
-        # check that only valid soiltypes are present
-        # soil_codes = [1,2,3]
-        # if not np.all(np.in1d(input['soil_code'], soil_codes)):
-        #     self.log.error("invalid soil codes are used")
-        #     used_codes = np.unique(input['soil_code'])
-        #     index = ~ np.in1d(used_codes, soil_codes)
-        #     self.log.error(used_codes[index])
-        #     return False
+                return False
+            with np.errstate(invalid='ignore'):
+                if np.any((inputarray['nitrogen_animal'] < 0)
+                        | (inputarray['nitrogen_animal'] > 10000)
+                        | (inputarray['nitrogen_fertilizer'] < 0)
+                        | (inputarray['nitrogen_fertilizer'] > 10000)
+                        | (inputarray['nitrogen_atmospheric'] < 0)
+                        | (inputarray['nitrogen_atmospheric'] > 10000)):
+                    self.log.error(
+                        "Error: nitrogen values must be >0 and <10000")
+                    return False
 
         # if all is successful:
         self._inputarray = inputarray
