@@ -316,16 +316,22 @@ class Niche(object):
 
         if np.any((inputarray['mhw'] > inputarray['mlw'])
                           & (inputarray["mhw"] != -99)):
-            self.log.error("Error: not all MHW values are lower than MLW")
+            self.log.error("Error: not all MHW values are lower than MLW:")
             badpoints = np.where(inputarray['mhw'] > inputarray['mlw'])
             print (badpoints * self._context.affine)
-            return False
+            #return False
 
         if full_model:
-            if np.any(inputarray['msw'] > inputarray['mlw']):
-                self.log.error("Error: not all MSW values are lower than MLW")
+            if np.any((inputarray['msw'] > inputarray['mlw'])
+                    & (inputarray["mhw"] != -99)
+                    & (inputarray["msw"] != -99)):
+                self.log.error("Error: not all MSW values are lower than MLW:")
+                badpoints = np.where(inputarray['mhw'] > inputarray['mlw'])
+                print (badpoints)
+                print (badpoints * self._context.affine)
                 return False
-            with np.errstate(invalid='ignore'):
+
+            with np.errstate(invalid='ignore'): # ignore NaN comparison errors
                 if np.any((inputarray['nitrogen_animal'] < 0)
                         | (inputarray['nitrogen_animal'] > 10000)
                         | (inputarray['nitrogen_fertilizer'] < 0)
