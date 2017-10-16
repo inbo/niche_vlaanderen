@@ -109,9 +109,9 @@ class testNiche(TestCase):
         myniche.set_input("soil_code",
                           "testcase/grobbendonk/input/soil_codes.asc",
                           set_spatial_context=True)
-        myniche.set_input("mhw", "testcase/grobbendonk/input/mhw.asc")
+        myniche.set_input("mhw", "testcase/grobbendonk/input/mhw_correct2.asc")
         myniche.set_input("mlw", "testcase/grobbendonk/input/mlw.asc")
-        myniche.set_input("msw", "testcase/grobbendonk/input/msw.asc")
+        myniche.set_input("msw", "testcase/grobbendonk/input/msw_correct.asc")
         myniche.set_input("conductivity",
                           "testcase/grobbendonk/input/conductivity.asc")
         myniche.set_input("nitrogen_atmospheric",
