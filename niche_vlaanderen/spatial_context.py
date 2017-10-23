@@ -25,9 +25,11 @@ class SpatialContext(object):
         self.crs = dst.crs
 
     def __repr__(self):
-        s = "%s" \
-        "width: %d, height: %d" \
-        "%s" % (self.affine, self.width, self.height, self.crs)
+        s = "Extent: %s\n\n" \
+            "%s\n\n" \
+        "width: %d, height: %d\n\n" \
+        "Projection: %s" % (self.get_extent(), self.affine.__repr__(),
+                            self.width, self.height, self.crs.to_string())
         return s
 
     def __eq__(self, other):
@@ -100,6 +102,11 @@ class SpatialContext(object):
         else:
             return True
 
+    def get_extent(self):
+        extent_self = (self.affine) * (0,0), \
+                      (self.affine) * (self.width, self.height)
+        return extent_self
+
     def set_overlap(self, new_sc):
         """ Sets the spatial context to the overlap of both SpatialContexts
 
@@ -113,11 +120,9 @@ class SpatialContext(object):
             return None
 
         # determine the extent in the old and new system
-        extent_self = (self.affine) * (0,0), \
-                      (self.affine) * (self.width, self.height)
+        extent_self = self.get_extent()
 
-        extent_new = (new_sc.affine) * (0,0),\
-                     (new_sc.affine) * (new_sc.width, new_sc.height)
+        extent_new = new_sc.get_extent()
 
         # The startpoint of the combined raster is the left coordinate
         # (if the 0th coefficient of affine is positive). and the bottom
