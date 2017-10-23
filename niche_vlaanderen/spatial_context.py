@@ -168,6 +168,7 @@ class SpatialContext(object):
         if not self.check_overlap(new_sc):
             return None
 
+        # Get minimum and maximum position in the new grid system
         gminxy = (~new_sc.affine) *((0,0) * self.affine)
         gmaxxy = (~new_sc.affine) *(
             (self.width, self.height) * self.affine)
@@ -178,5 +179,7 @@ class SpatialContext(object):
                   "Can not determine a read window")
             return None
 
+        # we can safely round hdere because we checked overlap before
+        # (differences are smaller than the tolerance)
         return (round(gminxy[1]), round(gmaxxy[1])),\
                (round(gminxy[0]), round(gmaxxy[0]))
