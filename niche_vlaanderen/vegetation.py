@@ -130,8 +130,8 @@ class Vegetation(object):
         for veg_code, subtable in veg.groupby(["veg_code"]):
             subtable = subtable.reset_index()
 
-            mhw_diff = np.zeros(soil_code.shape)
-            mlw_diff = np.zeros(soil_code.shape)
+            mhw_diff = np.full(soil_code.shape, np.nan)
+            mlw_diff = np.full(soil_code.shape, np.nan)
 
             for row in subtable.itertuples():
                 # mhw smaller than maximum
@@ -141,6 +141,11 @@ class Vegetation(object):
                 # mhw larger than minimum
                 sel = (row.soil_code == soil_code) & (row.mhw_min < mhw)
                 mhw_diff[sel] = (mhw - row.mhw_min)[sel]
+
+                # mhw in range
+                sel = ((row.soil_code == soil_code) & (row.mhw_min >= mhw)
+                & (row.mhw_max <= mhw) )
+                mhw_diff[sel] = (np.zeros(soil_code.shape))[sel]
                 
                 # mlw smaller than maximum
                 sel = (row.soil_code == soil_code) & (row.mlw_max > mlw)
@@ -149,6 +154,11 @@ class Vegetation(object):
                 # mlw larger than minimum
                 sel = (row.soil_code == soil_code) & (row.mlw_min < mlw)
                 mlw_diff[sel] = (mlw - row.mlw_min)[sel]
+                
+                # mlw in range
+                sel = ((row.soil_code == soil_code) & (row.mlw_min >= mlw)
+                & (row.mlw_max <= mlw) )
+                mlw_diff[sel] = (np.zeros(soil_code.shape))[sel]
 
             mhw_diff[nodata] = np.NaN
             mlw_diff[nodata] = np.NaN
