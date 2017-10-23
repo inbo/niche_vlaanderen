@@ -18,6 +18,10 @@ class testNiche(TestCase):
         result = n.set_input("msw", "nonexistingfile")
         self.assertEqual(False, result)
 
+        result = n.set_input("msw", "tests/data/invalid.asc")
+        self.assertEqual(False, result)
+
+
     def test_testcase(self):
         """
         This tests runs the data from the testcase/grote_nete.
