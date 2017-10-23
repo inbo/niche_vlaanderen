@@ -2,6 +2,7 @@ from unittest import TestCase
 import pytest
 
 import niche_vlaanderen
+import numpy as np
 
 import tempfile
 import shutil
@@ -186,4 +187,31 @@ class testNiche(TestCase):
         assert ("STATISTICS_MAXIMUM=1" in info)
         assert ("STATISTICS_MINIMUM=0" in info)
 
+        shutil.rmtree(tmpdir)
+
+    def test_difference(self):
+        n = self.create_grobbendonk_niche()
+        n.calculate_difference()
+        # check dict exists and contains enough nan values
+        self.assertEqual(276072, np.isnan(n._difference["mhw_04"]).sum())
+
+    @pytest.mark.skipif(
+        distutils.spawn.find_executable("gdalinfo") is None,
+        reason="gdalinfo not available in the environment.")
+
+    def test_write_difference(self):
+        n = self.create_grobbendonk_niche()
+        n.calculate_difference()
+
+        tmpdir = tempfile.mkdtemp()
+        n.write_difference(tmpdir)
+        info = subprocess.check_output(
+            ["gdalinfo",
+             "-stats",
+            os.path.join(tmpdir, 'mhw_04.tif')]
+        ).decode('utf-8')
+        self.assertTrue("Origin = (164937.500000000000000,216162.500000000000000)" in
+                info)
+        self.assertTrue ("STATISTICS_MAXIMUM=1051" in info)
+        self.assertTrue ("STATISTICS_MINIMUM=-100" in info)
         shutil.rmtree(tmpdir)

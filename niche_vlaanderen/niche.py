@@ -403,7 +403,6 @@ class Niche(object):
         self._vegetation, veg_occurence = vegetation.calculate(
             full_model=full_model, **veg_arguments)
 
-
         occ_table = pd.DataFrame.from_dict(veg_occurence, orient="index")
         occ_table.columns = ['occurence']
 
@@ -413,6 +412,26 @@ class Niche(object):
             ["{0:.2f}%".format(v * 100) for v in occ_table['occurence']],
             index=occ_table.index)
         print(occ_table)
+
+    def calculate_difference(self):
+        """Calculates the amount MHW/MLW should change to allow vegetation type
+
+        Creates the maps with the difference between the needed MHW and MLW
+        and the actual MHW/MLW for a vegetation type.
+
+        Calculated results will be stored in the niche class in a dict
+        _difference
+
+        keys are "mhw_01" etc
+        """
+        if self._check_input_files(full_model=False) == False:
+            return False
+
+        v = Vegetation()
+        self._difference = v.calculate_difference(
+            self._inputarray["soil_code"], self._inputarray["mhw"],
+            self._inputarray["mlw"]
+        )
 
     def write(self, folder):
         """Saves the model results to a folder
@@ -468,3 +487,54 @@ class Niche(object):
         for vi in self._abiotic:
             with rasterio.open(folder + '/%s.tif' % vi, 'w', **params) as dst:
                 dst.write(self._abiotic[vi], 1)
+
+    def write_difference(self, folder):
+        """Write the calculated differences to a folder
+
+        Saves the modeled differences to a folder. Files will be written as
+        geotiff. Files will have names mhw_01.tif, mlw_01.tif
+
+        Parameters
+        ----------
+
+        folder: string
+            Output folder to which files will be written. Parent directory must
+            exist already.
+
+        Returns
+        -------
+
+        bool:
+            Returns True on success.
+        """
+        if not hasattr(self, "_difference"):
+            self.log.error(
+                "A valid calculate_difference must be done before writing the output.")
+            return False
+
+        if not os.path.exists(folder):
+            try:
+                os.makedirs(folder)
+            except OSError as e:
+                self.log.error("Error creating path")
+                return False
+
+        params = dict(
+            driver='GTiff',
+            height=self._context.height,
+            width=self._context.width,
+            crs=self._context.crs,
+            affine=self._context.affine,
+            count=1,
+            compress="DEFLATE",
+            dtype="float64",
+            nodata = -99999
+        )
+
+        for i in self._difference:
+            with rasterio.open(folder + '/%s.tif' % i, 'w', **params) as dst:
+                band = self._difference[i]
+                band[band==np.nan] = -99999
+                dst.write(band, 1)
+
+        return True
