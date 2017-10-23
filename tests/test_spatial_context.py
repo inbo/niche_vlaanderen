@@ -42,6 +42,18 @@ class testSpatialContext(TestCase):
         self.assertEqual(164937.5, soil_code_sc.affine[2])
         self.assertEqual(216162.5, soil_code_sc.affine[5])
 
+    def test_check_no_overlap(self):
+        grobbendonk = rasterio.open(
+            "testcase/grobbendonk/input/soil_codes.asc")
+        grote_nete = rasterio.open(
+            "testcase/grote_nete/input/soil_codes.asc"
+        )
+        grobbendonk_sc = niche_vlaanderen.niche.SpatialContext(grobbendonk)
+        grote_nete_sc = niche_vlaanderen.niche.SpatialContext(grote_nete)
+
+        # check zones don't overlap
+        self.assertFalse(grobbendonk_sc.check_overlap(grote_nete_sc))
+
     def test_get_read_window(self):
         soil_code = rasterio.open("testcase/grobbendonk/input/soil_codes.asc")
         soil_code_sc = niche_vlaanderen.niche.SpatialContext(soil_code)
