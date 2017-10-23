@@ -94,8 +94,7 @@ class Vegetation(object):
             if return_all or np.any(vegi):
                 veg_bands[veg_code] = vegi
 
-            if np.any(vegi == 1):
-                occurence[veg_code] = (np.sum(vegi == 1)
+            occurence[veg_code] = (np.sum(vegi == 1)
                                        / (vegi.size - np.sum(nodata)))
         return veg_bands, occurence
 
