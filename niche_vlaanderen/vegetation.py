@@ -98,3 +98,64 @@ class Vegetation(object):
                 occurence[veg_code] = (np.sum(vegi == 1)
                                        / (vegi.size - np.sum(nodata)))
         return veg_bands, occurence
+
+    def calculate_difference(self, soil_code, mhw, mlw):
+        """ Calculates the difference between the mhw/mlw and the reference
+
+        This function calculates the difference between the mhw and mlw and
+        the reference values for each vegetation type.
+
+        Positive values indicate too dry values, negative values indicate too
+        wet values.
+
+        Values of zero indicate that the vegetation type can occur based on
+        soil type and the value under consideration (mhw or mlw)
+
+        Returns
+        -------
+        difference: dict
+            A dictionary containing the difference between the vegetation
+            value an the actual value.
+            Keys are eg mhw_01 for mhw and vegetation type 01
+        """
+        nodata = ((soil_code == -99) | np.isnan(mhw) | np.isnan(mlw))
+
+        difference = dict()
+
+        veg = self._ct_vegetation[["veg_code", "soil_code", "mhw_min",
+                                   "mhw_max", "mlw_min","mlw_max"]];
+
+        veg = veg.drop_duplicates()
+
+        for veg_code, subtable in veg.groupby(["veg_code"]):
+            subtable = subtable.reset_index()
+
+            mhw_diff = np.zeros(soil_code.shape)
+            mlw_diff = np.zeros(soil_code.shape)
+
+            for row in subtable.itertuples():
+                # mhw smaller than maximum
+                sel = (row.soil_code == soil_code) & (row.mhw_max > mhw)
+                mhw_diff[sel] = (mhw - row.mhw_max)[sel]
+
+                # mhw larger than minimum
+                sel = (row.soil_code == soil_code) & (row.mhw_min < mhw)
+                mhw_diff[sel] = (mhw - row.mhw_min)[sel]
+                
+                # mlw smaller than maximum
+                sel = (row.soil_code == soil_code) & (row.mlw_max > mlw)
+                mlw_diff[sel] = (mlw - row.mlw_max)[sel]
+
+                # mlw larger than minimum
+                sel = (row.soil_code == soil_code) & (row.mlw_min < mlw)
+                mlw_diff[sel] = (mlw - row.mlw_min)[sel]
+
+            mhw_diff[nodata] = np.NaN
+            mlw_diff[nodata] = np.NaN
+
+            difference["mhw_%02d" % veg_code] = mhw_diff
+            difference["mlw_%02d" % veg_code] = mlw_diff
+
+        return difference
+
+
