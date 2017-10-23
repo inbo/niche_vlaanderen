@@ -3,7 +3,8 @@ from unittest import TestCase
 import rasterio
 
 import niche_vlaanderen
-
+import pytest
+import sys
 
 class testSpatialContext(TestCase):
     def test_extent(self):
@@ -12,7 +13,12 @@ class testSpatialContext(TestCase):
         expected = ((172762.5, 210787.5), (172937.5, 210637.5))
         self.assertEqual(expected, small_sc.get_extent())
 
+    @pytest.mark.skipif(
+        sys.version_info > (3, 0),
+        reason="Python 3 has slightly different formatting.")
+
     def test_repr(self):
+        self.maxDiff = None
         small = rasterio.open("tests/data/msw_small.asc")
         small_sc = niche_vlaanderen.niche.SpatialContext(small)
         exp = "Extent: ((172762.5, 210787.5), (172937.5, 210637.5))\n\n"+ \
