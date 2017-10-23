@@ -27,7 +27,7 @@ class Acidity(object):
         self._lnk_acidity = pd.read_csv(lnk_acidity)
         self._ct_seepage = pd.read_csv(ct_seepage)
 
-    def _get_soil_mlw(self, soil_code, mlw):
+    def _calculate_soil_mlw(self, soil_code, mlw):
         # determine soil_group for soil_code
         orig_shape = mlw.shape
         soil_code = soil_code.flatten()
@@ -50,7 +50,7 @@ class Acidity(object):
         result = result.reshape(orig_shape)
         return result
 
-    def _get_mineral_richness_class(self, conductivity):
+    def _calculate_mineral_richness_class(self, conductivity):
         # conductivity may contain np.nan values - we ignore the numpy warnings
         # about the fact that these can not be compared.
         with np.errstate(invalid='ignore'):
@@ -94,8 +94,8 @@ class Acidity(object):
 
     def calculate(self, soil_class, mlw, inundation, seepage, conductivity,
                   rainwater):
-        soil_mlw = self._get_soil_mlw(soil_class, mlw)
-        mineral_richness = self._get_mineral_richness_class(conductivity)
+        soil_mlw = self._calculate_soil_mlw(soil_class, mlw)
+        mineral_richness = self._calculate_mineral_richness_class(conductivity)
         seepage_code = self._get_seepage_code(seepage)
         acidity = self._get_acidity(rainwater, mineral_richness, inundation,
                                     seepage_code, soil_mlw)

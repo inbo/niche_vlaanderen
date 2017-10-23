@@ -32,7 +32,7 @@ class testAcidity(TestCase):
         mlw = np.array([50, 66])
         soil_codes = np.array([140000, 40000])
         a = niche_vlaanderen.Acidity()
-        result = a._get_soil_mlw(soil_codes, mlw)
+        result = a._calculate_soil_mlw(soil_codes, mlw)
 
         np.testing.assert_equal(np.array([1, 9]), result)
 
@@ -40,14 +40,14 @@ class testAcidity(TestCase):
         mlw = np.array([79,80, 100, 110, 111])
         soil_codes = np.array([140000, 140000, 140000, 140000, 140000])
         a = niche_vlaanderen.Acidity()
-        result = a._get_soil_mlw(soil_codes, mlw)
+        result = a._calculate_soil_mlw(soil_codes, mlw)
         expected =  np.array([1,1,2,2,3])
         np.testing.assert_equal(expected, result)
 
     def test_minerality_class(self):
         conductivity = np.array([500, 100, np.nan, 700])
         a = niche_vlaanderen.Acidity()
-        result = a._get_mineral_richness_class(conductivity)
+        result = a._calculate_mineral_richness_class(conductivity)
 
         np.testing.assert_equal(np.array([1, 0, -99, 1]), result)
 
