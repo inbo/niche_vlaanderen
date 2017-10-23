@@ -32,14 +32,14 @@ class testNutrientLevel(TestCase):
         soil_codes = np.array([140000])
         msw = np.array([33])
         nl = niche_vlaanderen.NutrientLevel()
-        result = nl._get_mineralisation(soil_codes, msw)
+        result = nl._calculate_mineralisation(soil_codes, msw)
         np.testing.assert_equal(np.array([75]), result)
 
     def test_borders(self):
         soil_codes = np.array([10000, 10000, 10000, 10000, 10000])
         msw = np.array([4, 5, 7, 10, 11])
         nl = niche_vlaanderen.NutrientLevel()
-        result_nm = nl._get_mineralisation(soil_codes, msw)
+        result_nm = nl._calculate_mineralisation(soil_codes, msw)
         expected_nm = np.array([50, 50, 55, 55, 76])
         np.testing.assert_equal(expected_nm, result_nm)
         nuls = np.array([0, 0, 0, 0, 0])
@@ -66,7 +66,7 @@ class testNutrientLevel(TestCase):
         inundation = np.array([1])
 
         nl = niche_vlaanderen.NutrientLevel()
-        result = nl._get(management, soil_code, nitrogen, inundation)
+        result = nl._calculate(management, soil_code, nitrogen, inundation)
         np.testing.assert_equal(np.array(5), result)
 
     def test_calculate(self):
