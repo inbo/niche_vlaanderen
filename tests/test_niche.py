@@ -3,6 +3,7 @@ import pytest
 
 import niche_vlaanderen
 import numpy as np
+import pandas as pd
 
 import tempfile
 import shutil
@@ -23,13 +24,7 @@ class testNiche(TestCase):
         self.assertEqual(False, result)
 
 
-    def test_grote_nete(self):
-        """
-        This tests runs the data from the testcase/grote_nete.
-        TODO no actual validation is done!
-
-        """
-
+    def create_grote_nete_niche(self):
         myniche = niche_vlaanderen.Niche()
         myniche.set_input("soil_code",
                           "testcase/grote_nete/input/soil_codes.asc",
@@ -54,7 +49,37 @@ class testNiche(TestCase):
                           "testcase/grote_nete/input/inundation_vegetation.asc")
         myniche.set_input("seepage", "testcase/grote_nete/input/seepage.asc")
         myniche.set_input("rainwater", "testcase/grote_nete/input/nullgrid.asc")
+        return myniche
+
+    def test_grote_nete(self):
+        """
+        This tests runs the data from the testcase/grote_nete.
+        TODO no actual validation is done!
+
+        """
+
+        myniche = self.create_grote_nete_niche()
+
         myniche.run()
+
+        o1 = myniche.occurence
+        o1 = pd.DataFrame(o1, index=[0])
+
+        myniche.set_input("management_vegetation",
+                          "testcase/grote_nete/input/management.asc")
+        myniche.run()
+        o2 = myniche.occurence
+        o2 = pd.DataFrame(o2, index=[0])
+
+        myniche.set_input("inundation_vegetation",
+                          "testcase/grote_nete/input/inundation_vegetation.asc")
+        myniche.run()
+        o3 = myniche.occurence
+        o3 = pd.DataFrame(o3, index=[0])
+
+        self.assertTrue(np.all(o1>=o2))
+        self.assertTrue(np.all(o3>=o2))
+
         tmpdir = tempfile.mkdtemp()
         myniche.write(tmpdir)
         # check tempdir contains the vegation and the abiotic files
@@ -138,9 +163,8 @@ class testNiche(TestCase):
     def test_grobbendonk(self):
         """
         This tests runs the data from the testcase/grobbendonk.
-        TODO no actual validation is done!
 
-        # on linux this could be done with gdalcompare.py
+        The influence of adding management and inundation is checked
 
         """
 

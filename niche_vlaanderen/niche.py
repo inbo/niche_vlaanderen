@@ -15,7 +15,7 @@ _allowed_input = [
     "soil_code", "mlw", "msw", "mhw", "seepage", "nutrient_level",
     "inundation_acidity", "inundation_nutrient", "nitrogen_atmospheric",
     "nitrogen_animal", "nitrogen_fertilizer", "management", "conductivity",
-    "rainwater", "inundation_vegetation"]
+    "rainwater", "inundation_vegetation", "management_vegetation"]
 
 _minimal_input = [
     "soil_code", "mlw", "msw", "mhw", "seepage", "inundation_acidity",
@@ -392,18 +392,24 @@ class Niche(object):
         if "inundation_vegetation" not in self._inputarray:
             self._inputarray["inundation_vegetation"] = None
 
+        if "management_vegetation" not in self._inputarray:
+            self._inputarray["management_vegetation"] = None
+
         veg_arguments = dict(soil_code=self._inputarray["soil_code"],
                 mhw=self._inputarray["mhw"], mlw=self._inputarray["mlw"])
 
         if full_model:
             veg_arguments.update(
                 nutrient_level=self._abiotic["nutrient_level"],
-                acidity=self._abiotic["acidity"])
+                acidity=self._abiotic["acidity"],
+                inundation=self._inputarray["inundation_vegetation"],
+                management=self._inputarray["management_vegetation"]
+            )
 
-        self._vegetation, veg_occurence = vegetation.calculate(
+        self._vegetation, self.occurence = vegetation.calculate(
             full_model=full_model, **veg_arguments)
 
-        occ_table = pd.DataFrame.from_dict(veg_occurence, orient="index")
+        occ_table = pd.DataFrame.from_dict(self.occurence, orient="index")
         occ_table.columns = ['occurence']
 
         # we convert the occurence values to a table to have a pretty print
