@@ -6,6 +6,24 @@ import niche_vlaanderen
 
 
 class testSpatialContext(TestCase):
+    def test_extent(self):
+        small = rasterio.open("tests/data/msw_small.asc")
+        small_sc = niche_vlaanderen.niche.SpatialContext(small)
+        expected = ((172762.5, 210787.5), (172937.5, 210637.5))
+        self.assertEqual(expected, small_sc.get_extent())
+
+    def test_repr(self):
+        small = rasterio.open("tests/data/msw_small.asc")
+        small_sc = niche_vlaanderen.niche.SpatialContext(small)
+        exp = "Extent: ((172762.5, 210787.5), (172937.5, 210637.5))\n\n"+ \
+              "Affine(25.0, 0.0, 172762.5,\n       0.0, -25.0, 210787.5)\n\n"+\
+              "width: 7, height: 6\n\n" +\
+              "Projection: +ellps=intl +lat_0=90 +lat_1=51.1666672333 "+\
+              "+lat_2=49.8333339 +lon_0=4.36748666667 +no_defs +proj=lcc "+\
+              "+towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,"+\
+              "-1.2747 +units=m +x_0=150000.013 +y_0=5400088.438"
+        self.assertEqual(exp, small_sc.__repr__())
+
     def test_check_overlap(self):
 
         soil_code = rasterio.open("testcase/grobbendonk/input/soil_codes.asc")
