@@ -38,13 +38,23 @@ class testSpatialContext(TestCase):
         glg_sc = niche_vlaanderen.niche.SpatialContext(glg)
 
         overlap = soil_code_sc.check_overlap(glg_sc)
-        self.assertEqual(True, overlap)
+        self.assertTrue(overlap)
 
         glg_nete = rasterio.open("testcase/grote_nete/input/mlw.asc")
         glg_nete_sc = niche_vlaanderen.niche.SpatialContext(glg_nete)
 
         overlap = soil_code_sc.check_overlap(glg_nete_sc)
-        self.assertEqual(False, overlap)
+        self.assertFalse(overlap)
+
+    def test_check_overlap_cells_moved(self):
+        small = rasterio.open("tests/data/msw_small.asc")
+        small_sc = niche_vlaanderen.niche.SpatialContext(small)
+        # contains cells moved 0.5 m
+        small_moved = rasterio.open("tests/data/msw_small_moved.asc")
+        small_moved_sc = niche_vlaanderen.niche.SpatialContext(small_moved)
+        self.assertFalse(small_sc.check_overlap(small_moved_sc))
+        self.assertFalse(small_sc.set_overlap(small_moved_sc))
+
 
     def test_check_set_overlap(self):
         soil_code = rasterio.open("testcase/grobbendonk/input/soil_codes.asc")
