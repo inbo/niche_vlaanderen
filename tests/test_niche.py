@@ -23,12 +23,10 @@ class testNiche(TestCase):
         self.assertEqual(False, result)
 
 
-    def test_testcase(self):
+    def test_grote_nete(self):
         """
         This tests runs the data from the testcase/grote_nete.
         TODO no actual validation is done!
-
-        # on linux this could be done with gdalcompare.py
 
         """
 
@@ -210,7 +208,8 @@ class testNiche(TestCase):
              "-stats",
             os.path.join(tmpdir, 'mhw_04.tif')]
         ).decode('utf-8')
-        self.assertTrue("Origin = (164937.500000000000000,216162.500000000000000)" in
+        self.assertTrue(
+            "Origin = (164937.500000000000000,216162.500000000000000)" in
                 info)
         self.assertTrue ("STATISTICS_MAXIMUM=1051" in info)
         self.assertTrue ("STATISTICS_MINIMUM=-100" in info)
