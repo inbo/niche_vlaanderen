@@ -468,13 +468,3 @@ class Niche(object):
         for vi in self._abiotic:
             with rasterio.open(folder + '/%s.tif' % vi, 'w', **params) as dst:
                 dst.write(self._abiotic[vi], 1)
-
-    def _readInputPartial(self, path):
-        """Reads a window of a raster file based on the current SpatialContext
-        """
-        if self._context is None:
-            self.log.error("Spatial context not yet set")
-            return False
-
-        with rasterio.open(path) as dst:
-            sc_new = SpatialContext(dst)
