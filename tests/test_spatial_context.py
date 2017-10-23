@@ -65,3 +65,11 @@ class testSpatialContext(TestCase):
         part_window = soil_code_sc.get_read_window(glg_sc)
 
         self.assertEqual(part_window, None)
+
+    def test_different_crs(self):
+        test_l72 = rasterio.open("tests/data/msw_small.asc")
+        test_wgs84 = rasterio.open("tests/data/msw_small_wgs84.asc")
+        test_l72_sc = niche_vlaanderen.niche.SpatialContext(test_l72)
+        test_wgs84_sc = niche_vlaanderen.niche.SpatialContext(test_wgs84)
+        self.assertFalse(test_wgs84_sc == test_l72_sc)
+        self.assertTrue(test_wgs84_sc != test_l72_sc)
