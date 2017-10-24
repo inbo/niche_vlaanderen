@@ -20,9 +20,7 @@ class Vegetation(object):
 
     nodata = 255 # uint8
 
-    def __init__(self, ct_vegetation=resource_filename(
-                    "niche_vlaanderen",
-                    "../SystemTables/niche_vegetation.csv")):
+    def __init__(self, ct_vegetation=None):
         """ Initializes the Vegetation helper class
 
         This class initializes the Vegetation helper class. By default it uses
@@ -36,6 +34,10 @@ class Vegetation(object):
             Must contain the columns mentioned in the documentation:
             https://inbo.github.io/niche_vlaanderen/codetables.html#niche_vlaanderen
         """
+        if ct_vegetation == None:
+            ct_vegetation = resource_filename(
+                "niche_vlaanderen",
+                "../SystemTables/niche_vegetation.csv")
         self._ct_vegetation = pd.read_csv(ct_vegetation)
 
     def calculate(self, soil_code, mhw, mlw, nutrient_level=None, acidity=None,

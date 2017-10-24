@@ -11,17 +11,19 @@ class NutrientLevel(object):
 
     nodata = 255 # unsigned 8 bit type is used
 
-    def __init__(
-            self,
-            ct_nutrient_level=resource_filename(
+    def __init__(self, ct_nutrient_level=None, ct_management=None,
+                 ct_mineralisation=None):
+        if ct_nutrient_level == None:
+            ct_nutrient_level = resource_filename(
                 "niche_vlaanderen",
-                "../SystemTables/lnk_soil_nutrient_level.csv"),
-            ct_management=resource_filename(
-                "niche_vlaanderen", "../SystemTables/management.csv"),
-            ct_mineralisation=resource_filename(
+                "../SystemTables/lnk_soil_nutrient_level.csv")
+        if ct_management == None:
+            ct_management = resource_filename(
+                "niche_vlaanderen", "../SystemTables/management.csv")
+        if ct_mineralisation == None:
+            ct_mineralisation = resource_filename(
                 "niche_vlaanderen",
                 "../SystemTables/nitrogen_mineralisation.csv")
-            ):
 
         self._ct_nutrient_level = pd.read_csv(ct_nutrient_level)
         self._ct_management = pd.read_csv(ct_management)
@@ -99,7 +101,8 @@ class NutrientLevel(object):
         Calculates the Nutrient level based on numpy arrays
         """
 
-        nitrogen_mineralisation = self._calculate_mineralisation(soil_code, msw)
+        nitrogen_mineralisation = self._calculate_mineralisation(soil_code,
+                                                                 msw)
         total_nitrogen = (nitrogen_mineralisation + nitrogen_atmospheric
                           + nitrogen_animal + nitrogen_fertilizer)
         nutrient_level = self._calculate(management, soil_code, total_nitrogen,
