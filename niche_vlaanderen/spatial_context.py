@@ -7,6 +7,7 @@ class SpatialContext(object):
     This class is based on the rasterio model of a grid.
 
     Attributes
+    ----------
     affine: Affine
         Matrix that contains the affine transformation of the plane to convert
         grid coordinates to real world coordinates.
@@ -28,7 +29,7 @@ class SpatialContext(object):
         s = "Extent: %s\n\n" \
             "%s\n\n" \
         "width: %d, height: %d\n\n" \
-        "Projection: %s" % (self.get_extent(), self.affine.__repr__(),
+        "Projection: %s" % (self.extent, self.affine.__repr__(),
                             self.width, self.height, self.crs.to_string())
         return s
 
@@ -102,7 +103,8 @@ class SpatialContext(object):
         else:
             return True
 
-    def get_extent(self):
+    @property
+    def extent(self):
         extent_self = (self.affine) * (0,0), \
                       (self.affine) * (self.width, self.height)
         return extent_self
@@ -120,9 +122,9 @@ class SpatialContext(object):
             return None
 
         # determine the extent in the old and new system
-        extent_self = self.get_extent()
+        extent_self = self.extent
 
-        extent_new = new_sc.get_extent()
+        extent_new = new_sc.extent
 
         # The startpoint of the combined raster is the left coordinate
         # (if the 0th coefficient of affine is positive). and the bottom

@@ -11,7 +11,7 @@ class testSpatialContext(TestCase):
         small = rasterio.open("tests/data/msw_small.asc")
         small_sc = niche_vlaanderen.niche.SpatialContext(small)
         expected = ((172762.5, 210787.5), (172937.5, 210637.5))
-        self.assertEqual(expected, small_sc.get_extent())
+        self.assertEqual(expected, small_sc.extent)
 
     @pytest.mark.skipif(
         sys.version_info > (3, 0),
