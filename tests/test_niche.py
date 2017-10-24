@@ -23,6 +23,10 @@ class testNiche(TestCase):
         result = n.set_input("msw", "tests/data/invalid.asc")
         self.assertEqual(False, result)
 
+    def test_invalid_input_type(self):
+        n = niche_vlaanderen.Niche()
+        result = n.set_input("bla", "testcase/grote_nete/input/soil_codes.asc")
+        self.assertFalse(result)
 
     def create_grote_nete_niche(self):
         myniche = niche_vlaanderen.Niche()
