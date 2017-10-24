@@ -1,5 +1,6 @@
-import rasterio
 from affine import Affine
+
+from textwrap import dedent
 
 class SpatialContext(object):
     """Stores the spatial context of the grids in niche
@@ -26,11 +27,18 @@ class SpatialContext(object):
         self.crs = dst.crs
 
     def __repr__(self):
-        s = "Extent: %s\n\n" \
-            "%s\n\n" \
-        "width: %d, height: %d\n\n" \
-        "Projection: %s" % (self.extent, self.affine.__repr__(),
-                            self.width, self.height, self.crs.to_string())
+
+        s = """\
+        Extent: %s
+            
+        %s
+        
+        width: %d, height: %d
+        
+        Projection: %s"""
+
+        s = dedent(s) % (self.extent, self.affine.__repr__(),
+                         self.width, self.height, self.crs.to_string())
         return s
 
     def __eq__(self, other):
