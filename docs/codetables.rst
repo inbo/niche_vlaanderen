@@ -26,14 +26,14 @@ By default the codetables of the niche_vlaanderen package are used, but the user
 soil_codes
 ==========
 
-The table `soil_codes.csv <https://github.com/INBO/niche_vlaanderen/blob/master/SystemTables/soil_codes.csv>`_ contains the supported soil_codes in NICHE and their corresponding `soil_group` (used in determining the soil_glg_class, :ref:`soil_glg_class`).
+The table `soil_codes.csv <https://github.com/INBO/niche_vlaanderen/blob/master/system_tables/soil_codes.csv>`_ contains the supported soil_codes in NICHE and their corresponding `soil_group` (used in determining the soil_glg_class, :ref:`soil_glg_class`).
 
 .. _management_codes:
 
 management_codes
 ================
 
-The table `management_codes.csv  <https://github.com/INBO/niche_vlaanderen/blob/master/SystemTables/management_codes.csv>`_ contains the supported management_codes in NICHE.
+The table `management_codes.csv  <https://github.com/INBO/niche_vlaanderen/blob/master/system_tables/management_codes.csv>`_ contains the supported management_codes in NICHE.
 It also contains a column `influence` which is used in the calculation of nutrient level.
 
 niche_vlaanderen

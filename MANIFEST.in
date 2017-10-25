@@ -1,2 +1,2 @@
-include SystemTables/*.csv
+include system_tables/*.csv
 include testcase/*

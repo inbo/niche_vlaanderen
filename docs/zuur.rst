@@ -6,7 +6,7 @@ Bepaling van de zuurgraadklasse
 
 .. csv-table:: Zuurgraadklassen in NICHE
   :header-rows: 1
-  :file: ../SystemTables/acidity.csv
+  :file: ../system_tables/acidity.csv
 
 NICHE berekent de zuurgraad van de standplaats op basis van de :ref:`glg` en het bodemtype. Verdere aanvullingen gebeuren door het in
 rekening brengen van overstroming, kwel, en het eventueel voorhanden zijn van
@@ -34,10 +34,10 @@ In eerste instantie worden 3 bodemgroepen onderscheiden (opm: in het Nederlands 
  * V of V2 (organische bodems);
  * P, HV of KX (hoogveen of keileemgronden).
 
-Elke bodemcode wordt aan een bodemgroep gekoppeld in de tabel `soil_codes.csv <https://github.com/inbo/niche_vlaanderen/blob/master/SystemTables/soil_codes.csv>`_.
+Elke bodemcode wordt aan een bodemgroep gekoppeld in de tabel `soil_codes.csv <https://github.com/inbo/niche_vlaanderen/blob/master/system_tables/soil_codes.csv>`_.
 
 Op basis van de bodemgroep en de GLG wordt de soil_mlw klasse bepaald.
-Dit gebeurt aan de hand van de tabel `soil_mlw_class.csv <https://github.com/inbo/niche_vlaanderen/blob/master/SystemTables/soil_mlw_class.csv>`_.
+Dit gebeurt aan de hand van de tabel `soil_mlw_class.csv <https://github.com/inbo/niche_vlaanderen/blob/master/system_tables/soil_mlw_class.csv>`_.
 
 .. topic:: Voorbeeld
 
@@ -71,7 +71,7 @@ Bepaling Zuurcode
 =================
 
 Aan de hand van deze BodemGLGKlasse, de mineralenrijkdom en de gegevens :ref:`regenlens`, overstroming, kwel wordt de zuurcode bepaald.
-Dit gebeurt aan de hand van de tabel `lnk_acidity.csv <https://github.com/inbo/niche_vlaanderen/blob/master/SystemTables/lnk_acidity.csv>`_.
+Dit gebeurt aan de hand van de tabel `lnk_acidity.csv <https://github.com/inbo/niche_vlaanderen/blob/master/system_tables/lnk_acidity.csv>`_.
 
 .. topic:: Voorbeeld
 

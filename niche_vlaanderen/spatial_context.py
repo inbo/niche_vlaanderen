@@ -138,7 +138,6 @@ class SpatialContext(object):
         # (if the 0th coefficient of affine is positive). and the bottom
         # coordinate (if the 4th coefficient is negative)
 
-
         if self.affine[0] > 0:
             extent_x = (max(extent_self[0][0], extent_new[0][0]),
                         min(extent_self[1][0], extent_new[1][0]))
