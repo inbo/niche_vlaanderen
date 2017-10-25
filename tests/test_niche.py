@@ -217,22 +217,22 @@ class testNiche(TestCase):
 
         shutil.rmtree(tmpdir)
 
-    def test_difference(self):
+    def test_deviation(self):
         n = self.create_grobbendonk_niche()
-        n.calculate_difference()
+        n.calculate_deviation()
         # check dict exists and contains enough nan values
-        self.assertEqual(276072, np.isnan(n._difference["mhw_04"]).sum())
+        self.assertEqual(276072, np.isnan(n._deviation["mhw_04"]).sum())
 
     @pytest.mark.skipif(
         distutils.spawn.find_executable("gdalinfo") is None,
         reason="gdalinfo not available in the environment.")
 
-    def test_write_difference(self):
+    def test_write_deviation(self):
         n = self.create_grobbendonk_niche()
-        n.calculate_difference()
+        n.calculate_deviation()
 
         tmpdir = tempfile.mkdtemp()
-        n.write_difference(tmpdir)
+        n.write_deviation(tmpdir)
         info = subprocess.check_output(
             ["gdalinfo",
              "-stats",

@@ -100,8 +100,8 @@ class Vegetation(object):
                                        / (vegi.size - np.sum(nodata)))
         return veg_bands, occurence
 
-    def calculate_difference(self, soil_code, mhw, mlw):
-        """ Calculates the difference between the mhw/mlw and the reference
+    def calculate_deviaton(self, soil_code, mhw, mlw):
+        """ Calculates the deviation between the mhw/mlw and the reference
 
         This function calculates the difference between the mhw and mlw and
         the reference values for each vegetation type.

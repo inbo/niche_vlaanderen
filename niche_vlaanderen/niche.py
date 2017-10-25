@@ -237,7 +237,7 @@ class Niche(object):
             index=occ_table.index)
         print(occ_table)
 
-    def calculate_difference(self):
+    def calculate_deviation(self):
         """Calculates the amount MHW/MLW should change to allow vegetation type
 
         Creates the maps with the difference between the needed MHW and MLW
@@ -252,7 +252,7 @@ class Niche(object):
             return False
 
         v = Vegetation()
-        self._difference = v.calculate_difference(
+        self._deviation = v.calculate_deviaton(
             self._inputarray["soil_code"], self._inputarray["mhw"],
             self._inputarray["mlw"]
         )
@@ -312,10 +312,10 @@ class Niche(object):
             with rasterio.open(folder + '/%s.tif' % vi, 'w', **params) as dst:
                 dst.write(self._abiotic[vi], 1)
 
-    def write_difference(self, folder):
-        """Write the calculated differences to a folder
+    def write_deviation(self, folder):
+        """Write the calculated deviations to a folder
 
-        Saves the modeled differences to a folder. Files will be written as
+        Saves the modeled deviations to a folder. Files will be written as
         geotiff. Files will have names mhw_01.tif, mlw_01.tif
 
         Parameters
@@ -331,9 +331,9 @@ class Niche(object):
         bool:
             Returns True on success.
         """
-        if not hasattr(self, "_difference"):
+        if not hasattr(self, "_deviation"):
             self.log.error(
-                "A valid calculate_difference must be done before writing the output.")
+                "A valid calculate_deviation must be done before writing the output.")
             return False
 
         if not os.path.exists(folder):
@@ -355,9 +355,9 @@ class Niche(object):
             nodata = -99999
         )
 
-        for i in self._difference:
+        for i in self._deviation:
             with rasterio.open(folder + '/%s.tif' % i, 'w', **params) as dst:
-                band = self._difference[i]
+                band = self._deviation[i]
                 band[band==np.nan] = -99999
                 dst.write(band, 1)
 
