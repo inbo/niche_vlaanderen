@@ -9,18 +9,18 @@ class NutrientLevel(object):
      Class to calculate the NutrientLevel
     '''
 
-    nodata = 255 # unsigned 8 bit type is used
+    nodata = 255  # unsigned 8 bit type is used
 
     def __init__(self, ct_nutrient_level=None, ct_management=None,
                  ct_mineralisation=None):
-        if ct_nutrient_level == None:
+        if ct_nutrient_level is None:
             ct_nutrient_level = resource_filename(
                 "niche_vlaanderen",
                 "../system_tables/lnk_soil_nutrient_level.csv")
-        if ct_management == None:
+        if ct_management is None:
             ct_management = resource_filename(
                 "niche_vlaanderen", "../system_tables/management.csv")
-        if ct_mineralisation == None:
+        if ct_mineralisation is None:
             ct_mineralisation = resource_filename(
                 "niche_vlaanderen",
                 "../system_tables/nitrogen_mineralisation.csv")

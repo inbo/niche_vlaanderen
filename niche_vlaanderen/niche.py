@@ -25,6 +25,7 @@ _minimal_input = [
 
 logging.basicConfig()
 
+
 class Niche(object):
     """ Creates a new Niche object
 
@@ -108,12 +109,12 @@ class Niche(object):
             nodata = dst.nodatavals[0]
 
             window = self._context.get_read_window(SpatialContext(dst))
-            band = dst.read(1, window = window)
+            band = dst.read(1, window=window)
 
             if band.dtype == "uint8":
                 band = band.astype(int)
 
-            if f in ('mhw','mlw','msw'):
+            if f in ('mhw', 'mlw', 'msw'):
                 band = band.astype(int)
 
             if f in ("nitrogen_animal", "nitrogen_fertilizer",
@@ -133,29 +134,29 @@ class Niche(object):
         # api (eg soilcode present in codetable)
 
         if np.any((inputarray['mhw'] > inputarray['mlw'])
-                          & (inputarray["mhw"] != -99)):
+                  & (inputarray["mhw"] != -99)):
             self.log.error("Error: not all MHW values are lower than MLW:")
             badpoints = np.where(inputarray['mhw'] > inputarray['mlw'])
-            print (badpoints * self._context.affine)
-            #return False
+            print(badpoints * self._context.affine)
+            return False
 
         if full_model:
             if np.any((inputarray['msw'] > inputarray['mlw'])
-                    & (inputarray["mhw"] != -99)
-                    & (inputarray["msw"] != -99)):
+                      & (inputarray["mhw"] != -99)
+                      & (inputarray["msw"] != -99)):
                 self.log.error("Error: not all MSW values are lower than MLW:")
                 badpoints = np.where(inputarray['mhw'] > inputarray['mlw'])
-                print (badpoints)
-                print (badpoints * self._context.affine)
+                print(badpoints)
+                print(badpoints * self._context.affine)
                 return False
 
-            with np.errstate(invalid='ignore'): # ignore NaN comparison errors
+            with np.errstate(invalid='ignore'):  # ignore NaN comparison errors
                 if np.any((inputarray['nitrogen_animal'] < 0)
-                        | (inputarray['nitrogen_animal'] > 10000)
-                        | (inputarray['nitrogen_fertilizer'] < 0)
-                        | (inputarray['nitrogen_fertilizer'] > 10000)
-                        | (inputarray['nitrogen_atmospheric'] < 0)
-                        | (inputarray['nitrogen_atmospheric'] > 10000)):
+                          | (inputarray['nitrogen_animal'] > 10000)
+                          | (inputarray['nitrogen_fertilizer'] < 0)
+                          | (inputarray['nitrogen_fertilizer'] > 10000)
+                          | (inputarray['nitrogen_atmospheric'] < 0)
+                          | (inputarray['nitrogen_atmospheric'] > 10000)):
                     self.log.error(
                         "Error: nitrogen values must be >0 and <10000")
                     return False
@@ -214,7 +215,8 @@ class Niche(object):
             self._inputarray["management_vegetation"] = None
 
         veg_arguments = dict(soil_code=self._inputarray["soil_code"],
-                mhw=self._inputarray["mhw"], mlw=self._inputarray["mlw"])
+                             mhw=self._inputarray["mhw"],
+                             mlw=self._inputarray["mlw"])
 
         if full_model:
             veg_arguments.update(
@@ -248,7 +250,7 @@ class Niche(object):
 
         keys are "mhw_01" etc
         """
-        if self._check_input_files(full_model=False) == False:
+        if self._check_input_files(full_model=False) is False:
             return False
 
         v = Vegetation()
@@ -352,13 +354,13 @@ class Niche(object):
             count=1,
             compress="DEFLATE",
             dtype="float64",
-            nodata = -99999
+            nodata=-99999
         )
 
         for i in self._deviation:
             with rasterio.open(folder + '/%s.tif' % i, 'w', **params) as dst:
                 band = self._deviation[i]
-                band[band==np.nan] = -99999
+                band[band == np.nan] = -99999
                 dst.write(band, 1)
 
         return True

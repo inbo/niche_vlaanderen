@@ -18,7 +18,7 @@ class Vegetation(object):
     the Niche Class
     """
 
-    nodata = 255 # uint8
+    nodata = 255  # uint8
 
     def __init__(self, ct_vegetation=None):
         """ Initializes the Vegetation helper class
@@ -34,7 +34,7 @@ class Vegetation(object):
             Must contain the columns mentioned in the documentation:
             https://inbo.github.io/niche_vlaanderen/codetables.html#niche_vlaanderen
         """
-        if ct_vegetation == None:
+        if ct_vegetation is None:
             ct_vegetation = resource_filename(
                 "niche_vlaanderen",
                 "../system_tables/niche_vegetation.csv")
@@ -82,8 +82,8 @@ class Vegetation(object):
                                & (row.mlw_min >= mlw) & (row.mlw_max <= mlw))
                 if full_model:
                     current_row = (current_row
-                                    & (nutrient_level == row.nutrient_level)
-                                    & (row.acidity == acidity))
+                                   & (nutrient_level == row.nutrient_level)
+                                   & (row.acidity == acidity))
 
                 if inundation is not None:
                     current_row = current_row & (row.inundation == inundation)
@@ -97,7 +97,7 @@ class Vegetation(object):
                 veg_bands[veg_code] = vegi
 
             occurence[veg_code] = (np.sum(vegi == 1)
-                                       / (vegi.size - np.sum(nodata)))
+                                   / (vegi.size - np.sum(nodata)))
         return veg_bands, occurence
 
     def calculate_deviaton(self, soil_code, mhw, mlw):
@@ -124,7 +124,7 @@ class Vegetation(object):
         difference = dict()
 
         veg = self._ct_vegetation[["veg_code", "soil_code", "mhw_min",
-                                   "mhw_max", "mlw_min","mlw_max"]];
+                                   "mhw_max", "mlw_min", "mlw_max"]]
 
         veg = veg.drop_duplicates()
 
@@ -145,9 +145,9 @@ class Vegetation(object):
 
                 # mhw in range
                 sel = ((row.soil_code == soil_code) & (row.mhw_min >= mhw)
-                & (row.mhw_max <= mhw) )
+                       & (row.mhw_max <= mhw))
                 mhw_diff[sel] = (np.zeros(soil_code.shape))[sel]
-                
+
                 # mlw smaller than maximum
                 sel = (row.soil_code == soil_code) & (row.mlw_max > mlw)
                 mlw_diff[sel] = (mlw - row.mlw_max)[sel]
@@ -155,10 +155,10 @@ class Vegetation(object):
                 # mlw larger than minimum
                 sel = (row.soil_code == soil_code) & (row.mlw_min < mlw)
                 mlw_diff[sel] = (mlw - row.mlw_min)[sel]
-                
+
                 # mlw in range
                 sel = ((row.soil_code == soil_code) & (row.mlw_min >= mlw)
-                & (row.mlw_max <= mlw) )
+                       & (row.mlw_max <= mlw))
                 mlw_diff[sel] = (np.zeros(soil_code.shape))[sel]
 
             mhw_diff[nodata] = np.NaN
@@ -168,5 +168,3 @@ class Vegetation(object):
             difference["mlw_%02d" % veg_code] = mlw_diff
 
         return difference
-
-

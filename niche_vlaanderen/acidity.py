@@ -8,29 +8,29 @@ class Acidity(object):
     '''
     '''
 
-    nodata = 255 # uint8 data type
+    nodata = 255  # uint8 data type
 
     def __init__(self, ct_acidity=None,
-            ct_soil_mlw_class=None,
-            ct_soil_codes=None,
-            lnk_acidity=None,
-            ct_seepage=None):
+                 ct_soil_mlw_class=None,
+                 ct_soil_codes=None,
+                 lnk_acidity=None,
+                 ct_seepage=None):
 
-        if ct_acidity == None:
+        if ct_acidity is None:
             ct_acidity = resource_filename(
-            "niche_vlaanderen", "../system_tables/acidity.csv")
-        if ct_soil_mlw_class == None:
+             "niche_vlaanderen", "../system_tables/acidity.csv")
+        if ct_soil_mlw_class is None:
             ct_soil_mlw_class = resource_filename(
-            "niche_vlaanderen", "../system_tables/soil_mlw_class.csv")
-        if ct_soil_codes == None:
+             "niche_vlaanderen", "../system_tables/soil_mlw_class.csv")
+        if ct_soil_codes is None:
             ct_soil_codes = resource_filename(
-            "niche_vlaanderen", "../system_tables/soil_codes.csv")
-        if lnk_acidity == None:
+             "niche_vlaanderen", "../system_tables/soil_codes.csv")
+        if lnk_acidity is None:
             lnk_acidity = resource_filename(
-            "niche_vlaanderen", "../system_tables/lnk_acidity.csv")
-        if ct_seepage == None:
+             "niche_vlaanderen", "../system_tables/lnk_acidity.csv")
+        if ct_seepage is None:
             ct_seepage = resource_filename(
-            "niche_vlaanderen", "../system_tables/seepage.csv")
+             "niche_vlaanderen", "../system_tables/seepage.csv")
 
         self._ct_acidity = pd.read_csv(ct_acidity)
         self._ct_soil_mlw = pd.read_csv(ct_soil_mlw_class)

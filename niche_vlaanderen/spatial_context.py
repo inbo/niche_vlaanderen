@@ -2,6 +2,7 @@ from affine import Affine
 
 from textwrap import dedent
 
+
 class SpatialContext(object):
     """Stores the spatial context of the grids in niche
 
@@ -30,11 +31,11 @@ class SpatialContext(object):
 
         s = """\
         Extent: %s
-            
+
         %s
-        
+
         width: %d, height: %d
-        
+
         Projection: %s"""
 
         s = dedent(s) % (self.extent, self.affine.__repr__(),
@@ -113,7 +114,7 @@ class SpatialContext(object):
 
     @property
     def extent(self):
-        extent_self = (self.affine) * (0,0), \
+        extent_self = (self.affine) * (0, 0), \
                       (self.affine) * (self.width, self.height)
         return extent_self
 
@@ -178,11 +179,11 @@ class SpatialContext(object):
             return None
 
         # Get minimum and maximum position in the new grid system
-        gminxy = (~new_sc.affine) *((0,0) * self.affine)
-        gmaxxy = (~new_sc.affine) *(
+        gminxy = (~new_sc.affine) * ((0, 0) * self.affine)
+        gmaxxy = (~new_sc.affine) * (
             (self.width, self.height) * self.affine)
 
-        if (gminxy[0] <0 or gminxy[1] < 0
+        if (gminxy[0] < 0 or gminxy[1] < 0
             or gmaxxy[0] > new_sc.width or gmaxxy[1] > new_sc.height):
             print("Error: new SpatialContexts is larger than current context\n"
                   "Can not determine a read window")
