@@ -42,7 +42,7 @@ class SpatialContext(object):
                          self.width, self.height, self.crs.to_string())
         return s
 
-    def __eq__(self, other):
+    def compare(self, other):
         """Compare two SpatialContexts
 
         Equal to: Small differences (<1cm are allowed)
@@ -63,25 +63,19 @@ class SpatialContext(object):
         else:
             return False
 
+    def __eq__(self, other):
+        """Compare two SpatialContexts
+
+        Equal to: Small differences (<1cm are allowed)
+        """
+        return self.compare(other)
+
     def __ne__(self, other):
         """ Compare two SpatialContexts
 
         Not equal to: Small differences are allowed
         """
-        if self.width != other.width:
-            return True
-
-        if self.height != other.height:
-            return True
-
-        if self.crs.to_string() != other.crs.to_string():
-            return True
-
-        if self.affine.almost_equals(other.affine, precision=0.01)\
-                and self.width == other.width and self.height == other.height:
-            return False
-        else:
-            return True
+        return not self.compare(other)
 
     def check_overlap(self, new_sc):
         """Checks whether two SpatialContexts overlap
