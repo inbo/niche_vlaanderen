@@ -43,7 +43,7 @@ class Niche(object):
         self.log = logging.getLogger()
         self._context = None
 
-    def set_input(self, type, path, set_spatial_context=False):
+    def set_input(self, type, path):
         """ Adds a raster as input layer
 
         Parameters
@@ -62,9 +62,6 @@ class Niche(object):
             false otherwise.
 
         """
-        if not set_spatial_context and self._context is None:
-            self.log.error("Spatial context not yet set")
-            return False
 
         # check type is valid value from list
         if (type not in _allowed_input):
@@ -78,7 +75,7 @@ class Niche(object):
 
         with rasterio.open(path) as dst:
             sc_new = SpatialContext(dst)
-        if set_spatial_context:
+        if self._context is None:
             self._context = sc_new
         else:
             if self._context != sc_new:
