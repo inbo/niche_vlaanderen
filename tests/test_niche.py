@@ -2,6 +2,8 @@ from unittest import TestCase
 import pytest
 
 import niche_vlaanderen
+from niche_vlaanderen.niche import NicheException, TypeException
+from rasterio.errors import RasterioIOError
 import numpy as np
 import pandas as pd
 
@@ -17,8 +19,8 @@ class testNiche(TestCase):
 
     def test_invalidfile(self):
         n = niche_vlaanderen.Niche()
-        result = n.set_input("msw", "nonexistingfile")
-        self.assertFalse(result)
+        with pytest.raises(RasterioIOError):
+            result = n.set_input("msw", "nonexistingfile")
 
         # TODO: test below leads to a segmentation error - bug in gdal/rasterio!
         # n.set_input("mhw", "tests/data/invalid.asc")
@@ -29,8 +31,8 @@ class testNiche(TestCase):
 
     def test_invalid_input_type(self):
         n = niche_vlaanderen.Niche()
-        result = n.set_input("bla", "testcase/grote_nete/input/soil_codes.asc")
-        self.assertFalse(result)
+        with pytest.raises(TypeException):
+            result = n.set_input("bla", "testcase/grote_nete/input/soil_codes.asc")
 
     def create_grote_nete_niche(self):
         myniche = niche_vlaanderen.Niche()

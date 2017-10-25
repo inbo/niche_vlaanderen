@@ -25,6 +25,15 @@ _minimal_input = [
 
 logging.basicConfig()
 
+class TypeException(Exception):
+    """
+    Type is not allowed
+    """
+
+class NicheException(Exception):
+    """
+    Exception from niche code
+    """
 
 class Niche(object):
     """ Creates a new Niche object
@@ -66,13 +75,8 @@ class Niche(object):
 
         # check type is valid value from list
         if (type not in _allowed_input):
-            self.log.error("Unrecognized type %s" % type)
-            return False
+            raise TypeException("Unrecognized type %s" % type)
 
-        # check file exists
-        if not os.path.exists(path):
-            self.log.error("File %s does not exist" % path)
-            return False
 
         with rasterio.open(path) as dst:
             sc_new = SpatialContext(dst)
@@ -83,7 +87,6 @@ class Niche(object):
                 self._context.set_overlap(sc_new)
 
         self._inputfiles[type] = path
-        return True
 
     def _check_input_files(self, full_model):
         """ basic input checks (valid files etc)
@@ -93,18 +96,11 @@ class Niche(object):
         # check files exist
         for f in self._inputfiles:
             p = self._inputfiles[f]
-            if not os.path.exists(p):
-                self.log.error("File %s does not exist" % p)
-                return False
 
         # Load every input_file in the input_array
         inputarray = dict()
         for f in self._inputfiles:
-            try:
-                dst = rasterio.open(self._inputfiles[f])
-            except:
-                self.log.error("Error while opening file %s" % f)
-                return False
+            dst = rasterio.open(self._inputfiles[f])
 
             nodata = dst.nodatavals[0]
 
@@ -135,20 +131,19 @@ class Niche(object):
 
         if np.any((inputarray['mhw'] > inputarray['mlw'])
                   & (inputarray["mhw"] != -99)):
-            self.log.error("Error: not all MHW values are lower than MLW:")
             badpoints = np.where(inputarray['mhw'] > inputarray['mlw'])
             print(badpoints * self._context.affine)
-            return False
+            raise NicheException("Error: not all MHW values are lower than MLW:")
 
         if full_model:
             if np.any((inputarray['msw'] > inputarray['mlw'])
                       & (inputarray["mhw"] != -99)
                       & (inputarray["msw"] != -99)):
-                self.log.error("Error: not all MSW values are lower than MLW:")
+
                 badpoints = np.where(inputarray['mhw'] > inputarray['mlw'])
                 print(badpoints)
                 print(badpoints * self._context.affine)
-                return False
+                raise NicheException("Error: not all MSW values are lower than MLW:")
 
             with np.errstate(invalid='ignore'):  # ignore NaN comparison errors
                 if np.any((inputarray['nitrogen_animal'] < 0)
@@ -157,14 +152,11 @@ class Niche(object):
                           | (inputarray['nitrogen_fertilizer'] > 10000)
                           | (inputarray['nitrogen_atmospheric'] < 0)
                           | (inputarray['nitrogen_atmospheric'] > 10000)):
-                    self.log.error(
+                    raise NicheException(
                         "Error: nitrogen values must be >0 and <10000")
-                    return False
 
         # if all is successful:
         self._inputarray = inputarray
-
-        return(True)
 
     def run(self, full_model=True):
         """Run the niche model
@@ -181,12 +173,10 @@ class Niche(object):
         if full_model:
             missing_keys = set(_minimal_input) - set(self._inputfiles.keys())
             if len(missing_keys) > 0:
-                print("error, different obliged keys are missing")
                 print(missing_keys)
-                return False
+                raise NicheException("error, different obliged keys are missing")
 
-        if self._check_input_files(full_model) is False:
-            return False
+        self._check_input_files(full_model)
 
         if full_model:
             nl = NutrientLevel()
@@ -250,8 +240,7 @@ class Niche(object):
 
         keys are "mhw_01" etc
         """
-        if self._check_input_files(full_model=False) is False:
-            return False
+        self._check_input_files(full_model=False)
 
         v = Vegetation()
         self._deviation = v.calculate_deviaton(
@@ -282,16 +271,11 @@ class Niche(object):
         """
 
         if not hasattr(self, "_vegetation"):
-            self.log.error(
+            raise NicheException(
                 "A valid run must be done before writing the output.")
-            return False
 
         if not os.path.exists(folder):
-            try:
-                os.makedirs(folder)
-            except OSError as e:
-                self.log.error("Error creating path")
-                return False
+            os.makedirs(folder)
 
         params = dict(
             driver='GTiff',
@@ -339,11 +323,7 @@ class Niche(object):
             return False
 
         if not os.path.exists(folder):
-            try:
-                os.makedirs(folder)
-            except OSError as e:
-                self.log.error("Error creating path")
-                return False
+            os.makedirs(folder)
 
         params = dict(
             driver='GTiff',
@@ -362,5 +342,3 @@ class Niche(object):
                 band = self._deviation[i]
                 band[band == np.nan] = -99999
                 dst.write(band, 1)
-
-        return True
