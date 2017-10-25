@@ -20,6 +20,8 @@ install:
     - cmd: conda install -y -q numpy pandas
     - cmd: conda install -y -q rasterio
     - cmd: pip install --no-cache-dir -r dev-requirements.txt
+    - cmd: pip install hypothesis 
+      # it is strange that hypothesis is only required on windows + python3
 
 build: false
 
