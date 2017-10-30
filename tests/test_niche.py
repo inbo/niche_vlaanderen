@@ -23,6 +23,7 @@ class testNiche(TestCase):
             result = n.set_input("msw", "nonexistingfile")
 
         # TODO: test below leads to a segmentation error - bug in gdal/rasterio!
+        # fixed in gdal 2.3 (upcoming)
         # n.set_input("mhw", "tests/data/invalid.asc")
         # n.set_input("mlw", "tests/data/invalid.asc")
         # n.set_input("soil_code", "tests/data/invalid.asc")
@@ -109,6 +110,17 @@ class testNiche(TestCase):
             self.assertCountEqual(expected_files, dir)
 
         shutil.rmtree(tmpdir)
+
+    def test_grote_nete_constant_values(self):
+        myniche = self.create_grote_nete_niche()
+        myniche.set_input("rainwater", 0)
+        self.assertFalse("rainwater" in myniche._inputfiles)
+        myniche.set_input("nitrogen_fertilizer", 0)
+
+        myniche.run()
+        myniche2 = self.create_grote_nete_niche()
+        myniche2.run()
+        self.assertEqual(myniche.occurence, myniche2.occurence)
 
     def test_testcase_simple(self):
         """

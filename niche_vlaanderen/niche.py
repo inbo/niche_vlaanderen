@@ -10,6 +10,7 @@ from .spatial_context import SpatialContext
 
 import logging
 import os.path
+import numbers
 
 _allowed_input = [
     "soil_code", "mlw", "msw", "mhw", "seepage", "nutrient_level",
@@ -47,21 +48,22 @@ class Niche(object):
     """
     def __init__(self):
         self._inputfiles = dict()
+        self._inputvalues = dict()
         self._inputarray = dict()
         self._abiotic = dict()
         self._result = dict()
         self.log = logging.getLogger()
         self._context = None
 
-    def set_input(self, type, path):
+    def set_input(self, key, value):
         """ Adds a raster as input layer
 
         Parameters
         ----------
-        type: string
+        key: string
             The type of grid that you want to assign (eg msw, soil_code, ...).
             Possible options are listed in _allowed_input
-        path: string
+        value: string
             Path to a file containing the grid. Can also be a folder for
             certain grid types (eg arcgis rasters).
 
@@ -74,19 +76,25 @@ class Niche(object):
         """
 
         # check type is valid value from list
-        if (type not in _allowed_input):
-            raise TypeException("Unrecognized type %s" % type)
+        if (key not in _allowed_input):
+            raise TypeException("Unrecognized type %s" % key)
 
+        if isinstance(value, numbers.Number):
+            # Remove any existing values to make sure last value is used
+            self._inputfiles.pop(key, None)
+            self._inputvalues[key] = value
 
-        with rasterio.open(path) as dst:
-            sc_new = SpatialContext(dst)
-        if self._context is None:
-            self._context = sc_new
         else:
-            if self._context != sc_new:
-                self._context.set_overlap(sc_new)
-
-        self._inputfiles[type] = path
+            with rasterio.open(value) as dst:
+                sc_new = SpatialContext(dst)
+            if self._context is None:
+                self._context = sc_new
+            else:
+                if self._context != sc_new:
+                    self._context.set_overlap(sc_new)
+            # Remove any existing values to make sure last value is used
+            self._inputvalues.pop(key, None)
+            self._inputfiles[key] = value
 
     def _check_input_files(self, full_model):
         """ basic input checks (valid files etc)
@@ -124,6 +132,12 @@ class Niche(object):
                 band[band == nodata] = -99
 
             inputarray[f] = band
+
+        # Load in all constant inputvalues
+        for f in self._inputvalues:
+            shape = (int(self._context.height), int(self._context.width))
+            inputarray[f] = np.full(shape,self._inputvalues[f])
+
 
         # check if valid values are used in inputarrays
         # check for valid datatypes - values will be checked in the low-level
@@ -177,10 +191,11 @@ class Niche(object):
         -------
 
         bool:
-            Returns true if the calculation was succesfull.
+            Returns true if the calculation was successful.
         """
         if full_model:
-            missing_keys = set(_minimal_input) - set(self._inputfiles.keys())
+            missing_keys = set(_minimal_input) - set(self._inputfiles.keys()) \
+                           - set(self._inputvalues.keys())
             if len(missing_keys) > 0:
                 print(missing_keys)
                 raise NicheException("error, different obliged keys are missing")

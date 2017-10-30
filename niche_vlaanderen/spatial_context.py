@@ -28,8 +28,8 @@ class SpatialContext(object):
 
     def __init__(self, dst):
         self.affine = dst.affine
-        self.width = dst.width
-        self.height = dst.height
+        self.width = int(dst.width)
+        self.height = int(dst.height)
         self.crs = dst.crs
 
     def __repr__(self):
