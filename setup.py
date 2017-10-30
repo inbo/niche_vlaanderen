@@ -24,4 +24,8 @@ setup(name='niche_vlaanderen',
       ],
       include_package_data=True,
       tests_require=['pytest'],
+      entry_points='''
+          [console_scripts]
+          niche=niche_vlaanderen.cli:cli
+      '''
 )
