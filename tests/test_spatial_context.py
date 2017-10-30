@@ -14,22 +14,28 @@ class testSpatialContext(TestCase):
         expected = ((172762.5, 210787.5), (172937.5, 210637.5))
         self.assertEqual(expected, small_sc.extent)
 
-    @pytest.mark.skipif(
-        sys.version_info > (3, 0),
-        reason="Python 3 has slightly different formatting.")
-
     def test_repr(self):
         self.maxDiff = None
         small = rasterio.open("tests/data/msw_small.asc")
         small_sc = niche_vlaanderen.niche.SpatialContext(small)
         exp = "Extent: ((172762.5, 210787.5), (172937.5, 210637.5))\n\n"+ \
               "Affine(25.0, 0.0, 172762.5,\n       0.0, -25.0, 210787.5)\n\n"+\
-              "width: 7, height: 6\n\n" +\
+              "width: 7, height: 6\n\n"
+        exp2 = exp + \
               "Projection: +ellps=intl +lat_0=90 +lat_1=51.1666672333 "+\
               "+lat_2=49.8333339 +lon_0=4.36748666667 +no_defs +proj=lcc "+\
               "+towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,"+\
               "-1.2747 +units=m +x_0=150000.013 +y_0=5400088.438"
-        self.assertEqual(exp, small_sc.__repr__())
+        # Python 3 has slightly different formatting (more numbers)
+        exp3 = exp + \
+            "Projection: +ellps=intl +lat_0=90 +lat_1=51.16666723333333 " \
+            "+lat_2=49.8333339 +lon_0=4.367486666666666 +no_defs +proj=lcc " \
+            "+towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422," \
+            "-1.2747 +units=m +x_0=150000.013 +y_0=5400088.438"
+        if sys.version_info > (3, 0):
+            self.assertEqual(exp3, small_sc.__repr__())
+        else:
+            self.assertEqual(exp2, small_sc.__repr__())
 
     def test_check_overlap(self):
 
@@ -123,3 +129,22 @@ class testSpatialContext(TestCase):
         test_wgs84_sc = niche_vlaanderen.niche.SpatialContext(test_wgs84)
         self.assertFalse(test_wgs84_sc == test_l72_sc)
         self.assertTrue(test_wgs84_sc != test_l72_sc)
+
+    def test_compare(self):
+        test_small_ds = rasterio.open("tests/data/msw_small.asc")
+        sc1 = niche_vlaanderen.niche.SpatialContext(test_small_ds)
+        sc2 = niche_vlaanderen.niche.SpatialContext(sc1)
+        self.assertEqual(sc1, sc2)
+        sc2.height = sc2.height + 1
+        # height is not equal - should be false
+        self.assertFalse(sc1 == sc2)
+
+        # check with different affine
+        # we assign
+        sc2 = niche_vlaanderen.niche.SpatialContext(
+            rasterio.open("testcase/grobbendonk/input/mlw.asc")
+        )
+        sc2.height = sc1.height
+        sc2.width = sc1.width
+        sc2.crs = sc1.crs
+        self.assertFalse(sc1 == sc2)
