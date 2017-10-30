@@ -131,9 +131,16 @@ class Niche(object):
 
         if np.any((inputarray['mhw'] > inputarray['mlw'])
                   & (inputarray["mhw"] != -99)):
+            # find out which cells have invalid values
             badpoints = np.where(inputarray['mhw'] > inputarray['mlw'])
-            print(badpoints * self._context.affine)
-            raise NicheException("Error: not all MHW values are lower than MLW:")
+            # convert these cells into the projection system
+            badpoints = badpoints * self._context.affine
+
+            print("Not all MHW values are lower than MLW")
+            print ("coordinates with invalid values are:")
+            print (pd.DataFrame(list(badpoints)))
+            raise NicheException(
+                "Error: not all MHW values are lower than MLW")
 
         if full_model:
             if np.any((inputarray['msw'] > inputarray['mlw'])
@@ -141,9 +148,11 @@ class Niche(object):
                       & (inputarray["msw"] != -99)):
 
                 badpoints = np.where(inputarray['mhw'] > inputarray['mlw'])
-                print(badpoints)
-                print(badpoints * self._context.affine)
-                raise NicheException("Error: not all MSW values are lower than MLW:")
+                badpoints = badpoints * self._context.affine
+
+                print (pd.DataFrame(list(badpoints)))
+                raise NicheException(
+                    "Error: not all MSW values are lower than MLW")
 
             with np.errstate(invalid='ignore'):  # ignore NaN comparison errors
                 if np.any((inputarray['nitrogen_animal'] < 0)
