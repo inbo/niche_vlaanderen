@@ -3,6 +3,7 @@ from unittest import TestCase
 import rasterio
 
 import niche_vlaanderen
+from niche_vlaanderen.spatial_context import SpatialContextError
 import pytest
 import sys
 
@@ -53,7 +54,8 @@ class testSpatialContext(TestCase):
         small_moved = rasterio.open("tests/data/msw_small_moved.asc")
         small_moved_sc = niche_vlaanderen.niche.SpatialContext(small_moved)
         self.assertFalse(small_sc.check_overlap(small_moved_sc))
-        self.assertFalse(small_sc.set_overlap(small_moved_sc))
+        with pytest.raises(SpatialContextError):
+            self.assertFalse(small_sc.set_overlap(small_moved_sc))
 
 
     def test_check_set_overlap(self):
@@ -69,8 +71,7 @@ class testSpatialContext(TestCase):
         self.assertEqual(216737.5, soil_code_sc.affine[5])
 
         # after overlap we get
-        overlap_success = soil_code_sc.set_overlap(glg_sc)
-        self.assertEqual(True, overlap_success)
+        soil_code_sc.set_overlap(glg_sc)
         self.assertEqual(693, soil_code_sc.width)
         self.assertEqual(501, soil_code_sc.height)
         self.assertEqual(164937.5, soil_code_sc.affine[2])

@@ -3,6 +3,11 @@ from affine import Affine
 from textwrap import dedent
 
 
+class SpatialContextError(Exception):
+    """
+
+    """
+
 class SpatialContext(object):
     """Stores the spatial context of the grids in niche
 
@@ -122,7 +127,7 @@ class SpatialContext(object):
         """
         # Check orientation and cell size are equal
         if not self.check_overlap(new_sc):
-            return None
+            raise SpatialContextError("no overlap in extent")
 
         # determine the extent in the old and new system
         extent_self = self.extent
@@ -152,8 +157,6 @@ class SpatialContext(object):
 
         self.affine = Affine(self.affine[0], self.affine[1], extent_x[0],
                              self.affine[3], self.affine[4], extent_y[0])
-
-        return True
 
     def get_read_window(self, new_sc):
         """Gets the read window that overlap with a different SpatialContext
