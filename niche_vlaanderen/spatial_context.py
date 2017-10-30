@@ -196,14 +196,11 @@ class SpatialContext(object):
         # (differences are smaller than the tolerance
         window = (round(gminxy[1],2), round(gmaxxy[1],2)),\
                (round(gminxy[0],2), round(gmaxxy[0],2))
-        print(window)
 
         if (window[0][0] < 0 or window[1][0] < 0
             or window[1][1] > new_sc.width or window[1][0] > new_sc.height):
-            print (gminxy, gmaxxy)
             raise SpatialContextError(
                 "Error: new SpatialContexts is larger than current context\n"
                   "Can not determine a read window")
-
 
         return window

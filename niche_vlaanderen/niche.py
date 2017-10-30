@@ -61,6 +61,14 @@ class Niche(object):
 
     def __repr__(self):
         s = "# Niche Vlaanderen version: {}\n\n".format(__version__)
+        # Also add some versions of the major packages we use - easy for
+        # debugging
+        s += "package_versions:\n"
+        s += "  pandas: {}\n".format(pd.__version__)
+        s += "  numpy: {}\n".format(np.__version__)
+        s += "  rasterio: {}\n".format(rasterio.__version__)
+        s += "  gdal: {}\n".format(rasterio.__gdal_version__)
+
         s += "input_layers:\n"
         input = yaml.dump(self._inputfiles, default_flow_style= False)
         input += yaml.dump(self._inputvalues, default_flow_style= False) + '\n'
@@ -114,7 +122,7 @@ class Niche(object):
             self._inputfiles[key] = value
 
     def read_config_input(self, config):
-        """ Sets the input based on an input file
+        """ Sets the input based on an input file, without run or output
         """
         with open(config, 'r') as stream:
             config_loaded = yaml.load(stream)
@@ -125,6 +133,43 @@ class Niche(object):
             path = os.path.join(os.path.dirname(config),
                 config_loaded['input_layers'][k])
             self.set_input(k, path)
+
+    def run_config_file(self, config):
+        """ Runs Niche using a configuration file
+
+        Note that this will configure the model, run and output as specified
+        """
+
+        self.read_config_input(config)
+
+        # Set input values
+        with open(config, 'r') as stream:
+            config_loaded = yaml.load(stream)
+
+        # Set code tables
+
+        # Run + write according to model options
+        options = config_loaded["model_options"]
+
+        if options["simple_model"]:
+            self.run(full_model=False)
+        else:
+            self.run()
+
+        deviation = "deviation" in options and options["deviation"] == True
+        if deviation:
+            self.calculate_deviation()
+
+        if "output_dir" in options:
+            output_dir = options["output_dir"]
+        else:
+            return
+
+        self.write(output_dir)
+
+        if deviation:
+            self.write_deviation(output_dir)
+
 
     def _check_input_files(self, full_model):
         """ basic input checks (valid files etc)
