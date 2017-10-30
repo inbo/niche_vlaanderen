@@ -134,20 +134,30 @@ class SpatialContext(object):
 
         extent_new = new_sc.extent
 
-        # The startpoint of the combined raster is the left coordinate
+        # The starting point of the combined raster is the left coordinate
         # (if the 0th coefficient of affine is positive). and the bottom
         # coordinate (if the 4th coefficient is negative)
+        # Note that usually the 0th coefficient is positive and the 4th
+        # negative.
 
         if self.affine[0] > 0:
             extent_x = (max(extent_self[0][0], extent_new[0][0]),
                         min(extent_self[1][0], extent_new[1][0]))
         else:
-            extent_x = (min(extent_self[0][0], extent_new[0][0]),
-                        max(extent_self[1][0], extent_new[1][0]))
+            raise SpatialContextError(
+                "Grid is indexed right to left. This is very uncommon."
+                "Try resampling your grid in GIS prior to using in Niche."
+            )
+            # extent_x = (min(extent_self[0][0], extent_new[0][0]),
+            #             max(extent_self[1][0], extent_new[1][0]))
 
         if self.affine[4] > 0:
-            extent_y = max(extent_self[0][1], extent_new[0][1]),\
-                       min(extent_self[1][1], extent_new[1][1])
+            # extent_y = max(extent_self[0][1], extent_new[0][1]),\
+            #            min(extent_self[1][1], extent_new[1][1])
+            raise SpatialContextError(
+                "Grid is indexed top to bottom. This is very uncommon."
+                "Try resampling your grid in GIS prior to using in Niche."
+            )
         else:
             extent_y = min(extent_self[0][1], extent_new[0][1]),\
                        max(extent_self[1][1], extent_new[1][1])
