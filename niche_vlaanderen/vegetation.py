@@ -51,7 +51,7 @@ class Vegetation(object):
             A dictionary containing the different output arrays per
             veg_code value.
             -99 is used for nodata values
-        veg_occurence: dict
+        veg_occurrence: dict
             A dictionary containing the percentage of the area where the
             vegetation can occur.
 
@@ -68,7 +68,7 @@ class Vegetation(object):
             nodata = nodata | (management == -99)
 
         veg_bands = dict()
-        occurence = dict()
+        occurrence = dict()
 
         for veg_code, subtable in self._ct_vegetation.groupby(["veg_code"]):
             subtable = subtable.reset_index()
@@ -96,9 +96,9 @@ class Vegetation(object):
             if return_all or np.any(vegi):
                 veg_bands[veg_code] = vegi
 
-            occurence[veg_code] = (np.sum(vegi == 1)
+            occurrence[veg_code] = (np.sum(vegi == 1)
                                    / (vegi.size - np.sum(nodata)))
-        return veg_bands, occurence
+        return veg_bands, occurrence
 
     def calculate_deviaton(self, soil_code, mhw, mlw):
         """ Calculates the deviation between the mhw/mlw and the reference

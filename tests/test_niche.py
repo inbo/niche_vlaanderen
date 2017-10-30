@@ -74,19 +74,19 @@ class testNiche(TestCase):
 
         myniche.run()
 
-        o1 = myniche.occurence
+        o1 = myniche.occurrence
         o1 = pd.DataFrame(o1, index=[0])
 
         myniche.set_input("management_vegetation",
                           "testcase/grote_nete/input/management.asc")
         myniche.run()
-        o2 = myniche.occurence
+        o2 = myniche.occurrence
         o2 = pd.DataFrame(o2, index=[0])
 
         myniche.set_input("inundation_vegetation",
                           "testcase/grote_nete/input/inundation_vegetation.asc")
         myniche.run()
-        o3 = myniche.occurence
+        o3 = myniche.occurrence
         o3 = pd.DataFrame(o3, index=[0])
 
         self.assertTrue(np.all(o1>=o2))
@@ -120,7 +120,7 @@ class testNiche(TestCase):
         myniche.run()
         myniche2 = self.create_grote_nete_niche()
         myniche2.run()
-        self.assertEqual(myniche.occurence, myniche2.occurence)
+        self.assertEqual(myniche.occurrence, myniche2.occurrence)
 
     def test_testcase_simple(self):
         """

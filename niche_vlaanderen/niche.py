@@ -57,7 +57,7 @@ class Niche(object):
         self._result = dict()
         self.log = logging.getLogger()
         self._context = None
-        self.occurence = None
+        self.occurrence = None
 
     def __repr__(self):
         s = "# Niche Vlaanderen version: {}\n\n".format(__version__)
@@ -65,9 +65,9 @@ class Niche(object):
         input = yaml.dump(self._inputfiles, default_flow_style= False)
         input += yaml.dump(self._inputvalues, default_flow_style= False) + '\n'
         s += input
-        if self.occurence is not None:
+        if self.occurrence is not None:
             s += "model_result: \n"
-            s += yaml.dump(self.occurence)
+            s += yaml.dump(self.occurrence)
         else:
             s += "# No model run completed."
         return s
@@ -270,16 +270,16 @@ class Niche(object):
                 management=self._inputarray["management_vegetation"]
             )
 
-        self._vegetation, self.occurence = vegetation.calculate(
+        self._vegetation, self.occurrence = vegetation.calculate(
             full_model=full_model, **veg_arguments)
 
-        occ_table = pd.DataFrame.from_dict(self.occurence, orient="index")
-        occ_table.columns = ['occurence']
+        occ_table = pd.DataFrame.from_dict(self.occurrence, orient="index")
+        occ_table.columns = ['occurrence']
 
-        # we convert the occurence values to a table to have a pretty print
+        # we convert the occurrence values to a table to have a pretty print
         # the values are shown as a percentage
-        occ_table['occurence'] = pd.Series(
-            ["{0:.2f}%".format(v * 100) for v in occ_table['occurence']],
+        occ_table['occurrence'] = pd.Series(
+            ["{0:.2f}%".format(v * 100) for v in occ_table['occurrence']],
             index=occ_table.index)
         print(occ_table)
 

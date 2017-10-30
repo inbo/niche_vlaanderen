@@ -29,17 +29,17 @@ def raster_to_numpy(filename):
 class testNutrientLevel(TestCase):
 
     def test_nitrogen_mineralisation(self):
-        soil_codes = np.array([140000])
+        soil_code = np.array([140000])
         msw = np.array([33])
         nl = niche_vlaanderen.NutrientLevel()
-        result = nl._calculate_mineralisation(soil_codes, msw)
+        result = nl._calculate_mineralisation(soil_code, msw)
         np.testing.assert_equal(np.array([75]), result)
 
     def test_borders(self):
-        soil_codes = np.array([10000, 10000, 10000, 10000, 10000])
+        soil_code = np.array([10000, 10000, 10000, 10000, 10000])
         msw = np.array([4, 5, 7, 10, 11])
         nl = niche_vlaanderen.NutrientLevel()
-        result_nm = nl._calculate_mineralisation(soil_codes, msw)
+        result_nm = nl._calculate_mineralisation(soil_code, msw)
         expected_nm = np.array([50, 50, 55, 55, 76])
         np.testing.assert_equal(expected_nm, result_nm)
         nuls = np.array([0, 0, 0, 0, 0])
@@ -48,7 +48,7 @@ class testNutrientLevel(TestCase):
         # so we substract the nitrogen_sum from the expected mineralisation
         nitrogen_animal = nitrogen_sum - expected_nm
         management = np.array([2, 2, 2, 2, 2])
-        result = nl.calculate(soil_code=soil_codes,
+        result = nl.calculate(soil_code=soil_code,
                      msw=msw,
                      management=management,
                      nitrogen_animal=nitrogen_animal,
@@ -86,7 +86,7 @@ class testNutrientLevel(TestCase):
 
     def test_nutrient_level_testcase(self):
         nl = niche_vlaanderen.NutrientLevel()
-        soil_code = raster_to_numpy("testcase/grote_nete/input/soil_codes.asc")
+        soil_code = raster_to_numpy("testcase/grote_nete/input/soil_code.asc")
         msw = raster_to_numpy("testcase/grote_nete/input/msw.asc")
         nitrogen_deposition = \
             raster_to_numpy("testcase/grote_nete/input/nitrogen_atmospheric.asc")
