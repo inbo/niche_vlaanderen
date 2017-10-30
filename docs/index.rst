@@ -6,6 +6,8 @@
 niche_vlaanderen documentatie
 ============================================
 
+.. include ../README.rst
+
 Het Python package ``niche_vlaanderen`` laat de gebruiker toe om op basis van een aantal :doc:`invoer` de mogelijke vegetatietypes te berekenen.
 
 De berekening gebeurt in drie stappen:
@@ -23,15 +25,10 @@ In de Python module ``niche_vlaanderen`` kan de berekening op twee manieren gebe
 Contents:
 
 .. toctree::
-  :maxdepth: 2
+  :maxdepth: 4
 
-  invoer
-  trofie
-  zuur
-  vegetatie
-  niche
-  lowlevel
-  codetables
+  model
+  package
 
 
 Indices and tables
