@@ -173,20 +173,27 @@ class SpatialContext(object):
             base SpatialContext)
         """
         if not self.check_overlap(new_sc):
-            return None
+            raise SpatialContextError(
+                "Error: No overlap between both Spatial contexts."
+            )
 
         # Get minimum and maximum position in the new grid system
         gminxy = (~new_sc.affine) * ((0, 0) * self.affine)
         gmaxxy = (~new_sc.affine) * (
             (self.width, self.height) * self.affine)
 
-        if (gminxy[0] < 0 or gminxy[1] < 0
-            or gmaxxy[0] > new_sc.width or gmaxxy[1] > new_sc.height):
-            print("Error: new SpatialContexts is larger than current context\n"
-                  "Can not determine a read window")
-            return None
+        # we can safely round here because we checked overlap before
+        # (differences are smaller than the tolerance
+        window = (round(gminxy[1],2), round(gmaxxy[1],2)),\
+               (round(gminxy[0],2), round(gmaxxy[0],2))
+        print(window)
 
-        # we can safely round hdere because we checked overlap before
-        # (differences are smaller than the tolerance)
-        return (round(gminxy[1]), round(gmaxxy[1])),\
-               (round(gminxy[0]), round(gmaxxy[0]))
+        if (window[0][0] < 0 or window[1][0] < 0
+            or window[1][1] > new_sc.width or window[1][0] > new_sc.height):
+            print (gminxy, gmaxxy)
+            raise SpatialContextError(
+                "Error: new SpatialContexts is larger than current context\n"
+                  "Can not determine a read window")
+
+
+        return window

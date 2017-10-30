@@ -47,6 +47,9 @@ class testSpatialContext(TestCase):
         overlap = soil_code_sc.check_overlap(glg_nete_sc)
         self.assertFalse(overlap)
 
+        with pytest.raises(SpatialContextError):
+            overlap = soil_code_sc.get_read_window(glg_nete_sc)
+
     def test_check_overlap_cells_moved(self):
         small = rasterio.open("tests/data/msw_small.asc")
         small_sc = niche_vlaanderen.niche.SpatialContext(small)
@@ -109,9 +112,9 @@ class testSpatialContext(TestCase):
         glg_sc = niche_vlaanderen.niche.SpatialContext(glg)
 
         # soil_code has a larger extent than glg - this must error
-        part_window = soil_code_sc.get_read_window(glg_sc)
+        with pytest.raises(SpatialContextError):
+            part_window = soil_code_sc.get_read_window(glg_sc)
 
-        self.assertEqual(part_window, None)
 
     def test_different_crs(self):
         test_l72 = rasterio.open("tests/data/msw_small.asc")
