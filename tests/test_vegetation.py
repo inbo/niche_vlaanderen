@@ -124,7 +124,7 @@ class testVegetation(TestCase):
         soil_code = raster_to_numpy(input_dir + "soil_code.asc")
         msw = raster_to_numpy(input_dir + "msw.asc")
         mhw = raster_to_numpy(input_dir + "mhw.asc")
-        mlw = raster_to_numpy("input_dir + mlw.asc")
+        mlw = raster_to_numpy(input_dir + "mlw.asc")
         inundation = \
             raster_to_numpy(input_dir + "inundation_nutrient_level.asc")
         regenlens = raster_to_numpy(input_dir + "nullgrid.asc")
