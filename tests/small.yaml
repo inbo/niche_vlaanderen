@@ -1,0 +1,4 @@
+input_layers:
+  mhw: data/mhw_small.asc
+  mlw: ../testcase/grobbendonk/input/mlw.asc
+  soil_code: ../testcase/grobbendonk/input/soil_code.asc

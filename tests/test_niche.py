@@ -33,12 +33,12 @@ class testNiche(TestCase):
     def test_invalid_input_type(self):
         n = niche_vlaanderen.Niche()
         with pytest.raises(TypeException):
-            result = n.set_input("bla", "testcase/grote_nete/input/soil_codes.asc")
+            result = n.set_input("bla", "testcase/grote_nete/input/soil_code.asc")
 
     def create_grote_nete_niche(self):
         myniche = niche_vlaanderen.Niche()
         myniche.set_input("soil_code",
-                          "testcase/grote_nete/input/soil_codes.asc")
+                          "testcase/grote_nete/input/soil_code.asc")
         myniche.set_input("mhw", "testcase/grote_nete/input/mhw.asc")
         myniche.set_input("mlw", "testcase/grote_nete/input/mlw.asc")
         myniche.set_input("msw", "testcase/grote_nete/input/msw.asc")
@@ -131,7 +131,7 @@ class testNiche(TestCase):
 
         myniche = niche_vlaanderen.Niche()
         myniche.set_input("soil_code",
-                          "testcase/grote_nete/input/soil_codes.asc")
+                          "testcase/grote_nete/input/soil_code.asc")
         myniche.set_input("mhw", "testcase/grote_nete/input/mhw.asc")
         myniche.set_input("mlw", "testcase/grote_nete/input/mlw.asc")
         myniche.run(full_model=False)
@@ -157,7 +157,7 @@ class testNiche(TestCase):
     def create_grobbendonk_niche(self):
         myniche = niche_vlaanderen.Niche()
         myniche.set_input("soil_code",
-                          "testcase/grobbendonk/input/soil_codes.asc")
+                          "testcase/grobbendonk/input/soil_code.asc")
         myniche.set_input("mhw", "testcase/grobbendonk/input/mhw_correct2.asc")
         myniche.set_input("mlw", "testcase/grobbendonk/input/mlw.asc")
         myniche.set_input("msw", "testcase/grobbendonk/input/msw_correct.asc")

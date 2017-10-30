@@ -33,9 +33,9 @@ class testVegetation(TestCase):
         acidity = np.array([3])
         mlw = np.array([50])
         mhw = np.array([10])
-        soil_codes = np.array([140000])
+        soil_code = np.array([140000])
         v = niche_vlaanderen.Vegetation()
-        veg_predict, veg_occurence = v.calculate(soil_codes, mhw, mlw,
+        veg_predict, veg_occurence = v.calculate(soil_code, mhw, mlw,
                                                  nutrient_level, acidity)
         correct = [7, 8, 12, 16]
         for vi in veg_predict:
@@ -47,9 +47,9 @@ class testVegetation(TestCase):
     def test_one_value_simple(self):
         mlw = np.array([50])
         mhw = np.array([10])
-        soil_codes = np.array([80000])
+        soil_code = np.array([80000])
         v = niche_vlaanderen.Vegetation()
-        veg_predict, veg_occurence = v.calculate(soil_codes,
+        veg_predict, veg_occurence = v.calculate(soil_code,
                                                  mhw, mlw, full_model=False)
         correct = [3, 8, 11, 18, 23, 27]
         for vi in veg_predict:
@@ -72,9 +72,9 @@ class testVegetation(TestCase):
         acidity = np.array([3])
         mlw = np.array([50])
         mhw = np.array([10])
-        soil_codes = np.array([140000])
+        soil_code = np.array([140000])
         v = niche_vlaanderen.Vegetation()
-        veg_predict, veg_occurence = v.calculate(soil_codes, mhw, mlw,
+        veg_predict, veg_occurence = v.calculate(soil_code, mhw, mlw,
                                                  nutrient_level, acidity)
         correct = [] # no types should match
         for vi in veg_predict:
@@ -88,11 +88,11 @@ class testVegetation(TestCase):
         acidity = np.array([3])
         mlw = np.array([50])
         mhw = np.array([10])
-        soil_codes = np.array([140000])
+        soil_code = np.array([140000])
         inundation = np.array([1])
         v = niche_vlaanderen.Vegetation()
         veg_predict, veg_occurence = \
-            v.calculate(soil_codes, mhw, mlw, nutrient_level, acidity,
+            v.calculate(soil_code, mhw, mlw, nutrient_level, acidity,
                         inundation=inundation)
         correct = [7, 12, 16]
         for vi in veg_predict:
@@ -121,7 +121,7 @@ class testVegetation(TestCase):
         self.assertEqual(2 / 3, veg_occurence[16])
 
     def test_testcase(self):
-        soil_code = raster_to_numpy("testcase/grote_nete/input/soil_codes.asc")
+        soil_code = raster_to_numpy("testcase/grote_nete/input/soil_code.asc")
         msw = raster_to_numpy("testcase/grote_nete/input/msw.asc")
         mhw = raster_to_numpy("testcase/grote_nete/input/mhw.asc")
         mlw = raster_to_numpy("testcase/grote_nete/input/mlw.asc")

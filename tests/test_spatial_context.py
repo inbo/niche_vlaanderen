@@ -39,7 +39,7 @@ class testSpatialContext(TestCase):
 
     def test_check_overlap(self):
 
-        soil_code = rasterio.open("testcase/grobbendonk/input/soil_codes.asc")
+        soil_code = rasterio.open("testcase/grobbendonk/input/soil_code.asc")
         soil_code_sc = niche_vlaanderen.niche.SpatialContext(soil_code)
         glg = rasterio.open("testcase/grobbendonk/input/mlw.asc")
         glg_sc = niche_vlaanderen.niche.SpatialContext(glg)
@@ -68,7 +68,7 @@ class testSpatialContext(TestCase):
 
 
     def test_check_set_overlap(self):
-        soil_code = rasterio.open("testcase/grobbendonk/input/soil_codes.asc")
+        soil_code = rasterio.open("testcase/grobbendonk/input/soil_code.asc")
         soil_code_sc = niche_vlaanderen.niche.SpatialContext(soil_code)
         glg = rasterio.open("testcase/grobbendonk/input/mlw.asc")
         glg_sc = niche_vlaanderen.niche.SpatialContext(glg)
@@ -88,9 +88,9 @@ class testSpatialContext(TestCase):
 
     def test_check_no_overlap(self):
         grobbendonk = rasterio.open(
-            "testcase/grobbendonk/input/soil_codes.asc")
+            "testcase/grobbendonk/input/soil_code.asc")
         grote_nete = rasterio.open(
-            "testcase/grote_nete/input/soil_codes.asc"
+            "testcase/grote_nete/input/soil_code.asc"
         )
         grobbendonk_sc = niche_vlaanderen.niche.SpatialContext(grobbendonk)
         grote_nete_sc = niche_vlaanderen.niche.SpatialContext(grote_nete)
@@ -99,7 +99,7 @@ class testSpatialContext(TestCase):
         self.assertFalse(grobbendonk_sc.check_overlap(grote_nete_sc))
 
     def test_get_read_window(self):
-        soil_code = rasterio.open("testcase/grobbendonk/input/soil_codes.asc")
+        soil_code = rasterio.open("testcase/grobbendonk/input/soil_code.asc")
         soil_code_sc = niche_vlaanderen.niche.SpatialContext(soil_code)
         glg = rasterio.open("testcase/grobbendonk/input/mlw.asc")
         glg_sc = niche_vlaanderen.niche.SpatialContext(glg)
@@ -112,7 +112,7 @@ class testSpatialContext(TestCase):
         self.assertEqual(part_window, ((23, 524), (18, 711)))
 
     def test_get_read_window_smaller(self):
-        soil_code = rasterio.open("testcase/grobbendonk/input/soil_codes.asc")
+        soil_code = rasterio.open("testcase/grobbendonk/input/soil_code.asc")
         soil_code_sc = niche_vlaanderen.niche.SpatialContext(soil_code)
         glg = rasterio.open("testcase/grobbendonk/input/mlw.asc")
         glg_sc = niche_vlaanderen.niche.SpatialContext(glg)
