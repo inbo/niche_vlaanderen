@@ -258,3 +258,9 @@ class testNiche(TestCase):
         self.assertTrue ("STATISTICS_MAXIMUM=1051" in info)
         self.assertTrue ("STATISTICS_MINIMUM=-100" in info)
         shutil.rmtree(tmpdir)
+
+    def test_read_configuration(self):
+        config = 'tests/small.yaml'
+        myniche=niche_vlaanderen.Niche()
+        myniche.read_config_input(config)
+        myniche.run(full_model=False)
