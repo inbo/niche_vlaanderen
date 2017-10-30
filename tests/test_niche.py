@@ -15,6 +15,7 @@ import sys
 import distutils.spawn
 import subprocess
 
+
 class testNiche(TestCase):
 
     def test_invalidfile(self):
@@ -22,18 +23,11 @@ class testNiche(TestCase):
         with pytest.raises(RasterioIOError):
             result = n.set_input("msw", "nonexistingfile")
 
-        # TODO: test below leads to a segmentation error - bug in gdal/rasterio!
-        # fixed in gdal 2.3 (upcoming)
-        # n.set_input("mhw", "tests/data/invalid.asc")
-        # n.set_input("mlw", "tests/data/invalid.asc")
-        # n.set_input("soil_code", "tests/data/invalid.asc")
-        # result = n.run(full_model=False)
-        # self.assertFalse(result)
-
     def test_invalid_input_type(self):
         n = niche_vlaanderen.Niche()
         with pytest.raises(TypeException):
-            result = n.set_input("bla", "testcase/grote_nete/input/soil_code.asc")
+            result = n.set_input("bla",
+                                 "testcase/grote_nete/input/soil_code.asc")
 
     def create_grote_nete_niche(self):
         myniche = niche_vlaanderen.Niche()
@@ -156,28 +150,28 @@ class testNiche(TestCase):
 
     def create_grobbendonk_niche(self):
         myniche = niche_vlaanderen.Niche()
+        input = "testcase/grobbendonk/input/"
         myniche.set_input("soil_code",
-                          "testcase/grobbendonk/input/soil_code.asc")
-        myniche.set_input("mhw", "testcase/grobbendonk/input/mhw_correct2.asc")
-        myniche.set_input("mlw", "testcase/grobbendonk/input/mlw.asc")
-        myniche.set_input("msw", "testcase/grobbendonk/input/msw_correct.asc")
+                          input + "soil_code.asc")
+        myniche.set_input("mhw", input + "mhw_correct2.asc")
+        myniche.set_input("mlw", input + "mlw.asc")
+        myniche.set_input("msw", input + "msw_correct.asc")
         myniche.set_input("conductivity",
-                          "testcase/grobbendonk/input/conductivity.asc")
+                          input + "conductivity.asc")
         myniche.set_input("nitrogen_atmospheric",
-                          "testcase/grobbendonk/input/nitrogen_atmospheric.asc")
+                          input + "nitrogen_atmospheric.asc")
         myniche.set_input("nitrogen_animal",
-                          "testcase/grobbendonk/input/nitrogen_animal.asc")
+                          input + "nitrogen_animal.asc")
         myniche.set_input("nitrogen_fertilizer",
                           "testcase/grobbendonk/input/nullgrid.asc")
         myniche.set_input("management",
-                          "testcase/grobbendonk/input/management.asc")
+                          input + "management.asc")
         myniche.set_input("inundation_nutrient",
-                          "testcase/grobbendonk/input/inundation_nutrient.asc")
+                          input + "inundation_nutrient.asc")
         myniche.set_input("inundation_acidity",
-                          "testcase/grobbendonk/input/inundation_nutrient.asc")
-        myniche.set_input("seepage", "testcase/grobbendonk/input/seepage.asc")
-        myniche.set_input("rainwater",
-                          "testcase/grobbendonk/input/nullgrid.asc")
+                          input + "inundation_nutrient.asc")
+        myniche.set_input("seepage", input + "seepage.asc")
+        myniche.set_input("rainwater", input + "nullgrid.asc")
         return myniche
 
     def test_grobbendonk(self):
