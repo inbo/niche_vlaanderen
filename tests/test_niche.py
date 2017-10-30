@@ -255,6 +255,11 @@ class testNiche(TestCase):
 
     def test_read_configuration(self):
         config = 'tests/small.yaml'
-        myniche=niche_vlaanderen.Niche()
+        myniche = niche_vlaanderen.Niche()
         myniche.read_config_input(config)
         myniche.run(full_model=False)
+
+    def test_run_configuration(self):
+        config = 'tests/small.yaml'
+        myniche = niche_vlaanderen.Niche()
+        myniche.run_config_file(config)
