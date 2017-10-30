@@ -7,10 +7,13 @@ from .vegetation import Vegetation
 from .acidity import Acidity
 from .nutrient_level import NutrientLevel
 from .spatial_context import SpatialContext
+from .version import __version__
 
 import logging
 import os.path
 import numbers
+import yaml
+import textwrap
 
 _allowed_input = [
     "soil_code", "mlw", "msw", "mhw", "seepage", "nutrient_level",
@@ -54,6 +57,20 @@ class Niche(object):
         self._result = dict()
         self.log = logging.getLogger()
         self._context = None
+        self.occurence = None
+
+    def __repr__(self):
+        s = "# Niche Vlaanderen version: {}\n\n".format(__version__)
+        s += "input_layers:\n"
+        input = yaml.dump(self._inputfiles, default_flow_style= False)
+        input += yaml.dump(self._inputvalues, default_flow_style= False) + '\n'
+        s += input
+        if self.occurence is not None:
+            s += "model_result: \n"
+            s += yaml.dump(self.occurence)
+        else:
+            s += "# No model run completed."
+        return s
 
     def set_input(self, key, value):
         """ Adds a raster as input layer
@@ -95,6 +112,19 @@ class Niche(object):
             # Remove any existing values to make sure last value is used
             self._inputvalues.pop(key, None)
             self._inputfiles[key] = value
+
+    def read_config_input(self, config):
+        """ Sets the input based on an input file
+        """
+        with open(config, 'r') as stream:
+            config_loaded = yaml.load(stream)
+
+        # parse input_layers
+        for k in config_loaded['input_layers'].keys():
+            # adjust path to be relative to the yaml file
+            path = os.path.join(os.path.dirname(config),
+                config_loaded['input_layers'][k])
+            self.set_input(k, path)
 
     def _check_input_files(self, full_model):
         """ basic input checks (valid files etc)
