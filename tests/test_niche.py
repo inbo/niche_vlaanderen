@@ -96,7 +96,7 @@ class TestNiche(TestCase):
              'V7.tif', 'V8.tif', 'V9.tif', 'V10.tif', 'V11.tif', 'V12.tif',
              'V13.tif', 'V14.tif', 'V15.tif', 'V16.tif', 'V17.tif', 'V18.tif',
              'V19.tif', 'V20.tif', 'V21.tif', 'V22.tif', 'V23.tif', 'V24.tif',
-             'V25.tif', 'V26.tif', 'V27.tif', 'V28.tif']
+             'V25.tif', 'V26.tif', 'V27.tif', 'V28.tif', 'log.txt']
 
         dir = os.listdir(tmpdir)
 
@@ -139,7 +139,7 @@ class TestNiche(TestCase):
              'V7.tif', 'V8.tif', 'V9.tif', 'V10.tif', 'V11.tif', 'V12.tif',
              'V13.tif', 'V14.tif', 'V15.tif', 'V16.tif', 'V17.tif', 'V18.tif',
              'V19.tif', 'V20.tif', 'V21.tif', 'V22.tif', 'V23.tif', 'V24.tif',
-             'V25.tif', 'V26.tif', 'V27.tif', 'V28.tif']
+             'V25.tif', 'V26.tif', 'V27.tif', 'V28.tif', 'log.txt']
 
         dir = os.listdir(tmpdir)
 
@@ -202,7 +202,7 @@ class TestNiche(TestCase):
              'V7.tif', 'V8.tif', 'V9.tif', 'V10.tif', 'V11.tif', 'V12.tif',
              'V13.tif', 'V14.tif', 'V15.tif', 'V16.tif', 'V17.tif', 'V18.tif',
              'V19.tif', 'V20.tif', 'V21.tif', 'V22.tif', 'V23.tif', 'V24.tif',
-             'V25.tif', 'V26.tif', 'V27.tif', 'V28.tif']
+             'V25.tif', 'V26.tif', 'V27.tif', 'V28.tif','log.txt']
 
         dir = os.listdir(tmpdir)
 
@@ -274,6 +274,11 @@ class TestNiche(TestCase):
         myniche = niche_vlaanderen.Niche()
         myniche.run_config_file(config)
 
+    def test_run_configuration_numeric(self):
+        config = 'tests/small_ct.yaml'
+        myniche = niche_vlaanderen.Niche()
+        myniche.run_config_file(config)
+
     def test_incomplete_model(self):
         myniche = niche_vlaanderen.Niche()
         myniche.set_input("mhw", "tests/data/msw_small.asc")
@@ -300,5 +305,7 @@ class TestNiche(TestCase):
         myniche.set_input("msw", 10)
         with pytest.raises(NicheException):
             myniche.run()
+
+
 
 

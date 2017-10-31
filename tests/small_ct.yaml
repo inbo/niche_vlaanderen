@@ -1,9 +1,9 @@
 input_layers:
   mhw: data/mhw_small.asc
-  mlw: data/mlw_small.asc
+  mlw: 80
   soil_code: data/soil_code_small.asc
 
 model_options:
   simple_model: True
-  deviation: True
+  deviation: False
   output_dir: _output

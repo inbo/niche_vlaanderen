@@ -83,7 +83,7 @@ class Niche(object):
         input = yaml.dump(self._inputfiles, default_flow_style=False)
         input += yaml.dump(self._inputvalues, default_flow_style=False) + '\n'
         s += indent(input, "  ")
-        
+
         s += "model_options:\n"
         options = yaml.dump(self._model_options, default_flow_style=False)
         s += indent(options, "  ")
@@ -153,9 +153,11 @@ class Niche(object):
         # parse input_layers
         for k in config_loaded['input_layers'].keys():
             # adjust path to be relative to the yaml file
-            path = os.path.join(os.path.dirname(config),
-                                config_loaded['input_layers'][k])
-            self.set_input(k, path)
+            value = config_loaded['input_layers'][k]
+            if not isinstance(value, numbers.Number):
+                value = os.path.join(os.path.dirname(config),
+                                    value)
+            self.set_input(k, value)
 
     def run_config_file(self, config):
         """ Runs Niche using a configuration file
@@ -425,7 +427,7 @@ class Niche(object):
                 self._files_written[i] = os.path.normpath(path)
 
 
-        with open(folder + "log.txt", "w") as f:
+        with open(folder + "/log.txt", "w") as f:
             f.write(self.__repr__())
 
 def indent(s, pre):
