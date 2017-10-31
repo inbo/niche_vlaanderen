@@ -61,6 +61,7 @@ class Niche(object):
         self._abiotic = dict()
         self._result = dict()
         self._deviation = dict()
+        self._model_options=dict()
         self._files_written = dict()
         self.log = logging.getLogger()
         self._context = None
@@ -82,12 +83,18 @@ class Niche(object):
         input = yaml.dump(self._inputfiles, default_flow_style=False)
         input += yaml.dump(self._inputvalues, default_flow_style=False) + '\n'
         s += indent(input, "  ")
+        
+        s += "model_options:\n"
+        options = yaml.dump(self._model_options, default_flow_style=False)
+        s += indent(options, "  ")
+
         if self.occurrence is not None:
             s += "model_result: \n"
             s += indent(
                 yaml.dump(self.occurrence, default_flow_style=False), "  ")
         else:
             s += "# No model run completed."
+
 
         if len(self._files_written) > 0:
             s+= "files_written:\n"
@@ -273,6 +280,10 @@ class Niche(object):
                     dict _difference
 
         """
+
+        self._model_options["full_model"] = full_model
+        self._model_options["deviation"] = deviation
+
         if full_model:
             missing_keys = set(_minimal_input) - set(self._inputfiles.keys()) \
                            - set(self._inputvalues.keys())
@@ -360,6 +371,8 @@ class Niche(object):
         if not hasattr(self, "_vegetation"):
             raise NicheException(
                 "A valid run must be done before writing the output.")
+
+        self._model_options["output_dir"] = folder
 
         if not os.path.exists(folder):
             os.makedirs(folder)
