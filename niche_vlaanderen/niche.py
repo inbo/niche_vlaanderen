@@ -13,7 +13,6 @@ import logging
 import os.path
 import numbers
 import yaml
-import textwrap
 
 _allowed_input = [
     "soil_code", "mlw", "msw", "mhw", "seepage", "nutrient_level",
@@ -29,15 +28,18 @@ _minimal_input = [
 
 logging.basicConfig()
 
+
 class TypeException(Exception):
     """
     Type is not allowed
     """
 
+
 class NicheException(Exception):
     """
     Exception from niche code
     """
+
 
 class Niche(object):
     """ Creates a new Niche object
@@ -70,8 +72,8 @@ class Niche(object):
         s += "  gdal: {}\n".format(rasterio.__gdal_version__)
 
         s += "input_layers:\n"
-        input = yaml.dump(self._inputfiles, default_flow_style= False)
-        input += yaml.dump(self._inputvalues, default_flow_style= False) + '\n'
+        input = yaml.dump(self._inputfiles, default_flow_style=False)
+        input += yaml.dump(self._inputvalues, default_flow_style=False) + '\n'
         s += input
         if self.occurrence is not None:
             s += "model_result: \n"
@@ -131,7 +133,7 @@ class Niche(object):
         for k in config_loaded['input_layers'].keys():
             # adjust path to be relative to the yaml file
             path = os.path.join(os.path.dirname(config),
-                config_loaded['input_layers'][k])
+                                config_loaded['input_layers'][k])
             self.set_input(k, path)
 
     def run_config_file(self, config):
@@ -156,7 +158,7 @@ class Niche(object):
         else:
             self.run()
 
-        deviation = "deviation" in options and options["deviation"] == True
+        deviation = "deviation" in options and options["deviation"]
         if deviation:
             self.calculate_deviation()
 
@@ -170,15 +172,10 @@ class Niche(object):
         if deviation:
             self.write_deviation(output_dir)
 
-
     def _check_input_files(self, full_model):
         """ basic input checks (valid files etc)
 
         """
-
-        # check files exist
-        for f in self._inputfiles:
-            p = self._inputfiles[f]
 
         # Load every input_file in the input_array
         inputarray = dict()
@@ -211,12 +208,11 @@ class Niche(object):
         # Load in all constant inputvalues
         for f in self._inputvalues:
             shape = (int(self._context.height), int(self._context.width))
-            inputarray[f] = np.full(shape,self._inputvalues[f])
-
+            inputarray[f] = np.full(shape, self._inputvalues[f])
 
         # check if valid values are used in inputarrays
         # check for valid datatypes - values will be checked in the low-level
-        # api (eg soilcode present in codetable)
+        # api (eg soil_code present in codetable)
 
         if np.any((inputarray['mhw'] > inputarray['mlw'])
                   & (inputarray["mhw"] != -99)):
@@ -226,8 +222,8 @@ class Niche(object):
             badpoints = badpoints * self._context.affine
 
             print("Not all MHW values are lower than MLW")
-            print ("coordinates with invalid values are:")
-            print (pd.DataFrame(list(badpoints)))
+            print("coordinates with invalid values are:")
+            print(pd.DataFrame(list(badpoints)))
             raise NicheException(
                 "Error: not all MHW values are lower than MLW")
 
@@ -238,8 +234,8 @@ class Niche(object):
 
                 badpoints = np.where(inputarray['mhw'] > inputarray['mlw'])
                 badpoints = badpoints * self._context.affine
+                print(pd.DataFrame(list(badpoints)))
 
-                print (pd.DataFrame(list(badpoints)))
                 raise NicheException(
                     "Error: not all MSW values are lower than MLW")
 
@@ -273,7 +269,8 @@ class Niche(object):
                            - set(self._inputvalues.keys())
             if len(missing_keys) > 0:
                 print(missing_keys)
-                raise NicheException("error, different obliged keys are missing")
+                raise NicheException(
+                    "error, different obliged keys are missing")
 
         self._check_input_files(full_model)
 
@@ -362,11 +359,6 @@ class Niche(object):
             Output folder to which files will be written. Parent directory must
             exist already.
 
-        Returns
-        -------
-
-        bool:
-            Returns True on success.
         """
 
         if not hasattr(self, "_vegetation"):
@@ -410,16 +402,11 @@ class Niche(object):
             Output folder to which files will be written. Parent directory must
             exist already.
 
-        Returns
-        -------
-
-        bool:
-            Returns True on success.
         """
         if not hasattr(self, "_deviation"):
-            self.log.error(
-                "A valid calculate_deviation must be done before writing the output.")
-            return False
+            raise NicheException(
+                "A valid calculate_deviation must be done before writing the "
+                "output.")
 
         if not os.path.exists(folder):
             os.makedirs(folder)

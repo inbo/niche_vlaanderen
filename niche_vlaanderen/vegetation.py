@@ -97,7 +97,7 @@ class Vegetation(object):
                 veg_bands[veg_code] = vegi
 
             occurrence[veg_code] = (np.sum(vegi == 1)
-                                   / (vegi.size - np.sum(nodata)))
+                                    / (vegi.size - np.sum(nodata)))
         return veg_bands, occurrence
 
     def calculate_deviaton(self, soil_code, mhw, mlw):

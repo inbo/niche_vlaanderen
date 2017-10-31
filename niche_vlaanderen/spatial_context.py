@@ -1,5 +1,4 @@
 from affine import Affine
-
 from textwrap import dedent
 
 
@@ -7,6 +6,7 @@ class SpatialContextError(Exception):
     """
 
     """
+
 
 class SpatialContext(object):
     """Stores the spatial context of the grids in niche
@@ -194,13 +194,14 @@ class SpatialContext(object):
 
         # we can safely round here because we checked overlap before
         # (differences are smaller than the tolerance
-        window = (round(gminxy[1],2), round(gmaxxy[1],2)),\
-               (round(gminxy[0],2), round(gmaxxy[0],2))
+        window = (round(gminxy[1], 2), round(gmaxxy[1], 2)),\
+                 (round(gminxy[0], 2), round(gmaxxy[0], 2))
 
-        if (window[0][0] < 0 or window[1][0] < 0
-            or window[1][1] > new_sc.width or window[1][0] > new_sc.height):
+        if window[0][0] < 0 or window[1][0] < 0 or window[1][1] > new_sc.width\
+           or window[1][0] > new_sc.height:
+
             raise SpatialContextError(
-                "Error: new SpatialContexts is larger than current context\n"
-                  "Can not determine a read window")
+                "Error: new SpatialContexts is larger than current context.\n"
+                "Can not determine a read window")
 
         return window
