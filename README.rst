@@ -1,10 +1,10 @@
 ################
 niche-vlaanderen
 ################
-.. image:: https://travis-ci.org/johanvdw/niche_vlaanderen.svg?branch=master
-    :target: https://travis-ci.org/johanvdw/niche_vlaanderen
-.. image:: https://ci.appveyor.com/api/projects/status/028oj3tv7juuia8e?svg=true
-    :target: https://ci.appveyor.com/project/johanvdw/niche-vlaanderen-tuwi7
+.. image:: https://travis-ci.org/inbo/niche_vlaanderen.svg?branch=master
+    :target: https://travis-ci.org/inbo/niche_vlaanderen
+.. image:: https://ci.appveyor.com/api/projects/status/swigrkchlchy7x7q?svg=true
+    :target: https://ci.appveyor.com/project/johanvdw/niche-vlaanderen
 .. image:: https://coveralls.io/repos/github/inbo/niche_vlaanderen/badge.svg?branch=master
     :target: https://coveralls.io/github/inbo/niche_vlaanderen?branch=master
 
