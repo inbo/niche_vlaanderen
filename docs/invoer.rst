@@ -14,8 +14,8 @@ Om NICHE toe te passen, zijn 14 invoergrids noodzakelijk.
 
 .. _bodemklasse:
 
-Bodemklasse
-===========
+Bodemklasse ``soil_code``
+=========================
 
 Bodemkaart met toegekende NICHE-bodemcodes op basis van een vertaalsleutel of een bodemraster gebaseerd op veldgegevens.
 
@@ -35,8 +35,8 @@ De waterstandsparameters worden als volgt gedefinieerd (van der Veen et al., 199
 
 .. _ghg:
 
-GHG (Gemiddeld hoogste grondwaterstand)
----------------------------------------
+GHG (Gemiddeld hoogste grondwaterstand) ``mhw``
+-----------------------------------------------
 
 GHG - gemiddeld hoogste grondwaterstand: het gemiddelde van de drie hoogste grondwaterstanden (GH3) in de winterperiode (1 oktober tot 1 april) over tenminste 5 jaar bij kleine variatie tussen GH3 en LG3 en over 8 jaar bij grote variatie tussen GH3 en LG3.
 Het is maat voor het hoogste grondwaterniveau in een normale winter.
@@ -45,8 +45,8 @@ Het is maat voor het hoogste grondwaterniveau in een normale winter.
 
 .. _glg:
 
-GLG (gemiddeld laagste grondwaterstand)
----------------------------------------
+GLG (gemiddeld laagste grondwaterstand) ``mlw``
+-----------------------------------------------
 
 GLG - gemiddeld laagste grondwaterstand: het gemiddelde van de drie laagste grondwaterstanden (GL3) in de zomerperiode (1 april tot 1 oktober) over tenminste 5 jaar bij kleine variatie tussen GH3 en LG3 en over 8 jaar bij grote variatie tussen GH3 en LG3.
 Het is een maat voor het laagste niveau in een gemiddelde zomer.
@@ -55,8 +55,8 @@ Het is een maat voor het laagste niveau in een gemiddelde zomer.
 
 .. _gvg:
 
-GVG (gemiddeld voorjaarsgrondwaterstand)
-----------------------------------------
+GVG (gemiddeld voorjaarsgrondwaterstand) ``msw``
+------------------------------------------------
 
 GVG - gemiddelde voorjaarsgrondwaterstand: de gemiddelde grondwaterstand aan het begin van het groeiseizoen (1 april).
 Indien niet gekend kan de GVG afgeleid worden uit de formule: GVG = 5,4 + 0,83*GHG + 0,19*GLG (in cm).
@@ -65,8 +65,8 @@ Indien niet gekend kan de GVG afgeleid worden uit de formule: GVG = 5,4 + 0,83*G
 
 .. _kwel:
 
-Kwel
-====
+Kwel ``seepage``
+================
 
 Gemiddelde kwel in mm/dag en negatieve waarden (negatieve waarden worden gebruikt voor plaatsen waar grondwater uittreedt). Positieve waarden duiden op infiltratie.
 NICHE rekent met volgende klassegrenzen:
@@ -77,8 +77,8 @@ NICHE rekent met volgende klassegrenzen:
 
 .. _overstroming_trofie:
 
-Overstroming_trofie
-===================
+Overstroming_trofie ``inundation_nutrient``
+===========================================
 Overstromingskaart – invloed op trofiebepaling
 
 Overstromingen met voedselrijk water die met een zekere regelmaat terug komen, hebben invloed op de trofie van de standplaats die relevant is voor de vegetatie.
@@ -92,8 +92,8 @@ Indien het overstromingswater betreft met weinig nutriënten, of wanneer er geen
 
 .. _overstroming_zuur:
 
-Overstroming_zuurgraad
-======================
+Overstroming_zuurgraad ``inundation_acidity``
+=============================================
 Overstromingskaart – invloed op pH
 
 Overstromingen hebben in NICHE-Vlaanderen een effect op de zuurgraad van de standplaats.
@@ -105,8 +105,8 @@ Indien het overstromingen betreft met mineraalarm/zuur water (bvb in veengebiede
 
 .. _atmosferische_depositie:
 
-Atmosferische depositie
-=======================
+Atmosferische depositie ``nitrogen_atmospheric``
+================================================
 Kaart met overal dezelfde waarde voor atmosferische stikstof depositie (bv 30 N kg/ha/j) of een onderscheid in bossen en graslanden (op basis van het VMM depositiemeetnet).
 
 Er wordt een kaart aangemaakt met voor elke grid de waarde van de atmosferische stikstof depositie in kg-N/ha/jaar.
@@ -120,8 +120,8 @@ Het onderscheid kan gemaakt worden op basis van een beheerkaart, een actuele veg
 
 .. _dierlijke_bemesting:
 
-Dierlijke bemesting
-===================
+Dierlijke bemesting ``nitrogen_animal``
+=======================================
 
 Dierlijke bemesting, N kg/ha/j 
 Er wordt een kaart aangemaakt met voor elke grid de waarde van de hoeveelheid dierlijke mest in kg-N/ha/jaar. Dit kunnen reële gegevens zijn, of schattingen zoals deze die voor de Nederlandse landgebruikskaart werden ontwikkeld.
@@ -130,8 +130,8 @@ Er wordt een kaart aangemaakt met voor elke grid de waarde van de hoeveelheid di
 
 .. _kunstmest:
 
-Kunstmest
-=========
+Kunstmest ``nitrogen_fertilizer``
+=================================
 
 Toepassen van kunstmest, N kg/ha/j
 Er wordt een kaart aangemaakt met voor elke grid de waarde van de hoeveelheid kunstmest in kg-N/ha/jaar. Dit kunnen reële gegevens zijn, of schattingen zoals deze die voor de Nederlandse landgebruikskaart werden ontwikkeld.
@@ -154,8 +154,8 @@ Er wordt een kaart aangemaakt met voor elke grid de waarde van de hoeveelheid ku
 
 .. _beheer:
 
-Beheer
-======
+Beheer ``management``
+=====================
 
 Toegepast beheer op percelen.
 Er zijn vier klassen gedefinieerd bij het beheer, in de tabel 
@@ -168,8 +168,8 @@ Bij bepaling van het potentieel vegetatietype spelen alle beheersklassen een bel
 
 .. _mineraalrijkdom:
 
-Mineraalrijkdom
-===============
+Mineraalrijkdom ``minerality``
+==============================
 
 Elektrische conductiviteit van het grondwater in µS/cm.
 
@@ -184,8 +184,8 @@ De mineraalrijkdom kan bepaald worden op basis van de conductiviteitswaarden (> 
 
 .. _regenlens:
 
-Regenlens
-=========
+Regenlens ``rainwater``
+=======================
 
 Eventueel voorkomen van regenwaterlenzen wordt aangegeven.
 
@@ -197,12 +197,12 @@ De informatie zal meestal bekomen worden via expertkennis over het gebied aangez
 Als de nodige informatie voorhanden is, kunnen de voorziene beslisregels worden toegepast.
 Bij gebrek aan informatie krijgen alle gridcellen een waarde 0. 
 
- * Mogelijke waarden: 0 of 1
+  * Mogelijke waarden: 0 of 1
 
 .. _overstroming_vegetatie:
 
-Overstroming Vegetatie
-======================
+Overstroming Vegetatie ``inundation_vegetation``
+================================================
 
 Overstromingskaart met invloed op een selectie van vegetatietypes. Er wordt nagegaan welke vegetatietypes kunnen voorkomen bij overstroming en welke niet.
 Deze overstromingskaart wordt enkel gebruikt bij het aftoetsen van de vegetatietypes aan de standplaats, op basis van de NICHE-tabel. Er wordt nagegaan welke vegetatietypes kunnen voorkomen bij overstroming en welke niet. Er zijn 3 klassen onderscheiden, nl:
@@ -214,3 +214,4 @@ Deze overstromingskaart wordt enkel gebruikt bij het aftoetsen van de vegetatiet
 Deze overstromingskaart is een samenstelling van overstromingskaarten met verschillende retourperiodes (regelmatig= retourperiode 1 tot 2 jaar, incidenteel =  retourperiode van 5 jaar). 
 
  * Mogelijke waarden: 0,1 of 2
+ * Optioneel grid - de berekening kan ook gebeuren zonder vegetatie.

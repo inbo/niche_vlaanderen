@@ -3,24 +3,11 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-niche_vlaanderen documentatie
-============================================
 
-.. include ../README.rst
+.. include:: ../README.rst
 
-Het Python package ``niche_vlaanderen`` laat de gebruiker toe om op basis van een aantal :doc:`invoer` de mogelijke vegetatietypes te berekenen.
-
-De berekening gebeurt in drie stappen:
-
- * :ref:`trofie`
- * :ref:`zuur` 
- * :ref:`vegetatie`
-
-In de Python module ``niche_vlaanderen`` kan de berekening op twee manieren gebeuren
-
- * High-level: Met behulp van de ``Niche`` klasse, die rechtstreeks werkt met GIS bestanden.
-   Meer in :doc:`niche`.
- * Low-level: Deze geavanceerde methode laat toe om de berekening uit te voeren op (numpy) arrays, waarbij de gebruiker een grotere flexibiliteit heeft.
+This documentation is split in two parts. The first part :doc`model` (in Dutch) describes the background of the NICHE model.
+The second part :doc`package` describes the ``niche_vlaanderen`` package.
 
 Contents:
 

@@ -33,13 +33,13 @@ The table `soil_codes.csv <https://github.com/INBO/niche_vlaanderen/blob/master/
 management_codes
 ================
 
-The table `management_codes.csv  <https://github.com/INBO/niche_vlaanderen/blob/master/system_tables/management_codes.csv>`_ contains the supported management_codes in NICHE.
+The table `management.csv  <https://github.com/INBO/niche_vlaanderen/blob/master/system_tables/management.csv>`_ contains the supported management_codes in NICHE.
 It also contains a column `influence` which is used in the calculation of nutrient level.
 
 niche_vlaanderen
 ================
 
-The table `niche_vlaanderen.csv <https://github.com/INBO/niche_vlaanderen/blob/master/SystemTable/niche_vlaandersn.csv>`_ contains the link between the vegetation types that can be predicted by niche and the location factors that govern them.
+The table `niche_vegetation.csv <https://github.com/INBO/niche_vlaanderen/blob/master/system_tables/niche_vegetation.csv>`_ contains the link between the vegetation types that can be predicted by niche and the location factors that govern them.
 
 Required columns are:
  * veg_code: vegetation code
@@ -48,7 +48,7 @@ Required columns are:
  * acidity
  * mhw_min, mhw_max:
  * mlw_min, mlw_max:
- * managament
+ * management
  * inundation
 
 Other columns can exist but are ignored.
