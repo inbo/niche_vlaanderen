@@ -96,8 +96,8 @@ class Vegetation(object):
             if return_all or np.any(vegi):
                 veg_bands[veg_code] = vegi
 
-            occurrence[veg_code] = (np.sum(vegi == 1)
-                                    / (vegi.size - np.sum(nodata)))
+            occurrence[veg_code] = np.asscalar((np.sum(vegi == 1)
+                                    / (vegi.size - np.sum(nodata))))
         return veg_bands, occurrence
 
     def calculate_deviation(self, soil_code, mhw, mlw):

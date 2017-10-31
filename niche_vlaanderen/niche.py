@@ -13,6 +13,9 @@ import logging
 import os.path
 import numbers
 import yaml
+import textwrap
+import datetime
+import sys
 
 _allowed_input = [
     "soil_code", "mlw", "msw", "mhw", "seepage", "nutrient_level",
@@ -57,12 +60,14 @@ class Niche(object):
         self._inputarray = dict()
         self._abiotic = dict()
         self._result = dict()
+        self._files_written = dict()
         self.log = logging.getLogger()
         self._context = None
         self.occurrence = None
 
     def __repr__(self):
-        s = "# Niche Vlaanderen version: {}\n\n".format(__version__)
+        s = "# Niche Vlaanderen version: {}\n".format(__version__)
+        s += "# Run at: {}\n\n".format(datetime.datetime.now())
         # Also add some versions of the major packages we use - easy for
         # debugging
         s += "package_versions:\n"
@@ -71,15 +76,23 @@ class Niche(object):
         s += "  rasterio: {}\n".format(rasterio.__version__)
         s += "  gdal: {}\n".format(rasterio.__gdal_version__)
 
+        s += "\n"
         s += "input_layers:\n"
         input = yaml.dump(self._inputfiles, default_flow_style=False)
         input += yaml.dump(self._inputvalues, default_flow_style=False) + '\n'
-        s += input
+        s += indent(input, "  ")
         if self.occurrence is not None:
             s += "model_result: \n"
-            s += yaml.dump(self.occurrence)
+            s += indent(
+                yaml.dump(self.occurrence, default_flow_style=False), "  ")
         else:
             s += "# No model run completed."
+
+        if len(self._files_written) > 0:
+            s+= "files_written:\n"
+            s += indent(
+                yaml.dump(self._files_written, default_flow_style=False), "  ")
+
         return s
 
     def set_input(self, key, value):
@@ -377,13 +390,21 @@ class Niche(object):
         )
 
         for vi in self._vegetation:
+            path = folder + '/%s.tif' % vi
             with rasterio.open(folder + '/V%s.tif' % vi, 'w', **params) as dst:
                 dst.write(self._vegetation[vi], 1)
+                self._files_written[vi] = os.path.normpath(path)
 
         # also save the abiotic grids
         for vi in self._abiotic:
-            with rasterio.open(folder + '/%s.tif' % vi, 'w', **params) as dst:
+            path = folder + '/%s.tif' % vi
+            with rasterio.open(path, 'w', **params) as dst:
                 dst.write(self._abiotic[vi], 1)
+                self._files_written[vi] = os.path.normpath(path)
+
+        with open(folder + "log.txt", "w") as f:
+            f.write(self.__repr__())
+
 
     def write_deviation(self, folder):
         """Write the calculated deviations to a folder
@@ -420,7 +441,19 @@ class Niche(object):
         )
 
         for i in self._deviation:
-            with rasterio.open(folder + '/%s.tif' % i, 'w', **params) as dst:
+            path = folder + '/%s.tif' % i
+            with rasterio.open(path, 'w', **params) as dst:
                 band = self._deviation[i]
                 band[band == np.nan] = -99999
                 dst.write(band, 1)
+                self._files_written[i] = os.path.normpath(path)
+
+        with open(folder + "/log.txt", "w") as f:
+            f.write(self.__repr__())
+
+
+def indent(s, pre):
+    if sys.version_info >= (3,3):
+        return textwrap.indent(s, pre)
+    else:
+        return pre + s.replace('\n', '\n' + pre)
