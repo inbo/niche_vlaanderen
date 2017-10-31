@@ -60,6 +60,7 @@ class Niche(object):
         self._inputarray = dict()
         self._abiotic = dict()
         self._result = dict()
+        self._deviation = dict()
         self._files_written = dict()
         self.log = logging.getLogger()
         self._context = None
@@ -166,14 +167,12 @@ class Niche(object):
         # Run + write according to model options
         options = config_loaded["model_options"]
 
-        if options["simple_model"]:
-            self.run(full_model=False)
-        else:
-            self.run()
-
         deviation = "deviation" in options and options["deviation"]
-        if deviation:
-            self.calculate_deviation()
+        full_model = True
+        if "simple_model" in options and options["simple_model"]:
+            full_model = False
+
+        self.run(full_model, deviation)
 
         if "output_dir" in options:
             output_dir = options["output_dir"]
@@ -181,9 +180,6 @@ class Niche(object):
             return
 
         self.write(output_dir)
-
-        if deviation:
-            self.write_deviation(output_dir)
 
     def _check_all_lower(self, input_array, a, b):
         if np.any((input_array[a] > input_array[b])
@@ -261,17 +257,21 @@ class Niche(object):
         # if all is successful:
         self._inputarray = inputarray
 
-    def run(self, full_model=True):
+    def run(self, full_model=True, deviation=False):
         """Run the niche model
 
         Runs niche Vlaanderen model. Requires that the necessary input values
         have been added using set_input.
 
-        Returns
-        -------
+        Parameters
+        ----------
+        deviation: bool
+                    Create the maps with the difference between the needed MHW
+                    and MLW and the actual MHW/MLW for a vegetation type.
 
-        bool:
-            Returns true if the calculation was successful.
+                    Calculated results will be stored in the niche class in a
+                    dict _difference
+
         """
         if full_model:
             missing_keys = set(_minimal_input) - set(self._inputfiles.keys()) \
@@ -324,6 +324,12 @@ class Niche(object):
         self._vegetation, self.occurrence = vegetation.calculate(
             full_model=full_model, **veg_arguments)
 
+        if deviation:
+            self._deviation = vegetation.calculate_deviation(
+                self._inputarray["soil_code"], self._inputarray["mhw"],
+                self._inputarray["mlw"]
+            )
+
         occ_table = pd.DataFrame.from_dict(self.occurrence, orient="index")
         occ_table.columns = ['occurrence']
 
@@ -333,25 +339,6 @@ class Niche(object):
             ["{0:.2f}%".format(v * 100) for v in occ_table['occurrence']],
             index=occ_table.index)
         print(occ_table)
-
-    def calculate_deviation(self):
-        """Calculates the amount MHW/MLW should change to allow vegetation type
-
-        Creates the maps with the difference between the needed MHW and MLW
-        and the actual MHW/MLW for a vegetation type.
-
-        Calculated results will be stored in the niche class in a dict
-        _difference
-
-        keys are "mhw_01" etc
-        """
-        self._check_input_files(full_model=False)
-
-        v = Vegetation()
-        self._deviation = v.calculate_deviation(
-            self._inputarray["soil_code"], self._inputarray["mhw"],
-            self._inputarray["mlw"]
-        )
 
     def write(self, folder):
         """Saves the model results to a folder
@@ -402,32 +389,8 @@ class Niche(object):
                 dst.write(self._abiotic[vi], 1)
                 self._files_written[vi] = os.path.normpath(path)
 
-        with open(folder + "log.txt", "w") as f:
-            f.write(self.__repr__())
 
-
-    def write_deviation(self, folder):
-        """Write the calculated deviations to a folder
-
-        Saves the modeled deviations to a folder. Files will be written as
-        geotiff. Files will have names mhw_01.tif, mlw_01.tif
-
-        Parameters
-        ----------
-
-        folder: string
-            Output folder to which files will be written. Parent directory must
-            exist already.
-
-        """
-        if not hasattr(self, "_deviation"):
-            raise NicheException(
-                "A valid calculate_deviation must be done before writing the "
-                "output.")
-
-        if not os.path.exists(folder):
-            os.makedirs(folder)
-
+        # deviation
         params = dict(
             driver='GTiff',
             height=self._context.height,
@@ -448,9 +411,9 @@ class Niche(object):
                 dst.write(band, 1)
                 self._files_written[i] = os.path.normpath(path)
 
-        with open(folder + "/log.txt", "w") as f:
-            f.write(self.__repr__())
 
+        with open(folder + "log.txt", "w") as f:
+            f.write(self.__repr__())
 
 def indent(s, pre):
     if sys.version_info >= (3,3):

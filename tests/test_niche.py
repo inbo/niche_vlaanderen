@@ -16,7 +16,7 @@ import distutils.spawn
 import subprocess
 
 
-class testNiche(TestCase):
+class TestNiche(TestCase):
 
     @pytest.mark.skipif(sys.platform == "win32",
                         reason="fails on win32 - fixed in recent rasterio")
@@ -237,7 +237,7 @@ class testNiche(TestCase):
 
     def test_deviation(self):
         n = self.create_grobbendonk_niche()
-        n.calculate_deviation()
+        n.run(deviation=True)
         # check dict exists and contains enough nan values
         self.assertEqual(276072, np.isnan(n._deviation["mhw_04"]).sum())
 
@@ -247,10 +247,10 @@ class testNiche(TestCase):
 
     def test_write_deviation(self):
         n = self.create_grobbendonk_niche()
-        n.calculate_deviation()
+        n.run(deviation=True)
 
         tmpdir = tempfile.mkdtemp()
-        n.write_deviation(tmpdir)
+        n.write(tmpdir)
         info = subprocess.check_output(
             ["gdalinfo",
              "-stats",
@@ -281,8 +281,6 @@ class testNiche(TestCase):
             myniche.run()  # incomplete, keys are missing
         with pytest.raises(NicheException):
             myniche.write("_temp")  # should raise, no calculation done
-        with pytest.raises(NicheException):
-            myniche.write_deviation("_temp")  # should raise, no calculation
 
     def test_mxw_validation(self):
         myniche = self.create_grobbendonk_small()
