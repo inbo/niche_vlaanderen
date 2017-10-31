@@ -1,9 +1,9 @@
 
 .. _vegetatie:
 
-##################
-Bepaling vegetatie
-##################
+#################################
+Bepaling vegetatie ``vegetation``
+#################################
 
 Na de bepaling van de trofie en de zuurgraadklasse kan de eigenlijke bepaling van de mogelijke vegetatie gebeuren.
 

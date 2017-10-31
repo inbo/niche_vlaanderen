@@ -1,5 +1,5 @@
 ################
-niche-vlaanderen
+Niche Vlaanderen
 ################
 .. image:: https://travis-ci.org/inbo/niche_vlaanderen.svg?branch=master
     :target: https://travis-ci.org/inbo/niche_vlaanderen
@@ -22,7 +22,7 @@ Based on calculated abiotic properties of the location NICHE determines whether 
 
 This project is a redevelopment of an existing ArcGIS plugin in Python, without external non-open source dependencies.
 
----
+-----
 
 NICHE Vlaanderen is een hydro-ecologisch model voor vallei-ecosystemen in Vlaanderen en gebaseerd op het Nederlandse model NICHE (Nature Impact Assessment of Changes in Hydro-Ecological Systems), van Kiwa Water Research, Nederland. 
 NICHE Vlaanderen kan ingezet worden om de effecten van ingrepen in de waterhuishouding op grondwaterafhankelijke vegetaties te evalueren. 
@@ -31,11 +31,11 @@ Het model is gebaseerd op een aantal voor de vegetatie bepalende standplaatsfact
 
 Dit project is een herontwikkeling van een bestaande ArcGIS plugin in Python, zonder externe non-open source dependencies.
 
-Documentation
-============
-The documentation of this project is available at https://inbo.github.io/niche_vlaanderen/
-
 Licentie
 ========
 
 Dit project maakt gebruik van de MIT Licentie, zie `LICENSE <https://github.com/inbo/niche-vlaanderen/blob/master/LICENSE>`_ voor meer informatie.
+
+Documentation
+=============
+The documentation of this project is available at https://inbo.github.io/niche_vlaanderen/

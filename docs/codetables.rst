@@ -1,5 +1,5 @@
 #################
-Code Tables
+Codetabellen
 #################
 
 The logic of Niche is largely based on code tables.

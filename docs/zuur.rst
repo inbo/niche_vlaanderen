@@ -1,8 +1,8 @@
 .. _zuur:
 
-################################
-Bepaling van de zuurgraadklasse
-################################
+###########################################
+Bepaling van de zuurgraadklasse ``acidity``
+###########################################
 
 .. csv-table:: Zuurgraadklassen in NICHE
   :header-rows: 1

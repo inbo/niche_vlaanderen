@@ -1,16 +1,15 @@
-###############################
-niche_vlaanderen Python Package
-###############################
+###################################
+``niche_vlaanderen`` Python Package
+###################################
 
-In de Python module ``niche_vlaanderen`` kan de berekening op twee manieren gebeuren
+The Python package ``niche_vlaanderen`` allows calculating the NICHE model in three ways
 
- * High-level: Met behulp van de ``Niche`` klasse, die rechtstreeks werkt met GIS bestanden.
-   Meer in :doc:`niche`.
- * Low-level: Deze geavanceerde methode laat toe om de berekening uit te voeren op (numpy) arrays, waarbij de gebruiker een grotere flexibiliteit heeft.
+ * Using configuration files witht the command line interface
+ * High-level: Using the :doc:`niche` class that uses GIS files directly.
+ * Low-level: This advanced method allows calculation on (numpy) arrays, giving the user a very large flexibility.
 
-Overzicht
-=========
-
-.. toctree::
+.. toctree:: Overview
+  installation
+  cli
   niche
   lowlevel

@@ -1,10 +1,10 @@
 .. _trofie:
 
-##################################
-Berekening Trofie (nutrient_level)
-##################################
+####################################
+Berekening Trofie ``nutrient_level``
+####################################
 
-De Trofie (`nutrient_level`) is de mate van voedselrijkdom van de bodem.
+De Trofie (``nutrient_level``) is de mate van voedselrijkdom van de bodem.
 Deze wordt in NICHE weergegeven als een klassevariabele met waarden tussen 1 en 5.
 Mogelijke waarden worden gegeven in de tabel `nutrient_level.csv <https://github.com/inbo/niche_vlaanderen/blob/master/system_tables/nutrient_level.csv>`_.
 
