@@ -176,6 +176,14 @@ class testNiche(TestCase):
         myniche.set_input("rainwater", input + "nullgrid.asc")
         return myniche
 
+    def create_grobbendonk_small(self):
+        # note we add one small grid here, so the spatial extent is small
+        # and the test much faster
+        myniche = self.create_grobbendonk_niche()
+        myniche.set_input("msw", "tests/data/msw_small.asc")
+
+        return myniche
+
     def test_grobbendonk(self):
         """
         This tests runs the data from the testcase/grobbendonk.
@@ -265,3 +273,34 @@ class testNiche(TestCase):
         config = 'tests/small.yaml'
         myniche = niche_vlaanderen.Niche()
         myniche.run_config_file(config)
+
+    def test_incomplete_model(self):
+        myniche = niche_vlaanderen.Niche()
+        myniche.set_input("mhw", "tests/data/msw_small.asc")
+        with pytest.raises(NicheException):
+            myniche.run()  # incomplete, keys are missing
+        with pytest.raises(NicheException):
+            myniche.write("_temp")  # should raise, no calculation done
+        with pytest.raises(NicheException):
+            myniche.write_deviation("_temp")  # should raise, no calculation
+
+    def test_mxw_validation(self):
+        myniche = self.create_grobbendonk_small()
+        myniche.set_input("mhw", 5)
+        myniche.set_input("mlw", 0)
+        with pytest.raises(NicheException):
+            myniche.run()
+
+        myniche.set_input("mhw", 5)
+        myniche.set_input("mlw", 10)
+        myniche.set_input("msw", 3)
+        with pytest.raises(NicheException):
+            myniche.run()
+
+        myniche.set_input("mhw", 3)
+        myniche.set_input("mlw", 5)
+        myniche.set_input("msw", 10)
+        with pytest.raises(NicheException):
+            myniche.run()
+
+

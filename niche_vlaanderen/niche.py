@@ -172,6 +172,21 @@ class Niche(object):
         if deviation:
             self.write_deviation(output_dir)
 
+    def _check_all_lower(self, input_array, a, b):
+        if np.any((input_array[a] > input_array[b])
+                          & (input_array[a] != -99)
+                          & (input_array[b] != -99)):
+            # find out which cells have invalid values
+            bad_points = np.where(input_array[a] > input_array[b])
+            # convert these cells into the projection system
+            bad_points = bad_points * self._context.affine
+
+            print("Not all {} values are lower than {}".format(a,b))
+            print("coordinates with invalid values are:")
+            print(pd.DataFrame(list(bad_points)))
+            raise NicheException(
+                "Error: not all {} values are lower than {}".format(a,b))
+
     def _check_input_files(self, full_model):
         """ basic input checks (valid files etc)
 
@@ -214,30 +229,11 @@ class Niche(object):
         # check for valid datatypes - values will be checked in the low-level
         # api (eg soil_code present in codetable)
 
-        if np.any((inputarray['mhw'] > inputarray['mlw'])
-                  & (inputarray["mhw"] != -99)):
-            # find out which cells have invalid values
-            badpoints = np.where(inputarray['mhw'] > inputarray['mlw'])
-            # convert these cells into the projection system
-            badpoints = badpoints * self._context.affine
-
-            print("Not all MHW values are lower than MLW")
-            print("coordinates with invalid values are:")
-            print(pd.DataFrame(list(badpoints)))
-            raise NicheException(
-                "Error: not all MHW values are lower than MLW")
+        self._check_all_lower(inputarray, "mhw", "mlw")
 
         if full_model:
-            if np.any((inputarray['msw'] > inputarray['mlw'])
-                      & (inputarray["mhw"] != -99)
-                      & (inputarray["msw"] != -99)):
-
-                badpoints = np.where(inputarray['mhw'] > inputarray['mlw'])
-                badpoints = badpoints * self._context.affine
-                print(pd.DataFrame(list(badpoints)))
-
-                raise NicheException(
-                    "Error: not all MSW values are lower than MLW")
+            self._check_all_lower(inputarray, "msw", "mlw")
+            self._check_all_lower(inputarray, "mhw", "msw")
 
             with np.errstate(invalid='ignore'):  # ignore NaN comparison errors
                 if np.any((inputarray['nitrogen_animal'] < 0)
