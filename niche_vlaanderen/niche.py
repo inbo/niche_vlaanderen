@@ -339,7 +339,7 @@ class Niche(object):
         self._check_input_files(full_model=False)
 
         v = Vegetation()
-        self._deviation = v.calculate_deviaton(
+        self._deviation = v.calculate_deviation(
             self._inputarray["soil_code"], self._inputarray["mhw"],
             self._inputarray["mlw"]
         )

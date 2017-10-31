@@ -168,7 +168,7 @@ class testVegetation(TestCase):
         soil_code = np.array([30000, 30000, 30000, 30000, -99, 20000])
         mhw = np.array([66, 16, 5, -5, 5, 5])
         mlw = np.array([35, 35, 35, 35, 35, 35])
-        d = v.calculate_deviaton(soil_code, mhw, mlw)
+        d = v.calculate_deviation(soil_code, mhw, mlw)
         expected = np.array([46, 0, 0, -6, np.nan, np.nan])
         np.testing.assert_equal(expected, d["mhw_01"])
 
@@ -178,6 +178,6 @@ class testVegetation(TestCase):
         soil_code = np.array([30000, 30000, 30000, 30000, 30000, -99, 20000])
         mhw = np.array([5, 5, 5, 5, 5, 5, 5])
         mlw = np.array([66, 50, 38, 25, 5, 25, 25])
-        d = v.calculate_deviaton(soil_code, mhw, mlw)
+        d = v.calculate_deviation(soil_code, mhw, mlw)
         expected = np.array([28, 12, 0, 0, -15, np.nan, np.nan])
         np.testing.assert_equal(expected, d["mlw_01"])
