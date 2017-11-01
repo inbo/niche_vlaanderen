@@ -31,6 +31,19 @@ For a full model, more input layers must be specified:
     ``msw``, X, integer, :ref:`msw`
     ``soil_code``, X, integer, :ref:`soil_code`
     ``seepage``, X, xxx, :ref:`seepage`
+    ``inundation_acidity``, X, xxx, :ref:`inundation_acidity`
+    ``inundation_nutrient``, X, xxx, :ref:`inundation_nutrient`
+    ``nitrogen_atmospheric``, X, xxx, :ref:`nitrogen_atmospheric`
+    ``nitrogen_animal``, X, xxx, :ref:`nitrogen_animal`
+    ``nitrogen_fertilizer``, X, xxx, :ref:`nitrogen_fertilizer`
+    ``management``, X, xxx, :ref:`management`
+    ``conductivity``, X, xxx, :ref:`minerality`
+    ``rainwater``, X, xxx, :ref:`rainwater`
+    ``inundation_vegetation``, xxx, :ref:`inundation`
+    ``management_vegetation``, xxx, :ref:`management`
+    ``acidity``, xxx, :ref:`acidity`
+    ``nutrient_level``, xxx, :ref:`nutrient_level`
+
 
 
 A full example is given below:
