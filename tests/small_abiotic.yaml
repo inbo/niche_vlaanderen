@@ -1,7 +1,7 @@
 input_layers:
   mhw: data/mhw_small.asc
-  mlw: data/mlw_small.asc
   msw: data/msw_small.asc
+  mlw: data/mlw_small.asc
   soil_code: data/soil_code_small.asc
   seepage: 0
   inundation_acidity: 0
@@ -12,8 +12,11 @@ input_layers:
   management: 1
   conductivity: 501
   rainwater: 0
+  acidity: data/acidity.asc
+  nutrient_level: data/nutrient_level.asc
 
 model_options:
   simple_model: False
+  abiotic: True
   deviation: True
   output_dir: _output

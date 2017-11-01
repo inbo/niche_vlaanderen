@@ -17,18 +17,20 @@ import textwrap
 import datetime
 import sys
 
-_allowed_input = [
-    "soil_code", "mlw", "msw", "mhw", "seepage", "nutrient_level",
+_allowed_input = set([
+    "soil_code", "mlw", "msw", "mhw", "seepage",
     "inundation_acidity", "inundation_nutrient", "nitrogen_atmospheric",
     "nitrogen_animal", "nitrogen_fertilizer", "management", "conductivity",
     "rainwater", "inundation_vegetation", "management_vegetation", "acidity",
-    "nutrient_level"]
+    "nutrient_level"])
 
-_minimal_input = [
+_minimal_input = set([
     "soil_code", "mlw", "msw", "mhw", "seepage", "inundation_acidity",
     "nitrogen_atmospheric", "nitrogen_animal", "nitrogen_fertilizer",
     "management", "conductivity", "rainwater",
-    "inundation_nutrient"]
+    "inundation_nutrient"])
+
+_abiotic_keys = set(["nutrient_level", "acidity"])
 
 logging.basicConfig()
 
@@ -295,17 +297,24 @@ class Niche(object):
                 "Abiotic calculation is only possible with a full model")
 
         if abiotic:
-            missing_keys = set(["nutrient_level", "acidity"]) \
-                           - set(self._inputfiles.keys()) \
-                           - set(self._inputvalues.keys())
+            missing_keys = (_abiotic_keys
+                           - set(self._inputfiles.keys())
+                           - set(self._inputvalues.keys()))
             if len(missing_keys) > 0:
                 print("Abiotic input are missing: (abiotic=True)")
                 print(missing_keys)
                 raise NicheException(
                     "Error, abiotic keys are missing")
 
+        if not abiotic and (
+                (_abiotic_keys & set(self._inputfiles.keys()))
+                    or (_abiotic_keys & set(self._inputvalues.keys()))):
+            self.log.warning(
+                "abiotic inputs specified but not specified in model options\n"
+                "abiotic inputs will not be used")
+
         if full_model:
-            missing_keys = set(_minimal_input) - set(self._inputfiles.keys()) \
+            missing_keys = _minimal_input - set(self._inputfiles.keys()) \
                            - set(self._inputvalues.keys())
             if len(missing_keys) > 0:
                 print("Different keys are missing: ")

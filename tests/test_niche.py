@@ -264,13 +264,13 @@ class TestNiche(TestCase):
         shutil.rmtree(tmpdir)
 
     def test_read_configuration(self):
-        config = 'tests/small.yaml'
+        config = 'tests/small_simple.yaml'
         myniche = niche_vlaanderen.Niche()
         myniche.read_config_input(config)
         myniche.run(full_model=False)
 
     def test_run_configuration(self):
-        config = 'tests/small.yaml'
+        config = 'tests/small_simple.yaml'
         myniche = niche_vlaanderen.Niche()
         myniche.run_config_file(config)
 
@@ -306,6 +306,7 @@ class TestNiche(TestCase):
         with pytest.raises(NicheException):
             myniche.run()
 
-
-
-
+    def test_run_configuration_abiotic(self):
+        config = 'tests/small_abiotic.yaml'
+        myniche = niche_vlaanderen.Niche()
+        myniche.run_config_file(config)

@@ -1,0 +1,9 @@
+input_layers:
+  mhw: data/mhw_small.asc
+  mlw: data/mlw_small.asc
+  soil_code: data/soil_code_small.asc
+
+model_options:
+  simple_model: True
+  deviation: True
+  output_dir: _output
