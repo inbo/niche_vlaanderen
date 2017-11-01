@@ -16,6 +16,7 @@ setup(name='niche_vlaanderen',
       author_email='johan.vandewauw@inbo.be',
       license='MIT',
       install_requires=requirements,
+      packages=['niche_vlaanderen'],
       classifiers=[
           'Development Status :: 1 - Planning',
           'Inteded Audience :: Science/Research',
