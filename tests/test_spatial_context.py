@@ -11,15 +11,15 @@ class testSpatialContext(TestCase):
     def test_extent(self):
         small = rasterio.open("tests/data/msw_small.asc")
         small_sc = niche_vlaanderen.niche.SpatialContext(small)
-        expected = ((172762.5, 210787.5), (172937.5, 210637.5))
+        expected = ((172762.5, 210637.5), (172937.5, 210487.5))
         self.assertEqual(expected, small_sc.extent)
 
     def test_repr(self):
         self.maxDiff = None
         small = rasterio.open("tests/data/msw_small.asc")
         small_sc = niche_vlaanderen.niche.SpatialContext(small)
-        exp = "Extent: ((172762.5, 210787.5), (172937.5, 210637.5))\n\n"+ \
-              "Affine(25.0, 0.0, 172762.5,\n       0.0, -25.0, 210787.5)\n\n"+\
+        exp = "Extent: ((172762.5, 210637.5), (172937.5, 210487.5))\n\n"+ \
+              "Affine(25.0, 0.0, 172762.5,\n       0.0, -25.0, 210637.5)\n\n"+\
               "width: 7, height: 6\n\n"
         exp2 = exp + \
               "Projection: +ellps=intl +lat_0=90 +lat_1=51.1666672333 "+\
