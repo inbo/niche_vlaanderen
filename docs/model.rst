@@ -11,7 +11,9 @@ De berekening gebeurt in drie stappen:
  * :ref:`vegetatie`
 
 
-.. toctree:: Overzicht
+.. toctree::
+  :caption: Overzicht
+
   invoer
   trofie
   zuur

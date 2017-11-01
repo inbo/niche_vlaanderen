@@ -8,7 +8,9 @@ The Python package ``niche_vlaanderen`` allows calculating the NICHE model in th
  * High-level: Using the :doc:`niche` class that uses GIS files directly.
  * Low-level: This advanced method allows calculation on (numpy) arrays, giving the user a very large flexibility.
 
-.. toctree:: Overview
+.. toctree::
+  :caption: Overview
+
   installation
   cli
   niche

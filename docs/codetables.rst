@@ -21,20 +21,22 @@ A value of msw=5 will give nitrogen_mineralisation=50 as a result, a value of ms
 
 By default the codetables of the niche_vlaanderen package are used, but the user can supply one or more own codetables.
 
-.. _soil_codes:
+.. _ct_soil_code:
 
-soil_codes
-==========
+soil_code
+=========
 
 The table `soil_codes.csv <https://github.com/INBO/niche_vlaanderen/blob/master/system_tables/soil_codes.csv>`_ contains the supported soil_codes in NICHE and their corresponding `soil_group` (used in determining the soil_glg_class, :ref:`soil_glg_class`).
 
-.. _management_codes:
+.. _ct_management:
 
-management_codes
-================
+management
+==========
 
 The table `management.csv  <https://github.com/INBO/niche_vlaanderen/blob/master/system_tables/management.csv>`_ contains the supported management_codes in NICHE.
 It also contains a column `influence` which is used in the calculation of nutrient level.
+
+.. _ct_niche:
 
 niche_vlaanderen
 ================

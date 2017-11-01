@@ -14,8 +14,7 @@ To run the niche module in Python, one has to take the following steps:
 These steps are mirrored in the design of the ``Niche`` class which is given below.
 
 Optionally the user can also create difference maps showing how much MHW/MLW has
-to change to allow a certain vegetation type. This is done using the ``calculate_deviation`` method.
-Results of this operation can be saved using the ``write_difference`` method.
+to change to allow a certain vegetation type. This is done using the ``deviation`` parameter of the ``run`` method.
 
 .. autoclass:: Niche
     :members:

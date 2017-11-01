@@ -9,7 +9,7 @@ Na de bepaling van de trofie en de zuurgraadklasse kan de eigenlijke bepaling va
 
 Dit gebeurt aan de hand van de tabel `niche_vegetation <https://github.com/inbo/niche_vlaanderen/blob/master/system_tables/niche_vegetation.csv>`_.
 
-Optioneel kunnen :ref:`beheer` en de :ref:`overstroming_vegetatie` mee als selectiefactor gebruikt worden.
+Optioneel kunnen :ref:`management` en de :ref:`inundation_vegetation` mee als selectiefactor gebruikt worden.
 
 
 .. topic:: Voorbeeld
@@ -48,3 +48,11 @@ Optioneel kunnen :ref:`beheer` en de :ref:`overstroming_vegetatie` mee als selec
   Volgende vegetatiecodes kunnen dus voorkomen: 7, 8, 12 en 16.
 
   Indien ook nog inundantie wordt meegerekend, bvb regelmatig overstromen (1) valt een aantal mogelijke codes weg. Mogelijke codes zijn dan 7, 12 en 16.
+
+.. _simple:
+
+Eenvoudig niche model
+=====================
+
+Bij het eenvoudig Niche model wordt enkel rekening gehouden met :ref:`mhw`, :ref:`mlw` en :ref:`soil_code`.
+De berekening gebeurt verder gelijkaardig aan bovenstaande berekening, maar vegetatie is mogelijk van zodra die mogelijk is, zonder rekening te houden met de andere invoerwaarden.

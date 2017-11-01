@@ -16,6 +16,13 @@ class Vegetation(object):
 
     Note that to use grid inputs (eg raster files) it is recommended to use
     the Niche Class
+
+    Parameters
+    ----------
+    ct_vegetation: filename, .csv
+        optional alternative classification table
+        Must contain the columns mentioned in the documentation:
+        https://inbo.github.io/niche_vlaanderen/codetables.html#niche_vlaanderen
     """
 
     nodata = 255  # uint8
@@ -27,12 +34,6 @@ class Vegetation(object):
         the codetables supplied by the niche_vlaanderen package. It is possible
         to overwrite this by supplying the niche_vlaanderen parameter
 
-        Parameters
-        ----------
-        ct_vegetation: filename, .csv
-            optional alternative classification table
-            Must contain the columns mentioned in the documentation:
-            https://inbo.github.io/niche_vlaanderen/codetables.html#niche_vlaanderen
         """
         if ct_vegetation is None:
             ct_vegetation = resource_filename(

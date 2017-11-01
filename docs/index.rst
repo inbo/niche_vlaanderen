@@ -9,18 +9,9 @@ This documentation is split in two parts:
  * The first part :doc:`model` (in Dutch) describes the background of the NICHE model.
  * The second part :doc:`package` describes the ``niche_vlaanderen`` package.
 
-
-
-Indices and tables
-==================
-
-.. toctree:: Contents
-  :maxdepth: 1
+.. toctree::
+  :caption: Contents
+  :maxdepth: 2
 
   model
   package
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-

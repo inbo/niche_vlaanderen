@@ -12,17 +12,21 @@ This allows a greater flexibility and control over the details of the calculatio
 NutrientLevel
 =============
 
+.. autoclass:: NutrientLevel
+    :members:
+
 Acidity
 =======
+
+.. autoclass:: Acidity
+    :members:
+
 
 Vegetation
 ==========
 
 .. autoclass:: Vegetation
     :members:
-
-    .. automethod:: __init__
-
 
 Example
 ~~~~~~~~~
