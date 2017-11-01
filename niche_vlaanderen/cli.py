@@ -7,4 +7,4 @@ import niche_vlaanderen
 def cli(config):
     n = niche_vlaanderen.Niche()
     n.run_config_file(config)
-    print(n.__repr__)
+    print(n)

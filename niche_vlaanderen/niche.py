@@ -21,7 +21,8 @@ _allowed_input = [
     "soil_code", "mlw", "msw", "mhw", "seepage", "nutrient_level",
     "inundation_acidity", "inundation_nutrient", "nitrogen_atmospheric",
     "nitrogen_animal", "nitrogen_fertilizer", "management", "conductivity",
-    "rainwater", "inundation_vegetation", "management_vegetation"]
+    "rainwater", "inundation_vegetation", "management_vegetation", "acidity",
+    "nutrient_level"]
 
 _minimal_input = [
     "soil_code", "mlw", "msw", "mhw", "seepage", "inundation_acidity",
@@ -104,22 +105,18 @@ class Niche(object):
         return s
 
     def set_input(self, key, value):
-        """ Adds a raster as input layer
+        """ Adds a raster or numeric value as input layer
 
         Parameters
         ----------
         key: string
             The type of grid that you want to assign (eg msw, soil_code, ...).
             Possible options are listed in _allowed_input
-        value: string
+        value: string / number
             Path to a file containing the grid. Can also be a folder for
-            certain grid types (eg arcgis rasters).
-
-        Returns
-        -------
-        bool
-            Boolean that will be true if the file was added successfully and
-            false otherwise.
+            certain grid types (eg ArcGIS rasters).
+            Can also be a number: in that case a constant value is applied
+            everywhere.
 
         """
 
@@ -266,7 +263,7 @@ class Niche(object):
         # if all is successful:
         self._inputarray = inputarray
 
-    def run(self, full_model=True, deviation=False):
+    def run(self, full_model=True, deviation=False, abiotic=False):
         """Run the niche model
 
         Runs niche Vlaanderen model. Requires that the necessary input values
@@ -274,29 +271,51 @@ class Niche(object):
 
         Parameters
         ----------
+        full_model: bool
+                   Uses the full niche model. The simple model only uses mhw,
+                   mlw and soil_code as input.
+
         deviation: bool
                     Create the maps with the difference between the needed MHW
                     and MLW and the actual MHW/MLW for a vegetation type.
 
                     Calculated results will be stored in the niche class in a
                     dict _difference
+        abiotic:  bool
+                Specify the abiotic grids as input rather than calculating them.
 
         """
 
         self._model_options["full_model"] = full_model
         self._model_options["deviation"] = deviation
+        self._model_options["abiotic"] = abiotic
+
+        if abiotic and not full_model:
+            raise NicheException(
+                "Abiotic calculation is only possible with a full model")
+
+        if abiotic:
+            missing_keys = set(["nutrient_level", "acidity"]) \
+                           - set(self._inputfiles.keys()) \
+                           - set(self._inputvalues.keys())
+            if len(missing_keys) > 0:
+                print("Abiotic input are missing: (abiotic=True)")
+                print(missing_keys)
+                raise NicheException(
+                    "Error, abiotic keys are missing")
 
         if full_model:
             missing_keys = set(_minimal_input) - set(self._inputfiles.keys()) \
                            - set(self._inputvalues.keys())
             if len(missing_keys) > 0:
+                print("Different keys are missing: ")
                 print(missing_keys)
                 raise NicheException(
-                    "error, different obliged keys are missing")
+                    "Error, different obliged keys are missing")
 
         self._check_input_files(full_model)
 
-        if full_model:
+        if full_model and not abiotic:
             nl = NutrientLevel()
 
             self._abiotic["nutrient_level"] = nl.calculate(
@@ -328,11 +347,18 @@ class Niche(object):
 
         if full_model:
             veg_arguments.update(
-                nutrient_level=self._abiotic["nutrient_level"],
-                acidity=self._abiotic["acidity"],
                 inundation=self._inputarray["inundation_vegetation"],
                 management=self._inputarray["management_vegetation"]
             )
+            if not abiotic:
+                veg_arguments.update(
+                    nutrient_level=self._abiotic["nutrient_level"],
+                    acidity=self._abiotic["acidity"])
+            else:
+                veg_arguments.update(
+                    nutrient_level=self._inputarray["nutrient_level"],
+                    acidity=self._inputarray["acidity"])
+
 
         self._vegetation, self.occurrence = vegetation.calculate(
             full_model=full_model, **veg_arguments)
