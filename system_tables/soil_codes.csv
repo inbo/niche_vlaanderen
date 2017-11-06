@@ -10,4 +10,4 @@ soil_code,soil_name,description,soil_group
 130000,ZV,"venige zandgronden, moerige zandgronden, zandige veengronden",2
 140000,L1,"alluviale leemgronden, arm aan OM",1
 150000,LV,"alluviale leemgronden, rijk aan OM, venige leemgronden",2
-100000,NG,"gronden die niet in aanmerking komen voor NICHE: open water, bebouwd of sterk beïnvloed, droge gronden, open water, niet gespecifieerd",1
+100000,NG,"gronden die niet in aanmerking komen voor NICHE: open water, bebouwd of sterk beÃ¯nvloed, droge gronden, open water, niet gespecifieerd",1
