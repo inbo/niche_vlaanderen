@@ -30,7 +30,7 @@ class testAcidity(TestCase):
 
     def test_get_soil_mlw(self):
         mlw = np.array([50, 66])
-        soil_code = np.array([140000, 40000])
+        soil_code = np.array([140000, 70000])
         a = niche_vlaanderen.Acidity()
         result = a._calculate_soil_mlw(soil_code, mlw)
 
