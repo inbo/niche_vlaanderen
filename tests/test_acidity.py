@@ -4,7 +4,7 @@ import rasterio
 import numpy as np
 
 import niche_vlaanderen
-
+import pandas as pd
 
 def raster_to_numpy(filename):
     """Read a GDAL grid as numpy array
@@ -30,7 +30,7 @@ class testAcidity(TestCase):
 
     def test_get_soil_mlw(self):
         mlw = np.array([50, 66])
-        soil_code = np.array([140000, 70000])
+        soil_code = np.array(["L1", "P"])
         a = niche_vlaanderen.Acidity()
         result = a._calculate_soil_mlw(soil_code, mlw)
 
@@ -38,7 +38,7 @@ class testAcidity(TestCase):
 
     def test_get_soil_mlw_borders(self):
         mlw = np.array([79,80, 100, 110, 111])
-        soil_code = np.array([140000, 140000, 140000, 140000, 140000])
+        soil_code = np.array(["L1", "L1", "L1", "L1", "L1"])
         a = niche_vlaanderen.Acidity()
         result = a._calculate_soil_mlw(soil_code, mlw)
         expected =  np.array([1,1,2,2,3])
@@ -75,7 +75,7 @@ class testAcidity(TestCase):
     def test_acidity(self):
         rainwater = np.array([0])
         conductivity = np.array([400])
-        soilcode = np.array([140000])
+        soilcode = np.array(["L1"])
         inundation = np.array([1])
         seepage = np.array([20])
         mlw = np.array([50])
@@ -88,6 +88,13 @@ class testAcidity(TestCase):
     def test_acidity_testcase(self):
         a = niche_vlaanderen.Acidity()
         soil_code = raster_to_numpy("testcase/grote_nete/input/soil_code.asc")
+
+        soil_code_r = np.round(soil_code / 10000)[soil_code > 0]
+        ct_soil_code = pd.read_csv("system_tables/soil_codes.csv")
+        ct_soil_code = ct_soil_code.set_index("soil_code")
+        soil_name = np.full(soil_code.shape, "", dtype= "U2")
+        soil_name[soil_code > 0] = ct_soil_code.soil_name[soil_code_r]
+
         mlw = raster_to_numpy("testcase/grote_nete/input/mlw.asc")
         inundation = \
             raster_to_numpy("testcase/grote_nete/input/inundation_nutrient_level.asc")
@@ -96,7 +103,7 @@ class testAcidity(TestCase):
         conductivity = raster_to_numpy("testcase/grote_nete/input/conductivity.asc")
         acidity = raster_to_numpy("testcase/grote_nete/intermediate/ph.asc")
         acidity[np.isnan(acidity)] = 255
-        result = a.calculate(soil_code, mlw, inundation, seepage,
+        result = a.calculate(soil_name, mlw, inundation, seepage,
                              conductivity, rainwater)
 
         np.testing.assert_equal(acidity, result)

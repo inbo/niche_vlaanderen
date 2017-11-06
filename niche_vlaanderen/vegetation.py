@@ -41,7 +41,7 @@ class Vegetation(object):
                 "../system_tables/niche_vegetation.csv")
         self._ct_vegetation = pd.read_csv(ct_vegetation)
 
-    def calculate(self, soil_code, mhw, mlw, nutrient_level=None, acidity=None,
+    def calculate(self, soil_name, mhw, mlw, nutrient_level=None, acidity=None,
                   management=None, inundation=None, return_all=True,
                   full_model=True):
         """ Calculate vegetation types based on input arrays
@@ -57,7 +57,7 @@ class Vegetation(object):
             vegetation can occur.
 
         """
-        nodata = ((soil_code == -99) | np.isnan(mhw) | np.isnan(mlw))
+        nodata = ((soil_name == -99) | np.isnan(mhw) | np.isnan(mlw))
 
         if full_model:
             nodata = nodata | (nutrient_level == NutrientLevel.nodata) \
@@ -76,9 +76,9 @@ class Vegetation(object):
             # vegi is the prediction for the current veg_code
             # it is a logical or of the result of every row:
             # if a row is true for a pixel, that vegetation can occur
-            vegi = np.zeros(soil_code.shape, dtype=bool)
+            vegi = np.zeros(soil_name.shape, dtype=bool)
             for row in subtable.itertuples():
-                current_row = ((row.soil_code == soil_code)
+                current_row = ((row.soil_name == soil_name)
                                & (row.mhw_min >= mhw) & (row.mhw_max <= mhw)
                                & (row.mlw_min >= mlw) & (row.mlw_max <= mlw))
                 if full_model:
@@ -101,7 +101,7 @@ class Vegetation(object):
                                     / (vegi.size - np.sum(nodata))))
         return veg_bands, occurrence
 
-    def calculate_deviation(self, soil_code, mhw, mlw):
+    def calculate_deviation(self, soil_name, mhw, mlw):
         """ Calculates the deviation between the mhw/mlw and the reference
 
         This function calculates the difference between the mhw and mlw and
@@ -120,11 +120,11 @@ class Vegetation(object):
             value an the actual value.
             Keys are eg mhw_01 for mhw and vegetation type 01
         """
-        nodata = ((soil_code == -99) | np.isnan(mhw) | np.isnan(mlw))
+        nodata = ((soil_name == "NG") | np.isnan(mhw) | np.isnan(mlw))
 
         difference = dict()
 
-        veg = self._ct_vegetation[["veg_code", "soil_code", "mhw_min",
+        veg = self._ct_vegetation[["veg_code", "soil_name", "mhw_min",
                                    "mhw_max", "mlw_min", "mlw_max"]]
 
         veg = veg.drop_duplicates()
@@ -132,35 +132,35 @@ class Vegetation(object):
         for veg_code, subtable in veg.groupby(["veg_code"]):
             subtable = subtable.reset_index()
 
-            mhw_diff = np.full(soil_code.shape, np.nan)
-            mlw_diff = np.full(soil_code.shape, np.nan)
+            mhw_diff = np.full(soil_name.shape, np.nan)
+            mlw_diff = np.full(soil_name.shape, np.nan)
 
             for row in subtable.itertuples():
                 # mhw smaller than maximum
-                sel = (row.soil_code == soil_code) & (row.mhw_max > mhw)
+                sel = (row.soil_name == soil_name) & (row.mhw_max > mhw)
                 mhw_diff[sel] = (mhw - row.mhw_max)[sel]
 
                 # mhw larger than minimum
-                sel = (row.soil_code == soil_code) & (row.mhw_min < mhw)
+                sel = (row.soil_name == soil_name) & (row.mhw_min < mhw)
                 mhw_diff[sel] = (mhw - row.mhw_min)[sel]
 
                 # mhw in range
-                sel = ((row.soil_code == soil_code) & (row.mhw_min >= mhw)
+                sel = ((row.soil_name == soil_name) & (row.mhw_min >= mhw)
                        & (row.mhw_max <= mhw))
-                mhw_diff[sel] = (np.zeros(soil_code.shape))[sel]
+                mhw_diff[sel] = (np.zeros(soil_name.shape))[sel]
 
                 # mlw smaller than maximum
-                sel = (row.soil_code == soil_code) & (row.mlw_max > mlw)
+                sel = (row.soil_name == soil_name) & (row.mlw_max > mlw)
                 mlw_diff[sel] = (mlw - row.mlw_max)[sel]
 
                 # mlw larger than minimum
-                sel = (row.soil_code == soil_code) & (row.mlw_min < mlw)
+                sel = (row.soil_name == soil_name) & (row.mlw_min < mlw)
                 mlw_diff[sel] = (mlw - row.mlw_min)[sel]
 
                 # mlw in range
-                sel = ((row.soil_code == soil_code) & (row.mlw_min >= mlw)
+                sel = ((row.soil_name == soil_name) & (row.mlw_min >= mlw)
                        & (row.mlw_max <= mlw))
-                mlw_diff[sel] = (np.zeros(soil_code.shape))[sel]
+                mlw_diff[sel] = (np.zeros(soil_name.shape))[sel]
 
             mhw_diff[nodata] = np.NaN
             mlw_diff[nodata] = np.NaN

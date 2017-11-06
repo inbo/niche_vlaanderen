@@ -1,1207 +1,1207 @@
-veg_code,veg_type,soil_code,nutrient_level,acidity,mhw_min,mhw_max,mlw_min,mlw_max,management,inundation
-1,Sphagno-Betuletum,30000,2,1,20,1,38,20,0,0
-1,Sphagno-Betuletum,30000,1,1,20,1,38,20,0,0
-1,Sphagno-Betuletum,30000,2,2,20,1,38,20,0,0
-1,Sphagno-Betuletum,30000,1,2,20,1,38,20,0,0
-1,Sphagno-Betuletum,80000,2,1,23,-18,36,5,0,0
-1,Sphagno-Betuletum,80000,1,1,23,-18,36,5,0,0
-1,Sphagno-Betuletum,80000,2,2,23,-18,36,5,0,0
-1,Sphagno-Betuletum,80000,1,2,23,-18,36,5,0,0
-1,Sphagno-Betuletum,130000,2,1,36,-1,77,20,0,0
-1,Sphagno-Betuletum,130000,1,1,36,-1,77,20,0,0
-1,Sphagno-Betuletum,130000,2,2,36,-1,77,20,0,0
-1,Sphagno-Betuletum,130000,1,2,36,-1,77,20,0,0
-2,Carici elongatae-Alnetum,140000,2,1,46,-6,110,29,0,0
-2,Carici elongatae-Alnetum,140000,2,2,46,-6,110,29,0,0
-2,Carici elongatae-Alnetum,140000,3,1,46,-6,110,29,0,0
-2,Carici elongatae-Alnetum,140000,3,2,46,-6,110,29,0,0
-2,Carici elongatae-Alnetum,80000,2,1,18,-24,32,-15,0,0
-2,Carici elongatae-Alnetum,80000,3,1,18,-24,32,-15,0,0
-2,Carici elongatae-Alnetum,80000,2,2,18,-24,32,-15,0,0
-2,Carici elongatae-Alnetum,80000,3,2,18,-24,32,-15,0,0
-2,Carici elongatae-Alnetum,110000,2,1,46,-6,97,14,0,0
-2,Carici elongatae-Alnetum,110000,3,1,46,-6,97,14,0,0
-2,Carici elongatae-Alnetum,120000,2,1,46,-6,97,14,0,0
-2,Carici elongatae-Alnetum,120000,3,1,46,-6,97,14,0,0
-2,Carici elongatae-Alnetum,130000,2,1,46,-6,97,14,0,0
-2,Carici elongatae-Alnetum,130000,3,1,46,-6,97,14,0,0
-2,Carici elongatae-Alnetum,130000,2,2,46,-6,97,14,0,0
-2,Carici elongatae-Alnetum,130000,3,2,46,-6,97,14,0,0
-2,Carici elongatae-Alnetum,150000,2,1,46,-6,110,29,0,0
-2,Carici elongatae-Alnetum,150000,3,1,46,-6,110,29,0,0
-2,Carici elongatae-Alnetum,150000,2,2,46,-6,110,29,0,0
-2,Carici elongatae-Alnetum,150000,3,2,46,-6,110,29,0,0
-2,Carici elongatae-Alnetum,140000,2,1,46,-6,110,29,0,1
-2,Carici elongatae-Alnetum,140000,2,2,46,-6,110,29,0,1
-2,Carici elongatae-Alnetum,140000,3,1,46,-6,110,29,0,1
-2,Carici elongatae-Alnetum,140000,3,2,46,-6,110,29,0,1
-2,Carici elongatae-Alnetum,80000,2,1,18,-24,32,-15,0,1
-2,Carici elongatae-Alnetum,80000,3,1,18,-24,32,-15,0,1
-2,Carici elongatae-Alnetum,80000,2,2,18,-24,32,-15,0,1
-2,Carici elongatae-Alnetum,80000,3,2,18,-24,32,-15,0,1
-2,Carici elongatae-Alnetum,110000,2,1,46,-6,97,14,0,1
-2,Carici elongatae-Alnetum,110000,3,1,46,-6,97,14,0,1
-2,Carici elongatae-Alnetum,120000,2,1,46,-6,97,14,0,1
-2,Carici elongatae-Alnetum,120000,3,1,46,-6,97,14,0,1
-2,Carici elongatae-Alnetum,130000,2,1,46,-6,97,14,0,1
-2,Carici elongatae-Alnetum,130000,3,1,46,-6,97,14,0,1
-2,Carici elongatae-Alnetum,130000,2,2,46,-6,97,14,0,1
-2,Carici elongatae-Alnetum,130000,3,2,46,-6,97,14,0,1
-2,Carici elongatae-Alnetum,150000,2,1,46,-6,110,29,0,1
-2,Carici elongatae-Alnetum,150000,3,1,46,-6,110,29,0,1
-2,Carici elongatae-Alnetum,150000,2,2,46,-6,110,29,0,1
-2,Carici elongatae-Alnetum,150000,3,2,46,-6,110,29,0,1
-2,Carici elongatae-Alnetum,140000,2,1,46,-6,110,29,0,2
-2,Carici elongatae-Alnetum,140000,2,2,46,-6,110,29,0,2
-2,Carici elongatae-Alnetum,140000,3,1,46,-6,110,29,0,2
-2,Carici elongatae-Alnetum,140000,3,2,46,-6,110,29,0,2
-2,Carici elongatae-Alnetum,80000,2,1,18,-24,32,-15,0,2
-2,Carici elongatae-Alnetum,80000,3,1,18,-24,32,-15,0,2
-2,Carici elongatae-Alnetum,80000,2,2,18,-24,32,-15,0,2
-2,Carici elongatae-Alnetum,80000,3,2,18,-24,32,-15,0,2
-2,Carici elongatae-Alnetum,110000,2,1,46,-6,97,14,0,2
-2,Carici elongatae-Alnetum,110000,3,1,46,-6,97,14,0,2
-2,Carici elongatae-Alnetum,120000,2,1,46,-6,97,14,0,2
-2,Carici elongatae-Alnetum,120000,3,1,46,-6,97,14,0,2
-2,Carici elongatae-Alnetum,130000,2,1,46,-6,97,14,0,2
-2,Carici elongatae-Alnetum,130000,3,1,46,-6,97,14,0,2
-2,Carici elongatae-Alnetum,130000,2,2,46,-6,97,14,0,2
-2,Carici elongatae-Alnetum,130000,3,2,46,-6,97,14,0,2
-2,Carici elongatae-Alnetum,150000,2,1,46,-6,110,29,0,2
-2,Carici elongatae-Alnetum,150000,3,1,46,-6,110,29,0,2
-2,Carici elongatae-Alnetum,150000,2,2,46,-6,110,29,0,2
-2,Carici elongatae-Alnetum,150000,3,2,46,-6,110,29,0,2
-3,Macrophorbio-Alnetum,20000,4,1,30,-19,82,4,0,0
-3,Macrophorbio-Alnetum,20000,4,2,30,-19,82,4,0,0
-3,Macrophorbio-Alnetum,20000,2,1,30,-19,82,4,0,0
-3,Macrophorbio-Alnetum,20000,2,2,30,-19,82,4,0,0
-3,Macrophorbio-Alnetum,20000,3,1,30,-19,82,4,0,0
-3,Macrophorbio-Alnetum,20000,3,2,30,-19,82,4,0,0
-3,Macrophorbio-Alnetum,20000,4,3,30,-19,82,4,0,0
-3,Macrophorbio-Alnetum,20000,2,3,30,-19,82,4,0,0
-3,Macrophorbio-Alnetum,20000,3,3,30,-19,82,4,0,0
-3,Macrophorbio-Alnetum,30000,4,1,22,-23,62,13,0,0
-3,Macrophorbio-Alnetum,30000,4,2,22,-23,62,13,0,0
-3,Macrophorbio-Alnetum,30000,2,1,22,-23,62,13,0,0
-3,Macrophorbio-Alnetum,30000,2,2,22,-23,62,13,0,0
-3,Macrophorbio-Alnetum,30000,3,1,22,-23,62,13,0,0
-3,Macrophorbio-Alnetum,30000,3,2,22,-23,62,13,0,0
-3,Macrophorbio-Alnetum,140000,4,2,89,-47,124,-8,0,0
-3,Macrophorbio-Alnetum,140000,2,2,89,-47,124,-8,0,0
-3,Macrophorbio-Alnetum,140000,3,2,89,-47,124,-8,0,0
-3,Macrophorbio-Alnetum,140000,4,1,89,-47,124,-8,0,0
-3,Macrophorbio-Alnetum,140000,2,1,89,-47,124,-8,0,0
-3,Macrophorbio-Alnetum,140000,3,1,89,-47,124,-8,0,0
-3,Macrophorbio-Alnetum,150000,4,2,22,-23,62,13,0,0
-3,Macrophorbio-Alnetum,150000,2,2,22,-23,62,13,0,0
-3,Macrophorbio-Alnetum,150000,3,2,22,-23,62,13,0,0
-3,Macrophorbio-Alnetum,150000,4,1,22,-23,62,13,0,0
-3,Macrophorbio-Alnetum,150000,2,1,22,-23,62,13,0,0
-3,Macrophorbio-Alnetum,150000,3,1,22,-23,62,13,0,0
-3,Macrophorbio-Alnetum,80000,4,1,36,-22,70,-4,0,0
-3,Macrophorbio-Alnetum,80000,4,2,36,-22,70,-4,0,0
-3,Macrophorbio-Alnetum,80000,2,1,36,-22,70,-4,0,0
-3,Macrophorbio-Alnetum,80000,2,2,36,-22,70,-4,0,0
-3,Macrophorbio-Alnetum,80000,3,1,36,-22,70,-4,0,0
-3,Macrophorbio-Alnetum,80000,3,2,36,-22,70,-4,0,0
-3,Macrophorbio-Alnetum,130000,4,2,22,-23,62,13,0,0
-3,Macrophorbio-Alnetum,130000,2,2,22,-23,62,13,0,0
-3,Macrophorbio-Alnetum,130000,3,2,22,-23,62,13,0,0
-3,Macrophorbio-Alnetum,130000,4,1,22,-23,62,13,0,0
-3,Macrophorbio-Alnetum,130000,2,1,22,-23,62,13,0,0
-3,Macrophorbio-Alnetum,130000,3,1,22,-23,62,13,0,0
-3,Macrophorbio-Alnetum,20000,4,1,30,-19,82,4,0,1
-3,Macrophorbio-Alnetum,20000,4,2,30,-19,82,4,0,1
-3,Macrophorbio-Alnetum,20000,2,1,30,-19,82,4,0,1
-3,Macrophorbio-Alnetum,20000,2,2,30,-19,82,4,0,1
-3,Macrophorbio-Alnetum,20000,3,1,30,-19,82,4,0,1
-3,Macrophorbio-Alnetum,20000,3,2,30,-19,82,4,0,1
-3,Macrophorbio-Alnetum,20000,4,3,30,-19,82,4,0,1
-3,Macrophorbio-Alnetum,20000,2,3,30,-19,82,4,0,1
-3,Macrophorbio-Alnetum,20000,3,3,30,-19,82,4,0,1
-3,Macrophorbio-Alnetum,30000,4,1,22,-23,62,13,0,1
-3,Macrophorbio-Alnetum,30000,4,2,22,-23,62,13,0,1
-3,Macrophorbio-Alnetum,30000,2,1,22,-23,62,13,0,1
-3,Macrophorbio-Alnetum,30000,2,2,22,-23,62,13,0,1
-3,Macrophorbio-Alnetum,30000,3,1,22,-23,62,13,0,1
-3,Macrophorbio-Alnetum,30000,3,2,22,-23,62,13,0,1
-3,Macrophorbio-Alnetum,140000,4,2,89,-47,124,-8,0,1
-3,Macrophorbio-Alnetum,140000,2,2,89,-47,124,-8,0,1
-3,Macrophorbio-Alnetum,140000,3,2,89,-47,124,-8,0,1
-3,Macrophorbio-Alnetum,140000,4,1,89,-47,124,-8,0,1
-3,Macrophorbio-Alnetum,140000,2,1,89,-47,124,-8,0,1
-3,Macrophorbio-Alnetum,140000,3,1,89,-47,124,-8,0,1
-3,Macrophorbio-Alnetum,150000,4,2,22,-23,62,13,0,1
-3,Macrophorbio-Alnetum,150000,2,2,22,-23,62,13,0,1
-3,Macrophorbio-Alnetum,150000,3,2,22,-23,62,13,0,1
-3,Macrophorbio-Alnetum,150000,4,1,22,-23,62,13,0,1
-3,Macrophorbio-Alnetum,150000,2,1,22,-23,62,13,0,1
-3,Macrophorbio-Alnetum,150000,3,1,22,-23,62,13,0,1
-3,Macrophorbio-Alnetum,80000,4,1,36,-22,70,-4,0,1
-3,Macrophorbio-Alnetum,80000,4,2,36,-22,70,-4,0,1
-3,Macrophorbio-Alnetum,80000,2,1,36,-22,70,-4,0,1
-3,Macrophorbio-Alnetum,80000,2,2,36,-22,70,-4,0,1
-3,Macrophorbio-Alnetum,80000,3,1,36,-22,70,-4,0,1
-3,Macrophorbio-Alnetum,80000,3,2,36,-22,70,-4,0,1
-3,Macrophorbio-Alnetum,130000,4,2,22,-23,62,13,0,1
-3,Macrophorbio-Alnetum,130000,2,2,22,-23,62,13,0,1
-3,Macrophorbio-Alnetum,130000,3,2,22,-23,62,13,0,1
-3,Macrophorbio-Alnetum,130000,4,1,22,-23,62,13,0,1
-3,Macrophorbio-Alnetum,130000,2,1,22,-23,62,13,0,1
-3,Macrophorbio-Alnetum,130000,3,1,22,-23,62,13,0,1
-3,Macrophorbio-Alnetum,20000,4,1,30,-19,82,4,0,2
-3,Macrophorbio-Alnetum,20000,4,2,30,-19,82,4,0,2
-3,Macrophorbio-Alnetum,20000,2,1,30,-19,82,4,0,2
-3,Macrophorbio-Alnetum,20000,2,2,30,-19,82,4,0,2
-3,Macrophorbio-Alnetum,20000,3,1,30,-19,82,4,0,2
-3,Macrophorbio-Alnetum,20000,3,2,30,-19,82,4,0,2
-3,Macrophorbio-Alnetum,20000,4,3,30,-19,82,4,0,2
-3,Macrophorbio-Alnetum,20000,2,3,30,-19,82,4,0,2
-3,Macrophorbio-Alnetum,20000,3,3,30,-19,82,4,0,2
-3,Macrophorbio-Alnetum,30000,4,1,22,-23,62,13,0,2
-3,Macrophorbio-Alnetum,30000,4,2,22,-23,62,13,0,2
-3,Macrophorbio-Alnetum,30000,2,1,22,-23,62,13,0,2
-3,Macrophorbio-Alnetum,30000,2,2,22,-23,62,13,0,2
-3,Macrophorbio-Alnetum,30000,3,1,22,-23,62,13,0,2
-3,Macrophorbio-Alnetum,30000,3,2,22,-23,62,13,0,2
-3,Macrophorbio-Alnetum,140000,4,2,89,-47,124,-8,0,2
-3,Macrophorbio-Alnetum,140000,2,2,89,-47,124,-8,0,2
-3,Macrophorbio-Alnetum,140000,3,2,89,-47,124,-8,0,2
-3,Macrophorbio-Alnetum,140000,4,1,89,-47,124,-8,0,2
-3,Macrophorbio-Alnetum,140000,2,1,89,-47,124,-8,0,2
-3,Macrophorbio-Alnetum,140000,3,1,89,-47,124,-8,0,2
-3,Macrophorbio-Alnetum,150000,4,2,22,-23,62,13,0,2
-3,Macrophorbio-Alnetum,150000,2,2,22,-23,62,13,0,2
-3,Macrophorbio-Alnetum,150000,3,2,22,-23,62,13,0,2
-3,Macrophorbio-Alnetum,150000,4,1,22,-23,62,13,0,2
-3,Macrophorbio-Alnetum,150000,2,1,22,-23,62,13,0,2
-3,Macrophorbio-Alnetum,150000,3,1,22,-23,62,13,0,2
-3,Macrophorbio-Alnetum,80000,4,1,36,-22,70,-4,0,2
-3,Macrophorbio-Alnetum,80000,4,2,36,-22,70,-4,0,2
-3,Macrophorbio-Alnetum,80000,2,1,36,-22,70,-4,0,2
-3,Macrophorbio-Alnetum,80000,2,2,36,-22,70,-4,0,2
-3,Macrophorbio-Alnetum,80000,3,1,36,-22,70,-4,0,2
-3,Macrophorbio-Alnetum,80000,3,2,36,-22,70,-4,0,2
-3,Macrophorbio-Alnetum,130000,4,2,22,-23,62,13,0,2
-3,Macrophorbio-Alnetum,130000,2,2,22,-23,62,13,0,2
-3,Macrophorbio-Alnetum,130000,3,2,22,-23,62,13,0,2
-3,Macrophorbio-Alnetum,130000,4,1,22,-23,62,13,0,2
-3,Macrophorbio-Alnetum,130000,2,1,22,-23,62,13,0,2
-3,Macrophorbio-Alnetum,130000,3,1,22,-23,62,13,0,2
-4,Pruno-Fraxinetum,140000,4,1,42,1,89,14,0,0
-4,Pruno-Fraxinetum,140000,4,2,42,1,89,14,0,0
-4,Pruno-Fraxinetum,140000,2,1,42,1,89,14,0,0
-4,Pruno-Fraxinetum,140000,2,2,42,1,89,14,0,0
-4,Pruno-Fraxinetum,140000,3,1,42,1,89,14,0,0
-4,Pruno-Fraxinetum,140000,3,2,42,1,89,14,0,0
-4,Pruno-Fraxinetum,150000,4,1,43,-13,79,6,0,0
-4,Pruno-Fraxinetum,150000,4,2,43,-13,79,6,0,0
-4,Pruno-Fraxinetum,150000,2,1,43,-13,79,6,0,0
-4,Pruno-Fraxinetum,150000,2,2,43,-13,79,6,0,0
-4,Pruno-Fraxinetum,150000,3,1,43,-13,79,6,0,0
-4,Pruno-Fraxinetum,150000,3,2,43,-13,79,6,0,0
-4,Pruno-Fraxinetum,20000,4,1,42,1,89,14,0,0
-4,Pruno-Fraxinetum,20000,4,2,42,1,89,14,0,0
-4,Pruno-Fraxinetum,20000,2,1,42,1,89,14,0,0
-4,Pruno-Fraxinetum,20000,2,2,42,1,89,14,0,0
-4,Pruno-Fraxinetum,20000,3,1,42,1,89,14,0,0
-4,Pruno-Fraxinetum,20000,3,2,42,1,89,14,0,0
-4,Pruno-Fraxinetum,20000,4,3,42,1,89,14,0,0
-4,Pruno-Fraxinetum,20000,2,3,42,1,89,14,0,0
-4,Pruno-Fraxinetum,20000,3,3,42,1,89,14,0,0
-4,Pruno-Fraxinetum,30000,4,1,43,-13,79,6,0,0
-4,Pruno-Fraxinetum,30000,4,2,43,-13,79,6,0,0
-4,Pruno-Fraxinetum,30000,2,1,43,-13,79,6,0,0
-4,Pruno-Fraxinetum,30000,2,2,43,-13,79,6,0,0
-4,Pruno-Fraxinetum,30000,3,1,43,-13,79,6,0,0
-4,Pruno-Fraxinetum,30000,3,2,43,-13,79,6,0,0
-4,Pruno-Fraxinetum,130000,4,1,43,-13,79,6,0,0
-4,Pruno-Fraxinetum,130000,2,1,43,-13,79,6,0,0
-4,Pruno-Fraxinetum,130000,3,1,43,-13,79,6,0,0
-4,Pruno-Fraxinetum,130000,4,2,43,-13,79,6,0,0
-4,Pruno-Fraxinetum,130000,2,2,43,-13,79,6,0,0
-4,Pruno-Fraxinetum,130000,3,2,43,-13,79,6,0,0
-5,Carpinion betuli,140000,2,1,66,5,214,17,0,0
-5,Carpinion betuli,140000,2,2,66,5,214,17,0,0
-5,Carpinion betuli,140000,3,1,66,5,214,17,0,0
-5,Carpinion betuli,140000,3,2,66,5,214,17,0,0
-6,Betulo-Quercetum roboris,110000,2,1,179,21,272,38,0,0
-6,Betulo-Quercetum roboris,110000,1,1,179,21,272,38,0,0
-6,Betulo-Quercetum roboris,120000,2,1,179,12,272,38,0,0
-6,Betulo-Quercetum roboris,120000,1,1,179,12,272,38,0,0
-7,Caricion gracilis,20000,4,3,43,-21,99,11,1,1
-7,Caricion gracilis,20000,4,2,43,-21,99,11,1,1
-7,Caricion gracilis,20000,4,1,43,-21,99,11,1,1
-7,Caricion gracilis,20000,2,3,43,-21,99,11,1,1
-7,Caricion gracilis,20000,2,2,43,-21,99,11,1,1
-7,Caricion gracilis,20000,2,1,43,-21,99,11,1,1
-7,Caricion gracilis,20000,3,3,43,-21,99,11,1,1
-7,Caricion gracilis,20000,3,2,43,-21,99,11,1,1
-7,Caricion gracilis,20000,3,1,43,-21,99,11,1,1
-7,Caricion gracilis,30000,4,1,32,-9,70,3,1,1
-7,Caricion gracilis,30000,4,2,32,-9,70,3,1,1
-7,Caricion gracilis,30000,2,1,32,-9,70,3,1,1
-7,Caricion gracilis,30000,2,2,32,-9,70,3,1,1
-7,Caricion gracilis,30000,3,1,32,-9,70,3,1,1
-7,Caricion gracilis,30000,3,2,32,-9,70,3,1,1
-7,Caricion gracilis,30000,4,3,32,-9,70,3,1,1
-7,Caricion gracilis,30000,2,3,32,-9,70,3,1,1
-7,Caricion gracilis,30000,3,3,32,-9,70,3,1,1
-7,Caricion gracilis,140000,4,3,31,-32,73,-1,1,1
-7,Caricion gracilis,140000,4,1,31,-32,73,-1,1,1
-7,Caricion gracilis,140000,4,2,31,-32,73,-1,1,1
-7,Caricion gracilis,140000,2,3,31,-32,73,-1,1,1
-7,Caricion gracilis,140000,2,1,31,-32,73,-1,1,1
-7,Caricion gracilis,140000,2,2,31,-32,73,-1,1,1
-7,Caricion gracilis,140000,3,3,31,-32,73,-1,1,1
-7,Caricion gracilis,140000,3,1,31,-32,73,-1,1,1
-7,Caricion gracilis,140000,3,2,31,-32,73,-1,1,1
-7,Caricion gracilis,150000,4,3,12,-10,75,17,1,1
-7,Caricion gracilis,150000,4,2,12,-10,75,17,1,1
-7,Caricion gracilis,150000,2,3,12,-10,75,17,1,1
-7,Caricion gracilis,150000,2,2,12,-10,75,17,1,1
-7,Caricion gracilis,150000,3,3,12,-10,75,17,1,1
-7,Caricion gracilis,150000,3,2,12,-10,75,17,1,1
-7,Caricion gracilis,150000,4,1,12,-10,75,17,1,1
-7,Caricion gracilis,150000,2,1,12,-10,75,17,1,1
-7,Caricion gracilis,150000,3,1,12,-10,75,17,1,1
-7,Caricion gracilis,80000,4,3,9,-28,77,-19,1,1
-7,Caricion gracilis,80000,4,2,9,-28,77,-19,1,1
-7,Caricion gracilis,80000,4,1,9,-28,77,-19,1,1
-7,Caricion gracilis,80000,2,3,9,-28,77,-19,1,1
-7,Caricion gracilis,80000,2,2,9,-28,77,-19,1,1
-7,Caricion gracilis,80000,2,1,9,-28,77,-19,1,1
-7,Caricion gracilis,80000,3,3,9,-28,77,-19,1,1
-7,Caricion gracilis,80000,3,2,9,-28,77,-19,1,1
-7,Caricion gracilis,80000,3,1,9,-28,77,-19,1,1
-7,Caricion gracilis,130000,4,1,45,-10,75,17,1,1
-7,Caricion gracilis,130000,2,1,45,-10,75,17,1,1
-7,Caricion gracilis,130000,3,1,45,-10,75,17,1,1
-7,Caricion gracilis,130000,4,2,45,-10,75,17,1,1
-7,Caricion gracilis,130000,2,2,45,-10,75,17,1,1
-7,Caricion gracilis,130000,3,2,45,-10,75,17,1,1
-7,Caricion gracilis,20000,4,3,43,-21,99,11,1,2
-7,Caricion gracilis,20000,4,2,43,-21,99,11,1,2
-7,Caricion gracilis,20000,4,1,43,-21,99,11,1,2
-7,Caricion gracilis,20000,2,3,43,-21,99,11,1,2
-7,Caricion gracilis,20000,2,2,43,-21,99,11,1,2
-7,Caricion gracilis,20000,2,1,43,-21,99,11,1,2
-7,Caricion gracilis,20000,3,3,43,-21,99,11,1,2
-7,Caricion gracilis,20000,3,2,43,-21,99,11,1,2
-7,Caricion gracilis,20000,3,1,43,-21,99,11,1,2
-7,Caricion gracilis,30000,4,1,32,-9,70,3,1,2
-7,Caricion gracilis,30000,4,2,32,-9,70,3,1,2
-7,Caricion gracilis,30000,2,1,32,-9,70,3,1,2
-7,Caricion gracilis,30000,2,2,32,-9,70,3,1,2
-7,Caricion gracilis,30000,3,1,32,-9,70,3,1,2
-7,Caricion gracilis,30000,3,2,32,-9,70,3,1,2
-7,Caricion gracilis,30000,4,3,32,-9,70,3,1,2
-7,Caricion gracilis,30000,2,3,32,-9,70,3,1,2
-7,Caricion gracilis,30000,3,3,32,-9,70,3,1,2
-7,Caricion gracilis,140000,4,3,31,-32,73,-1,1,2
-7,Caricion gracilis,140000,4,1,31,-32,73,-1,1,2
-7,Caricion gracilis,140000,4,2,31,-32,73,-1,1,2
-7,Caricion gracilis,140000,2,3,31,-32,73,-1,1,2
-7,Caricion gracilis,140000,2,1,31,-32,73,-1,1,2
-7,Caricion gracilis,140000,2,2,31,-32,73,-1,1,2
-7,Caricion gracilis,140000,3,3,31,-32,73,-1,1,2
-7,Caricion gracilis,140000,3,1,31,-32,73,-1,1,2
-7,Caricion gracilis,140000,3,2,31,-32,73,-1,1,2
-7,Caricion gracilis,150000,4,3,12,-10,75,17,1,2
-7,Caricion gracilis,150000,4,2,12,-10,75,17,1,2
-7,Caricion gracilis,150000,2,3,12,-10,75,17,1,2
-7,Caricion gracilis,150000,2,2,12,-10,75,17,1,2
-7,Caricion gracilis,150000,3,3,12,-10,75,17,1,2
-7,Caricion gracilis,150000,3,2,12,-10,75,17,1,2
-7,Caricion gracilis,150000,4,1,12,-10,75,17,1,2
-7,Caricion gracilis,150000,2,1,12,-10,75,17,1,2
-7,Caricion gracilis,150000,3,1,12,-10,75,17,1,2
-7,Caricion gracilis,80000,4,3,9,-28,77,-19,1,2
-7,Caricion gracilis,80000,4,2,9,-28,77,-19,1,2
-7,Caricion gracilis,80000,4,1,9,-28,77,-19,1,2
-7,Caricion gracilis,80000,2,3,9,-28,77,-19,1,2
-7,Caricion gracilis,80000,2,2,9,-28,77,-19,1,2
-7,Caricion gracilis,80000,2,1,9,-28,77,-19,1,2
-7,Caricion gracilis,80000,3,3,9,-28,77,-19,1,2
-7,Caricion gracilis,80000,3,2,9,-28,77,-19,1,2
-7,Caricion gracilis,80000,3,1,9,-28,77,-19,1,2
-7,Caricion gracilis,130000,4,1,45,-10,75,17,1,2
-7,Caricion gracilis,130000,2,1,45,-10,75,17,1,2
-7,Caricion gracilis,130000,3,1,45,-10,75,17,1,2
-7,Caricion gracilis,130000,4,2,45,-10,75,17,1,2
-7,Caricion gracilis,130000,2,2,45,-10,75,17,1,2
-7,Caricion gracilis,130000,3,2,45,-10,75,17,1,2
-7,Caricion gracilis,20000,4,3,43,-21,99,11,3,1
-7,Caricion gracilis,20000,4,2,43,-21,99,11,3,1
-7,Caricion gracilis,20000,4,1,43,-21,99,11,3,1
-7,Caricion gracilis,20000,2,3,43,-21,99,11,3,1
-7,Caricion gracilis,20000,2,2,43,-21,99,11,3,1
-7,Caricion gracilis,20000,2,1,43,-21,99,11,3,1
-7,Caricion gracilis,20000,3,3,43,-21,99,11,3,1
-7,Caricion gracilis,20000,3,2,43,-21,99,11,3,1
-7,Caricion gracilis,20000,3,1,43,-21,99,11,3,1
-7,Caricion gracilis,30000,4,1,32,-9,70,3,3,1
-7,Caricion gracilis,30000,4,2,32,-9,70,3,3,1
-7,Caricion gracilis,30000,2,1,32,-9,70,3,3,1
-7,Caricion gracilis,30000,2,2,32,-9,70,3,3,1
-7,Caricion gracilis,30000,3,1,32,-9,70,3,3,1
-7,Caricion gracilis,30000,3,2,32,-9,70,3,3,1
-7,Caricion gracilis,30000,4,3,32,-9,70,3,3,1
-7,Caricion gracilis,30000,2,3,32,-9,70,3,3,1
-7,Caricion gracilis,30000,3,3,32,-9,70,3,3,1
-7,Caricion gracilis,140000,4,3,31,-32,73,-1,3,1
-7,Caricion gracilis,140000,4,1,31,-32,73,-1,3,1
-7,Caricion gracilis,140000,4,2,31,-32,73,-1,3,1
-7,Caricion gracilis,140000,2,3,31,-32,73,-1,3,1
-7,Caricion gracilis,140000,2,1,31,-32,73,-1,3,1
-7,Caricion gracilis,140000,2,2,31,-32,73,-1,3,1
-7,Caricion gracilis,140000,3,3,31,-32,73,-1,3,1
-7,Caricion gracilis,140000,3,1,31,-32,73,-1,3,1
-7,Caricion gracilis,140000,3,2,31,-32,73,-1,3,1
-7,Caricion gracilis,150000,4,3,12,-10,75,17,3,1
-7,Caricion gracilis,150000,4,2,12,-10,75,17,3,1
-7,Caricion gracilis,150000,2,3,12,-10,75,17,3,1
-7,Caricion gracilis,150000,2,2,12,-10,75,17,3,1
-7,Caricion gracilis,150000,3,3,12,-10,75,17,3,1
-7,Caricion gracilis,150000,3,2,12,-10,75,17,3,1
-7,Caricion gracilis,150000,4,1,12,-10,75,17,3,1
-7,Caricion gracilis,150000,2,1,12,-10,75,17,3,1
-7,Caricion gracilis,150000,3,1,12,-10,75,17,3,1
-7,Caricion gracilis,80000,4,3,9,-28,77,-19,3,1
-7,Caricion gracilis,80000,4,2,9,-28,77,-19,3,1
-7,Caricion gracilis,80000,4,1,9,-28,77,-19,3,1
-7,Caricion gracilis,80000,2,3,9,-28,77,-19,3,1
-7,Caricion gracilis,80000,2,2,9,-28,77,-19,3,1
-7,Caricion gracilis,80000,2,1,9,-28,77,-19,3,1
-7,Caricion gracilis,80000,3,3,9,-28,77,-19,3,1
-7,Caricion gracilis,80000,3,2,9,-28,77,-19,3,1
-7,Caricion gracilis,80000,3,1,9,-28,77,-19,3,1
-7,Caricion gracilis,130000,4,1,45,-10,75,17,3,1
-7,Caricion gracilis,130000,2,1,45,-10,75,17,3,1
-7,Caricion gracilis,130000,3,1,45,-10,75,17,3,1
-7,Caricion gracilis,130000,4,2,45,-10,75,17,3,1
-7,Caricion gracilis,130000,2,2,45,-10,75,17,3,1
-7,Caricion gracilis,130000,3,2,45,-10,75,17,3,1
-7,Caricion gracilis,20000,4,3,43,-21,99,11,3,2
-7,Caricion gracilis,20000,4,2,43,-21,99,11,3,2
-7,Caricion gracilis,20000,4,1,43,-21,99,11,3,2
-7,Caricion gracilis,20000,2,3,43,-21,99,11,3,2
-7,Caricion gracilis,20000,2,2,43,-21,99,11,3,2
-7,Caricion gracilis,20000,2,1,43,-21,99,11,3,2
-7,Caricion gracilis,20000,3,3,43,-21,99,11,3,2
-7,Caricion gracilis,20000,3,2,43,-21,99,11,3,2
-7,Caricion gracilis,20000,3,1,43,-21,99,11,3,2
-7,Caricion gracilis,30000,4,1,32,-9,70,3,3,2
-7,Caricion gracilis,30000,4,2,32,-9,70,3,3,2
-7,Caricion gracilis,30000,2,1,32,-9,70,3,3,2
-7,Caricion gracilis,30000,2,2,32,-9,70,3,3,2
-7,Caricion gracilis,30000,3,1,32,-9,70,3,3,2
-7,Caricion gracilis,30000,3,2,32,-9,70,3,3,2
-7,Caricion gracilis,30000,4,3,32,-9,70,3,3,2
-7,Caricion gracilis,30000,2,3,32,-9,70,3,3,2
-7,Caricion gracilis,30000,3,3,32,-9,70,3,3,2
-7,Caricion gracilis,140000,4,3,31,-32,73,-1,3,2
-7,Caricion gracilis,140000,4,1,31,-32,73,-1,3,2
-7,Caricion gracilis,140000,4,2,31,-32,73,-1,3,2
-7,Caricion gracilis,140000,2,3,31,-32,73,-1,3,2
-7,Caricion gracilis,140000,2,1,31,-32,73,-1,3,2
-7,Caricion gracilis,140000,2,2,31,-32,73,-1,3,2
-7,Caricion gracilis,140000,3,3,31,-32,73,-1,3,2
-7,Caricion gracilis,140000,3,1,31,-32,73,-1,3,2
-7,Caricion gracilis,140000,3,2,31,-32,73,-1,3,2
-7,Caricion gracilis,150000,4,3,12,-10,75,17,3,2
-7,Caricion gracilis,150000,4,2,12,-10,75,17,3,2
-7,Caricion gracilis,150000,2,3,12,-10,75,17,3,2
-7,Caricion gracilis,150000,2,2,12,-10,75,17,3,2
-7,Caricion gracilis,150000,3,3,12,-10,75,17,3,2
-7,Caricion gracilis,150000,3,2,12,-10,75,17,3,2
-7,Caricion gracilis,150000,4,1,12,-10,75,17,3,2
-7,Caricion gracilis,150000,2,1,12,-10,75,17,3,2
-7,Caricion gracilis,150000,3,1,12,-10,75,17,3,2
-7,Caricion gracilis,80000,4,3,9,-28,77,-19,3,2
-7,Caricion gracilis,80000,4,2,9,-28,77,-19,3,2
-7,Caricion gracilis,80000,4,1,9,-28,77,-19,3,2
-7,Caricion gracilis,80000,2,3,9,-28,77,-19,3,2
-7,Caricion gracilis,80000,2,2,9,-28,77,-19,3,2
-7,Caricion gracilis,80000,2,1,9,-28,77,-19,3,2
-7,Caricion gracilis,80000,3,3,9,-28,77,-19,3,2
-7,Caricion gracilis,80000,3,2,9,-28,77,-19,3,2
-7,Caricion gracilis,80000,3,1,9,-28,77,-19,3,2
-7,Caricion gracilis,130000,4,1,45,-10,75,17,3,2
-7,Caricion gracilis,130000,2,1,45,-10,75,17,3,2
-7,Caricion gracilis,130000,3,1,45,-10,75,17,3,2
-7,Caricion gracilis,130000,4,2,45,-10,75,17,3,2
-7,Caricion gracilis,130000,2,2,45,-10,75,17,3,2
-7,Caricion gracilis,130000,3,2,45,-10,75,17,3,2
-8,Filipendulion,20000,4,3,45,-31,172,42,1,0
-8,Filipendulion,20000,2,3,45,-31,172,42,1,0
-8,Filipendulion,20000,3,3,45,-31,172,42,1,0
-8,Filipendulion,20000,4,2,45,-31,172,42,1,0
-8,Filipendulion,20000,2,2,45,-31,172,42,1,0
-8,Filipendulion,20000,3,2,45,-31,172,42,1,0
-8,Filipendulion,20000,4,1,45,-31,172,42,1,0
-8,Filipendulion,20000,2,1,45,-31,172,42,1,0
-8,Filipendulion,20000,3,1,45,-31,172,42,1,0
-8,Filipendulion,30000,4,1,45,-31,172,42,1,0
-8,Filipendulion,30000,2,1,45,-31,172,42,1,0
-8,Filipendulion,30000,3,1,45,-31,172,42,1,0
-8,Filipendulion,30000,4,2,45,-31,172,42,1,0
-8,Filipendulion,30000,2,2,45,-31,172,42,1,0
-8,Filipendulion,30000,3,2,45,-31,172,42,1,0
-8,Filipendulion,140000,4,1,80,-31,170,21,1,0
-8,Filipendulion,140000,4,2,80,-31,170,21,1,0
-8,Filipendulion,140000,2,1,80,-31,170,21,1,0
-8,Filipendulion,140000,2,2,80,-31,170,21,1,0
-8,Filipendulion,140000,3,1,80,-31,170,21,1,0
-8,Filipendulion,140000,3,2,80,-31,170,21,1,0
-8,Filipendulion,140000,4,3,80,-31,170,21,1,0
-8,Filipendulion,140000,2,3,80,-31,170,21,1,0
-8,Filipendulion,140000,3,3,80,-31,170,21,1,0
-8,Filipendulion,150000,4,1,80,-31,170,21,1,0
-8,Filipendulion,150000,2,1,80,-31,170,21,1,0
-8,Filipendulion,150000,3,1,80,-31,170,21,1,0
-8,Filipendulion,150000,4,2,80,-31,170,21,1,0
-8,Filipendulion,150000,2,2,80,-31,170,21,1,0
-8,Filipendulion,150000,3,2,80,-31,170,21,1,0
-8,Filipendulion,80000,4,1,36,-35,87,-20,1,0
-8,Filipendulion,80000,2,1,36,-35,87,-20,1,0
-8,Filipendulion,80000,3,1,36,-35,87,-20,1,0
-8,Filipendulion,80000,4,2,36,-35,87,-20,1,0
-8,Filipendulion,80000,2,2,36,-35,87,-20,1,0
-8,Filipendulion,80000,3,2,36,-35,87,-20,1,0
-8,Filipendulion,130000,4,1,46,-35,109,-20,1,0
-8,Filipendulion,130000,4,2,46,-35,109,-20,1,0
-8,Filipendulion,130000,2,1,46,-35,109,-20,1,0
-8,Filipendulion,130000,2,2,46,-35,109,-20,1,0
-8,Filipendulion,130000,3,1,46,-35,109,-20,1,0
-8,Filipendulion,130000,3,2,46,-35,109,-20,1,0
-8,Filipendulion,20000,4,3,45,-31,172,42,1,2
-8,Filipendulion,20000,2,3,45,-31,172,42,1,2
-8,Filipendulion,20000,3,3,45,-31,172,42,1,2
-8,Filipendulion,20000,4,2,45,-31,172,42,1,2
-8,Filipendulion,20000,2,2,45,-31,172,42,1,2
-8,Filipendulion,20000,3,2,45,-31,172,42,1,2
-8,Filipendulion,20000,4,1,45,-31,172,42,1,2
-8,Filipendulion,20000,2,1,45,-31,172,42,1,2
-8,Filipendulion,20000,3,1,45,-31,172,42,1,2
-8,Filipendulion,30000,4,1,45,-31,172,42,1,2
-8,Filipendulion,30000,2,1,45,-31,172,42,1,2
-8,Filipendulion,30000,3,1,45,-31,172,42,1,2
-8,Filipendulion,30000,4,2,45,-31,172,42,1,2
-8,Filipendulion,30000,2,2,45,-31,172,42,1,2
-8,Filipendulion,30000,3,2,45,-31,172,42,1,2
-8,Filipendulion,140000,4,1,80,-31,170,21,1,2
-8,Filipendulion,140000,4,2,80,-31,170,21,1,2
-8,Filipendulion,140000,2,1,80,-31,170,21,1,2
-8,Filipendulion,140000,2,2,80,-31,170,21,1,2
-8,Filipendulion,140000,3,1,80,-31,170,21,1,2
-8,Filipendulion,140000,3,2,80,-31,170,21,1,2
-8,Filipendulion,140000,4,3,80,-31,170,21,1,2
-8,Filipendulion,140000,2,3,80,-31,170,21,1,2
-8,Filipendulion,140000,3,3,80,-31,170,21,1,2
-8,Filipendulion,150000,4,1,80,-31,170,21,1,2
-8,Filipendulion,150000,2,1,80,-31,170,21,1,2
-8,Filipendulion,150000,3,1,80,-31,170,21,1,2
-8,Filipendulion,150000,4,2,80,-31,170,21,1,2
-8,Filipendulion,150000,2,2,80,-31,170,21,1,2
-8,Filipendulion,150000,3,2,80,-31,170,21,1,2
-8,Filipendulion,80000,4,1,36,-35,87,-20,1,2
-8,Filipendulion,80000,2,1,36,-35,87,-20,1,2
-8,Filipendulion,80000,3,1,36,-35,87,-20,1,2
-8,Filipendulion,80000,4,2,36,-35,87,-20,1,2
-8,Filipendulion,80000,2,2,36,-35,87,-20,1,2
-8,Filipendulion,80000,3,2,36,-35,87,-20,1,2
-8,Filipendulion,130000,4,1,46,-35,109,-20,1,2
-8,Filipendulion,130000,4,2,46,-35,109,-20,1,2
-8,Filipendulion,130000,2,1,46,-35,109,-20,1,2
-8,Filipendulion,130000,2,2,46,-35,109,-20,1,2
-8,Filipendulion,130000,3,1,46,-35,109,-20,1,2
-8,Filipendulion,130000,3,2,46,-35,109,-20,1,2
-9,Galio - Alliarion,20000,4,1,76,14,157,30,1,2
-9,Galio - Alliarion,20000,5,1,76,14,157,30,1,2
-9,Galio - Alliarion,20000,3,1,76,14,157,30,1,2
-9,Galio - Alliarion,20000,4,2,76,14,157,30,1,2
-9,Galio - Alliarion,20000,5,2,76,14,157,30,1,2
-9,Galio - Alliarion,20000,3,2,76,14,157,30,1,2
-9,Galio - Alliarion,20000,4,3,76,14,157,30,1,2
-9,Galio - Alliarion,20000,5,3,76,14,157,30,1,2
-9,Galio - Alliarion,20000,3,3,76,14,157,30,1,2
-9,Galio - Alliarion,140000,4,1,76,14,157,30,1,2
-9,Galio - Alliarion,140000,5,1,76,14,157,30,1,2
-9,Galio - Alliarion,140000,3,1,76,14,157,30,1,2
-9,Galio - Alliarion,140000,4,2,76,14,157,30,1,2
-9,Galio - Alliarion,140000,5,2,76,14,157,30,1,2
-9,Galio - Alliarion,140000,3,2,76,14,157,30,1,2
-9,Galio - Alliarion,140000,4,3,76,14,157,30,1,2
-9,Galio - Alliarion,140000,5,3,76,14,157,30,1,2
-9,Galio - Alliarion,140000,3,3,76,14,157,30,1,2
-9,Galio - Alliarion,110000,4,1,124,50,160,50,1,2
-9,Galio - Alliarion,110000,5,1,124,50,160,50,1,2
-9,Galio - Alliarion,110000,3,1,124,50,160,50,1,2
-9,Galio - Alliarion,130000,4,1,124,50,160,50,1,2
-9,Galio - Alliarion,130000,5,1,124,50,160,50,1,2
-9,Galio - Alliarion,130000,3,1,124,50,160,50,1,2
-9,Galio - Alliarion,130000,4,2,124,50,160,50,1,2
-9,Galio - Alliarion,130000,5,2,124,50,160,50,1,2
-9,Galio - Alliarion,130000,3,2,124,50,160,50,1,2
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,20000,4,3,36,-3,178,88,1,1
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,20000,5,3,36,-3,178,88,1,1
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,20000,4,2,36,-3,178,88,1,1
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,20000,5,2,36,-3,178,88,1,1
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,30000,4,3,36,-2,99,31,1,1
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,30000,4,2,36,-2,99,31,1,1
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,30000,5,3,36,-2,99,31,1,1
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,30000,5,2,36,-2,99,31,1,1
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,20000,4,3,36,-3,178,88,1,2
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,20000,5,3,36,-3,178,88,1,2
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,20000,4,2,36,-3,178,88,1,2
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,20000,5,2,36,-3,178,88,1,2
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,30000,4,3,36,-2,99,31,1,2
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,30000,4,2,36,-2,99,31,1,2
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,30000,5,3,36,-2,99,31,1,2
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,30000,5,2,36,-2,99,31,1,2
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,20000,4,3,36,-3,178,88,3,1
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,20000,5,3,36,-3,178,88,3,1
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,20000,4,2,36,-3,178,88,3,1
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,20000,5,2,36,-3,178,88,3,1
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,30000,4,3,36,-2,99,31,3,1
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,30000,4,2,36,-2,99,31,3,1
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,30000,5,3,36,-2,99,31,3,1
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,30000,5,2,36,-2,99,31,3,1
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,20000,4,3,36,-3,178,88,3,2
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,20000,5,3,36,-3,178,88,3,2
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,20000,4,2,36,-3,178,88,3,2
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,20000,5,2,36,-3,178,88,3,2
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,30000,4,3,36,-2,99,31,3,2
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,30000,4,2,36,-2,99,31,3,2
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,30000,5,3,36,-2,99,31,3,2
-10,RG Phalaris arundinacea-[Convolvulo-Filipend,30000,5,2,36,-2,99,31,3,2
-11,RG Juncus effusus-[Molinietalia/Lolio-Potent,80000,4,1,11,-44,55,-12,1,2
-11,RG Juncus effusus-[Molinietalia/Lolio-Potent,80000,4,2,11,-44,55,-12,1,2
-11,RG Juncus effusus-[Molinietalia/Lolio-Potent,80000,3,1,11,-44,55,-12,1,2
-11,RG Juncus effusus-[Molinietalia/Lolio-Potent,80000,3,2,11,-44,55,-12,1,2
-11,RG Juncus effusus-[Molinietalia/Lolio-Potent,110000,4,1,13,-44,82,-12,1,2
-11,RG Juncus effusus-[Molinietalia/Lolio-Potent,110000,3,1,13,-44,82,-12,1,2
-11,RG Juncus effusus-[Molinietalia/Lolio-Potent,120000,4,1,13,-44,82,-12,1,2
-11,RG Juncus effusus-[Molinietalia/Lolio-Potent,120000,3,1,13,-44,82,-12,1,2
-11,RG Juncus effusus-[Molinietalia/Lolio-Potent,130000,4,1,11,-44,55,-12,1,2
-11,RG Juncus effusus-[Molinietalia/Lolio-Potent,130000,4,2,11,-44,55,-12,1,2
-11,RG Juncus effusus-[Molinietalia/Lolio-Potent,130000,3,1,11,-44,55,-12,1,2
-11,RG Juncus effusus-[Molinietalia/Lolio-Potent,130000,3,2,11,-44,55,-12,1,2
-11,RG Juncus effusus-[Molinietalia/Lolio-Potent,80000,4,1,11,-44,55,-12,2,2
-11,RG Juncus effusus-[Molinietalia/Lolio-Potent,80000,4,2,11,-44,55,-12,2,2
-11,RG Juncus effusus-[Molinietalia/Lolio-Potent,80000,3,1,11,-44,55,-12,2,2
-11,RG Juncus effusus-[Molinietalia/Lolio-Potent,80000,3,2,11,-44,55,-12,2,2
-11,RG Juncus effusus-[Molinietalia/Lolio-Potent,110000,4,1,13,-44,82,-12,2,2
-11,RG Juncus effusus-[Molinietalia/Lolio-Potent,110000,3,1,13,-44,82,-12,2,2
-11,RG Juncus effusus-[Molinietalia/Lolio-Potent,120000,4,1,13,-44,82,-12,2,2
-11,RG Juncus effusus-[Molinietalia/Lolio-Potent,120000,3,1,13,-44,82,-12,2,2
-11,RG Juncus effusus-[Molinietalia/Lolio-Potent,130000,4,1,11,-44,55,-12,2,2
-11,RG Juncus effusus-[Molinietalia/Lolio-Potent,130000,4,2,11,-44,55,-12,2,2
-11,RG Juncus effusus-[Molinietalia/Lolio-Potent,130000,3,1,11,-44,55,-12,2,2
-11,RG Juncus effusus-[Molinietalia/Lolio-Potent,130000,3,2,11,-44,55,-12,2,2
-12,Magnocaricion met Phragmites,20000,4,3,14,-37,55,-3,1,1
-12,Magnocaricion met Phragmites,20000,2,3,14,-37,55,-3,1,1
-12,Magnocaricion met Phragmites,20000,3,3,14,-37,55,-3,1,1
-12,Magnocaricion met Phragmites,20000,4,2,14,-37,55,-3,1,1
-12,Magnocaricion met Phragmites,20000,2,2,14,-37,55,-3,1,1
-12,Magnocaricion met Phragmites,20000,3,2,14,-37,55,-3,1,1
-12,Magnocaricion met Phragmites,30000,4,3,6,-37,55,-3,1,1
-12,Magnocaricion met Phragmites,30000,4,1,6,-37,55,-3,1,1
-12,Magnocaricion met Phragmites,30000,4,2,6,-37,55,-3,1,1
-12,Magnocaricion met Phragmites,30000,2,3,6,-37,55,-3,1,1
-12,Magnocaricion met Phragmites,30000,2,1,6,-37,55,-3,1,1
-12,Magnocaricion met Phragmites,30000,2,2,6,-37,55,-3,1,1
-12,Magnocaricion met Phragmites,30000,3,3,6,-37,55,-3,1,1
-12,Magnocaricion met Phragmites,30000,3,1,6,-37,55,-3,1,1
-12,Magnocaricion met Phragmites,30000,3,2,6,-37,55,-3,1,1
-12,Magnocaricion met Phragmites,140000,4,3,14,-37,55,-3,1,1
-12,Magnocaricion met Phragmites,140000,4,2,14,-37,55,-3,1,1
-12,Magnocaricion met Phragmites,140000,2,3,14,-37,55,-3,1,1
-12,Magnocaricion met Phragmites,140000,2,2,14,-37,55,-3,1,1
-12,Magnocaricion met Phragmites,140000,3,3,14,-37,55,-3,1,1
-12,Magnocaricion met Phragmites,140000,3,2,14,-37,55,-3,1,1
-12,Magnocaricion met Phragmites,150000,4,3,14,-37,55,-3,1,1
-12,Magnocaricion met Phragmites,150000,4,2,14,-37,55,-3,1,1
-12,Magnocaricion met Phragmites,150000,4,1,14,-37,55,-3,1,1
-12,Magnocaricion met Phragmites,150000,2,3,14,-37,55,-3,1,1
-12,Magnocaricion met Phragmites,150000,2,2,14,-37,55,-3,1,1
-12,Magnocaricion met Phragmites,150000,2,1,14,-37,55,-3,1,1
-12,Magnocaricion met Phragmites,150000,3,3,14,-37,55,-3,1,1
-12,Magnocaricion met Phragmites,150000,3,2,14,-37,55,-3,1,1
-12,Magnocaricion met Phragmites,150000,3,1,14,-37,55,-3,1,1
-12,Magnocaricion met Phragmites,80000,4,3,9,-37,45,-3,1,1
-12,Magnocaricion met Phragmites,80000,4,2,9,-37,45,-3,1,1
-12,Magnocaricion met Phragmites,80000,2,3,9,-37,45,-3,1,1
-12,Magnocaricion met Phragmites,80000,2,2,9,-37,45,-3,1,1
-12,Magnocaricion met Phragmites,80000,3,3,9,-37,45,-3,1,1
-12,Magnocaricion met Phragmites,80000,3,2,9,-37,45,-3,1,1
-12,Magnocaricion met Phragmites,80000,4,1,9,-37,45,-3,1,1
-12,Magnocaricion met Phragmites,80000,2,1,9,-37,45,-3,1,1
-12,Magnocaricion met Phragmites,80000,3,1,9,-37,45,-3,1,1
-12,Magnocaricion met Phragmites,20000,4,3,14,-37,55,-3,1,2
-12,Magnocaricion met Phragmites,20000,2,3,14,-37,55,-3,1,2
-12,Magnocaricion met Phragmites,20000,3,3,14,-37,55,-3,1,2
-12,Magnocaricion met Phragmites,20000,4,2,14,-37,55,-3,1,2
-12,Magnocaricion met Phragmites,20000,2,2,14,-37,55,-3,1,2
-12,Magnocaricion met Phragmites,20000,3,2,14,-37,55,-3,1,2
-12,Magnocaricion met Phragmites,30000,4,3,6,-37,55,-3,1,2
-12,Magnocaricion met Phragmites,30000,4,1,6,-37,55,-3,1,2
-12,Magnocaricion met Phragmites,30000,4,2,6,-37,55,-3,1,2
-12,Magnocaricion met Phragmites,30000,2,3,6,-37,55,-3,1,2
-12,Magnocaricion met Phragmites,30000,2,1,6,-37,55,-3,1,2
-12,Magnocaricion met Phragmites,30000,2,2,6,-37,55,-3,1,2
-12,Magnocaricion met Phragmites,30000,3,3,6,-37,55,-3,1,2
-12,Magnocaricion met Phragmites,30000,3,1,6,-37,55,-3,1,2
-12,Magnocaricion met Phragmites,30000,3,2,6,-37,55,-3,1,2
-12,Magnocaricion met Phragmites,140000,4,3,14,-37,55,-3,1,2
-12,Magnocaricion met Phragmites,140000,4,2,14,-37,55,-3,1,2
-12,Magnocaricion met Phragmites,140000,2,3,14,-37,55,-3,1,2
-12,Magnocaricion met Phragmites,140000,2,2,14,-37,55,-3,1,2
-12,Magnocaricion met Phragmites,140000,3,3,14,-37,55,-3,1,2
-12,Magnocaricion met Phragmites,140000,3,2,14,-37,55,-3,1,2
-12,Magnocaricion met Phragmites,150000,4,3,14,-37,55,-3,1,2
-12,Magnocaricion met Phragmites,150000,4,2,14,-37,55,-3,1,2
-12,Magnocaricion met Phragmites,150000,4,1,14,-37,55,-3,1,2
-12,Magnocaricion met Phragmites,150000,2,3,14,-37,55,-3,1,2
-12,Magnocaricion met Phragmites,150000,2,2,14,-37,55,-3,1,2
-12,Magnocaricion met Phragmites,150000,2,1,14,-37,55,-3,1,2
-12,Magnocaricion met Phragmites,150000,3,3,14,-37,55,-3,1,2
-12,Magnocaricion met Phragmites,150000,3,2,14,-37,55,-3,1,2
-12,Magnocaricion met Phragmites,150000,3,1,14,-37,55,-3,1,2
-12,Magnocaricion met Phragmites,80000,4,3,9,-37,45,-3,1,2
-12,Magnocaricion met Phragmites,80000,4,2,9,-37,45,-3,1,2
-12,Magnocaricion met Phragmites,80000,2,3,9,-37,45,-3,1,2
-12,Magnocaricion met Phragmites,80000,2,2,9,-37,45,-3,1,2
-12,Magnocaricion met Phragmites,80000,3,3,9,-37,45,-3,1,2
-12,Magnocaricion met Phragmites,80000,3,2,9,-37,45,-3,1,2
-12,Magnocaricion met Phragmites,80000,4,1,9,-37,45,-3,1,2
-12,Magnocaricion met Phragmites,80000,2,1,9,-37,45,-3,1,2
-12,Magnocaricion met Phragmites,80000,3,1,9,-37,45,-3,1,2
-13,RG Glyceria maxima,20000,4,2,3,-75,75,30,1,0
-13,RG Glyceria maxima,20000,2,2,3,-75,75,30,1,0
-13,RG Glyceria maxima,20000,3,2,3,-75,75,30,1,0
-13,RG Glyceria maxima,20000,4,3,3,-75,75,30,1,0
-13,RG Glyceria maxima,20000,2,3,3,-75,75,30,1,0
-13,RG Glyceria maxima,20000,3,3,3,-75,75,30,1,0
-13,RG Glyceria maxima,140000,4,2,3,-75,75,30,1,0
-13,RG Glyceria maxima,140000,2,2,3,-75,75,30,1,0
-13,RG Glyceria maxima,140000,3,2,3,-75,75,30,1,0
-13,RG Glyceria maxima,140000,4,3,3,-75,75,30,1,0
-13,RG Glyceria maxima,140000,2,3,3,-75,75,30,1,0
-13,RG Glyceria maxima,140000,3,3,3,-75,75,30,1,0
-13,RG Glyceria maxima,20000,4,2,3,-75,75,30,1,1
-13,RG Glyceria maxima,20000,2,2,3,-75,75,30,1,1
-13,RG Glyceria maxima,20000,3,2,3,-75,75,30,1,1
-13,RG Glyceria maxima,20000,4,3,3,-75,75,30,1,1
-13,RG Glyceria maxima,20000,2,3,3,-75,75,30,1,1
-13,RG Glyceria maxima,20000,3,3,3,-75,75,30,1,1
-13,RG Glyceria maxima,140000,4,2,3,-75,75,30,1,1
-13,RG Glyceria maxima,140000,2,2,3,-75,75,30,1,1
-13,RG Glyceria maxima,140000,3,2,3,-75,75,30,1,1
-13,RG Glyceria maxima,140000,4,3,3,-75,75,30,1,1
-13,RG Glyceria maxima,140000,2,3,3,-75,75,30,1,1
-13,RG Glyceria maxima,140000,3,3,3,-75,75,30,1,1
-13,RG Glyceria maxima,20000,4,2,3,-75,75,30,1,2
-13,RG Glyceria maxima,20000,2,2,3,-75,75,30,1,2
-13,RG Glyceria maxima,20000,3,2,3,-75,75,30,1,2
-13,RG Glyceria maxima,20000,4,3,3,-75,75,30,1,2
-13,RG Glyceria maxima,20000,2,3,3,-75,75,30,1,2
-13,RG Glyceria maxima,20000,3,3,3,-75,75,30,1,2
-13,RG Glyceria maxima,140000,4,2,3,-75,75,30,1,2
-13,RG Glyceria maxima,140000,2,2,3,-75,75,30,1,2
-13,RG Glyceria maxima,140000,3,2,3,-75,75,30,1,2
-13,RG Glyceria maxima,140000,4,3,3,-75,75,30,1,2
-13,RG Glyceria maxima,140000,2,3,3,-75,75,30,1,2
-13,RG Glyceria maxima,140000,3,3,3,-75,75,30,1,2
-14,Caricion nigrae,80000,1,1,7,-22,57,4,1,0
-14,Caricion nigrae,80000,2,1,7,-22,57,4,1,0
-14,Caricion nigrae,80000,1,2,7,-22,57,4,1,0
-14,Caricion nigrae,80000,2,2,7,-22,57,4,1,0
-14,Caricion nigrae,110000,1,1,4,-22,70,2,1,0
-14,Caricion nigrae,110000,2,1,4,-22,70,2,1,0
-14,Caricion nigrae,120000,1,1,6,-22,74,17,1,0
-14,Caricion nigrae,120000,2,1,6,-22,74,17,1,0
-14,Caricion nigrae,130000,1,1,25,-22,95,5,1,0
-14,Caricion nigrae,130000,2,1,25,-22,95,5,1,0
-14,Caricion nigrae,130000,1,2,25,-22,95,5,1,0
-14,Caricion nigrae,130000,2,2,25,-22,95,5,1,0
-14,Caricion nigrae,80000,1,1,7,-22,57,4,3,0
-14,Caricion nigrae,80000,2,1,7,-22,57,4,3,0
-14,Caricion nigrae,80000,1,2,7,-22,57,4,3,0
-14,Caricion nigrae,80000,2,2,7,-22,57,4,3,0
-14,Caricion nigrae,110000,1,1,4,-22,70,2,3,0
-14,Caricion nigrae,110000,2,1,4,-22,70,2,3,0
-14,Caricion nigrae,120000,1,1,6,-22,74,17,3,0
-14,Caricion nigrae,120000,2,1,6,-22,74,17,3,0
-14,Caricion nigrae,130000,1,1,25,-22,95,5,3,0
-14,Caricion nigrae,130000,2,1,25,-22,95,5,3,0
-14,Caricion nigrae,130000,1,2,25,-22,95,5,3,0
-14,Caricion nigrae,130000,2,2,25,-22,95,5,3,0
-15,Caricion davallianae,140000,1,3,9,-1,38,7,3,0
-15,Caricion davallianae,140000,1,2,9,-1,38,7,3,0
-15,Caricion davallianae,150000,1,3,9,-1,38,7,3,0
-15,Caricion davallianae,150000,1,2,9,-1,38,7,3,0
-15,Caricion davallianae,110000,1,3,9,-1,38,7,3,0
-15,Caricion davallianae,110000,1,2,9,-1,38,7,3,0
-15,Caricion davallianae,120000,1,3,9,-1,38,7,3,0
-15,Caricion davallianae,120000,1,2,9,-1,38,7,3,0
-15,Caricion davallianae,130000,1,2,9,-1,38,7,3,0
-15,Caricion davallianae,130000,1,3,9,-1,38,7,3,0
-16,Lolio-Potentillion anserinae,20000,4,1,21,-20,98,13,2,0
-16,Lolio-Potentillion anserinae,20000,4,2,21,-20,98,13,2,0
-16,Lolio-Potentillion anserinae,20000,4,3,21,-20,98,13,2,0
-16,Lolio-Potentillion anserinae,30000,4,2,9,-14,96,36,2,0
-16,Lolio-Potentillion anserinae,140000,4,3,30,-26,66,-3,2,0
-16,Lolio-Potentillion anserinae,140000,4,2,30,-26,66,-3,2,0
-16,Lolio-Potentillion anserinae,140000,4,1,30,-26,66,-3,2,0
-16,Lolio-Potentillion anserinae,120000,4,1,6,4,72,66,2,0
-16,Lolio-Potentillion anserinae,20000,4,1,21,-20,98,13,2,1
-16,Lolio-Potentillion anserinae,20000,4,2,21,-20,98,13,2,1
-16,Lolio-Potentillion anserinae,20000,4,3,21,-20,98,13,2,1
-16,Lolio-Potentillion anserinae,30000,4,2,9,-14,96,36,2,1
-16,Lolio-Potentillion anserinae,140000,4,3,30,-26,66,-3,2,1
-16,Lolio-Potentillion anserinae,140000,4,2,30,-26,66,-3,2,1
-16,Lolio-Potentillion anserinae,140000,4,1,30,-26,66,-3,2,1
-16,Lolio-Potentillion anserinae,120000,4,1,6,4,72,66,2,1
-16,Lolio-Potentillion anserinae,20000,4,1,21,-20,98,13,2,2
-16,Lolio-Potentillion anserinae,20000,4,2,21,-20,98,13,2,2
-16,Lolio-Potentillion anserinae,20000,4,3,21,-20,98,13,2,2
-16,Lolio-Potentillion anserinae,30000,4,2,9,-14,96,36,2,2
-16,Lolio-Potentillion anserinae,140000,4,3,30,-26,66,-3,2,2
-16,Lolio-Potentillion anserinae,140000,4,2,30,-26,66,-3,2,2
-16,Lolio-Potentillion anserinae,140000,4,1,30,-26,66,-3,2,2
-16,Lolio-Potentillion anserinae,120000,4,1,6,4,72,66,2,2
-16,Lolio-Potentillion anserinae,20000,4,1,21,-20,98,13,3,0
-16,Lolio-Potentillion anserinae,20000,4,2,21,-20,98,13,3,0
-16,Lolio-Potentillion anserinae,20000,4,3,21,-20,98,13,3,0
-16,Lolio-Potentillion anserinae,30000,4,2,9,-14,96,36,3,0
-16,Lolio-Potentillion anserinae,140000,4,3,30,-26,66,-3,3,0
-16,Lolio-Potentillion anserinae,140000,4,2,30,-26,66,-3,3,0
-16,Lolio-Potentillion anserinae,140000,4,1,30,-26,66,-3,3,0
-16,Lolio-Potentillion anserinae,120000,4,1,6,4,72,66,3,0
-16,Lolio-Potentillion anserinae,20000,4,1,21,-20,98,13,3,1
-16,Lolio-Potentillion anserinae,20000,4,2,21,-20,98,13,3,1
-16,Lolio-Potentillion anserinae,20000,4,3,21,-20,98,13,3,1
-16,Lolio-Potentillion anserinae,30000,4,2,9,-14,96,36,3,1
-16,Lolio-Potentillion anserinae,140000,4,3,30,-26,66,-3,3,1
-16,Lolio-Potentillion anserinae,140000,4,2,30,-26,66,-3,3,1
-16,Lolio-Potentillion anserinae,140000,4,1,30,-26,66,-3,3,1
-16,Lolio-Potentillion anserinae,120000,4,1,6,4,72,66,3,1
-16,Lolio-Potentillion anserinae,20000,4,1,21,-20,98,13,3,2
-16,Lolio-Potentillion anserinae,20000,4,2,21,-20,98,13,3,2
-16,Lolio-Potentillion anserinae,20000,4,3,21,-20,98,13,3,2
-16,Lolio-Potentillion anserinae,30000,4,2,9,-14,96,36,3,2
-16,Lolio-Potentillion anserinae,140000,4,3,30,-26,66,-3,3,2
-16,Lolio-Potentillion anserinae,140000,4,2,30,-26,66,-3,3,2
-16,Lolio-Potentillion anserinae,140000,4,1,30,-26,66,-3,3,2
-16,Lolio-Potentillion anserinae,120000,4,1,6,4,72,66,3,2
-17,Junco - Molinion,30000,2,3,16,-4,42,13,3,0
-17,Junco - Molinion,30000,1,3,16,-4,42,13,3,0
-17,Junco - Molinion,30000,2,2,16,-4,42,13,3,0
-17,Junco - Molinion,30000,1,2,16,-4,42,13,3,0
-17,Junco - Molinion,150000,2,3,16,2,42,13,3,0
-17,Junco - Molinion,150000,2,2,16,2,42,13,3,0
-17,Junco - Molinion,150000,1,3,16,2,42,13,3,0
-17,Junco - Molinion,150000,1,2,16,2,42,13,3,0
-17,Junco - Molinion,80000,2,3,16,-7,42,-1,3,0
-17,Junco - Molinion,80000,2,2,16,-7,42,-1,3,0
-17,Junco - Molinion,80000,2,1,16,-7,42,-1,3,0
-17,Junco - Molinion,80000,1,3,16,-7,42,-1,3,0
-17,Junco - Molinion,80000,1,2,16,-7,42,-1,3,0
-17,Junco - Molinion,80000,1,1,16,-7,42,-1,3,0
-17,Junco - Molinion,110000,2,2,18,6,113,86,3,0
-17,Junco - Molinion,110000,1,2,18,6,113,86,3,0
-17,Junco - Molinion,120000,2,2,18,6,113,86,3,0
-17,Junco - Molinion,120000,1,2,18,6,113,86,3,0
-17,Junco - Molinion,130000,2,1,17,-1,72,7,3,0
-17,Junco - Molinion,130000,1,1,17,-1,72,7,3,0
-17,Junco - Molinion,130000,2,2,17,-1,72,7,3,0
-17,Junco - Molinion,130000,1,2,17,-1,72,7,3,0
-18,Calthion palustris,20000,2,3,25,-16,68,18,2,0
-18,Calthion palustris,20000,2,1,25,-16,68,18,2,0
-18,Calthion palustris,20000,2,2,25,-16,68,18,2,0
-18,Calthion palustris,20000,3,3,25,-16,68,18,2,0
-18,Calthion palustris,20000,3,1,25,-16,68,18,2,0
-18,Calthion palustris,20000,3,2,25,-16,68,18,2,0
-18,Calthion palustris,30000,2,3,8,-16,61,-7,2,0
-18,Calthion palustris,30000,2,1,8,-16,61,-7,2,0
-18,Calthion palustris,30000,2,2,8,-16,61,-7,2,0
-18,Calthion palustris,30000,3,3,8,-16,61,-7,2,0
-18,Calthion palustris,30000,3,1,8,-16,61,-7,2,0
-18,Calthion palustris,30000,3,2,8,-16,61,-7,2,0
-18,Calthion palustris,140000,2,3,51,-16,123,15,2,0
-18,Calthion palustris,140000,2,1,51,-16,123,15,2,0
-18,Calthion palustris,140000,2,2,51,-16,123,15,2,0
-18,Calthion palustris,140000,3,3,51,-16,123,15,2,0
-18,Calthion palustris,140000,3,1,51,-16,123,15,2,0
-18,Calthion palustris,140000,3,2,51,-16,123,15,2,0
-18,Calthion palustris,150000,2,3,5,-16,117,16,2,0
-18,Calthion palustris,150000,2,2,5,-16,117,16,2,0
-18,Calthion palustris,150000,3,3,5,-16,117,16,2,0
-18,Calthion palustris,150000,3,2,5,-16,117,16,2,0
-18,Calthion palustris,150000,2,1,5,-16,117,16,2,0
-18,Calthion palustris,150000,3,1,5,-16,117,16,2,0
-18,Calthion palustris,80000,2,1,25,-33,81,-19,2,0
-18,Calthion palustris,80000,2,2,25,-33,81,-19,2,0
-18,Calthion palustris,80000,3,1,25,-33,81,-19,2,0
-18,Calthion palustris,80000,3,2,25,-33,81,-19,2,0
-18,Calthion palustris,110000,2,3,51,1,102,46,2,0
-18,Calthion palustris,110000,2,2,51,1,102,46,2,0
-18,Calthion palustris,110000,2,1,51,1,102,46,2,0
-18,Calthion palustris,110000,3,3,51,1,102,46,2,0
-18,Calthion palustris,110000,3,2,51,1,102,46,2,0
-18,Calthion palustris,110000,3,1,51,1,102,46,2,0
-18,Calthion palustris,120000,2,1,51,-12,99,51,2,0
-18,Calthion palustris,120000,3,1,51,-12,99,51,2,0
-18,Calthion palustris,130000,2,1,7,-9,46,23,2,0
-18,Calthion palustris,130000,3,1,7,-9,46,23,2,0
-18,Calthion palustris,130000,2,2,7,-9,46,23,2,0
-18,Calthion palustris,130000,3,2,7,-9,46,23,2,0
-18,Calthion palustris,20000,2,3,25,-16,68,18,2,2
-18,Calthion palustris,20000,2,1,25,-16,68,18,2,2
-18,Calthion palustris,20000,2,2,25,-16,68,18,2,2
-18,Calthion palustris,20000,3,3,25,-16,68,18,2,2
-18,Calthion palustris,20000,3,1,25,-16,68,18,2,2
-18,Calthion palustris,20000,3,2,25,-16,68,18,2,2
-18,Calthion palustris,30000,2,3,8,-16,61,-7,2,2
-18,Calthion palustris,30000,2,1,8,-16,61,-7,2,2
-18,Calthion palustris,30000,2,2,8,-16,61,-7,2,2
-18,Calthion palustris,30000,3,3,8,-16,61,-7,2,2
-18,Calthion palustris,30000,3,1,8,-16,61,-7,2,2
-18,Calthion palustris,30000,3,2,8,-16,61,-7,2,2
-18,Calthion palustris,140000,2,3,51,-16,123,15,2,2
-18,Calthion palustris,140000,2,1,51,-16,123,15,2,2
-18,Calthion palustris,140000,2,2,51,-16,123,15,2,2
-18,Calthion palustris,140000,3,3,51,-16,123,15,2,2
-18,Calthion palustris,140000,3,1,51,-16,123,15,2,2
-18,Calthion palustris,140000,3,2,51,-16,123,15,2,2
-18,Calthion palustris,150000,2,3,5,-16,117,16,2,2
-18,Calthion palustris,150000,2,2,5,-16,117,16,2,2
-18,Calthion palustris,150000,3,3,5,-16,117,16,2,2
-18,Calthion palustris,150000,3,2,5,-16,117,16,2,2
-18,Calthion palustris,150000,2,1,5,-16,117,16,2,2
-18,Calthion palustris,150000,3,1,5,-16,117,16,2,2
-18,Calthion palustris,80000,2,1,25,-33,81,-19,2,2
-18,Calthion palustris,80000,2,2,25,-33,81,-19,2,2
-18,Calthion palustris,80000,3,1,25,-33,81,-19,2,2
-18,Calthion palustris,80000,3,2,25,-33,81,-19,2,2
-18,Calthion palustris,110000,2,3,51,1,102,46,2,2
-18,Calthion palustris,110000,2,2,51,1,102,46,2,2
-18,Calthion palustris,110000,2,1,51,1,102,46,2,2
-18,Calthion palustris,110000,3,3,51,1,102,46,2,2
-18,Calthion palustris,110000,3,2,51,1,102,46,2,2
-18,Calthion palustris,110000,3,1,51,1,102,46,2,2
-18,Calthion palustris,120000,2,1,51,-12,99,51,2,2
-18,Calthion palustris,120000,3,1,51,-12,99,51,2,2
-18,Calthion palustris,130000,2,1,7,-9,46,23,2,2
-18,Calthion palustris,130000,3,1,7,-9,46,23,2,2
-18,Calthion palustris,130000,2,2,7,-9,46,23,2,2
-18,Calthion palustris,130000,3,2,7,-9,46,23,2,2
-18,Calthion palustris,20000,2,3,25,-16,68,18,3,0
-18,Calthion palustris,20000,2,1,25,-16,68,18,3,0
-18,Calthion palustris,20000,2,2,25,-16,68,18,3,0
-18,Calthion palustris,20000,3,3,25,-16,68,18,3,0
-18,Calthion palustris,20000,3,1,25,-16,68,18,3,0
-18,Calthion palustris,20000,3,2,25,-16,68,18,3,0
-18,Calthion palustris,30000,2,3,8,-16,61,-7,3,0
-18,Calthion palustris,30000,2,1,8,-16,61,-7,3,0
-18,Calthion palustris,30000,2,2,8,-16,61,-7,3,0
-18,Calthion palustris,30000,3,3,8,-16,61,-7,3,0
-18,Calthion palustris,30000,3,1,8,-16,61,-7,3,0
-18,Calthion palustris,30000,3,2,8,-16,61,-7,3,0
-18,Calthion palustris,140000,2,3,51,-16,123,15,3,0
-18,Calthion palustris,140000,2,1,51,-16,123,15,3,0
-18,Calthion palustris,140000,2,2,51,-16,123,15,3,0
-18,Calthion palustris,140000,3,3,51,-16,123,15,3,0
-18,Calthion palustris,140000,3,1,51,-16,123,15,3,0
-18,Calthion palustris,140000,3,2,51,-16,123,15,3,0
-18,Calthion palustris,150000,2,3,5,-16,117,16,3,0
-18,Calthion palustris,150000,2,2,5,-16,117,16,3,0
-18,Calthion palustris,150000,3,3,5,-16,117,16,3,0
-18,Calthion palustris,150000,3,2,5,-16,117,16,3,0
-18,Calthion palustris,150000,2,1,5,-16,117,16,3,0
-18,Calthion palustris,150000,3,1,5,-16,117,16,3,0
-18,Calthion palustris,80000,2,1,25,-33,81,-19,3,0
-18,Calthion palustris,80000,2,2,25,-33,81,-19,3,0
-18,Calthion palustris,80000,3,1,25,-33,81,-19,3,0
-18,Calthion palustris,80000,3,2,25,-33,81,-19,3,0
-18,Calthion palustris,110000,2,3,51,1,102,46,3,0
-18,Calthion palustris,110000,2,2,51,1,102,46,3,0
-18,Calthion palustris,110000,2,1,51,1,102,46,3,0
-18,Calthion palustris,110000,3,3,51,1,102,46,3,0
-18,Calthion palustris,110000,3,2,51,1,102,46,3,0
-18,Calthion palustris,110000,3,1,51,1,102,46,3,0
-18,Calthion palustris,120000,2,1,51,-12,99,51,3,0
-18,Calthion palustris,120000,3,1,51,-12,99,51,3,0
-18,Calthion palustris,130000,2,1,7,-9,46,23,3,0
-18,Calthion palustris,130000,3,1,7,-9,46,23,3,0
-18,Calthion palustris,130000,2,2,7,-9,46,23,3,0
-18,Calthion palustris,130000,3,2,7,-9,46,23,3,0
-18,Calthion palustris,20000,2,3,25,-16,68,18,3,2
-18,Calthion palustris,20000,2,1,25,-16,68,18,3,2
-18,Calthion palustris,20000,2,2,25,-16,68,18,3,2
-18,Calthion palustris,20000,3,3,25,-16,68,18,3,2
-18,Calthion palustris,20000,3,1,25,-16,68,18,3,2
-18,Calthion palustris,20000,3,2,25,-16,68,18,3,2
-18,Calthion palustris,30000,2,3,8,-16,61,-7,3,2
-18,Calthion palustris,30000,2,1,8,-16,61,-7,3,2
-18,Calthion palustris,30000,2,2,8,-16,61,-7,3,2
-18,Calthion palustris,30000,3,3,8,-16,61,-7,3,2
-18,Calthion palustris,30000,3,1,8,-16,61,-7,3,2
-18,Calthion palustris,30000,3,2,8,-16,61,-7,3,2
-18,Calthion palustris,140000,2,3,51,-16,123,15,3,2
-18,Calthion palustris,140000,2,1,51,-16,123,15,3,2
-18,Calthion palustris,140000,2,2,51,-16,123,15,3,2
-18,Calthion palustris,140000,3,3,51,-16,123,15,3,2
-18,Calthion palustris,140000,3,1,51,-16,123,15,3,2
-18,Calthion palustris,140000,3,2,51,-16,123,15,3,2
-18,Calthion palustris,150000,2,3,5,-16,117,16,3,2
-18,Calthion palustris,150000,2,2,5,-16,117,16,3,2
-18,Calthion palustris,150000,3,3,5,-16,117,16,3,2
-18,Calthion palustris,150000,3,2,5,-16,117,16,3,2
-18,Calthion palustris,150000,2,1,5,-16,117,16,3,2
-18,Calthion palustris,150000,3,1,5,-16,117,16,3,2
-18,Calthion palustris,80000,2,1,25,-33,81,-19,3,2
-18,Calthion palustris,80000,2,2,25,-33,81,-19,3,2
-18,Calthion palustris,80000,3,1,25,-33,81,-19,3,2
-18,Calthion palustris,80000,3,2,25,-33,81,-19,3,2
-18,Calthion palustris,110000,2,3,51,1,102,46,3,2
-18,Calthion palustris,110000,2,2,51,1,102,46,3,2
-18,Calthion palustris,110000,2,1,51,1,102,46,3,2
-18,Calthion palustris,110000,3,3,51,1,102,46,3,2
-18,Calthion palustris,110000,3,2,51,1,102,46,3,2
-18,Calthion palustris,110000,3,1,51,1,102,46,3,2
-18,Calthion palustris,120000,2,1,51,-12,99,51,3,2
-18,Calthion palustris,120000,3,1,51,-12,99,51,3,2
-18,Calthion palustris,130000,2,1,7,-9,46,23,3,2
-18,Calthion palustris,130000,3,1,7,-9,46,23,3,2
-18,Calthion palustris,130000,2,2,7,-9,46,23,3,2
-18,Calthion palustris,130000,3,2,7,-9,46,23,3,2
-19,Alopecurion pratensis,20000,4,1,23,-3,90,52,2,1
-19,Alopecurion pratensis,20000,2,1,23,-3,90,52,2,1
-19,Alopecurion pratensis,20000,3,1,23,-3,90,52,2,1
-19,Alopecurion pratensis,20000,4,2,23,-3,90,52,2,1
-19,Alopecurion pratensis,20000,2,2,23,-3,90,52,2,1
-19,Alopecurion pratensis,20000,3,2,23,-3,90,52,2,1
-19,Alopecurion pratensis,20000,4,3,23,-3,90,52,2,1
-19,Alopecurion pratensis,20000,2,3,23,-3,90,52,2,1
-19,Alopecurion pratensis,20000,3,3,23,-3,90,52,2,1
-19,Alopecurion pratensis,30000,4,1,23,-3,90,52,2,1
-19,Alopecurion pratensis,30000,2,1,23,-3,90,52,2,1
-19,Alopecurion pratensis,30000,3,1,23,-3,90,52,2,1
-19,Alopecurion pratensis,30000,4,2,23,-3,90,52,2,1
-19,Alopecurion pratensis,30000,2,2,23,-3,90,52,2,1
-19,Alopecurion pratensis,30000,3,2,23,-3,90,52,2,1
-19,Alopecurion pratensis,140000,4,1,21,-9,109,35,2,1
-19,Alopecurion pratensis,140000,4,2,21,-9,109,35,2,1
-19,Alopecurion pratensis,140000,2,1,21,-9,109,35,2,1
-19,Alopecurion pratensis,140000,2,2,21,-9,109,35,2,1
-19,Alopecurion pratensis,140000,3,1,21,-9,109,35,2,1
-19,Alopecurion pratensis,140000,3,2,21,-9,109,35,2,1
-19,Alopecurion pratensis,110000,4,1,23,-3,90,52,2,1
-19,Alopecurion pratensis,110000,2,1,23,-3,90,52,2,1
-19,Alopecurion pratensis,110000,3,1,23,-3,90,52,2,1
-19,Alopecurion pratensis,120000,4,1,23,-3,90,52,2,1
-19,Alopecurion pratensis,120000,2,1,23,-3,90,52,2,1
-19,Alopecurion pratensis,120000,3,1,23,-3,90,52,2,1
-19,Alopecurion pratensis,130000,4,1,23,-3,90,52,2,1
-19,Alopecurion pratensis,130000,4,2,23,-3,90,52,2,1
-19,Alopecurion pratensis,130000,2,1,23,-3,90,52,2,1
-19,Alopecurion pratensis,130000,2,2,23,-3,90,52,2,1
-19,Alopecurion pratensis,130000,3,1,23,-3,90,52,2,1
-19,Alopecurion pratensis,130000,3,2,23,-3,90,52,2,1
-19,Alopecurion pratensis,20000,4,1,23,-3,90,52,2,2
-19,Alopecurion pratensis,20000,2,1,23,-3,90,52,2,2
-19,Alopecurion pratensis,20000,3,1,23,-3,90,52,2,2
-19,Alopecurion pratensis,20000,4,2,23,-3,90,52,2,2
-19,Alopecurion pratensis,20000,2,2,23,-3,90,52,2,2
-19,Alopecurion pratensis,20000,3,2,23,-3,90,52,2,2
-19,Alopecurion pratensis,20000,4,3,23,-3,90,52,2,2
-19,Alopecurion pratensis,20000,2,3,23,-3,90,52,2,2
-19,Alopecurion pratensis,20000,3,3,23,-3,90,52,2,2
-19,Alopecurion pratensis,30000,4,1,23,-3,90,52,2,2
-19,Alopecurion pratensis,30000,2,1,23,-3,90,52,2,2
-19,Alopecurion pratensis,30000,3,1,23,-3,90,52,2,2
-19,Alopecurion pratensis,30000,4,2,23,-3,90,52,2,2
-19,Alopecurion pratensis,30000,2,2,23,-3,90,52,2,2
-19,Alopecurion pratensis,30000,3,2,23,-3,90,52,2,2
-19,Alopecurion pratensis,140000,4,1,21,-9,109,35,2,2
-19,Alopecurion pratensis,140000,4,2,21,-9,109,35,2,2
-19,Alopecurion pratensis,140000,2,1,21,-9,109,35,2,2
-19,Alopecurion pratensis,140000,2,2,21,-9,109,35,2,2
-19,Alopecurion pratensis,140000,3,1,21,-9,109,35,2,2
-19,Alopecurion pratensis,140000,3,2,21,-9,109,35,2,2
-19,Alopecurion pratensis,110000,4,1,23,-3,90,52,2,2
-19,Alopecurion pratensis,110000,2,1,23,-3,90,52,2,2
-19,Alopecurion pratensis,110000,3,1,23,-3,90,52,2,2
-19,Alopecurion pratensis,120000,4,1,23,-3,90,52,2,2
-19,Alopecurion pratensis,120000,2,1,23,-3,90,52,2,2
-19,Alopecurion pratensis,120000,3,1,23,-3,90,52,2,2
-19,Alopecurion pratensis,130000,4,1,23,-3,90,52,2,2
-19,Alopecurion pratensis,130000,4,2,23,-3,90,52,2,2
-19,Alopecurion pratensis,130000,2,1,23,-3,90,52,2,2
-19,Alopecurion pratensis,130000,2,2,23,-3,90,52,2,2
-19,Alopecurion pratensis,130000,3,1,23,-3,90,52,2,2
-19,Alopecurion pratensis,130000,3,2,23,-3,90,52,2,2
-19,Alopecurion pratensis,20000,4,1,23,-3,90,52,3,1
-19,Alopecurion pratensis,20000,2,1,23,-3,90,52,3,1
-19,Alopecurion pratensis,20000,3,1,23,-3,90,52,3,1
-19,Alopecurion pratensis,20000,4,2,23,-3,90,52,3,1
-19,Alopecurion pratensis,20000,2,2,23,-3,90,52,3,1
-19,Alopecurion pratensis,20000,3,2,23,-3,90,52,3,1
-19,Alopecurion pratensis,20000,4,3,23,-3,90,52,3,1
-19,Alopecurion pratensis,20000,2,3,23,-3,90,52,3,1
-19,Alopecurion pratensis,20000,3,3,23,-3,90,52,3,1
-19,Alopecurion pratensis,30000,4,1,23,-3,90,52,3,1
-19,Alopecurion pratensis,30000,2,1,23,-3,90,52,3,1
-19,Alopecurion pratensis,30000,3,1,23,-3,90,52,3,1
-19,Alopecurion pratensis,30000,4,2,23,-3,90,52,3,1
-19,Alopecurion pratensis,30000,2,2,23,-3,90,52,3,1
-19,Alopecurion pratensis,30000,3,2,23,-3,90,52,3,1
-19,Alopecurion pratensis,140000,4,1,21,-9,109,35,3,1
-19,Alopecurion pratensis,140000,4,2,21,-9,109,35,3,1
-19,Alopecurion pratensis,140000,2,1,21,-9,109,35,3,1
-19,Alopecurion pratensis,140000,2,2,21,-9,109,35,3,1
-19,Alopecurion pratensis,140000,3,1,21,-9,109,35,3,1
-19,Alopecurion pratensis,140000,3,2,21,-9,109,35,3,1
-19,Alopecurion pratensis,110000,4,1,23,-3,90,52,3,1
-19,Alopecurion pratensis,110000,2,1,23,-3,90,52,3,1
-19,Alopecurion pratensis,110000,3,1,23,-3,90,52,3,1
-19,Alopecurion pratensis,120000,4,1,23,-3,90,52,3,1
-19,Alopecurion pratensis,120000,2,1,23,-3,90,52,3,1
-19,Alopecurion pratensis,120000,3,1,23,-3,90,52,3,1
-19,Alopecurion pratensis,130000,4,1,23,-3,90,52,3,1
-19,Alopecurion pratensis,130000,4,2,23,-3,90,52,3,1
-19,Alopecurion pratensis,130000,2,1,23,-3,90,52,3,1
-19,Alopecurion pratensis,130000,2,2,23,-3,90,52,3,1
-19,Alopecurion pratensis,130000,3,1,23,-3,90,52,3,1
-19,Alopecurion pratensis,130000,3,2,23,-3,90,52,3,1
-19,Alopecurion pratensis,20000,4,1,23,-3,90,52,3,2
-19,Alopecurion pratensis,20000,2,1,23,-3,90,52,3,2
-19,Alopecurion pratensis,20000,3,1,23,-3,90,52,3,2
-19,Alopecurion pratensis,20000,4,2,23,-3,90,52,3,2
-19,Alopecurion pratensis,20000,2,2,23,-3,90,52,3,2
-19,Alopecurion pratensis,20000,3,2,23,-3,90,52,3,2
-19,Alopecurion pratensis,20000,4,3,23,-3,90,52,3,2
-19,Alopecurion pratensis,20000,2,3,23,-3,90,52,3,2
-19,Alopecurion pratensis,20000,3,3,23,-3,90,52,3,2
-19,Alopecurion pratensis,30000,4,1,23,-3,90,52,3,2
-19,Alopecurion pratensis,30000,2,1,23,-3,90,52,3,2
-19,Alopecurion pratensis,30000,3,1,23,-3,90,52,3,2
-19,Alopecurion pratensis,30000,4,2,23,-3,90,52,3,2
-19,Alopecurion pratensis,30000,2,2,23,-3,90,52,3,2
-19,Alopecurion pratensis,30000,3,2,23,-3,90,52,3,2
-19,Alopecurion pratensis,140000,4,1,21,-9,109,35,3,2
-19,Alopecurion pratensis,140000,4,2,21,-9,109,35,3,2
-19,Alopecurion pratensis,140000,2,1,21,-9,109,35,3,2
-19,Alopecurion pratensis,140000,2,2,21,-9,109,35,3,2
-19,Alopecurion pratensis,140000,3,1,21,-9,109,35,3,2
-19,Alopecurion pratensis,140000,3,2,21,-9,109,35,3,2
-19,Alopecurion pratensis,110000,4,1,23,-3,90,52,3,2
-19,Alopecurion pratensis,110000,2,1,23,-3,90,52,3,2
-19,Alopecurion pratensis,110000,3,1,23,-3,90,52,3,2
-19,Alopecurion pratensis,120000,4,1,23,-3,90,52,3,2
-19,Alopecurion pratensis,120000,2,1,23,-3,90,52,3,2
-19,Alopecurion pratensis,120000,3,1,23,-3,90,52,3,2
-19,Alopecurion pratensis,130000,4,1,23,-3,90,52,3,2
-19,Alopecurion pratensis,130000,4,2,23,-3,90,52,3,2
-19,Alopecurion pratensis,130000,2,1,23,-3,90,52,3,2
-19,Alopecurion pratensis,130000,2,2,23,-3,90,52,3,2
-19,Alopecurion pratensis,130000,3,1,23,-3,90,52,3,2
-19,Alopecurion pratensis,130000,3,2,23,-3,90,52,3,2
-20,Arrhenatherion elatioris,20000,2,1,85,25,250,50,2,0
-20,Arrhenatherion elatioris,20000,3,1,85,25,250,50,2,0
-20,Arrhenatherion elatioris,20000,2,2,85,25,250,50,2,0
-20,Arrhenatherion elatioris,20000,3,2,85,25,250,50,2,0
-20,Arrhenatherion elatioris,20000,2,3,85,25,250,50,2,0
-20,Arrhenatherion elatioris,20000,3,3,85,25,250,50,2,0
-20,Arrhenatherion elatioris,140000,2,1,105,25,250,50,2,0
-20,Arrhenatherion elatioris,140000,3,1,105,25,250,50,2,0
-20,Arrhenatherion elatioris,140000,2,2,105,25,250,50,2,0
-20,Arrhenatherion elatioris,140000,3,2,105,25,250,50,2,0
-20,Arrhenatherion elatioris,110000,2,1,139,25,250,187,2,0
-20,Arrhenatherion elatioris,110000,3,1,139,25,250,187,2,0
-20,Arrhenatherion elatioris,20000,2,1,85,25,250,50,3,0
-20,Arrhenatherion elatioris,20000,3,1,85,25,250,50,3,0
-20,Arrhenatherion elatioris,20000,2,2,85,25,250,50,3,0
-20,Arrhenatherion elatioris,20000,3,2,85,25,250,50,3,0
-20,Arrhenatherion elatioris,20000,2,3,85,25,250,50,3,0
-20,Arrhenatherion elatioris,20000,3,3,85,25,250,50,3,0
-20,Arrhenatherion elatioris,140000,2,1,105,25,250,50,3,0
-20,Arrhenatherion elatioris,140000,3,1,105,25,250,50,3,0
-20,Arrhenatherion elatioris,140000,2,2,105,25,250,50,3,0
-20,Arrhenatherion elatioris,140000,3,2,105,25,250,50,3,0
-20,Arrhenatherion elatioris,110000,2,1,139,25,250,187,3,0
-20,Arrhenatherion elatioris,110000,3,1,139,25,250,187,3,0
-21,Cynosurion cristati,20000,2,1,70,-14,152,33,2,0
-21,Cynosurion cristati,20000,3,1,70,-14,152,33,2,0
-21,Cynosurion cristati,20000,2,2,70,-14,152,33,2,0
-21,Cynosurion cristati,20000,3,2,70,-14,152,33,2,0
-21,Cynosurion cristati,20000,2,3,70,-14,152,33,2,0
-21,Cynosurion cristati,20000,3,3,70,-14,152,33,2,0
-21,Cynosurion cristati,30000,2,2,70,-14,152,33,2,0
-21,Cynosurion cristati,30000,3,2,70,-14,152,33,2,0
-21,Cynosurion cristati,140000,2,3,70,-14,152,33,2,0
-21,Cynosurion cristati,140000,2,1,70,-14,152,33,2,0
-21,Cynosurion cristati,140000,2,2,70,-14,152,33,2,0
-21,Cynosurion cristati,140000,3,3,70,-14,152,33,2,0
-21,Cynosurion cristati,140000,3,1,70,-14,152,33,2,0
-21,Cynosurion cristati,140000,3,2,70,-14,152,33,2,0
-21,Cynosurion cristati,110000,2,1,80,13,152,89,2,0
-21,Cynosurion cristati,110000,2,2,80,13,152,89,2,0
-21,Cynosurion cristati,110000,3,1,80,13,152,89,2,0
-21,Cynosurion cristati,110000,3,2,80,13,152,89,2,0
-21,Cynosurion cristati,20000,2,1,70,-14,152,33,3,0
-21,Cynosurion cristati,20000,3,1,70,-14,152,33,3,0
-21,Cynosurion cristati,20000,2,2,70,-14,152,33,3,0
-21,Cynosurion cristati,20000,3,2,70,-14,152,33,3,0
-21,Cynosurion cristati,20000,2,3,70,-14,152,33,3,0
-21,Cynosurion cristati,20000,3,3,70,-14,152,33,3,0
-21,Cynosurion cristati,30000,2,2,70,-14,152,33,3,0
-21,Cynosurion cristati,30000,3,2,70,-14,152,33,3,0
-21,Cynosurion cristati,140000,2,3,70,-14,152,33,3,0
-21,Cynosurion cristati,140000,2,1,70,-14,152,33,3,0
-21,Cynosurion cristati,140000,2,2,70,-14,152,33,3,0
-21,Cynosurion cristati,140000,3,3,70,-14,152,33,3,0
-21,Cynosurion cristati,140000,3,1,70,-14,152,33,3,0
-21,Cynosurion cristati,140000,3,2,70,-14,152,33,3,0
-21,Cynosurion cristati,110000,2,1,80,13,152,89,3,0
-21,Cynosurion cristati,110000,2,2,80,13,152,89,3,0
-21,Cynosurion cristati,110000,3,1,80,13,152,89,3,0
-21,Cynosurion cristati,110000,3,2,80,13,152,89,3,0
-22,Ericion tetralicis,110000,1,1,47,-20,166,1,1,0
-22,Ericion tetralicis,120000,1,1,46,-3,117,36,1,0
-22,Ericion tetralicis,110000,1,1,47,-20,166,1,1,2
-22,Ericion tetralicis,120000,1,1,46,-3,117,36,1,2
-23,Venige heide,80000,1,1,20,-6,74,13,1,0
-23,Venige heide,80000,1,2,20,-6,74,13,1,0
-23,Venige heide,110000,1,1,20,1,74,29,1,0
-23,Venige heide,120000,1,1,20,1,74,29,1,0
-23,Venige heide,130000,1,1,20,-6,74,13,1,0
-23,Venige heide,130000,1,2,20,-6,74,13,1,0
-24,Oxycocco - Ericion,80000,1,1,13,-17,43,-8,0,0
-24,Oxycocco - Ericion,80000,1,2,13,-17,43,-8,0,0
-24,Oxycocco - Ericion,110000,1,1,16,-11,23,7,0,0
-24,Oxycocco - Ericion,120000,1,1,16,-11,23,11,0,0
-24,Oxycocco - Ericion,130000,1,1,13,-17,3,-8,0,0
-24,Oxycocco - Ericion,130000,1,2,13,-17,3,-8,0,0
-25,Rynchosporion albae,110000,1,1,-2,-44,66,-12,0,0
-25,Rynchosporion albae,110000,1,1,-2,-44,66,-12,0,2
-25,Rynchosporion albae,110000,1,1,-2,-44,66,-12,1,0
-25,Rynchosporion albae,110000,1,1,-2,-44,66,-12,1,2
-26,RG Molinia caerulea [Oxycocco-sphagnetea],110000,2,1,100,-9,127,7,1,0
-26,RG Molinia caerulea [Oxycocco-sphagnetea],110000,3,1,100,-9,127,7,1,0
-26,RG Molinia caerulea [Oxycocco-sphagnetea],120000,2,1,100,-9,127,7,1,0
-26,RG Molinia caerulea [Oxycocco-sphagnetea],120000,3,1,100,-9,127,7,1,0
-26,RG Molinia caerulea [Oxycocco-sphagnetea],130000,2,1,5,-9,67,7,1,0
-26,RG Molinia caerulea [Oxycocco-sphagnetea],130000,3,1,5,-9,67,7,1,0
-26,RG Molinia caerulea [Oxycocco-sphagnetea],130000,2,2,5,-9,67,7,1,0
-26,RG Molinia caerulea [Oxycocco-sphagnetea],130000,3,2,5,-9,67,7,1,0
-27,RG Myrica gale [Ericion tetralicis],80000,1,1,60,-16,126,2,1,0
-27,RG Myrica gale [Ericion tetralicis],80000,1,2,60,-16,126,2,1,0
-27,RG Myrica gale [Ericion tetralicis],110000,1,1,76,-10,126,3,1,0
-27,RG Myrica gale [Ericion tetralicis],120000,1,1,76,-2,126,33,1,0
-27,RG Myrica gale [Ericion tetralicis],130000,1,1,22,-3,126,9,1,0
-27,RG Myrica gale [Ericion tetralicis],130000,1,2,22,-3,126,9,1,0
-28,Calluno - Genistion pilosae,110000,1,1,172,51,196,114,1,0
+veg_code,veg_type,soil_name,nutrient_level,acidity,mhw_min,mhw_max,mlw_min,mlw_max,management,inundation
+1,Sphagno-Betuletum,KV,1,1,20,1,38,20,0,0
+1,Sphagno-Betuletum,KV,1,2,20,1,38,20,0,0
+1,Sphagno-Betuletum,KV,2,1,20,1,38,20,0,0
+1,Sphagno-Betuletum,KV,2,2,20,1,38,20,0,0
+1,Sphagno-Betuletum,V,1,1,23,-18,36,5,0,0
+1,Sphagno-Betuletum,V,1,2,23,-18,36,5,0,0
+1,Sphagno-Betuletum,V,2,1,23,-18,36,5,0,0
+1,Sphagno-Betuletum,V,2,2,23,-18,36,5,0,0
+1,Sphagno-Betuletum,ZV,1,1,36,-1,77,20,0,0
+1,Sphagno-Betuletum,ZV,1,2,36,-1,77,20,0,0
+1,Sphagno-Betuletum,ZV,2,1,36,-1,77,20,0,0
+1,Sphagno-Betuletum,ZV,2,2,36,-1,77,20,0,0
+2,Carici elongatae-Alnetum,L1,2,1,46,-6,110,29,0,0
+2,Carici elongatae-Alnetum,L1,2,1,46,-6,110,29,0,1
+2,Carici elongatae-Alnetum,L1,2,1,46,-6,110,29,0,2
+2,Carici elongatae-Alnetum,L1,2,2,46,-6,110,29,0,0
+2,Carici elongatae-Alnetum,L1,2,2,46,-6,110,29,0,1
+2,Carici elongatae-Alnetum,L1,2,2,46,-6,110,29,0,2
+2,Carici elongatae-Alnetum,L1,3,1,46,-6,110,29,0,0
+2,Carici elongatae-Alnetum,L1,3,1,46,-6,110,29,0,1
+2,Carici elongatae-Alnetum,L1,3,1,46,-6,110,29,0,2
+2,Carici elongatae-Alnetum,L1,3,2,46,-6,110,29,0,0
+2,Carici elongatae-Alnetum,L1,3,2,46,-6,110,29,0,1
+2,Carici elongatae-Alnetum,L1,3,2,46,-6,110,29,0,2
+2,Carici elongatae-Alnetum,LV,2,1,46,-6,110,29,0,0
+2,Carici elongatae-Alnetum,LV,2,1,46,-6,110,29,0,1
+2,Carici elongatae-Alnetum,LV,2,1,46,-6,110,29,0,2
+2,Carici elongatae-Alnetum,LV,2,2,46,-6,110,29,0,0
+2,Carici elongatae-Alnetum,LV,2,2,46,-6,110,29,0,1
+2,Carici elongatae-Alnetum,LV,2,2,46,-6,110,29,0,2
+2,Carici elongatae-Alnetum,LV,3,1,46,-6,110,29,0,0
+2,Carici elongatae-Alnetum,LV,3,1,46,-6,110,29,0,1
+2,Carici elongatae-Alnetum,LV,3,1,46,-6,110,29,0,2
+2,Carici elongatae-Alnetum,LV,3,2,46,-6,110,29,0,0
+2,Carici elongatae-Alnetum,LV,3,2,46,-6,110,29,0,1
+2,Carici elongatae-Alnetum,LV,3,2,46,-6,110,29,0,2
+2,Carici elongatae-Alnetum,V,2,1,18,-24,32,-15,0,0
+2,Carici elongatae-Alnetum,V,2,1,18,-24,32,-15,0,1
+2,Carici elongatae-Alnetum,V,2,1,18,-24,32,-15,0,2
+2,Carici elongatae-Alnetum,V,2,2,18,-24,32,-15,0,0
+2,Carici elongatae-Alnetum,V,2,2,18,-24,32,-15,0,1
+2,Carici elongatae-Alnetum,V,2,2,18,-24,32,-15,0,2
+2,Carici elongatae-Alnetum,V,3,1,18,-24,32,-15,0,0
+2,Carici elongatae-Alnetum,V,3,1,18,-24,32,-15,0,1
+2,Carici elongatae-Alnetum,V,3,1,18,-24,32,-15,0,2
+2,Carici elongatae-Alnetum,V,3,2,18,-24,32,-15,0,0
+2,Carici elongatae-Alnetum,V,3,2,18,-24,32,-15,0,1
+2,Carici elongatae-Alnetum,V,3,2,18,-24,32,-15,0,2
+2,Carici elongatae-Alnetum,Z1,2,1,46,-6,97,14,0,0
+2,Carici elongatae-Alnetum,Z1,2,1,46,-6,97,14,0,1
+2,Carici elongatae-Alnetum,Z1,2,1,46,-6,97,14,0,2
+2,Carici elongatae-Alnetum,Z1,3,1,46,-6,97,14,0,0
+2,Carici elongatae-Alnetum,Z1,3,1,46,-6,97,14,0,1
+2,Carici elongatae-Alnetum,Z1,3,1,46,-6,97,14,0,2
+2,Carici elongatae-Alnetum,Z2,2,1,46,-6,97,14,0,0
+2,Carici elongatae-Alnetum,Z2,2,1,46,-6,97,14,0,1
+2,Carici elongatae-Alnetum,Z2,2,1,46,-6,97,14,0,2
+2,Carici elongatae-Alnetum,Z2,3,1,46,-6,97,14,0,0
+2,Carici elongatae-Alnetum,Z2,3,1,46,-6,97,14,0,1
+2,Carici elongatae-Alnetum,Z2,3,1,46,-6,97,14,0,2
+2,Carici elongatae-Alnetum,ZV,2,1,46,-6,97,14,0,0
+2,Carici elongatae-Alnetum,ZV,2,1,46,-6,97,14,0,1
+2,Carici elongatae-Alnetum,ZV,2,1,46,-6,97,14,0,2
+2,Carici elongatae-Alnetum,ZV,2,2,46,-6,97,14,0,0
+2,Carici elongatae-Alnetum,ZV,2,2,46,-6,97,14,0,1
+2,Carici elongatae-Alnetum,ZV,2,2,46,-6,97,14,0,2
+2,Carici elongatae-Alnetum,ZV,3,1,46,-6,97,14,0,0
+2,Carici elongatae-Alnetum,ZV,3,1,46,-6,97,14,0,1
+2,Carici elongatae-Alnetum,ZV,3,1,46,-6,97,14,0,2
+2,Carici elongatae-Alnetum,ZV,3,2,46,-6,97,14,0,0
+2,Carici elongatae-Alnetum,ZV,3,2,46,-6,97,14,0,1
+2,Carici elongatae-Alnetum,ZV,3,2,46,-6,97,14,0,2
+3,Macrophorbio-Alnetum,K1,2,1,30,-19,82,4,0,0
+3,Macrophorbio-Alnetum,K1,2,1,30,-19,82,4,0,1
+3,Macrophorbio-Alnetum,K1,2,1,30,-19,82,4,0,2
+3,Macrophorbio-Alnetum,K1,2,2,30,-19,82,4,0,0
+3,Macrophorbio-Alnetum,K1,2,2,30,-19,82,4,0,1
+3,Macrophorbio-Alnetum,K1,2,2,30,-19,82,4,0,2
+3,Macrophorbio-Alnetum,K1,2,3,30,-19,82,4,0,0
+3,Macrophorbio-Alnetum,K1,2,3,30,-19,82,4,0,1
+3,Macrophorbio-Alnetum,K1,2,3,30,-19,82,4,0,2
+3,Macrophorbio-Alnetum,K1,3,1,30,-19,82,4,0,0
+3,Macrophorbio-Alnetum,K1,3,1,30,-19,82,4,0,1
+3,Macrophorbio-Alnetum,K1,3,1,30,-19,82,4,0,2
+3,Macrophorbio-Alnetum,K1,3,2,30,-19,82,4,0,0
+3,Macrophorbio-Alnetum,K1,3,2,30,-19,82,4,0,1
+3,Macrophorbio-Alnetum,K1,3,2,30,-19,82,4,0,2
+3,Macrophorbio-Alnetum,K1,3,3,30,-19,82,4,0,0
+3,Macrophorbio-Alnetum,K1,3,3,30,-19,82,4,0,1
+3,Macrophorbio-Alnetum,K1,3,3,30,-19,82,4,0,2
+3,Macrophorbio-Alnetum,K1,4,1,30,-19,82,4,0,0
+3,Macrophorbio-Alnetum,K1,4,1,30,-19,82,4,0,1
+3,Macrophorbio-Alnetum,K1,4,1,30,-19,82,4,0,2
+3,Macrophorbio-Alnetum,K1,4,2,30,-19,82,4,0,0
+3,Macrophorbio-Alnetum,K1,4,2,30,-19,82,4,0,1
+3,Macrophorbio-Alnetum,K1,4,2,30,-19,82,4,0,2
+3,Macrophorbio-Alnetum,K1,4,3,30,-19,82,4,0,0
+3,Macrophorbio-Alnetum,K1,4,3,30,-19,82,4,0,1
+3,Macrophorbio-Alnetum,K1,4,3,30,-19,82,4,0,2
+3,Macrophorbio-Alnetum,KV,2,1,22,-23,62,13,0,0
+3,Macrophorbio-Alnetum,KV,2,1,22,-23,62,13,0,1
+3,Macrophorbio-Alnetum,KV,2,1,22,-23,62,13,0,2
+3,Macrophorbio-Alnetum,KV,2,2,22,-23,62,13,0,0
+3,Macrophorbio-Alnetum,KV,2,2,22,-23,62,13,0,1
+3,Macrophorbio-Alnetum,KV,2,2,22,-23,62,13,0,2
+3,Macrophorbio-Alnetum,KV,3,1,22,-23,62,13,0,0
+3,Macrophorbio-Alnetum,KV,3,1,22,-23,62,13,0,1
+3,Macrophorbio-Alnetum,KV,3,1,22,-23,62,13,0,2
+3,Macrophorbio-Alnetum,KV,3,2,22,-23,62,13,0,0
+3,Macrophorbio-Alnetum,KV,3,2,22,-23,62,13,0,1
+3,Macrophorbio-Alnetum,KV,3,2,22,-23,62,13,0,2
+3,Macrophorbio-Alnetum,KV,4,1,22,-23,62,13,0,0
+3,Macrophorbio-Alnetum,KV,4,1,22,-23,62,13,0,1
+3,Macrophorbio-Alnetum,KV,4,1,22,-23,62,13,0,2
+3,Macrophorbio-Alnetum,KV,4,2,22,-23,62,13,0,0
+3,Macrophorbio-Alnetum,KV,4,2,22,-23,62,13,0,1
+3,Macrophorbio-Alnetum,KV,4,2,22,-23,62,13,0,2
+3,Macrophorbio-Alnetum,L1,2,1,89,-47,124,-8,0,0
+3,Macrophorbio-Alnetum,L1,2,1,89,-47,124,-8,0,1
+3,Macrophorbio-Alnetum,L1,2,1,89,-47,124,-8,0,2
+3,Macrophorbio-Alnetum,L1,2,2,89,-47,124,-8,0,0
+3,Macrophorbio-Alnetum,L1,2,2,89,-47,124,-8,0,1
+3,Macrophorbio-Alnetum,L1,2,2,89,-47,124,-8,0,2
+3,Macrophorbio-Alnetum,L1,3,1,89,-47,124,-8,0,0
+3,Macrophorbio-Alnetum,L1,3,1,89,-47,124,-8,0,1
+3,Macrophorbio-Alnetum,L1,3,1,89,-47,124,-8,0,2
+3,Macrophorbio-Alnetum,L1,3,2,89,-47,124,-8,0,0
+3,Macrophorbio-Alnetum,L1,3,2,89,-47,124,-8,0,1
+3,Macrophorbio-Alnetum,L1,3,2,89,-47,124,-8,0,2
+3,Macrophorbio-Alnetum,L1,4,1,89,-47,124,-8,0,0
+3,Macrophorbio-Alnetum,L1,4,1,89,-47,124,-8,0,1
+3,Macrophorbio-Alnetum,L1,4,1,89,-47,124,-8,0,2
+3,Macrophorbio-Alnetum,L1,4,2,89,-47,124,-8,0,0
+3,Macrophorbio-Alnetum,L1,4,2,89,-47,124,-8,0,1
+3,Macrophorbio-Alnetum,L1,4,2,89,-47,124,-8,0,2
+3,Macrophorbio-Alnetum,LV,2,1,22,-23,62,13,0,0
+3,Macrophorbio-Alnetum,LV,2,1,22,-23,62,13,0,1
+3,Macrophorbio-Alnetum,LV,2,1,22,-23,62,13,0,2
+3,Macrophorbio-Alnetum,LV,2,2,22,-23,62,13,0,0
+3,Macrophorbio-Alnetum,LV,2,2,22,-23,62,13,0,1
+3,Macrophorbio-Alnetum,LV,2,2,22,-23,62,13,0,2
+3,Macrophorbio-Alnetum,LV,3,1,22,-23,62,13,0,0
+3,Macrophorbio-Alnetum,LV,3,1,22,-23,62,13,0,1
+3,Macrophorbio-Alnetum,LV,3,1,22,-23,62,13,0,2
+3,Macrophorbio-Alnetum,LV,3,2,22,-23,62,13,0,0
+3,Macrophorbio-Alnetum,LV,3,2,22,-23,62,13,0,1
+3,Macrophorbio-Alnetum,LV,3,2,22,-23,62,13,0,2
+3,Macrophorbio-Alnetum,LV,4,1,22,-23,62,13,0,0
+3,Macrophorbio-Alnetum,LV,4,1,22,-23,62,13,0,1
+3,Macrophorbio-Alnetum,LV,4,1,22,-23,62,13,0,2
+3,Macrophorbio-Alnetum,LV,4,2,22,-23,62,13,0,0
+3,Macrophorbio-Alnetum,LV,4,2,22,-23,62,13,0,1
+3,Macrophorbio-Alnetum,LV,4,2,22,-23,62,13,0,2
+3,Macrophorbio-Alnetum,V,2,1,36,-22,70,-4,0,0
+3,Macrophorbio-Alnetum,V,2,1,36,-22,70,-4,0,1
+3,Macrophorbio-Alnetum,V,2,1,36,-22,70,-4,0,2
+3,Macrophorbio-Alnetum,V,2,2,36,-22,70,-4,0,0
+3,Macrophorbio-Alnetum,V,2,2,36,-22,70,-4,0,1
+3,Macrophorbio-Alnetum,V,2,2,36,-22,70,-4,0,2
+3,Macrophorbio-Alnetum,V,3,1,36,-22,70,-4,0,0
+3,Macrophorbio-Alnetum,V,3,1,36,-22,70,-4,0,1
+3,Macrophorbio-Alnetum,V,3,1,36,-22,70,-4,0,2
+3,Macrophorbio-Alnetum,V,3,2,36,-22,70,-4,0,0
+3,Macrophorbio-Alnetum,V,3,2,36,-22,70,-4,0,1
+3,Macrophorbio-Alnetum,V,3,2,36,-22,70,-4,0,2
+3,Macrophorbio-Alnetum,V,4,1,36,-22,70,-4,0,0
+3,Macrophorbio-Alnetum,V,4,1,36,-22,70,-4,0,1
+3,Macrophorbio-Alnetum,V,4,1,36,-22,70,-4,0,2
+3,Macrophorbio-Alnetum,V,4,2,36,-22,70,-4,0,0
+3,Macrophorbio-Alnetum,V,4,2,36,-22,70,-4,0,1
+3,Macrophorbio-Alnetum,V,4,2,36,-22,70,-4,0,2
+3,Macrophorbio-Alnetum,ZV,2,1,22,-23,62,13,0,0
+3,Macrophorbio-Alnetum,ZV,2,1,22,-23,62,13,0,1
+3,Macrophorbio-Alnetum,ZV,2,1,22,-23,62,13,0,2
+3,Macrophorbio-Alnetum,ZV,2,2,22,-23,62,13,0,0
+3,Macrophorbio-Alnetum,ZV,2,2,22,-23,62,13,0,1
+3,Macrophorbio-Alnetum,ZV,2,2,22,-23,62,13,0,2
+3,Macrophorbio-Alnetum,ZV,3,1,22,-23,62,13,0,0
+3,Macrophorbio-Alnetum,ZV,3,1,22,-23,62,13,0,1
+3,Macrophorbio-Alnetum,ZV,3,1,22,-23,62,13,0,2
+3,Macrophorbio-Alnetum,ZV,3,2,22,-23,62,13,0,0
+3,Macrophorbio-Alnetum,ZV,3,2,22,-23,62,13,0,1
+3,Macrophorbio-Alnetum,ZV,3,2,22,-23,62,13,0,2
+3,Macrophorbio-Alnetum,ZV,4,1,22,-23,62,13,0,0
+3,Macrophorbio-Alnetum,ZV,4,1,22,-23,62,13,0,1
+3,Macrophorbio-Alnetum,ZV,4,1,22,-23,62,13,0,2
+3,Macrophorbio-Alnetum,ZV,4,2,22,-23,62,13,0,0
+3,Macrophorbio-Alnetum,ZV,4,2,22,-23,62,13,0,1
+3,Macrophorbio-Alnetum,ZV,4,2,22,-23,62,13,0,2
+4,Pruno-Fraxinetum,K1,2,1,42,1,89,14,0,0
+4,Pruno-Fraxinetum,K1,2,2,42,1,89,14,0,0
+4,Pruno-Fraxinetum,K1,2,3,42,1,89,14,0,0
+4,Pruno-Fraxinetum,K1,3,1,42,1,89,14,0,0
+4,Pruno-Fraxinetum,K1,3,2,42,1,89,14,0,0
+4,Pruno-Fraxinetum,K1,3,3,42,1,89,14,0,0
+4,Pruno-Fraxinetum,K1,4,1,42,1,89,14,0,0
+4,Pruno-Fraxinetum,K1,4,2,42,1,89,14,0,0
+4,Pruno-Fraxinetum,K1,4,3,42,1,89,14,0,0
+4,Pruno-Fraxinetum,KV,2,1,43,-13,79,6,0,0
+4,Pruno-Fraxinetum,KV,2,2,43,-13,79,6,0,0
+4,Pruno-Fraxinetum,KV,3,1,43,-13,79,6,0,0
+4,Pruno-Fraxinetum,KV,3,2,43,-13,79,6,0,0
+4,Pruno-Fraxinetum,KV,4,1,43,-13,79,6,0,0
+4,Pruno-Fraxinetum,KV,4,2,43,-13,79,6,0,0
+4,Pruno-Fraxinetum,L1,2,1,42,1,89,14,0,0
+4,Pruno-Fraxinetum,L1,2,2,42,1,89,14,0,0
+4,Pruno-Fraxinetum,L1,3,1,42,1,89,14,0,0
+4,Pruno-Fraxinetum,L1,3,2,42,1,89,14,0,0
+4,Pruno-Fraxinetum,L1,4,1,42,1,89,14,0,0
+4,Pruno-Fraxinetum,L1,4,2,42,1,89,14,0,0
+4,Pruno-Fraxinetum,LV,2,1,43,-13,79,6,0,0
+4,Pruno-Fraxinetum,LV,2,2,43,-13,79,6,0,0
+4,Pruno-Fraxinetum,LV,3,1,43,-13,79,6,0,0
+4,Pruno-Fraxinetum,LV,3,2,43,-13,79,6,0,0
+4,Pruno-Fraxinetum,LV,4,1,43,-13,79,6,0,0
+4,Pruno-Fraxinetum,LV,4,2,43,-13,79,6,0,0
+4,Pruno-Fraxinetum,ZV,2,1,43,-13,79,6,0,0
+4,Pruno-Fraxinetum,ZV,2,2,43,-13,79,6,0,0
+4,Pruno-Fraxinetum,ZV,3,1,43,-13,79,6,0,0
+4,Pruno-Fraxinetum,ZV,3,2,43,-13,79,6,0,0
+4,Pruno-Fraxinetum,ZV,4,1,43,-13,79,6,0,0
+4,Pruno-Fraxinetum,ZV,4,2,43,-13,79,6,0,0
+5,Carpinion betuli,L1,2,1,66,5,214,17,0,0
+5,Carpinion betuli,L1,2,2,66,5,214,17,0,0
+5,Carpinion betuli,L1,3,1,66,5,214,17,0,0
+5,Carpinion betuli,L1,3,2,66,5,214,17,0,0
+6,Betulo-Quercetum roboris,Z1,1,1,179,21,272,38,0,0
+6,Betulo-Quercetum roboris,Z1,2,1,179,21,272,38,0,0
+6,Betulo-Quercetum roboris,Z2,1,1,179,12,272,38,0,0
+6,Betulo-Quercetum roboris,Z2,2,1,179,12,272,38,0,0
+7,Caricion gracilis,K1,2,1,43,-21,99,11,1,1
+7,Caricion gracilis,K1,2,1,43,-21,99,11,1,2
+7,Caricion gracilis,K1,2,1,43,-21,99,11,3,1
+7,Caricion gracilis,K1,2,1,43,-21,99,11,3,2
+7,Caricion gracilis,K1,2,2,43,-21,99,11,1,1
+7,Caricion gracilis,K1,2,2,43,-21,99,11,1,2
+7,Caricion gracilis,K1,2,2,43,-21,99,11,3,1
+7,Caricion gracilis,K1,2,2,43,-21,99,11,3,2
+7,Caricion gracilis,K1,2,3,43,-21,99,11,1,1
+7,Caricion gracilis,K1,2,3,43,-21,99,11,1,2
+7,Caricion gracilis,K1,2,3,43,-21,99,11,3,1
+7,Caricion gracilis,K1,2,3,43,-21,99,11,3,2
+7,Caricion gracilis,K1,3,1,43,-21,99,11,1,1
+7,Caricion gracilis,K1,3,1,43,-21,99,11,1,2
+7,Caricion gracilis,K1,3,1,43,-21,99,11,3,1
+7,Caricion gracilis,K1,3,1,43,-21,99,11,3,2
+7,Caricion gracilis,K1,3,2,43,-21,99,11,1,1
+7,Caricion gracilis,K1,3,2,43,-21,99,11,1,2
+7,Caricion gracilis,K1,3,2,43,-21,99,11,3,1
+7,Caricion gracilis,K1,3,2,43,-21,99,11,3,2
+7,Caricion gracilis,K1,3,3,43,-21,99,11,1,1
+7,Caricion gracilis,K1,3,3,43,-21,99,11,1,2
+7,Caricion gracilis,K1,3,3,43,-21,99,11,3,1
+7,Caricion gracilis,K1,3,3,43,-21,99,11,3,2
+7,Caricion gracilis,K1,4,1,43,-21,99,11,1,1
+7,Caricion gracilis,K1,4,1,43,-21,99,11,1,2
+7,Caricion gracilis,K1,4,1,43,-21,99,11,3,1
+7,Caricion gracilis,K1,4,1,43,-21,99,11,3,2
+7,Caricion gracilis,K1,4,2,43,-21,99,11,1,1
+7,Caricion gracilis,K1,4,2,43,-21,99,11,1,2
+7,Caricion gracilis,K1,4,2,43,-21,99,11,3,1
+7,Caricion gracilis,K1,4,2,43,-21,99,11,3,2
+7,Caricion gracilis,K1,4,3,43,-21,99,11,1,1
+7,Caricion gracilis,K1,4,3,43,-21,99,11,1,2
+7,Caricion gracilis,K1,4,3,43,-21,99,11,3,1
+7,Caricion gracilis,K1,4,3,43,-21,99,11,3,2
+7,Caricion gracilis,KV,2,1,32,-9,70,3,1,1
+7,Caricion gracilis,KV,2,1,32,-9,70,3,1,2
+7,Caricion gracilis,KV,2,1,32,-9,70,3,3,1
+7,Caricion gracilis,KV,2,1,32,-9,70,3,3,2
+7,Caricion gracilis,KV,2,2,32,-9,70,3,1,1
+7,Caricion gracilis,KV,2,2,32,-9,70,3,1,2
+7,Caricion gracilis,KV,2,2,32,-9,70,3,3,1
+7,Caricion gracilis,KV,2,2,32,-9,70,3,3,2
+7,Caricion gracilis,KV,2,3,32,-9,70,3,1,1
+7,Caricion gracilis,KV,2,3,32,-9,70,3,1,2
+7,Caricion gracilis,KV,2,3,32,-9,70,3,3,1
+7,Caricion gracilis,KV,2,3,32,-9,70,3,3,2
+7,Caricion gracilis,KV,3,1,32,-9,70,3,1,1
+7,Caricion gracilis,KV,3,1,32,-9,70,3,1,2
+7,Caricion gracilis,KV,3,1,32,-9,70,3,3,1
+7,Caricion gracilis,KV,3,1,32,-9,70,3,3,2
+7,Caricion gracilis,KV,3,2,32,-9,70,3,1,1
+7,Caricion gracilis,KV,3,2,32,-9,70,3,1,2
+7,Caricion gracilis,KV,3,2,32,-9,70,3,3,1
+7,Caricion gracilis,KV,3,2,32,-9,70,3,3,2
+7,Caricion gracilis,KV,3,3,32,-9,70,3,1,1
+7,Caricion gracilis,KV,3,3,32,-9,70,3,1,2
+7,Caricion gracilis,KV,3,3,32,-9,70,3,3,1
+7,Caricion gracilis,KV,3,3,32,-9,70,3,3,2
+7,Caricion gracilis,KV,4,1,32,-9,70,3,1,1
+7,Caricion gracilis,KV,4,1,32,-9,70,3,1,2
+7,Caricion gracilis,KV,4,1,32,-9,70,3,3,1
+7,Caricion gracilis,KV,4,1,32,-9,70,3,3,2
+7,Caricion gracilis,KV,4,2,32,-9,70,3,1,1
+7,Caricion gracilis,KV,4,2,32,-9,70,3,1,2
+7,Caricion gracilis,KV,4,2,32,-9,70,3,3,1
+7,Caricion gracilis,KV,4,2,32,-9,70,3,3,2
+7,Caricion gracilis,KV,4,3,32,-9,70,3,1,1
+7,Caricion gracilis,KV,4,3,32,-9,70,3,1,2
+7,Caricion gracilis,KV,4,3,32,-9,70,3,3,1
+7,Caricion gracilis,KV,4,3,32,-9,70,3,3,2
+7,Caricion gracilis,L1,2,1,31,-32,73,-1,1,1
+7,Caricion gracilis,L1,2,1,31,-32,73,-1,1,2
+7,Caricion gracilis,L1,2,1,31,-32,73,-1,3,1
+7,Caricion gracilis,L1,2,1,31,-32,73,-1,3,2
+7,Caricion gracilis,L1,2,2,31,-32,73,-1,1,1
+7,Caricion gracilis,L1,2,2,31,-32,73,-1,1,2
+7,Caricion gracilis,L1,2,2,31,-32,73,-1,3,1
+7,Caricion gracilis,L1,2,2,31,-32,73,-1,3,2
+7,Caricion gracilis,L1,2,3,31,-32,73,-1,1,1
+7,Caricion gracilis,L1,2,3,31,-32,73,-1,1,2
+7,Caricion gracilis,L1,2,3,31,-32,73,-1,3,1
+7,Caricion gracilis,L1,2,3,31,-32,73,-1,3,2
+7,Caricion gracilis,L1,3,1,31,-32,73,-1,1,1
+7,Caricion gracilis,L1,3,1,31,-32,73,-1,1,2
+7,Caricion gracilis,L1,3,1,31,-32,73,-1,3,1
+7,Caricion gracilis,L1,3,1,31,-32,73,-1,3,2
+7,Caricion gracilis,L1,3,2,31,-32,73,-1,1,1
+7,Caricion gracilis,L1,3,2,31,-32,73,-1,1,2
+7,Caricion gracilis,L1,3,2,31,-32,73,-1,3,1
+7,Caricion gracilis,L1,3,2,31,-32,73,-1,3,2
+7,Caricion gracilis,L1,3,3,31,-32,73,-1,1,1
+7,Caricion gracilis,L1,3,3,31,-32,73,-1,1,2
+7,Caricion gracilis,L1,3,3,31,-32,73,-1,3,1
+7,Caricion gracilis,L1,3,3,31,-32,73,-1,3,2
+7,Caricion gracilis,L1,4,1,31,-32,73,-1,1,1
+7,Caricion gracilis,L1,4,1,31,-32,73,-1,1,2
+7,Caricion gracilis,L1,4,1,31,-32,73,-1,3,1
+7,Caricion gracilis,L1,4,1,31,-32,73,-1,3,2
+7,Caricion gracilis,L1,4,2,31,-32,73,-1,1,1
+7,Caricion gracilis,L1,4,2,31,-32,73,-1,1,2
+7,Caricion gracilis,L1,4,2,31,-32,73,-1,3,1
+7,Caricion gracilis,L1,4,2,31,-32,73,-1,3,2
+7,Caricion gracilis,L1,4,3,31,-32,73,-1,1,1
+7,Caricion gracilis,L1,4,3,31,-32,73,-1,1,2
+7,Caricion gracilis,L1,4,3,31,-32,73,-1,3,1
+7,Caricion gracilis,L1,4,3,31,-32,73,-1,3,2
+7,Caricion gracilis,LV,2,1,12,-10,75,17,1,1
+7,Caricion gracilis,LV,2,1,12,-10,75,17,1,2
+7,Caricion gracilis,LV,2,1,12,-10,75,17,3,1
+7,Caricion gracilis,LV,2,1,12,-10,75,17,3,2
+7,Caricion gracilis,LV,2,2,12,-10,75,17,1,1
+7,Caricion gracilis,LV,2,2,12,-10,75,17,1,2
+7,Caricion gracilis,LV,2,2,12,-10,75,17,3,1
+7,Caricion gracilis,LV,2,2,12,-10,75,17,3,2
+7,Caricion gracilis,LV,2,3,12,-10,75,17,1,1
+7,Caricion gracilis,LV,2,3,12,-10,75,17,1,2
+7,Caricion gracilis,LV,2,3,12,-10,75,17,3,1
+7,Caricion gracilis,LV,2,3,12,-10,75,17,3,2
+7,Caricion gracilis,LV,3,1,12,-10,75,17,1,1
+7,Caricion gracilis,LV,3,1,12,-10,75,17,1,2
+7,Caricion gracilis,LV,3,1,12,-10,75,17,3,1
+7,Caricion gracilis,LV,3,1,12,-10,75,17,3,2
+7,Caricion gracilis,LV,3,2,12,-10,75,17,1,1
+7,Caricion gracilis,LV,3,2,12,-10,75,17,1,2
+7,Caricion gracilis,LV,3,2,12,-10,75,17,3,1
+7,Caricion gracilis,LV,3,2,12,-10,75,17,3,2
+7,Caricion gracilis,LV,3,3,12,-10,75,17,1,1
+7,Caricion gracilis,LV,3,3,12,-10,75,17,1,2
+7,Caricion gracilis,LV,3,3,12,-10,75,17,3,1
+7,Caricion gracilis,LV,3,3,12,-10,75,17,3,2
+7,Caricion gracilis,LV,4,1,12,-10,75,17,1,1
+7,Caricion gracilis,LV,4,1,12,-10,75,17,1,2
+7,Caricion gracilis,LV,4,1,12,-10,75,17,3,1
+7,Caricion gracilis,LV,4,1,12,-10,75,17,3,2
+7,Caricion gracilis,LV,4,2,12,-10,75,17,1,1
+7,Caricion gracilis,LV,4,2,12,-10,75,17,1,2
+7,Caricion gracilis,LV,4,2,12,-10,75,17,3,1
+7,Caricion gracilis,LV,4,2,12,-10,75,17,3,2
+7,Caricion gracilis,LV,4,3,12,-10,75,17,1,1
+7,Caricion gracilis,LV,4,3,12,-10,75,17,1,2
+7,Caricion gracilis,LV,4,3,12,-10,75,17,3,1
+7,Caricion gracilis,LV,4,3,12,-10,75,17,3,2
+7,Caricion gracilis,V,2,1,9,-28,77,-19,1,1
+7,Caricion gracilis,V,2,1,9,-28,77,-19,1,2
+7,Caricion gracilis,V,2,1,9,-28,77,-19,3,1
+7,Caricion gracilis,V,2,1,9,-28,77,-19,3,2
+7,Caricion gracilis,V,2,2,9,-28,77,-19,1,1
+7,Caricion gracilis,V,2,2,9,-28,77,-19,1,2
+7,Caricion gracilis,V,2,2,9,-28,77,-19,3,1
+7,Caricion gracilis,V,2,2,9,-28,77,-19,3,2
+7,Caricion gracilis,V,2,3,9,-28,77,-19,1,1
+7,Caricion gracilis,V,2,3,9,-28,77,-19,1,2
+7,Caricion gracilis,V,2,3,9,-28,77,-19,3,1
+7,Caricion gracilis,V,2,3,9,-28,77,-19,3,2
+7,Caricion gracilis,V,3,1,9,-28,77,-19,1,1
+7,Caricion gracilis,V,3,1,9,-28,77,-19,1,2
+7,Caricion gracilis,V,3,1,9,-28,77,-19,3,1
+7,Caricion gracilis,V,3,1,9,-28,77,-19,3,2
+7,Caricion gracilis,V,3,2,9,-28,77,-19,1,1
+7,Caricion gracilis,V,3,2,9,-28,77,-19,1,2
+7,Caricion gracilis,V,3,2,9,-28,77,-19,3,1
+7,Caricion gracilis,V,3,2,9,-28,77,-19,3,2
+7,Caricion gracilis,V,3,3,9,-28,77,-19,1,1
+7,Caricion gracilis,V,3,3,9,-28,77,-19,1,2
+7,Caricion gracilis,V,3,3,9,-28,77,-19,3,1
+7,Caricion gracilis,V,3,3,9,-28,77,-19,3,2
+7,Caricion gracilis,V,4,1,9,-28,77,-19,1,1
+7,Caricion gracilis,V,4,1,9,-28,77,-19,1,2
+7,Caricion gracilis,V,4,1,9,-28,77,-19,3,1
+7,Caricion gracilis,V,4,1,9,-28,77,-19,3,2
+7,Caricion gracilis,V,4,2,9,-28,77,-19,1,1
+7,Caricion gracilis,V,4,2,9,-28,77,-19,1,2
+7,Caricion gracilis,V,4,2,9,-28,77,-19,3,1
+7,Caricion gracilis,V,4,2,9,-28,77,-19,3,2
+7,Caricion gracilis,V,4,3,9,-28,77,-19,1,1
+7,Caricion gracilis,V,4,3,9,-28,77,-19,1,2
+7,Caricion gracilis,V,4,3,9,-28,77,-19,3,1
+7,Caricion gracilis,V,4,3,9,-28,77,-19,3,2
+7,Caricion gracilis,ZV,2,1,45,-10,75,17,1,1
+7,Caricion gracilis,ZV,2,1,45,-10,75,17,1,2
+7,Caricion gracilis,ZV,2,1,45,-10,75,17,3,1
+7,Caricion gracilis,ZV,2,1,45,-10,75,17,3,2
+7,Caricion gracilis,ZV,2,2,45,-10,75,17,1,1
+7,Caricion gracilis,ZV,2,2,45,-10,75,17,1,2
+7,Caricion gracilis,ZV,2,2,45,-10,75,17,3,1
+7,Caricion gracilis,ZV,2,2,45,-10,75,17,3,2
+7,Caricion gracilis,ZV,3,1,45,-10,75,17,1,1
+7,Caricion gracilis,ZV,3,1,45,-10,75,17,1,2
+7,Caricion gracilis,ZV,3,1,45,-10,75,17,3,1
+7,Caricion gracilis,ZV,3,1,45,-10,75,17,3,2
+7,Caricion gracilis,ZV,3,2,45,-10,75,17,1,1
+7,Caricion gracilis,ZV,3,2,45,-10,75,17,1,2
+7,Caricion gracilis,ZV,3,2,45,-10,75,17,3,1
+7,Caricion gracilis,ZV,3,2,45,-10,75,17,3,2
+7,Caricion gracilis,ZV,4,1,45,-10,75,17,1,1
+7,Caricion gracilis,ZV,4,1,45,-10,75,17,1,2
+7,Caricion gracilis,ZV,4,1,45,-10,75,17,3,1
+7,Caricion gracilis,ZV,4,1,45,-10,75,17,3,2
+7,Caricion gracilis,ZV,4,2,45,-10,75,17,1,1
+7,Caricion gracilis,ZV,4,2,45,-10,75,17,1,2
+7,Caricion gracilis,ZV,4,2,45,-10,75,17,3,1
+7,Caricion gracilis,ZV,4,2,45,-10,75,17,3,2
+8,Filipendulion,K1,2,1,45,-31,172,42,1,0
+8,Filipendulion,K1,2,1,45,-31,172,42,1,2
+8,Filipendulion,K1,2,2,45,-31,172,42,1,0
+8,Filipendulion,K1,2,2,45,-31,172,42,1,2
+8,Filipendulion,K1,2,3,45,-31,172,42,1,0
+8,Filipendulion,K1,2,3,45,-31,172,42,1,2
+8,Filipendulion,K1,3,1,45,-31,172,42,1,0
+8,Filipendulion,K1,3,1,45,-31,172,42,1,2
+8,Filipendulion,K1,3,2,45,-31,172,42,1,0
+8,Filipendulion,K1,3,2,45,-31,172,42,1,2
+8,Filipendulion,K1,3,3,45,-31,172,42,1,0
+8,Filipendulion,K1,3,3,45,-31,172,42,1,2
+8,Filipendulion,K1,4,1,45,-31,172,42,1,0
+8,Filipendulion,K1,4,1,45,-31,172,42,1,2
+8,Filipendulion,K1,4,2,45,-31,172,42,1,0
+8,Filipendulion,K1,4,2,45,-31,172,42,1,2
+8,Filipendulion,K1,4,3,45,-31,172,42,1,0
+8,Filipendulion,K1,4,3,45,-31,172,42,1,2
+8,Filipendulion,KV,2,1,45,-31,172,42,1,0
+8,Filipendulion,KV,2,1,45,-31,172,42,1,2
+8,Filipendulion,KV,2,2,45,-31,172,42,1,0
+8,Filipendulion,KV,2,2,45,-31,172,42,1,2
+8,Filipendulion,KV,3,1,45,-31,172,42,1,0
+8,Filipendulion,KV,3,1,45,-31,172,42,1,2
+8,Filipendulion,KV,3,2,45,-31,172,42,1,0
+8,Filipendulion,KV,3,2,45,-31,172,42,1,2
+8,Filipendulion,KV,4,1,45,-31,172,42,1,0
+8,Filipendulion,KV,4,1,45,-31,172,42,1,2
+8,Filipendulion,KV,4,2,45,-31,172,42,1,0
+8,Filipendulion,KV,4,2,45,-31,172,42,1,2
+8,Filipendulion,L1,2,1,80,-31,170,21,1,0
+8,Filipendulion,L1,2,1,80,-31,170,21,1,2
+8,Filipendulion,L1,2,2,80,-31,170,21,1,0
+8,Filipendulion,L1,2,2,80,-31,170,21,1,2
+8,Filipendulion,L1,2,3,80,-31,170,21,1,0
+8,Filipendulion,L1,2,3,80,-31,170,21,1,2
+8,Filipendulion,L1,3,1,80,-31,170,21,1,0
+8,Filipendulion,L1,3,1,80,-31,170,21,1,2
+8,Filipendulion,L1,3,2,80,-31,170,21,1,0
+8,Filipendulion,L1,3,2,80,-31,170,21,1,2
+8,Filipendulion,L1,3,3,80,-31,170,21,1,0
+8,Filipendulion,L1,3,3,80,-31,170,21,1,2
+8,Filipendulion,L1,4,1,80,-31,170,21,1,0
+8,Filipendulion,L1,4,1,80,-31,170,21,1,2
+8,Filipendulion,L1,4,2,80,-31,170,21,1,0
+8,Filipendulion,L1,4,2,80,-31,170,21,1,2
+8,Filipendulion,L1,4,3,80,-31,170,21,1,0
+8,Filipendulion,L1,4,3,80,-31,170,21,1,2
+8,Filipendulion,LV,2,1,80,-31,170,21,1,0
+8,Filipendulion,LV,2,1,80,-31,170,21,1,2
+8,Filipendulion,LV,2,2,80,-31,170,21,1,0
+8,Filipendulion,LV,2,2,80,-31,170,21,1,2
+8,Filipendulion,LV,3,1,80,-31,170,21,1,0
+8,Filipendulion,LV,3,1,80,-31,170,21,1,2
+8,Filipendulion,LV,3,2,80,-31,170,21,1,0
+8,Filipendulion,LV,3,2,80,-31,170,21,1,2
+8,Filipendulion,LV,4,1,80,-31,170,21,1,0
+8,Filipendulion,LV,4,1,80,-31,170,21,1,2
+8,Filipendulion,LV,4,2,80,-31,170,21,1,0
+8,Filipendulion,LV,4,2,80,-31,170,21,1,2
+8,Filipendulion,V,2,1,36,-35,87,-20,1,0
+8,Filipendulion,V,2,1,36,-35,87,-20,1,2
+8,Filipendulion,V,2,2,36,-35,87,-20,1,0
+8,Filipendulion,V,2,2,36,-35,87,-20,1,2
+8,Filipendulion,V,3,1,36,-35,87,-20,1,0
+8,Filipendulion,V,3,1,36,-35,87,-20,1,2
+8,Filipendulion,V,3,2,36,-35,87,-20,1,0
+8,Filipendulion,V,3,2,36,-35,87,-20,1,2
+8,Filipendulion,V,4,1,36,-35,87,-20,1,0
+8,Filipendulion,V,4,1,36,-35,87,-20,1,2
+8,Filipendulion,V,4,2,36,-35,87,-20,1,0
+8,Filipendulion,V,4,2,36,-35,87,-20,1,2
+8,Filipendulion,ZV,2,1,46,-35,109,-20,1,0
+8,Filipendulion,ZV,2,1,46,-35,109,-20,1,2
+8,Filipendulion,ZV,2,2,46,-35,109,-20,1,0
+8,Filipendulion,ZV,2,2,46,-35,109,-20,1,2
+8,Filipendulion,ZV,3,1,46,-35,109,-20,1,0
+8,Filipendulion,ZV,3,1,46,-35,109,-20,1,2
+8,Filipendulion,ZV,3,2,46,-35,109,-20,1,0
+8,Filipendulion,ZV,3,2,46,-35,109,-20,1,2
+8,Filipendulion,ZV,4,1,46,-35,109,-20,1,0
+8,Filipendulion,ZV,4,1,46,-35,109,-20,1,2
+8,Filipendulion,ZV,4,2,46,-35,109,-20,1,0
+8,Filipendulion,ZV,4,2,46,-35,109,-20,1,2
+9,Galio - Alliarion,K1,3,1,76,14,157,30,1,2
+9,Galio - Alliarion,K1,3,2,76,14,157,30,1,2
+9,Galio - Alliarion,K1,3,3,76,14,157,30,1,2
+9,Galio - Alliarion,K1,4,1,76,14,157,30,1,2
+9,Galio - Alliarion,K1,4,2,76,14,157,30,1,2
+9,Galio - Alliarion,K1,4,3,76,14,157,30,1,2
+9,Galio - Alliarion,K1,5,1,76,14,157,30,1,2
+9,Galio - Alliarion,K1,5,2,76,14,157,30,1,2
+9,Galio - Alliarion,K1,5,3,76,14,157,30,1,2
+9,Galio - Alliarion,L1,3,1,76,14,157,30,1,2
+9,Galio - Alliarion,L1,3,2,76,14,157,30,1,2
+9,Galio - Alliarion,L1,3,3,76,14,157,30,1,2
+9,Galio - Alliarion,L1,4,1,76,14,157,30,1,2
+9,Galio - Alliarion,L1,4,2,76,14,157,30,1,2
+9,Galio - Alliarion,L1,4,3,76,14,157,30,1,2
+9,Galio - Alliarion,L1,5,1,76,14,157,30,1,2
+9,Galio - Alliarion,L1,5,2,76,14,157,30,1,2
+9,Galio - Alliarion,L1,5,3,76,14,157,30,1,2
+9,Galio - Alliarion,Z1,3,1,124,50,160,50,1,2
+9,Galio - Alliarion,Z1,4,1,124,50,160,50,1,2
+9,Galio - Alliarion,Z1,5,1,124,50,160,50,1,2
+9,Galio - Alliarion,ZV,3,1,124,50,160,50,1,2
+9,Galio - Alliarion,ZV,3,2,124,50,160,50,1,2
+9,Galio - Alliarion,ZV,4,1,124,50,160,50,1,2
+9,Galio - Alliarion,ZV,4,2,124,50,160,50,1,2
+9,Galio - Alliarion,ZV,5,1,124,50,160,50,1,2
+9,Galio - Alliarion,ZV,5,2,124,50,160,50,1,2
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,K1,4,2,36,-3,178,88,1,1
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,K1,4,2,36,-3,178,88,1,2
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,K1,4,2,36,-3,178,88,3,1
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,K1,4,2,36,-3,178,88,3,2
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,K1,4,3,36,-3,178,88,1,1
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,K1,4,3,36,-3,178,88,1,2
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,K1,4,3,36,-3,178,88,3,1
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,K1,4,3,36,-3,178,88,3,2
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,K1,5,2,36,-3,178,88,1,1
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,K1,5,2,36,-3,178,88,1,2
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,K1,5,2,36,-3,178,88,3,1
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,K1,5,2,36,-3,178,88,3,2
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,K1,5,3,36,-3,178,88,1,1
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,K1,5,3,36,-3,178,88,1,2
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,K1,5,3,36,-3,178,88,3,1
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,K1,5,3,36,-3,178,88,3,2
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,KV,4,2,36,-2,99,31,1,1
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,KV,4,2,36,-2,99,31,1,2
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,KV,4,2,36,-2,99,31,3,1
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,KV,4,2,36,-2,99,31,3,2
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,KV,4,3,36,-2,99,31,1,1
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,KV,4,3,36,-2,99,31,1,2
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,KV,4,3,36,-2,99,31,3,1
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,KV,4,3,36,-2,99,31,3,2
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,KV,5,2,36,-2,99,31,1,1
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,KV,5,2,36,-2,99,31,1,2
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,KV,5,2,36,-2,99,31,3,1
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,KV,5,2,36,-2,99,31,3,2
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,KV,5,3,36,-2,99,31,1,1
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,KV,5,3,36,-2,99,31,1,2
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,KV,5,3,36,-2,99,31,3,1
+10,RG Phalaris arundinacea-[Convolvulo-Filipend,KV,5,3,36,-2,99,31,3,2
+11,RG Juncus effusus-[Molinietalia/Lolio-Potent,V,3,1,11,-44,55,-12,1,2
+11,RG Juncus effusus-[Molinietalia/Lolio-Potent,V,3,1,11,-44,55,-12,2,2
+11,RG Juncus effusus-[Molinietalia/Lolio-Potent,V,3,2,11,-44,55,-12,1,2
+11,RG Juncus effusus-[Molinietalia/Lolio-Potent,V,3,2,11,-44,55,-12,2,2
+11,RG Juncus effusus-[Molinietalia/Lolio-Potent,V,4,1,11,-44,55,-12,1,2
+11,RG Juncus effusus-[Molinietalia/Lolio-Potent,V,4,1,11,-44,55,-12,2,2
+11,RG Juncus effusus-[Molinietalia/Lolio-Potent,V,4,2,11,-44,55,-12,1,2
+11,RG Juncus effusus-[Molinietalia/Lolio-Potent,V,4,2,11,-44,55,-12,2,2
+11,RG Juncus effusus-[Molinietalia/Lolio-Potent,Z1,3,1,13,-44,82,-12,1,2
+11,RG Juncus effusus-[Molinietalia/Lolio-Potent,Z1,3,1,13,-44,82,-12,2,2
+11,RG Juncus effusus-[Molinietalia/Lolio-Potent,Z1,4,1,13,-44,82,-12,1,2
+11,RG Juncus effusus-[Molinietalia/Lolio-Potent,Z1,4,1,13,-44,82,-12,2,2
+11,RG Juncus effusus-[Molinietalia/Lolio-Potent,Z2,3,1,13,-44,82,-12,1,2
+11,RG Juncus effusus-[Molinietalia/Lolio-Potent,Z2,3,1,13,-44,82,-12,2,2
+11,RG Juncus effusus-[Molinietalia/Lolio-Potent,Z2,4,1,13,-44,82,-12,1,2
+11,RG Juncus effusus-[Molinietalia/Lolio-Potent,Z2,4,1,13,-44,82,-12,2,2
+11,RG Juncus effusus-[Molinietalia/Lolio-Potent,ZV,3,1,11,-44,55,-12,1,2
+11,RG Juncus effusus-[Molinietalia/Lolio-Potent,ZV,3,1,11,-44,55,-12,2,2
+11,RG Juncus effusus-[Molinietalia/Lolio-Potent,ZV,3,2,11,-44,55,-12,1,2
+11,RG Juncus effusus-[Molinietalia/Lolio-Potent,ZV,3,2,11,-44,55,-12,2,2
+11,RG Juncus effusus-[Molinietalia/Lolio-Potent,ZV,4,1,11,-44,55,-12,1,2
+11,RG Juncus effusus-[Molinietalia/Lolio-Potent,ZV,4,1,11,-44,55,-12,2,2
+11,RG Juncus effusus-[Molinietalia/Lolio-Potent,ZV,4,2,11,-44,55,-12,1,2
+11,RG Juncus effusus-[Molinietalia/Lolio-Potent,ZV,4,2,11,-44,55,-12,2,2
+12,Magnocaricion met Phragmites,K1,2,2,14,-37,55,-3,1,1
+12,Magnocaricion met Phragmites,K1,2,2,14,-37,55,-3,1,2
+12,Magnocaricion met Phragmites,K1,2,3,14,-37,55,-3,1,1
+12,Magnocaricion met Phragmites,K1,2,3,14,-37,55,-3,1,2
+12,Magnocaricion met Phragmites,K1,3,2,14,-37,55,-3,1,1
+12,Magnocaricion met Phragmites,K1,3,2,14,-37,55,-3,1,2
+12,Magnocaricion met Phragmites,K1,3,3,14,-37,55,-3,1,1
+12,Magnocaricion met Phragmites,K1,3,3,14,-37,55,-3,1,2
+12,Magnocaricion met Phragmites,K1,4,2,14,-37,55,-3,1,1
+12,Magnocaricion met Phragmites,K1,4,2,14,-37,55,-3,1,2
+12,Magnocaricion met Phragmites,K1,4,3,14,-37,55,-3,1,1
+12,Magnocaricion met Phragmites,K1,4,3,14,-37,55,-3,1,2
+12,Magnocaricion met Phragmites,KV,2,1,6,-37,55,-3,1,1
+12,Magnocaricion met Phragmites,KV,2,1,6,-37,55,-3,1,2
+12,Magnocaricion met Phragmites,KV,2,2,6,-37,55,-3,1,1
+12,Magnocaricion met Phragmites,KV,2,2,6,-37,55,-3,1,2
+12,Magnocaricion met Phragmites,KV,2,3,6,-37,55,-3,1,1
+12,Magnocaricion met Phragmites,KV,2,3,6,-37,55,-3,1,2
+12,Magnocaricion met Phragmites,KV,3,1,6,-37,55,-3,1,1
+12,Magnocaricion met Phragmites,KV,3,1,6,-37,55,-3,1,2
+12,Magnocaricion met Phragmites,KV,3,2,6,-37,55,-3,1,1
+12,Magnocaricion met Phragmites,KV,3,2,6,-37,55,-3,1,2
+12,Magnocaricion met Phragmites,KV,3,3,6,-37,55,-3,1,1
+12,Magnocaricion met Phragmites,KV,3,3,6,-37,55,-3,1,2
+12,Magnocaricion met Phragmites,KV,4,1,6,-37,55,-3,1,1
+12,Magnocaricion met Phragmites,KV,4,1,6,-37,55,-3,1,2
+12,Magnocaricion met Phragmites,KV,4,2,6,-37,55,-3,1,1
+12,Magnocaricion met Phragmites,KV,4,2,6,-37,55,-3,1,2
+12,Magnocaricion met Phragmites,KV,4,3,6,-37,55,-3,1,1
+12,Magnocaricion met Phragmites,KV,4,3,6,-37,55,-3,1,2
+12,Magnocaricion met Phragmites,L1,2,2,14,-37,55,-3,1,1
+12,Magnocaricion met Phragmites,L1,2,2,14,-37,55,-3,1,2
+12,Magnocaricion met Phragmites,L1,2,3,14,-37,55,-3,1,1
+12,Magnocaricion met Phragmites,L1,2,3,14,-37,55,-3,1,2
+12,Magnocaricion met Phragmites,L1,3,2,14,-37,55,-3,1,1
+12,Magnocaricion met Phragmites,L1,3,2,14,-37,55,-3,1,2
+12,Magnocaricion met Phragmites,L1,3,3,14,-37,55,-3,1,1
+12,Magnocaricion met Phragmites,L1,3,3,14,-37,55,-3,1,2
+12,Magnocaricion met Phragmites,L1,4,2,14,-37,55,-3,1,1
+12,Magnocaricion met Phragmites,L1,4,2,14,-37,55,-3,1,2
+12,Magnocaricion met Phragmites,L1,4,3,14,-37,55,-3,1,1
+12,Magnocaricion met Phragmites,L1,4,3,14,-37,55,-3,1,2
+12,Magnocaricion met Phragmites,LV,2,1,14,-37,55,-3,1,1
+12,Magnocaricion met Phragmites,LV,2,1,14,-37,55,-3,1,2
+12,Magnocaricion met Phragmites,LV,2,2,14,-37,55,-3,1,1
+12,Magnocaricion met Phragmites,LV,2,2,14,-37,55,-3,1,2
+12,Magnocaricion met Phragmites,LV,2,3,14,-37,55,-3,1,1
+12,Magnocaricion met Phragmites,LV,2,3,14,-37,55,-3,1,2
+12,Magnocaricion met Phragmites,LV,3,1,14,-37,55,-3,1,1
+12,Magnocaricion met Phragmites,LV,3,1,14,-37,55,-3,1,2
+12,Magnocaricion met Phragmites,LV,3,2,14,-37,55,-3,1,1
+12,Magnocaricion met Phragmites,LV,3,2,14,-37,55,-3,1,2
+12,Magnocaricion met Phragmites,LV,3,3,14,-37,55,-3,1,1
+12,Magnocaricion met Phragmites,LV,3,3,14,-37,55,-3,1,2
+12,Magnocaricion met Phragmites,LV,4,1,14,-37,55,-3,1,1
+12,Magnocaricion met Phragmites,LV,4,1,14,-37,55,-3,1,2
+12,Magnocaricion met Phragmites,LV,4,2,14,-37,55,-3,1,1
+12,Magnocaricion met Phragmites,LV,4,2,14,-37,55,-3,1,2
+12,Magnocaricion met Phragmites,LV,4,3,14,-37,55,-3,1,1
+12,Magnocaricion met Phragmites,LV,4,3,14,-37,55,-3,1,2
+12,Magnocaricion met Phragmites,V,2,1,9,-37,45,-3,1,1
+12,Magnocaricion met Phragmites,V,2,1,9,-37,45,-3,1,2
+12,Magnocaricion met Phragmites,V,2,2,9,-37,45,-3,1,1
+12,Magnocaricion met Phragmites,V,2,2,9,-37,45,-3,1,2
+12,Magnocaricion met Phragmites,V,2,3,9,-37,45,-3,1,1
+12,Magnocaricion met Phragmites,V,2,3,9,-37,45,-3,1,2
+12,Magnocaricion met Phragmites,V,3,1,9,-37,45,-3,1,1
+12,Magnocaricion met Phragmites,V,3,1,9,-37,45,-3,1,2
+12,Magnocaricion met Phragmites,V,3,2,9,-37,45,-3,1,1
+12,Magnocaricion met Phragmites,V,3,2,9,-37,45,-3,1,2
+12,Magnocaricion met Phragmites,V,3,3,9,-37,45,-3,1,1
+12,Magnocaricion met Phragmites,V,3,3,9,-37,45,-3,1,2
+12,Magnocaricion met Phragmites,V,4,1,9,-37,45,-3,1,1
+12,Magnocaricion met Phragmites,V,4,1,9,-37,45,-3,1,2
+12,Magnocaricion met Phragmites,V,4,2,9,-37,45,-3,1,1
+12,Magnocaricion met Phragmites,V,4,2,9,-37,45,-3,1,2
+12,Magnocaricion met Phragmites,V,4,3,9,-37,45,-3,1,1
+12,Magnocaricion met Phragmites,V,4,3,9,-37,45,-3,1,2
+13,RG Glyceria maxima,K1,2,2,3,-75,75,30,1,0
+13,RG Glyceria maxima,K1,2,2,3,-75,75,30,1,1
+13,RG Glyceria maxima,K1,2,2,3,-75,75,30,1,2
+13,RG Glyceria maxima,K1,2,3,3,-75,75,30,1,0
+13,RG Glyceria maxima,K1,2,3,3,-75,75,30,1,1
+13,RG Glyceria maxima,K1,2,3,3,-75,75,30,1,2
+13,RG Glyceria maxima,K1,3,2,3,-75,75,30,1,0
+13,RG Glyceria maxima,K1,3,2,3,-75,75,30,1,1
+13,RG Glyceria maxima,K1,3,2,3,-75,75,30,1,2
+13,RG Glyceria maxima,K1,3,3,3,-75,75,30,1,0
+13,RG Glyceria maxima,K1,3,3,3,-75,75,30,1,1
+13,RG Glyceria maxima,K1,3,3,3,-75,75,30,1,2
+13,RG Glyceria maxima,K1,4,2,3,-75,75,30,1,0
+13,RG Glyceria maxima,K1,4,2,3,-75,75,30,1,1
+13,RG Glyceria maxima,K1,4,2,3,-75,75,30,1,2
+13,RG Glyceria maxima,K1,4,3,3,-75,75,30,1,0
+13,RG Glyceria maxima,K1,4,3,3,-75,75,30,1,1
+13,RG Glyceria maxima,K1,4,3,3,-75,75,30,1,2
+13,RG Glyceria maxima,L1,2,2,3,-75,75,30,1,0
+13,RG Glyceria maxima,L1,2,2,3,-75,75,30,1,1
+13,RG Glyceria maxima,L1,2,2,3,-75,75,30,1,2
+13,RG Glyceria maxima,L1,2,3,3,-75,75,30,1,0
+13,RG Glyceria maxima,L1,2,3,3,-75,75,30,1,1
+13,RG Glyceria maxima,L1,2,3,3,-75,75,30,1,2
+13,RG Glyceria maxima,L1,3,2,3,-75,75,30,1,0
+13,RG Glyceria maxima,L1,3,2,3,-75,75,30,1,1
+13,RG Glyceria maxima,L1,3,2,3,-75,75,30,1,2
+13,RG Glyceria maxima,L1,3,3,3,-75,75,30,1,0
+13,RG Glyceria maxima,L1,3,3,3,-75,75,30,1,1
+13,RG Glyceria maxima,L1,3,3,3,-75,75,30,1,2
+13,RG Glyceria maxima,L1,4,2,3,-75,75,30,1,0
+13,RG Glyceria maxima,L1,4,2,3,-75,75,30,1,1
+13,RG Glyceria maxima,L1,4,2,3,-75,75,30,1,2
+13,RG Glyceria maxima,L1,4,3,3,-75,75,30,1,0
+13,RG Glyceria maxima,L1,4,3,3,-75,75,30,1,1
+13,RG Glyceria maxima,L1,4,3,3,-75,75,30,1,2
+14,Caricion nigrae,V,1,1,7,-22,57,4,1,0
+14,Caricion nigrae,V,1,1,7,-22,57,4,3,0
+14,Caricion nigrae,V,1,2,7,-22,57,4,1,0
+14,Caricion nigrae,V,1,2,7,-22,57,4,3,0
+14,Caricion nigrae,V,2,1,7,-22,57,4,1,0
+14,Caricion nigrae,V,2,1,7,-22,57,4,3,0
+14,Caricion nigrae,V,2,2,7,-22,57,4,1,0
+14,Caricion nigrae,V,2,2,7,-22,57,4,3,0
+14,Caricion nigrae,Z1,1,1,4,-22,70,2,1,0
+14,Caricion nigrae,Z1,1,1,4,-22,70,2,3,0
+14,Caricion nigrae,Z1,2,1,4,-22,70,2,1,0
+14,Caricion nigrae,Z1,2,1,4,-22,70,2,3,0
+14,Caricion nigrae,Z2,1,1,6,-22,74,17,1,0
+14,Caricion nigrae,Z2,1,1,6,-22,74,17,3,0
+14,Caricion nigrae,Z2,2,1,6,-22,74,17,1,0
+14,Caricion nigrae,Z2,2,1,6,-22,74,17,3,0
+14,Caricion nigrae,ZV,1,1,25,-22,95,5,1,0
+14,Caricion nigrae,ZV,1,1,25,-22,95,5,3,0
+14,Caricion nigrae,ZV,1,2,25,-22,95,5,1,0
+14,Caricion nigrae,ZV,1,2,25,-22,95,5,3,0
+14,Caricion nigrae,ZV,2,1,25,-22,95,5,1,0
+14,Caricion nigrae,ZV,2,1,25,-22,95,5,3,0
+14,Caricion nigrae,ZV,2,2,25,-22,95,5,1,0
+14,Caricion nigrae,ZV,2,2,25,-22,95,5,3,0
+15,Caricion davallianae,L1,1,2,9,-1,38,7,3,0
+15,Caricion davallianae,L1,1,3,9,-1,38,7,3,0
+15,Caricion davallianae,LV,1,2,9,-1,38,7,3,0
+15,Caricion davallianae,LV,1,3,9,-1,38,7,3,0
+15,Caricion davallianae,Z1,1,2,9,-1,38,7,3,0
+15,Caricion davallianae,Z1,1,3,9,-1,38,7,3,0
+15,Caricion davallianae,Z2,1,2,9,-1,38,7,3,0
+15,Caricion davallianae,Z2,1,3,9,-1,38,7,3,0
+15,Caricion davallianae,ZV,1,2,9,-1,38,7,3,0
+15,Caricion davallianae,ZV,1,3,9,-1,38,7,3,0
+16,Lolio-Potentillion anserinae,K1,4,1,21,-20,98,13,2,0
+16,Lolio-Potentillion anserinae,K1,4,1,21,-20,98,13,2,1
+16,Lolio-Potentillion anserinae,K1,4,1,21,-20,98,13,2,2
+16,Lolio-Potentillion anserinae,K1,4,1,21,-20,98,13,3,0
+16,Lolio-Potentillion anserinae,K1,4,1,21,-20,98,13,3,1
+16,Lolio-Potentillion anserinae,K1,4,1,21,-20,98,13,3,2
+16,Lolio-Potentillion anserinae,K1,4,2,21,-20,98,13,2,0
+16,Lolio-Potentillion anserinae,K1,4,2,21,-20,98,13,2,1
+16,Lolio-Potentillion anserinae,K1,4,2,21,-20,98,13,2,2
+16,Lolio-Potentillion anserinae,K1,4,2,21,-20,98,13,3,0
+16,Lolio-Potentillion anserinae,K1,4,2,21,-20,98,13,3,1
+16,Lolio-Potentillion anserinae,K1,4,2,21,-20,98,13,3,2
+16,Lolio-Potentillion anserinae,K1,4,3,21,-20,98,13,2,0
+16,Lolio-Potentillion anserinae,K1,4,3,21,-20,98,13,2,1
+16,Lolio-Potentillion anserinae,K1,4,3,21,-20,98,13,2,2
+16,Lolio-Potentillion anserinae,K1,4,3,21,-20,98,13,3,0
+16,Lolio-Potentillion anserinae,K1,4,3,21,-20,98,13,3,1
+16,Lolio-Potentillion anserinae,K1,4,3,21,-20,98,13,3,2
+16,Lolio-Potentillion anserinae,KV,4,2,9,-14,96,36,2,0
+16,Lolio-Potentillion anserinae,KV,4,2,9,-14,96,36,2,1
+16,Lolio-Potentillion anserinae,KV,4,2,9,-14,96,36,2,2
+16,Lolio-Potentillion anserinae,KV,4,2,9,-14,96,36,3,0
+16,Lolio-Potentillion anserinae,KV,4,2,9,-14,96,36,3,1
+16,Lolio-Potentillion anserinae,KV,4,2,9,-14,96,36,3,2
+16,Lolio-Potentillion anserinae,L1,4,1,30,-26,66,-3,2,0
+16,Lolio-Potentillion anserinae,L1,4,1,30,-26,66,-3,2,1
+16,Lolio-Potentillion anserinae,L1,4,1,30,-26,66,-3,2,2
+16,Lolio-Potentillion anserinae,L1,4,1,30,-26,66,-3,3,0
+16,Lolio-Potentillion anserinae,L1,4,1,30,-26,66,-3,3,1
+16,Lolio-Potentillion anserinae,L1,4,1,30,-26,66,-3,3,2
+16,Lolio-Potentillion anserinae,L1,4,2,30,-26,66,-3,2,0
+16,Lolio-Potentillion anserinae,L1,4,2,30,-26,66,-3,2,1
+16,Lolio-Potentillion anserinae,L1,4,2,30,-26,66,-3,2,2
+16,Lolio-Potentillion anserinae,L1,4,2,30,-26,66,-3,3,0
+16,Lolio-Potentillion anserinae,L1,4,2,30,-26,66,-3,3,1
+16,Lolio-Potentillion anserinae,L1,4,2,30,-26,66,-3,3,2
+16,Lolio-Potentillion anserinae,L1,4,3,30,-26,66,-3,2,0
+16,Lolio-Potentillion anserinae,L1,4,3,30,-26,66,-3,2,1
+16,Lolio-Potentillion anserinae,L1,4,3,30,-26,66,-3,2,2
+16,Lolio-Potentillion anserinae,L1,4,3,30,-26,66,-3,3,0
+16,Lolio-Potentillion anserinae,L1,4,3,30,-26,66,-3,3,1
+16,Lolio-Potentillion anserinae,L1,4,3,30,-26,66,-3,3,2
+16,Lolio-Potentillion anserinae,Z2,4,1,6,4,72,66,2,0
+16,Lolio-Potentillion anserinae,Z2,4,1,6,4,72,66,2,1
+16,Lolio-Potentillion anserinae,Z2,4,1,6,4,72,66,2,2
+16,Lolio-Potentillion anserinae,Z2,4,1,6,4,72,66,3,0
+16,Lolio-Potentillion anserinae,Z2,4,1,6,4,72,66,3,1
+16,Lolio-Potentillion anserinae,Z2,4,1,6,4,72,66,3,2
+17,Junco - Molinion,KV,1,2,16,-4,42,13,3,0
+17,Junco - Molinion,KV,1,3,16,-4,42,13,3,0
+17,Junco - Molinion,KV,2,2,16,-4,42,13,3,0
+17,Junco - Molinion,KV,2,3,16,-4,42,13,3,0
+17,Junco - Molinion,LV,1,2,16,2,42,13,3,0
+17,Junco - Molinion,LV,1,3,16,2,42,13,3,0
+17,Junco - Molinion,LV,2,2,16,2,42,13,3,0
+17,Junco - Molinion,LV,2,3,16,2,42,13,3,0
+17,Junco - Molinion,V,1,1,16,-7,42,-1,3,0
+17,Junco - Molinion,V,1,2,16,-7,42,-1,3,0
+17,Junco - Molinion,V,1,3,16,-7,42,-1,3,0
+17,Junco - Molinion,V,2,1,16,-7,42,-1,3,0
+17,Junco - Molinion,V,2,2,16,-7,42,-1,3,0
+17,Junco - Molinion,V,2,3,16,-7,42,-1,3,0
+17,Junco - Molinion,Z1,1,2,18,6,113,86,3,0
+17,Junco - Molinion,Z1,2,2,18,6,113,86,3,0
+17,Junco - Molinion,Z2,1,2,18,6,113,86,3,0
+17,Junco - Molinion,Z2,2,2,18,6,113,86,3,0
+17,Junco - Molinion,ZV,1,1,17,-1,72,7,3,0
+17,Junco - Molinion,ZV,1,2,17,-1,72,7,3,0
+17,Junco - Molinion,ZV,2,1,17,-1,72,7,3,0
+17,Junco - Molinion,ZV,2,2,17,-1,72,7,3,0
+18,Calthion palustris,K1,2,1,25,-16,68,18,2,0
+18,Calthion palustris,K1,2,1,25,-16,68,18,2,2
+18,Calthion palustris,K1,2,1,25,-16,68,18,3,0
+18,Calthion palustris,K1,2,1,25,-16,68,18,3,2
+18,Calthion palustris,K1,2,2,25,-16,68,18,2,0
+18,Calthion palustris,K1,2,2,25,-16,68,18,2,2
+18,Calthion palustris,K1,2,2,25,-16,68,18,3,0
+18,Calthion palustris,K1,2,2,25,-16,68,18,3,2
+18,Calthion palustris,K1,2,3,25,-16,68,18,2,0
+18,Calthion palustris,K1,2,3,25,-16,68,18,2,2
+18,Calthion palustris,K1,2,3,25,-16,68,18,3,0
+18,Calthion palustris,K1,2,3,25,-16,68,18,3,2
+18,Calthion palustris,K1,3,1,25,-16,68,18,2,0
+18,Calthion palustris,K1,3,1,25,-16,68,18,2,2
+18,Calthion palustris,K1,3,1,25,-16,68,18,3,0
+18,Calthion palustris,K1,3,1,25,-16,68,18,3,2
+18,Calthion palustris,K1,3,2,25,-16,68,18,2,0
+18,Calthion palustris,K1,3,2,25,-16,68,18,2,2
+18,Calthion palustris,K1,3,2,25,-16,68,18,3,0
+18,Calthion palustris,K1,3,2,25,-16,68,18,3,2
+18,Calthion palustris,K1,3,3,25,-16,68,18,2,0
+18,Calthion palustris,K1,3,3,25,-16,68,18,2,2
+18,Calthion palustris,K1,3,3,25,-16,68,18,3,0
+18,Calthion palustris,K1,3,3,25,-16,68,18,3,2
+18,Calthion palustris,KV,2,1,8,-16,61,-7,2,0
+18,Calthion palustris,KV,2,1,8,-16,61,-7,2,2
+18,Calthion palustris,KV,2,1,8,-16,61,-7,3,0
+18,Calthion palustris,KV,2,1,8,-16,61,-7,3,2
+18,Calthion palustris,KV,2,2,8,-16,61,-7,2,0
+18,Calthion palustris,KV,2,2,8,-16,61,-7,2,2
+18,Calthion palustris,KV,2,2,8,-16,61,-7,3,0
+18,Calthion palustris,KV,2,2,8,-16,61,-7,3,2
+18,Calthion palustris,KV,2,3,8,-16,61,-7,2,0
+18,Calthion palustris,KV,2,3,8,-16,61,-7,2,2
+18,Calthion palustris,KV,2,3,8,-16,61,-7,3,0
+18,Calthion palustris,KV,2,3,8,-16,61,-7,3,2
+18,Calthion palustris,KV,3,1,8,-16,61,-7,2,0
+18,Calthion palustris,KV,3,1,8,-16,61,-7,2,2
+18,Calthion palustris,KV,3,1,8,-16,61,-7,3,0
+18,Calthion palustris,KV,3,1,8,-16,61,-7,3,2
+18,Calthion palustris,KV,3,2,8,-16,61,-7,2,0
+18,Calthion palustris,KV,3,2,8,-16,61,-7,2,2
+18,Calthion palustris,KV,3,2,8,-16,61,-7,3,0
+18,Calthion palustris,KV,3,2,8,-16,61,-7,3,2
+18,Calthion palustris,KV,3,3,8,-16,61,-7,2,0
+18,Calthion palustris,KV,3,3,8,-16,61,-7,2,2
+18,Calthion palustris,KV,3,3,8,-16,61,-7,3,0
+18,Calthion palustris,KV,3,3,8,-16,61,-7,3,2
+18,Calthion palustris,L1,2,1,51,-16,123,15,2,0
+18,Calthion palustris,L1,2,1,51,-16,123,15,2,2
+18,Calthion palustris,L1,2,1,51,-16,123,15,3,0
+18,Calthion palustris,L1,2,1,51,-16,123,15,3,2
+18,Calthion palustris,L1,2,2,51,-16,123,15,2,0
+18,Calthion palustris,L1,2,2,51,-16,123,15,2,2
+18,Calthion palustris,L1,2,2,51,-16,123,15,3,0
+18,Calthion palustris,L1,2,2,51,-16,123,15,3,2
+18,Calthion palustris,L1,2,3,51,-16,123,15,2,0
+18,Calthion palustris,L1,2,3,51,-16,123,15,2,2
+18,Calthion palustris,L1,2,3,51,-16,123,15,3,0
+18,Calthion palustris,L1,2,3,51,-16,123,15,3,2
+18,Calthion palustris,L1,3,1,51,-16,123,15,2,0
+18,Calthion palustris,L1,3,1,51,-16,123,15,2,2
+18,Calthion palustris,L1,3,1,51,-16,123,15,3,0
+18,Calthion palustris,L1,3,1,51,-16,123,15,3,2
+18,Calthion palustris,L1,3,2,51,-16,123,15,2,0
+18,Calthion palustris,L1,3,2,51,-16,123,15,2,2
+18,Calthion palustris,L1,3,2,51,-16,123,15,3,0
+18,Calthion palustris,L1,3,2,51,-16,123,15,3,2
+18,Calthion palustris,L1,3,3,51,-16,123,15,2,0
+18,Calthion palustris,L1,3,3,51,-16,123,15,2,2
+18,Calthion palustris,L1,3,3,51,-16,123,15,3,0
+18,Calthion palustris,L1,3,3,51,-16,123,15,3,2
+18,Calthion palustris,LV,2,1,5,-16,117,16,2,0
+18,Calthion palustris,LV,2,1,5,-16,117,16,2,2
+18,Calthion palustris,LV,2,1,5,-16,117,16,3,0
+18,Calthion palustris,LV,2,1,5,-16,117,16,3,2
+18,Calthion palustris,LV,2,2,5,-16,117,16,2,0
+18,Calthion palustris,LV,2,2,5,-16,117,16,2,2
+18,Calthion palustris,LV,2,2,5,-16,117,16,3,0
+18,Calthion palustris,LV,2,2,5,-16,117,16,3,2
+18,Calthion palustris,LV,2,3,5,-16,117,16,2,0
+18,Calthion palustris,LV,2,3,5,-16,117,16,2,2
+18,Calthion palustris,LV,2,3,5,-16,117,16,3,0
+18,Calthion palustris,LV,2,3,5,-16,117,16,3,2
+18,Calthion palustris,LV,3,1,5,-16,117,16,2,0
+18,Calthion palustris,LV,3,1,5,-16,117,16,2,2
+18,Calthion palustris,LV,3,1,5,-16,117,16,3,0
+18,Calthion palustris,LV,3,1,5,-16,117,16,3,2
+18,Calthion palustris,LV,3,2,5,-16,117,16,2,0
+18,Calthion palustris,LV,3,2,5,-16,117,16,2,2
+18,Calthion palustris,LV,3,2,5,-16,117,16,3,0
+18,Calthion palustris,LV,3,2,5,-16,117,16,3,2
+18,Calthion palustris,LV,3,3,5,-16,117,16,2,0
+18,Calthion palustris,LV,3,3,5,-16,117,16,2,2
+18,Calthion palustris,LV,3,3,5,-16,117,16,3,0
+18,Calthion palustris,LV,3,3,5,-16,117,16,3,2
+18,Calthion palustris,V,2,1,25,-33,81,-19,2,0
+18,Calthion palustris,V,2,1,25,-33,81,-19,2,2
+18,Calthion palustris,V,2,1,25,-33,81,-19,3,0
+18,Calthion palustris,V,2,1,25,-33,81,-19,3,2
+18,Calthion palustris,V,2,2,25,-33,81,-19,2,0
+18,Calthion palustris,V,2,2,25,-33,81,-19,2,2
+18,Calthion palustris,V,2,2,25,-33,81,-19,3,0
+18,Calthion palustris,V,2,2,25,-33,81,-19,3,2
+18,Calthion palustris,V,3,1,25,-33,81,-19,2,0
+18,Calthion palustris,V,3,1,25,-33,81,-19,2,2
+18,Calthion palustris,V,3,1,25,-33,81,-19,3,0
+18,Calthion palustris,V,3,1,25,-33,81,-19,3,2
+18,Calthion palustris,V,3,2,25,-33,81,-19,2,0
+18,Calthion palustris,V,3,2,25,-33,81,-19,2,2
+18,Calthion palustris,V,3,2,25,-33,81,-19,3,0
+18,Calthion palustris,V,3,2,25,-33,81,-19,3,2
+18,Calthion palustris,Z1,2,1,51,1,102,46,2,0
+18,Calthion palustris,Z1,2,1,51,1,102,46,2,2
+18,Calthion palustris,Z1,2,1,51,1,102,46,3,0
+18,Calthion palustris,Z1,2,1,51,1,102,46,3,2
+18,Calthion palustris,Z1,2,2,51,1,102,46,2,0
+18,Calthion palustris,Z1,2,2,51,1,102,46,2,2
+18,Calthion palustris,Z1,2,2,51,1,102,46,3,0
+18,Calthion palustris,Z1,2,2,51,1,102,46,3,2
+18,Calthion palustris,Z1,2,3,51,1,102,46,2,0
+18,Calthion palustris,Z1,2,3,51,1,102,46,2,2
+18,Calthion palustris,Z1,2,3,51,1,102,46,3,0
+18,Calthion palustris,Z1,2,3,51,1,102,46,3,2
+18,Calthion palustris,Z1,3,1,51,1,102,46,2,0
+18,Calthion palustris,Z1,3,1,51,1,102,46,2,2
+18,Calthion palustris,Z1,3,1,51,1,102,46,3,0
+18,Calthion palustris,Z1,3,1,51,1,102,46,3,2
+18,Calthion palustris,Z1,3,2,51,1,102,46,2,0
+18,Calthion palustris,Z1,3,2,51,1,102,46,2,2
+18,Calthion palustris,Z1,3,2,51,1,102,46,3,0
+18,Calthion palustris,Z1,3,2,51,1,102,46,3,2
+18,Calthion palustris,Z1,3,3,51,1,102,46,2,0
+18,Calthion palustris,Z1,3,3,51,1,102,46,2,2
+18,Calthion palustris,Z1,3,3,51,1,102,46,3,0
+18,Calthion palustris,Z1,3,3,51,1,102,46,3,2
+18,Calthion palustris,Z2,2,1,51,-12,99,51,2,0
+18,Calthion palustris,Z2,2,1,51,-12,99,51,2,2
+18,Calthion palustris,Z2,2,1,51,-12,99,51,3,0
+18,Calthion palustris,Z2,2,1,51,-12,99,51,3,2
+18,Calthion palustris,Z2,3,1,51,-12,99,51,2,0
+18,Calthion palustris,Z2,3,1,51,-12,99,51,2,2
+18,Calthion palustris,Z2,3,1,51,-12,99,51,3,0
+18,Calthion palustris,Z2,3,1,51,-12,99,51,3,2
+18,Calthion palustris,ZV,2,1,7,-9,46,23,2,0
+18,Calthion palustris,ZV,2,1,7,-9,46,23,2,2
+18,Calthion palustris,ZV,2,1,7,-9,46,23,3,0
+18,Calthion palustris,ZV,2,1,7,-9,46,23,3,2
+18,Calthion palustris,ZV,2,2,7,-9,46,23,2,0
+18,Calthion palustris,ZV,2,2,7,-9,46,23,2,2
+18,Calthion palustris,ZV,2,2,7,-9,46,23,3,0
+18,Calthion palustris,ZV,2,2,7,-9,46,23,3,2
+18,Calthion palustris,ZV,3,1,7,-9,46,23,2,0
+18,Calthion palustris,ZV,3,1,7,-9,46,23,2,2
+18,Calthion palustris,ZV,3,1,7,-9,46,23,3,0
+18,Calthion palustris,ZV,3,1,7,-9,46,23,3,2
+18,Calthion palustris,ZV,3,2,7,-9,46,23,2,0
+18,Calthion palustris,ZV,3,2,7,-9,46,23,2,2
+18,Calthion palustris,ZV,3,2,7,-9,46,23,3,0
+18,Calthion palustris,ZV,3,2,7,-9,46,23,3,2
+19,Alopecurion pratensis,K1,2,1,23,-3,90,52,2,1
+19,Alopecurion pratensis,K1,2,1,23,-3,90,52,2,2
+19,Alopecurion pratensis,K1,2,1,23,-3,90,52,3,1
+19,Alopecurion pratensis,K1,2,1,23,-3,90,52,3,2
+19,Alopecurion pratensis,K1,2,2,23,-3,90,52,2,1
+19,Alopecurion pratensis,K1,2,2,23,-3,90,52,2,2
+19,Alopecurion pratensis,K1,2,2,23,-3,90,52,3,1
+19,Alopecurion pratensis,K1,2,2,23,-3,90,52,3,2
+19,Alopecurion pratensis,K1,2,3,23,-3,90,52,2,1
+19,Alopecurion pratensis,K1,2,3,23,-3,90,52,2,2
+19,Alopecurion pratensis,K1,2,3,23,-3,90,52,3,1
+19,Alopecurion pratensis,K1,2,3,23,-3,90,52,3,2
+19,Alopecurion pratensis,K1,3,1,23,-3,90,52,2,1
+19,Alopecurion pratensis,K1,3,1,23,-3,90,52,2,2
+19,Alopecurion pratensis,K1,3,1,23,-3,90,52,3,1
+19,Alopecurion pratensis,K1,3,1,23,-3,90,52,3,2
+19,Alopecurion pratensis,K1,3,2,23,-3,90,52,2,1
+19,Alopecurion pratensis,K1,3,2,23,-3,90,52,2,2
+19,Alopecurion pratensis,K1,3,2,23,-3,90,52,3,1
+19,Alopecurion pratensis,K1,3,2,23,-3,90,52,3,2
+19,Alopecurion pratensis,K1,3,3,23,-3,90,52,2,1
+19,Alopecurion pratensis,K1,3,3,23,-3,90,52,2,2
+19,Alopecurion pratensis,K1,3,3,23,-3,90,52,3,1
+19,Alopecurion pratensis,K1,3,3,23,-3,90,52,3,2
+19,Alopecurion pratensis,K1,4,1,23,-3,90,52,2,1
+19,Alopecurion pratensis,K1,4,1,23,-3,90,52,2,2
+19,Alopecurion pratensis,K1,4,1,23,-3,90,52,3,1
+19,Alopecurion pratensis,K1,4,1,23,-3,90,52,3,2
+19,Alopecurion pratensis,K1,4,2,23,-3,90,52,2,1
+19,Alopecurion pratensis,K1,4,2,23,-3,90,52,2,2
+19,Alopecurion pratensis,K1,4,2,23,-3,90,52,3,1
+19,Alopecurion pratensis,K1,4,2,23,-3,90,52,3,2
+19,Alopecurion pratensis,K1,4,3,23,-3,90,52,2,1
+19,Alopecurion pratensis,K1,4,3,23,-3,90,52,2,2
+19,Alopecurion pratensis,K1,4,3,23,-3,90,52,3,1
+19,Alopecurion pratensis,K1,4,3,23,-3,90,52,3,2
+19,Alopecurion pratensis,KV,2,1,23,-3,90,52,2,1
+19,Alopecurion pratensis,KV,2,1,23,-3,90,52,2,2
+19,Alopecurion pratensis,KV,2,1,23,-3,90,52,3,1
+19,Alopecurion pratensis,KV,2,1,23,-3,90,52,3,2
+19,Alopecurion pratensis,KV,2,2,23,-3,90,52,2,1
+19,Alopecurion pratensis,KV,2,2,23,-3,90,52,2,2
+19,Alopecurion pratensis,KV,2,2,23,-3,90,52,3,1
+19,Alopecurion pratensis,KV,2,2,23,-3,90,52,3,2
+19,Alopecurion pratensis,KV,3,1,23,-3,90,52,2,1
+19,Alopecurion pratensis,KV,3,1,23,-3,90,52,2,2
+19,Alopecurion pratensis,KV,3,1,23,-3,90,52,3,1
+19,Alopecurion pratensis,KV,3,1,23,-3,90,52,3,2
+19,Alopecurion pratensis,KV,3,2,23,-3,90,52,2,1
+19,Alopecurion pratensis,KV,3,2,23,-3,90,52,2,2
+19,Alopecurion pratensis,KV,3,2,23,-3,90,52,3,1
+19,Alopecurion pratensis,KV,3,2,23,-3,90,52,3,2
+19,Alopecurion pratensis,KV,4,1,23,-3,90,52,2,1
+19,Alopecurion pratensis,KV,4,1,23,-3,90,52,2,2
+19,Alopecurion pratensis,KV,4,1,23,-3,90,52,3,1
+19,Alopecurion pratensis,KV,4,1,23,-3,90,52,3,2
+19,Alopecurion pratensis,KV,4,2,23,-3,90,52,2,1
+19,Alopecurion pratensis,KV,4,2,23,-3,90,52,2,2
+19,Alopecurion pratensis,KV,4,2,23,-3,90,52,3,1
+19,Alopecurion pratensis,KV,4,2,23,-3,90,52,3,2
+19,Alopecurion pratensis,L1,2,1,21,-9,109,35,2,1
+19,Alopecurion pratensis,L1,2,1,21,-9,109,35,2,2
+19,Alopecurion pratensis,L1,2,1,21,-9,109,35,3,1
+19,Alopecurion pratensis,L1,2,1,21,-9,109,35,3,2
+19,Alopecurion pratensis,L1,2,2,21,-9,109,35,2,1
+19,Alopecurion pratensis,L1,2,2,21,-9,109,35,2,2
+19,Alopecurion pratensis,L1,2,2,21,-9,109,35,3,1
+19,Alopecurion pratensis,L1,2,2,21,-9,109,35,3,2
+19,Alopecurion pratensis,L1,3,1,21,-9,109,35,2,1
+19,Alopecurion pratensis,L1,3,1,21,-9,109,35,2,2
+19,Alopecurion pratensis,L1,3,1,21,-9,109,35,3,1
+19,Alopecurion pratensis,L1,3,1,21,-9,109,35,3,2
+19,Alopecurion pratensis,L1,3,2,21,-9,109,35,2,1
+19,Alopecurion pratensis,L1,3,2,21,-9,109,35,2,2
+19,Alopecurion pratensis,L1,3,2,21,-9,109,35,3,1
+19,Alopecurion pratensis,L1,3,2,21,-9,109,35,3,2
+19,Alopecurion pratensis,L1,4,1,21,-9,109,35,2,1
+19,Alopecurion pratensis,L1,4,1,21,-9,109,35,2,2
+19,Alopecurion pratensis,L1,4,1,21,-9,109,35,3,1
+19,Alopecurion pratensis,L1,4,1,21,-9,109,35,3,2
+19,Alopecurion pratensis,L1,4,2,21,-9,109,35,2,1
+19,Alopecurion pratensis,L1,4,2,21,-9,109,35,2,2
+19,Alopecurion pratensis,L1,4,2,21,-9,109,35,3,1
+19,Alopecurion pratensis,L1,4,2,21,-9,109,35,3,2
+19,Alopecurion pratensis,Z1,2,1,23,-3,90,52,2,1
+19,Alopecurion pratensis,Z1,2,1,23,-3,90,52,2,2
+19,Alopecurion pratensis,Z1,2,1,23,-3,90,52,3,1
+19,Alopecurion pratensis,Z1,2,1,23,-3,90,52,3,2
+19,Alopecurion pratensis,Z1,3,1,23,-3,90,52,2,1
+19,Alopecurion pratensis,Z1,3,1,23,-3,90,52,2,2
+19,Alopecurion pratensis,Z1,3,1,23,-3,90,52,3,1
+19,Alopecurion pratensis,Z1,3,1,23,-3,90,52,3,2
+19,Alopecurion pratensis,Z1,4,1,23,-3,90,52,2,1
+19,Alopecurion pratensis,Z1,4,1,23,-3,90,52,2,2
+19,Alopecurion pratensis,Z1,4,1,23,-3,90,52,3,1
+19,Alopecurion pratensis,Z1,4,1,23,-3,90,52,3,2
+19,Alopecurion pratensis,Z2,2,1,23,-3,90,52,2,1
+19,Alopecurion pratensis,Z2,2,1,23,-3,90,52,2,2
+19,Alopecurion pratensis,Z2,2,1,23,-3,90,52,3,1
+19,Alopecurion pratensis,Z2,2,1,23,-3,90,52,3,2
+19,Alopecurion pratensis,Z2,3,1,23,-3,90,52,2,1
+19,Alopecurion pratensis,Z2,3,1,23,-3,90,52,2,2
+19,Alopecurion pratensis,Z2,3,1,23,-3,90,52,3,1
+19,Alopecurion pratensis,Z2,3,1,23,-3,90,52,3,2
+19,Alopecurion pratensis,Z2,4,1,23,-3,90,52,2,1
+19,Alopecurion pratensis,Z2,4,1,23,-3,90,52,2,2
+19,Alopecurion pratensis,Z2,4,1,23,-3,90,52,3,1
+19,Alopecurion pratensis,Z2,4,1,23,-3,90,52,3,2
+19,Alopecurion pratensis,ZV,2,1,23,-3,90,52,2,1
+19,Alopecurion pratensis,ZV,2,1,23,-3,90,52,2,2
+19,Alopecurion pratensis,ZV,2,1,23,-3,90,52,3,1
+19,Alopecurion pratensis,ZV,2,1,23,-3,90,52,3,2
+19,Alopecurion pratensis,ZV,2,2,23,-3,90,52,2,1
+19,Alopecurion pratensis,ZV,2,2,23,-3,90,52,2,2
+19,Alopecurion pratensis,ZV,2,2,23,-3,90,52,3,1
+19,Alopecurion pratensis,ZV,2,2,23,-3,90,52,3,2
+19,Alopecurion pratensis,ZV,3,1,23,-3,90,52,2,1
+19,Alopecurion pratensis,ZV,3,1,23,-3,90,52,2,2
+19,Alopecurion pratensis,ZV,3,1,23,-3,90,52,3,1
+19,Alopecurion pratensis,ZV,3,1,23,-3,90,52,3,2
+19,Alopecurion pratensis,ZV,3,2,23,-3,90,52,2,1
+19,Alopecurion pratensis,ZV,3,2,23,-3,90,52,2,2
+19,Alopecurion pratensis,ZV,3,2,23,-3,90,52,3,1
+19,Alopecurion pratensis,ZV,3,2,23,-3,90,52,3,2
+19,Alopecurion pratensis,ZV,4,1,23,-3,90,52,2,1
+19,Alopecurion pratensis,ZV,4,1,23,-3,90,52,2,2
+19,Alopecurion pratensis,ZV,4,1,23,-3,90,52,3,1
+19,Alopecurion pratensis,ZV,4,1,23,-3,90,52,3,2
+19,Alopecurion pratensis,ZV,4,2,23,-3,90,52,2,1
+19,Alopecurion pratensis,ZV,4,2,23,-3,90,52,2,2
+19,Alopecurion pratensis,ZV,4,2,23,-3,90,52,3,1
+19,Alopecurion pratensis,ZV,4,2,23,-3,90,52,3,2
+20,Arrhenatherion elatioris,K1,2,1,85,25,250,50,2,0
+20,Arrhenatherion elatioris,K1,2,1,85,25,250,50,3,0
+20,Arrhenatherion elatioris,K1,2,2,85,25,250,50,2,0
+20,Arrhenatherion elatioris,K1,2,2,85,25,250,50,3,0
+20,Arrhenatherion elatioris,K1,2,3,85,25,250,50,2,0
+20,Arrhenatherion elatioris,K1,2,3,85,25,250,50,3,0
+20,Arrhenatherion elatioris,K1,3,1,85,25,250,50,2,0
+20,Arrhenatherion elatioris,K1,3,1,85,25,250,50,3,0
+20,Arrhenatherion elatioris,K1,3,2,85,25,250,50,2,0
+20,Arrhenatherion elatioris,K1,3,2,85,25,250,50,3,0
+20,Arrhenatherion elatioris,K1,3,3,85,25,250,50,2,0
+20,Arrhenatherion elatioris,K1,3,3,85,25,250,50,3,0
+20,Arrhenatherion elatioris,L1,2,1,105,25,250,50,2,0
+20,Arrhenatherion elatioris,L1,2,1,105,25,250,50,3,0
+20,Arrhenatherion elatioris,L1,2,2,105,25,250,50,2,0
+20,Arrhenatherion elatioris,L1,2,2,105,25,250,50,3,0
+20,Arrhenatherion elatioris,L1,3,1,105,25,250,50,2,0
+20,Arrhenatherion elatioris,L1,3,1,105,25,250,50,3,0
+20,Arrhenatherion elatioris,L1,3,2,105,25,250,50,2,0
+20,Arrhenatherion elatioris,L1,3,2,105,25,250,50,3,0
+20,Arrhenatherion elatioris,Z1,2,1,139,25,250,187,2,0
+20,Arrhenatherion elatioris,Z1,2,1,139,25,250,187,3,0
+20,Arrhenatherion elatioris,Z1,3,1,139,25,250,187,2,0
+20,Arrhenatherion elatioris,Z1,3,1,139,25,250,187,3,0
+21,Cynosurion cristati,K1,2,1,70,-14,152,33,2,0
+21,Cynosurion cristati,K1,2,1,70,-14,152,33,3,0
+21,Cynosurion cristati,K1,2,2,70,-14,152,33,2,0
+21,Cynosurion cristati,K1,2,2,70,-14,152,33,3,0
+21,Cynosurion cristati,K1,2,3,70,-14,152,33,2,0
+21,Cynosurion cristati,K1,2,3,70,-14,152,33,3,0
+21,Cynosurion cristati,K1,3,1,70,-14,152,33,2,0
+21,Cynosurion cristati,K1,3,1,70,-14,152,33,3,0
+21,Cynosurion cristati,K1,3,2,70,-14,152,33,2,0
+21,Cynosurion cristati,K1,3,2,70,-14,152,33,3,0
+21,Cynosurion cristati,K1,3,3,70,-14,152,33,2,0
+21,Cynosurion cristati,K1,3,3,70,-14,152,33,3,0
+21,Cynosurion cristati,KV,2,2,70,-14,152,33,2,0
+21,Cynosurion cristati,KV,2,2,70,-14,152,33,3,0
+21,Cynosurion cristati,KV,3,2,70,-14,152,33,2,0
+21,Cynosurion cristati,KV,3,2,70,-14,152,33,3,0
+21,Cynosurion cristati,L1,2,1,70,-14,152,33,2,0
+21,Cynosurion cristati,L1,2,1,70,-14,152,33,3,0
+21,Cynosurion cristati,L1,2,2,70,-14,152,33,2,0
+21,Cynosurion cristati,L1,2,2,70,-14,152,33,3,0
+21,Cynosurion cristati,L1,2,3,70,-14,152,33,2,0
+21,Cynosurion cristati,L1,2,3,70,-14,152,33,3,0
+21,Cynosurion cristati,L1,3,1,70,-14,152,33,2,0
+21,Cynosurion cristati,L1,3,1,70,-14,152,33,3,0
+21,Cynosurion cristati,L1,3,2,70,-14,152,33,2,0
+21,Cynosurion cristati,L1,3,2,70,-14,152,33,3,0
+21,Cynosurion cristati,L1,3,3,70,-14,152,33,2,0
+21,Cynosurion cristati,L1,3,3,70,-14,152,33,3,0
+21,Cynosurion cristati,Z1,2,1,80,13,152,89,2,0
+21,Cynosurion cristati,Z1,2,1,80,13,152,89,3,0
+21,Cynosurion cristati,Z1,2,2,80,13,152,89,2,0
+21,Cynosurion cristati,Z1,2,2,80,13,152,89,3,0
+21,Cynosurion cristati,Z1,3,1,80,13,152,89,2,0
+21,Cynosurion cristati,Z1,3,1,80,13,152,89,3,0
+21,Cynosurion cristati,Z1,3,2,80,13,152,89,2,0
+21,Cynosurion cristati,Z1,3,2,80,13,152,89,3,0
+22,Ericion tetralicis,Z1,1,1,47,-20,166,1,1,0
+22,Ericion tetralicis,Z1,1,1,47,-20,166,1,1,2
+22,Ericion tetralicis,Z2,1,1,46,-3,117,36,1,0
+22,Ericion tetralicis,Z2,1,1,46,-3,117,36,1,2
+23,Venige heide,V,1,1,20,-6,74,13,1,0
+23,Venige heide,V,1,2,20,-6,74,13,1,0
+23,Venige heide,Z1,1,1,20,1,74,29,1,0
+23,Venige heide,Z2,1,1,20,1,74,29,1,0
+23,Venige heide,ZV,1,1,20,-6,74,13,1,0
+23,Venige heide,ZV,1,2,20,-6,74,13,1,0
+24,Oxycocco - Ericion,V,1,1,13,-17,43,-8,0,0
+24,Oxycocco - Ericion,V,1,2,13,-17,43,-8,0,0
+24,Oxycocco - Ericion,Z1,1,1,16,-11,23,7,0,0
+24,Oxycocco - Ericion,Z2,1,1,16,-11,23,11,0,0
+24,Oxycocco - Ericion,ZV,1,1,13,-17,3,-8,0,0
+24,Oxycocco - Ericion,ZV,1,2,13,-17,3,-8,0,0
+25,Rynchosporion albae,Z1,1,1,-2,-44,66,-12,0,0
+25,Rynchosporion albae,Z1,1,1,-2,-44,66,-12,0,2
+25,Rynchosporion albae,Z1,1,1,-2,-44,66,-12,1,0
+25,Rynchosporion albae,Z1,1,1,-2,-44,66,-12,1,2
+26,RG Molinia caerulea [Oxycocco-sphagnetea],Z1,2,1,100,-9,127,7,1,0
+26,RG Molinia caerulea [Oxycocco-sphagnetea],Z1,3,1,100,-9,127,7,1,0
+26,RG Molinia caerulea [Oxycocco-sphagnetea],Z2,2,1,100,-9,127,7,1,0
+26,RG Molinia caerulea [Oxycocco-sphagnetea],Z2,3,1,100,-9,127,7,1,0
+26,RG Molinia caerulea [Oxycocco-sphagnetea],ZV,2,1,5,-9,67,7,1,0
+26,RG Molinia caerulea [Oxycocco-sphagnetea],ZV,2,2,5,-9,67,7,1,0
+26,RG Molinia caerulea [Oxycocco-sphagnetea],ZV,3,1,5,-9,67,7,1,0
+26,RG Molinia caerulea [Oxycocco-sphagnetea],ZV,3,2,5,-9,67,7,1,0
+27,RG Myrica gale [Ericion tetralicis],V,1,1,60,-16,126,2,1,0
+27,RG Myrica gale [Ericion tetralicis],V,1,2,60,-16,126,2,1,0
+27,RG Myrica gale [Ericion tetralicis],Z1,1,1,76,-10,126,3,1,0
+27,RG Myrica gale [Ericion tetralicis],Z2,1,1,76,-2,126,33,1,0
+27,RG Myrica gale [Ericion tetralicis],ZV,1,1,22,-3,126,9,1,0
+27,RG Myrica gale [Ericion tetralicis],ZV,1,2,22,-3,126,9,1,0
+28,Calluno - Genistion pilosae,Z1,1,1,172,51,196,114,1,0

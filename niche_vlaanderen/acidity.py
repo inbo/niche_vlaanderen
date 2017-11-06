@@ -34,22 +34,22 @@ class Acidity(object):
 
         self._ct_acidity = pd.read_csv(ct_acidity)
         self._ct_soil_mlw = pd.read_csv(ct_soil_mlw_class)
-        self._ct_soil_codes = pd.read_csv(ct_soil_codes).set_index("soil_code")
+        self._ct_soil_codes = pd.read_csv(ct_soil_codes).set_index("soil_name")
         self._lnk_acidity = pd.read_csv(lnk_acidity)
         self._ct_seepage = pd.read_csv(ct_seepage)
 
-    def _calculate_soil_mlw(self, soil_code, mlw):
+    def _calculate_soil_mlw(self, soil_name, mlw):
         # determine soil_group for soil_code
         orig_shape = mlw.shape
-        soil_code = soil_code.flatten()
+        soil_name = soil_name.flatten()
         mlw = mlw.flatten()
 
-        soil_group = self._ct_soil_codes.soil_group[soil_code]\
+        soil_group = self._ct_soil_codes.soil_group[soil_name]\
             .values.astype("int8")
         # the function above gives 0 for no data
         soil_group[soil_group == 0] = -99
 
-        result = np.full(soil_code.shape, -99)
+        result = np.full(soil_name.shape, -99)
         for sel_group, subtable in self._ct_soil_mlw.groupby(["soil_group"]):
 
             subtable = subtable.copy().reset_index(drop=True)

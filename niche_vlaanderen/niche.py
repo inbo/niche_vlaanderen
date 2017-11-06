@@ -16,6 +16,7 @@ import yaml
 import textwrap
 import datetime
 import sys
+from pkg_resources import resource_filename
 
 _allowed_input = set([
     "soil_code", "mlw", "msw", "mhw", "seepage",
@@ -241,12 +242,28 @@ class Niche(object):
             if band.dtype == "uint8":
                 band = band.astype(int)
 
-            if f in ('mhw', 'mlw', 'msw'):
+            if f in ('mhw', 'mlw', 'msw', 'soil_code'):
                 band = band.astype(int)
 
             if f in ("nitrogen_animal", "nitrogen_fertilizer",
                      "nitrogen_atmospheric"):
                 band = band.astype('float32')
+
+            if f == 'soil_code' and np.all(band[band != nodata] >= 10000):
+                band[band != nodata] = np.round(band[band != nodata] /10000)
+
+            if f == 'soil_code':
+                # convert soil_code to soil_name
+                ct_soil_code_csv = resource_filename(
+                       "niche_vlaanderen", "../system_tables/soil_codes.csv")
+
+                ct_soil_code = pd.read_csv(ct_soil_code_csv).set_index("soil_code")
+
+                soil_name = np.full(band.shape, "", dtype="U2")
+                soil_name[band > 0] = ct_soil_code.soil_name[band[band != nodata]]
+
+                inputarray["soil_name"] = soil_name
+
 
             # create a mask for no-data values, taking into account data-types
             if band.dtype == 'float32':
@@ -361,7 +378,7 @@ class Niche(object):
             nl = NutrientLevel(**ct_nl)
 
             self._abiotic["nutrient_level"] = nl.calculate(
-                self._inputarray["soil_code"], self._inputarray["msw"],
+                self._inputarray["soil_name"], self._inputarray["msw"],
                 self._inputarray["nitrogen_atmospheric"],
                 self._inputarray["nitrogen_animal"],
                 self._inputarray["nitrogen_fertilizer"],
@@ -370,7 +387,7 @@ class Niche(object):
 
             acidity = Acidity()
             self._abiotic["acidity"] = acidity.calculate(
-                self._inputarray["soil_code"], self._inputarray["mlw"],
+                self._inputarray["soil_name"], self._inputarray["mlw"],
                 self._inputarray["inundation_acidity"],
                 self._inputarray["seepage"],
                 self._inputarray["conductivity"],
@@ -383,7 +400,7 @@ class Niche(object):
         if "management_vegetation" not in self._inputarray:
             self._inputarray["management_vegetation"] = None
 
-        veg_arguments = dict(soil_code=self._inputarray["soil_code"],
+        veg_arguments = dict(soil_name=self._inputarray["soil_name"],
                              mhw=self._inputarray["mhw"],
                              mlw=self._inputarray["mlw"])
 
@@ -407,7 +424,7 @@ class Niche(object):
 
         if deviation:
             self._deviation = vegetation.calculate_deviation(
-                self._inputarray["soil_code"], self._inputarray["mhw"],
+                self._inputarray["soil_name"], self._inputarray["mhw"],
                 self._inputarray["mlw"]
             )
 
