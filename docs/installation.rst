@@ -17,23 +17,28 @@ Start the `Anaconda prompt` from the start menu
 
 Install the dependant packages
 
-.. code-block:: python
+.. code-block:: default
 
     (C:\Users\johan\Miniconda3) C:\Users\johan> conda config --add channels conda-forge
     (C:\Users\johan\Miniconda3) C:\Users\johan> conda install numpy rasterio pandas pyyaml
 
 Install niche itself (last version):
 
-.. code-block:: python
+.. code-block:: default
 
     (C:\Users\johan\Miniconda3) C:\Users\johan> pip install git+https://github.com/INBO/niche_vlaanderen
 
 
 You can verify the installation was succesful by running the cli interface
 
-.. code-block:: python
+.. code-block:: default
 
-    (C:\Users\johan\Miniconda3) C:\Users\johan> niche
+    (C:\Users\johan\Miniconda3) C:\Users\johan> niche --help
     Usage: niche [OPTIONS] CONFIG
 
-    Error: Missing argument "config".
+      Command line interface to the NICHE vegetation model
+
+    Options:
+      --example  prints an example configuration file
+      --help     Show this message and exit.
+
