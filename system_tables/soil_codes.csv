@@ -1,13 +1,13 @@
 soil_code,soil_name,description,soil_group
-20000,K1,"alluviale kleigronden, arm aan OM",1
-30000,KV,"alluviale kleigronden, rijk aan OM, venige klei, klei op veen",2
-50000,Le,"eolische leemgronden",1
-60000,MK,"maritieme klei",1
-70000,P,trilveen,3
-80000,V,veen,2
-110000,Z1,"humusarme zandgronden (dunne humuslaag), podzol",1
-120000,Z2,humusrijke zandgronden (dikke humuslaag),1
-130000,ZV,"venige zandgronden, moerige zandgronden, zandige veengronden",2
-140000,L1,"alluviale leemgronden, arm aan OM",1
-150000,LV,"alluviale leemgronden, rijk aan OM, venige leemgronden",2
-100000,NG,"gronden die niet in aanmerking komen voor NICHE: open water, bebouwd of sterk beïnvloed, droge gronden, open water, niet gespecifieerd",1
+2,K1,"alluviale kleigronden, arm aan OM",1
+3,KV,"alluviale kleigronden, rijk aan OM, venige klei, klei op veen",2
+5,Le,"eolische leemgronden",1
+6,MK,"maritieme klei",1
+7,P,trilveen,3
+8,V,veen,2
+11,Z1,"humusarme zandgronden (dunne humuslaag), podzol",1
+12,Z2,humusrijke zandgronden (dikke humuslaag),1
+13,ZV,"venige zandgronden, moerige zandgronden, zandige veengronden",2
+14,L1,"alluviale leemgronden, arm aan OM",1
+15,LV,"alluviale leemgronden, rijk aan OM, venige leemgronden",2
+10,NG,"gronden die niet in aanmerking komen voor NICHE: open water, bebouwd of sterk beïnvloed, droge gronden, open water, niet gespecifieerd",1
