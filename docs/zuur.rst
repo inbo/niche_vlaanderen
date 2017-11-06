@@ -1,4 +1,4 @@
-.. _zuur:
+.. _acidity:
 
 ###########################################
 Bepaling van de zuurgraadklasse ``acidity``

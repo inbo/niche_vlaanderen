@@ -7,7 +7,7 @@ Bepaling vegetatie ``vegetation``
 
 Na de bepaling van de trofie en de zuurgraadklasse kan de eigenlijke bepaling van de mogelijke vegetatie gebeuren.
 
-Dit gebeurt aan de hand van de tabel `niche_vegetation <https://github.com/inbo/niche_vlaanderen/blob/master/system_tables/niche_vegetation.csv>`_.
+Dit gebeurt aan de hand van de tabel :ref:`_ct_niche`.
 
 Optioneel kunnen :ref:`management` en de :ref:`inundation_vegetation` mee als selectiefactor gebruikt worden.
 
@@ -56,3 +56,11 @@ Eenvoudig niche model
 
 Bij het eenvoudig Niche model wordt enkel rekening gehouden met :ref:`mhw`, :ref:`mlw` en :ref:`soil_code`.
 De berekening gebeurt verder gelijkaardig aan bovenstaande berekening, maar vegetatie is mogelijk van zodra die mogelijk is, zonder rekening te houden met de andere invoerwaarden.
+
+.. _deviation:
+
+Afwijking van het eenvoudig niche model
+=======================================
+
+Voor veel studies is het niet enkel interessant om na te gaan welke vegetatie kan voorkomen, maar ook welke wijziging in glg of ghg vereist is om een bepaalde vegetatie mogelijk te maken.
+Dit kan aan de hand van afwijkingskaarten.

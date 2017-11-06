@@ -7,7 +7,7 @@ Het Python package ``niche_vlaanderen`` laat de gebruiker toe om op basis van ee
 De berekening gebeurt in drie stappen:
 
  * :ref:`trofie`
- * :ref:`zuur`
+ * :ref:`acidity`
  * :ref:`vegetatie`
 
 
