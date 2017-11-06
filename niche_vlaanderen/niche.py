@@ -32,6 +32,10 @@ _minimal_input = set([
 
 _abiotic_keys = set(["nutrient_level", "acidity"])
 
+_code_tables = ["ct_acidity", "ct_soil_mlw_class", "ct_soil_codes",
+                "lnk_acidity", "ct_seepage", "ct_vegetation", "ct_management",
+                "ct_nutrient_level", "ct_mineralisation"]
+
 logging.basicConfig()
 
 
@@ -62,6 +66,7 @@ class Niche(object):
         self._inputvalues = dict()
         self._inputarray = dict()
         self._abiotic = dict()
+        self._code_tables = dict()
         self._result = dict()
         self._deviation = dict()
         self._model_options=dict()
@@ -106,6 +111,12 @@ class Niche(object):
 
         return s
 
+    def _set_ct(self, key, value):
+        if (key not in _code_tables):
+            raise TypeException("Unrecognized codetable %s" % key)
+
+        self._code_tables[key] = value
+
     def set_input(self, key, value):
         """ Adds a raster or numeric value as input layer
 
@@ -121,6 +132,9 @@ class Niche(object):
             everywhere.
 
         """
+        if (key in _code_tables):
+            self._set_ct(key, value)
+            return
 
         # check type is valid value from list
         if (key not in _allowed_input):
@@ -149,13 +163,18 @@ class Niche(object):
         with open(config, 'r') as stream:
             config_loaded = yaml.load(stream)
 
+        if "code_tables" in config_loaded.keys():
+            for k in config_loaded['code_tables'].keys():
+                value = config_loaded['code_tables'][k]
+                value = os.path.join(os.path.dirname(config), value)
+                self.set_input(k, value)
+
         # parse input_layers
         for k in config_loaded['input_layers'].keys():
             # adjust path to be relative to the yaml file
             value = config_loaded['input_layers'][k]
             if not isinstance(value, numbers.Number):
-                value = os.path.join(os.path.dirname(config),
-                                    value)
+                value = os.path.join(os.path.dirname(config), value)
             self.set_input(k, value)
 
     def run_config_file(self, config):
@@ -325,7 +344,21 @@ class Niche(object):
         self._check_input_files(full_model)
 
         if full_model and not abiotic:
-            nl = NutrientLevel()
+            if sys.version_info >= (3, 3):
+                keys = self._code_tables.keys()
+            else:
+                keys = self._code_tables.viewkeys()
+
+            keys = keys & \
+                   ['ct_acidity', 'ct_soil_mlw_class', 'ct_soil_codes',
+                    'lnk_acidity', 'ct_seepage']
+
+            ct_nl = dict()
+
+            for k in keys:
+                ct_nl[k] = self._code_tables[k]
+
+            nl = NutrientLevel(**ct_nl)
 
             self._abiotic["nutrient_level"] = nl.calculate(
                 self._inputarray["soil_code"], self._inputarray["msw"],

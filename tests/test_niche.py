@@ -310,3 +310,10 @@ class TestNiche(TestCase):
         config = 'tests/small_abiotic.yaml'
         myniche = niche_vlaanderen.Niche()
         myniche.run_config_file(config)
+
+    def overwrite_codetable(self):
+        config = 'tests/small_simple.yaml'
+        myniche = niche_vlaanderen.Niche()
+        myniche.read_config_input(config)
+        myniche.set_input('ct_acidity', 'system_tables/acidity.asc')
+        myniche.run()
