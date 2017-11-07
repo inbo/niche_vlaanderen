@@ -57,7 +57,7 @@ class Vegetation(object):
             vegetation can occur.
 
         """
-        nodata = ((soil_name == -99) | np.isnan(mhw) | np.isnan(mlw))
+        nodata = ((soil_name == "NG") | np.isnan(mhw) | np.isnan(mlw))
 
         if full_model:
             nodata = nodata | (nutrient_level == NutrientLevel.nodata) \
