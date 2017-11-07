@@ -1,4 +1,5 @@
 import rasterio
+import rasterio.plot
 
 import numpy as np
 import pandas as pd
@@ -489,7 +490,6 @@ class Niche(object):
                 dst.write(self._abiotic[vi], 1)
                 self._files_written[vi] = os.path.normpath(path)
 
-
         # deviation
         params = dict(
             driver='GTiff',
@@ -514,6 +514,19 @@ class Niche(object):
 
         with open(folder + "/log.txt", "w") as f:
             f.write(self.__repr__())
+
+    def show(self, key, contour=False):
+        if key in _allowed_input:
+            v = self._inputarray[key]
+        if key in _abiotic_keys:
+            v = self._abiotic[key]
+        if key in self._vegetation.keys():
+            v = self._vegetation[key]
+        rasterio.plot.show(v, contour)
+        if rasterio.__version__.split(".")[0] > 0:
+            rasterio.plot.show(v, contour, transform=self._context.affine)
+        else
+            rasterio.plot.show(v, contour)
 
 def indent(s, pre):
     if sys.version_info >= (3,3):
