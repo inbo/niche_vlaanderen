@@ -14,7 +14,7 @@ def cli(ctx, config, example):
     if example:
         ex = resource_filename(
                 "niche_vlaanderen",
-                "../system_tables/example.yaml")
+                "system_tables/example.yaml")
         with open(ex) as f:
             for line in f:
                 print (line)

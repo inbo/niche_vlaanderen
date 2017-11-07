@@ -256,7 +256,7 @@ class Niche(object):
             if f == 'soil_code':
                 # convert soil_code to soil_name
                 ct_soil_code_csv = resource_filename(
-                       "niche_vlaanderen", "../system_tables/soil_codes.csv")
+                       "niche_vlaanderen", "system_tables/soil_codes.csv")
 
                 ct_soil_code = pd.read_csv(ct_soil_code_csv).set_index("soil_code")
 

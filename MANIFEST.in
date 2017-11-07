@@ -1,3 +1,3 @@
-include system_tables/*.csv
-include system_tables/*.yaml
+include niche_vlaanderen/system_tables/*.csv
+include niche_vlaanderen/system_tables/*.yaml
 include testcase/*

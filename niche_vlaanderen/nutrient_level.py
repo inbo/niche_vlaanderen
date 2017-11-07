@@ -16,14 +16,14 @@ class NutrientLevel(object):
         if ct_nutrient_level is None:
             ct_nutrient_level = resource_filename(
                 "niche_vlaanderen",
-                "../system_tables/lnk_soil_nutrient_level.csv")
+                "system_tables/lnk_soil_nutrient_level.csv")
         if ct_management is None:
             ct_management = resource_filename(
-                "niche_vlaanderen", "../system_tables/management.csv")
+                "niche_vlaanderen", "system_tables/management.csv")
         if ct_mineralisation is None:
             ct_mineralisation = resource_filename(
                 "niche_vlaanderen",
-                "../system_tables/nitrogen_mineralisation.csv")
+                "system_tables/nitrogen_mineralisation.csv")
 
         self._ct_nutrient_level = pd.read_csv(ct_nutrient_level)
         self._ct_management = pd.read_csv(ct_management)

@@ -90,7 +90,7 @@ class testAcidity(TestCase):
         soil_code = raster_to_numpy("testcase/grote_nete/input/soil_code.asc")
 
         soil_code_r = np.round(soil_code / 10000)[soil_code > 0]
-        ct_soil_code = pd.read_csv("system_tables/soil_codes.csv")
+        ct_soil_code = pd.read_csv("niche_vlaanderen/system_tables/soil_codes.csv")
         ct_soil_code = ct_soil_code.set_index("soil_code")
         soil_name = np.full(soil_code.shape, "", dtype= "U2")
         soil_name[soil_code > 0] = ct_soil_code.soil_name[soil_code_r]

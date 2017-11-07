@@ -38,7 +38,7 @@ class Vegetation(object):
         if ct_vegetation is None:
             ct_vegetation = resource_filename(
                 "niche_vlaanderen",
-                "../system_tables/niche_vegetation.csv")
+                "system_tables/niche_vegetation.csv")
         self._ct_vegetation = pd.read_csv(ct_vegetation)
 
     def calculate(self, soil_name, mhw, mlw, nutrient_level=None, acidity=None,

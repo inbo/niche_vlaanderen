@@ -51,6 +51,6 @@ You can overwrite them if you specify ``abiotic`` in the model_options.
 
 A full example is given below:
 
- .. literalinclude:: ../system_tables/example.yaml
+ .. literalinclude:: ../niche_vlaanderen/system_tables/example.yaml
 
 The option ``deviation`` creates deviation maps, which show the difference between the borders specified in the niche table and the actual values of mhw and mlw for every soil type.
