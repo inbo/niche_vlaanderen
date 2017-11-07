@@ -1,0 +1,66 @@
+# Niche Vlaanderen configuration file
+#
+# input_layers take the values for every input of the niche model. It is
+# possible to specify a grid file or directory, or to specify a constant number
+#
+# Files can be specified using absolute or relative paths.
+# eg:
+#   soil_code: c:\project\dijle\mhw.tif
+#
+# Different grid types are supported. Recommended types are geotiff (.tif) and
+# .asc (which is human readable).
+#
+# Arcgis grid sets can be specified using their directory or one of the .adf
+# files below them.
+# eg:
+#   mlw: c:\project\niche\TestCase_GroteNete\InputSnapBodem\dd2_glg
+# or:
+#   mlw: c:\project\niche\TestCase_GroteNete\InputSnapBodem\dd2_glg\w001001.adf
+#
+# More information on the different options are explained in the documentation:
+# https://inbo.github.io/niche_vlaanderen/cli.html
+
+input_layers:
+  # These three input layers always have to be defined
+  soil_code: data/soil_code_small.asc
+  mhw: data/mhw_small.asc
+  mlw: data/mlw_small.asc
+  # These input layers have to be defined when running a full model
+  # When running a simple model they can be omitted.
+  msw: data/msw_small.asc
+  seepage: 0
+  inundation_acidity: 0
+  inundation_nutrient: 0
+  nitrogen_atmospheric: 30
+  nitrogen_animal: 0
+  nitrogen_fertilizer: 0
+  management: 1
+  conductivity: 501
+  rainwater: 0
+  # Both layers below are optional in a full model, but will be used if
+  # specified
+  # management_vegetation:
+  # inundation_vegetation:
+
+# model_options sets the options for running the model. The only required field
+# is output_dir. The other options are optional and will use default values
+# if not defined.
+#
+
+model_options:
+  # output_dir: directory to which the model output files have to be written.
+  output_dir: _output
+  # simple_model: default is False. If true only mhw, mlw and soil_code are
+  # used for prediction.
+  simple_model: False
+  # deviation: default is False. Create maps on the deviation between the niche
+  # required mhw/mlw and the actual mhw/mlw.
+  deviation: True
+  # abiotic: default is False. Use abiotic values specified for the Full model
+  # rather than calculating them.
+  abiotic: False
+
+
+# optionally code tables can be overwritten
+# code_tables:
+#  ct_soil_code: newsoilcode.csv
