@@ -533,3 +533,35 @@ def indent(s, pre):
         return textwrap.indent(s, pre)
     else:
         return pre + s.replace('\n', '\n' + pre)
+
+class NicheDelta(object):
+    """Class containing the difference between two niche runs
+    """
+    def __init__(self, n1, n2):
+        self._delta=dict()
+
+        if n1._context != n2._context:
+            raise NicheException(
+                "Spatial contexts differ, can not make a delta")
+        self._context = n1._context
+
+        if len(n1._vegetation) == 0 or len(n2._vegetation) == 0:
+            raise NicheException(
+                "No vegetation in nich object. Please run the model prior to "
+                "calculating a delta."
+            )
+
+        if len(n1._vegetation) != len(n2.vegetation):
+            raise NicheException(
+                "Niche vegetation objects have different length. "
+            )
+
+        for vi in n1._vegetation:
+            self._delta[vi] = n1._vegetation[vi] - n2._vegetation[vi]
+
+    def write(self, output_dir):
+        pass
+
+    def table(self):
+        pass
+    
