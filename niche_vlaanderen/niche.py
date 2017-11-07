@@ -516,17 +516,19 @@ class Niche(object):
             f.write(self.__repr__())
 
     def show(self, key, contour=False):
-        if key in _allowed_input:
+        if key in self._inputarray:
             v = self._inputarray[key]
-        if key in _abiotic_keys:
+        if key in self._abiotic:
             v = self._abiotic[key]
         if key in self._vegetation.keys():
             v = self._vegetation[key]
-        rasterio.plot.show(v, contour)
-        if rasterio.__version__.split(".")[0] > 0:
-            rasterio.plot.show(v, contour, transform=self._context.affine)
+        if key in self._deviation:
+            v = self._deviation[key]
+        if rasterio.__version__.split(".")[0] != '0':
+            rasterio.plot.show(v, contour, transform=self._context.affine,
+                               title=key)
         else:
-            rasterio.plot.show(v, contour)
+            rasterio.plot.show(v, contour, title=key)
 
 def indent(s, pre):
     if sys.version_info >= (3,3):
@@ -564,4 +566,3 @@ class NicheDelta(object):
 
     def table(self):
         pass
-    
