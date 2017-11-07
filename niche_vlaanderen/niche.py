@@ -525,7 +525,7 @@ class Niche(object):
         rasterio.plot.show(v, contour)
         if rasterio.__version__.split(".")[0] > 0:
             rasterio.plot.show(v, contour, transform=self._context.affine)
-        else
+        else:
             rasterio.plot.show(v, contour)
 
 def indent(s, pre):
