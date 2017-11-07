@@ -1,2 +1,3 @@
 include system_tables/*.csv
+include system_tables/*.yaml
 include testcase/*

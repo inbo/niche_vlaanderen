@@ -51,27 +51,6 @@ You can overwrite them if you specify ``abiotic`` in the model_options.
 
 A full example is given below:
 
- .. code-block:: yaml
-
-    input_layers:
-      mhw: data/mhw_small.asc
-      mlw: data/mlw_small.asc
-      msw: data/msw_small.asc
-      soil_code: data/soil_code_small.asc
-      seepage: 0
-      inundation_acidity: 0
-      inundation_nutrient: 0
-      nitrogen_atmospheric: 30
-      nitrogen_animal: 0
-      nitrogen_fertilizer: 0
-      management: 1
-      conductivity: 501
-      rainwater: 0
-
-    model_options:
-      simple_model: False
-      deviation: True
-      abiotic: False
-      output_dir: _output
+ .. literalinclude:: ../system_tables/example.yaml
 
 The option ``deviation`` creates deviation maps, which show the difference between the borders specified in the niche table and the actual values of mhw and mlw for every soil type.
