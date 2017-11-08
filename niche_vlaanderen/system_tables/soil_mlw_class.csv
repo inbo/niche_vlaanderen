@@ -1,5 +1,4 @@
 soil_group,mlw_min,mlw_max,soil_mlw_class
-0,0,9000,0
 1,-999,80,1
 1,80,110,2
 1,110,9000,3
