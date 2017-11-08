@@ -20,7 +20,7 @@ Install the dependant packages
 .. code-block:: default
 
     (C:\Users\johan\Miniconda3) C:\Users\johan> conda config --add channels conda-forge
-    (C:\Users\johan\Miniconda3) C:\Users\johan> conda install numpy rasterio pandas pyyaml
+    (C:\Users\johan\Miniconda3) C:\Users\johan> conda install numpy rasterio pandas pyyaml fiona
 
 Install niche itself (last version):
 

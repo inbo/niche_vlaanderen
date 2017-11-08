@@ -1,8 +1,8 @@
 .. module:: niche_vlaanderen
 
-#####################
-Running Niche
-#####################
+#######################
+Running Niche in Python
+#######################
 
 To run the niche module in Python, one has to take the following steps:
 
