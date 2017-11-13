@@ -2,7 +2,7 @@ from unittest import TestCase
 import pandas as pd
 from niche_vlaanderen.codetables import *
 import pytest
-
+import niche_vlaanderen
 
 class TestCodeTables(TestCase):
     def test_boundaries_correct(self):
@@ -40,3 +40,10 @@ class TestCodeTables(TestCase):
                                 ct_soil_codes=ct_soil_codes,
                                 lnk_acidity=lnk_acidity,
                                 ct_seepage=ct_seepage)
+
+    def test_vegetation(self):
+        # should not raise
+        v = niche_vlaanderen.Vegetation()
+        badveg =  "tests/data/bad_ct/bad_vegetation.csv"
+        with pytest.raises(CodeTableException):
+            v = niche_vlaanderen.Vegetation(ct_vegetation=badveg)

@@ -109,12 +109,12 @@ class NutrientLevel(object):
 
             soil_selected, influence_selected = name
             table_sel = subtable.copy(deep=True).reset_index(drop=True)
-            print (nitrogen)
+
             index = np.digitize(nitrogen, table_sel.total_nitrogen_max,
                                 right=True)
             selection = ((soil_code == soil_selected) &
                          (influence == influence_selected))
-            print(index)
+
             result[selection] = table_sel.nutrient_level[index][selection]
 
         # Note that niche_vlaanderen is different from the original model here:

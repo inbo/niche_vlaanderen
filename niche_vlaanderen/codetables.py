@@ -94,3 +94,29 @@ def validate_tables_nutrient_level(ct_lnk_soil_nutrient_level, ct_management,
     check_inner_join(ct_lnk_soil_nutrient_level, ct_soil_code, "soil_name")
     check_inner_join(ct_lnk_soil_nutrient_level, ct_nutrient_level,
                      "nutrient_level")
+
+
+def validate_tables_vegetation(ct_vegetation, ct_soil_code, ct_inundation,
+                               ct_management, ct_acidity, ct_nutrient_level):
+    check_inner_join(ct_vegetation, ct_soil_code, "soil_name")
+    check_inner_join(ct_vegetation, ct_inundation, "inundation")
+    check_inner_join(ct_vegetation, ct_acidity, "acidity")
+    check_inner_join(ct_vegetation, ct_nutrient_level, "nutrient_level")
+    check_inner_join(ct_vegetation, ct_management, "management", "code")
+
+    # extra check: per vegetation type, soil_code only one mhw, mlw combination
+    #  is allowed. Otherwise the simple model may give unexpected results.
+    cols = ["veg_code", "soil_name"]
+    grouped = ct_vegetation[["veg_code", "soil_name","mhw_min", "mhw_max",
+                             "mlw_min","mlw_max"]].groupby(cols)
+
+    for (veg_code, soil_name), subtable in grouped:
+        st_unique = subtable.drop_duplicates()
+
+        if st_unique.shape[0] != 1:
+            print (st_unique)
+            raise CodeTableException("Non unique mhw/mlw combinations")
+
+
+
+

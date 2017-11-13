@@ -6,7 +6,7 @@ import pandas as pd
 
 from .nutrient_level import NutrientLevel
 from .acidity import Acidity
-
+from .codetables import validate_tables_vegetation
 
 class Vegetation(object):
     """Helper class to calculate vegetation based on input arrays
@@ -27,28 +27,63 @@ class Vegetation(object):
 
     nodata = 255  # uint8
 
-    def __init__(self, ct_vegetation=None, ct_soil_code=None):
+    def __init__(self, ct_vegetation=None, ct_soil_code=None, ct_acidity=None,
+                 ct_management=None, ct_nutrient_level=None,
+                 ct_inundation=None):
         """ Initializes the Vegetation helper class
 
         This class initializes the Vegetation helper class. By default it uses
-        the codetables supplied by the niche_vlaanderen package. It is possible
-        to overwrite this by supplying the niche_vlaanderen parameter
+        the code tables supplied by the niche_vlaanderen package. It is
+        possible to overwrite this by supplying the niche_vlaanderen parameter
 
         """
         if ct_vegetation is None:
             ct_vegetation = resource_filename(
                 "niche_vlaanderen",
                 "system_tables/niche_vegetation.csv")
+
+        # Note that the next code tables are only used for validation, they are
+        # not part of the logic of the vegetation class
+
         if ct_soil_code is None:
             ct_soil_code = resource_filename(
                 "niche_vlaanderen", "system_tables/soil_codes.csv")
 
+        if ct_acidity is None:
+            ct_acidity = resource_filename(
+                "niche_vlaanderen", "system_tables/acidity.csv")
+
+        if ct_nutrient_level is None:
+            ct_nutrient_level = resource_filename(
+                "niche_vlaanderen", "system_tables/nutrient_level.csv")
+
+        if ct_management is None:
+            ct_management = resource_filename(
+                "niche_vlaanderen", "system_tables/management.csv")
+
+        if ct_inundation is None:
+            ct_inundation = resource_filename(
+                "niche_vlaanderen", "system_tables/inundation.csv")
+
         self._ct_vegetation = pd.read_csv(ct_vegetation)
+        self._ct_soil_code = pd.read_csv(ct_soil_code)
+        self._ct_acidity = pd.read_csv(ct_acidity)
+        self._ct_nutrient_level = pd.read_csv(ct_nutrient_level)
+        self._ct_management = pd.read_csv(ct_management)
+        self._ct_inundation = pd.read_csv(ct_inundation)
+
+        validate_tables_vegetation(ct_vegetation=self._ct_vegetation,
+                                   ct_soil_code=self._ct_soil_code,
+                                   ct_acidity=self._ct_acidity,
+                                   ct_management=self._ct_management,
+                                   ct_nutrient_level=self._ct_nutrient_level,
+                                   ct_inundation=self._ct_inundation)
 
         # join soil_code to soil_name where needed
-        self._ct_soil_code = pd.read_csv(ct_soil_code).set_index("soil_name")
+        self._ct_soil_code = self._ct_soil_code.set_index("soil_name")
         self._ct_vegetation["soil_code"] = \
-            self._ct_soil_code.soil_code[self._ct_vegetation["soil_name"]].reset_index().soil_code
+            self._ct_soil_code.soil_code[self._ct_vegetation["soil_name"]]\
+                .reset_index().soil_code
 
 
     def calculate(self, soil_code, mhw, mlw, nutrient_level=None, acidity=None,
