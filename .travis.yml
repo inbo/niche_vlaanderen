@@ -61,9 +61,9 @@ deploy:
           WlJBSFIyS29vbUduOGt2cFovSXJkb0g3MkJQVUdMenFzd0U2cVVBZytXd050TWY1dG0yMXNJUTZG
           MW9sYWUrRTNSUElVS3ZwemR4UHBIdkZUaHluNjg2WnNPc2NndWRYajRkR2dZQVlnRjJVSW5XMzA9
     - provider: pages
-        skip_cleanup: true
-        github_token: $GH_TOKEN
-        local_dir: docs/_build
-        on:
-          branch: master
-          python: 3.5
+      skip_cleanup: true
+      github_token: $GH_TOKEN
+      local_dir: docs/_build
+      on:
+        branch: master
+        python: 3.5
