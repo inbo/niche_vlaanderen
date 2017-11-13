@@ -2,6 +2,7 @@ import rasterio
 import rasterio.plot
 
 import numpy as np
+import numpy.ma as ma
 import pandas as pd
 
 from .vegetation import Vegetation
@@ -514,19 +515,28 @@ class Niche(object):
             f.write(self.__repr__())
 
     def show(self, key, contour=False):
+        plt = rasterio.plot.get_plt()
+        fig, ax = plt.subplots()
+
         if key in self._inputarray:
             v = self._inputarray[key]
+            v = ma.masked_equal(v, -99)
         if key in self._abiotic:
             v = self._abiotic[key]
+            v = ma.masked_equal(v, 255)
         if key in self._vegetation.keys():
             v = self._vegetation[key]
+            v = ma.masked_equal(v, 255)
         if key in self._deviation:
             v = self._deviation[key]
-        if rasterio.__version__.split(".")[0] != '0':
-            rasterio.plot.show(v, contour, transform=self._context.affine,
-                               title=key)
-        else:
-            rasterio.plot.show(v, contour, title=key)
+
+        ((a, b), (c, d)) = self._context.extent
+        mpl_extent = (a, c, d, b)
+        #rasterio.plot.show(v, contour, title=key, extent=mpl_extent, ax=ax)
+        plt.imshow(v, extent=mpl_extent)
+        ax.set_title(key)
+        plt.colorbar()
+        plt.show()
 
 def indent(s, pre):
     if sys.version_info >= (3,3):
