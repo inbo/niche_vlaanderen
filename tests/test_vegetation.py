@@ -5,7 +5,7 @@ import numpy as np
 import rasterio
 
 import niche_vlaanderen
-import pandas as pd
+
 
 def raster_to_numpy(filename):
     '''Read a GDAL grid as numpy array
@@ -33,9 +33,9 @@ class testVegetation(TestCase):
         acidity = np.array([3])
         mlw = np.array([50])
         mhw = np.array([10])
-        soil_name = np.array(["L1"])
+        soil_code = np.array([140000])
         v = niche_vlaanderen.Vegetation()
-        veg_predict, veg_occurrence = v.calculate(soil_name, mhw, mlw,
+        veg_predict, veg_occurrence = v.calculate(soil_code, mhw, mlw,
                                                   nutrient_level, acidity)
         correct = [7, 8, 12, 16]
         for vi in veg_predict:
@@ -47,7 +47,7 @@ class testVegetation(TestCase):
     def test_one_value_simple(self):
         mlw = np.array([50])
         mhw = np.array([10])
-        soil_code = np.array(["V"])
+        soil_code = np.array([80000])
         v = niche_vlaanderen.Vegetation()
         veg_predict, veg_occurrence = v.calculate(soil_code,
                                                   mhw, mlw, full_model=False)
@@ -59,11 +59,11 @@ class testVegetation(TestCase):
                 np.testing.assert_equal(np.array([0]), veg_predict[vi])
 
     def test_borders(self):
-        soil_name = np.array(["KV", "KV", "KV", "KV", "KV"])
+        soil_code = np.array([30000, 30000, 30000, 30000, 30000])
         mhw = np.array([21, 20, 10, 1, 0])
         mlw = np.array([30, 30, 30, 30, 30])
         v = niche_vlaanderen.Vegetation()
-        veg_predict, _ = v.calculate(soil_name, mhw, mlw, full_model=False)
+        veg_predict, _ = v.calculate(soil_code, mhw, mlw, full_model=False)
         expected = [0, 1, 1, 1, 0]
         np.testing.assert_equal(expected, veg_predict[1])
 
@@ -72,9 +72,9 @@ class testVegetation(TestCase):
         acidity = np.array([3])
         mlw = np.array([50])
         mhw = np.array([10])
-        soil_name = np.array(["L1"])
+        soil_code = np.array([140000])
         v = niche_vlaanderen.Vegetation()
-        veg_predict, veg_occurrence = v.calculate(soil_name, mhw, mlw,
+        veg_predict, veg_occurrence = v.calculate(soil_code, mhw, mlw,
                                                   nutrient_level, acidity)
         correct = []  # no types should match
         for vi in veg_predict:
@@ -88,11 +88,11 @@ class testVegetation(TestCase):
         acidity = np.array([3])
         mlw = np.array([50])
         mhw = np.array([10])
-        soil_name = np.array(["L1"])
+        soil_code = np.array([140000])
         inundation = np.array([1])
         v = niche_vlaanderen.Vegetation()
         veg_predict, veg_occurrence = \
-            v.calculate(soil_name, mhw, mlw, nutrient_level, acidity,
+            v.calculate(soil_code, mhw, mlw, nutrient_level, acidity,
                         inundation=inundation)
         correct = [7, 12, 16]
         for vi in veg_predict:
@@ -106,11 +106,11 @@ class testVegetation(TestCase):
         acidity = np.array([[3, 3], [3, 255]])
         mlw = np.array([[50, 50], [50, 50]])
         mhw = np.array([[31, 30], [10, 4]])
-        soil_name = np.array([["L1", "L1"], ["L1", "L1"]])
+        soil_code = np.array([[140000, 140000], [140000, 140000]])
         inundation = np.array([[1, 1], [1, 1]])
         v = niche_vlaanderen.Vegetation()
         veg_predict, veg_occurrence = \
-            v.calculate(soil_name=soil_name, mhw=mhw, mlw=mlw,
+            v.calculate(soil_code=soil_code, mhw=mhw, mlw=mlw,
                         nutrient_level=nutrient_level, acidity=acidity,
                         inundation=inundation)
         # check no data propagates nicely
@@ -122,11 +122,8 @@ class testVegetation(TestCase):
     def test_testcase(self):
         input_dir = "testcase/grote_nete/input/"
         soil_code = raster_to_numpy(input_dir + "soil_code.asc")
+
         soil_code_r = np.round(soil_code / 10000)[soil_code > 0]
-        ct_soil_code = pd.read_csv("niche_vlaanderen/system_tables/soil_codes.csv")
-        ct_soil_code = ct_soil_code.set_index("soil_code")
-        soil_name = np.full(soil_code.shape, "", dtype= "U2")
-        soil_name[soil_code > 0] = ct_soil_code.soil_name[soil_code_r]
 
         msw = raster_to_numpy(input_dir + "msw.asc")
         mhw = raster_to_numpy(input_dir + "mhw.asc")
@@ -143,16 +140,16 @@ class testVegetation(TestCase):
         management = raster_to_numpy(input_dir + "management.asc")
 
         nl = niche_vlaanderen.NutrientLevel()
-        nutrient_level = nl.calculate(soil_name, msw, nitrogen_deposition,
+        nutrient_level = nl.calculate(soil_code_r, msw, nitrogen_deposition,
                                       nitrogen_animal, nitrogen_fertilizer,
                                       management, inundation)
 
         a = niche_vlaanderen.Acidity()
-        acidity = a.calculate(soil_name, mlw, inundation, seepage,
+        acidity = a.calculate(soil_code_r, mlw, inundation, seepage,
                               conductivity, regenlens)
 
         v = niche_vlaanderen.Vegetation()
-        veg_predict, veg_occurrence = v.calculate(soil_name, mhw, mlw,
+        veg_predict, veg_occurrence = v.calculate(soil_code_r, mhw, mlw,
                                                   nutrient_level, acidity)
 
         for i in range(1, 28):
@@ -170,19 +167,20 @@ class testVegetation(TestCase):
 
     def test_deviation_mhw(self):
         v = niche_vlaanderen.Vegetation()
-        soil_name = np.array(["KV", "KV", "KV", "KV", "NG", "K1"])
+
+        soil_code = np.array([30000, 30000, 30000, 30000, -99, 20000])
         mhw = np.array([66, 16, 5, -5, 5, 5])
         mlw = np.array([35, 35, 35, 35, 35, 35])
-        d = v.calculate_deviation(soil_name, mhw, mlw)
+        d = v.calculate_deviation(soil_code, mhw, mlw)
         expected = np.array([46, 0, 0, -6, np.nan, np.nan])
         np.testing.assert_equal(expected, d["mhw_01"])
 
     def test_deviation_mlw(self):
         v = niche_vlaanderen.Vegetation()
 
-        soil_name = np.array(["KV", "KV", "KV", "KV", "KV", "NG", "K1"])
+        soil_code = np.array([30000, 30000, 30000, 30000, 30000, -99, 20000])
         mhw = np.array([5, 5, 5, 5, 5, 5, 5])
         mlw = np.array([66, 50, 38, 25, 5, 25, 25])
-        d = v.calculate_deviation(soil_name, mhw, mlw)
+        d = v.calculate_deviation(soil_code, mhw, mlw)
         expected = np.array([28, 12, 0, 0, -15, np.nan, np.nan])
         np.testing.assert_equal(expected, d["mlw_01"])

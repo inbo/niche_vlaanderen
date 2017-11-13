@@ -30,26 +30,25 @@ class NutrientLevel(object):
         self._ct_mineralisation = pd.read_csv(ct_mineralisation)
 
         # convert the mineralisation to float so we can use np.nan for nodata
-        self._ct_mineralisation["nitrogen_mineralisation"] = \
-            self._ct_mineralisation["nitrogen_mineralisation"].astype("float64")
+        self._ct_mineralisation = self._ct_mineralisation.astype("float64")
 
-    def _calculate_mineralisation(self, soil_name_array, msw_array):
+    def _calculate_mineralisation(self, soil_code_array, msw_array):
         """
         get nitrogen mineralisation for numpy arrays
         """
-        orig_shape = soil_name_array.shape
-        soil_name_array = soil_name_array.flatten()
+        orig_shape = soil_code_array.shape
+        soil_code_array = soil_code_array.flatten()
         msw_array = msw_array.flatten()
-        result = np.empty(soil_name_array.shape)
+        result = np.empty(soil_code_array.shape)
         result[:] = np.nan
 
-        for name in self._ct_mineralisation.soil_name.unique():
+        for code in self._ct_mineralisation.soil_code.unique():
             # We must reset the index because digitize will give indexes
             # compared to the new table.
-            select = self._ct_mineralisation.soil_name == name
+            select = self._ct_mineralisation.soil_code == code
             table_sel = self._ct_mineralisation[select].copy()
             table_sel = table_sel.reset_index(drop=True)
-            soil_sel = (soil_name_array == name)
+            soil_sel = (soil_code_array == code)
             index = np.digitize(msw_array[soil_sel], table_sel.msw_max,
                                 right=True)
 
@@ -58,7 +57,7 @@ class NutrientLevel(object):
         result = result.reshape(orig_shape)
         return result
 
-    def _calculate(self, management, soil_name, nitrogen, inundation):
+    def _calculate(self, management, soil_code, nitrogen, inundation):
 
         # calculate management influence
         influence = np.full(management.shape, -99)  # -99 used as no data value
@@ -69,8 +68,8 @@ class NutrientLevel(object):
                 self._ct_management[sel_ct].influence.values[0]
 
         # flatten all input layers (necessary for digitize)
-        orig_shape = soil_name.shape
-        soil_name = soil_name.flatten()
+        orig_shape = soil_code.shape
+        soil_code = soil_code.flatten()
         nitrogen = nitrogen.flatten()
         inundation = inundation.flatten()
         influence = influence.flatten()
@@ -79,13 +78,13 @@ class NutrientLevel(object):
         result = np.full(influence.shape, self.nodata, dtype='uint8')
 
         for name, subtable in self._ct_nutrient_level.groupby(
-                ["soil_name", "management_influence"]):
+                ["soil_code", "management_influence"]):
 
             soil_selected, influence_selected = name
             table_sel = subtable.copy(deep=True).reset_index(drop=True)
             index = np.digitize(nitrogen, table_sel.total_nitrogen_max,
                                 right=True)
-            selection = ((soil_name == soil_selected) &
+            selection = ((soil_code == soil_selected) &
                          (influence == influence_selected))
             result[selection] = table_sel.nutrient_level[index][selection]
 
@@ -96,16 +95,16 @@ class NutrientLevel(object):
         result = result.reshape(orig_shape)
         return result
 
-    def calculate(self, soil_name, msw, nitrogen_atmospheric, nitrogen_animal,
+    def calculate(self, soil_code, msw, nitrogen_atmospheric, nitrogen_animal,
                   nitrogen_fertilizer, management, inundation):
         """
         Calculates the Nutrient level based on numpy arrays
         """
 
-        nitrogen_mineralisation = self._calculate_mineralisation(soil_name,
+        nitrogen_mineralisation = self._calculate_mineralisation(soil_code,
                                                                  msw)
         total_nitrogen = (nitrogen_mineralisation + nitrogen_atmospheric
                           + nitrogen_animal + nitrogen_fertilizer)
-        nutrient_level = self._calculate(management, soil_name, total_nitrogen,
+        nutrient_level = self._calculate(management, soil_code, total_nitrogen,
                                          inundation)
         return nutrient_level

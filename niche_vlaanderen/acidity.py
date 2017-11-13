@@ -47,18 +47,18 @@ class Acidity(object):
 
         self._ct_soil_codes = self._ct_soil_codes.set_index("soil_name")
 
-    def _calculate_soil_mlw(self, soil_name, mlw):
+    def _calculate_soil_mlw(self, soil_code, mlw):
         # determine soil_group for soil_code
         orig_shape = mlw.shape
-        soil_name = soil_name.flatten()
+        soil_code = soil_code.flatten()
         mlw = mlw.flatten()
 
-        soil_group = self._ct_soil_codes.soil_group[soil_name]\
+        soil_group = self._ct_soil_codes.soil_group[soil_code]\
             .values.astype("int8")
         # the function above gives 0 for no data
         soil_group[soil_group == 0] = -99
 
-        result = np.full(soil_name.shape, -99)
+        result = np.full(soil_code.shape, -99)
         for sel_group, subtable in self._ct_soil_mlw.groupby(["soil_group"]):
 
             subtable = subtable.copy().reset_index(drop=True)
