@@ -10,7 +10,7 @@ Mogelijke waarden worden gegeven in de tabel `nutrient_level.csv <https://github
 
 .. csv-table:: Trofie klassen
   :header-rows: 1
-  :file: ../system_tables/nutrient_level.csv
+  :file: ../niche_vlaanderen/system_tables/nutrient_level.csv
 
 
 De berekening gebeurt in volgende 4 stappen:
@@ -37,8 +37,8 @@ Stikstofmineralisatie
 
 De stikstofmineralisatie (`nitrogen_mineralisation`) wordt berekend aan de hand van volgende invoergegevens:
 
-* :ref:`gvg`
-* :ref:`bodemklasse`
+* :ref:`msw`
+* :ref:`soil_code`
 
 In combinatie met de tabel `nitrogen_mineralisation <https://github.com/inbo/niche_vlaanderen/blob/master/system_tables/nitrogen_mineralisation.csv>`_.
 Daar wordt de N_mineralisatie bepaald met de bodemcijfercode en de min en max waarde voor gvg.
@@ -59,9 +59,9 @@ Bepaling Totale Stikstof
 De totale Stikstof (N_tot) wordt bepaald als de som van volgende stikstofbronnen:
 
 * :ref:`stikstofmineralisatie` (vorige stap)
-* :ref:`atmosferische_depositie` (input raster)
-* :ref:`kunstmest` (input raster)
-* :ref:`dierlijke_bemesting` (input raster)
+* :ref:`nitrogen_atmospheric` (input raster)
+* :ref:`nitrogen_fertilizer` (input raster)
+* :ref:`nitrogen_animal` (input raster)
 
 .. topic:: Voorbeeld
   
@@ -79,7 +79,7 @@ Mogelijke waarden van beheer worden gegeven in de tabel `Management <https://git
 
 .. csv-table:: Management
   :header-rows: 1
-  :file: ../system_tables/management.csv
+  :file: ../niche_vlaanderen/system_tables/management.csv
 
 
 De Invloed die correspondeert met het gekozen management kan met het bodemtype en de totale stikstof gebruikt worden om in de tabel `lnk_soil_nutrient_level <https://github.com/inbo/niche_vlaanderen/blob/master/system_tables/lnk_soil_nutrient_level.csv>`_ de gecodeerde trofie te berekenen

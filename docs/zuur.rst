@@ -6,7 +6,7 @@ Bepaling van de zuurgraadklasse ``acidity``
 
 .. csv-table:: Zuurgraadklassen in NICHE
   :header-rows: 1
-  :file: ../system_tables/acidity.csv
+  :file: ../niche_vlaanderen/system_tables/acidity.csv
 
 NICHE berekent de zuurgraad van de standplaats op basis van de :ref:`glg` en het bodemtype. Verdere aanvullingen gebeuren door het in
 rekening brengen van overstroming, kwel, en het eventueel voorhanden zijn van

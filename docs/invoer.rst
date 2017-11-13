@@ -207,9 +207,9 @@ Overstroming Vegetatie ``inundation_vegetation``
 Overstromingskaart met invloed op een selectie van vegetatietypes. Er wordt nagegaan welke vegetatietypes kunnen voorkomen bij overstroming en welke niet.
 Deze overstromingskaart wordt enkel gebruikt bij het aftoetsen van de vegetatietypes aan de standplaats, op basis van de NICHE-tabel. Er wordt nagegaan welke vegetatietypes kunnen voorkomen bij overstroming en welke niet. Er zijn 3 klassen onderscheiden, nl:
 
- * 0 = geen overstroming
- * 1 = regelmatig
- * 2 = incidenteel
+.. csv-table:: Overstromingsklassen
+  :header-rows: 1
+  :file: ../niche_vlaanderen/system_tables/inundation.csv
 
 Deze overstromingskaart is een samenstelling van overstromingskaarten met verschillende retourperiodes (regelmatig= retourperiode 1 tot 2 jaar, incidenteel =  retourperiode van 5 jaar). 
 
