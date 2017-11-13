@@ -26,14 +26,14 @@ By default the codetables of the niche_vlaanderen package are used, but the user
 soil_code
 =========
 
-The table `soil_codes.csv <https://github.com/INBO/niche_vlaanderen/blob/master/system_tables/soil_codes.csv>`_ contains the supported soil_codes in NICHE and their corresponding `soil_group` (used in determining the soil_glg_class, :ref:`soil_glg_class`).
+The table `soil_codes.csv <https://github.com/INBO/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/soil_codes.csv>`_ contains the supported soil_codes in NICHE and their corresponding `soil_group` (used in determining the soil_glg_class, :ref:`soil_glg_class`).
 
 .. _ct_management:
 
 management
 ==========
 
-The table `management.csv  <https://github.com/INBO/niche_vlaanderen/blob/master/system_tables/management.csv>`_ contains the supported management_codes in NICHE.
+The table `management.csv  <https://github.com/INBO/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/management.csv>`_ contains the supported management_codes in NICHE.
 It also contains a column `influence` which is used in the calculation of nutrient level.
 
 .. _ct_niche:
@@ -41,7 +41,7 @@ It also contains a column `influence` which is used in the calculation of nutrie
 niche_vlaanderen
 ================
 
-The table `niche_vegetation.csv <https://github.com/INBO/niche_vlaanderen/blob/master/system_tables/niche_vegetation.csv>`_ contains the link between the vegetation types that can be predicted by niche and the location factors that govern them.
+The table `niche_vegetation.csv <https://github.com/INBO/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_vegetation.csv>`_ contains the link between the vegetation types that can be predicted by niche and the location factors that govern them.
 
 Required columns are:
  * veg_code: vegetation code
