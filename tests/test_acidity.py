@@ -67,7 +67,7 @@ class testAcidity(TestCase):
     def test_seepage_code(self):
         seepage = np.array([5, 0.3, 0.05, -0.04, -0.2, -5])
         a = niche_vlaanderen.Acidity()
-        result = a._get_seepage_code(seepage)
+        result = a._get_seepage(seepage)
 
         expected = np.array([1, 1, 1, 1, 2, 3])
         np.testing.assert_equal(expected, result)

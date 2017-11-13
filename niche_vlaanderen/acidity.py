@@ -96,18 +96,18 @@ class Acidity(object):
         result = result.reshape(orig_shape)
         return result
 
-    def _get_seepage_code(self, seepage):
+    def _get_seepage(self, seepage):
         orig_shape = seepage.shape
         seepage = seepage.flatten()
         index = np.digitize(seepage, self._ct_seepage.seepage_max, right=True)
-        seepage_code = self._ct_seepage.seepage_code[index]
-        return seepage_code.values.reshape(orig_shape)
+        seepage = self._ct_seepage.seepage[index]
+        return seepage.values.reshape(orig_shape)
 
     def calculate(self, soil_class, mlw, inundation, seepage, conductivity,
                   rainwater):
         soil_mlw = self._calculate_soil_mlw(soil_class, mlw)
         mineral_richness = self._calculate_mineral_richness_class(conductivity)
-        seepage_code = self._get_seepage_code(seepage)
+        seepage = self._get_seepage(seepage)
         acidity = self._get_acidity(rainwater, mineral_richness, inundation,
-                                    seepage_code, soil_mlw)
+                                    seepage, soil_mlw)
         return acidity
