@@ -27,7 +27,7 @@ class Vegetation(object):
 
     nodata = 255  # uint8
 
-    def __init__(self, ct_vegetation=None):
+    def __init__(self, ct_vegetation=None, ct_soil_code=None):
         """ Initializes the Vegetation helper class
 
         This class initializes the Vegetation helper class. By default it uses
@@ -39,7 +39,17 @@ class Vegetation(object):
             ct_vegetation = resource_filename(
                 "niche_vlaanderen",
                 "system_tables/niche_vegetation.csv")
+        if ct_soil_code is None:
+            ct_soil_code = resource_filename(
+                "niche_vlaanderen", "system_tables/soil_codes.csv")
+
         self._ct_vegetation = pd.read_csv(ct_vegetation)
+
+        # join soil_code to soil_name where needed
+        self._ct_soil_code = pd.read_csv(ct_soil_code).set_index("soil_name")
+        self._ct_vegetation["soil_code"] = \
+            self._ct_soil_code.soil_code[self._ct_vegetation["soil_name"]].reset_index().soil_code
+
 
     def calculate(self, soil_code, mhw, mlw, nutrient_level=None, acidity=None,
                   management=None, inundation=None, return_all=True,

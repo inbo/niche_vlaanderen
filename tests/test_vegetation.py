@@ -33,7 +33,7 @@ class testVegetation(TestCase):
         acidity = np.array([3])
         mlw = np.array([50])
         mhw = np.array([10])
-        soil_code = np.array([140000])
+        soil_code = np.array([14])
         v = niche_vlaanderen.Vegetation()
         veg_predict, veg_occurrence = v.calculate(soil_code, mhw, mlw,
                                                   nutrient_level, acidity)
@@ -47,7 +47,7 @@ class testVegetation(TestCase):
     def test_one_value_simple(self):
         mlw = np.array([50])
         mhw = np.array([10])
-        soil_code = np.array([80000])
+        soil_code = np.array([8])
         v = niche_vlaanderen.Vegetation()
         veg_predict, veg_occurrence = v.calculate(soil_code,
                                                   mhw, mlw, full_model=False)
@@ -59,7 +59,7 @@ class testVegetation(TestCase):
                 np.testing.assert_equal(np.array([0]), veg_predict[vi])
 
     def test_borders(self):
-        soil_code = np.array([30000, 30000, 30000, 30000, 30000])
+        soil_code = np.array([3, 3, 3, 3, 3])
         mhw = np.array([21, 20, 10, 1, 0])
         mlw = np.array([30, 30, 30, 30, 30])
         v = niche_vlaanderen.Vegetation()
@@ -88,7 +88,7 @@ class testVegetation(TestCase):
         acidity = np.array([3])
         mlw = np.array([50])
         mhw = np.array([10])
-        soil_code = np.array([140000])
+        soil_code = np.array([14])
         inundation = np.array([1])
         v = niche_vlaanderen.Vegetation()
         veg_predict, veg_occurrence = \
@@ -106,7 +106,7 @@ class testVegetation(TestCase):
         acidity = np.array([[3, 3], [3, 255]])
         mlw = np.array([[50, 50], [50, 50]])
         mhw = np.array([[31, 30], [10, 4]])
-        soil_code = np.array([[140000, 140000], [140000, 140000]])
+        soil_code = np.array([[14, 14], [14, 14]])
         inundation = np.array([[1, 1], [1, 1]])
         v = niche_vlaanderen.Vegetation()
         veg_predict, veg_occurrence = \
@@ -122,8 +122,8 @@ class testVegetation(TestCase):
     def test_testcase(self):
         input_dir = "testcase/grote_nete/input/"
         soil_code = raster_to_numpy(input_dir + "soil_code.asc")
-
-        soil_code_r = np.round(soil_code / 10000)[soil_code > 0]
+        soil_code_r = soil_code
+        soil_code_r[soil_code > 0] = np.round(soil_code / 10000)[soil_code > 0]
 
         msw = raster_to_numpy(input_dir + "msw.asc")
         mhw = raster_to_numpy(input_dir + "mhw.asc")
@@ -168,7 +168,7 @@ class testVegetation(TestCase):
     def test_deviation_mhw(self):
         v = niche_vlaanderen.Vegetation()
 
-        soil_code = np.array([30000, 30000, 30000, 30000, -99, 20000])
+        soil_code = np.array([3, 3, 3, 3, -99, 2])
         mhw = np.array([66, 16, 5, -5, 5, 5])
         mlw = np.array([35, 35, 35, 35, 35, 35])
         d = v.calculate_deviation(soil_code, mhw, mlw)
@@ -178,7 +178,7 @@ class testVegetation(TestCase):
     def test_deviation_mlw(self):
         v = niche_vlaanderen.Vegetation()
 
-        soil_code = np.array([30000, 30000, 30000, 30000, 30000, -99, 20000])
+        soil_code = np.array([3, 3, 3, 3, 3, -99, 2])
         mhw = np.array([5, 5, 5, 5, 5, 5, 5])
         mlw = np.array([66, 50, 38, 25, 5, 25, 25])
         d = v.calculate_deviation(soil_code, mhw, mlw)

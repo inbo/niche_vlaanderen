@@ -249,11 +249,17 @@ class Niche(object):
                      "nitrogen_atmospheric"):
                 band = band.astype('float32')
 
+            if f == 'soil_code' and np.all(band[band != nodata] >= 10000):
+                band[band != nodata] = np.round(
+                band[band != nodata] / 10000)
+
             # create a mask for no-data values, taking into account data-types
             if band.dtype == 'float32':
                 band[band == nodata] = np.nan
             else:
                 band[band == nodata] = -99
+
+
 
             inputarray[f] = band
 
@@ -362,12 +368,13 @@ class Niche(object):
             nl = NutrientLevel(**ct_nl)
 
             self._abiotic["nutrient_level"] = nl.calculate(
-                self._inputarray["soil_code"], self._inputarray["msw"],
-                self._inputarray["nitrogen_atmospheric"],
-                self._inputarray["nitrogen_animal"],
-                self._inputarray["nitrogen_fertilizer"],
-                self._inputarray["management"],
-                self._inputarray["inundation_nutrient"])
+                soil_code=self._inputarray["soil_code"],
+                msw=self._inputarray["msw"],
+                nitrogen_atmospheric=self._inputarray["nitrogen_atmospheric"],
+                nitrogen_animal=self._inputarray["nitrogen_animal"],
+                nitrogen_fertilizer=self._inputarray["nitrogen_fertilizer"],
+                management=self._inputarray["management"],
+                inundation=self._inputarray["inundation_nutrient"])
 
             acidity = Acidity()
             self._abiotic["acidity"] = acidity.calculate(

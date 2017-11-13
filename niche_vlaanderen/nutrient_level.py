@@ -11,10 +11,10 @@ class NutrientLevel(object):
 
     nodata = 255  # unsigned 8 bit type is used
 
-    def __init__(self, ct_nutrient_level=None, ct_management=None,
-                 ct_mineralisation=None):
-        if ct_nutrient_level is None:
-            ct_nutrient_level = resource_filename(
+    def __init__(self, ct_lnk_soil_nutrient_level=None, ct_management=None,
+                 ct_mineralisation=None, ct_soil_code= None):
+        if ct_lnk_soil_nutrient_level is None:
+            ct_lnk_soil_nutrient_level = resource_filename(
                 "niche_vlaanderen",
                 "system_tables/lnk_soil_nutrient_level.csv")
         if ct_management is None:
@@ -24,13 +24,25 @@ class NutrientLevel(object):
             ct_mineralisation = resource_filename(
                 "niche_vlaanderen",
                 "system_tables/nitrogen_mineralisation.csv")
+        if ct_soil_code is None:
+            ct_soil_code = resource_filename(
+                "niche_vlaanderen", "system_tables/soil_codes.csv")
 
-        self._ct_nutrient_level = pd.read_csv(ct_nutrient_level)
-        self._ct_management = pd.read_csv(ct_management)
+        self.ct_lnk_soil_nutrient_level = pd.read_csv(ct_lnk_soil_nutrient_level)
+        self._ct_management = pd.read_csv(ct_management).set_index("management")
         self._ct_mineralisation = pd.read_csv(ct_mineralisation)
 
         # convert the mineralisation to float so we can use np.nan for nodata
-        self._ct_mineralisation = self._ct_mineralisation.astype("float64")
+        self._ct_mineralisation["nitrogen_mineralisation"] = \
+            self._ct_mineralisation["nitrogen_mineralisation"].astype("float64")
+
+        # join soil_code to soil_name where needed
+        self._ct_soil_code = pd.read_csv(ct_soil_code).set_index("soil_name")
+        self._ct_mineralisation["soil_code"] = \
+            self._ct_soil_code.soil_code[self._ct_mineralisation["soil_name"]].reset_index().soil_code
+        self.ct_lnk_soil_nutrient_level["soil_code"] = \
+            self._ct_soil_code.soil_code[self.ct_lnk_soil_nutrient_level["soil_name"]].reset_index().soil_code
+        print(self.ct_lnk_soil_nutrient_level)
 
     def _calculate_mineralisation(self, soil_code_array, msw_array):
         """
@@ -52,7 +64,7 @@ class NutrientLevel(object):
             index = np.digitize(msw_array[soil_sel], table_sel.msw_max,
                                 right=True)
 
-            result[soil_sel] = table_sel.nitrogen_mineralisation[index]
+            result[soil_sel] = table_sel["nitrogen_mineralisation"][index]
 
         result = result.reshape(orig_shape)
         return result
@@ -77,15 +89,17 @@ class NutrientLevel(object):
         # search for classification values in nutrient level codetable
         result = np.full(influence.shape, self.nodata, dtype='uint8')
 
-        for name, subtable in self._ct_nutrient_level.groupby(
+        for name, subtable in self.ct_lnk_soil_nutrient_level.groupby(
                 ["soil_code", "management_influence"]):
 
             soil_selected, influence_selected = name
             table_sel = subtable.copy(deep=True).reset_index(drop=True)
+            print (nitrogen)
             index = np.digitize(nitrogen, table_sel.total_nitrogen_max,
                                 right=True)
             selection = ((soil_code == soil_selected) &
                          (influence == influence_selected))
+            print(index)
             result[selection] = table_sel.nutrient_level[index][selection]
 
         # Note that niche_vlaanderen is different from the original model here:
