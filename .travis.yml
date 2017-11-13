@@ -65,5 +65,5 @@ deploy:
         github_token: $GH_TOKEN
         local_dir: docs/_build
         on:
-        branch: master
-        python: 3.5
+          branch: master
+          python: 3.5
