@@ -16,3 +16,4 @@ This documentation is split in two parts:
   model
   package
   contributing
+  authors
