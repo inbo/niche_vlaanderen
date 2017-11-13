@@ -45,7 +45,7 @@ class Acidity(object):
                                 lnk_acidity=self._lnk_acidity,
                                 ct_seepage=self._ct_seepage)
 
-        self._ct_soil_codes = self._ct_soil_codes.set_index("soil_name")
+        self._ct_soil_codes = self._ct_soil_codes.set_index("soil_code")
 
     def _calculate_soil_mlw(self, soil_code, mlw):
         # determine soil_group for soil_code
