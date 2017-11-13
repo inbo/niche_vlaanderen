@@ -3,6 +3,7 @@ from pkg_resources import resource_filename
 import numpy as np
 import pandas as pd
 
+from .codetables import validate_tables_acidity
 
 class Acidity(object):
     '''
@@ -34,9 +35,17 @@ class Acidity(object):
 
         self._ct_acidity = pd.read_csv(ct_acidity)
         self._ct_soil_mlw = pd.read_csv(ct_soil_mlw_class)
-        self._ct_soil_codes = pd.read_csv(ct_soil_codes).set_index("soil_name")
+        self._ct_soil_codes = pd.read_csv(ct_soil_codes)
         self._lnk_acidity = pd.read_csv(lnk_acidity)
         self._ct_seepage = pd.read_csv(ct_seepage)
+
+        validate_tables_acidity(ct_acidity=self._ct_acidity,
+                                ct_soil_mlw_class=self._ct_soil_mlw,
+                                ct_soil_codes=self._ct_soil_codes,
+                                lnk_acidity=self._lnk_acidity,
+                                ct_seepage=self._ct_seepage)
+
+        self._ct_soil_codes = self._ct_soil_codes.set_index("soil_name")
 
     def _calculate_soil_mlw(self, soil_name, mlw):
         # determine soil_group for soil_code
