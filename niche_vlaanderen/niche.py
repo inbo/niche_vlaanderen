@@ -88,17 +88,25 @@ class Niche(object):
         s += "  gdal: {}\n".format(rasterio.__gdal_version__)
 
         s += "\n"
-        s += "input_layers:\n"
-        input = yaml.dump(self._inputfiles, default_flow_style=False)
-        input += yaml.dump(self._inputvalues, default_flow_style=False) + '\n'
-        s += indent(input, "  ")
-
         s += "model_options:\n"
         options = yaml.dump(self._model_options, default_flow_style=False)
         s += indent(options, "  ")
 
+        if self._context is not None:
+            s+="\nmodel_properties:\n"
+            s+="  model_extent: " + str(self._context.extent) + "\n"
+
+        s += "\n"
+        s += "input_layers:\n"
+        input = yaml.dump(self._inputfiles, default_flow_style=False)
+        input += yaml.dump(self._inputvalues, default_flow_style=False) \
+            if len(self._inputvalues)>0 else ""
+        s += indent(input, "  ")
+
+
+
         if self.occurrence is not None:
-            s += "model_result: \n"
+            s += "\nmodel_result: \n"
             s += indent(
                 yaml.dump(self.occurrence, default_flow_style=False), "  ")
         else:
@@ -106,7 +114,7 @@ class Niche(object):
 
 
         if len(self._files_written) > 0:
-            s+= "files_written:\n"
+            s+= "\nfiles_written:\n"
             s += indent(
                 yaml.dump(self._files_written, default_flow_style=False), "  ")
 

@@ -317,3 +317,16 @@ class TestNiche(TestCase):
         myniche.read_config_input(config)
         myniche.set_input('ct_acidity', 'system_tables/acidity.asc')
         myniche.run()
+
+    def rereadoutput(self):
+        """
+        This tests checks if the output written by the model is a valid input
+        for a new run
+        """
+        config = 'tests/small_simple.yaml'
+        myniche = niche_vlaanderen.Niche()
+        myniche.run(config)
+        myniche = niche_vlaanderen.Niche()
+        config = '_output/log.txt'
+        myniche.run(config)
+

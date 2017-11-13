@@ -22,6 +22,25 @@
 # More information on the different options are explained in the documentation:
 # https://inbo.github.io/niche_vlaanderen/cli.html
 
+
+# model_options sets the options for running the model. The only required field
+# is output_dir. The other options are optional and will use default values
+# if not defined.
+#
+
+model_options:
+  # output_dir: directory to which the model output files have to be written.
+  output_dir: _output
+  # simple_model: default is False. If true only mhw, mlw and soil_code are
+  # used for prediction.
+  simple_model: False
+  # deviation: default is False. Create maps on the deviation between the niche
+  # required mhw/mlw and the actual mhw/mlw.
+  deviation: True
+  # abiotic: default is False. Use abiotic values specified for the Full model
+  # rather than calculating them.
+  abiotic: False
+
 input_layers:
   # These three input layers always have to be defined
   soil_code: data/soil_code_small.asc
@@ -43,25 +62,6 @@ input_layers:
   # specified
   # management_vegetation:
   # inundation_vegetation:
-
-# model_options sets the options for running the model. The only required field
-# is output_dir. The other options are optional and will use default values
-# if not defined.
-#
-
-model_options:
-  # output_dir: directory to which the model output files have to be written.
-  output_dir: _output
-  # simple_model: default is False. If true only mhw, mlw and soil_code are
-  # used for prediction.
-  simple_model: False
-  # deviation: default is False. Create maps on the deviation between the niche
-  # required mhw/mlw and the actual mhw/mlw.
-  deviation: True
-  # abiotic: default is False. Use abiotic values specified for the Full model
-  # rather than calculating them.
-  abiotic: False
-
 
 # optionally code tables can be overwritten
 # code_tables:
