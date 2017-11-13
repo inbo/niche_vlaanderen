@@ -71,3 +71,26 @@ def validate_tables_acidity(ct_acidity, ct_soil_mlw_class,
     check_inner_join(ct_soil_codes, ct_soil_mlw_class,"soil_group")
     check_inner_join(ct_soil_mlw_class, lnk_acidity, "soil_mlw_class")
     check_inner_join(ct_seepage, lnk_acidity, "seepage")
+
+def validate_tables_nutrient_level(ct_lnk_soil_nutrient_level, ct_management,
+                                   ct_mineralisation, ct_soil_code,
+                                   ct_nutrient_level):
+    # check tables
+    check_unique(ct_soil_code, "soil_code")
+    check_unique(ct_soil_code, "soil_name")
+    check_unique(ct_management, "code")
+
+    check_lower_upper_boundaries(ct_mineralisation, "msw_min", "msw_max",
+                                 "nitrogen_mineralisation")
+    check_inner_join(ct_mineralisation, ct_soil_code, "soil_name")
+
+    check_inner_join(ct_lnk_soil_nutrient_level, ct_management,
+                     "management_influence", "influence")
+
+    check_lower_upper_boundaries(ct_lnk_soil_nutrient_level,
+                                 "total_nitrogen_min","total_nitrogen_max",
+                                 "nutrient_level")
+
+    check_inner_join(ct_lnk_soil_nutrient_level, ct_soil_code, "soil_name")
+    check_inner_join(ct_lnk_soil_nutrient_level, ct_nutrient_level,
+                     "nutrient_level")
