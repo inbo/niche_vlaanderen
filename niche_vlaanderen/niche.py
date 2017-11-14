@@ -547,8 +547,27 @@ def indent(s, pre):
 class NicheDelta(object):
     """Class containing the difference between two niche runs
     """
+
     def __init__(self, n1, n2):
         self._delta=dict()
+
+        self.deltaconv = dict()
+
+        self.deltaconv[(0, 1)] = 1
+        self.deltaconv[(1, 0)] = -1
+        self.deltaconv[(1, 1)] = 2
+        self.deltaconv[(0, 0)] = 0
+        self.deltaconv[(255, 255)] = 255
+        self.deltaconv[(255, 0)] = -255
+        self.deltaconv[(255, 1)] = -255
+        self.deltaconv[(0, 255)] = -255
+        self.deltaconv[(1, 255)] = -255
+
+        if n1._context is None or n2._context is None:
+            raise NicheException(
+                "No extent in Niche object. Please run both models prior to "
+                "calculating a delta."
+            )
 
         if n1._context != n2._context:
             raise NicheException(
@@ -557,17 +576,33 @@ class NicheDelta(object):
 
         if len(n1._vegetation) == 0 or len(n2._vegetation) == 0:
             raise NicheException(
-                "No vegetation in nich object. Please run the model prior to "
-                "calculating a delta."
+                "No vegetation in Niche object. Please run both models prior "
+                "to calculating a delta."
             )
 
-        if len(n1._vegetation) != len(n2.vegetation):
+        # the error below should not occur as we check the context, but
+        # better safe than sorry
+        if n1._vegetation[1].size != n2._vegetation[1].size:
             raise NicheException(
-                "Niche vegetation objects have different length. "
+                "Arrays have different size."
+            )
+
+        if len(n1._vegetation) != len(n2._vegetation):
+            raise NicheException(
+                "Niche vegetation objects have different length."
             )
 
         for vi in n1._vegetation:
-            self._delta[vi] = n1._vegetation[vi] - n2._vegetation[vi]
+            n1v = n1._vegetation[vi].flatten()
+            n2v = n2._vegetation[vi].flatten()
+            res = np.full( n1v.size, 4)
+            res[((n1v == 0) & (n2v == 0))] = 0
+            res[((n1v == 1) & (n2v == 1))] = 1
+            res[((n1v == 1) & (n2v == 0))] = 2
+            res[((n1v == 0) & (n2v == 1))] = 3
+            res[((n1v == 255) & (n2v == 255))] = 255
+            res.resize(n1._vegetation[vi].shape)
+            self._delta[vi] = res
 
     def write(self, output_dir):
         pass
