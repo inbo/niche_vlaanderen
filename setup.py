@@ -26,7 +26,7 @@ setup(name='niche_vlaanderen',
     packages=['niche_vlaanderen'],
     classifiers=[
         'Development Status :: 1 - Planning',
-        'Inteded Audience :: Science/Research',
+        'Intended Audience :: Science/Research',
         'License :: OSI Approved :: MIT License',
     "Programming Language :: Python :: 2",
     'Programming Language :: Python :: 2.7',
