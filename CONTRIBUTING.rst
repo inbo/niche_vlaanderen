@@ -105,6 +105,9 @@ Before you submit a pull request, check that it meets these guidelines:
    https://travis-ci.org/inbo/niche_vlaanderen/pull_requests
    and make sure that the tests pass for all supported Python versions.
 
+Note that this are guidelines. If you are stuck while adding functionality 
+- consider doing a pull request anyway, others may be able to help.
+
 Tips
 ----
 
