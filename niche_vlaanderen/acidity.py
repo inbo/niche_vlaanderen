@@ -5,6 +5,7 @@ import pandas as pd
 
 from .codetables import validate_tables_acidity
 
+
 class Acidity(object):
     '''
     '''

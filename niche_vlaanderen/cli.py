@@ -2,12 +2,12 @@ import click
 import niche_vlaanderen
 from pkg_resources import resource_filename
 
+
 @click.command()
 @click.pass_context
 @click.option('--example', is_flag=True,
               help='prints an example configuration file')
 @click.argument('config', required=False, type=click.Path(exists=True))
-
 def cli(ctx, config, example):
     """Command line interface to the NICHE vegetation model
     """
@@ -17,7 +17,7 @@ def cli(ctx, config, example):
                 "system_tables/example.yaml")
         with open(ex) as f:
             for line in f:
-                print (line)
+                print(line)
 
     if config is not None:
         n = niche_vlaanderen.Niche()

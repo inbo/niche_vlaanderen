@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 from .codetables import validate_tables_nutrient_level
 
+
 class NutrientLevel(object):
     '''
      Class to calculate the NutrientLevel
@@ -12,7 +13,7 @@ class NutrientLevel(object):
     nodata = 255  # unsigned 8 bit type is used
 
     def __init__(self, ct_lnk_soil_nutrient_level=None, ct_management=None,
-                 ct_mineralisation=None, ct_soil_code= None, ct_nutrient = None):
+                 ct_mineralisation=None, ct_soil_code=None, ct_nutrient=None):
         if ct_lnk_soil_nutrient_level is None:
             ct_lnk_soil_nutrient_level = resource_filename(
                 "niche_vlaanderen",
@@ -32,8 +33,10 @@ class NutrientLevel(object):
             ct_nutrient_level = resource_filename(
                 "niche_vlaanderen", "system_tables/nutrient_level.csv")
 
-        self.ct_lnk_soil_nutrient_level = pd.read_csv(ct_lnk_soil_nutrient_level)
-        self._ct_management = pd.read_csv(ct_management).set_index("management")
+        self.ct_lnk_soil_nutrient_level = \
+            pd.read_csv(ct_lnk_soil_nutrient_level)
+        self._ct_management = \
+            pd.read_csv(ct_management).set_index("management")
         self._ct_mineralisation = pd.read_csv(ct_mineralisation)
         self._ct_nutrient_level = pd.read_csv(ct_nutrient_level)
         self._ct_soil_code = pd.read_csv(ct_soil_code)
@@ -56,8 +59,7 @@ class NutrientLevel(object):
         self.ct_lnk_soil_nutrient_level["soil_code"] = \
             self._ct_soil_code.soil_code[
                 self.ct_lnk_soil_nutrient_level["soil_name"]]\
-                .reset_index().soil_code
-
+            .reset_index().soil_code
 
     def _calculate_mineralisation(self, soil_code_array, msw_array):
         """

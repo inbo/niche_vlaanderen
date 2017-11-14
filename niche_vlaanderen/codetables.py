@@ -4,11 +4,6 @@ class CodeTableException(Exception):
     """
 
 
-codetables = ["ct_acidity", "ct_soil_mlw_class", "ct_soil_codes",
-                "lnk_acidity", "ct_seepage", "ct_vegetation", "ct_management",
-                "ct_nutrient_level", "ct_mineralisation"]
-
-
 def check_lower_upper_boundaries(df, min_col, max_col, value):
     """Checks whether there are no overlaps between min_col and max_col
 
@@ -28,11 +23,12 @@ def check_lower_upper_boundaries(df, min_col, max_col, value):
         max_values = subtable[max_col]
         for (i, index) in enumerate(min_values.index):
             if i > 0:
-                if(min_values[index] != max_values[prev_index]):
+                if(min_values[index] != max_values[prev_index]):  # noqa: flake8
                     raise CodeTableException(
                         "Min and max values in table do not correspond"
                     )
-            prev_index = index
+            prev_index = index  # noqa: flake8
+
 
 def check_inner_join(df1, df2, f1, f2=None):
     if f2 is None:
@@ -64,13 +60,14 @@ def validate_tables_acidity(ct_acidity, ct_soil_mlw_class,
 
     check_unique(ct_seepage, "seepage")
     check_lower_upper_boundaries(ct_seepage, "seepage_min", "seepage_max",
-                                                    "seepage")
+                                 "seepage")
 
     # check links between tables
     check_inner_join(ct_acidity, lnk_acidity, "acidity")
-    check_inner_join(ct_soil_codes, ct_soil_mlw_class,"soil_group")
+    check_inner_join(ct_soil_codes, ct_soil_mlw_class, "soil_group")
     check_inner_join(ct_soil_mlw_class, lnk_acidity, "soil_mlw_class")
     check_inner_join(ct_seepage, lnk_acidity, "seepage")
+
 
 def validate_tables_nutrient_level(ct_lnk_soil_nutrient_level, ct_management,
                                    ct_mineralisation, ct_soil_code,
@@ -88,7 +85,7 @@ def validate_tables_nutrient_level(ct_lnk_soil_nutrient_level, ct_management,
                      "management_influence", "influence")
 
     check_lower_upper_boundaries(ct_lnk_soil_nutrient_level,
-                                 "total_nitrogen_min","total_nitrogen_max",
+                                 "total_nitrogen_min", "total_nitrogen_max",
                                  "nutrient_level")
 
     check_inner_join(ct_lnk_soil_nutrient_level, ct_soil_code, "soil_name")
@@ -107,16 +104,12 @@ def validate_tables_vegetation(ct_vegetation, ct_soil_code, ct_inundation,
     # extra check: per vegetation type, soil_code only one mhw, mlw combination
     #  is allowed. Otherwise the simple model may give unexpected results.
     cols = ["veg_code", "soil_name"]
-    grouped = ct_vegetation[["veg_code", "soil_name","mhw_min", "mhw_max",
-                             "mlw_min","mlw_max"]].groupby(cols)
+    grouped = ct_vegetation[["veg_code", "soil_name", "mhw_min", "mhw_max",
+                             "mlw_min", "mlw_max"]].groupby(cols)
 
     for (veg_code, soil_name), subtable in grouped:
         st_unique = subtable.drop_duplicates()
 
         if st_unique.shape[0] != 1:
-            print (st_unique)
+            print(st_unique)
             raise CodeTableException("Non unique mhw/mlw combinations")
-
-
-
-
