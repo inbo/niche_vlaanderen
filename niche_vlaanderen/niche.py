@@ -538,6 +538,20 @@ class Niche(object):
         plt.colorbar()
         plt.show()
 
+    @property
+    def table(self):
+        """Dataframe containing the potential area (m**2) per vegetation type
+        """
+        td = dict()
+        for i in self._vegetation:
+            vi = pd.Series(self._vegetation[i].flatten())
+            td[i] = vi.value_counts() * self._context.cell_area
+        df = pd.DataFrame.from_dict(td, orient='index')
+        df = df.fillna(0)
+        df = df[[0,1,255]]
+        df.columns=["not present", "present", "no data"]
+        return df
+
 def indent(s, pre):
     if sys.version_info >= (3,3):
         return textwrap.indent(s, pre)
