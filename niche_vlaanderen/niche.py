@@ -565,18 +565,6 @@ class NicheDelta(object):
     def __init__(self, n1, n2):
         self._delta=dict()
 
-        self.deltaconv = dict()
-
-        self.deltaconv[(0, 1)] = 1
-        self.deltaconv[(1, 0)] = -1
-        self.deltaconv[(1, 1)] = 2
-        self.deltaconv[(0, 0)] = 0
-        self.deltaconv[(255, 255)] = 255
-        self.deltaconv[(255, 0)] = -255
-        self.deltaconv[(255, 1)] = -255
-        self.deltaconv[(0, 255)] = -255
-        self.deltaconv[(1, 255)] = -255
-
         if n1._context is None or n2._context is None:
             raise NicheException(
                 "No extent in Niche object. Please run both models prior to "
@@ -616,10 +604,40 @@ class NicheDelta(object):
             res[((n1v == 0) & (n2v == 1))] = 3
             res[((n1v == 255) & (n2v == 255))] = 255
             res.resize(n1._vegetation[vi].shape)
-            self._delta[vi] = res
+            self._delta[vi] = ma.masked_equal(res, 255)
 
     def write(self, output_dir):
         pass
 
+    def show(self, key):
+        plt = rasterio.plot.get_plt()
+        import matplotlib.patches as mpatches
+
+        fig, ax = plt.subplots()
+        ((a, b), (c, d)) = self._context.extent
+        mpl_extent = (a, c, d, b)
+
+        im = plt.imshow(self._delta[key], extent=mpl_extent)
+        ax.set_title(key)
+
+        values = [0,1,2,3,4]
+        labels = ["not present in both models", "present in both models",
+                  "only in model 1", "only in model 2", "nodata in one model"]
+        colors = [im.cmap(im.norm(value)) for value in values]
+        patches = [mpatches.Patch(color=colors[i],
+                                  label=labels[i]) for i in range(len(values))]
+        plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2,
+                   borderaxespad=0.)
+
+        plt.show()
+
+    @property
     def table(self):
-        pass
+        td = dict()
+        for i in self._delta:
+            vi = pd.Series(self._delta[i].flatten())
+            td[i] = vi.value_counts() * self._context.cell_area
+        df = pd.DataFrame.from_dict(td, orient='index')
+        df = df.fillna(0)
+
+        return df
