@@ -148,3 +148,8 @@ class testSpatialContext(TestCase):
         sc2.width = sc1.width
         sc2.crs = sc1.crs
         self.assertFalse(sc1 == sc2)
+
+    def test_area(self):
+        test_small_ds = rasterio.open("tests/data/msw_small.asc")
+        sc1 = niche_vlaanderen.niche.SpatialContext(test_small_ds)
+        self.assertEqual(625, sc1.cell_area)

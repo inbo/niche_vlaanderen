@@ -205,3 +205,7 @@ class SpatialContext(object):
                 "Can not determine a read window")
 
         return window
+
+    @property
+    def cell_area(self):
+        return abs(self.affine[0] * self.affine[4])
