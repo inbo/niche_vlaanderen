@@ -39,7 +39,7 @@ after_success:
 - coveralls || echo "coveralls failure"
 
 deploy:
-    - user: stvhoey
+    - user: johanvdw
       distributions: sdist bdist_wheel
       provider: pypi
       true:
@@ -67,3 +67,4 @@ deploy:
       on:
         branch: master
         python: 3.5
+
