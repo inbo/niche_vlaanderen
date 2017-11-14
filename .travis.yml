@@ -42,7 +42,7 @@ before_deploy:
   - travis-sphinx build --source=docs --nowarn
 
 deploy:
-    - user: johanvdw
+    - user: stvhoey
       distributions: sdist bdist_wheel
       provider: pypi
       true:
@@ -70,4 +70,3 @@ deploy:
       on:
         branch: master
         python: 3.5
-
