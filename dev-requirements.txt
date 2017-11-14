@@ -4,3 +4,10 @@ rasterio
 pyyaml
 pytest
 pytest-cov
+pip
+bumpversion
+wheel
+flake8
+tox
+Sphinx
+PyYAML
