@@ -24,7 +24,7 @@ Optioneel kunnen :ref:`management` en de :ref:`inundation_vegetation` mee als se
    * GHG: 10 cm
    * bodemcode: L1 (140000)
 
-  Zoeken we dit op in de tabel NicheVl dan krijgen we volgende opties:
+  Zoeven we dit op in de tabel NicheVl dan krijgen we volgende opties:
 
   .. csv-table:: potentiële vegetatie op basis van NICHE
     :header-rows: 1
