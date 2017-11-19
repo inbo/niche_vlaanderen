@@ -13,3 +13,4 @@ Sphinx
 PyYAML
 nbsphinx
 jupyter_client
+ipykernel
