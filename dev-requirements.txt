@@ -11,3 +11,4 @@ flake8
 tox
 Sphinx
 PyYAML
+nbsphinx
