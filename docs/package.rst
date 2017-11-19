@@ -14,4 +14,5 @@ The Python package ``niche_vlaanderen`` allows calculating the NICHE model in th
   installation
   cli
   niche
+  compare
   lowlevel
