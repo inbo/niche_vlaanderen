@@ -12,3 +12,4 @@ tox
 Sphinx
 PyYAML
 nbsphinx
+jupyter_client
