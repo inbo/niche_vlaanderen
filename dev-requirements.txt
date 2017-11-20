@@ -14,3 +14,4 @@ PyYAML
 nbsphinx
 jupyter_client
 ipykernel
+pandoc
