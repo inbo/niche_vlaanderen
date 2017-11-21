@@ -100,6 +100,7 @@ class NutrientLevel(object):
         orig_shape = soil_code.shape
         soil_code = soil_code.flatten()
         nitrogen = nitrogen.flatten()
+
         inundation = inundation.flatten()
         influence = influence.flatten()
 
@@ -117,7 +118,8 @@ class NutrientLevel(object):
             selection = ((soil_code == soil_selected) &
                          (influence == influence_selected))
 
-            result[selection] = table_sel.nutrient_level[index][selection]
+            result[selection] = \
+                table_sel.nutrient_level.reindex(index)[selection]
 
         # Note that niche_vlaanderen is different from the original model here:
         # only if nutrient_level <4 the inundation rule is applied.

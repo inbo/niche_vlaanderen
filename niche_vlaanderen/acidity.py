@@ -53,8 +53,7 @@ class Acidity(object):
         orig_shape = mlw.shape
         soil_code = soil_code.flatten()
         mlw = mlw.flatten()
-
-        soil_group = self._ct_soil_codes.soil_group[soil_code]\
+        soil_group = self._ct_soil_codes.soil_group.reindex(soil_code)\
             .values.astype("int8")
         # the function above gives 0 for no data
         soil_group[soil_group == 0] = -99
@@ -65,8 +64,8 @@ class Acidity(object):
             subtable = subtable.copy().reset_index(drop=True)
             index = np.digitize(mlw, subtable.mlw_max, right=True)
             selection = (soil_group == sel_group)
-
-            result[selection] = subtable.soil_mlw_class[index][selection]
+            result[selection] = \
+                subtable.soil_mlw_class.reindex(index)[selection]
 
         result = result.reshape(orig_shape)
         return result
@@ -110,7 +109,7 @@ class Acidity(object):
         orig_shape = seepage.shape
         seepage = seepage.flatten()
         index = np.digitize(seepage, self._ct_seepage.seepage_max, right=True)
-        seepage = self._ct_seepage.seepage[index]
+        seepage = self._ct_seepage.seepage.reindex(index)
         return seepage.values.reshape(orig_shape)
 
     def calculate(self, soil_class, mlw, inundation, seepage, conductivity,
