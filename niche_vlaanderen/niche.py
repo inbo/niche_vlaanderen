@@ -63,7 +63,10 @@ class Niche(object):
     constructor.
 
     """
-    def __init__(self):
+    def __init__(self, ct_acidity=None, ct_soil_mlw_class=None,
+                 ct_soil_codes=None, lnk_acidity=None, ct_seepage=None,
+                 ct_vegetation=None, ct_management=None,
+                 ct_nutrient_level=None, ct_mineralisation=None):
         self._inputfiles = dict()
         self._inputvalues = dict()
         self._inputarray = dict()
@@ -76,6 +79,10 @@ class Niche(object):
         self.log = logging.getLogger()
         self._context = None
         self.occurrence = None
+        for k in _code_tables:
+            ct = locals()[k]
+            if ct is not None:
+                self._set_ct(k, ct)
 
     def __repr__(self):
         s = "# Niche Vlaanderen version: {}\n".format(__version__)
@@ -142,9 +149,6 @@ class Niche(object):
             everywhere.
 
         """
-        if (key in _code_tables):
-            self._set_ct(key, value)
-            return
 
         # check type is valid value from list
         if (key not in _allowed_input):
