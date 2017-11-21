@@ -39,7 +39,7 @@ For a full model, more input layers must be specified:
     ``management``,, X, xxx, :ref:`management`
     ``conductivity``,, X, xxx, :ref:`minerality`
     ``rainwater``,, X, xxx, :ref:`rainwater`
-    ``inundation_vegetation``,, \(X\) ,xxx, :ref:`inundation`
+    ``inundation_vegetation``,, \(X\) ,xxx, :ref:`inundation_vegetation`
     ``management_vegetation``,,\(X\) ,xxx, :ref:`management`
     ``acidity``,,abiotic,xxx, :ref:`acidity`
     ``nutrient_level``,,abiotic ,xxx, :ref:`nutrient_level`

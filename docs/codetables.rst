@@ -45,7 +45,8 @@ The table `niche_vegetation.csv <https://github.com/INBO/niche_vlaanderen/blob/m
 
 Required columns are:
  * veg_code: vegetation code
- * soil_code: soil code, must correspond to the :ref:`soil_codes`:.
+ * veg_type: the vegetation name
+ * soil_code: soil code, must correspond to the :ref:`soil_code`:.
  * nutrient_level
  * acidity
  * mhw_min, mhw_max:

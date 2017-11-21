@@ -1,4 +1,4 @@
-.. _trofie:
+.. _nutrient_level:
 
 ####################################
 Berekening Trofie ``nutrient_level``

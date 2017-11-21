@@ -7,7 +7,7 @@ Bepaling vegetatie ``vegetation``
 
 Na de bepaling van de trofie en de zuurgraadklasse kan de eigenlijke bepaling van de mogelijke vegetatie gebeuren.
 
-Dit gebeurt aan de hand van de tabel :ref:`_ct_niche`.
+Dit gebeurt aan de hand van de tabel :ref:`ct_niche`.
 
 Optioneel kunnen :ref:`management` en de :ref:`inundation_vegetation` mee als selectiefactor gebruikt worden.
 

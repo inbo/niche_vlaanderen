@@ -8,7 +8,7 @@ Bepaling van de zuurgraadklasse ``acidity``
   :header-rows: 1
   :file: ../niche_vlaanderen/system_tables/acidity.csv
 
-NICHE berekent de zuurgraad van de standplaats op basis van de :ref:`glg` en het bodemtype. Verdere aanvullingen gebeuren door het in
+NICHE berekent de zuurgraad van de standplaats op basis van de GLG (:ref:`mlw`) en het bodemtype. Verdere aanvullingen gebeuren door het in
 rekening brengen van overstroming, kwel, en het eventueel voorhanden zijn van
 regenwaterlenzen.
 
@@ -17,11 +17,11 @@ door de kenmerken van het grondwater. Bij lage grondwaterstanden kan regenwater
 infiltreren en wordt de standplaats zuurder.
 
 Invoergegevens zijn dus:
- * :ref:`bodemklasse`
- * :ref:`glg`
- * :ref:`overstroming_zuur`
- * :ref:`kwel`
- * :ref:`regenlens`
+ * :ref:`soil_code`
+ * :ref:`mlw`
+ * :ref:`inundation_acidity`
+ * :ref:`seepage`
+ * :ref:`rainwater`
 
 .. _soil_glg_class:
 
@@ -60,7 +60,7 @@ Dit gebeurt aan de hand van de tabel `soil_mlw_class.csv <https://github.com/inb
 Bepaling Mineraalrijkdom_klasse
 ===============================
 
-De reële waarden uit het grid :ref:`mineraalrijkdom` worden geklasseerd op basis van 1 drempelwaarde:
+De reële waarden uit het grid :ref:`minerality` worden geklasseerd op basis van 1 drempelwaarde:
 Indien groter dan 500 µS/cm krijgt deze de waarde 2, anders de waarde 1.
 
 .. topic:: Voorbeeld
@@ -70,7 +70,7 @@ Indien groter dan 500 µS/cm krijgt deze de waarde 2, anders de waarde 1.
 Bepaling Zuurcode
 =================
 
-Aan de hand van deze BodemGLGKlasse, de mineralenrijkdom en de gegevens :ref:`regenlens`, overstroming, kwel wordt de zuurcode bepaald.
+Aan de hand van deze BodemGLGKlasse, de mineralenrijkdom en de gegevens :ref:`rainwater`, overstroming, kwel wordt de zuurcode bepaald.
 Dit gebeurt aan de hand van de tabel `lnk_acidity.csv <https://github.com/inbo/niche_vlaanderen/blob/master/system_tables/lnk_acidity.csv>`_.
 
 .. topic:: Voorbeeld
