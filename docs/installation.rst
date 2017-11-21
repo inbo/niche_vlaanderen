@@ -26,7 +26,7 @@ Install niche itself (last version):
 
 .. code-block:: default
 
-    (C:\Users\johan\Miniconda3) C:\Users\johan> pip install git+https://github.com/INBO/niche_vlaanderen
+    (C:\Users\johan\Miniconda3) C:\Users\johan> pip install niche_vlaanderen
 
 
 You can verify the installation was succesful by running the cli interface
@@ -42,3 +42,12 @@ You can verify the installation was succesful by running the cli interface
       --example  prints an example configuration file
       --help     Show this message and exit.
 
+Upgrading the Installation
+==========================
+
+Existing installations of Niche can be updated using pip (for windows, run
+from the Anaconda prompt
+
+.. code-block:: default
+
+    pip install niche_vlaanderen --upgrade
