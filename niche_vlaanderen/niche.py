@@ -80,7 +80,7 @@ class Niche(object):
         self._deviation = dict()
         self._model_options=dict()
         self._files_written = dict()
-        self.log = logging.getLogger()
+        self._log = logging.getLogger()
         self._context = None
         self.occurrence = None
 
@@ -358,7 +358,7 @@ class Niche(object):
         if not abiotic and (
                 (_abiotic_keys & set(self._inputfiles.keys()))
                     or (_abiotic_keys & set(self._inputvalues.keys()))):
-            self.log.warning(
+            self._log.warning(
                 "abiotic inputs specified but not specified in model options\n"
                 "abiotic inputs will not be used")
 
