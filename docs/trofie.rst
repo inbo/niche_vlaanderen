@@ -6,7 +6,7 @@ Berekening Trofie ``nutrient_level``
 
 De Trofie (``nutrient_level``) is de mate van voedselrijkdom van de bodem.
 Deze wordt in NICHE weergegeven als een klassevariabele met waarden tussen 1 en 5.
-Mogelijke waarden worden gegeven in de tabel `nutrient_level.csv <https://github.com/inbo/niche_vlaanderen/blob/master/system_tables/nutrient_level.csv>`_.
+Mogelijke waarden worden gegeven in de tabel `nutrient_level.csv <https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/nutrient_level.csv>`_.
 
 .. csv-table:: Trofie klassen
   :header-rows: 1
@@ -40,7 +40,7 @@ De stikstofmineralisatie (`nitrogen_mineralisation`) wordt berekend aan de hand 
 * :ref:`msw`
 * :ref:`soil_code`
 
-In combinatie met de tabel `nitrogen_mineralisation <https://github.com/inbo/niche_vlaanderen/blob/master/system_tables/nitrogen_mineralisation.csv>`_.
+In combinatie met de tabel `nitrogen_mineralisation <https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/nitrogen_mineralisation.csv>`_.
 Daar wordt de N_mineralisatie bepaald met de bodemcijfercode en de min en max waarde voor gvg.
 
 .. topic:: Voorbeeld
@@ -75,14 +75,15 @@ Bepaling gecodeerde Trofie
 ==========================
 
 De totale stikstof wordt gecombineerd met het management en het bodemtype om de gecodeerde Trofie te berekenen.
-Mogelijke waarden van beheer worden gegeven in de tabel `Management <https://github.com/inbo/niche_vlaanderen/blob/master/system_tables/management.csv>`_.
+Mogelijke waarden van beheer worden gegeven in de tabel `Management <https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/management.csv>`_.
 
 .. csv-table:: Management
   :header-rows: 1
   :file: ../niche_vlaanderen/system_tables/management.csv
 
 
-De Invloed die correspondeert met het gekozen management kan met het bodemtype en de totale stikstof gebruikt worden om in de tabel `lnk_soil_nutrient_level <https://github.com/inbo/niche_vlaanderen/blob/master/system_tables/lnk_soil_nutrient_level.csv>`_ de gecodeerde trofie te berekenen
+De Invloed die correspondeert met het gekozen management kan met het bodemtype en de
+    totale stikstof gebruikt worden om in de tabel `lnk_soil_nutrient_level <https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/lnk_soil_nutrient_level.csv>`_ de gecodeerde trofie te berekenen
 
 .. topic:: Voorbeeld
 
@@ -101,9 +102,11 @@ De Invloed die correspondeert met het gekozen management kan met het bodemtype e
 Invloed Overstroming
 ====================
 
-De waarden voor trofie die in de vorige stap berekend werden worden met 1 verhoogd indien er zich overstromingen voordoen én de trofie 3 of lager is.
+De waarden voor trofie die in de vorige stap berekend werden worden met 1 verhoogd
+indien er zich overstromingen voordoen én de trofie 3 of lager is.
 
-Opmerking: het Vlaamse model wijkt hier af van het oorspronkelijke Nederlandse Niche model waarbij ook waarden van 4 stijgen tot 5 bij overstroming.
+Opmerking: het Vlaamse model wijkt hier af van het oorspronkelijke Nederlandse Niche
+model waarbij ook waarden van 4 stijgen tot 5 bij overstroming.
 
 .. topic:: Voorbeeld
 
