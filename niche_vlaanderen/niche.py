@@ -645,7 +645,7 @@ class NicheDelta(object):
         colors = [im.cmap(im.norm(value)) for value in values]
         patches = [mpatches.Patch(color=colors[i],
                                   label=labels[i]) for i in range(len(values))]
-        plt.legend(handles=patches, bbox_to_anchor=(1.05, g1), loc=2,
+        plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2,
                    borderaxespad=0.)
 
         plt.show() 
