@@ -19,20 +19,23 @@ import textwrap
 import datetime
 import sys
 
-_allowed_input = set([
+_allowed_input = {
     "soil_code", "mlw", "msw", "mhw", "seepage",
     "inundation_acidity", "inundation_nutrient", "nitrogen_atmospheric",
     "nitrogen_animal", "nitrogen_fertilizer", "management", "conductivity",
     "rainwater", "inundation_vegetation", "management_vegetation", "acidity",
-    "nutrient_level"])
+    "nutrient_level"}
 
-_minimal_input = set([
+_minimal_input = {
     "soil_code", "mlw", "msw", "mhw", "seepage", "inundation_acidity",
     "nitrogen_atmospheric", "nitrogen_animal", "nitrogen_fertilizer",
     "management", "conductivity", "rainwater",
-    "inundation_nutrient"])
+    "inundation_nutrient"}
 
-_abiotic_keys = set(["nutrient_level", "acidity"])
+def minimal_input():
+    return _minimal_input
+
+_abiotic_keys = {"nutrient_level", "acidity"}
 
 _code_tables = ["ct_acidity", "ct_soil_mlw_class", "ct_soil_codes",
                 "lnk_acidity", "ct_seepage", "ct_vegetation", "ct_management",
