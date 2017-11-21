@@ -10,6 +10,7 @@ from .acidity import Acidity
 from .nutrient_level import NutrientLevel
 from .spatial_context import SpatialContext
 from .version import __version__
+from pkg_resources import resource_filename
 
 import logging
 import os.path
@@ -82,10 +83,16 @@ class Niche(object):
         self.log = logging.getLogger()
         self._context = None
         self.occurrence = None
+
         for k in _code_tables:
             ct = locals()[k]
             if ct is not None:
                 self._set_ct(k, ct)
+
+        if ct_vegetation is None:
+            self._set_ct("ct_vegetation", resource_filename(
+                "niche_vlaanderen",
+                "system_tables/niche_vegetation.csv"))
 
     def __repr__(self):
         s = "# Niche Vlaanderen version: {}\n".format(__version__)
@@ -531,7 +538,7 @@ class Niche(object):
         mpl_extent = (a, c, d, b)
         #rasterio.plot.show(v, contour, title=key, extent=mpl_extent, ax=ax)
         plt.imshow(v, extent=mpl_extent)
-        ax.set_title(key)
+        ax.set_title("{} ({})".format(self.vegcode2name(key), key))
         plt.colorbar()
         plt.show()
 
@@ -548,6 +555,21 @@ class Niche(object):
         df = df[[0,1,255]]
         df.columns=["not present", "present", "no data"]
         return df
+
+
+    def vegcode2name(self, vegcode):
+        """Converts a vegetation code to a name
+
+        Uses ct_vegetation columns veg_code and veg_type"""
+
+        if not hasattr(self, "_vegcode2namedict"):
+            self._ct_vegetation = pd.read_csv(
+                self._code_tables["ct_vegetation"])
+            self._vegcode2namedict = \
+                self._ct_vegetation[["veg_code", "veg_type"]].set_index(
+                "veg_code").to_dict()["veg_type"]
+        return self._vegcode2namedict[vegcode]
+
 
 def indent(s, pre):
     if sys.version_info >= (3,3):
