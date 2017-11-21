@@ -432,16 +432,6 @@ class Niche(object):
                 self._inputarray["mlw"]
             )
 
-        occ_table = pd.DataFrame.from_dict(self.occurrence, orient="index")
-        occ_table.columns = ['occurrence']
-
-        # we convert the occurrence values to a table to have a pretty print
-        # the values are shown as a percentage
-        occ_table['occurrence'] = pd.Series(
-            ["{0:.2f}%".format(v * 100) for v in occ_table['occurrence']],
-            index=occ_table.index)
-        print(occ_table)
-
     def write(self, folder):
         """Saves the model results to a folder
 
