@@ -11,7 +11,6 @@ from .nutrient_level import NutrientLevel
 from .spatial_context import SpatialContext
 from .version import __version__
 from pkg_resources import resource_filename
-from matplotlib.colors import Normalize
 
 import logging
 import os.path
@@ -667,6 +666,7 @@ class NicheDelta(object):
     def show(self, key):
         plt = rasterio.plot.get_plt()
         import matplotlib.patches as mpatches
+        from matplotlib.colors import Normalize
 
         fig, ax = plt.subplots()
         ((a, b), (c, d)) = self._context.extent
