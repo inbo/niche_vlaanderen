@@ -16,7 +16,6 @@ import logging
 import os.path
 import numbers
 import yaml
-import textwrap
 import datetime
 import sys
 
@@ -33,8 +32,10 @@ _minimal_input = {
     "management", "conductivity", "rainwater",
     "inundation_nutrient"}
 
+
 def minimal_input():
     return _minimal_input
+
 
 _abiotic_keys = {"nutrient_level", "acidity"}
 
@@ -78,7 +79,7 @@ class Niche(object):
         self._code_tables = dict()
         self._result = dict()
         self._deviation = dict()
-        self._model_options=dict()
+        self._model_options = dict()
         self._files_written = dict()
         self._log = logging.getLogger()
         self._context = None
@@ -111,17 +112,15 @@ class Niche(object):
         s += indent(options, "  ")
 
         if self._context is not None:
-            s+="\nmodel_properties:\n"
-            s+="  model_extent: " + str(self._context.extent) + "\n"
+            s += "\nmodel_properties:\n"
+            s += "  model_extent: " + str(self._context.extent) + "\n"
 
         s += "\n"
         s += "input_layers:\n"
         input = yaml.dump(self._inputfiles, default_flow_style=False)
         input += yaml.dump(self._inputvalues, default_flow_style=False) \
-            if len(self._inputvalues)>0 else ""
+            if len(self._inputvalues) > 0 else ""
         s += indent(input, "  ")
-
-
 
         if self.occurrence is not None:
             s += "\nmodel_result: \n"
@@ -130,9 +129,8 @@ class Niche(object):
         else:
             s += "# No model run completed."
 
-
         if len(self._files_written) > 0:
-            s+= "\nfiles_written:\n"
+            s += "\nfiles_written:\n"
             s += indent(
                 yaml.dump(self._files_written, default_flow_style=False), "  ")
 
@@ -234,18 +232,18 @@ class Niche(object):
 
     def _check_all_lower(self, input_array, a, b):
         if np.any((input_array[a] > input_array[b])
-                          & (input_array[a] != -99)
-                          & (input_array[b] != -99)):
+                  & (input_array[a] != -99)
+                  & (input_array[b] != -99)):
             # find out which cells have invalid values
             bad_points = np.where(input_array[a] > input_array[b])
             # convert these cells into the projection system
             bad_points = bad_points * self._context.affine
 
-            print("Not all {} values are lower than {}".format(a,b))
+            print("Not all {} values are lower than {}".format(a, b))
             print("coordinates with invalid values are:")
             print(pd.DataFrame(list(bad_points)))
             raise NicheException(
-                "Error: not all {} values are lower than {}".format(a,b))
+                "Error: not all {} values are lower than {}".format(a, b))
 
     def _check_input_files(self, full_model):
         """ basic input checks (valid files etc)
@@ -273,16 +271,13 @@ class Niche(object):
                 band = band.astype('float32')
 
             if f == 'soil_code' and np.all(band[band != nodata] >= 10000):
-                band[band != nodata] = np.round(
-                band[band != nodata] / 10000)
+                band[band != nodata] = np.round(band[band != nodata] / 10000)
 
             # create a mask for no-data values, taking into account data-types
             if band.dtype == 'float32':
                 band[band == nodata] = np.nan
             else:
                 band[band == nodata] = -99
-
-
 
             inputarray[f] = band
 
@@ -333,7 +328,8 @@ class Niche(object):
                     Calculated results will be stored in the niche class in a
                     dict _difference
         abiotic:  bool
-                Specify the abiotic grids as input rather than calculating them.
+                Specify the abiotic grids as input rather than calculating
+                them.
 
         """
 
@@ -347,8 +343,8 @@ class Niche(object):
 
         if abiotic:
             missing_keys = (_abiotic_keys
-                           - set(self._inputfiles.keys())
-                           - set(self._inputvalues.keys()))
+                            - set(self._inputfiles.keys())
+                            - set(self._inputvalues.keys()))
             if len(missing_keys) > 0:
                 print("Abiotic input are missing: (abiotic=True)")
                 print(missing_keys)
@@ -357,7 +353,7 @@ class Niche(object):
 
         if not abiotic and (
                 (_abiotic_keys & set(self._inputfiles.keys()))
-                    or (_abiotic_keys & set(self._inputvalues.keys()))):
+                or (_abiotic_keys & set(self._inputvalues.keys()))):
             self._log.warning(
                 "abiotic inputs specified but not specified in model options\n"
                 "abiotic inputs will not be used")
@@ -380,8 +376,8 @@ class Niche(object):
                 keys = self._code_tables.viewkeys()
 
             keys = keys & \
-                   ['ct_acidity', 'ct_soil_mlw_class', 'ct_soil_codes',
-                    'lnk_acidity', 'ct_seepage']
+                ['ct_acidity', 'ct_soil_mlw_class', 'ct_soil_codes',
+                 'lnk_acidity', 'ct_seepage']
 
             ct_nl = dict()
 
@@ -431,7 +427,6 @@ class Niche(object):
                 veg_arguments.update(
                     nutrient_level=self._inputarray["nutrient_level"],
                     acidity=self._inputarray["acidity"])
-
 
         self._vegetation, self.occurrence = vegetation.calculate(
             full_model=full_model, **veg_arguments)
@@ -514,7 +509,6 @@ class Niche(object):
                 dst.write(band, 1)
                 self._files_written[i] = os.path.normpath(path)
 
-
         with open(folder + "/log.txt", "w") as f:
             f.write(self.__repr__())
 
@@ -536,7 +530,6 @@ class Niche(object):
 
         ((a, b), (c, d)) = self._context.extent
         mpl_extent = (a, c, d, b)
-        #rasterio.plot.show(v, contour, title=key, extent=mpl_extent, ax=ax)
         plt.imshow(v, extent=mpl_extent)
         ax.set_title("{} ({})".format(self.vegcode2name(key), key))
         plt.colorbar()
@@ -552,10 +545,9 @@ class Niche(object):
             td[i] = vi.value_counts() * self._context.cell_area
         df = pd.DataFrame.from_dict(td, orient='index')
         df = df.fillna(0)
-        df = df[[0,1,255]]
-        df.columns=["not present", "present", "no data"]
+        df = df[[0, 1, 255]]
+        df.columns = ["not present", "present", "no data"]
         return df
-
 
     def vegcode2name(self, vegcode):
         """Converts a vegetation code to a name
@@ -565,24 +557,22 @@ class Niche(object):
         if not hasattr(self, "_vegcode2namedict"):
             self._ct_vegetation = pd.read_csv(
                 self._code_tables["ct_vegetation"])
-            self._vegcode2namedict = \
-                self._ct_vegetation[["veg_code", "veg_type"]].set_index(
-                "veg_code").to_dict()["veg_type"]
+            subtable = self._ct_vegetation[["veg_code", "veg_type"]]
+            veg_dict = subtable.set_index("veg_code").to_dict()["veg_type"]
+            self._vegcode2namedict = veg_dict
         return self._vegcode2namedict[vegcode]
 
 
 def indent(s, pre):
-    if sys.version_info >= (3,3):
-        return textwrap.indent(s, pre)
-    else:
-        return pre + s.replace('\n', '\n' + pre)
+    return pre + s.replace('\n', '\n' + pre)
+
 
 class NicheDelta(object):
     """Class containing the difference between two niche runs
     """
 
     def __init__(self, n1, n2):
-        self._delta=dict()
+        self._delta = dict()
 
         if n1._context is None or n2._context is None:
             raise NicheException(
@@ -616,7 +606,7 @@ class NicheDelta(object):
         for vi in n1._vegetation:
             n1v = n1._vegetation[vi].flatten()
             n2v = n2._vegetation[vi].flatten()
-            res = np.full( n1v.size, 4)
+            res = np.full(n1v.size, 4)
             res[((n1v == 0) & (n2v == 0))] = 0
             res[((n1v == 1) & (n2v == 1))] = 1
             res[((n1v == 1) & (n2v == 0))] = 2
@@ -639,7 +629,7 @@ class NicheDelta(object):
         im = plt.imshow(self._delta[key], extent=mpl_extent)
         ax.set_title(key)
 
-        values = [0,1,2,3,4]
+        values = [0, 1, 2, 3, 4]
         labels = ["not present in both models", "present in both models",
                   "only in model 1", "only in model 2", "nodata in one model"]
         colors = [im.cmap(im.norm(value)) for value in values]
@@ -648,7 +638,7 @@ class NicheDelta(object):
         plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2,
                    borderaxespad=0.)
 
-        plt.show() 
+        plt.show()
 
     @property
     def table(self):

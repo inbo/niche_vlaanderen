@@ -8,6 +8,7 @@ from .nutrient_level import NutrientLevel
 from .acidity import Acidity
 from .codetables import validate_tables_vegetation
 
+
 class Vegetation(object):
     """Helper class to calculate vegetation based on input arrays
 
@@ -22,7 +23,7 @@ class Vegetation(object):
     ct_vegetation: filename, .csv
         optional alternative classification table
         Must contain the columns mentioned in the documentation:
-        https://inbo.github.io/niche_vlaanderen/codetables.html#niche_vlaanderen
+        https://inbo.github.io/niche_vlaanderen/codetables.html
     """
 
     nodata = 255  # uint8
@@ -85,7 +86,6 @@ class Vegetation(object):
             self._ct_soil_code.soil_code[self._ct_vegetation["soil_name"]]\
                 .reset_index().soil_code
 
-
     def calculate(self, soil_code, mhw, mlw, nutrient_level=None, acidity=None,
                   management=None, inundation=None, return_all=True,
                   full_model=True):
@@ -143,8 +143,8 @@ class Vegetation(object):
             if return_all or np.any(vegi):
                 veg_bands[veg_code] = vegi
 
-            occurrence[veg_code] = np.asscalar((np.sum(vegi == 1)
-                                    / (vegi.size - np.sum(nodata))))
+            occurrence[veg_code] = np.asscalar(
+                (np.sum(vegi == 1) / (vegi.size - np.sum(nodata))))
         return veg_bands, occurrence
 
     def calculate_deviation(self, soil_code, mhw, mlw):

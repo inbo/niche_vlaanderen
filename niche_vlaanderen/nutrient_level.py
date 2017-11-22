@@ -43,7 +43,8 @@ class NutrientLevel(object):
 
         # convert the mineralisation to float so we can use np.nan for nodata
         self._ct_mineralisation["nitrogen_mineralisation"] = \
-            self._ct_mineralisation["nitrogen_mineralisation"].astype("float64")
+            self._ct_mineralisation["nitrogen_mineralisation"]\
+                .astype("float64")
 
         validate_tables_nutrient_level(self.ct_lnk_soil_nutrient_level,
                                        self._ct_management,
