@@ -477,8 +477,8 @@ class Niche(object):
         )
 
         for vi in self._vegetation:
-            path = folder + '/%s.tif' % vi
-            with rasterio.open(folder + '/V%s.tif' % vi, 'w', **params) as dst:
+            path = folder + '/V%s.tif' % vi
+            with rasterio.open(path, 'w', **params) as dst:
                 dst.write(self._vegetation[vi], 1)
                 self._files_written[vi] = os.path.normpath(path)
 
