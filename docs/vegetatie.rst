@@ -29,21 +29,21 @@ Optioneel kunnen :ref:`management` en de :ref:`inundation_vegetation` mee als se
   .. csv-table:: potentiële vegetatie op basis van NICHE
     :header-rows: 1
     
-    VEG_CODE,VEG_TYPE,SOIL,TROFIE,ZUURGRAAD,GHG_MIN,GHG_MAX,GLG_MIN,GLG_MAX,MANAGEMENT,INUNDATIE,NAT_SCORE
-    7,Caricion gracilis,140000,4,3,31,-32,73,-1,1,1,1
-    7,Caricion gracilis,140000,4,3,31,-32,73,-1,1,2,1
-    7,Caricion gracilis,140000,4,3,31,-32,73,-1,3,1,1
-    7,Caricion gracilis,140000,4,3,31,-32,73,-1,3,2,1
-    8,Filipendulion,140000,4,3,80,-31,170,21,1,0,1
-    8,Filipendulion,140000,4,3,80,-31,170,21,1,2,1
-    12,Magnocaricion met Phragmites,140000,4,3,14,-37,55,-3,1,1,1
-    12,Magnocaricion met Phragmites,140000,4,3,14,-37,55,-3,1,2,1
-    16,Lolio-Potentillion anserinae,140000,4,3,30,-26,66,-3,2,0,1
-    16,Lolio-Potentillion anserinae,140000,4,3,30,-26,66,-3,2,1,1
-    16,Lolio-Potentillion anserinae,140000,4,3,30,-26,66,-3,2,2,1
-    16,Lolio-Potentillion anserinae,140000,4,3,30,-26,66,-3,3,0,1
-    16,Lolio-Potentillion anserinae,140000,4,3,30,-26,66,-3,3,1,1
-    16,Lolio-Potentillion anserinae,140000,4,3,30,-26,66,-3,3,2,1
+    veg_code,veg_type,soil_name,nutrient_level,acidity,mhw_min,mhw_max,mlw_min,mlw_max,management,inundation
+    7,Caricion gracilis,140000,4,3,31,-32,73,-1,1,1
+    7,Caricion gracilis,140000,4,3,31,-32,73,-1,1,2
+    7,Caricion gracilis,140000,4,3,31,-32,73,-1,3,1
+    7,Caricion gracilis,140000,4,3,31,-32,73,-1,3,2
+    8,Filipendulion,140000,4,3,80,-31,170,21,1,0
+    8,Filipendulion,140000,4,3,80,-31,170,21,1,2
+    12,Magnocaricion met Phragmites,140000,4,3,14,-37,55,-3,1,1
+    12,Magnocaricion met Phragmites,140000,4,3,14,-37,55,-3,1,2
+    16,Lolio-Potentillion anserinae,140000,4,3,30,-26,66,-3,2,0
+    16,Lolio-Potentillion anserinae,140000,4,3,30,-26,66,-3,2,1
+    16,Lolio-Potentillion anserinae,140000,4,3,30,-26,66,-3,2,2
+    16,Lolio-Potentillion anserinae,140000,4,3,30,-26,66,-3,3,0
+    16,Lolio-Potentillion anserinae,140000,4,3,30,-26,66,-3,3,1
+    16,Lolio-Potentillion anserinae,140000,4,3,30,-26,66,-3,3,2
 
   Volgende vegetatiecodes kunnen dus voorkomen: 7, 8, 12 en 16.
 
