@@ -1,5 +1,6 @@
 import rasterio
 import rasterio.plot
+import rasterstats
 
 import numpy as np
 import numpy.ma as ma
@@ -531,7 +532,7 @@ class Niche(object):
         ((a, b), (c, d)) = self._context.extent
         mpl_extent = (a, c, d, b)
         plt.imshow(v, extent=mpl_extent)
-        ax.set_title("{} ({})".format(self.vegcode2name(key), key))
+        ax.set_title("{} ({})".format(self._vegcode2name(key), key))
         plt.colorbar()
         plt.show()
 
@@ -549,7 +550,35 @@ class Niche(object):
         df.columns = ["not present", "present", "no data"]
         return df
 
-    def vegcode2name(self, vegcode):
+    def zonal_stats(self, vectors):
+        """Calculates zonal statistics using vectors
+
+        Parameters
+        ==========
+        vectors: path to a vector source or geo-like python objects
+        you can specify a path to a vector file eg "../test.shp", or pass
+        geo objects from other python functions.
+
+        Note that the vector should be in the same coordinate system as the
+        raster.
+        """
+        td = dict()
+        for i in self._vegetation:
+            # Note we use -99 as nodata value to make sure the true nodata
+            # value (255) is part of the result table.
+
+            td[i] = rasterstats.zonal_stats(vectors,
+                                            raster=self._vegetation[i],
+                                            affine=self._context.affine,
+                                            categorical=True,
+                                            nodata=-99)
+        df = pd.DataFrame.from_dict(td, orient='index')
+        df = df[0].apply(pd.Series)
+        df = df.fillna(0) * self._context.cell_area
+        df.columns = ['present', 'not present', 'no data']
+        return df
+
+    def _vegcode2name(self, vegcode):
         """Converts a vegetation code to a name
 
         Uses ct_vegetation columns veg_code and veg_type"""
@@ -674,7 +703,7 @@ class NicheDelta(object):
 
         im = plt.imshow(self._delta[key], extent=mpl_extent,
                         norm=Normalize(0, max(self._values)))
-        ax.set_title("{} ({})".format(self._n1.vegcode2name(key), key))
+        ax.set_title("{} ({})".format(self._n1._vegcode2name(key), key))
 
         labels = self._labels
         values = self._values
