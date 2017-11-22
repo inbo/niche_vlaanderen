@@ -11,6 +11,7 @@ from .nutrient_level import NutrientLevel
 from .spatial_context import SpatialContext
 from .version import __version__
 from pkg_resources import resource_filename
+from matplotlib.colors import Normalize
 
 import logging
 import os.path
@@ -569,7 +570,15 @@ def indent(s, pre):
 
 class NicheDelta(object):
     """Class containing the difference between two niche runs
+
+    The difference can be visualized using the show method. It is also
+    possible to derive a table with the area's according to each group.
     """
+
+    _values = [0, 1, 2, 3, 4]
+    _labels = ["not present in both models", "present in both models",
+               "only in model 1", "only in model 2",
+               "nodata in one model"]
 
     def __init__(self, n1, n2):
         self._delta = dict()
@@ -606,7 +615,7 @@ class NicheDelta(object):
         for vi in n1._vegetation:
             n1v = n1._vegetation[vi].flatten()
             n2v = n2._vegetation[vi].flatten()
-            res = np.full(n1v.size, 4)
+            res = np.full(n1v.size, 4, dtype="uint8")
             res[((n1v == 0) & (n2v == 0))] = 0
             res[((n1v == 1) & (n2v == 1))] = 1
             res[((n1v == 1) & (n2v == 0))] = 2
@@ -615,8 +624,45 @@ class NicheDelta(object):
             res.resize(n1._vegetation[vi].shape)
             self._delta[vi] = ma.masked_equal(res, 255)
 
-    def write(self, output_dir):
-        pass
+        self._n1 = n1
+
+    def write(self, folder):
+        """ Writes the difference grids to grid files.
+
+        The differences have are coded using these values:
+        - 0: "not present in both models"
+        - 1: "present in both models"
+        - 2: "only in model 1"
+        - 3: "only in model 2"
+        - 4: "nodata in one model"
+
+        Parameters
+        ==========
+
+        folder: path
+            Path to which the output files will be written.
+        """
+
+        if not os.path.exists(folder):
+            os.makedirs(folder)
+
+        params = dict(
+            driver='GTiff',
+            height=self._context.height,
+            width=self._context.width,
+            crs=self._context.crs,
+            affine=self._context.affine,
+            count=1,
+            dtype="uint8",
+            nodata=255,
+            compress="DEFLATE"
+        )
+
+        for vi in self._delta:
+            path = folder + '/D%s.tif' % vi
+            with rasterio.open(path, 'w', **params) as dst:
+                dst.write(self._delta[vi], 1)
+                # self._files_written[vi] = os.path.normpath(path)
 
     def show(self, key):
         plt = rasterio.plot.get_plt()
@@ -626,15 +672,16 @@ class NicheDelta(object):
         ((a, b), (c, d)) = self._context.extent
         mpl_extent = (a, c, d, b)
 
-        im = plt.imshow(self._delta[key], extent=mpl_extent)
-        ax.set_title(key)
+        im = plt.imshow(self._delta[key], extent=mpl_extent,
+                        norm=Normalize(0, max(self._values)))
+        ax.set_title("{} ({})".format(self._n1.vegcode2name(key), key))
 
-        values = [0, 1, 2, 3, 4]
-        labels = ["not present in both models", "present in both models",
-                  "only in model 1", "only in model 2", "nodata in one model"]
-        colors = [im.cmap(im.norm(value)) for value in values]
+        labels = self._labels
+        values = self._values
+
+        colors = [im.cmap(value/(len(values) - 1)) for value in values]
         patches = [mpatches.Patch(color=colors[i],
-                                  label=labels[i]) for i in range(len(values))]
+                                  label=labels[i]) for i in values]
         plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2,
                    borderaxespad=0.)
 
@@ -647,6 +694,13 @@ class NicheDelta(object):
             vi = pd.Series(self._delta[i].flatten())
             td[i] = vi.value_counts() * self._context.cell_area
         df = pd.DataFrame.from_dict(td, orient='index')
-        df = df.fillna(0)
 
+        # Missing values get area 0
+        df = df.fillna(0)
+        for i in self._values:
+            if i not in df.columns:
+                df[i] = 0
+
+        df = df[self._values]
+        df.columns = self._labels
         return df
