@@ -1,6 +1,7 @@
 pandas
 numpy
 rasterio
+rasterstats
 pyyaml
 pytest
 pytest-cov
