@@ -8,7 +8,7 @@ For a simple NICHE model this could look like this:
  .. code-block:: yaml
 
      model_options:
-       simple_model: True
+       full_model: False
        deviation: False
        output_dir: _output
 
