@@ -318,7 +318,7 @@ class TestNiche(TestCase):
         myniche.set_input('ct_acidity', 'system_tables/acidity.asc')
         myniche.run()
 
-    def rereadoutput(self):
+    def test_rereadoutput(self):
         """
         This tests checks if the output written by the model is a valid input
         for a new run
@@ -327,8 +327,12 @@ class TestNiche(TestCase):
         myniche = niche_vlaanderen.Niche()
         myniche.run_config_file(config)
         myniche = niche_vlaanderen.Niche()
-        config = '_output/log.txt'
-        myniche.run_config_file(config)
+
+        shutil.copy('_output/log.txt', 'log.txt')
+
+        config = 'log.txt'
+        myniche2 = niche_vlaanderen.Niche()
+        myniche2.run_config_file(config)
 
 
 class TestNicheDelta(TestCase):

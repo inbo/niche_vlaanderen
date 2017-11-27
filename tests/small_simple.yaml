@@ -4,6 +4,6 @@ input_layers:
   soil_code: data/soil_code_small.asc
 
 model_options:
-  simple_model: True
+  full_model: False
   deviation: True
   output_dir: _output

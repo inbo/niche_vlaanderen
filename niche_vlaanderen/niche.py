@@ -219,7 +219,7 @@ class Niche(object):
 
         deviation = "deviation" in options and options["deviation"]
         full_model = True
-        if "simple_model" in options and options["simple_model"]:
+        if "full_model" in options and not options["full_model"]:
             full_model = False
 
         self.run(full_model, deviation)
