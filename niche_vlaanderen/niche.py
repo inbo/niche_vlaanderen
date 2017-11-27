@@ -624,7 +624,9 @@ class NicheDelta(object):
 
         if n1._context != n2._context:
             raise NicheException(
-                "Spatial contexts differ, can not make a delta")
+                "Spatial contexts differ, can not make a delta\n"
+                "Context 1 %s\n"
+                "Context 2 %s" % (n1._context, n2._context))
         self._context = n1._context
 
         if len(n1._vegetation) == 0 or len(n2._vegetation) == 0:
