@@ -60,7 +60,10 @@ class SpatialContext(object):
             return False
 
         if self.crs.to_string() != other.crs.to_string():
-            return False
+            if self.crs.to_string() == '' or self.crs.to_string() == '':
+                print("Ignoring missing CRS in comparison")
+            else:
+                return False
 
         if self.affine.almost_equals(other.affine, precision=0.01)\
                 and self.width == other.width and self.height == other.height:
