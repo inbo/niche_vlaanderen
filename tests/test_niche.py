@@ -325,8 +325,24 @@ class TestNiche(TestCase):
         """
         config = 'tests/small_simple.yaml'
         myniche = niche_vlaanderen.Niche()
-        myniche.run(config)
+        myniche.run_config_file(config)
         myniche = niche_vlaanderen.Niche()
         config = '_output/log.txt'
-        myniche.run(config)
+        myniche.run_config_file(config)
+
+
+class TestNicheDelta(TestCase):
+    def test_simplevsfull(self):
+        config = 'tests/small_simple.yaml'
+        simple = niche_vlaanderen.Niche()
+        simple.run_config_file(config)
+
+        config_full = "tests/small.yaml"
+        full = niche_vlaanderen.Niche()
+        full.run_config_file(config_full)
+
+        delta = niche_vlaanderen.NicheDelta(simple, full)
+
+        self.assertEqual(0, delta.table["only in model 2"].sum())
+
 
