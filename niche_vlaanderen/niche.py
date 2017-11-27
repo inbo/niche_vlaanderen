@@ -545,7 +545,12 @@ class Niche(object):
             vi = pd.Series(self._vegetation[i].flatten())
             td[i] = vi.value_counts() * self._context.cell_area
         df = pd.DataFrame.from_dict(td, orient='index')
+
         df = df.fillna(0)
+        for i in [0,1,255]:
+            if i not in df.columns:
+                df[i] = 0
+
         df = df[[0, 1, 255]]
         df.columns = ["not present", "present", "no data"]
         return df
@@ -567,7 +572,7 @@ class Niche(object):
             # Note we use -99 as nodata value to make sure the true nodata
             # value (255) is part of the result table.
 
-            td[i] = rasterstats.zonal_stats(vectors,
+            td[i] = rasterstats.zonal_stats(vectors=vectors,
                                             raster=self._vegetation[i],
                                             affine=self._context.affine,
                                             categorical=True,
