@@ -336,6 +336,9 @@ class TestNiche(TestCase):
         Tests the show method. Note that this only tests whether a plot is
         constructed. The actual content is not tested.
         """
+        import matplotlib as mpl
+        mpl.use('agg')
+
         import matplotlib.pyplot as plt
         plt.show = lambda: None
 
@@ -399,6 +402,9 @@ class TestNicheDelta(TestCase):
         # we can use this in a test
         self.assertEqual(0, delta.table["only in model 2"].sum())
 
+        import matplotlib as mpl
+        mpl.use('agg')
+        
         import matplotlib.pyplot as plt
         plt.show = lambda: None
 
