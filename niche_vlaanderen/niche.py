@@ -605,6 +605,11 @@ class Niche(object):
         df = pd.DataFrame.from_dict(td, orient='index')
         df = df[0].apply(pd.Series)
         df = df.fillna(0) * self._context.cell_area
+        
+        for i in [0, 1, 255]:
+            if i not in df.columns:
+                df[i] = 0
+
         df.columns = ['present', 'not present', 'no data']
         return df
 
