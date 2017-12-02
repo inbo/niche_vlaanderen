@@ -609,6 +609,10 @@ class Niche(object):
 
         Note that the vector should be in the same coordinate system as the
         raster.
+
+        Returns
+        =======
+        dict of dataframes. The index of the dict is the vector.
         """
         td = dict()
         for i in self._vegetation:
@@ -620,16 +624,20 @@ class Niche(object):
                                             affine=self._context.affine,
                                             categorical=True,
                                             nodata=-99)
-        df = pd.DataFrame.from_dict(td, orient='index')
-        df = df[0].apply(pd.Series)
-        df = df.fillna(0) * self._context.cell_area
 
-        for i in [0, 1, 255]:
-            if i not in df.columns:
-                df[i] = 0
+        rs_result = pd.DataFrame.from_dict(td, orient='index')
+        df_list=dict()
 
-        df.columns = ['present', 'not present', 'no data']
-        return df
+        for j in rs_result.columns:
+            df_list[j] = rs_result[j].apply(pd.Series)
+            df_list[j] = df_list[j].fillna(0) * self._context.cell_area
+
+            for i in [0, 1, 255]:
+                if i not in df_list[j].columns:
+                    df_list[j][i] = 0
+
+                    df_list[j].columns = ['present', 'not present', 'no data']
+        return df_list
 
     def _vegcode2name(self, vegcode):
         """Converts a vegetation code to a name
