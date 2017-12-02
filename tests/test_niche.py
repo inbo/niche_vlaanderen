@@ -148,32 +148,6 @@ class TestNiche(TestCase):
 
         shutil.rmtree(tmpdir)
 
-    def create_grobbendonk_niche(self):
-        myniche = niche_vlaanderen.Niche()
-        input = "testcase/grobbendonk/input/"
-        myniche.set_input("soil_code",
-                          input + "soil_code.asc")
-        myniche.set_input("mhw", input + "mhw_correct2.asc")
-        myniche.set_input("mlw", input + "mlw.asc")
-        myniche.set_input("msw", input + "msw_correct.asc")
-        myniche.set_input("conductivity",
-                          input + "conductivity.asc")
-        myniche.set_input("nitrogen_atmospheric",
-                          input + "nitrogen_atmospheric.asc")
-        myniche.set_input("nitrogen_animal",
-                          input + "nitrogen_animal.asc")
-        myniche.set_input("nitrogen_fertilizer",
-                          "testcase/grobbendonk/input/nullgrid.asc")
-        myniche.set_input("management",
-                          input + "management.asc")
-        myniche.set_input("inundation_nutrient",
-                          input + "inundation_nutrient.asc")
-        myniche.set_input("inundation_acidity",
-                          input + "inundation_nutrient.asc")
-        myniche.set_input("seepage", input + "seepage.asc")
-        myniche.set_input("rainwater", input + "nullgrid.asc")
-        return myniche
-
     def create_small(self):
         myniche = niche_vlaanderen.Niche()
 
@@ -181,6 +155,7 @@ class TestNiche(TestCase):
         myniche.set_input("mhw", input_dir + "mhw_small.asc")
         myniche.set_input("mlw", input_dir + "mlw_small.asc")
         myniche.set_input("msw", "tests/data/msw_small.asc")
+        myniche.set_input("soil_code", input_dir + "soil_code_small.asc")
 
         return myniche
 
@@ -188,8 +163,8 @@ class TestNiche(TestCase):
         distutils.spawn.find_executable("gdalinfo") is None,
         reason="gdalinfo not available in the environment.")
 
-    def test_grobbendonk_validate(self):
-        myniche = self.create_grobbendonk_niche()
+    def test_zwarte_beek_validate(self):
+        myniche = self.create_zwarte_beek_niche()
         myniche.run()
         tmpdir = tempfile.mkdtemp()
         myniche.write(tmpdir)
@@ -199,7 +174,8 @@ class TestNiche(TestCase):
              "-stats",
             os.path.join(tmpdir, 'V1.tif')]
         ).decode('utf-8')
-        assert ("Origin = (164937.500000000000000,216162.500000000000000)" in
+        print(info)
+        assert ("(216580.000000000000000,198580.000000000000000)" in
                 info)
         assert ("STATISTICS_MAXIMUM=1" in info)
         assert ("STATISTICS_MINIMUM=0" in info)
@@ -207,18 +183,18 @@ class TestNiche(TestCase):
         shutil.rmtree(tmpdir)
 
     def test_deviation(self):
-        n = self.create_grobbendonk_niche()
+        n = self.create_zwarte_beek_niche()
         n.run(deviation=True)
         # check dict exists and contains enough nan values
-        self.assertEqual(276072, np.isnan(n._deviation["mhw_04"]).sum())
+        self.assertEqual(14400, np.isnan(n._deviation["mhw_04"]).sum())
 
     @pytest.mark.skipif(
         distutils.spawn.find_executable("gdalinfo") is None,
         reason="gdalinfo not available in the environment.")
 
     def test_write_deviation(self):
-        n = self.create_grobbendonk_niche()
-        n.run(deviation=True)
+        n = self.create_small()
+        n.run(deviation=True, full_model=False)
 
         tmpdir = tempfile.mkdtemp()
         n.write(tmpdir)
@@ -227,11 +203,12 @@ class TestNiche(TestCase):
              "-stats",
             os.path.join(tmpdir, 'mhw_04.tif')]
         ).decode('utf-8')
+        print(info)
         self.assertTrue(
-            "Origin = (164937.500000000000000,216162.500000000000000)" in
+            "Origin = (172762.500000000000000,210637.500000000000000)" in
                 info)
-        self.assertTrue ("STATISTICS_MAXIMUM=1051" in info)
-        self.assertTrue ("STATISTICS_MINIMUM=-100" in info)
+        self.assertTrue ("STATISTICS_MAXIMUM=9" in info)
+        self.assertTrue ("STATISTICS_MINIMUM=0" in info)
         shutil.rmtree(tmpdir)
 
     def test_read_configuration(self):
