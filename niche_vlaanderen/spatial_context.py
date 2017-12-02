@@ -32,6 +32,19 @@ class SpatialContext(object):
         self.height = int(dst.height)
         self.crs = dst.crs
 
+        if self.affine[0] < 0:
+            raise SpatialContextError(  # pragma: no cover
+                "Grid is indexed right to left. This is very uncommon."
+                "Try resampling your grid in GIS prior to using in Niche."
+            )
+        
+        if self.affine[4] > 0:
+            raise SpatialContextError(
+                "Grid is indexed top to bottom. This is very uncommon."
+                "Try resampling your grid in GIS prior to using in Niche."
+            )
+
+
     def __repr__(self):
 
         s = """\
@@ -143,27 +156,11 @@ class SpatialContext(object):
         # Note that usually the 0th coefficient is positive and the 4th
         # negative.
 
-        if self.affine[0] > 0:
-            extent_x = (max(extent_self[0][0], extent_new[0][0]),
-                        min(extent_self[1][0], extent_new[1][0]))
-        else:
-            raise SpatialContextError(
-                "Grid is indexed right to left. This is very uncommon."
-                "Try resampling your grid in GIS prior to using in Niche."
-            )
-            # extent_x = (min(extent_self[0][0], extent_new[0][0]),
-            #             max(extent_self[1][0], extent_new[1][0]))
+        extent_x = (max(extent_self[0][0], extent_new[0][0]),
+                    min(extent_self[1][0], extent_new[1][0]))
 
-        if self.affine[4] > 0:
-            # extent_y = max(extent_self[0][1], extent_new[0][1]),\
-            #            min(extent_self[1][1], extent_new[1][1])
-            raise SpatialContextError(
-                "Grid is indexed top to bottom. This is very uncommon."
-                "Try resampling your grid in GIS prior to using in Niche."
-            )
-        else:
-            extent_y = min(extent_self[0][1], extent_new[0][1]),\
-                       max(extent_self[1][1], extent_new[1][1])
+        extent_y = min(extent_self[0][1], extent_new[0][1]),\
+                   max(extent_self[1][1], extent_new[1][1])
 
         self.width = round((extent_x[1] - extent_x[0]) / self.affine[0])
         self.height = round((extent_y[1] - extent_y[0]) / self.affine[4])
