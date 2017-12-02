@@ -513,27 +513,52 @@ class Niche(object):
         with open(folder + "/log.txt", "w") as f:
             f.write(self.__repr__())
 
-    def show(self, key, contour=False):
+    def show(self, key):
         plt = rasterio.plot.get_plt()
+
+        import matplotlib.patches as mpatches
+        from matplotlib.colors import Normalize
+
         fig, ax = plt.subplots()
+
+        norm = None
 
         if key in self._inputarray:
             v = self._inputarray[key]
             v = ma.masked_equal(v, -99)
+            title = key
         if key in self._abiotic:
             v = self._abiotic[key]
             v = ma.masked_equal(v, 255)
+            title = key
         if key in self._vegetation.keys():
             v = self._vegetation[key]
             v = ma.masked_equal(v, 255)
+            title = "{} ({})".format(self._vegcode2name(key), key)
         if key in self._deviation:
             v = self._deviation[key]
+            title = key
+            norm = Normalize(0, 200)
 
         ((a, b), (c, d)) = self._context.extent
         mpl_extent = (a, c, d, b)
-        plt.imshow(v, extent=mpl_extent)
-        ax.set_title("{} ({})".format(self._vegcode2name(key), key))
-        plt.colorbar()
+
+        im = plt.imshow(v, extent=mpl_extent, norm=norm)
+
+        ax.set_title(title)
+
+        if key in self._vegetation:
+            labels = ["not present", "present"]
+            values = [0, 1]
+
+            colors = [im.cmap(value / (len(values) - 1)) for value in values]
+            patches = [mpatches.Patch(color=colors[i],
+                                      label=labels[i]) for i in values]
+            plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2,
+                       borderaxespad=0.)
+        else:
+            plt.colorbar()
+
         plt.show()
 
     @property
@@ -547,7 +572,7 @@ class Niche(object):
         df = pd.DataFrame.from_dict(td, orient='index')
 
         df = df.fillna(0)
-        for i in [0,1,255]:
+        for i in [0, 1, 255]:
             if i not in df.columns:
                 df[i] = 0
 
