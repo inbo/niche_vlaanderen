@@ -18,7 +18,6 @@ import os.path
 import numbers
 import yaml
 import datetime
-import sys
 
 _allowed_input = {
     "soil_code", "mlw", "msw", "mhw", "seepage",
@@ -45,12 +44,6 @@ _code_tables = ["ct_acidity", "ct_soil_mlw_class", "ct_soil_codes",
                 "ct_nutrient_level", "ct_mineralisation"]
 
 logging.basicConfig()
-
-
-class TypeException(Exception):
-    """
-    Type is not allowed
-    """
 
 
 class NicheException(Exception):
@@ -86,8 +79,6 @@ class Niche(object):
         self._context = None
         self.occurrence = None
 
-
-
         for k in _code_tables:
             ct = locals()[k]
             if ct is not None:
@@ -114,9 +105,9 @@ class Niche(object):
         options = yaml.dump(self._model_options, default_flow_style=False)
         s += indent(options, "  ")
 
-        if len(self._code_tables)>0:
+        if len(self._code_tables) > 0:
             s += "\n\n"
-            s+= "code_tables:\n"
+            s += "code_tables:\n"
             s += indent(
                 yaml.dump(self._code_tables, default_flow_style=False), "  ")
 
@@ -147,7 +138,7 @@ class Niche(object):
 
     def _set_ct(self, key, value):
         if (key not in _code_tables):
-            raise TypeException("Unrecognized codetable %s" % key)
+            raise NicheException("Unrecognized codetable %s" % key)
 
         self._code_tables[key] = value
 
@@ -382,7 +373,7 @@ class Niche(object):
             ct_nl = dict()
 
             keys = set(NutrientLevel.__init__.__code__.co_varnames) \
-                   & set(self._code_tables)
+                & set(self._code_tables)
 
             for k in keys:
                 ct_nl[k] = self._code_tables[k]
@@ -401,7 +392,7 @@ class Niche(object):
             ct_acidity = dict()
 
             keys = set(Acidity.__init__.__code__.co_varnames) \
-                   & set(self._code_tables)
+                & set(self._code_tables)
 
             for k in keys:
                 ct_acidity[k] = self._code_tables[k]
@@ -417,7 +408,7 @@ class Niche(object):
         ct_veg = dict()
 
         keys = set(Vegetation.__init__.__code__.co_varnames) \
-               & set(self._code_tables)
+            & set(self._code_tables)
 
         for k in keys:
             ct_veg[k] = self._code_tables[k]

@@ -2,7 +2,7 @@ from unittest import TestCase
 import pytest
 
 import niche_vlaanderen
-from niche_vlaanderen.niche import NicheException, TypeException
+from niche_vlaanderen.niche import NicheException
 from rasterio.errors import RasterioIOError
 import numpy as np
 import pandas as pd
@@ -33,28 +33,28 @@ class TestNiche(TestCase):
 
     def create_zwarte_beek_niche(self):
         myniche = niche_vlaanderen.Niche()
-        myniche.set_input("soil_code",
-                          "testcase/zwarte_beek/input/soil_code.asc")
-        myniche.set_input("mhw", "testcase/zwarte_beek/input/mhw.asc")
-        myniche.set_input("mlw", "testcase/zwarte_beek/input/mlw.asc")
-        myniche.set_input("msw", "testcase/zwarte_beek/input/msw.asc")
+        input_dir = "testcase/zwarte_beek/input/"
+        myniche.set_input("soil_code", input_dir + "soil_code.asc")
+        myniche.set_input("mhw", input_dir + "mhw.asc")
+        myniche.set_input("mlw", input_dir + "mlw.asc")
+        myniche.set_input("msw", input_dir + "msw.asc")
         myniche.set_input("conductivity",
-                          "testcase/zwarte_beek/input/conductivity.asc")
+                          input_dir + "conductivity.asc")
         myniche.set_input("nitrogen_atmospheric",
-                          "testcase/zwarte_beek/input/nitrogen_atmospheric.asc")
+                          input_dir + "nitrogen_atmospheric.asc")
         myniche.set_input("nitrogen_animal",
                           0)
         myniche.set_input("nitrogen_fertilizer",
                           0)
         myniche.set_input("management",
-                          "testcase/zwarte_beek/input/management.asc")
+                          input_dir + "management.asc")
         myniche.set_input("inundation_nutrient",
-                          "testcase/zwarte_beek/input/inundation.asc")
+                          input_dir + "inundation.asc")
         myniche.set_input("inundation_acidity",
-                          "testcase/zwarte_beek/input/inundation.asc")
-        myniche.set_input("seepage", "testcase/zwarte_beek/input/seepage.asc")
+                          input_dir + "inundation.asc")
+        myniche.set_input("seepage", input_dir + "seepage.asc")
         myniche.set_input("rainwater",
-                          "testcase/zwarte_beek/input/rainwater.asc")
+                          input_dir + "rainwater.asc")
         return myniche
 
     def test_zwarte_beek(self):
@@ -71,14 +71,16 @@ class TestNiche(TestCase):
         o1 = myniche.occurrence
         o1 = pd.DataFrame(o1, index=[0])
 
+        input_dir = "testcase/zwarte_beek/input/"
+
         myniche.set_input("management_vegetation",
-                          "testcase/zwarte_beek/input/management.asc")
+                          input_dir + "management.asc")
         myniche.run()
         o2 = myniche.occurrence
         o2 = pd.DataFrame(o2, index=[0])
 
         myniche.set_input("inundation_vegetation",
-                          "testcase/zwarte_beek/input/inundation.asc")
+                          input_dir + "inundation.asc")
         myniche.run()
         o3 = myniche.occurrence
         o3 = pd.DataFrame(o3, index=[0])
@@ -119,15 +121,17 @@ class TestNiche(TestCase):
     def test_testcase_simple(self):
         """
         This tests runs the data from the testcase/zwarte_beek.
-        TODO no actual validation is done!
+        Note: validation is done in the vegetation tests - not here.
 
         """
 
         myniche = niche_vlaanderen.Niche()
+        input_dir = "testcase/zwarte_beek/input/"
+
         myniche.set_input("soil_code",
-                          "testcase/zwarte_beek/input/soil_code.asc")
-        myniche.set_input("mhw", "testcase/zwarte_beek/input/mhw.asc")
-        myniche.set_input("mlw", "testcase/zwarte_beek/input/mlw.asc")
+                          input_dir + "soil_code.asc")
+        myniche.set_input("mhw", input_dir + "mhw.asc")
+        myniche.set_input("mlw", input_dir + "mlw.asc")
         myniche.run(full_model=False)
         tmpdir = tempfile.mkdtemp()
         myniche.write(tmpdir)
