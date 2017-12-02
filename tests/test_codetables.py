@@ -53,3 +53,8 @@ class TestCodeTables(TestCase):
         print(df1)
         with pytest.raises(CodeTableException):
             check_inner_join(df1, df1, "soil_code", "soil_group")
+
+    def test_unique_mlw(self):
+        badveg = "tests/data/bad_ct/differentmlw.csv"
+        with pytest.raises(CodeTableException):
+            v = niche_vlaanderen.Vegetation(ct_vegetation=badveg)

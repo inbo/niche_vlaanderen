@@ -1,0 +1,17 @@
+veg_code,veg_type,soil_name,nutrient_level,acidity,mhw_min,mhw_max,mlw_min,mlw_max,management,inundation
+1,Sphagno-Betuletum,KV,1,1,20,1,38,20,0,0
+1,Sphagno-Betuletum,KV,1,2,20,1,38,20,0,0
+1,Sphagno-Betuletum,KV,2,1,20,1,38,20,0,0
+1,Sphagno-Betuletum,KV,2,2,20,1,38,20,0,0
+1,Sphagno-Betuletum,V,1,1,23,-18,36,5,0,0
+1,Sphagno-Betuletum,V,1,2,23,-18,36,5,0,0
+1,Sphagno-Betuletum,V,2,1,23,-18,36,5,0,0
+1,Sphagno-Betuletum,V,2,2,23,-18,36,5,0,0
+1,Sphagno-Betuletum,ZV,1,1,36,-1,77,20,0,0
+1,Sphagno-Betuletum,ZV,1,2,36,-1,77,20,0,0
+1,Sphagno-Betuletum,ZV,2,1,36,-1,77,20,0,0
+1,Sphagno-Betuletum,ZV,2,2,36,-1,77,20,0,0
+1,Sphagno-Betuletum,ZV,2,2,36,-1,77,20,0,1
+1,Sphagno-Betuletum,ZV,3,3,36,-1,77,20,1,2
+1,Sphagno-Betuletum,ZV,4,3,36,-1,77,20,2,2
+1,Sphagno-Betuletum,ZV,5,3,37,-1,77,20,3,2
