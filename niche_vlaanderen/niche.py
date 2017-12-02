@@ -82,7 +82,7 @@ class Niche(object):
         self._deviation = dict()
         self._model_options = dict()
         self._files_written = dict()
-        self._log = logging.getLogger()
+        self._log = logging.getLogger("niche_vlaanderen")
         self._context = None
         self.occurrence = None
 
