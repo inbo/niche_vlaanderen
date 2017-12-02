@@ -174,10 +174,12 @@ class TestNiche(TestCase):
         myniche.set_input("rainwater", input + "nullgrid.asc")
         return myniche
 
-    def create_grobbendonk_small(self):
-        # note we add one small grid here, so the spatial extent is small
-        # and the test much faster
-        myniche = self.create_grobbendonk_niche()
+    def create_small(self):
+        myniche = niche_vlaanderen.Niche()
+
+        input_dir = "tests/data/"
+        myniche.set_input("mhw", input_dir + "mhw_small.asc")
+        myniche.set_input("mlw", input_dir + "mlw_small.asc")
         myniche.set_input("msw", "tests/data/msw_small.asc")
 
         return myniche
@@ -286,7 +288,7 @@ class TestNiche(TestCase):
             myniche.write("_temp")  # should raise, no calculation done
 
     def test_mxw_validation(self):
-        myniche = self.create_grobbendonk_small()
+        myniche = self.create_small()
         myniche.set_input("mhw", 5)
         myniche.set_input("mlw", 0)
         with pytest.raises(NicheException):
