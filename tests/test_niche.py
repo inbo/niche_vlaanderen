@@ -151,11 +151,11 @@ class TestNiche(TestCase):
     def create_small(self):
         myniche = niche_vlaanderen.Niche()
 
-        input_dir = "tests/data/"
-        myniche.set_input("mhw", input_dir + "mhw_small.asc")
-        myniche.set_input("mlw", input_dir + "mlw_small.asc")
-        myniche.set_input("msw", "tests/data/msw_small.asc")
-        myniche.set_input("soil_code", input_dir + "soil_code_small.asc")
+        input_dir = "tests/data/small/"
+        myniche.set_input("mhw", input_dir + "mhw.asc")
+        myniche.set_input("mlw", input_dir + "mlw.asc")
+        myniche.set_input("msw", input_dir + "msw.asc")
+        myniche.set_input("soil_code", input_dir + "soil_code.asc")
 
         return myniche
 
@@ -229,7 +229,7 @@ class TestNiche(TestCase):
 
     def test_incomplete_model(self):
         myniche = niche_vlaanderen.Niche()
-        myniche.set_input("mhw", "tests/data/msw_small.asc")
+        myniche.set_input("mhw", "tests/data/small/msw.asc")
         with pytest.raises(NicheException):
             myniche.run()  # incomplete, keys are missing
         with pytest.raises(NicheException):

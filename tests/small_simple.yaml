@@ -1,7 +1,7 @@
 input_layers:
-  mhw: data/mhw_small.asc
-  mlw: data/mlw_small.asc
-  soil_code: data/soil_code_small.asc
+  mhw: data/small/mhw.asc
+  mlw: data/small/mlw.asc
+  soil_code: data/small/soil_code.asc
 
 model_options:
   full_model: False
