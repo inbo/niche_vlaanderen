@@ -266,6 +266,11 @@ class TestNiche(TestCase):
         myniche = niche_vlaanderen.Niche()
         myniche.run_config_file(config)
 
+    def test_run_abiotic_error(self):
+        myniche = self.create_small()
+        with pytest.raises(NicheException):
+            myniche.run(abiotic=True)
+
     def test_rereadoutput(self):
         """
         This tests checks if the output written by the model is a valid input
