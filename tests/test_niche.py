@@ -155,12 +155,7 @@ class TestNiche(TestCase):
     def create_small(self):
         myniche = niche_vlaanderen.Niche()
 
-        input_dir = "tests/data/small/"
-        myniche.set_input("mhw", input_dir + "mhw.asc")
-        myniche.set_input("mlw", input_dir + "mlw.asc")
-        myniche.set_input("msw", input_dir + "msw.asc")
-        myniche.set_input("soil_code", input_dir + "soil_code.asc")
-
+        myniche.read_config_input("tests/small.yaml")
         return myniche
 
     @pytest.mark.skipif(
@@ -243,20 +238,21 @@ class TestNiche(TestCase):
         myniche = self.create_small()
         myniche.set_input("mhw", 5)
         myniche.set_input("mlw", 0)
+
         with pytest.raises(NicheException):
-            myniche.run()
+            myniche.run(full_model=False)
 
         myniche.set_input("mhw", 5)
         myniche.set_input("mlw", 10)
         myniche.set_input("msw", 3)
         with pytest.raises(NicheException):
-            myniche.run()
+            myniche.run(full_model=True)
 
         myniche.set_input("mhw", 3)
         myniche.set_input("mlw", 5)
         myniche.set_input("msw", 10)
         with pytest.raises(NicheException):
-            myniche.run()
+            myniche.run(full_model=True)
 
     def test_run_configuration_abiotic(self):
         config = 'tests/small_abiotic.yaml'
