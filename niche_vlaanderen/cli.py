@@ -16,8 +16,7 @@ def cli(ctx, config, example):
                 "niche_vlaanderen",
                 "system_tables/example.yaml")
         with open(ex) as f:
-            for line in f:
-                print(line)
+            print(f.read())
 
     if config is not None:
         n = niche_vlaanderen.Niche()
