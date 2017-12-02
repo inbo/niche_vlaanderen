@@ -90,7 +90,7 @@ class TestNiche(TestCase):
 
         tmpdir = tempfile.mkdtemp()
         myniche.write(tmpdir)
-        # check tempdir contains the vegation and the abiotic files
+        # check tempdir contains the vegetation and the abiotic files
         expected_files = ["nutrient_level.tif", "acidity.tif",
              'V1.tif', 'V2.tif', 'V3.tif', 'V4.tif', 'V5.tif', 'V6.tif',
              'V7.tif', 'V8.tif', 'V9.tif', 'V10.tif', 'V11.tif', 'V12.tif',
@@ -395,4 +395,30 @@ class TestNicheDelta(TestCase):
 
         delta = niche_vlaanderen.NicheDelta(simple, full)
 
+        # as the full model always contains less than the simple model,
+        # we can use this in a test
         self.assertEqual(0, delta.table["only in model 2"].sum())
+
+        import matplotlib.pyplot as plt
+        plt.show = lambda: None
+
+        delta.show(5)
+
+        tmpdir = tempfile.mkdtemp()
+        delta.write(tmpdir)
+        # check tempdir contains the vegation and the abiotic files
+        expected_files = [
+             'D1.tif', 'D2.tif', 'D3.tif', 'D4.tif', 'D5.tif', 'D6.tif',
+             'D7.tif', 'D8.tif', 'D9.tif', 'D10.tif', 'D11.tif', 'D12.tif',
+             'D13.tif', 'D14.tif', 'D15.tif', 'D16.tif', 'D17.tif', 'D18.tif',
+             'D19.tif', 'D20.tif', 'D21.tif', 'D22.tif', 'D23.tif', 'D24.tif',
+             'D25.tif', 'D26.tif', 'D27.tif', 'D28.tif' ]
+
+        dir = os.listdir(tmpdir)
+
+        if sys.version_info < (3, 2):
+            self.assertItemsEqual(expected_files, dir)
+        else:
+            self.assertCountEqual(expected_files, dir)
+
+        shutil.rmtree(tmpdir)
