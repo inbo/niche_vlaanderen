@@ -47,7 +47,7 @@ class testSpatialContext(TestCase):
         overlap = soil_code_sc.check_overlap(glg_sc)
         self.assertTrue(overlap)
 
-        glg_nete = rasterio.open("testcase/grote_nete/input/mlw.asc")
+        glg_nete = rasterio.open("testcase/zwarte_beek/input/mlw.asc")
         glg_nete_sc = niche_vlaanderen.niche.SpatialContext(glg_nete)
 
         overlap = soil_code_sc.check_overlap(glg_nete_sc)
@@ -89,14 +89,14 @@ class testSpatialContext(TestCase):
     def test_check_no_overlap(self):
         grobbendonk = rasterio.open(
             "testcase/grobbendonk/input/soil_code.asc")
-        grote_nete = rasterio.open(
-            "testcase/grote_nete/input/soil_code.asc"
+        zwarte_beek = rasterio.open(
+            "testcase/zwarte_beek/input/soil_code.asc"
         )
         grobbendonk_sc = niche_vlaanderen.niche.SpatialContext(grobbendonk)
-        grote_nete_sc = niche_vlaanderen.niche.SpatialContext(grote_nete)
+        zwarte_beek_sc = niche_vlaanderen.niche.SpatialContext(zwarte_beek)
 
         # check zones don't overlap
-        self.assertFalse(grobbendonk_sc.check_overlap(grote_nete_sc))
+        self.assertFalse(grobbendonk_sc.check_overlap(zwarte_beek_sc))
 
     def test_get_read_window(self):
         soil_code = rasterio.open("testcase/grobbendonk/input/soil_code.asc")
