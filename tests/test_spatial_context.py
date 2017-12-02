@@ -9,14 +9,14 @@ import sys
 
 class testSpatialContext(TestCase):
     def test_extent(self):
-        small = rasterio.open("tests/data/msw_small.asc")
+        small = rasterio.open("tests/data/small/msw.asc")
         small_sc = niche_vlaanderen.niche.SpatialContext(small)
         expected = ((172762.5, 210637.5), (172937.5, 210487.5))
         self.assertEqual(expected, small_sc.extent)
 
     def test_repr(self):
         self.maxDiff = None
-        small = rasterio.open("tests/data/msw_small.asc")
+        small = rasterio.open("tests/data/small/msw.asc")
         small_sc = niche_vlaanderen.niche.SpatialContext(small)
         exp = "Extent: ((172762.5, 210637.5), (172937.5, 210487.5))\n\n"+ \
               "Affine(25.0, 0.0, 172762.5,\n       0.0, -25.0, 210637.5)\n\n"+\
@@ -39,9 +39,9 @@ class testSpatialContext(TestCase):
 
     def test_check_overlap(self):
 
-        soil_code = rasterio.open("testcase/grobbendonk/input/soil_code.asc")
+        soil_code = rasterio.open("tests/data/small/soil_code.asc")
         soil_code_sc = niche_vlaanderen.niche.SpatialContext(soil_code)
-        glg = rasterio.open("testcase/grobbendonk/input/mlw.asc")
+        glg = rasterio.open("tests/data/small/mlw.asc")
         glg_sc = niche_vlaanderen.niche.SpatialContext(glg)
 
         overlap = soil_code_sc.check_overlap(glg_sc)
@@ -57,7 +57,7 @@ class testSpatialContext(TestCase):
             overlap = soil_code_sc.get_read_window(glg_nete_sc)
 
     def test_check_overlap_cells_moved(self):
-        small = rasterio.open("tests/data/msw_small.asc")
+        small = rasterio.open("tests/data/small/msw.asc")
         small_sc = niche_vlaanderen.niche.SpatialContext(small)
         # contains cells moved 0.5 m
         small_moved = rasterio.open("tests/data/msw_small_moved.asc")
@@ -68,53 +68,55 @@ class testSpatialContext(TestCase):
 
 
     def test_check_set_overlap(self):
-        soil_code = rasterio.open("testcase/grobbendonk/input/soil_code.asc")
+        soil_code = rasterio.open("testcase/zwarte_beek/input/soil_code.asc")
         soil_code_sc = niche_vlaanderen.niche.SpatialContext(soil_code)
-        glg = rasterio.open("testcase/grobbendonk/input/mlw.asc")
+        glg = rasterio.open("tests/data/part_zwarte_beek_mlw.asc")
         glg_sc = niche_vlaanderen.niche.SpatialContext(glg)
 
         # originally we have
-        self.assertEqual(737, soil_code_sc.width)
-        self.assertEqual(555, soil_code_sc.height)
-        self.assertEqual(164487.5, soil_code_sc.affine[2])
-        self.assertEqual(216737.5, soil_code_sc.affine[5])
+        self.assertEqual(188, soil_code_sc.width)
+        self.assertEqual(84, soil_code_sc.height)
+        self.assertEqual(216580, soil_code_sc.affine[2])
+        self.assertEqual(198580, soil_code_sc.affine[5])
 
         # after overlap we get
+
         soil_code_sc.set_overlap(glg_sc)
-        self.assertEqual(693, soil_code_sc.width)
-        self.assertEqual(501, soil_code_sc.height)
-        self.assertEqual(164937.5, soil_code_sc.affine[2])
-        self.assertEqual(216162.5, soil_code_sc.affine[5])
+        print (soil_code_sc)
+        self.assertEqual(37, soil_code_sc.width)
+        self.assertEqual(37, soil_code_sc.height)
+        self.assertEqual(216910, soil_code_sc.affine[2])
+        self.assertEqual(198445, soil_code_sc.affine[5])
 
     def test_check_no_overlap(self):
-        grobbendonk = rasterio.open(
-            "testcase/grobbendonk/input/soil_code.asc")
+        small = rasterio.open(
+            "tests/data/small/soil_code.asc")
         zwarte_beek = rasterio.open(
             "testcase/zwarte_beek/input/soil_code.asc"
         )
-        grobbendonk_sc = niche_vlaanderen.niche.SpatialContext(grobbendonk)
+        small_sc = niche_vlaanderen.niche.SpatialContext(small)
         zwarte_beek_sc = niche_vlaanderen.niche.SpatialContext(zwarte_beek)
 
         # check zones don't overlap
-        self.assertFalse(grobbendonk_sc.check_overlap(zwarte_beek_sc))
+        self.assertFalse(small_sc.check_overlap(zwarte_beek_sc))
 
     def test_get_read_window(self):
-        soil_code = rasterio.open("testcase/grobbendonk/input/soil_code.asc")
+        soil_code = rasterio.open("testcase/zwarte_beek/input/soil_code.asc")
         soil_code_sc = niche_vlaanderen.niche.SpatialContext(soil_code)
-        glg = rasterio.open("testcase/grobbendonk/input/mlw.asc")
+        glg = rasterio.open("tests/data/part_zwarte_beek_mlw.asc")
         glg_sc = niche_vlaanderen.niche.SpatialContext(glg)
         full_window = soil_code_sc.get_read_window(soil_code_sc)
 
-        self.assertEqual(full_window, ((0, 555), (0, 737)))
+        self.assertEqual(full_window, ((0, 84), (0, 188)))
 
         part_window = glg_sc.get_read_window(soil_code_sc)
 
-        self.assertEqual(part_window, ((23, 524), (18, 711)))
+        self.assertEqual(part_window, ((27, 64), (66, 103)))
 
     def test_get_read_window_smaller(self):
-        soil_code = rasterio.open("testcase/grobbendonk/input/soil_code.asc")
+        soil_code = rasterio.open("testcase/zwarte_beek/input/soil_code.asc")
         soil_code_sc = niche_vlaanderen.niche.SpatialContext(soil_code)
-        glg = rasterio.open("testcase/grobbendonk/input/mlw.asc")
+        glg = rasterio.open("tests/data/part_zwarte_beek_mlw.asc")
         glg_sc = niche_vlaanderen.niche.SpatialContext(glg)
 
         # soil_code has a larger extent than glg - this must error
@@ -123,7 +125,7 @@ class testSpatialContext(TestCase):
 
 
     def test_different_crs(self):
-        test_l72 = rasterio.open("tests/data/msw_small.asc")
+        test_l72 = rasterio.open("tests/data/small/msw.asc")
         test_wgs84 = rasterio.open("tests/data/msw_small_wgs84.asc")
         test_l72_sc = niche_vlaanderen.niche.SpatialContext(test_l72)
         test_wgs84_sc = niche_vlaanderen.niche.SpatialContext(test_wgs84)
@@ -131,7 +133,7 @@ class testSpatialContext(TestCase):
         self.assertTrue(test_wgs84_sc != test_l72_sc)
 
     def test_compare(self):
-        test_small_ds = rasterio.open("tests/data/msw_small.asc")
+        test_small_ds = rasterio.open("tests/data/small/msw.asc")
         sc1 = niche_vlaanderen.niche.SpatialContext(test_small_ds)
         sc2 = niche_vlaanderen.niche.SpatialContext(sc1)
         self.assertEqual(sc1, sc2)
@@ -142,7 +144,7 @@ class testSpatialContext(TestCase):
         # check with different affine
         # we assign
         sc2 = niche_vlaanderen.niche.SpatialContext(
-            rasterio.open("testcase/grobbendonk/input/mlw.asc")
+            rasterio.open("testcase/zwarte_beek/input/mlw.asc")
         )
         sc2.height = sc1.height
         sc2.width = sc1.width
@@ -150,6 +152,6 @@ class testSpatialContext(TestCase):
         self.assertFalse(sc1 == sc2)
 
     def test_area(self):
-        test_small_ds = rasterio.open("tests/data/msw_small.asc")
+        test_small_ds = rasterio.open("tests/data/small/msw.asc")
         sc1 = niche_vlaanderen.niche.SpatialContext(test_small_ds)
         self.assertEqual(625, sc1.cell_area)
