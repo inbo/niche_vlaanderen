@@ -120,7 +120,7 @@ class testVegetation(TestCase):
         self.assertEqual(2 / 3, veg_occurrence[16])
 
     def test_testcase(self):
-        input_dir = "testcase/grote_nete/input/"
+        input_dir = "testcase/zwarte_beek/input/"
         soil_code = raster_to_numpy(input_dir + "soil_code.asc")
         soil_code_r = soil_code
         soil_code_r[soil_code > 0] = np.round(soil_code / 10000)[soil_code > 0]
@@ -129,13 +129,13 @@ class testVegetation(TestCase):
         mhw = raster_to_numpy(input_dir + "mhw.asc")
         mlw = raster_to_numpy(input_dir + "mlw.asc")
         inundation = \
-            raster_to_numpy(input_dir + "inundation_nutrient_level.asc")
+            raster_to_numpy(input_dir + "inundation.asc")
         regenlens = raster_to_numpy(input_dir + "nullgrid.asc")
         seepage = raster_to_numpy(input_dir + "seepage.asc")
         conductivity = raster_to_numpy(input_dir + "conductivity.asc")
         nitrogen_deposition = \
             raster_to_numpy(input_dir + "nitrogen_atmospheric.asc")
-        nitrogen_animal = raster_to_numpy(input_dir + "nitrogen_animal.asc")
+        nitrogen_animal = raster_to_numpy(input_dir + "nullgrid.asc")
         nitrogen_fertilizer = raster_to_numpy(input_dir + "nullgrid.asc")
         management = raster_to_numpy(input_dir + "management.asc")
 
@@ -154,7 +154,7 @@ class testVegetation(TestCase):
 
         for i in range(1, 28):
             vi = raster_to_numpy(
-                "testcase/grote_nete/VegNoEffectsRef/v%d.asc" % i)
+                "testcase/zwarte_beek/vegetation/v%d.asc" % i)
 
             # TODO: this is dirty - we apply the same no data filter to the
             # original set the new set, as this was done incorrectly in the

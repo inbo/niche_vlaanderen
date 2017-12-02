@@ -29,44 +29,42 @@ class TestNiche(TestCase):
         n = niche_vlaanderen.Niche()
         with pytest.raises(TypeException):
             result = n.set_input("bla",
-                                 "testcase/grote_nete/input/soil_code.asc")
+                                 "testcase/zwarte_beek/input/soil_code.asc")
 
-    def create_grote_nete_niche(self):
+    def create_zwarte_beek_niche(self):
         myniche = niche_vlaanderen.Niche()
         myniche.set_input("soil_code",
-                          "testcase/grote_nete/input/soil_code.asc")
-        myniche.set_input("mhw", "testcase/grote_nete/input/mhw.asc")
-        myniche.set_input("mlw", "testcase/grote_nete/input/mlw.asc")
-        myniche.set_input("msw", "testcase/grote_nete/input/msw.asc")
+                          "testcase/zwarte_beek/input/soil_code.asc")
+        myniche.set_input("mhw", "testcase/zwarte_beek/input/mhw.asc")
+        myniche.set_input("mlw", "testcase/zwarte_beek/input/mlw.asc")
+        myniche.set_input("msw", "testcase/zwarte_beek/input/msw.asc")
         myniche.set_input("conductivity",
-                          "testcase/grote_nete/input/conductivity.asc")
+                          "testcase/zwarte_beek/input/conductivity.asc")
         myniche.set_input("nitrogen_atmospheric",
-                          "testcase/grote_nete/input/nitrogen_atmospheric.asc")
+                          "testcase/zwarte_beek/input/nitrogen_atmospheric.asc")
         myniche.set_input("nitrogen_animal",
-                          "testcase/grote_nete/input/nitrogen_animal.asc")
+                          0)
         myniche.set_input("nitrogen_fertilizer",
-                          "testcase/grote_nete/input/nullgrid.asc")
+                          0)
         myniche.set_input("management",
-                          "testcase/grote_nete/input/management.asc")
+                          "testcase/zwarte_beek/input/management.asc")
         myniche.set_input("inundation_nutrient",
-                          "testcase/grote_nete/input/inundation_nutrient_level.asc")
+                          "testcase/zwarte_beek/input/inundation.asc")
         myniche.set_input("inundation_acidity",
-                          "testcase/grote_nete/input/inundation_nutrient_level.asc")
-        myniche.set_input("inundation_vegetation",
-                          "testcase/grote_nete/input/inundation_vegetation.asc")
-        myniche.set_input("seepage", "testcase/grote_nete/input/seepage.asc")
+                          "testcase/zwarte_beek/input/inundation.asc")
+        myniche.set_input("seepage", "testcase/zwarte_beek/input/seepage.asc")
         myniche.set_input("rainwater",
-                          "testcase/grote_nete/input/nullgrid.asc")
+                          "testcase/zwarte_beek/input/rainwater.asc")
         return myniche
 
-    def test_grote_nete(self):
+    def test_zwarte_beek(self):
         """
-        This tests runs the data from the testcase/grote_nete.
+        This tests runs the data from the testcase/zwarte_beek.
         TODO no actual validation is done!
 
         """
 
-        myniche = self.create_grote_nete_niche()
+        myniche = self.create_zwarte_beek_niche()
 
         myniche.run()
 
@@ -74,19 +72,19 @@ class TestNiche(TestCase):
         o1 = pd.DataFrame(o1, index=[0])
 
         myniche.set_input("management_vegetation",
-                          "testcase/grote_nete/input/management.asc")
+                          "testcase/zwarte_beek/input/management.asc")
         myniche.run()
         o2 = myniche.occurrence
         o2 = pd.DataFrame(o2, index=[0])
 
         myniche.set_input("inundation_vegetation",
-                          "testcase/grote_nete/input/inundation_vegetation.asc")
+                          "testcase/zwarte_beek/input/inundation.asc")
         myniche.run()
         o3 = myniche.occurrence
         o3 = pd.DataFrame(o3, index=[0])
 
         self.assertTrue(np.all(o1>=o2))
-        self.assertTrue(np.all(o3>=o2))
+        self.assertTrue(np.all(o2>=o3))
 
         tmpdir = tempfile.mkdtemp()
         myniche.write(tmpdir)
@@ -107,29 +105,29 @@ class TestNiche(TestCase):
 
         shutil.rmtree(tmpdir)
 
-    def test_grote_nete_constant_values(self):
-        myniche = self.create_grote_nete_niche()
+    def test_zwarte_beek_constant_values(self):
+        myniche = self.create_zwarte_beek_niche()
         myniche.set_input("rainwater", 0)
         self.assertFalse("rainwater" in myniche._inputfiles)
         myniche.set_input("nitrogen_fertilizer", 0)
 
         myniche.run()
-        myniche2 = self.create_grote_nete_niche()
+        myniche2 = self.create_zwarte_beek_niche()
         myniche2.run()
         self.assertEqual(myniche.occurrence, myniche2.occurrence)
 
     def test_testcase_simple(self):
         """
-        This tests runs the data from the testcase/grote_nete.
+        This tests runs the data from the testcase/zwarte_beek.
         TODO no actual validation is done!
 
         """
 
         myniche = niche_vlaanderen.Niche()
         myniche.set_input("soil_code",
-                          "testcase/grote_nete/input/soil_code.asc")
-        myniche.set_input("mhw", "testcase/grote_nete/input/mhw.asc")
-        myniche.set_input("mlw", "testcase/grote_nete/input/mlw.asc")
+                          "testcase/zwarte_beek/input/soil_code.asc")
+        myniche.set_input("mhw", "testcase/zwarte_beek/input/mhw.asc")
+        myniche.set_input("mlw", "testcase/zwarte_beek/input/mlw.asc")
         myniche.run(full_model=False)
         tmpdir = tempfile.mkdtemp()
         myniche.write(tmpdir)
