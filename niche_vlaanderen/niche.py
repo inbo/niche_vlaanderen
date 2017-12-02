@@ -636,7 +636,7 @@ class Niche(object):
                 if i not in df_list[j].columns:
                     df_list[j][i] = 0
 
-                    df_list[j].columns = ['present', 'not present', 'no data']
+                    df_list[j].columns = ['not present', 'present', 'no data']
         return df_list
 
     def _vegcode2name(self, vegcode):

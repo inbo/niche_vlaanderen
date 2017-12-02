@@ -365,6 +365,24 @@ class TestNiche(TestCase):
 
         np.testing.assert_equal(np.repeat(area_expected, 28), area)
 
+    def test_zonal_stats(self):
+        myniche = self.create_zwarte_beek_niche()
+        myniche.run(full_model=False)
+        vector = "testcase/zwarte_beek/input/study_area_l72.geojson"
+
+        # there is only one polygon
+        stats = myniche.zonal_stats(vector)[0]
+
+        # we expect no data to be zero as the shape is a mask
+        self.assertEqual(0, np.sum(stats["no data"]))
+
+        # which also means that present /not present should be equal to the
+        # normal table
+        print(myniche.table)
+        print(stats)
+        assert myniche.table["present"].equals(stats["present"])
+
+
 class TestNicheDelta(TestCase):
     def test_simplevsfull(self):
         config = 'tests/small_simple.yaml'
