@@ -181,6 +181,14 @@ class TestNiche(TestCase):
 
         shutil.rmtree(tmpdir)
 
+    def test_windowed_read(self):
+        # tests whether the spatial context is adjusted to the smaller grid
+        myniche = self.create_zwarte_beek_niche()
+        myniche.set_input("mlw", "tests/data/part_zwarte_beek_mlw.asc")
+        myniche.run(full_model=True)
+        self.assertEqual(37, myniche._context.width)
+        self.assertEqual(37, myniche._context.height)
+
     def test_deviation(self):
         n = self.create_zwarte_beek_niche()
         n.run(deviation=True)
@@ -271,6 +279,14 @@ class TestNiche(TestCase):
         with pytest.raises(NicheException):
             myniche.run(abiotic=True)
 
+        myniche.set_input("nutrient_level", 1)
+        myniche.set_input("acidity", 1)
+
+        with pytest.raises(NicheException):
+            myniche.run(abiotic=True, full_model=False)
+
+        myniche.run(abiotic=True)
+
     def test_rereadoutput(self):
         """
         This tests checks if the output written by the model is a valid input
@@ -299,6 +315,55 @@ class TestNiche(TestCase):
         # we expect only one vegetation type, as the codetable has only one
         self.assertEqual(1, len(myniche.occurrence))
 
+        # we try to overwrite using a non existing key
+        with pytest.raises(NicheException):
+            myniche._set_ct("bla", "tests/data/bad_ct/one_vegetation.csv")
+
+        # we try to overwrite using a non existing codetable
+        with pytest.raises(NicheException):
+            myniche._set_ct("ct_vegetation", "nonexisting")
+
+    def test_repr(self):
+        myniche = self.create_small()
+        str = myniche.__repr__()
+        assert "# No model run completed." in str
+        myniche.run()
+        str = myniche.__repr__()
+        self.assertFalse("# No model run completed." in str)
+
+    def test_show(self):
+        """
+        Tests the show method. Note that this only tests whether a plot is
+        constructed. The actual content is not tested.
+        """
+        import matplotlib.pyplot as plt
+        plt.show = lambda: None
+
+        myniche = self.create_small()
+        myniche.run(deviation=True)
+        myniche.show("mhw")
+        myniche.show(1)
+        myniche.show("mhw_01")
+        myniche.show("nutrient_level")
+        with pytest.raises(NicheException):
+            myniche.show("sinterklaas")
+
+    def test_table(self):
+        myniche = self.create_small()
+
+        with pytest.raises(NicheException):
+            myniche.table
+
+        myniche.run(full_model=False)
+        print(myniche)
+        res = myniche.table
+        print(res)
+        self.assertEqual((28,3), res.shape)
+
+        area_expected = 7 * 6 * 25 * 25
+        area = res["present"] + res["not present"] + res["no data"]
+
+        np.testing.assert_equal(np.repeat(area_expected, 28), area)
 
 class TestNicheDelta(TestCase):
     def test_simplevsfull(self):

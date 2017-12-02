@@ -33,7 +33,7 @@ _minimal_input = {
     "inundation_nutrient"}
 
 
-def minimal_input():
+def minimal_input():  # pragma: no cover
     return _minimal_input
 
 
@@ -140,6 +140,9 @@ class Niche(object):
         if (key not in _code_tables):
             raise NicheException("Unrecognized codetable %s" % key)
 
+        if not os.path.isfile(value):
+            raise NicheException("Cannot find file %s" % key)
+
         self._code_tables[key] = value
 
     def set_input(self, key, value):
@@ -225,10 +228,7 @@ class Niche(object):
 
         if "output_dir" in options:
             output_dir = options["output_dir"]
-        else:
-            return
-
-        self.write(output_dir)
+            self.write(output_dir)
 
     def _check_all_lower(self, input_array, a, b):
         if np.any((input_array[a] > input_array[b])
@@ -531,6 +531,7 @@ class Niche(object):
         fig, ax = plt.subplots()
 
         norm = None
+        v = None
 
         if key in self._inputarray:
             v = self._inputarray[key]
@@ -548,6 +549,9 @@ class Niche(object):
             v = self._deviation[key]
             title = key
             norm = Normalize(0, 200)
+
+        if v is None:
+            raise NicheException("Invalid key specified")
 
         ((a, b), (c, d)) = self._context.extent
         mpl_extent = (a, c, d, b)
@@ -574,6 +578,11 @@ class Niche(object):
     def table(self):
         """Dataframe containing the potential area (m**2) per vegetation type
         """
+
+        if not hasattr(self, '_vegetation'):
+            raise NicheException(
+                "Error: You must run niche prior to requesting the result table")
+
         td = dict()
         for i in self._vegetation:
             vi = pd.Series(self._vegetation[i].flatten())
