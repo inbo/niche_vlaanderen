@@ -47,3 +47,9 @@ class TestCodeTables(TestCase):
         badveg =  "tests/data/bad_ct/bad_vegetation.csv"
         with pytest.raises(CodeTableException):
             v = niche_vlaanderen.Vegetation(ct_vegetation=badveg)
+
+    def test_inner_join(self):
+        df1 = pd.read_csv("niche_vlaanderen/system_tables/soil_codes.csv")
+        print(df1)
+        with pytest.raises(CodeTableException):
+            check_inner_join(df1, df1, "soil_code", "soil_group")

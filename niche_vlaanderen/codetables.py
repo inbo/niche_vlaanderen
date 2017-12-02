@@ -1,3 +1,5 @@
+import numpy as np
+
 class CodeTableException(Exception):
     """
     Exception while validating the code tables
@@ -33,9 +35,11 @@ def check_lower_upper_boundaries(df, min_col, max_col, value):
 def check_inner_join(df1, df2, f1, f2=None):
     if f2 is None:
         f2 = f1
-    u2 = df2[f2].unique().sort()
-    u1 = df1[f1].unique().sort()
-    if u1 != u2:
+
+    u2 = np.unique(df2[f2])
+    u1 = np.unique(df1[f1])
+
+    if not np.array_equal(u1, u2):
         print(u1)
         print(u2)
         raise CodeTableException(
@@ -90,15 +94,16 @@ def validate_tables_nutrient_level(ct_lnk_soil_nutrient_level, ct_management,
 
     check_inner_join(ct_lnk_soil_nutrient_level, ct_soil_code, "soil_name")
     check_inner_join(ct_lnk_soil_nutrient_level, ct_nutrient_level,
-                     "nutrient_level")
+                     "nutrient_level", "code")
 
 
 def validate_tables_vegetation(ct_vegetation, ct_soil_code, ct_inundation,
                                ct_management, ct_acidity, ct_nutrient_level):
-    check_inner_join(ct_vegetation, ct_soil_code, "soil_name")
+    #check_inner_join(ct_vegetation, ct_soil_code, "soil_name")
+
     check_inner_join(ct_vegetation, ct_inundation, "inundation")
     check_inner_join(ct_vegetation, ct_acidity, "acidity")
-    check_inner_join(ct_vegetation, ct_nutrient_level, "nutrient_level")
+    check_inner_join(ct_vegetation, ct_nutrient_level, "nutrient_level", "code")
     check_inner_join(ct_vegetation, ct_management, "management", "code")
 
     # extra check: per vegetation type, soil_code only one mhw, mlw combination

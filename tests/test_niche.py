@@ -27,7 +27,7 @@ class TestNiche(TestCase):
 
     def test_invalid_input_type(self):
         n = niche_vlaanderen.Niche()
-        with pytest.raises(TypeException):
+        with pytest.raises(NicheException):
             result = n.set_input("bla",
                                  "testcase/zwarte_beek/input/soil_code.asc")
 
@@ -259,13 +259,6 @@ class TestNiche(TestCase):
         myniche = niche_vlaanderen.Niche()
         myniche.run_config_file(config)
 
-    def overwrite_codetable(self):
-        config = 'tests/small_simple.yaml'
-        myniche = niche_vlaanderen.Niche()
-        myniche.read_config_input(config)
-        myniche.set_input('ct_acidity', 'system_tables/acidity.asc')
-        myniche.run()
-
     def test_rereadoutput(self):
         """
         This tests checks if the output written by the model is a valid input
@@ -282,6 +275,18 @@ class TestNiche(TestCase):
         myniche2 = niche_vlaanderen.Niche()
         myniche2.run_config_file(config)
 
+    def test_overwrite_code_table(self):
+        myniche = niche_vlaanderen.Niche(
+            ct_vegetation="tests/data/bad_ct/one_vegetation.csv")
+
+        myniche.set_input("mhw", "tests/data/small/mhw.asc")
+        myniche.set_input("mlw", "tests/data/small/mlw.asc")
+        myniche.set_input("soil_code", "tests/data/small/soil_code.asc")
+        myniche.run(full_model=False)
+
+        # we expect only one vegetation type, as the codetable has only one
+        self.assertEqual(1, len(myniche.occurrence))
+
 
 class TestNicheDelta(TestCase):
     def test_simplevsfull(self):
@@ -296,5 +301,3 @@ class TestNicheDelta(TestCase):
         delta = niche_vlaanderen.NicheDelta(simple, full)
 
         self.assertEqual(0, delta.table["only in model 2"].sum())
-
-

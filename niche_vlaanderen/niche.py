@@ -69,7 +69,7 @@ class Niche(object):
     constructor.
 
     """
-    def __init__(self, ct_acidity=None, ct_soil_mlw_class=None,
+    def __init__(self, config=None, ct_acidity=None, ct_soil_mlw_class=None,
                  ct_soil_codes=None, lnk_acidity=None, ct_seepage=None,
                  ct_vegetation=None, ct_management=None,
                  ct_nutrient_level=None, ct_mineralisation=None):
@@ -85,6 +85,8 @@ class Niche(object):
         self._log = logging.getLogger("niche_vlaanderen")
         self._context = None
         self.occurrence = None
+
+
 
         for k in _code_tables:
             ct = locals()[k]
@@ -111,6 +113,12 @@ class Niche(object):
         s += "model_options:\n"
         options = yaml.dump(self._model_options, default_flow_style=False)
         s += indent(options, "  ")
+
+        if len(self._code_tables)>0:
+            s += "\n\n"
+            s+= "code_tables:\n"
+            s += indent(
+                yaml.dump(self._code_tables, default_flow_style=False), "  ")
 
         if self._context is not None:
             s += "\nmodel_properties:\n"
@@ -161,7 +169,7 @@ class Niche(object):
 
         # check type is valid value from list
         if (key not in _allowed_input):
-            raise TypeException("Unrecognized type %s" % key)
+            raise NicheException("Unrecognized type %s" % key)
 
         if isinstance(value, numbers.Number):
             # Remove any existing values to make sure last value is used
@@ -190,7 +198,7 @@ class Niche(object):
             for k in config_loaded['code_tables'].keys():
                 value = config_loaded['code_tables'][k]
                 value = os.path.join(os.path.dirname(config), value)
-                self.set_input(k, value)
+                self._set_ct(k, value)
 
         # parse input_layers
         for k in config_loaded['input_layers'].keys():
@@ -371,16 +379,10 @@ class Niche(object):
         self._check_input_files(full_model)
 
         if full_model and not abiotic:
-            if sys.version_info >= (3, 3):
-                keys = self._code_tables.keys()
-            else:
-                keys = self._code_tables.viewkeys()
-
-            keys = keys & \
-                ['ct_acidity', 'ct_soil_mlw_class', 'ct_soil_codes',
-                 'lnk_acidity', 'ct_seepage']
-
             ct_nl = dict()
+
+            keys = set(NutrientLevel.__init__.__code__.co_varnames) \
+                   & set(self._code_tables)
 
             for k in keys:
                 ct_nl[k] = self._code_tables[k]
@@ -396,7 +398,15 @@ class Niche(object):
                 management=self._inputarray["management"],
                 inundation=self._inputarray["inundation_nutrient"])
 
-            acidity = Acidity()
+            ct_acidity = dict()
+
+            keys = set(Acidity.__init__.__code__.co_varnames) \
+                   & set(self._code_tables)
+
+            for k in keys:
+                ct_acidity[k] = self._code_tables[k]
+
+            acidity = Acidity(**ct_acidity)
             self._abiotic["acidity"] = acidity.calculate(
                 self._inputarray["soil_code"], self._inputarray["mlw"],
                 self._inputarray["inundation_acidity"],
@@ -404,7 +414,15 @@ class Niche(object):
                 self._inputarray["conductivity"],
                 self._inputarray["rainwater"])
 
-        vegetation = Vegetation()
+        ct_veg = dict()
+
+        keys = set(Vegetation.__init__.__code__.co_varnames) \
+               & set(self._code_tables)
+
+        for k in keys:
+            ct_veg[k] = self._code_tables[k]
+
+        vegetation = Vegetation(**ct_veg)
         if "inundation_vegetation" not in self._inputarray:
             self._inputarray["inundation_vegetation"] = None
 
@@ -605,7 +623,7 @@ class Niche(object):
         df = pd.DataFrame.from_dict(td, orient='index')
         df = df[0].apply(pd.Series)
         df = df.fillna(0) * self._context.cell_area
-        
+
         for i in [0, 1, 255]:
             if i not in df.columns:
                 df[i] = 0
