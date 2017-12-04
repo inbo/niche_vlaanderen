@@ -18,8 +18,7 @@ install:
     - cmd: conda update -y -q conda
     - cmd: conda config --add channels conda-forge
     - cmd: conda install -y -q numpy pandas
-    - cmd: conda install -y -q rasterio
-    - cmd: conda install -y -q fiona
+    - cmd: conda install -y -q gdal rasterio fiona
     - cmd: pip install --no-cache-dir -r dev-requirements.txt
     - cmd: pip install hypothesis 
       # it is strange that hypothesis is only required on windows + python3
