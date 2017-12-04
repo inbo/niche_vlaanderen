@@ -30,20 +30,24 @@ class SpatialContext(object):
         self.affine = dst.affine
         self.width = int(dst.width)
         self.height = int(dst.height)
-        self.crs = dst.crs
+        if dst.crs is None:
+            self.crs = ""
+        elif isinstance(dst.crs, str):
+            self.crs = dst.crs
+        else:
+            self.crs = dst.crs.to_string()
 
         if self.affine[0] < 0:
             raise SpatialContextError(  # pragma: no cover
                 "Grid is indexed right to left. This is very uncommon."
                 "Try resampling your grid in GIS prior to using in Niche."
             )
-        
+
         if self.affine[4] > 0:
             raise SpatialContextError(
                 "Grid is indexed top to bottom. This is very uncommon."
                 "Try resampling your grid in GIS prior to using in Niche."
             )
-
 
     def __repr__(self):
 
@@ -57,7 +61,7 @@ class SpatialContext(object):
         Projection: %s"""
 
         s = dedent(s) % (self.extent, self.affine.__repr__(),
-                         self.width, self.height, self.crs.to_string())
+                         self.width, self.height, self.crs)
         return s
 
     def compare(self, other):
@@ -72,8 +76,8 @@ class SpatialContext(object):
         if self.height != other.height:
             return False
 
-        if self.crs.to_string() != other.crs.to_string():
-            if self.crs.to_string() == '' or self.crs.to_string() == '':
+        if self.crs != other.crs:
+            if self.crs == '' or self.crs == '':
                 print("Ignoring missing CRS in comparison")
             else:
                 return False
