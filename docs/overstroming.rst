@@ -1,6 +1,6 @@
-#########################
-Niche Overstromingsmodule
-#########################
+#######################
+Niche Floodplain module
+#######################
 
 Het is mogelijk een verdere verfijning van het NICHE model door te voeren voor
 gebieden waar frequent overstromingen voorkomen. Hierbij wordt aangegeven in
@@ -9,7 +9,7 @@ overstromingen.
 
   .. csv-table:: mogelijke codes voor diepte van overstroming
     :header-rows: 1
-    :file: ../niche_vlaanderen/system_tables/inundation/potential.csv
+    :file: ../niche_vlaanderen/system_tables/floodplains/potential.csv
 
 
 Hierbij wordt rekening gehouden met de overstromingsfrequentie, de diepte,
@@ -19,14 +19,14 @@ Deze overstromingsdiepete wordt beschreven met volgende codes
 
   .. csv-table:: mogelijke codes voor diepte van overstroming
     :header-rows: 1
-    :file: ../niche_vlaanderen/system_tables/inundation/depths.csv
+    :file: ../niche_vlaanderen/system_tables/floodplains/depths.csv
 
 Deze overstromingsdiepte wordt in 4 invoerrasters aangeleverd, met 1 raster per
 frequentie.
 
   .. csv-table:: gebruikte frequenties
     :header-rows: 1
-    :file: ../niche_vlaanderen/system_tables/inundation/frequency.csv
+    :file: ../niche_vlaanderen/system_tables/floodplains/frequency.csv
 
 De gegevens uit deze tabel worden vergeleken met de tabel lnk_potential
 
