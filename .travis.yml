@@ -24,7 +24,7 @@ before_install:
 
 install:
   - pip install --use-wheel -r dev-requirements.txt
-  - pip install travis-sphinx sphinx_rtd_theme coveralls
+  - pip install sphinx_rtd_theme coveralls
   - pip install .
 
 addons:
@@ -40,7 +40,7 @@ after_success:
 - coveralls || echo "coveralls failure"
 
 before_deploy:
-  - travis-sphinx build --source=docs --nowarn
+  - sphinx-build docs -a doc/_build/html
 
 deploy:
     - user: stvhoey
@@ -67,7 +67,7 @@ deploy:
     - provider: pages
       skip_cleanup: true
       github_token: $GH_TOKEN
-      local_dir: doc/build
+      local_dir: doc/_build/html
       on:
         branch: master
         python: 3.5
