@@ -15,7 +15,7 @@ python:
   - "3.6"
 # - "nightly"
 
-script: pytest --cov niche_vlaanderen --cov-report term-missing
+script: pytest --cov niche_vlaanderen --cov-report term-missing --verbose --tb=long
 
 before_install:
   - export CPPFLAGS=`gdal-config --cflags`

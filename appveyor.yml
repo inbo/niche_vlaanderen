@@ -26,5 +26,4 @@ install:
 build: false
 
 test_script:
-  - pytest
-
+  - pytest --verbose --tb=long
