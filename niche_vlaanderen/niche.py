@@ -237,7 +237,7 @@ class Niche(object):
             # find out which cells have invalid values
             bad_points = np.where(input_array[a] > input_array[b])
             # convert these cells into the projection system
-            bad_points = bad_points * self._context.affine
+            bad_points = bad_points * self._context.transform
 
             print("Not all {} values are lower than {}".format(a, b))
             print("coordinates with invalid values are:")
@@ -478,7 +478,7 @@ class Niche(object):
             height=self._context.height,
             width=self._context.width,
             crs=self._context.crs,
-            affine=self._context.affine,
+            transform=self._context.transform,
             count=1,
             dtype="uint8",
             nodata=255,
@@ -504,7 +504,7 @@ class Niche(object):
             height=self._context.height,
             width=self._context.width,
             crs=self._context.crs,
-            affine=self._context.affine,
+            transform=self._context.transform,
             count=1,
             compress="DEFLATE",
             dtype="float64",
@@ -621,7 +621,7 @@ class Niche(object):
 
             td[i] = rasterstats.zonal_stats(vectors=vectors,
                                             raster=self._vegetation[i],
-                                            affine=self._context.affine,
+                                            affine=self._context.transform,
                                             categorical=True,
                                             nodata=-99)
 
@@ -742,7 +742,7 @@ class NicheDelta(object):
             height=self._context.height,
             width=self._context.width,
             crs=self._context.crs,
-            affine=self._context.affine,
+            transform=self._context.transform,
             count=1,
             dtype="uint8",
             nodata=255,

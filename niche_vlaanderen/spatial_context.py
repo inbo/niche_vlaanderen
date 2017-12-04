@@ -1,6 +1,6 @@
 from affine import Affine
 from textwrap import dedent
-
+import rasterio
 
 class SpatialContextError(Exception):
     """
@@ -15,10 +15,10 @@ class SpatialContext(object):
 
     Attributes
     ----------
-    affine: Affine
-        Matrix that contains the affine transformation of the plane to convert
+    transform: Affine
+        Matrix that contains the transform transformation of the plane to convert
         grid coordinates to real world coordinates.
-        https://github.com/sgillies/affine
+        https://github.com/sgillies/transform
     width, height: int
         Integer numbers containing the width and height of the raster
     crs: rasterio.CRS
@@ -27,7 +27,11 @@ class SpatialContext(object):
     """
 
     def __init__(self, dst):
-        self.affine = dst.affine
+        if isinstance(dst.transform, Affine):
+            self.transform = dst.transform
+        else:
+            self.transform = dst.affine  # for compatibility with rasterio 0.x
+
         self.width = int(dst.width)
         self.height = int(dst.height)
         if dst.crs is None:
@@ -37,13 +41,13 @@ class SpatialContext(object):
         else:
             self.crs = dst.crs.to_string()
 
-        if self.affine[0] < 0:
+        if self.transform[0] < 0:
             raise SpatialContextError(  # pragma: no cover
                 "Grid is indexed right to left. This is very uncommon."
                 "Try resampling your grid in GIS prior to using in Niche."
             )
 
-        if self.affine[4] > 0:
+        if self.transform[4] > 0:
             raise SpatialContextError(
                 "Grid is indexed top to bottom. This is very uncommon."
                 "Try resampling your grid in GIS prior to using in Niche."
@@ -60,7 +64,7 @@ class SpatialContext(object):
 
         Projection: %s"""
 
-        s = dedent(s) % (self.extent, self.affine.__repr__(),
+        s = dedent(s) % (self.extent, self.transform.__repr__(),
                          self.width, self.height, self.crs)
         return s
 
@@ -82,7 +86,7 @@ class SpatialContext(object):
             else:
                 return False
 
-        if self.affine.almost_equals(other.affine, precision=0.01)\
+        if self.transform.almost_equals(other.transform, precision=0.01)\
                 and self.width == other.width and self.height == other.height:
             return True
         else:
@@ -111,16 +115,16 @@ class SpatialContext(object):
         Overlapping SpatialContexts can be used to intersect (set_overlap) or
         can be used to define a read window.
         """
-        if not ((self.affine[0] == new_sc.affine[0])
-                and (self.affine[1] == new_sc.affine[1])
-                and (self.affine[3] == new_sc.affine[3])
-                and (self.affine[4] == new_sc.affine[4])):
+        if not ((self.transform[0] == new_sc.transform[0])
+                and (self.transform[1] == new_sc.transform[1])
+                and (self.transform[3] == new_sc.transform[3])
+                and (self.transform[4] == new_sc.transform[4])):
             print("error: different grid size or orientation")
             return False
 
             # check cells overlap
-        dgx = (~self.affine)[2] - (~new_sc.affine)[2]
-        dgy = (~self.affine)[5] - (~new_sc.affine)[5]
+        dgx = (~self.transform)[2] - (~new_sc.transform)[2]
+        dgy = (~self.transform)[5] - (~new_sc.transform)[5]
 
         # if this differences are not integer numbers, cells do not overlap
         # we 0.01 m
@@ -133,8 +137,8 @@ class SpatialContext(object):
 
     @property
     def extent(self):
-        extent_self = (self.affine) * (0, 0), \
-                      (self.affine) * (self.width, self.height)
+        extent_self = (self.transform) * (0, 0), \
+                      (self.transform) * (self.width, self.height)
         return extent_self
 
     def set_overlap(self, new_sc):
@@ -155,7 +159,7 @@ class SpatialContext(object):
         extent_new = new_sc.extent
 
         # The starting point of the combined raster is the left coordinate
-        # (if the 0th coefficient of affine is positive). and the bottom
+        # (if the 0th coefficient of transform is positive). and the bottom
         # coordinate (if the 4th coefficient is negative)
         # Note that usually the 0th coefficient is positive and the 4th
         # negative.
@@ -166,11 +170,11 @@ class SpatialContext(object):
         extent_y = min(extent_self[0][1], extent_new[0][1]),\
                    max(extent_self[1][1], extent_new[1][1])
 
-        self.width = round((extent_x[1] - extent_x[0]) / self.affine[0])
-        self.height = round((extent_y[1] - extent_y[0]) / self.affine[4])
+        self.width = round((extent_x[1] - extent_x[0]) / self.transform[0])
+        self.height = round((extent_y[1] - extent_y[0]) / self.transform[4])
 
-        self.affine = Affine(self.affine[0], self.affine[1], extent_x[0],
-                             self.affine[3], self.affine[4], extent_y[0])
+        self.transform = Affine(self.transform[0], self.transform[1], extent_x[0],
+                                self.transform[3], self.transform[4], extent_y[0])
 
     def get_read_window(self, new_sc):
         """Gets the read window that overlap with a different SpatialContext
@@ -192,9 +196,9 @@ class SpatialContext(object):
             )
 
         # Get minimum and maximum position in the new grid system
-        gminxy = (~new_sc.affine) * ((0, 0) * self.affine)
-        gmaxxy = (~new_sc.affine) * (
-            (self.width, self.height) * self.affine)
+        gminxy = (~new_sc.transform) * ((0, 0) * self.transform)
+        gmaxxy = (~new_sc.transform) * (
+            (self.width, self.height) * self.transform)
 
         # we can safely round here because we checked overlap before
         # (differences are smaller than the tolerance
@@ -212,4 +216,4 @@ class SpatialContext(object):
 
     @property
     def cell_area(self):
-        return abs(self.affine[0] * self.affine[4])
+        return abs(self.transform[0] * self.transform[4])
