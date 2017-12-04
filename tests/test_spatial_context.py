@@ -76,8 +76,8 @@ class testSpatialContext(TestCase):
         # originally we have
         self.assertEqual(188, soil_code_sc.width)
         self.assertEqual(84, soil_code_sc.height)
-        self.assertEqual(216580, soil_code_sc.affine[2])
-        self.assertEqual(198580, soil_code_sc.affine[5])
+        self.assertEqual(216580, soil_code_sc.transform[2])
+        self.assertEqual(198580, soil_code_sc.transform[5])
 
         # after overlap we get
 
@@ -85,8 +85,8 @@ class testSpatialContext(TestCase):
         print (soil_code_sc)
         self.assertEqual(37, soil_code_sc.width)
         self.assertEqual(37, soil_code_sc.height)
-        self.assertEqual(216910, soil_code_sc.affine[2])
-        self.assertEqual(198445, soil_code_sc.affine[5])
+        self.assertEqual(216910, soil_code_sc.transform[2])
+        self.assertEqual(198445, soil_code_sc.transform[5])
 
     def test_check_no_overlap(self):
         small = rasterio.open(
