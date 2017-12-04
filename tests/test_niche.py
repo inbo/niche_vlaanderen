@@ -368,6 +368,8 @@ class TestNiche(TestCase):
 
         np.testing.assert_equal(np.repeat(area_expected, 28), area)
 
+    @pytest.mark.skipif(sys.platform == "win32" and sys.version_info < (3, 2),
+                        reason="fails on win32 - fixed in recent rasterio")
     def test_zonal_stats(self):
         myniche = self.create_zwarte_beek_niche()
         myniche.run(full_model=False)
