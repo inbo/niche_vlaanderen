@@ -44,22 +44,16 @@ class testAcidity(TestCase):
         expected =  np.array([1,1,2,2,3])
         np.testing.assert_equal(expected, result)
 
-    def test_minerality_class(self):
-        conductivity = np.array([500, 100, np.nan, 700])
-        a = niche_vlaanderen.Acidity()
-        result = a._calculate_mineral_richness_class(conductivity)
-
-        np.testing.assert_equal(np.array([1, 0, -99, 1]), result)
 
     def test_acidity_partial(self):
         rainwater = np.array([0])
-        mineral_richness = np.array([1])
+        minerality = np.array([1])
         inundation = np.array([1])
         seepage = np.array([1])
         soil_mlw = np.array([1])
 
         a = niche_vlaanderen.Acidity()
-        result = a._get_acidity(rainwater, mineral_richness, inundation,
+        result = a._get_acidity(rainwater, minerality, inundation,
                                 seepage, soil_mlw)
 
         np.testing.assert_equal(np.array([3]), result)
@@ -74,14 +68,14 @@ class testAcidity(TestCase):
 
     def test_acidity(self):
         rainwater = np.array([0])
-        conductivity = np.array([400])
+        minerality = np.array([0])
         soilcode = np.array([14])
         inundation = np.array([1])
         seepage = np.array([20])
         mlw = np.array([50])
 
         a = niche_vlaanderen.Acidity()
-        result = a.calculate(soilcode, mlw, inundation, seepage, conductivity,
+        result = a.calculate(soilcode, mlw, inundation, seepage, minerality,
                              rainwater)
         np.testing.assert_equal(3, result)
 
@@ -97,10 +91,10 @@ class testAcidity(TestCase):
             raster_to_numpy(inputdir + "inundation.asc")
         rainwater = raster_to_numpy(inputdir + "nullgrid.asc")
         seepage = raster_to_numpy(inputdir + "seepage.asc")
-        conductivity = raster_to_numpy(inputdir + "conductivity.asc")
+        minerality = raster_to_numpy(inputdir + "minerality.asc")
         acidity = raster_to_numpy("testcase/zwarte_beek/abiotic/acidity.asc")
         acidity[np.isnan(acidity)] = 255
         result = a.calculate(soil_code_r, mlw, inundation, seepage,
-                             conductivity, rainwater)
+                             minerality, rainwater)
 
         np.testing.assert_equal(acidity, result)

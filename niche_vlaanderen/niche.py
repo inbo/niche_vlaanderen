@@ -22,14 +22,14 @@ import datetime
 _allowed_input = {
     "soil_code", "mlw", "msw", "mhw", "seepage",
     "inundation_acidity", "inundation_nutrient", "nitrogen_atmospheric",
-    "nitrogen_animal", "nitrogen_fertilizer", "management", "conductivity",
+    "nitrogen_animal", "nitrogen_fertilizer", "management", "minerality",
     "rainwater", "inundation_vegetation", "management_vegetation", "acidity",
     "nutrient_level"}
 
 _minimal_input = {
     "soil_code", "mlw", "msw", "mhw", "seepage", "inundation_acidity",
     "nitrogen_atmospheric", "nitrogen_animal", "nitrogen_fertilizer",
-    "management", "conductivity", "rainwater",
+    "management", "minerality", "rainwater",
     "inundation_nutrient"}
 
 
@@ -402,7 +402,7 @@ class Niche(object):
                 self._inputarray["soil_code"], self._inputarray["mlw"],
                 self._inputarray["inundation_acidity"],
                 self._inputarray["seepage"],
-                self._inputarray["conductivity"],
+                self._inputarray["minerality"],
                 self._inputarray["rainwater"])
 
         ct_veg = dict()

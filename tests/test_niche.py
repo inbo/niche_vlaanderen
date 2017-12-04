@@ -38,8 +38,8 @@ class TestNiche(TestCase):
         myniche.set_input("mhw", input_dir + "mhw.asc")
         myniche.set_input("mlw", input_dir + "mlw.asc")
         myniche.set_input("msw", input_dir + "msw.asc")
-        myniche.set_input("conductivity",
-                          input_dir + "conductivity.asc")
+        myniche.set_input("minerality",
+                          input_dir + "minerality.asc")
         myniche.set_input("nitrogen_atmospheric",
                           input_dir + "nitrogen_atmospheric.asc")
         myniche.set_input("nitrogen_animal",
@@ -404,7 +404,7 @@ class TestNicheDelta(TestCase):
 
         import matplotlib as mpl
         mpl.use('agg')
-        
+
         import matplotlib.pyplot as plt
         plt.show = lambda: None
 

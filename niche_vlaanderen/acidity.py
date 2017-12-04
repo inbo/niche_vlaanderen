@@ -70,20 +70,12 @@ class Acidity(object):
         result = result.reshape(orig_shape)
         return result
 
-    def _calculate_mineral_richness_class(self, conductivity):
-        # conductivity may contain np.nan values - we ignore the numpy warnings
-        # about the fact that these can not be compared.
-        with np.errstate(invalid='ignore'):
-            reclass = (conductivity >= 500).astype("int8")
-        reclass[np.isnan(conductivity)] = -99
-        return reclass
-
-    def _get_acidity(self, rainwater, mineral_richness, inundation, seepage,
+    def _get_acidity(self, rainwater, minerality, inundation, seepage,
                      soil_mlw_class):
 
         orig_shape = inundation.shape
         rainwater = rainwater.flatten()
-        mineral_richness = mineral_richness.flatten()
+        minerality = minerality.flatten()
         inundation = inundation.flatten()
         seepage = seepage.flatten()
         soil_mlw_class = soil_mlw_class.flatten()
@@ -97,7 +89,7 @@ class Acidity(object):
             subtable = subtable.copy().reset_index(drop=True)
 
             selection = ((rainwater == sel_rainwater)
-                         & (mineral_richness == sel_mr)
+                         & (minerality == sel_mr)
                          & (inundation == sel_inundation)
                          & (seepage == sel_seepage)
                          & (soil_mlw_class == sel_soil_mlw_class))
@@ -112,11 +104,10 @@ class Acidity(object):
         seepage = self._ct_seepage.seepage.reindex(index)
         return seepage.values.reshape(orig_shape)
 
-    def calculate(self, soil_class, mlw, inundation, seepage, conductivity,
+    def calculate(self, soil_class, mlw, inundation, seepage, minerality,
                   rainwater):
         soil_mlw = self._calculate_soil_mlw(soil_class, mlw)
-        mineral_richness = self._calculate_mineral_richness_class(conductivity)
         seepage = self._get_seepage(seepage)
-        acidity = self._get_acidity(rainwater, mineral_richness, inundation,
+        acidity = self._get_acidity(rainwater, minerality, inundation,
                                     seepage, soil_mlw)
         return acidity

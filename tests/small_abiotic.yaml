@@ -10,7 +10,7 @@ input_layers:
   nitrogen_animal: 0
   nitrogen_fertilizer: 0
   management: 1
-  conductivity: 501
+  minerality: 1
   rainwater: 0
   acidity: data/small/acidity.asc
   nutrient_level: data/small/nutrient_level.asc
