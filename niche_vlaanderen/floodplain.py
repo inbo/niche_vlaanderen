@@ -1,4 +1,5 @@
 import rasterio
+import os
 from pkg_resources import resource_filename
 
 import pandas as pd
@@ -7,7 +8,7 @@ import numpy as np
 from .spatial_context import SpatialContext
 
 
-class FloodPlainError(Exception):
+class FloodPlainException(Exception):
     """"""
 
 
@@ -50,6 +51,7 @@ class FloodPlain(object):
             depth = dst.read(1)
             self._context = SpatialContext(dst)
         self._calculate(depth, frequency, duration, period)
+
         self.options = (frequency, duration, period)
 
     def show(self, key):
@@ -82,8 +84,39 @@ class FloodPlain(object):
 
         plt.show()
 
+    def write(self, folder):
+        if not hasattr(self, "_veg"):
+            raise FloodPlainException(
+                "A valid run must be done before writing the output.")
+
+        if not os.path.exists(folder):
+            os.makedirs(folder)
+
+        params = dict(
+            driver='GTiff',
+            height=self._context.height,
+            width=self._context.width,
+            crs=self._context.crs,
+            transform=self._context.transform,
+            count=1,
+            dtype="uint8",
+            nodata=255,
+            compress="DEFLATE"
+        )
+
+        self._files_written = dict()
+
+        for vi in self._veg:
+            filename = "F{}-{}-P{}-{}.tif".format(vi, self.options[0],
+                                              self.options[1], self.options[2])
+            path = folder + "/" + filename
+            with rasterio.open(path, 'w', **params) as dst:
+                dst.write(self._veg[vi], 1)
+                self._files_written[vi] = os.path.normpath(path)
+
+
     def combine(self, niche_result):
         # check niche model has been run
         if not hasattr(niche_result, "_vegetation"):
-            raise FloodPlainError(
+            raise FloodPlainException(
                 "Niche model must be run prior to running this module.")
