@@ -40,6 +40,9 @@ model_options:
   # abiotic: default is False. Use abiotic values specified for the Full model
   # rather than calculating them.
   abiotic: False
+  # name: you can specify a name for the model. This name will be added to
+  # the output files and will be used when plotting/comparing results.
+  name: example
 
 input_layers:
   # These three input layers always have to be defined

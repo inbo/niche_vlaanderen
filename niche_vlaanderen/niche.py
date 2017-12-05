@@ -1,5 +1,4 @@
 import rasterio
-import rasterio.plot
 import rasterstats
 
 import numpy as np
@@ -74,6 +73,7 @@ class Niche(object):
         self._result = dict()
         self._deviation = dict()
         self._model_options = dict()
+        self._model_options["name"] = ""
         self._files_written = dict()
         self._log = logging.getLogger("niche_vlaanderen")
         self._context = None
@@ -88,6 +88,14 @@ class Niche(object):
             self._set_ct("ct_vegetation", resource_filename(
                 "niche_vlaanderen",
                 "system_tables/niche_vegetation.csv"))
+
+    @property
+    def name(self):
+        return self._model_options["name"]
+
+    @name.setter
+    def name(self, name):
+        self._model_options["name"] = name
 
     def __repr__(self):
         s = "# Niche Vlaanderen version: {}\n".format(__version__)
@@ -201,6 +209,10 @@ class Niche(object):
             if not isinstance(value, numbers.Number):
                 value = os.path.join(os.path.dirname(config), value)
             self.set_input(k, value)
+
+        if "model_options" in config_loaded.keys():
+            if "name" in config_loaded["model_options"].keys():
+                self.name = config_loaded["model_options"]["name"]
 
     def run_config_file(self, config):
         """ Runs Niche using a configuration file
@@ -485,15 +497,18 @@ class Niche(object):
             compress="DEFLATE"
         )
 
+        prefix = ""
+        if self.name != "":
+            prefix=self.name + "_"
         for vi in self._vegetation:
-            path = folder + '/V%s.tif' % vi
+            path = folder + '/{}V{:02d}.tif'.format(prefix,vi)
             with rasterio.open(path, 'w', **params) as dst:
                 dst.write(self._vegetation[vi], 1)
                 self._files_written[vi] = os.path.normpath(path)
 
         # also save the abiotic grids
         for vi in self._abiotic:
-            path = folder + '/%s.tif' % vi
+            path = folder + '/{}{}.tif'.format(prefix,vi)
             with rasterio.open(path, 'w', **params) as dst:
                 dst.write(self._abiotic[vi], 1)
                 self._files_written[vi] = os.path.normpath(path)
@@ -512,23 +527,26 @@ class Niche(object):
         )
 
         for i in self._deviation:
-            path = folder + '/%s.tif' % i
+            path = folder + '/{}{}.tif'.format(prefix, i)
             with rasterio.open(path, 'w', **params) as dst:
                 band = self._deviation[i]
                 band[band == np.nan] = -99999
                 dst.write(band, 1)
                 self._files_written[i] = os.path.normpath(path)
 
-        with open(folder + "/log.txt", "w") as f:
+        with open(folder + "/{}log.txt".format(prefix), "w") as f:
             f.write(self.__repr__())
 
     def show(self, key):
-        plt = rasterio.plot.get_plt()
+        try:
+            import matplotlib.pyplot as plt
+            import matplotlib.patches as mpatches
+            from matplotlib.colors import Normalize
 
-        import matplotlib.patches as mpatches
-        from matplotlib.colors import Normalize
-
-        fig, ax = plt.subplots()
+        except (ImportError, RuntimeError):  # pragma: no cover
+            msg = "Could not import matplotlib\n"
+            msg += "matplotlib required for plotting functions"
+            raise ImportError(msg)
 
         norm = None
         v = None
@@ -552,6 +570,8 @@ class Niche(object):
 
         if v is None:
             raise NicheException("Invalid key specified")
+
+        fig, ax = plt.subplots()
 
         ((a, b), (c, d)) = self._context.extent
         mpl_extent = (a, c, d, b)
@@ -756,9 +776,15 @@ class NicheDelta(object):
                 # self._files_written[vi] = os.path.normpath(path)
 
     def show(self, key):
-        plt = rasterio.plot.get_plt()
-        import matplotlib.patches as mpatches
-        from matplotlib.colors import Normalize
+        try:
+            import matplotlib.pyplot as plt
+            import matplotlib.patches as mpatches
+            from matplotlib.colors import Normalize
+
+        except (ImportError, RuntimeError):  # pragma: no cover
+            msg = "Could not import matplotlib\n"
+            msg += "matplotlib required for plotting functions"
+            raise ImportError(msg)
 
         fig, ax = plt.subplots()
         ((a, b), (c, d)) = self._context.extent

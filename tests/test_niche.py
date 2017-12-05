@@ -92,8 +92,8 @@ class TestNiche(TestCase):
         myniche.write(tmpdir)
         # check tempdir contains the vegetation and the abiotic files
         expected_files = ["nutrient_level.tif", "acidity.tif",
-             'V1.tif', 'V2.tif', 'V3.tif', 'V4.tif', 'V5.tif', 'V6.tif',
-             'V7.tif', 'V8.tif', 'V9.tif', 'V10.tif', 'V11.tif', 'V12.tif',
+             'V01.tif', 'V02.tif', 'V03.tif', 'V04.tif', 'V05.tif', 'V06.tif',
+             'V07.tif', 'V08.tif', 'V09.tif', 'V10.tif', 'V11.tif', 'V12.tif',
              'V13.tif', 'V14.tif', 'V15.tif', 'V16.tif', 'V17.tif', 'V18.tif',
              'V19.tif', 'V20.tif', 'V21.tif', 'V22.tif', 'V23.tif', 'V24.tif',
              'V25.tif', 'V26.tif', 'V27.tif', 'V28.tif', 'log.txt']
@@ -132,16 +132,19 @@ class TestNiche(TestCase):
                           input_dir + "soil_code.asc")
         myniche.set_input("mhw", input_dir + "mhw.asc")
         myniche.set_input("mlw", input_dir + "mlw.asc")
+        myniche.name = "simple"
         myniche.run(full_model=False)
         tmpdir = tempfile.mkdtemp()
         myniche.write(tmpdir)
         # check tempdir contains the vegation and the abiotic files
         expected_files = [
-             'V1.tif', 'V2.tif', 'V3.tif', 'V4.tif', 'V5.tif', 'V6.tif',
-             'V7.tif', 'V8.tif', 'V9.tif', 'V10.tif', 'V11.tif', 'V12.tif',
+             'V01.tif', 'V02.tif', 'V03.tif', 'V04.tif', 'V05.tif', 'V06.tif',
+             'V07.tif', 'V08.tif', 'V09.tif', 'V10.tif', 'V11.tif', 'V12.tif',
              'V13.tif', 'V14.tif', 'V15.tif', 'V16.tif', 'V17.tif', 'V18.tif',
              'V19.tif', 'V20.tif', 'V21.tif', 'V22.tif', 'V23.tif', 'V24.tif',
              'V25.tif', 'V26.tif', 'V27.tif', 'V28.tif', 'log.txt']
+
+        expected_files = ["simple_" + i for i in expected_files]
 
         dir = os.listdir(tmpdir)
 
@@ -171,7 +174,7 @@ class TestNiche(TestCase):
         info = subprocess.check_output(
             ["gdalinfo",
              "-stats",
-            os.path.join(tmpdir, 'V1.tif')]
+            os.path.join(tmpdir, 'V01.tif')]
         ).decode('utf-8')
         print(info)
         assert ("(216580.000000000000000,198580.000000000000000)" in
