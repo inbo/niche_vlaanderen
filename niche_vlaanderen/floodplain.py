@@ -1,6 +1,7 @@
 import rasterio
 import os
 from pkg_resources import resource_filename
+import copy
 
 import pandas as pd
 import numpy as np
@@ -120,3 +121,13 @@ class FloodPlain(object):
         if not hasattr(niche_result, "_vegetation"):
             raise FloodPlainException(
                 "Niche model must be run prior to running this module.")
+
+        if not hasattr(self, "_veg"):
+            raise FloodPlainException(
+                "Floodplain model must be run prior to running this module.")
+
+        if self._context != niche_result._context:
+            raise FloodPlainException(
+                "Niche model has a different spatial context")
+
+        new = copy
