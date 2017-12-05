@@ -26,7 +26,7 @@ before_install:
   - export PROJ_LIB=/usr/share/proj
 
 install:
-  - pip install rasterio==RASTERIO_VERSION
+  - pip install rasterio==$RASTERIO_VERSION
   - pip install --use-wheel -r dev-requirements.txt
   - pip install sphinx_rtd_theme coveralls
   - pip install .
