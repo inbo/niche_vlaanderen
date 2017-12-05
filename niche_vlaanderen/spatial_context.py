@@ -1,6 +1,8 @@
 from affine import Affine
 from textwrap import dedent
 import rasterio
+import warnings
+
 
 class SpatialContextError(Exception):
     """
@@ -27,10 +29,13 @@ class SpatialContext(object):
     """
 
     def __init__(self, dst):
-        if isinstance(dst.transform, Affine):
-            self.transform = dst.transform
-        else:
-            self.transform = dst.affine  # for compatibility with rasterio 0.x
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore", FutureWarning)
+            if isinstance(dst.transform, Affine):
+                self.transform = dst.transform
+            else:
+                # for compatibility with rasterio 0.x
+                self.transform = dst.affine
 
         self.width = int(dst.width)
         self.height = int(dst.height)
