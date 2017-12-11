@@ -56,9 +56,15 @@ class FloodPlain(object):
         self.options = (frequency, duration, period)
 
     def show(self, key):
-        plt = rasterio.plot.get_plt()
-        import matplotlib.patches as mpatches
-        from matplotlib.colors import Normalize
+        try:
+            import matplotlib.pyplot as plt
+            import matplotlib.patches as mpatches
+            from matplotlib.colors import Normalize
+
+        except (ImportError, RuntimeError):  # pragma: no cover
+            msg = "Could not import matplotlib\n"
+            msg += "matplotlib required for plotting functions"
+            raise ImportError(msg)
 
         if key not in self._veg.keys():
             print("vegetation type not modeled")
@@ -130,4 +136,8 @@ class FloodPlain(object):
             raise FloodPlainException(
                 "Niche model has a different spatial context")
 
-        new = copy
+        new = copy.copy(self)
+        for vi in new._veg:
+            new._veg[vi] = niche_result._vegetation[vi] * new._veg[vi]
+
+        return (new)
