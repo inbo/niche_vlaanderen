@@ -95,7 +95,7 @@ class Niche(object):
 
     @name.setter
     def name(self, name):
-        self._model_options["name"] = name
+        self._model_options["name"] = str(name)
 
     def __repr__(self):
         s = "# Niche Vlaanderen version: {}\n".format(__version__)
@@ -566,7 +566,7 @@ class Niche(object):
         if key in self._deviation:
             v = self._deviation[key]
             title = key
-            norm = Normalize(0, 200)
+            norm = Normalize(-50, 50)
 
         if v is None:
             raise NicheException("Invalid key specified")
@@ -822,3 +822,16 @@ class NicheDelta(object):
         df = df[self._values]
         df.columns = self._labels
         return df
+
+
+def conductivity2minerality(conductivity, minerality):
+    # converts a grid with conductivity to a grid of minerality
+    # in the same grid format
+    with rasterio.open(conductivity) as src:
+        band = src.read(1)
+        band = np.where(band>500,1,0)
+        profile = src.profile
+        band = band.astype(profile["dtype"])
+
+    with rasterio.open(minerality, 'w', **profile) as dst:
+        dst.write(band, 1)
