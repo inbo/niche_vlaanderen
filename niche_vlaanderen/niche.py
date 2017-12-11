@@ -537,7 +537,7 @@ class Niche(object):
         with open(folder + "/{}log.txt".format(prefix), "w") as f:
             f.write(self.__repr__())
 
-    def show(self, key):
+    def plot(self, key, ax=None):
         try:
             import matplotlib.pyplot as plt
             import matplotlib.patches as mpatches
@@ -571,7 +571,8 @@ class Niche(object):
         if v is None:
             raise NicheException("Invalid key specified")
 
-        fig, ax = plt.subplots()
+        if ax is None:
+            fig, ax = plt.subplots()
 
         ((a, b), (c, d)) = self._context.extent
         mpl_extent = (a, c, d, b)
@@ -592,7 +593,7 @@ class Niche(object):
         else:
             plt.colorbar()
 
-        plt.show()
+        return(ax)
 
     @property
     def table(self):
@@ -680,7 +681,7 @@ def indent(s, pre):
 class NicheDelta(object):
     """Class containing the difference between two niche runs
 
-    The difference can be visualized using the show method. It is also
+    The difference can be visualized using the plot method. It is also
     possible to derive a table with the area's according to each group.
     """
 
@@ -775,7 +776,7 @@ class NicheDelta(object):
                 dst.write(self._delta[vi], 1)
                 # self._files_written[vi] = os.path.normpath(path)
 
-    def show(self, key):
+    def plot(self, key, ax = None):
         try:
             import matplotlib.pyplot as plt
             import matplotlib.patches as mpatches
@@ -786,7 +787,8 @@ class NicheDelta(object):
             msg += "matplotlib required for plotting functions"
             raise ImportError(msg)
 
-        fig, ax = plt.subplots()
+        if ax is None:
+            fig, ax = plt.subplots()
         ((a, b), (c, d)) = self._context.extent
         mpl_extent = (a, c, d, b)
 
@@ -803,7 +805,7 @@ class NicheDelta(object):
         plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2,
                    borderaxespad=0.)
 
-        plt.show()
+        return ax
 
     @property
     def table(self):

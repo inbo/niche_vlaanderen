@@ -55,7 +55,7 @@ class FloodPlain(object):
 
         self.options = (frequency, duration, period)
 
-    def show(self, key):
+    def plot(self, key, ax=None):
         try:
             import matplotlib.pyplot as plt
             import matplotlib.patches as mpatches
@@ -70,7 +70,9 @@ class FloodPlain(object):
             print("vegetation type not modeled")
             return
 
-        fig, ax = plt.subplots()
+        if ax is None:
+            fig, ax = plt.subplots()
+
         ((a, b), (c, d)) = self._context.extent
         mpl_extent = (a, c, d, b)
 
@@ -89,7 +91,7 @@ class FloodPlain(object):
         plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2,
                    borderaxespad=0.)
 
-        plt.show()
+        return ax
 
     def write(self, folder):
         if not hasattr(self, "_veg"):

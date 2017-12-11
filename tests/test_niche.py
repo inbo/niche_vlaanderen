@@ -336,7 +336,7 @@ class TestNiche(TestCase):
 
     def test_show(self):
         """
-        Tests the show method. Note that this only tests whether a plot is
+        Tests the plot method. Note that this only tests whether a plot is
         constructed. The actual content is not tested.
         """
         import matplotlib as mpl
@@ -347,12 +347,12 @@ class TestNiche(TestCase):
 
         myniche = self.create_small()
         myniche.run(deviation=True)
-        myniche.show("mhw")
-        myniche.show(1)
-        myniche.show("mhw_01")
-        myniche.show("nutrient_level")
+        myniche.plot("mhw")
+        myniche.plot(1)
+        myniche.plot("mhw_01")
+        myniche.plot("nutrient_level")
         with pytest.raises(NicheException):
-            myniche.show("sinterklaas")
+            myniche.plot("sinterklaas")
 
     def test_table(self):
         myniche = self.create_small()
@@ -413,7 +413,7 @@ class TestNicheDelta(TestCase):
         import matplotlib.pyplot as plt
         plt.show = lambda: None
 
-        delta.show(5)
+        delta.plot(5)
 
         tmpdir = tempfile.mkdtemp()
         delta.write(tmpdir)
