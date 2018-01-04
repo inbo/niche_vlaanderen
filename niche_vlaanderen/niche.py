@@ -70,7 +70,7 @@ class Niche(object):
         self._inputarray = dict()
         self._abiotic = dict()
         self._code_tables = dict()
-        self._result = dict()
+        self._vegetation = dict()
         self._deviation = dict()
         self._model_options = dict()
         self._model_options["name"] = ""
@@ -481,7 +481,7 @@ class Niche(object):
 
         """
 
-        if not hasattr(self, "_vegetation"):
+        if not self.vegetation_calculated:
             raise NicheException(
                 "A valid run must be done before writing the output.")
 
@@ -638,7 +638,7 @@ class Niche(object):
 
         Returns
         =======
-        dict of dataframes. The index of the dict is the vector.
+        dataframe. The index of the dict is the vector.
         """
         td = dict()
         for i in self._vegetation:
@@ -680,11 +680,12 @@ class Niche(object):
 
     @property
     def vegetation_calculated(self):
-        return hasattr(self, '_vegetation')
+        return len(self._vegetation)>0
 
     def _clear_result(self):
         """Clears calculated vegetation"""
-        del self._vegetation
+        self._vegetation.clear()
+        self._deviation.clear()
 
 
 def indent(s, pre):

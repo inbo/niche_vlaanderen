@@ -126,7 +126,7 @@ class FloodPlain(object):
 
     def combine(self, niche_result):
         # check niche model has been run
-        if not hasattr(niche_result, "_vegetation"):
+        if niche_result.vegetation_calculated:
             raise FloodPlainException(
                 "Niche model must be run prior to running this module.")
 
