@@ -136,7 +136,9 @@ class FloodPlain(object):
 
         if self._context != niche_result._context:
             raise FloodPlainException(
-                "Niche model has a different spatial context")
+                "Niche model has a different spatial context:\n" +
+                str(self._context) + str(niche_result._context)
+                )
 
         new = copy.copy(self)
         for vi in new._veg:
