@@ -662,18 +662,23 @@ class Niche(object):
                                             nodata=-99)
 
         rs_result = pd.DataFrame.from_dict(td, orient='index')
+
+        ti = list()
+
+        presence = dict({0: "not present", 1: "present", 255: "no data"})
+
+        for vi in td:
+            for shape_i, rec in enumerate(td[vi]):
+                for a in rec:
+                    ti.append((vi, shape_i, presence[int(a)],
+                               rec[a] * self._context.cell_area))
+
         df_list=dict()
 
-        for j in rs_result.columns:
-            df_list[j] = rs_result[j].apply(pd.Series)
-            df_list[j] = df_list[j].fillna(0) * self._context.cell_area
+        df = pd.DataFrame(ti, columns=['vegetation', 'shape_id', 'presence',
+                                       'area'])
 
-            for i in [0, 1, 255]:
-                if i not in df_list[j].columns:
-                    df_list[j][i] = 0
-
-                    df_list[j].columns = ['not present', 'present', 'no data']
-        return df_list
+        return df
 
     def _vegcode2name(self, vegcode):
         """Converts a vegetation code to a name

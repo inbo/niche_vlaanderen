@@ -379,16 +379,17 @@ class TestNiche(TestCase):
         vector = "testcase/zwarte_beek/input/study_area_l72.geojson"
 
         # there is only one polygon
-        stats = myniche.zonal_stats(vector)[0]
+        stats = myniche.zonal_stats(vector)
 
-        # we expect no data to be zero as the shape is a mask
-        self.assertEqual(0, np.sum(stats["no data"]))
+        # we expect no data to be absent as the shape is a mask
+        assert np.any(stats.presence == "no data") == False
 
         # which also means that present /not present should be equal to the
         # normal table
         print(myniche.table)
         print(stats)
-        assert myniche.table["present"].equals(stats["present"])
+        sum = np.sum(stats.area[(stats.presence == "present")])
+        assert np.sum(myniche.table["present"]) == sum
 
 
 class TestNicheDelta(TestCase):
