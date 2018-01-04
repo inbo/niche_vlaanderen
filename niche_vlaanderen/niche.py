@@ -542,7 +542,7 @@ class Niche(object):
         with open(folder + "/{}log.txt".format(prefix), "w") as f:
             f.write(self.__repr__())
 
-    def plot(self, key, ax=None):
+    def plot(self, key, ax=None, fixed_scale=True):
         try:
             import matplotlib.pyplot as plt
             import matplotlib.patches as mpatches
@@ -571,7 +571,8 @@ class Niche(object):
         if key in self._deviation:
             v = self._deviation[key]
             title = key
-            norm = Normalize(-50, 50)
+            if fixed_scale:
+                norm = Normalize(-50, 50)
 
         if v is None:
             raise NicheException("Invalid key specified")
