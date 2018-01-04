@@ -556,6 +556,15 @@ class Niche(object):
         norm = None
         v = None
 
+        if key in self._inputfiles and key not in self._inputarray:
+            # if set_input has been done, but no model run yet
+            # in this case we will open the file and fetch the data
+            with rasterio.open(self._inputfiles[key]) as dst:
+                window = self._context.get_read_window(SpatialContext(dst))
+                v = dst.read(1, window=window)
+                v = ma.masked_equal(v, dst.nodatavals[0])
+            title = key
+
         if key in self._inputarray:
             v = self._inputarray[key]
             v = ma.masked_equal(v, -99)
