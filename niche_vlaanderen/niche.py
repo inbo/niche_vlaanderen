@@ -173,6 +173,11 @@ class Niche(object):
         if (key not in _allowed_input):
             raise NicheException("Unrecognized type %s" % key)
 
+        if self.vegetation_calculated:
+            self._log.warning("Setting new input after model run, "
+                      "clearing results")
+            self._clear_result()
+
         if isinstance(value, numbers.Number):
             # Remove any existing values to make sure last value is used
             self._inputfiles.pop(key, None)
@@ -600,7 +605,7 @@ class Niche(object):
         """Dataframe containing the potential area (m**2) per vegetation type
         """
 
-        if not hasattr(self, '_vegetation'):
+        if not self.vegetation_calculated:
             raise NicheException(
                 "Error: You must run niche prior to requesting the result table")
 
@@ -672,6 +677,14 @@ class Niche(object):
             veg_dict = subtable.set_index("veg_code").to_dict()["veg_type"]
             self._vegcode2namedict = veg_dict
         return self._vegcode2namedict[vegcode]
+
+    @property
+    def vegetation_calculated(self):
+        return hasattr(self, '_vegetation')
+
+    def _clear_result(self):
+        """Clears calculated vegetation"""
+        del self._vegetation
 
 
 def indent(s, pre):
