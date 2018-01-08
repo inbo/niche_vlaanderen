@@ -619,19 +619,19 @@ class Niche(object):
             raise NicheException(
                 "Error: You must run niche prior to requesting the result table")
 
-        td = dict()
+        td = list()
+
+        presence = dict({0: "not present", 1: "present", 255: "no data"})
+
         for i in self._vegetation:
             vi = pd.Series(self._vegetation[i].flatten())
-            td[i] = vi.value_counts() * self._context.cell_area
-        df = pd.DataFrame.from_dict(td, orient='index')
+            rec =  vi.value_counts() * self._context.cell_area
+            for a in rec.index:
+                td.append((i,presence[a],rec[a]))
 
-        df = df.fillna(0)
-        for i in [0, 1, 255]:
-            if i not in df.columns:
-                df[i] = 0
+        df = pd.DataFrame(td, columns=['vegetation', 'presence',
+                                       'area'])
 
-        df = df[[0, 1, 255]]
-        df.columns = ["not present", "present", "no data"]
         return df
 
     def zonal_stats(self, vectors):
