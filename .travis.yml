@@ -18,7 +18,9 @@ python:
   - "3.6"
 # - "nightly"
 
-script: pytest --cov niche_vlaanderen --cov-report term-missing --verbose --tb=long
+script: 
+  - pytest --cov niche_vlaanderen --cov-report term-missing --verbose --tb=long
+  - sphinx-build docs -a doc/_build/html
 
 before_install:
   - export CPPFLAGS=`gdal-config --cflags`
@@ -44,7 +46,6 @@ after_success:
 - coveralls || echo "coveralls failure"
 
 before_deploy:
-  - sphinx-build docs -a doc/_build/html
 
 deploy:
     - user: stvhoey
