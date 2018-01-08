@@ -364,12 +364,12 @@ class TestNiche(TestCase):
         print(myniche)
         res = myniche.table
         print(res)
-        self.assertEqual((28,3), res.shape)
+        self.assertEqual((36,3), res.shape)
 
-        area_expected = 7 * 6 * 25 * 25
-        area = res["present"] + res["not present"] + res["no data"]
+        area_expected = 7 * 6 * 25 * 25 * 28
+        area = np.sum(res["area"])
 
-        np.testing.assert_equal(np.repeat(area_expected, 28), area)
+        assert area == area_expected
 
     @pytest.mark.skipif(sys.platform == "win32" and sys.version_info < (3, 2),
                         reason="fails on win32 - fixed in recent rasterio")
@@ -386,10 +386,10 @@ class TestNiche(TestCase):
 
         # which also means that present /not present should be equal to the
         # normal table
-        print(myniche.table)
-        print(stats)
+        table = myniche.table
         sum = np.sum(stats.area[(stats.presence == "present")])
-        assert np.sum(myniche.table["present"]) == sum
+        table_sum = np.sum(table.area[(table.presence == "present")])
+        assert table_sum == sum
 
 
 class TestNicheDelta(TestCase):
