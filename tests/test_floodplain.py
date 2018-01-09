@@ -20,6 +20,12 @@ class TestFloodPlain(TestCase):
         np.testing.assert_equal(expected, fp._veg[25])
 
     def test_plot(self):
+        import matplotlib as mpl
+        mpl.use('agg')
+
+        import matplotlib.pyplot as plt
+        plt.show = lambda: None
+
         fp = nv.FloodPlain()
         fp.calculate("testcase/floodplains/ff_bt_t10_h.asc", "T10",
                      period="winter", duration=1)
