@@ -20,7 +20,7 @@ python:
 
 script: 
   - pytest --cov niche_vlaanderen --cov-report term-missing --verbose --tb=long
-  - sphinx-build docs -a doc/_build/html
+  - "if [[ $TRAVIS_PYTHON_VERSION == 3.5 ]]; then sphinx-build docs -a doc/_build/html;fi"
 
 before_install:
   - export CPPFLAGS=`gdal-config --cflags`
