@@ -1,4 +1,5 @@
 include niche_vlaanderen/system_tables/*.csv
+include niche_vlaanderen/system_tables/floodplains/*.csv
 include niche_vlaanderen/system_tables/*.yaml
 include testcase/*
 
