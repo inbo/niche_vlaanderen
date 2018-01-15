@@ -17,3 +17,4 @@ The Python package ``niche_vlaanderen`` allows calculating the NICHE model in th
   niche
   compare
   lowlevel
+  floodplain

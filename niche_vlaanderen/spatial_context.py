@@ -91,8 +91,7 @@ class SpatialContext(object):
             else:
                 return False
 
-        if self.transform.almost_equals(other.transform, precision=0.01)\
-                and self.width == other.width and self.height == other.height:
+        if self.transform.almost_equals(other.transform, precision=0.01):
             return True
         else:
             return False
