@@ -410,7 +410,8 @@ class TestNicheDelta(TestCase):
 
         # as the full model always contains less than the simple model,
         # we can use this in a test
-        self.assertEqual(0, delta.table["only in model 2"].sum())
+        df = delta.table
+        self.assertEqual(0, df[df.presence=="only in model 2"].area.sum())
 
         import matplotlib as mpl
         mpl.use('agg')

@@ -838,20 +838,15 @@ class NicheDelta(object):
 
     @property
     def table(self):
-        td = dict()
+        td = list()
         for i in self._delta:
             vi = pd.Series(self._delta[i].flatten())
-            td[i] = vi.value_counts() * self._context.cell_area
-        df = pd.DataFrame.from_dict(td, orient='index')
+            rec = vi.value_counts()
+            for a in rec.index:
+                td.append((i, self._labels[int(a)], rec[a]* self._context.cell_area))
+        df = pd.DataFrame(td, columns = ['vegetation', 'presence', 'area'])
 
-        # Missing values get area 0
-        df = df.fillna(0)
-        for i in self._values:
-            if i not in df.columns:
-                df[i] = 0
 
-        df = df[self._values]
-        df.columns = self._labels
         return df
 
 
