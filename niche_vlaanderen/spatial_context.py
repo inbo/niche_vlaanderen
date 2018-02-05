@@ -89,7 +89,10 @@ class SpatialContext(object):
             if self.crs == '' or self.crs == '':
                 print("Ignoring missing CRS in comparison")
             else:
-                return False
+                print("Warning: CRS definitions are not equal!")
+                # TODO: we should probably look at the strict validation here.
+                # currently disabled until we have a better way to detect l72 variants
+                # return False
 
         if self.transform.almost_equals(other.transform, precision=0.01):
             return True
