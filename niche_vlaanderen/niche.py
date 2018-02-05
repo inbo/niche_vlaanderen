@@ -359,7 +359,7 @@ class Niche(object):
         # if all is successful:
         self._inputarray = inputarray
 
-    def run(self, full_model=True, deviation=False, abiotic=False):
+    def run(self, full_model=True, deviation=False, abiotic=False, strict_checks=True):
         """Run the niche model
 
         Runs niche Vlaanderen model. Requires that the necessary input values
@@ -386,6 +386,7 @@ class Niche(object):
         self._options["full_model"] = full_model
         self._options["deviation"] = deviation
         self._options["abiotic"] = abiotic
+        self._options["strict_checks"] = strict_checks
 
         if abiotic and not full_model:
             raise NicheException(
