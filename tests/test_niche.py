@@ -266,6 +266,12 @@ class TestNiche(TestCase):
         with pytest.raises(NicheException):
             myniche.run(full_model=True)
 
+        myniche.set_input("mhw", 3)
+        myniche.set_input("mlw", 5)
+        myniche.set_input("msw", 10)
+        myniche.run(full_model=True, strict_checks=False)
+        # should not raise
+
     def test_nitrogen_validation(self):
         myniche = self.create_small()
         myniche.set_input("nitrogen_animal", 10001)
