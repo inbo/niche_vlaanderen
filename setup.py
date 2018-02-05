@@ -4,6 +4,9 @@
 import sys
 from setuptools import setup, find_packages
 
+version = {}
+with open("niche_vlaanderen/version.py") as fp:
+    exec(fp.read(), version)
 
 with open('README.rst') as readme_file:
     readme = readme_file.read()
@@ -16,7 +19,7 @@ requirements = [
         ]
 
 setup(name='niche_vlaanderen',
-    version="1.0a5",
+    version=version['__version__'],
     description='NICHE Vlaanderen: hydro-ecological model for valley-ecosystems in Flanders',
     url='https://github.com/INBO/niche_vlaanderen',
     author='Johan Van de Wauw',
