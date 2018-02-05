@@ -121,7 +121,7 @@ class FloodPlain(object):
             path = folder + "/" + filename
             with rasterio.open(path, 'w', **params) as dst:
                 dst.write(self._veg[vi], 1)
-                self._files_written[vi] = os.path.normpath(path)
+                self._files_written[filename] = os.path.normpath(path)
 
 
     def combine(self, niche_result):

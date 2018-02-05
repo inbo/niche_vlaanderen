@@ -10,6 +10,8 @@ from .acidity import Acidity
 from .nutrient_level import NutrientLevel
 from .spatial_context import SpatialContext
 from .version import __version__
+from .floodplain import FloodPlain
+
 from pkg_resources import resource_filename
 
 import logging
@@ -223,6 +225,17 @@ class Niche(object):
                 self._options["strict_checks"] = \
                     config_loaded["model_options"]["strict_checks"]
 
+        if "inundation" in config_loaded.keys():
+            self._options["inundation"]=[]
+            for scen_nr in config_loaded["inundation"]:
+                print (scen_nr)
+                scen = {k: scen_nr[k]
+                        for k in ["name", "depth", "period", "frequency",
+                                  "duration"]}
+                self._options["inundation"].append(scen)
+
+
+
     def run_config_file(self, config):
         """ Runs Niche using a configuration file
 
@@ -235,7 +248,7 @@ class Niche(object):
         with open(config, 'r') as stream:
             config_loaded = yaml.load(stream)
 
-        # Set code tables
+        # Set code tables TODO?
 
         # Run + write according to model options
         options = config_loaded["model_options"]
@@ -246,6 +259,20 @@ class Niche(object):
             full_model = False
 
         self.run(full_model, deviation)
+
+        if "inundation" in self._options:
+            for scen in self._options["inundation"]:
+                self.fp = FloodPlain() #TODO overwrite code tables
+                self.fp.calculate(depth_file=scen["depth"],
+                                  period=scen["period"],
+                                  frequency=scen["frequency"],
+                                  duration=scen["duration"])
+                self.fp.combine(self)
+                if "output_dir" in options:
+                    self.fp.write(options["output_dir"])
+                    print(self.fp._files_written)
+                    self._files_written.update(self.fp._files_written)
+
 
         if "output_dir" in options:
             output_dir = options["output_dir"]
