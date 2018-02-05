@@ -24,3 +24,8 @@ inundation:
     frequency: T20
     duration: 1
     period: winter
+  - name: T10-winter
+    depth: ../testcase/floodplains/ff_bt_t10_h.asc
+    frequency: T10
+    duration: 1
+    period: winter

@@ -46,10 +46,10 @@ configfile:
 
     inundation:
      - name: T20-winter
-        - file: T20.tif
-        - frequency: T20
-        - duration: 1
-        - period: winter
+       file: T20.tif
+       frequency: T20
+       duration: short
+       period: winter
      - name: T20-zomer
        ....
 

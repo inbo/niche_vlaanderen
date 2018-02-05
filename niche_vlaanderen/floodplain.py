@@ -53,7 +53,9 @@ class FloodPlain(object):
             self._context = SpatialContext(dst)
         self._calculate(depth, frequency, duration, period)
 
-        self.options = (frequency, duration, period)
+        self.options = {'frequency': frequency,
+                        "duration": duration,
+                        "period": period}
 
     def plot(self, key, ax=None):
         try:
@@ -78,8 +80,8 @@ class FloodPlain(object):
 
         im = plt.imshow(self._veg[key], extent=mpl_extent,
                         norm=Normalize(0, 3))
-        options = list(self.options)
-        options[2] = "< 14 days" if self.options[2] == 1 else "> 14 days"
+        options = self.options.copy()
+        options["duration"] = "< 14 days" if self.options["duration"] == 1 else "> 14 days"
         ax.set_title("{} ({})".format(key, options))
 
         labels = self._ct["potential"]["description"]
@@ -116,8 +118,9 @@ class FloodPlain(object):
         self._files_written = dict()
 
         for vi in self._veg:
-            filename = "F{}-{}-P{}-{}.tif".format(vi, self.options[0],
-                                              self.options[1], self.options[2])
+            filename = "F{:02d}-{}-P{}-{}.tif".format(
+                vi, self.options["frequency"], self.options["duration"],
+                self.options["period"])
             path = folder + "/" + filename
             with rasterio.open(path, 'w', **params) as dst:
                 dst.write(self._veg[vi], 1)
