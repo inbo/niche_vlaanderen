@@ -72,8 +72,9 @@ class Niche(object):
         self._code_tables = dict()
         self._vegetation = dict()
         self._deviation = dict()
-        self._model_options = dict()
-        self._model_options["name"] = ""
+        self._options = dict()
+        self._options["name"] = ""
+        self._options["strict_checks"] = True
         self._files_written = dict()
         self._log = logging.getLogger("niche_vlaanderen")
         self._context = None
@@ -91,11 +92,11 @@ class Niche(object):
 
     @property
     def name(self):
-        return self._model_options["name"]
+        return self._options["name"]
 
     @name.setter
     def name(self, name):
-        self._model_options["name"] = str(name)
+        self._options["name"] = str(name)
 
     def __repr__(self):
         s = "# Niche Vlaanderen version: {}\n".format(__version__)
@@ -110,7 +111,7 @@ class Niche(object):
 
         s += "\n"
         s += "model_options:\n"
-        options = yaml.dump(self._model_options, default_flow_style=False)
+        options = yaml.dump(self._options, default_flow_style=False)
         s += indent(options, "  ")
 
         if len(self._code_tables) > 0:
@@ -218,6 +219,9 @@ class Niche(object):
         if "model_options" in config_loaded.keys():
             if "name" in config_loaded["model_options"].keys():
                 self.name = config_loaded["model_options"]["name"]
+            if "strict_checks" in config_loaded["model_options"].keys():
+                self._options["strict_checks"] = \
+                    config_loaded["model_options"]["strict_checks"]
 
     def run_config_file(self, config):
         """ Runs Niche using a configuration file
@@ -256,11 +260,13 @@ class Niche(object):
             # convert these cells into the projection system
             bad_points = bad_points * self._context.transform
 
-            print("Not all {} values are lower than {}".format(a, b))
+            print("Warning: Not all {} values are lower than {}".format(a, b))
             print("coordinates with invalid values are:")
             print(pd.DataFrame(list(bad_points)))
-            raise NicheException(
-                "Error: not all {} values are lower than {}".format(a, b))
+
+            if self._options["strict_checks"]:
+                raise NicheException(
+                    "Error: not all {} values are lower than {}".format(a, b))
 
     def _check_input_files(self, full_model):
         """ basic input checks (valid files etc)
@@ -350,9 +356,9 @@ class Niche(object):
 
         """
 
-        self._model_options["full_model"] = full_model
-        self._model_options["deviation"] = deviation
-        self._model_options["abiotic"] = abiotic
+        self._options["full_model"] = full_model
+        self._options["deviation"] = deviation
+        self._options["abiotic"] = abiotic
 
         if abiotic and not full_model:
             raise NicheException(
@@ -485,7 +491,7 @@ class Niche(object):
             raise NicheException(
                 "A valid run must be done before writing the output.")
 
-        self._model_options["output_dir"] = folder
+        self._options["output_dir"] = folder
 
         if not os.path.exists(folder):
             os.makedirs(folder)
