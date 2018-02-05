@@ -7,8 +7,10 @@ from pkg_resources import resource_filename
 @click.pass_context
 @click.option('--example', is_flag=True,
               help='prints an example configuration file')
+@click.option('--version', is_flag=True,
+              help='prints the version number')
 @click.argument('config', required=False, type=click.Path(exists=True))
-def cli(ctx, config, example):
+def cli(ctx, config, example, version):
     """Command line interface to the NICHE vegetation model
     """
     if example:
@@ -25,3 +27,6 @@ def cli(ctx, config, example):
     if config is None and not example:
         # we should really find a neater way to show --help here by default.
         print("No config file added. Use --help for more info")
+
+    if version is not None:
+        print("niche_vlaanderen version:" + niche_vlaanderen.__version__)
