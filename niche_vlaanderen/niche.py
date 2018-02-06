@@ -1,5 +1,6 @@
 import rasterio
 import rasterstats
+import warnings
 
 import numpy as np
 import numpy.ma as ma
@@ -685,6 +686,11 @@ class Niche(object):
         dataframe. The index of the dict is the vector.
         """
         td = dict()
+
+        # Ignore the warnings from rasterstats - code must be adjusted
+        # in that package - not in our code.
+        warnings.simplefilter(action='ignore', category=FutureWarning)
+
         for i in self._vegetation:
             # Note we use -99 as nodata value to make sure the true nodata
             # value (255) is part of the result table.
@@ -694,6 +700,7 @@ class Niche(object):
                                             affine=self._context.transform,
                                             categorical=True,
                                             nodata=-99)
+        warnings.simplefilter('default')
 
         ti = list()
 
