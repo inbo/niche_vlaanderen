@@ -318,12 +318,13 @@ class Niche(object):
                      "nitrogen_atmospheric"):
                 band = band.astype('float32')
 
+            # convert old soil codes to new soil codes
             if f == 'soil_code' and np.all(band[band != nodata] >= 10000):
                 band[band != nodata] = np.round(band[band != nodata] / 10000)
 
             # create a mask for no-data values, taking into account data-types
             if band.dtype == 'float32':
-                band[band == nodata] = np.nan
+                band[np.isclose(band, nodata)] = np.nan
             else:
                 band[band == nodata] = -99
 
