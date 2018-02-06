@@ -624,6 +624,9 @@ class Niche(object):
 
         im = plt.imshow(v, extent=mpl_extent, norm=norm)
 
+        if self.name != '':
+            title = self.name + " " + title
+
         ax.set_title(title)
 
         if key in self._vegetation:
