@@ -1,5 +1,5 @@
 ###################################
-``niche_vlaanderen`` Python Package
+Tutorials
 ###################################
 
 The Python package ``niche_vlaanderen`` allows calculating the NICHE model in three ways
@@ -11,8 +11,8 @@ The Python package ``niche_vlaanderen`` allows calculating the NICHE model in th
 .. toctree::
   :caption: Overview
 
-  installation
-  cli
-  niche
-  compare
-  lowlevel
+
+  getting_started
+  advanced_usage
+  floodplain
+

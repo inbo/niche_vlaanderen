@@ -15,5 +15,6 @@ This documentation is split in two parts:
 
   model
   package
+  tutorials
   contributing
   authors

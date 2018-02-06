@@ -1,0 +1,11 @@
+model_options:
+  name: ''
+  strict_checks: true
+  full_model: false
+
+input_layers:
+  mhw: ../testcase/zwarte_beek/input/mhw.asc
+  mlw: ../testcase/zwarte_beek/input/mhw.asc
+  soil_code: ../testcase/zwarte_beek/input/soil_code.asc
+
+

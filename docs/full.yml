@@ -1,0 +1,22 @@
+model_options:
+  abiotic: false
+  deviation: false
+  full_model: true
+  name: 'full'
+  strict_checks: true
+
+input_layers:
+  inundation_acidity: ../testcase/zwarte_beek/input/inundation.asc
+  inundation_nutrient: ../testcase/zwarte_beek/input/inundation.asc
+  management: ../testcase/zwarte_beek/input/management.asc
+  mhw: ../testcase/zwarte_beek/input/mhw.asc
+  minerality: ../testcase/zwarte_beek/input/minerality.asc
+  mlw: ../testcase/zwarte_beek/input/mlw.asc
+  msw: ../testcase/zwarte_beek/input/msw.asc
+  seepage: ../testcase/zwarte_beek/input/seepage.asc
+  soil_code: ../testcase/zwarte_beek/input/soil_code.asc
+  nitrogen_animal: 0
+  nitrogen_atmospheric: 0
+  nitrogen_fertilizer: 0
+  rainwater: 0
+
