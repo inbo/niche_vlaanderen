@@ -1,6 +1,5 @@
 from affine import Affine
 from textwrap import dedent
-import rasterio
 import warnings
 
 
@@ -18,8 +17,8 @@ class SpatialContext(object):
     Attributes
     ----------
     transform: Affine
-        Matrix that contains the transform transformation of the plane to convert
-        grid coordinates to real world coordinates.
+        Matrix that contains the transform transformation of the plane to
+        convert grid coordinates to real world coordinates.
         https://github.com/sgillies/transform
     width, height: int
         Integer numbers containing the width and height of the raster
@@ -91,7 +90,8 @@ class SpatialContext(object):
             else:
                 print("Warning: CRS definitions are not equal!")
                 # TODO: we should probably look at the strict validation here.
-                # currently disabled until we have a better way to detect l72 variants
+                # currently disabled until we have a better way to detect
+                # l72 variants
                 # return False
 
         if self.transform.almost_equals(other.transform, precision=0.01):
@@ -174,14 +174,15 @@ class SpatialContext(object):
         extent_x = (max(extent_self[0][0], extent_new[0][0]),
                     min(extent_self[1][0], extent_new[1][0]))
 
-        extent_y = min(extent_self[0][1], extent_new[0][1]),\
-                   max(extent_self[1][1], extent_new[1][1])
+        extent_y = (min(extent_self[0][1], extent_new[0][1]),
+                    max(extent_self[1][1], extent_new[1][1]))
 
         self.width = round((extent_x[1] - extent_x[0]) / self.transform[0])
         self.height = round((extent_y[1] - extent_y[0]) / self.transform[4])
 
-        self.transform = Affine(self.transform[0], self.transform[1], extent_x[0],
-                                self.transform[3], self.transform[4], extent_y[0])
+        self.transform = \
+            Affine(self.transform[0], self.transform[1], extent_x[0],
+                   self.transform[3], self.transform[4], extent_y[0])
 
     def get_read_window(self, new_sc):
         """Gets the read window that overlap with a different SpatialContext

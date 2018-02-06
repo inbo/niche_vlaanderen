@@ -176,7 +176,7 @@ class Niche(object):
 
         if self.vegetation_calculated:
             self._log.warning("Setting new input after model run, "
-                      "clearing results")
+                              "clearing results")
             self._clear_result()
 
         if isinstance(value, numbers.Number):
@@ -224,15 +224,12 @@ class Niche(object):
                     config_loaded["model_options"]["strict_checks"]
 
         if "inundation" in config_loaded.keys():
-            self._options["inundation"]=[]
+            self._options["inundation"] = []
             for scen_nr in config_loaded["inundation"]:
-                print (scen_nr)
                 scen = {k: scen_nr[k]
                         for k in ["name", "depth", "period", "frequency",
                                   "duration"]}
                 self._options["inundation"].append(scen)
-
-
 
     def run_config_file(self, config):
         """ Runs Niche using a configuration file
@@ -260,7 +257,7 @@ class Niche(object):
 
         if "inundation" in self._options:
             for scen in self._options["inundation"]:
-                self.fp = FloodPlain() #TODO overwrite code tables
+                self.fp = FloodPlain()  # TODO overwrite code tables
                 self.fp.calculate(depth_file=scen["depth"],
                                   period=scen["period"],
                                   frequency=scen["frequency"],
@@ -270,7 +267,6 @@ class Niche(object):
                     self.fp.write(options["output_dir"])
                     print(self.fp._files_written)
                     self._files_written.update(self.fp._files_written)
-
 
         if "output_dir" in options:
             output_dir = options["output_dir"]
@@ -358,7 +354,8 @@ class Niche(object):
         # if all is successful:
         self._inputarray = inputarray
 
-    def run(self, full_model=True, deviation=False, abiotic=False, strict_checks=True):
+    def run(self, full_model=True, deviation=False, abiotic=False,
+            strict_checks=True):
         """Run the niche model
 
         Runs niche Vlaanderen model. Requires that the necessary input values
@@ -537,20 +534,20 @@ class Niche(object):
 
         prefix = ""
         if self.name != "":
-            prefix=self.name + "_"
+            prefix = self.name + "_"
 
         # write a summary file containing the table of the model
         self.table.to_csv(folder + '/' + prefix + "summary.csv")
 
         for vi in self._vegetation:
-            path = folder + '/{}V{:02d}.tif'.format(prefix,vi)
+            path = folder + '/{}V{:02d}.tif'.format(prefix, vi)
             with rasterio.open(path, 'w', **params) as dst:
                 dst.write(self._vegetation[vi], 1)
                 self._files_written[vi] = os.path.normpath(path)
 
         # also save the abiotic grids
         for vi in self._abiotic:
-            path = folder + '/{}{}.tif'.format(prefix,vi)
+            path = folder + '/{}{}.tif'.format(prefix, vi)
             with rasterio.open(path, 'w', **params) as dst:
                 dst.write(self._abiotic[vi], 1)
                 self._files_written[vi] = os.path.normpath(path)
@@ -651,10 +648,10 @@ class Niche(object):
     def table(self):
         """Dataframe containing the potential area (m**2) per vegetation type
         """
-
         if not self.vegetation_calculated:
             raise NicheException(
-                "Error: You must run niche prior to requesting the result table")
+                "Error: You must run niche prior to requesting the "
+                "result table")
 
         td = list()
 
@@ -662,9 +659,9 @@ class Niche(object):
 
         for i in self._vegetation:
             vi = pd.Series(self._vegetation[i].flatten())
-            rec =  vi.value_counts() * self._context.cell_area / 10000
+            rec = vi.value_counts() * self._context.cell_area / 10000
             for a in rec.index:
-                td.append((i,presence[a],rec[a]))
+                td.append((i, presence[a], rec[a]))
 
         df = pd.DataFrame(td, columns=['vegetation', 'presence',
                                        'area_ha'])
@@ -698,8 +695,6 @@ class Niche(object):
                                             categorical=True,
                                             nodata=-99)
 
-        rs_result = pd.DataFrame.from_dict(td, orient='index')
-
         ti = list()
 
         presence = dict({0: "not present", 1: "present", 255: "no data"})
@@ -710,11 +705,8 @@ class Niche(object):
                     ti.append((vi, shape_i, presence[int(a)],
                                rec[a] * self._context.cell_area / 10000))
 
-        df_list=dict()
-
         df = pd.DataFrame(ti, columns=['vegetation', 'shape_id', 'presence',
                                        'area_ha'])
-
         return df
 
     def _vegcode2name(self, vegcode):
@@ -732,7 +724,7 @@ class Niche(object):
 
     @property
     def vegetation_calculated(self):
-        return len(self._vegetation)>0
+        return len(self._vegetation) > 0
 
     def _clear_result(self):
         """Clears calculated vegetation"""
@@ -845,7 +837,7 @@ class NicheDelta(object):
         # Also the resulting table is written
         self.table.to_csv("delta_summary.csv")
 
-    def plot(self, key, ax = None):
+    def plot(self, key, ax=None):
         try:
             import matplotlib.pyplot as plt
             import matplotlib.patches as mpatches
@@ -884,8 +876,8 @@ class NicheDelta(object):
             rec = vi.value_counts()
             for a in rec.index:
                 td.append((i, self._labels[int(a)],
-                           rec[a]* self._context.cell_area / 10000))
-        df = pd.DataFrame(td, columns = ['vegetation', 'presence', 'area_ha'])
+                           rec[a] * self._context.cell_area / 10000))
+        df = pd.DataFrame(td, columns=['vegetation', 'presence', 'area_ha'])
 
         return df
 
@@ -895,7 +887,7 @@ def conductivity2minerality(conductivity, minerality):
     # in the same grid format
     with rasterio.open(conductivity) as src:
         band = src.read(1)
-        band = np.where(band>500,1,0)
+        band = np.where(band > 500, 1, 0)
         profile = src.profile
         band = band.astype(profile["dtype"])
 

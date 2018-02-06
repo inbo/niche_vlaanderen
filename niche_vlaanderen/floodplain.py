@@ -81,7 +81,8 @@ class FloodPlain(object):
         im = plt.imshow(self._veg[key], extent=mpl_extent,
                         norm=Normalize(0, 3))
         options = self.options.copy()
-        options["duration"] = "< 14 days" if self.options["duration"] == 1 else "> 14 days"
+        options["duration"] = "< 14 days" \
+            if self.options["duration"] == 1 else "> 14 days"
         ax.set_title("{} ({})".format(key, options))
 
         labels = self._ct["potential"]["description"]
@@ -125,7 +126,6 @@ class FloodPlain(object):
             with rasterio.open(path, 'w', **params) as dst:
                 dst.write(self._veg[vi], 1)
                 self._files_written[filename] = os.path.normpath(path)
-
 
     def combine(self, niche_result):
         # check niche model has been run
