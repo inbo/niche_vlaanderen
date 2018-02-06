@@ -5,7 +5,7 @@ model_options:
 
 input_layers:
   mhw: ../testcase/zwarte_beek/input/mhw.asc
-  mlw: ../testcase/zwarte_beek/input/mhw.asc
+  mlw: ../testcase/zwarte_beek/input/mlw.asc
   soil_code: ../testcase/zwarte_beek/input/soil_code.asc
 
 
