@@ -11,25 +11,28 @@ The recommended version is `64 bit with Python 3.6`__, though 32 bit and Python 
 __ https://repo.continuum.io/miniconda/Miniconda3-latest-Windows-x86_64.exe
 .. _miniconda: https://conda.io/miniconda.html
 
-The installation can proceed without administrator rights, keep the default options.
+The installation can proceed without administrator rights, keep the default options. After miniconda is installed,
+we will proceed installing niche_vlaanderen in its own environment.
+
+Download the file https://raw.githubusercontent.com/inbo/niche_vlaanderen/master/docs/niche_env.yml to a location on
+your computer.
 
 Start the `Anaconda prompt` from the start menu
 
-Install the dependant packages
+Create an environment containing niche and its dependencies. You should point to the file you just downloaded.
 
 .. code-block:: default
 
-    (C:\Users\johan\Miniconda3) C:\Users\johan> conda config --add channels conda-forge
-    (C:\Users\johan\Miniconda3) C:\Users\johan> conda install numpy rasterio pandas pyyaml fiona
+    (C:\Users\johan\Miniconda3) C:\Users\johan> conda env create -f c:\users\johan\Downloads\niche_env.yml.txt
 
-Install niche itself (last version):
+Activate the niche environment
 
 .. code-block:: default
 
-    (C:\Users\johan\Miniconda3) C:\Users\johan> pip install niche_vlaanderen
+    (C:\Users\johan\Miniconda3) C:\Users\johan> activate niche_vlaanderen
 
 
-You can verify the installation was succesful by running the cli interface
+You can verify the installation was successful by running the cli interface
 
 .. code-block:: default
 
@@ -50,4 +53,4 @@ from the Anaconda prompt
 
 .. code-block:: default
 
-    pip install niche_vlaanderen --upgrade
+    conda env update -f c:\users\johan\Downloads\niche_env.yml.txt
