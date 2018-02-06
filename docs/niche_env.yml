@@ -1,4 +1,4 @@
-name: niche
+name: niche_vlaanderen
 channels:
 - conda-forge
 - defaults
