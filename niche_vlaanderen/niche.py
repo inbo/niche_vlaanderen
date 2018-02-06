@@ -133,10 +133,8 @@ class Niche(object):
             if len(self._inputvalues) > 0 else ""
         s += indent(input, "  ")
 
-        if self.occurrence is not None:
-            s += "\nmodel_result: \n"
-            s += indent(
-                yaml.dump(self.occurrence, default_flow_style=False), "  ")
+        if self.vegetation_calculated:
+            s += "# Model run completed"
         else:
             s += "# No model run completed."
 
