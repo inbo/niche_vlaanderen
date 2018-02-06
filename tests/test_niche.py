@@ -1,3 +1,4 @@
+from __future__ import division
 from unittest import TestCase
 import pytest
 
@@ -376,8 +377,8 @@ class TestNiche(TestCase):
         print(res)
         self.assertEqual((36,3), res.shape)
 
-        area_expected = 7 * 6 * 25 * 25 * 28
-        area = np.sum(res["area"])
+        area_expected = 7 * 6 * 25 * 25 * 28 / 10000
+        area = np.sum(res["area_ha"])
 
         assert area == area_expected
 
@@ -397,8 +398,8 @@ class TestNiche(TestCase):
         # which also means that present /not present should be equal to the
         # normal table
         table = myniche.table
-        sum = np.sum(stats.area[(stats.presence == "present")])
-        table_sum = np.sum(table.area[(table.presence == "present")])
+        sum = np.sum(stats.area_ha[(stats.presence == "present")])
+        table_sum = np.sum(table.area_ha[(table.presence == "present")])
         assert table_sum == sum
 
 
@@ -417,7 +418,7 @@ class TestNicheDelta(TestCase):
         # as the full model always contains less than the simple model,
         # we can use this in a test
         df = delta.table
-        self.assertEqual(0, df[df.presence=="only in model 2"].area.sum())
+        self.assertEqual(0, df[df.presence=="only in model 2"].area_ha.sum())
 
         import matplotlib as mpl
         mpl.use('agg')

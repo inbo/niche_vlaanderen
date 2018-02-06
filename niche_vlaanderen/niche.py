@@ -659,12 +659,12 @@ class Niche(object):
 
         for i in self._vegetation:
             vi = pd.Series(self._vegetation[i].flatten())
-            rec =  vi.value_counts() * self._context.cell_area
+            rec =  vi.value_counts() * self._context.cell_area / 10000
             for a in rec.index:
                 td.append((i,presence[a],rec[a]))
 
         df = pd.DataFrame(td, columns=['vegetation', 'presence',
-                                       'area'])
+                                       'area_ha'])
 
         return df
 
@@ -705,12 +705,12 @@ class Niche(object):
             for shape_i, rec in enumerate(td[vi]):
                 for a in rec:
                     ti.append((vi, shape_i, presence[int(a)],
-                               rec[a] * self._context.cell_area))
+                               rec[a] * self._context.cell_area / 10000))
 
         df_list=dict()
 
         df = pd.DataFrame(ti, columns=['vegetation', 'shape_id', 'presence',
-                                       'area'])
+                                       'area_ha'])
 
         return df
 
@@ -877,9 +877,9 @@ class NicheDelta(object):
             vi = pd.Series(self._delta[i].flatten())
             rec = vi.value_counts()
             for a in rec.index:
-                td.append((i, self._labels[int(a)], rec[a]* self._context.cell_area))
-        df = pd.DataFrame(td, columns = ['vegetation', 'presence', 'area'])
-
+                td.append((i, self._labels[int(a)],
+                           rec[a]* self._context.cell_area / 10000))
+        df = pd.DataFrame(td, columns = ['vegetation', 'presence', 'area_ha'])
 
         return df
 
