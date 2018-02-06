@@ -7,6 +7,7 @@ import pandas as pd
 from .nutrient_level import NutrientLevel
 from .acidity import Acidity
 from .codetables import validate_tables_vegetation
+from .exception import NicheException
 
 
 class Vegetation(object):
@@ -91,6 +92,12 @@ class Vegetation(object):
                   full_model=True):
         """ Calculate vegetation types based on input arrays
 
+        Parameters
+        ----------
+        return_all: boolean
+            A boolean (default=True) whether all grids should be returned or
+            only grids containing data.
+
         Returns
         -------
         veg: dict
@@ -142,6 +149,9 @@ class Vegetation(object):
 
             if return_all or np.any(vegi):
                 veg_bands[veg_code] = vegi
+
+            if vegi.size == np.sum(nodata):
+                raise NicheException("only nodata values predicted")
 
             occurrence[veg_code] = np.asscalar(
                 (np.sum(vegi == 1) / (vegi.size - np.sum(nodata))))

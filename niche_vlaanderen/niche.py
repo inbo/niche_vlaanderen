@@ -12,6 +12,7 @@ from .nutrient_level import NutrientLevel
 from .spatial_context import SpatialContext
 from .version import __version__
 from .floodplain import FloodPlain
+from .exception import NicheException
 
 from pkg_resources import resource_filename
 
@@ -46,12 +47,6 @@ _code_tables = ["ct_acidity", "ct_soil_mlw_class", "ct_soil_codes",
                 "ct_nutrient_level", "ct_mineralisation"]
 
 logging.basicConfig()
-
-
-class NicheException(Exception):
-    """
-    Exception from niche code
-    """
 
 
 class Niche(object):

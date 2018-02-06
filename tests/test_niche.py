@@ -4,7 +4,7 @@ import pytest
 
 import niche_vlaanderen
 import rasterio
-from niche_vlaanderen.niche import NicheException
+from niche_vlaanderen.exception import NicheException
 from rasterio.errors import RasterioIOError
 import numpy as np
 import pandas as pd

@@ -14,6 +14,8 @@ def raster_to_numpy(filename):
     ------
     No-data values are -99 for integer types and np.nan for real types.
     '''
+
+    print(filename)
     with rasterio.open(filename) as ds:
         data = ds.read(1)
         nodata = ds.nodatavals[0]
@@ -132,7 +134,7 @@ class testVegetation(TestCase):
             raster_to_numpy(input_dir + "inundation.asc")
         regenlens = raster_to_numpy(input_dir + "nullgrid.asc")
         seepage = raster_to_numpy(input_dir + "seepage.asc")
-        conductivity = raster_to_numpy(input_dir + "conductivity.asc")
+        conductivity = raster_to_numpy(input_dir + "minerality.asc")
         nitrogen_deposition = \
             raster_to_numpy(input_dir + "nitrogen_atmospheric.asc")
         nitrogen_animal = raster_to_numpy(input_dir + "nullgrid.asc")
