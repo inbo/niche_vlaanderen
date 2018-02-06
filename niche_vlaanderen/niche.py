@@ -537,6 +537,10 @@ class Niche(object):
         prefix = ""
         if self.name != "":
             prefix=self.name + "_"
+
+        # write a summary file containing the table of the model
+        self.table.to_csv(folder + '/' + prefix + "summary.csv")
+
         for vi in self._vegetation:
             path = folder + '/{}V{:02d}.tif'.format(prefix,vi)
             with rasterio.open(path, 'w', **params) as dst:
@@ -836,6 +840,9 @@ class NicheDelta(object):
             with rasterio.open(path, 'w', **params) as dst:
                 dst.write(self._delta[vi], 1)
                 # self._files_written[vi] = os.path.normpath(path)
+
+        # Also the resulting table is written
+        self.table.to_csv("delta_summary.csv")
 
     def plot(self, key, ax = None):
         try:

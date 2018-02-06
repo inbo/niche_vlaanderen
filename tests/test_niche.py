@@ -98,7 +98,8 @@ class TestNiche(TestCase):
              'V07.tif', 'V08.tif', 'V09.tif', 'V10.tif', 'V11.tif', 'V12.tif',
              'V13.tif', 'V14.tif', 'V15.tif', 'V16.tif', 'V17.tif', 'V18.tif',
              'V19.tif', 'V20.tif', 'V21.tif', 'V22.tif', 'V23.tif', 'V24.tif',
-             'V25.tif', 'V26.tif', 'V27.tif', 'V28.tif', 'log.txt']
+             'V25.tif', 'V26.tif', 'V27.tif', 'V28.tif', 'log.txt',
+             'summary.csv']
 
         dir = os.listdir(tmpdir)
 
@@ -144,7 +145,8 @@ class TestNiche(TestCase):
              'V07.tif', 'V08.tif', 'V09.tif', 'V10.tif', 'V11.tif', 'V12.tif',
              'V13.tif', 'V14.tif', 'V15.tif', 'V16.tif', 'V17.tif', 'V18.tif',
              'V19.tif', 'V20.tif', 'V21.tif', 'V22.tif', 'V23.tif', 'V24.tif',
-             'V25.tif', 'V26.tif', 'V27.tif', 'V28.tif', 'log.txt']
+             'V25.tif', 'V26.tif', 'V27.tif', 'V28.tif', 'log.txt',
+             'summary.csv']
 
         expected_files = ["simple_" + i for i in expected_files]
 
