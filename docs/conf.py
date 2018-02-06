@@ -58,7 +58,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'niche_vlaanderen'
-copyright = '2017, Johan Van de Wauw'
+copyright = '2017 - 2018, Johan Van de Wauw'
 author = 'Johan Van de Wauw'
 
 # The version info for the project you're documenting, acts as replacement for
