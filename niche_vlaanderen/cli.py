@@ -2,7 +2,6 @@ import click
 import niche_vlaanderen
 from pkg_resources import resource_filename
 
-
 @click.command()
 @click.pass_context
 @click.option('--example', is_flag=True,
@@ -28,5 +27,5 @@ def cli(ctx, config, example, version):
         # we should really find a neater way to show --help here by default.
         print("No config file added. Use --help for more info")
 
-    if version is not None:
+    if version:
         print("niche_vlaanderen version:" + niche_vlaanderen.__version__)
