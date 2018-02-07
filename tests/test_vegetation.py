@@ -1,10 +1,12 @@
 from __future__ import division
 from unittest import TestCase
+import pytest
 
 import numpy as np
 import rasterio
 
 import niche_vlaanderen
+from niche_vlaanderen.exception import NicheException
 
 
 def raster_to_numpy(filename):
@@ -166,6 +168,18 @@ class testVegetation(TestCase):
 
             vi[(veg_predict[i] == 255)] = 255
             np.testing.assert_equal(vi, veg_predict[i])
+
+    def test_all_nodata(self):
+        soil_code = raster_to_numpy(
+            "tests/data/small/soil_code.asc")
+        mlw = raster_to_numpy(
+            "tests/data/small/mlw.asc")
+        mhw = mlw.copy()
+        mhw.fill(np.nan)
+
+        v = niche_vlaanderen.Vegetation()
+        with pytest.raises(NicheException):
+            d = v.calculate(soil_code, mhw, mlw)
 
     def test_deviation_mhw(self):
         v = niche_vlaanderen.Vegetation()
