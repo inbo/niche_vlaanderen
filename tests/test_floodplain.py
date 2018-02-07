@@ -41,6 +41,7 @@ class TestFloodPlain(TestCase):
         with pytest.raises(FloodPlainException):
             fp.plot(2000)
 
+    @pytest.mark.skipwindows27
     def test_write(self):
         fp = nv.FloodPlain()
         tempdir = tempfile.mkdtemp() + "/newdir"

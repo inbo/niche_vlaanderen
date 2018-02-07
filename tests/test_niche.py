@@ -59,6 +59,7 @@ class TestNiche(TestCase):
                           input_dir + "rainwater.asc")
         return myniche
 
+    @pytest.mark.skipwindows27
     def test_zwarte_beek(self):
         """
         This tests runs the data from the testcase/zwarte_beek.
@@ -121,6 +122,7 @@ class TestNiche(TestCase):
         myniche2.run()
         self.assertEqual(myniche.occurrence, myniche2.occurrence)
 
+    @pytest.mark.skipwindows27
     def test_testcase_simple(self):
         """
         This tests runs the data from the testcase/zwarte_beek.
@@ -169,6 +171,7 @@ class TestNiche(TestCase):
         distutils.spawn.find_executable("gdalinfo") is None,
         reason="gdalinfo not available in the environment.")
 
+    @pytest.mark.skipwindows27
     def test_zwarte_beek_validate(self):
         myniche = self.create_zwarte_beek_niche()
         myniche.run()
@@ -205,7 +208,7 @@ class TestNiche(TestCase):
     @pytest.mark.skipif(
         distutils.spawn.find_executable("gdalinfo") is None,
         reason="gdalinfo not available in the environment.")
-
+    @pytest.mark.skipwindows27
     def test_write_deviation(self):
         n = self.create_small()
         n.run(deviation=True, full_model=False)
@@ -231,11 +234,13 @@ class TestNiche(TestCase):
         myniche.read_config_input(config)
         myniche.run(full_model=False)
 
+    @pytest.mark.skipwindows27
     def test_run_configuration(self):
         config = 'tests/small_simple.yaml'
         myniche = niche_vlaanderen.Niche()
         myniche.run_config_file(config)
 
+    @pytest.mark.skipwindows27
     def test_run_configuration_numeric(self):
         config = 'tests/small_ct.yaml'
         myniche = niche_vlaanderen.Niche()
@@ -281,7 +286,7 @@ class TestNiche(TestCase):
         with pytest.raises(NicheException):
             myniche.run(full_model=True)
 
-
+    @pytest.mark.skipwindows27
     def test_run_configuration_abiotic(self):
         config = 'tests/small_abiotic.yaml'
         myniche = niche_vlaanderen.Niche()
@@ -406,6 +411,7 @@ class TestNiche(TestCase):
 
 
 class TestNicheDelta(TestCase):
+    @pytest.mark.skipwindows27
     def test_simplevsfull(self):
         config = 'tests/small_simple.yaml'
         simple = niche_vlaanderen.Niche()
