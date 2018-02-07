@@ -69,8 +69,8 @@ class FloodPlain(object):
             raise ImportError(msg)
 
         if key not in self._veg.keys():
-            print("vegetation type not modeled")
-            return
+            msg = "vegetation type {} not modeled".format(key)
+            raise FloodPlainException(msg)
 
         if ax is None:
             fig, ax = plt.subplots()
@@ -97,7 +97,7 @@ class FloodPlain(object):
         return ax
 
     def write(self, folder):
-        if not hasattr(self, "_veg"):
+        if len(self._veg) == 0:
             raise FloodPlainException(
                 "A valid run must be done before writing the output.")
 
