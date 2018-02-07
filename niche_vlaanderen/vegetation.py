@@ -27,7 +27,7 @@ class Vegetation(object):
         https://inbo.github.io/niche_vlaanderen/codetables.html
     """
 
-    nodata = 255  # uint8
+    nodata_veg = 255  # uint8
 
     def __init__(self, ct_vegetation=None, ct_soil_code=None, ct_acidity=None,
                  ct_management=None, ct_nutrient_level=None,
@@ -103,7 +103,7 @@ class Vegetation(object):
         veg: dict
             A dictionary containing the different output arrays per
             veg_code value.
-            -99 is used for nodata values
+            -99 is used for nodata_veg values
         veg_occurrence: dict
             A dictionary containing the percentage of the area where the
             vegetation can occur.
@@ -145,7 +145,7 @@ class Vegetation(object):
                     current_row = current_row & (row.management == management)
                 vegi = vegi | current_row
             vegi = vegi.astype("uint8")
-            vegi[nodata] = self.nodata
+            vegi[nodata] = self.nodata_veg
 
             if return_all or np.any(vegi):
                 veg_bands[veg_code] = vegi
