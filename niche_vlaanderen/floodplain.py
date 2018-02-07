@@ -133,7 +133,7 @@ class FloodPlain(object):
             raise FloodPlainException(
                 "Niche model must be run prior to running this module.")
 
-        if not hasattr(self, "_veg"):
+        if len(self._veg) == 0:
             raise FloodPlainException(
                 "Floodplain model must be run prior to running this module.")
 

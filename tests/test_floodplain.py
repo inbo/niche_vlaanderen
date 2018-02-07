@@ -76,3 +76,52 @@ class TestFloodPlain(TestCase):
             self.assertCountEqual(expected_files, dir)
 
         shutil.rmtree(tempdir)
+
+    def test_combine(self):
+        fp = nv.FloodPlain()
+
+        myniche = nv.Niche()
+        input = "testcase/dijle/"
+        myniche.set_input("soil_code", input + "bodemv.asc")
+        myniche.set_input("msw", input + "gvg_0_cm.asc")
+        myniche.set_input("mlw", input + "glg_0_cm.asc")
+        myniche.set_input("mhw", input + "ghg_0_cm.asc")
+        myniche.set_input("seepage", input + "kwel_mm_dag.asc")
+
+        myniche.set_input("management", input + "beheer_int.asc")
+
+        myniche.set_input("nitrogen_atmospheric", input + "depositie_def.asc")
+        myniche.set_input("nitrogen_animal", input + "bemest_dier.asc")
+
+        myniche.set_input("nitrogen_fertilizer", input + "bemest_kunst.asc")
+
+        myniche.set_input("inundation_vegetation", input + "overstr_veg.asc")
+        myniche.set_input("inundation_acidity", input + "ovrstr_t10_50.asc")
+        myniche.set_input("inundation_nutrient", input + "ovrstr_t10_50.asc")
+
+        myniche.set_input("minerality", input + "minerality.asc")
+
+        myniche.set_input("rainwater", input + "nulgrid.asc")
+
+        with pytest.raises(FloodPlainException):
+            # niche model not yet run
+            fp.combine(myniche)
+
+        myniche.run()
+        with pytest.raises(FloodPlainException):
+            # floodplain model not yet run
+            fp.combine(myniche)
+
+
+        fp.calculate("testcase/floodplains/ff_bt_t10_h.asc", "T10",
+                     period="winter", duration=1)
+
+        result = fp.combine(myniche)
+
+        # get unique values for every vegtype
+        unique = []
+        for i in result._veg:
+            unique.append(np.unique(result._veg[i]))
+        unique = np.unique(np.hstack(unique))
+        expected = np.array([0, 1, 2, 3])
+        np.testing.assert_equal(expected, unique)
