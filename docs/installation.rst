@@ -19,7 +19,8 @@ your computer.
 
 Start the `Anaconda prompt` from the start menu
 
-Create an environment containing niche and its dependencies. You should point to the file you just downloaded.
+Create an environment containing niche and its dependencies. You should point to the file you just downloaded with the
+correct filename (make sure you pick the correct extension).
 
 .. code-block:: default
 
@@ -54,3 +55,23 @@ from the Anaconda prompt
 .. code-block:: default
 
     conda env update -f c:\users\johan\Downloads\niche_env.yml.txt
+
+Installing a specific niche version
+===================================
+
+If you want to install a specific niche version, you can install using pip:
+
+.. code-block:: default
+
+    pip install niche_vlaanderen==1.0a8
+
+
+Running niche
+=============
+
+Whenever you want to use niche (either from the command line or Python) you need to start from the `Anaconda prompt`
+and activate the environment:
+
+.. code-block:: default
+
+    (C:\Users\johan\Miniconda3) C:\Users\johan> activate niche_vlaanderen
