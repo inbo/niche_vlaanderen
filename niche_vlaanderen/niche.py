@@ -303,7 +303,7 @@ class Niche(object):
             if band.dtype == "uint8":
                 band = band.astype(int)
 
-            # mhw, mlw and msw are rounded and converted to int to make sure
+            # mhw, mlw and msw are rounded to two decimals to make sure
             # that comparisons give the expected value (eg not 15.00001 > 15
             # but ==
             # see https://github.com/inbo/niche_vlaanderen/issues/25
