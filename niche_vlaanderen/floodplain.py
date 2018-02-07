@@ -1,3 +1,5 @@
+from __future__  import division
+
 import rasterio
 import os
 from pkg_resources import resource_filename
