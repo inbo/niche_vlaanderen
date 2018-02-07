@@ -347,7 +347,7 @@ class TestNiche(TestCase):
         str = myniche.__repr__()
         self.assertFalse("# No model run completed." in str)
 
-    def test_show(self):
+    def test_plot(self):
         """
         Tests the plot method. Note that this only tests whether a plot is
         constructed. The actual content is not tested.
