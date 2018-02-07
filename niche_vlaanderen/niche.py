@@ -303,8 +303,12 @@ class Niche(object):
             if band.dtype == "uint8":
                 band = band.astype(int)
 
+            # mhw, mlw and msw are rounded and converted to int to make sure
+            # that comparisons give the expected value (eg not 15.00001 > 15
+            # but ==
+            # see https://github.com/inbo/niche_vlaanderen/issues/25
             if f in ('mhw', 'mlw', 'msw'):
-                band = band.astype(int)
+                band = np.rint(band).astype(int)
 
             if f in ("nitrogen_animal", "nitrogen_fertilizer",
                      "nitrogen_atmospheric"):
