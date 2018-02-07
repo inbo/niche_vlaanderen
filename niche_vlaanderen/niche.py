@@ -308,7 +308,7 @@ class Niche(object):
             # but ==
             # see https://github.com/inbo/niche_vlaanderen/issues/25
             if f in ('mhw', 'mlw', 'msw'):
-                band = np.rint(band).astype(int)
+                band = np.round(band, 2)
 
             if f in ("nitrogen_animal", "nitrogen_fertilizer",
                      "nitrogen_atmospheric"):
@@ -319,7 +319,7 @@ class Niche(object):
                 band[band != nodata] = np.round(band[band != nodata] / 10000)
 
             # create a mask for no-data values, taking into account data-types
-            if band.dtype == 'float32':
+            if band.dtype == 'float32' and nodata is not None:
                 band[np.isclose(band, nodata)] = np.nan
             else:
                 band[band == nodata] = -99
