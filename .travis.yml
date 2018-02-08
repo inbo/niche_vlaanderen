@@ -30,7 +30,7 @@ before_install:
 install:
   - pip install rasterio==$RASTERIO_VERSION
   - pip install --use-wheel -r dev-requirements.txt
-  - pip install sphinx_rtd_theme coveralls
+  - pip install coveralls
   - pip install .
 
 addons:
@@ -46,6 +46,7 @@ after_success:
 - coveralls || echo "coveralls failure"
 
 before_deploy:
+  - pip install -r doc-requirements
 
 deploy:
     - user: stvhoey

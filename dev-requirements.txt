@@ -1,18 +1,6 @@
-pandas
-numpy
-rasterio
-rasterstats
-pyyaml
+-r requirements
 pytest
 pytest-cov
 pip
-bumpversion
 wheel
-flake8
-tox
-Sphinx
-PyYAML
-nbsphinx
-jupyter_client
-ipykernel
 matplotlib
