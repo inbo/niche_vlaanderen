@@ -1,0 +1,34 @@
+model_options:
+  simple_model: False
+  deviation: True
+  output_dir: _output
+
+code_tables:
+  lnk_potential: data/bad_ct/lnk_potential.csv
+
+input_layers:
+  mhw: ../testcase/dijle/ghg_0_cm.asc
+  mlw: ../testcase/dijle/glg_0_cm.asc
+  msw: ../testcase/dijle/gvg_0_cm.asc
+  soil_code: ../testcase/dijle/bodemv.asc
+  seepage: ../testcase/dijle/kwel_mm_dag.asc
+  inundation_acidity: ../testcase/dijle/ovrstr_t10_50.asc
+  inundation_nutrient: 0
+  nitrogen_atmospheric: 30
+  nitrogen_animal: 0
+  nitrogen_fertilizer: 0
+  management: 1
+  minerality: 1
+  rainwater: 0
+
+inundation:
+  - name: eerste
+    depth: ../testcase/floodplains/ff_bt_t25_h.asc
+    frequency: T20
+    duration: 1
+    period: winter
+  - name: tweede
+    depth: ../testcase/floodplains/ff_bt_t10_h.asc
+    frequency: T10
+    duration: 1
+    period: winter
