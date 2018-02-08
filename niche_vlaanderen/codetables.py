@@ -1,5 +1,5 @@
 import numpy as np
-
+from .exception import NicheException
 
 class CodeTableException(Exception):
     """
@@ -119,3 +119,14 @@ def validate_tables_vegetation(ct_vegetation, ct_soil_code, ct_inundation,
         if st_unique.shape[0] != 1:
             print(st_unique)
             raise CodeTableException("Non unique mhw/mlw combinations")
+
+
+def check_codes_used(name, used, allowed):
+    used_codes = set(np.unique(used))
+    allowed_codes = set(allowed)
+    allowed_codes.add(-99)  # nodata
+    if not used_codes.issubset(allowed_codes):
+        msg = "Invalid %s code used\n" % name
+        msg += "used: %s\n" % str(used_codes)
+        msg += "possible: %s" % str(allowed_codes)
+        raise NicheException(msg)

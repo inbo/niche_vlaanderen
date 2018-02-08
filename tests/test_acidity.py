@@ -2,8 +2,9 @@ from unittest import TestCase
 
 import rasterio
 import numpy as np
-
 import niche_vlaanderen
+import pytest
+from niche_vlaanderen.exception import NicheException
 
 
 def raster_to_numpy(filename):
@@ -99,3 +100,16 @@ class testAcidity(TestCase):
                              minerality, rainwater)
 
         np.testing.assert_equal(acidity, result)
+
+    def test_acidity_invalidsoil(self):
+        rainwater = np.array([0])
+        minerality = np.array([0])
+        soilcode = np.array([-1])
+        inundation = np.array([1])
+        seepage = np.array([20])
+        mlw = np.array([50])
+
+        a = niche_vlaanderen.Acidity()
+        with pytest.raises(NicheException):
+            result = a.calculate(soilcode, mlw, inundation, seepage, minerality,
+                                 rainwater)
