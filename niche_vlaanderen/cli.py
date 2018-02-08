@@ -21,7 +21,7 @@ def cli(ctx, config, example, version):
 
     if config is not None:
         n = niche_vlaanderen.Niche()
-        n.run_config_file(config)
+        n.run_config_file(config, overwrite_ct=True)
         click.echo(n)
     if config is None and not example:
         # we should really find a neater way to show --help here by default.

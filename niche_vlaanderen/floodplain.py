@@ -17,7 +17,7 @@ class FloodPlainException(Exception):
 
 class FloodPlain(object):
     def __init__(self, depths=None, duration=None, frequency=None,
-                 lnk_potential=None, potential=None):
+                 lnk_potential=None, potential=None, name=None):
         self._ct = dict()
         self._veg = dict()
 
@@ -29,6 +29,7 @@ class FloodPlain(object):
             else:
                 ct = locals()[i]
             self._ct[i] = pd.read_csv(ct)
+        self.name = name
 
     def _calculate(self, depth, frequency, duration, period):
         orig_shape = depth.shape
@@ -119,9 +120,12 @@ class FloodPlain(object):
         )
 
         self._files_written = dict()
+        name = ""
+        if self.name is not None:
+            name = self.name + "-"
 
         for vi in self._veg:
-            filename = "F{:02d}-{}-P{}-{}.tif".format(
+            filename = "{}F{:02d}-{}-P{}-{}.tif".format(name,
                 vi, self.options["frequency"], self.options["duration"],
                 self.options["period"])
             path = folder + "/" + filename

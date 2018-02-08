@@ -45,6 +45,8 @@ _abiotic_keys = {"nutrient_level", "acidity"}
 _code_tables = ["ct_acidity", "ct_soil_mlw_class", "ct_soil_codes",
                 "lnk_acidity", "ct_seepage", "ct_vegetation", "ct_management",
                 "ct_nutrient_level", "ct_mineralisation"]
+_code_tables_fp = ["duration",
+                   "frequency", "lnk_potential", "potential"]
 
 logging.basicConfig()
 
@@ -142,7 +144,7 @@ class Niche(object):
         return s
 
     def _set_ct(self, key, value):
-        if (key not in _code_tables):
+        if key not in _code_tables and key not in _code_tables_fp:
             raise NicheException("Unrecognized codetable %s" % key)
 
         if not os.path.isfile(value):
@@ -192,13 +194,13 @@ class Niche(object):
             self._inputvalues.pop(key, None)
             self._inputfiles[key] = value
 
-    def read_config_input(self, config):
+    def read_config_input(self, config, overwrite_ct=False):
         """ Sets the input based on an input file, without run or output
         """
         with open(config, 'r') as stream:
             config_loaded = yaml.load(stream)
 
-        if "code_tables" in config_loaded.keys():
+        if overwrite_ct and "code_tables" in config_loaded.keys():
             for k in config_loaded['code_tables'].keys():
                 value = config_loaded['code_tables'][k]
                 value = os.path.join(os.path.dirname(config), value)
@@ -227,19 +229,17 @@ class Niche(object):
                                   "duration"]}
                 self._options["inundation"].append(scen)
 
-    def run_config_file(self, config):
+    def run_config_file(self, config, overwrite_ct=False):
         """ Runs Niche using a configuration file
 
         Note that this will configure the model, run and output as specified
         """
 
-        self.read_config_input(config)
+        self.read_config_input(config, overwrite_ct=overwrite_ct)
 
         # Set input values
         with open(config, 'r') as stream:
             config_loaded = yaml.load(stream)
-
-        # Set code tables TODO?
 
         # Run + write according to model options
         options = config_loaded["model_options"]
@@ -253,7 +253,15 @@ class Niche(object):
 
         if "inundation" in self._options:
             for scen in self._options["inundation"]:
-                self.fp = FloodPlain()  # TODO overwrite code tables
+                ct_nl = dict()
+
+                keys = set(FloodPlain.__init__.__code__.co_varnames) \
+                       & set(self._code_tables)
+
+                for k in keys:
+                    ct_nl[k] = self._code_tables[k]
+
+                self.fp = FloodPlain(name=scen["name"],**ct_nl)
                 self.fp.calculate(depth_file=scen["depth"],
                                   period=scen["period"],
                                   frequency=scen["frequency"],
