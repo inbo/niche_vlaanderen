@@ -2,7 +2,7 @@
 Niche Configuration file
 ########################
 
-The easiest way to get started with NICHE is by using a configuration file.
+Instead of running Niche interactively, it can be used  with a configuration file.
 For a simple NICHE model this could look like this:
 
  .. code-block:: yaml

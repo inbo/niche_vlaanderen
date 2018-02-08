@@ -9,6 +9,13 @@ For simple calculation, the recommended way to run NICHE is through the :doc:`ni
 In the low level interface, it is possible to run the three classes ``Vegetation``, ``Acidity`` and ``NutrientLevel`` directly using numpy arrays.
 This allows a greater flexibility and control over the details of the calculation.
 
+Niche
+=====
+
+.. autoclass:: Niche
+    :members:
+
+
 NutrientLevel
 =============
 

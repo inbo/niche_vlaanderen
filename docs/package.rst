@@ -1,6 +1,6 @@
-###################################
-``niche_vlaanderen`` Python Package
-###################################
+##############
+Python Package
+##############
 
 The Python package ``niche_vlaanderen`` allows calculating the NICHE model in three ways
 
@@ -11,7 +11,6 @@ The Python package ``niche_vlaanderen`` allows calculating the NICHE model in th
 .. toctree::
   :caption: Overview
 
-  installation
   cli
   niche
   compare

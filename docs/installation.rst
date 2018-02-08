@@ -1,9 +1,9 @@
-##################
-Niche Installation
-##################
+############
+Installation
+############
 
-Windows Installation
-====================
+Windows
+=======
 
 The recommended way of installing niche on windows uses miniconda_ for installation.
 The recommended version is `64 bit with Python 3.6`__, though 32 bit and Python 2.7 should work as well.
@@ -46,8 +46,8 @@ You can verify the installation was successful by running the cli interface
       --example  prints an example configuration file
       --help     Show this message and exit.
 
-Upgrading the Installation
-==========================
+Upgrading
+=========
 
 Existing installations of Niche can be updated using pip (for windows, run
 from the Anaconda prompt
@@ -56,8 +56,8 @@ from the Anaconda prompt
 
     conda env update -f c:\users\johan\Downloads\niche_env.yml.txt
 
-Installing a specific niche version
-===================================
+Installing a specific version
+=============================
 
 If you want to install a specific niche version, you can install using pip:
 
@@ -75,3 +75,16 @@ and activate the environment:
 .. code-block:: default
 
     (C:\Users\johan\Miniconda3) C:\Users\johan> activate niche_vlaanderen
+
+Optionally - Jupyter Notebook
+=============================
+
+If you want to run niche_vlaanderen interactively, we recommend using a jupyter notebook.
+This can be installed by running
+.. code-block:: default
+
+    conda install jupyter
+
+And it can be started by running ``jupyter``.
+
+

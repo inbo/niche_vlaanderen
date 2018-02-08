@@ -14,7 +14,8 @@ This documentation is split in two parts:
   :maxdepth: 2
 
   model
-  package
+  installation
   tutorials
+  package
   contributing
   authors
