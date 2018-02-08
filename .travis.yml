@@ -20,7 +20,6 @@ python:
 
 script: 
   - pytest --cov niche_vlaanderen --cov-report term-missing --verbose --tb=long
-  - "if [[ $TRAVIS_PYTHON_VERSION == 3.5 ]]; then sphinx-build docs -a doc/_build/html;fi"
 
 before_install:
   - export CPPFLAGS=`gdal-config --cflags`
@@ -47,6 +46,7 @@ after_success:
 
 before_deploy:
   - pip install -r doc-requirements
+  - "if [[ $TRAVIS_PYTHON_VERSION == 3.5 ]]; then sphinx-build docs -a doc/_build/html;fi"
 
 deploy:
     - user: stvhoey
