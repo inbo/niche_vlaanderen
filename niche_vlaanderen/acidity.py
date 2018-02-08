@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 
 from .codetables import validate_tables_acidity
+from .exception import NicheException
 
 
 class Acidity(object):
@@ -49,6 +50,16 @@ class Acidity(object):
         self._ct_soil_codes = self._ct_soil_codes.set_index("soil_code")
 
     def _calculate_soil_mlw(self, soil_code, mlw):
+        # check only valid soil_codes are used
+        used_codes = set(np.unique(soil_code))
+        allowed_codes = set(self._ct_soil_codes.index)
+        allowed_codes.add(-99)  # nodata
+        if not used_codes.issubset(allowed_codes):
+            msg = "Invalid soil code used\n"
+            msg += "used soil codes:" + str(used_codes)
+            msg += "possible soil codes:" + str(allowed_codes)
+            raise NicheException(msg)
+        
         # determine soil_group for soil_code
         orig_shape = mlw.shape
         soil_code = soil_code.flatten()

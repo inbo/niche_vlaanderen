@@ -26,7 +26,7 @@ def raster_to_numpy(filename):
     if data.dtype == 'float32':
         data[data == nodata] = np.nan
     else:
-        data[data == nodata] = nodata
+        data[data == nodata] = -99
 
     return data
 

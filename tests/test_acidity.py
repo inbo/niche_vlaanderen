@@ -16,12 +16,12 @@ def raster_to_numpy(filename):
     with rasterio.open(filename) as ds:
         data = ds.read(1)
         nodata = ds.nodatavals[0]
-
+    print (nodata)
     # create a mask for no-data values, taking into account the data-types
     if data.dtype == 'float32':
-        data[data == nodata] = np.nan
+        data[np.isclose(data, nodata)] = np.nan
     else:
-        data[data == nodata] = nodata
+        data[np.isclose(data, nodata)] = -99
 
     return data
 
@@ -94,6 +94,7 @@ class testAcidity(TestCase):
         minerality = raster_to_numpy(inputdir + "minerality.asc")
         acidity = raster_to_numpy("testcase/zwarte_beek/abiotic/acidity.asc")
         acidity[np.isnan(acidity)] = 255
+        acidity[acidity == -99] = 255
         result = a.calculate(soil_code_r, mlw, inundation, seepage,
                              minerality, rainwater)
 

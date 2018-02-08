@@ -21,7 +21,7 @@ def raster_to_numpy(filename):
     if data.dtype == 'float32':
         data[data == nodata] = np.nan
     else:
-        data[data == nodata] = nodata
+        data[data == nodata] = -99
 
     return data
 
@@ -101,6 +101,9 @@ class TestNutrientLevel(TestCase):
 
         nutrient_level = \
             raster_to_numpy("testcase/zwarte_beek/abiotic/nutrient_level.asc")
+        # convert nodata value from -99 to 255 (
+        nutrient_level[nutrient_level == -99] = 255
+
         result = nl.calculate(soil_code_r, msw, nitrogen_deposition,
                               nitrogen_animal, nitrogen_fertilizer, management,
                               inundation)
