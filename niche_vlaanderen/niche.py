@@ -269,7 +269,6 @@ class Niche(object):
                 self.fp.combine(self)
                 if "output_dir" in options:
                     self.fp.write(options["output_dir"])
-                    print(self.fp._files_written)
                     self._files_written.update(self.fp._files_written)
 
         if "output_dir" in options:
