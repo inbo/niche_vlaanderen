@@ -262,7 +262,10 @@ class Niche(object):
                     ct_nl[k] = self._code_tables[k]
 
                 self.fp = FloodPlain(name=scen["name"],**ct_nl)
-                self.fp.calculate(depth_file=scen["depth"],
+
+                depth_file = os.path.join(os.path.dirname(config), scen["depth"])
+
+                self.fp.calculate(depth_file=depth_file,
                                   period=scen["period"],
                                   frequency=scen["frequency"],
                                   duration=scen["duration"])
