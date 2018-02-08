@@ -34,6 +34,20 @@ def check_lower_upper_boundaries(df, min_col, max_col, value):
 
 
 def check_inner_join(df1, df2, f1, f2=None):
+    """
+    Checks if keys for columns in two table are present in both tables
+
+    Parameters
+    ==========
+    df1: first dataframe
+    df2: second dataframe
+    f1: field in first dataframe
+    f2: field in second dataframe
+
+    Returns
+    =======
+    None on succesful usage - will raise a CodeTableException on Failure
+    """
     if f2 is None:
         f2 = f1
 
@@ -122,7 +136,14 @@ def validate_tables_vegetation(ct_vegetation, ct_soil_code, ct_inundation,
 
 
 def check_codes_used(name, used, allowed):
-    used_codes = set(np.unique(used))
+    """
+
+    :param name: name of the parameter - only used for reporting errors
+    :param used: used values in the grid file (or array)
+    :param allowed: allowed values from the codetable
+    :return: None - will raise if an error is present
+    """
+    used_codes = set(np.unique(used[~np.isnan(used)]))
     allowed_codes = set(allowed)
     allowed_codes.add(-99)  # nodata
     if not used_codes.issubset(allowed_codes):
