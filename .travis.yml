@@ -20,7 +20,6 @@ python:
 
 script: 
   - pytest --cov niche_vlaanderen --cov-report term-missing --verbose --tb=long
-  - "if [[ $TRAVIS_PYTHON_VERSION == 3.5 ]]; then sphinx-build docs -a doc/_build/html;fi"
 
 before_install:
   - export CPPFLAGS=`gdal-config --cflags`
@@ -30,7 +29,7 @@ before_install:
 install:
   - pip install rasterio==$RASTERIO_VERSION
   - pip install --use-wheel -r dev-requirements.txt
-  - pip install sphinx_rtd_theme coveralls
+  - pip install coveralls
   - pip install .
 
 addons:
@@ -46,6 +45,8 @@ after_success:
 - coveralls || echo "coveralls failure"
 
 before_deploy:
+  - pip install -r doc-requirements
+  - "if [[ $TRAVIS_PYTHON_VERSION == 3.5 ]]; then sphinx-build docs -a doc/_build/html;fi"
 
 deploy:
     - user: stvhoey
