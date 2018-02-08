@@ -2,7 +2,7 @@ from pkg_resources import resource_filename
 
 import numpy as np
 import pandas as pd
-from .codetables import validate_tables_nutrient_level
+from .codetables import validate_tables_nutrient_level, check_codes_used
 
 
 class NutrientLevel(object):
@@ -88,6 +88,10 @@ class NutrientLevel(object):
         return result
 
     def _calculate(self, management, soil_code, nitrogen, inundation):
+        check_codes_used("management", management,
+                         self._ct_management["code"])
+        check_codes_used("soil_code", soil_code,
+                         self._ct_soil_code["soil_code"])
 
         # calculate management influence
         influence = np.full(management.shape, -99)  # -99 used as no data value

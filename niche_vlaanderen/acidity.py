@@ -50,7 +50,6 @@ class Acidity(object):
         self._ct_soil_codes = self._ct_soil_codes.set_index("soil_code")
 
     def _calculate_soil_mlw(self, soil_code, mlw):
-        # check only valid soil_codes are used
         check_codes_used("soil_code", soil_code, self._ct_soil_codes.index)
 
         # determine soil_group for soil_code
@@ -78,6 +77,14 @@ class Acidity(object):
                      soil_mlw_class):
 
         orig_shape = inundation.shape
+
+        check_codes_used("rainwater", rainwater, {0, 1})
+        check_codes_used("minerality", minerality, self._lnk_acidity["mineral_richness"])
+        check_codes_used("inundation", inundation,
+                         self._lnk_acidity["inundation"])
+        check_codes_used("seepage", seepage,
+                         self._ct_seepage["seepage"])
+
         rainwater = rainwater.flatten()
         minerality = minerality.flatten()
         inundation = inundation.flatten()

@@ -102,6 +102,7 @@ class testAcidity(TestCase):
         np.testing.assert_equal(acidity, result)
 
     def test_acidity_invalidsoil(self):
+        a = niche_vlaanderen.Acidity()
         rainwater = np.array([0])
         minerality = np.array([0])
         soilcode = np.array([-1])
@@ -110,6 +111,19 @@ class testAcidity(TestCase):
         mlw = np.array([50])
 
         a = niche_vlaanderen.Acidity()
+        with pytest.raises(NicheException):
+            result = a.calculate(soilcode, mlw, inundation, seepage, minerality,
+                                 rainwater)
+        rainwater = np.array([0])
+
+    def test_acidity_invalidminerality(self):
+        a = niche_vlaanderen.Acidity()
+        rainwater = np.array([0])
+        minerality = np.array([500])
+        soilcode = np.array([14])
+        inundation = np.array([1])
+        seepage = np.array([20])
+        mlw = np.array([50])
         with pytest.raises(NicheException):
             result = a.calculate(soilcode, mlw, inundation, seepage, minerality,
                                  rainwater)
