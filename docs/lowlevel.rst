@@ -58,6 +58,8 @@ Vegetation
 
 Example
 ~~~~~~~~~
+The low level api can be used to calculate single values without having to
+create a full grid.
 
  .. code-block:: pycon
 

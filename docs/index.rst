@@ -17,5 +17,8 @@ This documentation is split in two parts:
   installation
   tutorials
   package
+  cli
+  lowlevel
+  faq
   contributing
   authors

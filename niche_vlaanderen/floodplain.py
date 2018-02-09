@@ -16,6 +16,12 @@ class FloodPlainException(Exception):
 
 
 class FloodPlain(object):
+    """
+    Predict the vegetation response to (frequent) flooding
+
+    A Floodplain object can be used to predict the response of vegetation to
+    (frequent) flooding.
+    """
     def __init__(self, depths=None, duration=None, frequency=None,
                  lnk_potential=None, potential=None, name=None):
         self._ct = dict()

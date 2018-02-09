@@ -8,6 +8,9 @@ from .codetables import validate_tables_nutrient_level, check_codes_used
 class NutrientLevel(object):
     '''
      Class to calculate the NutrientLevel
+
+     The used codetables can be overwritten by using the corresponding ct_*
+     arguments.
     '''
 
     nodata = 255  # unsigned 8 bit type is used
@@ -64,7 +67,7 @@ class NutrientLevel(object):
 
     def _calculate_mineralisation(self, soil_code_array, msw_array):
         """
-        get nitrogen mineralisation for numpy arrays
+        Get nitrogen mineralisation for numpy arrays
         """
         orig_shape = soil_code_array.shape
         soil_code_array = soil_code_array.flatten()
@@ -88,6 +91,9 @@ class NutrientLevel(object):
         return result
 
     def _calculate(self, management, soil_code, nitrogen, inundation):
+        """
+        Calculates the nutrient level using previously calculated nitrogen
+        """
         check_codes_used("management", management,
                          self._ct_management["code"])
         check_codes_used("soil_code", soil_code,
@@ -136,7 +142,32 @@ class NutrientLevel(object):
     def calculate(self, soil_code, msw, nitrogen_atmospheric, nitrogen_animal,
                   nitrogen_fertilizer, management, inundation):
         """
-        Calculates the Nutrient level based on numpy arrays
+        Calculates the Nutrient level
+
+        Calculates the nutrient level based on a number of numpy arrays.
+
+        Parameters
+        ==========
+        soil_code: numpy.array
+            Array containing the soil codes. Values must be present
+            in the soil_code table. -99 is used as no data value.
+        msw: numpy.array
+            Array containing the mean spring waterlevel. numpy.nan is used as
+            no data value
+        nitrogen_atmospheric: numpy.array
+            Array containing the atmospheric deposition of Nitrogen. numpy.nan
+            is used as no data value
+        nitrogen_animal: numpy.array
+            Array containing the animal contribution of Nitrogen.numpy.nan
+            is used as no data value
+        nitrogen_fertilizer: numpy.array
+            Array containing the fertilizer contribution of Nitrogen.numpy.nan
+            is used as no data value
+        management: numpy.array
+            Array containing the management.
+        inundation:
+            Array containing the inundation values.
+
         """
 
         nitrogen_mineralisation = self._calculate_mineralisation(soil_code,

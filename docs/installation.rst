@@ -81,6 +81,7 @@ Optionally - Jupyter Notebook
 
 If you want to run niche_vlaanderen interactively, we recommend using a jupyter notebook.
 This can be installed by running
+
 .. code-block:: default
 
     conda install jupyter

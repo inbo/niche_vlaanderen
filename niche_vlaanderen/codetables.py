@@ -138,14 +138,13 @@ def validate_tables_vegetation(ct_vegetation, ct_soil_code, ct_inundation,
 def check_codes_used(name, used, allowed):
     """
 
-    :param name: name of the parameter - only used for reporting errors
-    :param used: used values in the grid file (or array)
-    :param allowed: allowed values from the codetable
-    :return: None - will raise if an error is present
     """
     used_codes = set(np.unique(used[~np.isnan(used)]))
     allowed_codes = set(allowed)
-    allowed_codes.add(-99)  # nodata
+    if name in ["acidity", "nutrient_level"]:  # no data
+        allowed_codes.add(255)
+    else:
+        allowed_codes.add(-99)
     if not used_codes.issubset(allowed_codes):
         msg = "Invalid %s code used\n" % name
         msg += "used: %s\n" % str(used_codes)

@@ -164,9 +164,10 @@ class Niche(object):
         ----------
         key: string
             The type of grid that you want to assign (eg msw, soil_code, ...).
-            Possible options are listed in _allowed_input
+            Possible options are listed in
+            https://inbo.github.io/niche_vlaanderen/cli.html#id1
         value: string / number
-            Path to a file containing the grid. Can also be a folder for
+            Path to a file containing the grid. Can be a folder for
             certain grid types (eg ArcGIS rasters).
             Can also be a number: in that case a constant value is applied
             everywhere.
@@ -397,8 +398,8 @@ class Niche(object):
                     dict _difference
         abiotic:  bool
                 Specify the abiotic grids as input rather than calculating
-                them. See
-                https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Using-abiotic-grids  # noqa
+                them. See tutorial at:
+                https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Using-abiotic-grids
         strict_checks: bool
                 By default running a model will fail if impossible combinations
                 of MxW exist somewhere in the input files. By disabling strict
@@ -778,6 +779,9 @@ class NicheDelta(object):
 
     The difference can be visualized using the plot method. It is also
     possible to derive a table with the area's according to each group.
+
+    See the tutorial at:
+    https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Comparing-Niche-classes
     """
 
     _values = [0, 1, 2, 3, 4]
@@ -836,12 +840,13 @@ class NicheDelta(object):
     def write(self, folder):
         """ Writes the difference grids to grid files.
 
-        The differences have are coded using these values:
-        - 0: "not present in both models"
-        - 1: "present in both models"
-        - 2: "only in model 1"
-        - 3: "only in model 2"
-        - 4: "nodata in one model"
+        The differences are coded using these values:
+
+         * 0: "not present in both models"
+         * 1: "present in both models"
+         * 2: "only in model 1"
+         * 3: "only in model 2"
+         * 4: "nodata in one model"
 
         Parameters
         ==========
@@ -875,6 +880,15 @@ class NicheDelta(object):
         self.table.to_csv("delta_summary.csv")
 
     def plot(self, key, ax=None):
+        """
+        Plots the difference between two classes
+
+        Parameters
+        ==========
+        key: number
+            The vegetation code (1-28)
+
+        """
         try:
             import matplotlib.pyplot as plt
             import matplotlib.patches as mpatches
