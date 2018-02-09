@@ -7,7 +7,7 @@
 
 This documentation is split in two parts:
  * The first part :doc:`model` (in Dutch) describes the background of the NICHE model.
- * The second part :doc:`package` describes the ``niche_vlaanderen`` package.
+ * The second part describes the ``niche_vlaanderen`` package.
 
 .. toctree::
   :caption: Contents
@@ -16,7 +16,6 @@ This documentation is split in two parts:
   model
   installation
   tutorials
-  package
   cli
   lowlevel
   faq
