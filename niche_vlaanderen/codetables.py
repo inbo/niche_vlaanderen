@@ -141,10 +141,10 @@ def check_codes_used(name, used, allowed):
     """
     used_codes = set(np.unique(used[~np.isnan(used)]))
     allowed_codes = set(allowed)
-    if name in ["acidity", "nutrient_level"]:  # no data
+    allowed_codes.add(-99)  # no data when loaded from grid
+    if name in ["acidity", "nutrient_level"]:  # no data value when calculated
         allowed_codes.add(255)
-    else:
-        allowed_codes.add(-99)
+
     if not used_codes.issubset(allowed_codes):
         msg = "Invalid %s code used\n" % name
         msg += "used: %s\n" % str(used_codes)
