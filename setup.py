@@ -15,7 +15,8 @@ requirements = [
         'pandas',
         'numpy',
         'rasterio',
-        'pyyaml'
+        'pyyaml',
+        'rasterstats'
         ]
 
 setup(name='niche_vlaanderen',
