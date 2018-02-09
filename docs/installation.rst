@@ -63,7 +63,7 @@ If you want to install a specific niche version, you can install using pip:
 
 .. code-block:: default
 
-    pip install niche_vlaanderen==1.0a9
+    pip install niche_vlaanderen==1.0a10
 
 
 Running niche
