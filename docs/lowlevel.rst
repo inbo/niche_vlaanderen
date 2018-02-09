@@ -1,13 +1,18 @@
 .. module:: niche_vlaanderen
 
 ###################
-Low level interface
+Reference
 ###################
 
-For simple calculation, the recommended way to run NICHE is through the :doc:`niche` class.
+For simple calculation, the recommended way to run NICHE is through the
+:ref:`niche` class, as demonstrated in the :doc:`tutorials`.
 
-In the low level interface, it is possible to run the three classes ``Vegetation``, ``Acidity`` and ``NutrientLevel`` directly using numpy arrays.
-This allows a greater flexibility and control over the details of the calculation.
+In the low level interface, it is possible to run the three classes
+``Vegetation``, ``Acidity`` and ``NutrientLevel`` directly using numpy arrays.
+This allows a greater flexibility and control over the details of the calculation,
+
+
+.. _niche:
 
 Niche
 =====
@@ -15,22 +20,38 @@ Niche
 .. autoclass:: Niche
     :members:
 
+Niche Delta
+===========
+
+.. autoclass:: NicheDelta
+    :members:
+
+FloodPlain
+==========
+
+.. autoclass:: FloodPlain
+    :members:
+
+Array based functions
+=====================
+
+At the lowest level of Niche sit a number of array-based classes which calculate the actual Niche model. These require numpy arrays as an input: all handling of gis files/... is done in the Niche class. 
 
 NutrientLevel
-=============
+-------------
 
 .. autoclass:: NutrientLevel
     :members:
 
 Acidity
-=======
+-------
 
 .. autoclass:: Acidity
     :members:
 
 
 Vegetation
-==========
+----------
 
 .. autoclass:: Vegetation
     :members:

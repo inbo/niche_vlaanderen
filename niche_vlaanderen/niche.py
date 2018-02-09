@@ -60,8 +60,13 @@ class Niche(object):
     The default codetables are used unless other tables are supplied to the
     constructor.
 
+    Parameters:
+        ct_*, lnk_*: path
+          Optionally, paths to codetables can be provided. These will override
+          the standard codetables used by Niche.
+
     """
-    def __init__(self, config=None, ct_acidity=None, ct_soil_mlw_class=None,
+    def __init__(self, ct_acidity=None, ct_soil_mlw_class=None,
                  ct_soil_codes=None, lnk_acidity=None, ct_seepage=None,
                  ct_vegetation=None, ct_management=None,
                  ct_nutrient_level=None, ct_mineralisation=None):
@@ -195,7 +200,14 @@ class Niche(object):
             self._inputfiles[key] = value
 
     def read_config_input(self, config, overwrite_ct=False):
-        """ Sets the input based on an input file, without run or output
+        """ Sets the input based on an input file, without running it
+
+        Configures a model based on a config file
+
+        Parameters:
+            overwrite_ct: bool (False)
+               Allows the user to override the default codetables (after
+               the class has been initialized).
         """
         with open(config, 'r') as stream:
             config_loaded = yaml.load(stream)
@@ -385,8 +397,14 @@ class Niche(object):
                     dict _difference
         abiotic:  bool
                 Specify the abiotic grids as input rather than calculating
-                them.
-
+                them. See
+                https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Using-abiotic-grids  # noqa
+        strict_checks: bool
+                By default running a model will fail if impossible combinations
+                of MxW exist somewhere in the input files. By disabling strict
+                checks models can still be run. It will still emit a warning.
+                Note that this is provided to be backwards compatibility and
+                it is recommended to fix the data rather than disabling this.
         """
 
         self._options["full_model"] = full_model
@@ -517,7 +535,7 @@ class Niche(object):
 
         folder: string
             Output folder to which files will be written. Parent directory must
-            exist already.
+            already exist.
 
         """
 
@@ -659,7 +677,7 @@ class Niche(object):
 
     @property
     def table(self):
-        """Dataframe containing the potential area (m**2) per vegetation type
+        """Dataframe containing the potential area (ha) per vegetation type
         """
         if not self.vegetation_calculated:
             raise NicheException(
@@ -695,7 +713,7 @@ class Niche(object):
 
         Returns
         =======
-        dataframe. The index of the dict is the vector.
+        table: pandas.DataFrame
         """
         td = dict()
 
