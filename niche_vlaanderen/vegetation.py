@@ -6,7 +6,7 @@ import pandas as pd
 
 from .nutrient_level import NutrientLevel
 from .acidity import Acidity
-from .codetables import validate_tables_vegetation
+from .codetables import validate_tables_vegetation, check_codes_used
 from .exception import NicheException
 
 
@@ -116,10 +116,28 @@ class Vegetation(object):
             nodata = nodata | (nutrient_level == NutrientLevel.nodata) \
                      | (acidity == Acidity.nodata)
 
+
         if inundation is not None:
             nodata = nodata | (inundation == -99)
+
         if management is not None:
             nodata = nodata | (management == -99)
+
+        if np.all(nodata):
+            raise NicheException("only nodata values in prediction")
+
+        if full_model:
+            check_codes_used("acidity", acidity,
+                             self._ct_acidity["acidity"])
+            check_codes_used("nutrient_level", nutrient_level,
+                             self._ct_nutrient_level["code"])
+
+        if inundation is not None:
+            check_codes_used("inundation", inundation,
+                             self._ct_inundation["inundation"])
+        if management is not None:
+            check_codes_used("management", management,
+                             self._ct_management["code"])
 
         veg_bands = dict()
         occurrence = dict()
@@ -149,9 +167,6 @@ class Vegetation(object):
 
             if return_all or np.any(vegi):
                 veg_bands[veg_code] = vegi
-
-            if vegi.size == np.sum(nodata):
-                raise NicheException("only nodata values predicted")
 
             occurrence[veg_code] = np.asscalar(
                 (np.sum(vegi == 1) / (vegi.size - np.sum(nodata))))
