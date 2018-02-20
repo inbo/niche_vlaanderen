@@ -5,6 +5,9 @@ channels:
 dependencies:
 - affine=2.1.0=py_1
 - attrs=17.4.0=py_0
+- backports=1.0=py36_1
+- backports.functools_lru_cache=1.5=py36_0
+- bleach=2.0.0=py_1
 - boost=1.66.0=py36_vc14_1
 - boost-cpp=1.66.0=vc14_1
 - boto3=1.5.24=py_0
@@ -15,17 +18,32 @@ dependencies:
 - click=6.7=py_1
 - click-plugins=1.0.3=py36_0
 - cligj=0.4.0=py36_0
+- colorama=0.3.9=py36_0
 - curl=7.55.1=vc14_0
+- cycler=0.10.0=py36_0
+- decorator=4.1.2=py36_0
 - docutils=0.14=py36_0
+- entrypoints=0.2.3=py36_1
 - expat=2.2.5=vc14_0
+- freetype=2.8.1=vc14_0
 - freexl=1.0.2=vc14_2
 - gdal=2.2.3=py36_0
 - geos=3.6.2=vc14_1
 - geotiff=1.4.2=vc14_1
 - hdf4=4.2.13=vc14_0
 - hdf5=1.10.1=vc14_1
+- html5lib=1.0.1=py_0
+- icu=58.2=vc14_0
+- ipykernel=4.8.2=py36_0
+- ipython=6.2.1=py36_1
+- ipython_genutils=0.2.0=py36_0
+- jedi=0.11.1=py36_0
+- jinja2=2.10=py36_0
 - jmespath=0.9.3=py36_0
 - jpeg=9b=vc14_2
+- jsonschema=2.6.0=py36_1
+- jupyter_client=5.2.2=py36_0
+- jupyter_core=4.4.0=py_0
 - kealib=1.4.7=vc14_4
 - krb5=1.14.2=vc14_0
 - libgdal=2.2.3=vc14_3
@@ -38,31 +56,59 @@ dependencies:
 - libssh2=1.8.0=vc14_2
 - libtiff=4.0.9=vc14_0
 - libxml2=2.9.5=vc14_1
+- markupsafe=1.0=py36_0
+- matplotlib=2.1.2=py36_0
+- mistune=0.8.3=py_0
 - munch=2.2.0=py36_0
+- nb_conda=2.2.1=py36_0
+- nb_conda_kernels=2.1.0=py36_0
+- nbconvert=5.3.1=py_1
+- nbformat=4.4.0=py36_0
+- notebook=5.4.0=py36_0
 - openjpeg=2.3.0=vc14_2
 - openssl=1.0.2n=vc14_0
 - pandas=0.22.0=py36_0
+- pandoc=2.1.1=0
+- pandocfilters=1.4.1=py36_0
+- parso=0.1.1=py_0
 - pcre=8.39=vc14_0
+- pickleshare=0.7.4=py36_0
 - pip=9.0.1=py36_1
 - proj4=4.9.3=vc14_5
+- prompt_toolkit=1.0.15=py36_0
+- pygments=2.2.0=py36_0
 - pyparsing=2.2.0=py36_0
+- pyqt=5.6.0=py36_4
 - python=3.6.4=0
 - python-dateutil=2.6.1=py36_0
 - pytz=2017.3=py_2
+- pywinpty=0.5=py36_1
 - pyyaml=3.12=py36_1
+- pyzmq=17.0.0=py36_3
+- qt=5.6.2=vc14_1
 - rasterstats=0.12.0=py_2
 - s3transfer=0.1.12=py36_0
+- send2trash=1.5.0=py_0
 - setuptools=38.4.0=py36_0
 - shapely=1.6.4=py36_0
+- simplegeneric=0.8.1=py36_0
 - simplejson=3.11.1=py36_0
+- sip=4.18=py36_1
 - six=1.11.0=py36_1
 - snuggs=1.4.1=py36_0
 - sqlite=3.20.1=vc14_2
+- terminado=0.8.1=py36_0
+- testpath=0.3.1=py36_0
 - tk=8.6.7=vc14_0
+- tornado=4.5.3=py36_0
+- traitlets=4.3.2=py36_0
 - vc=14=0
 - vs2015_runtime=14.0.25420=0
+- wcwidth=0.1.7=py36_0
+- webencodings=0.5=py36_0
 - wheel=0.30.0=py36_2
 - wincertstore=0.2=py36_0
+- winpty=0.4.3=vc14_2
 - xerces-c=3.2.0=vc14_0
 - xz=5.2.3=0
 - yaml=0.1.7=vc14_0
@@ -74,5 +120,13 @@ dependencies:
 - numpy=1.14.0=py36h4a99626_1
 - rasterio=0.36.0=py36hb8ea33a_1
 - pip:
+  - backports.functools-lru-cache==1.5
+  - ipython-genutils==0.2.0
+  - jupyter-client==5.2.2
+  - jupyter-core==4.4.0
+  - nb-conda==2.2.1
+  - nb-conda-kernels==2.1.0
   - niche-vlaanderen==1.0a10
+  - prompt-toolkit==1.0.15
+prefix: C:\Users\johan\Miniconda3\envs\niche
 
