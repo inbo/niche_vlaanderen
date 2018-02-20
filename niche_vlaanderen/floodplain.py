@@ -210,9 +210,9 @@ class FloodPlain(object):
 
         new = copy.copy(self)
         for vi in new._veg:
-            new._veg[vi] = niche_result._vegetation[vi] * new._veg[vi]
             nodata = ((niche_result._vegetation[vi] == 255) |
                       (new._veg[vi] ==-99))
+            new._veg[vi] = niche_result._vegetation[vi] * new._veg[vi]
             new._veg[vi][nodata] = -99
 
         return (new)
