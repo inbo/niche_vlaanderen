@@ -52,6 +52,8 @@ deploy:
     - user: stvhoey
       distributions: sdist bdist_wheel
       provider: pypi
+      on: 
+         condition: RASTERIO_VERSION = 0.36.0
       true:
         python: 3.5
         repo: inbo/niche_vlaanderen
