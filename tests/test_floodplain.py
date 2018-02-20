@@ -124,5 +124,5 @@ class TestFloodPlain(TestCase):
         for i in result._veg:
             unique.append(np.unique(result._veg[i]))
         unique = np.unique(np.hstack(unique))
-        expected = np.array([0, 1, 2, 3])
+        expected = np.array([-99, 0, 1, 2, 3])
         np.testing.assert_equal(expected, unique)

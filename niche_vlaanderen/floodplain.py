@@ -44,7 +44,7 @@ class FloodPlain(object):
         for veg_code, subtable_veg in \
                 self._ct["lnk_potential"].groupby(["veg_code"]):
             subtable_veg = subtable_veg.reset_index()
-            self._veg[veg_code] = np.zeros(depth.shape, dtype="uint8")
+            self._veg[veg_code] = np.full(depth.shape, -99, dtype="int16")
             groupby_cols = ["period", "frequency", "duration"]
             for index, subtable in subtable_veg.groupby(groupby_cols):
                 if (period, frequency, duration) == index:
@@ -60,6 +60,7 @@ class FloodPlain(object):
         with rasterio.open(depth_file) as dst:
             depth = dst.read(1)
             self._context = SpatialContext(dst)
+            depth[depth == dst.nodatavals[0]] = -99
         self._calculate(depth, frequency, duration, period)
 
         self.options = {'frequency': frequency,
@@ -88,7 +89,7 @@ class FloodPlain(object):
         mpl_extent = (a, c, d, b)
 
         im = plt.imshow(self._veg[key], extent=mpl_extent,
-                        norm=Normalize(0, 3))
+                        norm=Normalize(0, 4))
         options = self.options.copy()
         options["duration"] = "< 14 days" \
             if self.options["duration"] == 1 else "> 14 days"
@@ -97,9 +98,9 @@ class FloodPlain(object):
         labels = self._ct["potential"]["description"]
         values = self._ct["potential"]["code"]
 
-        colors = [im.cmap(value/(len(values) - 1)) for value in values]
+        colors = [im.cmap(i/(len(values) - 1)) for (i, value) in enumerate(values)]
         patches = [mpatches.Patch(color=colors[i],
-                                  label=labels[i]) for i in values]
+                                  label=labels[i]) for (i, value) in enumerate(values)]
         plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2,
                    borderaxespad=0.)
 
@@ -120,8 +121,8 @@ class FloodPlain(object):
             crs=self._context.crs,
             transform=self._context.transform,
             count=1,
-            dtype="uint8",
-            nodata=255,
+            dtype="int16",
+            nodata=-99,
             compress="DEFLATE"
         )
 
