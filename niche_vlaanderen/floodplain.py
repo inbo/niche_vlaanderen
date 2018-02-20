@@ -9,6 +9,7 @@ import pandas as pd
 import numpy as np
 
 from .spatial_context import SpatialContext
+from .codetables import validate_tables_floodplains, check_codes_used
 
 
 class FloodPlainException(Exception):
@@ -32,7 +33,8 @@ class FloodPlain(object):
         self._ct = dict()
         self._veg = dict()
 
-        for i in ["duration", "frequency", "lnk_potential", "potential"]:
+        for i in ["depths", "duration", "frequency", "lnk_potential",
+                  "potential"]:
             if locals()[i] is None:
                 ct = resource_filename(
                         "niche_vlaanderen",
@@ -42,6 +44,8 @@ class FloodPlain(object):
             self._ct[i] = pd.read_csv(ct)
         self.name = name
 
+        validate_tables_floodplains(**self._ct)
+
     def _calculate(self, depth, frequency, duration, period):
         """
         Low level calculation of a floodplains object.
@@ -50,6 +54,16 @@ class FloodPlain(object):
         orig_shape = depth.shape
         depth = depth.flatten()
         nodata = (depth == -99)
+
+        check_codes_used("depth", depth,
+                         self._ct["depths"]["code"])
+        check_codes_used("frequency", frequency,
+                         self._ct["frequency"]["code"])
+        check_codes_used("duration", duration,
+                         self._ct["duration"]["code"])
+        check_codes_used("period", period,
+                         ["summer","winter"])
+
         for veg_code, subtable_veg in \
                 self._ct["lnk_potential"].groupby(["veg_code"]):
             subtable_veg = subtable_veg.reset_index()

@@ -135,11 +135,28 @@ def validate_tables_vegetation(ct_vegetation, ct_soil_code, ct_inundation,
             raise CodeTableException("Non unique mhw/mlw combinations")
 
 
+def validate_tables_floodplains(depths, duration, frequency, lnk_potential,
+                                potential):
+    # test disabled as we have a 0 code which is not in lnk_potential
+    # check_inner_join(lnk_potential, depths, "depth","code")
+    check_inner_join(lnk_potential, duration, "duration", "code")
+    check_inner_join(lnk_potential, frequency, "frequency", "code")
+    # test disabled as we have a code 4 which is not in lnk_potential
+    # check_inner_join(lnk_potential, potential, "potential", "code")
+
+
 def check_codes_used(name, used, allowed):
     """
 
     """
-    used_codes = set(np.unique(used[~np.isnan(used)]))
+    if isinstance(used, str) or isinstance(used, int):
+        used = np.array(used)
+
+    if used.dtype.kind == "S":
+        used_codes = set(np.unique(used))
+    else:
+        used_codes = set(np.unique(used[~np.isnan(used)]))
+
     allowed_codes = set(allowed)
     allowed_codes.add(-99)  # no data when loaded from grid
     if name in ["acidity", "nutrient_level"]:  # no data value when calculated
