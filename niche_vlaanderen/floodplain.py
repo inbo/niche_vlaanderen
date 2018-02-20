@@ -7,6 +7,7 @@ import copy
 
 import pandas as pd
 import numpy as np
+import numpy.ma as ma
 
 from .spatial_context import SpatialContext
 from .codetables import validate_tables_floodplains, check_codes_used
@@ -137,7 +138,9 @@ class FloodPlain(object):
         ((a, b), (c, d)) = self._context.extent
         mpl_extent = (a, c, d, b)
 
-        im = plt.imshow(self._veg[key], extent=mpl_extent,
+        veg = ma.masked_equal(self._veg[key], -99)
+
+        im = plt.imshow(veg, extent=mpl_extent,
                         norm=Normalize(0, 4))
         options = self.options.copy()
         options["duration"] = "< 14 days" \
