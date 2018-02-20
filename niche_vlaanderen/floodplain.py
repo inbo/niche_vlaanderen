@@ -21,6 +21,11 @@ class FloodPlain(object):
 
     A Floodplain object can be used to predict the response of vegetation to
     (frequent) flooding.
+
+    The code tables used can be overwritten when initializing the object.
+    Optionally also a name can be given which is used in plots and output
+    files.
+
     """
     def __init__(self, depths=None, duration=None, frequency=None,
                  lnk_potential=None, potential=None, name=None):
@@ -38,6 +43,10 @@ class FloodPlain(object):
         self.name = name
 
     def _calculate(self, depth, frequency, duration, period):
+        """
+        Low level calculation of a floodplains object.
+        Uses a numpy array for depth rather than a grid file (in calculate)
+        """
         orig_shape = depth.shape
         depth = depth.flatten()
         nodata = (depth == -99)
@@ -60,6 +69,29 @@ class FloodPlain(object):
             self._veg[veg_code] = self._veg[veg_code].reshape(orig_shape)
 
     def calculate(self, depth_file, frequency, period, duration):
+        """ Calculate a floodplain object
+
+        Parameters
+        ==========
+        depth_file: filename
+           The filename containing a classified grid with inundation dephts.
+           The classes used must correspond to the ones in the depths.csv code
+           table.
+
+        frequency: code
+           The frequency with which flooding occurs, eg T2, T50. Valid values
+           are given in the frequency.csv code table.
+
+        period: winter|summer
+            period in which the flooding occurs. Must be either "summer" or
+            "winter"
+
+        duration: code
+            Period with which the flooding occurs, from duration.csv
+             * 1: <14 days
+             * 2: >14 days
+
+        """
         with rasterio.open(depth_file) as dst:
             depth = dst.read(1)
             self._context = SpatialContext(dst)
