@@ -152,10 +152,10 @@ def check_codes_used(name, used, allowed):
     if isinstance(used, str) or isinstance(used, int):
         used = np.array(used)
 
-    if used.dtype.kind == "S":
-        used_codes = set(np.unique(used))
-    else:
+    if used.dtype.kind =='f':
         used_codes = set(np.unique(used[~np.isnan(used)]))
+    else:
+        used_codes = set(np.unique(used))
 
     allowed_codes = set(allowed)
     allowed_codes.add(-99)  # no data when loaded from grid
