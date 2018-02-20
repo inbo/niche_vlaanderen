@@ -40,11 +40,14 @@ class FloodPlain(object):
     def _calculate(self, depth, frequency, duration, period):
         orig_shape = depth.shape
         depth = depth.flatten()
-
+        nodata = (depth == -99)
         for veg_code, subtable_veg in \
                 self._ct["lnk_potential"].groupby(["veg_code"]):
             subtable_veg = subtable_veg.reset_index()
-            self._veg[veg_code] = np.full(depth.shape, -99, dtype="int16")
+            # by default we give code 4 (no information/flooding)
+            # https://github.com/inbo/niche_vlaanderen/issues/87
+            self._veg[veg_code] = np.full(depth.shape, 4, dtype="int16")
+            self._veg[veg_code][nodata] = -99
             groupby_cols = ["period", "frequency", "duration"]
             for index, subtable in subtable_veg.groupby(groupby_cols):
                 if (period, frequency, duration) == index:
@@ -159,5 +162,8 @@ class FloodPlain(object):
         new = copy.copy(self)
         for vi in new._veg:
             new._veg[vi] = niche_result._vegetation[vi] * new._veg[vi]
+            nodata = ((niche_result._vegetation[vi] == 255) |
+                      (new._veg[vi] ==-99))
+            new._veg[vi][nodata] = -99
 
         return (new)

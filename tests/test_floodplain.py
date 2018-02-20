@@ -26,6 +26,18 @@ class TestFloodPlain(TestCase):
             expected = dst.read(1)
         np.testing.assert_equal(expected, fp._veg[25])
 
+    def test_calculate_withnodata(self):
+        fp = nv.FloodPlain()
+        fp.calculate("tests/data/depths_with_nodata.asc", "T10",
+                     period="winter", duration=1)
+        unique = []
+        for i in fp._veg:
+            unique.append(np.unique(fp._veg[i]))
+        unique = np.unique(np.hstack(unique))
+        expected = np.array([-99, 0, 1, 2, 3, 4])
+        np.testing.assert_equal(expected, unique)
+
+
     def test_plot(self):
         import matplotlib as mpl
         mpl.use('agg')
@@ -126,3 +138,4 @@ class TestFloodPlain(TestCase):
         unique = np.unique(np.hstack(unique))
         expected = np.array([-99, 0, 1, 2, 3])
         np.testing.assert_equal(expected, unique)
+
