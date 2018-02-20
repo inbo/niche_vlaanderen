@@ -14,7 +14,7 @@ __ https://repo.continuum.io/miniconda/Miniconda3-latest-Windows-x86_64.exe
 The installation can proceed without administrator rights, keep the default options. After miniconda is installed,
 we will proceed installing niche_vlaanderen in its own environment.
 
-Download the file https://raw.githubusercontent.com/inbo/niche_vlaanderen/master/docs/niche_env.yml to a location on
+Download the file https://cdn.rawgit.com/inbo/niche_vlaanderen/master/docs/niche_env.yml to a location on
 your computer.
 
 Start the `Anaconda prompt` from the start menu
@@ -24,13 +24,13 @@ correct filename (make sure you pick the correct extension).
 
 .. code-block:: default
 
-    (C:\Users\johan\Miniconda3) C:\Users\johan> conda env create -f c:\users\johan\Downloads\niche_env.yml.txt
+    (C:\Users\johan\Miniconda3) C:\Users\johan> conda env create -f c:\users\johan\Downloads\niche_env.yml
 
 Activate the niche environment
 
 .. code-block:: default
 
-    (C:\Users\johan\Miniconda3) C:\Users\johan> activate niche_vlaanderen
+    (C:\Users\johan\Miniconda3) C:\Users\johan> activate niche
 
 
 You can verify the installation was successful by running the cli interface
