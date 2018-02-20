@@ -159,6 +159,17 @@ class FloodPlain(object):
         return ax
 
     def write(self, folder):
+        """ Writes the floodplain grids to grid files.
+
+         The differences are coded using the values specified in the
+         potential.csv table.
+
+         Parameters
+         ==========
+
+         folder: path
+             Path to which the output files will be written.
+         """
         if len(self._veg) == 0:
             raise FloodPlainException(
                 "A valid run must be done before writing the output.")
@@ -193,6 +204,23 @@ class FloodPlain(object):
                 self._files_written[filename] = os.path.normpath(path)
 
     def combine(self, niche_result):
+        """Combines a FloodPlain model with a Niche model
+
+        Both models must be run prior to combining them. The niche model will
+        act as a "mask" making areas where Niche predicts a vegetation type
+        to be not present are set to "not combinable".
+
+        Parameters
+        ==========
+        niche_result: Niche
+            Niche model that must be run prior to running combine.
+
+        Returns
+        =======
+        combined: FloodPlain
+           
+        """
+
         # check niche model has been run
         if not niche_result.vegetation_calculated:
             raise FloodPlainException(
