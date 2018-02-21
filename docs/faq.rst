@@ -12,6 +12,7 @@ our issuetracker_, and file a new issue if it is needed.
 
 Missing gcs.csv file
 ====================
+
 If you see the following issue:
 
 .. code-block:: default
@@ -40,15 +41,14 @@ Using ESRI grids without sta.adf
 
 .. code-block:: default
 
-  Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-  File "/home/johan/_proj/niche/niche_vlaanderen/niche_vlaanderen/niche.py", line 192, in set_input
-    with rasterio.open(value) as dst:
-  File "/home/johan/.local/lib/python3.5/site-packages/rasterio/__init__.py", line 193, in open
-    s.start()
-  File "rasterio/_base.pyx", line 76, in rasterio._base.DatasetReader.start (rasterio/_base.c:2969)
-  rasterio.errors.RasterioIOError: 'bodemveen' not recognized as a supported file format.
-
+      Traceback (most recent call last):
+      File "<stdin>", line 1, in <module>
+      File "/home/johan/_proj/niche/niche_vlaanderen/niche_vlaanderen/niche.py", line 192, in set_input
+        with rasterio.open(value) as dst:
+      File "/home/johan/.local/lib/python3.5/site-packages/rasterio/__init__.py", line 193, in open
+        s.start()
+      File "rasterio/_base.pyx", line 76, in rasterio._base.DatasetReader.start (rasterio/_base.c:2969)
+      rasterio.errors.RasterioIOError: 'bodemveen' not recognized as a supported file format.
 
 In general ESRI grids can be opened by specifying the directory of the files
 or by choosing one of the *.ADF files in the directory. However if the 'sta.adf'

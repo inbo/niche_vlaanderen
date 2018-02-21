@@ -77,7 +77,7 @@ If you want to calculate a niche object combined with a FloodPlains model, this 
 adding a floodplains block. Different scenarios can be specified. They need a single name.
 The output of the module will be written to the same directory as the output specified in the model options.
 
-.. code-block::
+.. code-block:: yaml
 
    floodplains:
      - name: T25-winter
