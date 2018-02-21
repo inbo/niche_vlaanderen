@@ -474,6 +474,18 @@ class TestNicheDelta(TestCase):
         with pytest.raises(NicheException):
             delta = niche_vlaanderen.NicheDelta(small, myniche)
 
+    def test_uint(self):
+        myniche = niche_vlaanderen.Niche()
+
+        myniche.set_input("mhw", "tests/data/small/mhw.asc")
+        myniche.set_input("mlw", "tests/data/small/mlw.asc")
+        myniche.set_input("soil_code", "tests/data/tif/soil_code.tif")
+        myniche.run(full_model=False)
+
+        # this dataset should contain one nodata cell
+        df = myniche.table
+        assert np.all(df[df.presence == "no data"]["area_ha"] == 0.0625)
+
 @pytest.mark.skipif(
         distutils.spawn.find_executable("gdalinfo") is None,
         reason="gdalinfo not available in the environment.")
