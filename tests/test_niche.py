@@ -20,8 +20,7 @@ import subprocess
 
 class TestNiche(TestCase):
 
-    @pytest.mark.skipif(sys.platform == "win32",
-                        reason="fails on win32 - fixed in recent rasterio")
+    @pytest.mark.skipwindows27
     def test_invalidfile(self):
         n = niche_vlaanderen.Niche()
         with pytest.raises(RasterioIOError):
