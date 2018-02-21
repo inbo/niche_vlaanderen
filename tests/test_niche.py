@@ -438,6 +438,7 @@ class TestNicheDelta(TestCase):
         delta.plot(5)
 
         tmpdir = tempfile.mkdtemp()
+        tmpdir = tmpdir + "/new"
         delta.write(tmpdir)
         # check tempdir contains the vegetation and the abiotic files
         expected_files = [
@@ -472,3 +473,23 @@ class TestNicheDelta(TestCase):
         # we try to overwrite using a non existing codetable
         with pytest.raises(NicheException):
             delta = niche_vlaanderen.NicheDelta(small, myniche)
+
+@pytest.mark.skipif(
+        distutils.spawn.find_executable("gdalinfo") is None,
+        reason="gdalinfo not available in the environment.")
+
+def test_conductivity2minerality():
+    tmpdir = tempfile.mkdtemp()
+    niche_vlaanderen.conductivity2minerality(
+        "tests/data/small/conductivity.asc", tmpdir + "/minerality.tif")
+
+    info = subprocess.check_output(
+        ["gdalinfo", "-stats", tmpdir + "/minerality.tif"]
+    ).decode('utf-8')
+
+    assert ("STATISTICS_MAXIMUM=1" in info)
+    assert ("STATISTICS_MINIMUM=0" in info)
+    assert ("STATISTICS_STDDEV=0.5")
+    assert ("STATISTICS_MEAN=0.5")
+
+    shutil.rmtree(tmpdir)

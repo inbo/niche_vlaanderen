@@ -323,7 +323,10 @@ class Niche(object):
             window = self._context.get_read_window(SpatialContext(dst))
             band = dst.read(1, window=window)
 
-            if band.dtype == "uint8":
+            # if we have unsigned integers - switch to signed otherwise
+            # no data (-99) will fail.
+
+            if band.dtype.kind == 'u':
                 band = band.astype(int)
 
             # mhw, mlw and msw are rounded to two decimals to make sure
@@ -814,9 +817,7 @@ class NicheDelta(object):
         # the error below should not occur as we check the context, but
         # better safe than sorry
         if n1._vegetation[1].size != n2._vegetation[1].size:
-            raise NicheException(
-                "Arrays have different size."
-            )  # noqa
+            raise NicheException("Arrays have different size.")  # noqa
 
         if len(n1._vegetation) != len(n2._vegetation):
             raise NicheException(
@@ -938,13 +939,34 @@ class NicheDelta(object):
 
 
 def conductivity2minerality(conductivity, minerality):
-    # converts a grid with conductivity to a grid of minerality
-    # in the same grid format
-    with rasterio.open(conductivity) as src:
-        band = src.read(1)
-        band = np.where(band > 500, 1, 0)
-        profile = src.profile
-        band = band.astype(profile["dtype"])
+    """ Convert a grid with conductivity to a grid of minerality
 
-    with rasterio.open(minerality, 'w', **profile) as dst:
-        dst.write(band, 1)
+    Helper function that converts a grid with conductivity values
+    to a grid of minerality values (where conductivity > 500).
+
+    Supplied for backwards compatibility with the original niche vlaanderen
+    model.
+
+    Parameters
+    ==========
+    conductivity: filename
+      Original grid with conductivity values.
+    minerality: filename
+      New grid where minerality values are stored. This will be a geotiff, so
+      extension .tif is recommended.
+    """
+
+    # we will ignore future warnings from rasterio
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", FutureWarning)
+
+        with rasterio.open(conductivity) as src:
+            band = src.read(1)
+            band = np.where(band > 500, 1, 0)
+            profile = src.profile
+            profile["driver"] = 'GTiff'
+            profile["compress"] = "DEFLATE"
+            band = band.astype(profile["dtype"])
+
+        with rasterio.open(minerality, 'w', **profile) as dst:
+            dst.write(band, 1)
