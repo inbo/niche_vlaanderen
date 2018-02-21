@@ -32,7 +32,8 @@ class TestNiche(TestCase):
             result = n.set_input("bla",
                                  "testcase/zwarte_beek/input/soil_code.asc")
 
-    def create_zwarte_beek_niche(self):
+    @staticmethod
+    def create_zwarte_beek_niche():
         myniche = niche_vlaanderen.Niche()
         input_dir = "testcase/zwarte_beek/input/"
         myniche.set_input("soil_code", input_dir + "soil_code.asc")
@@ -365,8 +366,13 @@ class TestNiche(TestCase):
         plt.show = lambda: None
 
         myniche = self.create_small()
+
+        # try plotting before running
+        myniche.plot("mhw")
         myniche.run(deviation=True)
         myniche.plot("mhw")
+        myniche.plot(1)
+        myniche.name = "name"
         myniche.plot(1)
         myniche.plot("mhw_01")
         myniche.plot("nutrient_level")
@@ -409,6 +415,18 @@ class TestNiche(TestCase):
         sum = np.sum(stats.area_ha[(stats.presence == "present")])
         table_sum = np.sum(table.area_ha[(table.presence == "present")])
         assert table_sum == sum
+
+    def test_uint(self):
+        myniche = niche_vlaanderen.Niche()
+
+        myniche.set_input("mhw", "tests/data/small/mhw.asc")
+        myniche.set_input("mlw", "tests/data/small/mlw.asc")
+        myniche.set_input("soil_code", "tests/data/tif/soil_code.tif")
+        myniche.run(full_model=False)
+
+        # this dataset should contain one nodata cell
+        df = myniche.table
+        assert np.all(df[df.presence == "no data"]["area_ha"] == 0.0625)
 
 
 class TestNicheDelta(TestCase):
@@ -470,21 +488,25 @@ class TestNicheDelta(TestCase):
         small = niche_vlaanderen.Niche()
         small.run_config_file("tests/small.yaml")
 
-        # we try to overwrite using a non existing codetable
+        # we try to compare but both elements have different vegetations
         with pytest.raises(NicheException):
             delta = niche_vlaanderen.NicheDelta(small, myniche)
 
-    def test_uint(self):
-        myniche = niche_vlaanderen.Niche()
+    def invalidDelta(self):
+        small = niche_vlaanderen.Niche()
+        small.read_config_file("tests/small_simple.yaml")
+        with pytest.raises(NicheException):
+            # should fail as the model has not yet been run
+            delta = niche_vlaanderen.NicheDelta(small, small)
 
-        myniche.set_input("mhw", "tests/data/small/mhw.asc")
-        myniche.set_input("mlw", "tests/data/small/mlw.asc")
-        myniche.set_input("soil_code", "tests/data/tif/soil_code.tif")
-        myniche.run(full_model=False)
+        zwb = TestNiche.create_zwarte_beek_niche()
+        zwb.run()
+        small.run()
+        # should fail due to different extent
+        with pytest.raises(NicheException):
+            delta = niche_vlaanderen.NicheDelta(zwb, small)
 
-        # this dataset should contain one nodata cell
-        df = myniche.table
-        assert np.all(df[df.presence == "no data"]["area_ha"] == 0.0625)
+
 
 @pytest.mark.skipif(
         distutils.spawn.find_executable("gdalinfo") is None,
