@@ -58,23 +58,53 @@ An example configuration file for a full model is given below.
  .. literalinclude:: full.yml
 
 
-Abiotic values
-==============
+
+
+
+Abiotic and/or deviation
+=========================
 Using a configuration file, it is also possible to use abiotic values, like
-previously demonstrated in :ref:`advanced_usage.ipynb#Using-abiotic-grids`.
+previously demonstrated in `Using abiotic grids`_.
 
 To do this the values ``acidity`` and ``nutrient_level`` must be specified,
 together with the ``abiotic`` model option.
 
+The option ``deviation`` creates deviation maps, which show the difference between
+the borders specified in the niche table and the actual values of mhw and mlw for
+every soil type, as discussed in `Creating deviation maps`_.
+
+Floodplains module
+==================
+If you want to calculate a niche object combined with a FloodPlains model, this is possible by
+adding a floodplains block. Different scenarios can be specified
+.. code-block::
+   floodplains:
+     - name: T25-winter
+       file: T25.tif
+       frequency: T25
+       duration: short
+       period: winter
+     - name: T25-zomer
+       ....
 
 Generating a config file in interactive mode
 ============================================
 
 When running Niche in interactive mode, representing the model will show the
-corresponding configuration file. This was demonstrated in :ref:`getting_started.ipynb#Showing-the-model-configuration`
+corresponding configuration file. This was demonstrated in `Showing the model configuration`_.
 
 Also when writing a grid using the write method a "log.txt" file will be written.
-This file itself is also a valid configuration file for a next run.
+This file itself is also a valid configuration file for a next run. The list with generated files will be ignored.
+
+Running a config file in interactive mode
+=========================================
+
+Running a config file from the command line
+===========================================
+
+.. note::
+
+    If you don't specify an output directory, nothing will be written - in command line mode this makes no sense
 
 
 Full example
@@ -83,6 +113,10 @@ Full example
 We offer a full example (included below) which contains all possible options and some documentation.
 This file may be a good starting point for creating your own configuration files.
 
+This full example can be generated from the command line by running ``niche --example``
+
  .. literalinclude:: ../niche_vlaanderen/system_tables/example.yaml
 
-The option ``deviation`` creates deviation maps, which show the difference between the borders specified in the niche table and the actual values of mhw and mlw for every soil type.
+.. _`Using abiotic grids`: https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Using-abiotic-grids
+.. _`Showing the model configuration`: https://inbo.github.io/niche_vlaanderen/getting_started.html#Showing-the-model-configuration
+.. _`Creating deviation maps`: https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Creating-deviation-maps

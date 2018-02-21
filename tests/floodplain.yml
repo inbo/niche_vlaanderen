@@ -18,7 +18,7 @@ model_options:
   deviation: True
   output_dir: _output
 
-inundation:
+floodplain:
   - name: T20-winter
     depth: ../testcase/floodplains/ff_bt_t25_h.asc
     frequency: T20

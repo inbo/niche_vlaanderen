@@ -234,13 +234,13 @@ class Niche(object):
                 self._options["strict_checks"] = \
                     config_loaded["model_options"]["strict_checks"]
 
-        if "inundation" in config_loaded.keys():
-            self._options["inundation"] = []
-            for scen_nr in config_loaded["inundation"]:
+        if "floodplains" in config_loaded.keys():
+            self._options["floodplains"] = []
+            for scen_nr in config_loaded["floodplains"]:
                 scen = {k: scen_nr[k]
                         for k in ["name", "depth", "period", "frequency",
                                   "duration"]}
-                self._options["inundation"].append(scen)
+                self._options["floodplains"].append(scen)
 
     def run_config_file(self, config, overwrite_ct=False):
         """ Runs Niche using a configuration file
@@ -264,8 +264,8 @@ class Niche(object):
 
         self.run(full_model, deviation)
 
-        if "inundation" in self._options:
-            for scen in self._options["inundation"]:
+        if "floodplains" in self._options:
+            for scen in self._options["floodplains"]:
                 ct_nl = dict()
 
                 keys = set(FloodPlain.__init__.__code__.co_varnames) \

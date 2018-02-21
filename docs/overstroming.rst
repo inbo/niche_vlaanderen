@@ -38,19 +38,3 @@ De gegevens uit deze tabel worden vergeleken met de tabel lnk_potential
     1,winter,T50,1,2,3
     1,winter,T50,1,3,3
     1,winter,T50,2,1,3
-
-De module kan uitgevoerd worden door inundation aan te roepen vanuit de
-configfile:
-
-  .. code-block:: yaml
-
-    inundation:
-     - name: T20-winter
-       file: T20.tif
-       frequency: T20
-       duration: short
-       period: winter
-     - name: T20-zomer
-       ....
-
-Hierbij kunnen verschillende scenario's gespecifieerd worden.
