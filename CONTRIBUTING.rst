@@ -105,13 +105,47 @@ Before you submit a pull request, check that it meets these guidelines:
    https://travis-ci.org/inbo/niche_vlaanderen/pull_requests
    and make sure that the tests pass for all supported Python versions.
 
-Note that this are guidelines. If you are stuck while adding functionality 
-- consider doing a pull request anyway, others may be able to help.
+.. example::
+    Note that this are guidelines. If you are stuck while adding functionality
+    - consider doing a pull request anyway, others may be able to help.
 
 Tips
 ----
 
+Version numbering scheme
+~~~~~~~~~~~~~~~~~~~~~~~~
+The version numbers of ``niche_vlaanderen`` are based on semver_: MAJOR.MINOR version. MAJOR versions can have incompatible API changes,
+MINOR versions are backwards-compatible.
+Alpha and beta releases are made by appending a1/b1 to the version number, eg 1.0a10 for the 10th alpha release.
+
+Building the documentation
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+The documentation for the project can be found under the ``docs/`` folder, and is written using
+`reStructuredText`_.
+
+To build the documentation locally, you need to install the doc requirements, which are based on sphinx_.
+.. code-block:: bash
+  $ pip install -r doc-requirements.txt
+
+After which you should be able to generate HTML output by typing ``make html`` from the `docs` directory.
+
+Publishing on the documentation website (https://inbo.github.io/niche_vlaanderen/ ) will happen when changes
+to master build correctly (under travis). Note that this may mean that the documentation is actually a bit more recent than the last released version.
+
+Coding guidelines
+~~~~~~~~~~~~~~~~~
+
+
+Running unit tests
+~~~~~~~~~~~~~~~~~~
+
+
 To run a subset of tests::
 
 $ py.test tests.test_niche
+
+
+.. _reStructuredText: http://docutils.sourceforge.net/rst.html
+.. _sphinx: http://www.sphinx-doc.org/en/master/
+.. _semver: https://semver.org/
 

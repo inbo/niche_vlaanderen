@@ -107,7 +107,7 @@ To run this, from the anaconda prompt do:
     (C:\Users\johan\Miniconda3) C:\Users\johan> jupyter notebook
 
 This should open a webbrowser pointing towards http://localhost:8888 . If you browser does not open, try looking for the
-correct URL in the prompt.
+correct URL at the anaconda prompt.
 
 The :doc:`tutorials` will use these jupyter notebooks, and are the best place to continue from here.
 

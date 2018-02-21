@@ -8,6 +8,8 @@ or usage of niche_vlaanderen, and workarounds for them.
 If your issue is not mentioned in this list, please search for the issues on
 our issuetracker_, and file a new issue if it is needed.
 
+.. _missing_gcs:
+
 Missing gcs.csv file
 ====================
 
