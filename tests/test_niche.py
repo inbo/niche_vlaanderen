@@ -425,7 +425,7 @@ class TestNicheDelta(TestCase):
         # as the full model always contains less than the simple model,
         # we can use this in a test
         df = delta.table
-        self.assertEqual(0, df[df.presence=="only in model 2"].area_ha.sum())
+        self.assertEqual(0, df[df.presence == "only in model 2"].area_ha.sum())
 
         import matplotlib as mpl
         mpl.use('agg')
@@ -437,13 +437,14 @@ class TestNicheDelta(TestCase):
 
         tmpdir = tempfile.mkdtemp()
         delta.write(tmpdir)
-        # check tempdir contains the vegation and the abiotic files
+        # check tempdir contains the vegetation and the abiotic files
         expected_files = [
              'D1.tif', 'D2.tif', 'D3.tif', 'D4.tif', 'D5.tif', 'D6.tif',
              'D7.tif', 'D8.tif', 'D9.tif', 'D10.tif', 'D11.tif', 'D12.tif',
              'D13.tif', 'D14.tif', 'D15.tif', 'D16.tif', 'D17.tif', 'D18.tif',
              'D19.tif', 'D20.tif', 'D21.tif', 'D22.tif', 'D23.tif', 'D24.tif',
-             'D25.tif', 'D26.tif', 'D27.tif', 'D28.tif' ]
+             'D25.tif', 'D26.tif', 'D27.tif', 'D28.tif', 'legend_delta.csv',
+             'delta_summary.csv']
 
         dir = os.listdir(tmpdir)
 

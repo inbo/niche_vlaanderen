@@ -877,7 +877,11 @@ class NicheDelta(object):
                 # self._files_written[vi] = os.path.normpath(path)
 
         # Also the resulting table is written
-        self.table.to_csv("delta_summary.csv")
+        self.table.to_csv(folder + "/delta_summary.csv")
+
+        # And a small file containing the legend
+        legend = pd.DataFrame(dict(code=self._values, labels=self._labels))
+        legend.to_csv(folder + "/legend_delta.csv")
 
     def plot(self, key, ax=None):
         """
