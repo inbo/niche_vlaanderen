@@ -566,7 +566,7 @@ class Niche(object):
             prefix = self.name + "_"
 
         # write a summary file containing the table of the model
-        self.table.to_csv(folder + '/' + prefix + "summary.csv")
+        self.table.to_csv(folder + '/' + prefix + "summary.csv", index=False)
 
         for vi in self._vegetation:
             path = folder + '/{}V{:02d}.tif'.format(prefix, vi)
@@ -877,11 +877,11 @@ class NicheDelta(object):
                 # self._files_written[vi] = os.path.normpath(path)
 
         # Also the resulting table is written
-        self.table.to_csv(folder + "/delta_summary.csv")
+        self.table.to_csv(folder + "/delta_summary.csv", index=False)
 
         # And a small file containing the legend
         legend = pd.DataFrame(dict(code=self._values, labels=self._labels))
-        legend.to_csv(folder + "/legend_delta.csv")
+        legend.to_csv(folder + "/legend_delta.csv", index=False)
 
     def plot(self, key, ax=None):
         """
