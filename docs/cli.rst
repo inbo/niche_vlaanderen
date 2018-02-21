@@ -78,6 +78,7 @@ Floodplains module
 If you want to calculate a niche object combined with a FloodPlains model, this is possible by
 adding a floodplains block. Different scenarios can be specified
 .. code-block::
+
    floodplains:
      - name: T25-winter
        file: T25.tif
@@ -98,6 +99,8 @@ This file itself is also a valid configuration file for a next run. The list wit
 
 Running a config file in interactive mode
 =========================================
+
+When using Niche in interactive mode, you can load all data from a config file using the read_config method, or you can run all by using the run_config method.
 
 Running a config file from the command line
 ===========================================

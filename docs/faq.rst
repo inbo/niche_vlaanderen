@@ -12,6 +12,7 @@ our issuetracker_, and file a new issue if it is needed.
 
 Missing gcs.csv file
 ====================
+If you see the following issue:
 
 .. code-block:: default
 
@@ -25,13 +26,13 @@ prompt, try setting the GDAL_DATA environment to a path which contains a
 
 .. code-block:: default
 
-   set GDAL_DATA=%APPDATA%xxx
+   set GDAL_DATA=C:\Users\johan\Miniconda3\pkgs\gdal-2.1.3-py36_vc14_7\Library\share\gdal\gcs.csv
 
 And then start python, niche (command line) or jupyter notebook.
 
 .. code-block:: default
 
-   set GDAL_DATA=%APPDATA%xxx
+   set GDAL_DATA=C:\Users\johan\Miniconda3\pkgs\gdal-2.1.3-py36_vc14_7\Library\share\gdal\gcs.csv
    jupyter notebook
 
 Using ESRI grids without sta.adf
