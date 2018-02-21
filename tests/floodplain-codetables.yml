@@ -21,7 +21,7 @@ input_layers:
   minerality: 1
   rainwater: 0
 
-inundation:
+floodplains:
   - name: eerste
     depth: ../testcase/floodplains/ff_bt_t25_h.asc
     frequency: T25

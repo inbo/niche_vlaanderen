@@ -18,10 +18,10 @@ model_options:
   deviation: True
   output_dir: _output
 
-floodplain:
+floodplains:
   - name: T20-winter
     depth: ../testcase/floodplains/ff_bt_t25_h.asc
-    frequency: T20
+    frequency: T25
     duration: 1
     period: winter
   - name: T10-winter
