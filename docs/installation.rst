@@ -54,7 +54,7 @@ from the Anaconda prompt
 
 .. code-block:: default
 
-    conda env update -f c:\users\johan\Downloads\niche_env.yml.txt
+    conda env update -f c:\users\johan\Downloads\niche_env.yml
 
 Installing a specific version
 =============================
@@ -65,6 +65,25 @@ If you want to install a specific niche version, you can install using pip:
 
     pip install niche_vlaanderen==1.0a10
 
+Alternative installation
+========================
+Rather than using the provided environment file, you may want to install the packages yourself,
+eg if you want to work with specific versions for another package. This is currently not
+the recommended installation as some versions of gdal provided by conda have a bug (with
+a workaround (missing_gcs_).
+
+.. code-block:: default
+
+    conda install pandas pyyaml rasterio rasterstats
+    pip install niche_vlaanderen==1.0a10
+
+It is strongly recommended to install also `matplotlib` (otherwise plotting will not work):
+
+.. code-block:: default
+
+    conda install matplotlib
+
+In a similar way you can add jupyter notebook (`conda install jupyter`).
 
 Running niche
 =============
@@ -79,13 +98,17 @@ and activate the environment:
 Optionally - Jupyter Notebook
 =============================
 
-If you want to run niche_vlaanderen interactively, we recommend using a jupyter notebook.
-This can be installed by running
+If you want to run niche_vlaanderen interactively, we recommend using a [jupyter notebook](http://jupyter.org/).
+To run this, from the anaconda prompt do:
 
 .. code-block:: default
 
-    conda install jupyter
+    (C:\Users\johan\Miniconda3) C:\Users\johan> activate niche_vlaanderen
+    (C:\Users\johan\Miniconda3) C:\Users\johan> jupyter notebook
 
-And it can be started by running ``jupyter``.
+This should open a webbrowser pointing towards http://localhost:8888 . If you browser does not open, try looking for the
+correct URL in the prompt.
+
+The :doc:`tutorials` will use these jupyter notebooks, and are the best place to continue from here.
 
 
