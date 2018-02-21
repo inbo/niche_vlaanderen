@@ -40,18 +40,22 @@ model_options:
   # abiotic: default is False. Use abiotic values specified for the Full model
   # rather than calculating them.
   abiotic: False
+  # strict_checks: default is True. Validate that no invalid combinations
+  # of MHW, MLW and MSW occur.
+  strict_checks: True
   # name: you can specify a name for the model. This name will be added to
   # the output files and will be used when plotting/comparing results.
   name: example
 
 input_layers:
   # These three input layers always have to be defined
-  soil_code: data/soil_code_small.asc
-  mhw: data/mhw_small.asc
-  mlw: data/mlw_small.asc
+  soil_code: data/small/soil_code.asc
+  mhw: data/small/mhw.asc
+  mlw: data/small/mlw.asc
   # These input layers have to be defined when running a full model
   # When running a simple model they can be omitted.
-  msw: data/msw_small.asc
+  # note that instead of a full grid a constant value can be given
+  msw: data/small/msw.asc
   seepage: 0
   inundation_acidity: 0
   inundation_nutrient: 0
@@ -59,7 +63,7 @@ input_layers:
   nitrogen_animal: 0
   nitrogen_fertilizer: 0
   management: 1
-  conductivity: 501
+  minerality: 0
   rainwater: 0
   # Both layers below are optional in a full model, but will be used if
   # specified

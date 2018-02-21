@@ -12,7 +12,6 @@ For a simple NICHE model this could look like this:
 
      model_options:
        full_model: False
-       deviation: False
        output_dir: _output
 
      input_layers:
@@ -20,7 +19,7 @@ For a simple NICHE model this could look like this:
        mlw: data/mlw_small.asc
        soil_code: data/soil_code_small.asc
 
-The file specifies the input layers, the output directory, and other model options.
+The file specifies the input layers, the output directory(``output_dir``), and other model options.
 In this case, as we have a simple model (:ref:`simple`), as specified in the model options.
 
 
@@ -57,9 +56,8 @@ An example configuration file for a full model is given below.
 
  .. literalinclude:: full.yml
 
-
-
-
+As the option ``full_model=True`` is given (it is enabled by default, so can be omitted) all input layers are used.
+The other model options correspond to the parameters that could be given to the :func:`niche_vlaanderen.Niche.run` method.
 
 Abiotic and/or deviation
 =========================
@@ -76,16 +74,18 @@ every soil type, as discussed in `Creating deviation maps`_.
 Floodplains module
 ==================
 If you want to calculate a niche object combined with a FloodPlains model, this is possible by
-adding a floodplains block. Different scenarios can be specified
+adding a floodplains block. Different scenarios can be specified. They need a single name.
+The output of the module will be written to the same directory as the output specified in the model options.
+
 .. code-block::
 
    floodplains:
      - name: T25-winter
-       file: T25.tif
+       depth: T25.tif
        frequency: T25
        duration: short
        period: winter
-     - name: T25-zomer
+     - depth: T25-zomer
        ....
 
 Generating a config file in interactive mode
@@ -100,10 +100,19 @@ This file itself is also a valid configuration file for a next run. The list wit
 Running a config file in interactive mode
 =========================================
 
-When using Niche in interactive mode, you can load all data from a config file using the read_config method, or you can run all by using the run_config method.
+When using Niche in interactive mode, you can load all data from a config file using the
+:func:`niche_vlaanderen.Niche.read_config_file` method, or you can run all by using the
+:func:`niche_vlaanderen.Niche.run_config_file` method.
 
 Running a config file from the command line
 ===========================================
+
+After opening the anaconda prompt (and starting the environment) you can also run niche from a command line using a
+config file. This is done by running the ``niche`` application.
+
+.. code-block:: bash
+
+    niche example.yml
 
 .. note::
 

@@ -3,7 +3,6 @@ model_options:
   deviation: false
   full_model: true
   name: 'full'
-  strict_checks: true
 
 input_layers:
   inundation_acidity: ../testcase/zwarte_beek/input/inundation.asc

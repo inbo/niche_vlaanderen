@@ -20,3 +20,17 @@ def test_cli_floodplain():
     dir = os.listdir("_output")
     result_eerste = [f.startswith("eerste") for f in dir]
     assert sum(result_eerste) == 24
+
+def test_example_yml():
+    runner = CliRunner()
+    # the following returns the example yaml file, which we will test in the next step
+    result = runner.invoke(nv_cli.cli, ["--example"])
+    # this is written to a file
+    with open("tests/_example.yml", "w") as text_file:
+        text_file.write(result.output)
+    # which we run again
+    result2 = runner.invoke(nv_cli.cli, ["tests/_example.yml"])
+    assert "files_written:" in result2.output
+    assert "mhw_25: " in result2.output
+
+
