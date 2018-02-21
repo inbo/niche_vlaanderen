@@ -816,7 +816,7 @@ class NicheDelta(object):
         if n1._vegetation[1].size != n2._vegetation[1].size:
             raise NicheException(
                 "Arrays have different size."
-            )
+            )  # noqa
 
         if len(n1._vegetation) != len(n2._vegetation):
             raise NicheException(

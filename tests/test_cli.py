@@ -33,4 +33,9 @@ def test_example_yml():
     assert "files_written:" in result2.output
     assert "mhw_25: " in result2.output
 
+def test_get_version():
+    runner = CliRunner()
+    # the following returns the example yaml file, which we will test in the next step
+    result = runner.invoke(nv_cli.cli, ["--version"])
+    assert "niche_vlaanderen version: 1.0" in result.output
 

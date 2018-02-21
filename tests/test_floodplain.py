@@ -125,9 +125,15 @@ class TestFloodPlain(TestCase):
             # floodplain model not yet run
             fp.combine(myniche)
 
-
         fp.calculate("testcase/floodplains/ff_bt_t10_h.asc", "T10",
                      period="winter", duration=1)
+
+        small = nv.Niche()
+        small.run_config_file("tests/small.yaml")
+
+        with pytest.raises(FloodPlainException):
+            # floodplain has different spatial extent than niche
+            fp.combine(small)
 
         result = fp.combine(myniche)
 

@@ -28,4 +28,4 @@ def cli(ctx, config, example, version):
         print("No config file added. Use --help for more info")
 
     if version:
-        print("niche_vlaanderen version:" + niche_vlaanderen.__version__)
+        print("niche_vlaanderen version: " + niche_vlaanderen.__version__)

@@ -91,6 +91,8 @@ class TestNiche(TestCase):
         self.assertTrue(np.all(o2>=o3))
 
         tmpdir = tempfile.mkdtemp()
+        # if a subdir does not exist - it should be created
+        tmpdir = tmpdir + '/subdir'
         myniche.write(tmpdir)
         # check tempdir contains the vegetation and the abiotic files
         expected_files = ["nutrient_level.tif", "acidity.tif",
@@ -454,3 +456,19 @@ class TestNicheDelta(TestCase):
             self.assertCountEqual(expected_files, dir)
 
         shutil.rmtree(tmpdir)
+
+    def test_differentvegsize(self):
+        myniche = niche_vlaanderen.Niche(
+            ct_vegetation="tests/data/bad_ct/one_vegetation.csv")
+
+        myniche.set_input("mhw", "tests/data/small/mhw.asc")
+        myniche.set_input("mlw", "tests/data/small/mlw.asc")
+        myniche.set_input("soil_code", "tests/data/small/soil_code.asc")
+        myniche.run(full_model=False)
+
+        small = niche_vlaanderen.Niche()
+        small.run_config_file("tests/small.yaml")
+
+        # we try to overwrite using a non existing codetable
+        with pytest.raises(NicheException):
+            delta = niche_vlaanderen.NicheDelta(small, myniche)
