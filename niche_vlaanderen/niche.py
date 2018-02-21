@@ -200,7 +200,7 @@ class Niche(object):
             self._inputvalues.pop(key, None)
             self._inputfiles[key] = value
 
-    def read_config_input(self, config, overwrite_ct=False):
+    def read_config_file(self, config, overwrite_ct=False):
         """ Sets the input based on an input file, without running it
 
         Configures a model based on a config file
@@ -248,7 +248,7 @@ class Niche(object):
         Note that this will configure the model, run and output as specified
         """
 
-        self.read_config_input(config, overwrite_ct=overwrite_ct)
+        self.read_config_file(config, overwrite_ct=overwrite_ct)
 
         # Set input values
         with open(config, 'r') as stream:

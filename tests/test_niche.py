@@ -163,7 +163,7 @@ class TestNiche(TestCase):
     def create_small(self):
         myniche = niche_vlaanderen.Niche()
 
-        myniche.read_config_input("tests/small.yaml")
+        myniche.read_config_file("tests/small.yaml")
         return myniche
 
     @pytest.mark.skipif(
@@ -230,7 +230,7 @@ class TestNiche(TestCase):
     def test_read_configuration(self):
         config = 'tests/small_simple.yaml'
         myniche = niche_vlaanderen.Niche()
-        myniche.read_config_input(config)
+        myniche.read_config_file(config)
         myniche.run(full_model=False)
 
     @pytest.mark.skipwindows27
