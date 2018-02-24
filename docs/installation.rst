@@ -70,7 +70,7 @@ Alternative installation
 Rather than using the provided environment file, you may want to install the packages yourself,
 eg if you want to work with specific versions for another package. This is currently not
 the recommended installation as some versions of gdal provided by conda have a bug (with
-a workaround (missing_gcs_).
+a workaround (:ref:`missing_gcs`).
 
 .. code-block:: default
 
@@ -83,12 +83,13 @@ It is strongly recommended to install also `matplotlib` (otherwise plotting will
 
     conda install matplotlib
 
-In a similar way you can add jupyter notebook (`conda install jupyter`).
+In a similar way you can add jupyter notebook (``conda install jupyter``).
 
 Running niche
 =============
 
-Whenever you want to use niche (either from the command line or Python) you need to start from the `Anaconda prompt`
+Whenever you want to use niche (either from the command line or Python) you need
+to start from the `Anaconda prompt` (in the start menu)
 and activate the environment:
 
 .. code-block:: default

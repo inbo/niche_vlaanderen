@@ -37,6 +37,12 @@ _minimal_input = {
 
 
 def minimal_input():  # pragma: no cover
+    """Get a set with all required input codes for a full Niche model
+    Returns
+    =======
+       :set
+       set of input_codes required for a full Niche model
+    """
     return _minimal_input
 
 
@@ -61,7 +67,7 @@ class Niche(object):
     constructor.
 
     Parameters:
-        ct_*, lnk_*: path
+        ct_* lnk_*: path
           Optionally, paths to codetables can be provided. These will override
           the standard codetables used by Niche.
 
@@ -609,6 +615,38 @@ class Niche(object):
             f.write(self.__repr__())
 
     def plot(self, key, ax=None, fixed_scale=True):
+        """ Plots the result or input of a Niche object
+
+        Creates a plot of an input layer of a Niche object or of the result
+        of a Niche object.
+
+        Note that depending on your matplotlib environment you may still have
+        to call the matplotlib show method to actually show the plot.
+          myniche.plot(11)
+          import matplotlib.pyplot as plt
+          plt.show()
+
+        Parameters
+        ==========
+        key: veg_code (1..28) or input_code
+          key of the vegetation type that should be plotted, eg myniche.plot(7)
+          or key of the input layer you want to plot eg myniche("mhw").
+          If deviation was calculated with the model, this can also be plotted,
+          by using `input_code_veg_code` eg `mhw_14`
+
+        ax: matplotlib axis
+          optional axis parameter. Can be specified when you want to plot
+          different plots in one layout
+
+        fixed_scale: boolean (default: True)
+          Use a fixed scale
+
+        Returns
+        =======
+        ax: matplotlib axis
+          Can be used to update the plot (eg change the
+          title).
+        """
         try:
             import matplotlib.pyplot as plt
             import matplotlib.patches as mpatches
