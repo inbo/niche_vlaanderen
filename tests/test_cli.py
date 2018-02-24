@@ -21,6 +21,7 @@ def test_cli_floodplain():
     result_eerste = [f.startswith("eerste") for f in dir]
     assert sum(result_eerste) == 24
 
+@pytest.mark.skipwindows27
 def test_example_yml():
     runner = CliRunner()
     # the following returns the example yaml file, which we will test in the next step
