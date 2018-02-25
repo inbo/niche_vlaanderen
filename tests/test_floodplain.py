@@ -90,6 +90,7 @@ class TestFloodPlain(TestCase):
 
         shutil.rmtree(tempdir)
 
+    @pytest.mark.skipwindows27
     def test_combine(self):
         fp = nv.FloodPlain()
 
