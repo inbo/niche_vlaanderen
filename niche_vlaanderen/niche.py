@@ -403,12 +403,9 @@ class Niche(object):
                     Create the maps with the difference between the needed MHW
                     and MLW and the actual MHW/MLW for a vegetation type.
 
-                    Calculated results will be stored in the niche class in a
-                    dict _difference
         abiotic:  bool
                 Specify the abiotic grids as input rather than calculating
-                them. See tutorial at:
-                https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Using-abiotic-grids
+                them. See tutorial at: `Using abiotic grids`_
         strict_checks: bool
                 By default running a model will fail if impossible combinations
                 of MxW exist somewhere in the input files. By disabling strict
@@ -634,16 +631,16 @@ class Niche(object):
           If deviation was calculated with the model, this can also be plotted,
           by using `input_code_veg_code` eg `mhw_14`
 
-        ax: matplotlib axis
+        ax: `matplotlib.axes.Axes`_
           optional axis parameter. Can be specified when you want to plot
           different plots in one layout
 
         fixed_scale: boolean (default: True)
-          Use a fixed scale
+           Use a fixed scale
 
         Returns
         =======
-        ax: matplotlib axis
+        ax: `matplotlib.axes.Axes`_
           Can be used to update the plot (eg change the
           title).
         """
@@ -821,8 +818,7 @@ class NicheDelta(object):
     The difference can be visualized using the plot method. It is also
     possible to derive a table with the area's according to each group.
 
-    See the tutorial at:
-    https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Comparing-Niche-classes
+    See the tutorial at: `Comparing Niche classes`_
     """
 
     _values = [0, 1, 2, 3, 4]
@@ -964,6 +960,12 @@ class NicheDelta(object):
 
     @property
     def table(self):
+        """ Return a summarized dataframe for a NicheDelta object
+
+        Returns
+        =======
+        df: `pandas.DataFrame`_
+        """
         td = list()
         for i in self._delta:
             vi = pd.Series(self._delta[i].flatten())

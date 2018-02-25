@@ -90,21 +90,21 @@ class FloodPlain(object):
         ==========
         depth_file: filename
            The filename containing a classified grid with inundation dephts.
-           The classes used must correspond to the ones in the depths.csv code
-           table.
+           The classes used must correspond to the codes in the
+           depths.csv_ code table.
+
 
         frequency: code
            The frequency with which flooding occurs, eg T2, T50. Valid values
-           are given in the frequency.csv code table.
+           are given in the frequency.csv_ code table.
 
         period: winter|summer
             period in which the flooding occurs. Must be either "summer" or
             "winter"
 
         duration: code
-            Period with which the flooding occurs, from duration.csv
-             * 1: <14 days
-             * 2: >14 days
+            Period with which the flooding occurs, from duration.csv_
+
 
         """
         with rasterio.open(depth_file) as dst:

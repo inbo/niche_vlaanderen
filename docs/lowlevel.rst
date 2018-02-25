@@ -130,3 +130,13 @@ Gebruiken we ook de waarde voor overstromingen dan wordt dit.
     {7: 1.0, 12: 1.0, 16: 1.0}
 
 Vegetatietype 8 is nu niet meer mogelijk.
+
+.. _depths.csv: https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/floodplains/depths.csv
+.. _duration.csv: https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/floodplains/duration.csv
+.. _frequency.csv: https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/floodplains/frequency.csv
+
+.. _`matplotlib.axes.Axes`: https://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes
+.. _`pandas.DataFrame`: https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html
+
+.. _`Using abiotic grids`: https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Using-abiotic-grids
+.. _`Comparing Niche Classes`: https://inbo.github.io/niche_vlaanderen/advanced_usage.rst#Comparing-Niche-classes
