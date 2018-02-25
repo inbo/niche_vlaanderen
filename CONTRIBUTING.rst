@@ -124,7 +124,9 @@ The documentation for the project can be found under the ``docs/`` folder, and i
 `reStructuredText`_.
 
 To build the documentation locally, you need to install the doc requirements, which are based on sphinx_.
+
 .. code-block:: bash
+
   $ pip install -r doc-requirements.txt
 
 After which you should be able to generate HTML output by typing ``make html`` from the `docs` directory.
