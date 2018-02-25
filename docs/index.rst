@@ -10,10 +10,15 @@ This documentation is split in two parts:
  * The second part describes the ``niche_vlaanderen`` package.
 
 .. toctree::
-  :caption: Contents
+  :caption: Model
   :maxdepth: 2
 
   model
+
+.. toctree::
+  :caption: Package
+  :maxdepth: 2
+
   installation
   tutorials
   cli
