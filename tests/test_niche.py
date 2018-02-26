@@ -428,6 +428,31 @@ class TestNiche(TestCase):
         df = myniche.table
         assert np.all(df[df.presence == "no data"]["area_ha"] == 0.0625)
 
+    def test_overwrite_file(self):
+        myniche = self.create_small();
+        myniche.run()
+        tmpdir = tempfile.mkdtemp()
+        myniche.write(tmpdir)
+        # should raise: file already exists
+        with pytest.raises(NicheException):
+            myniche.write(tmpdir)
+        shutil.rmtree(tmpdir)
+
+    def test_overwrite_codetable_nonexisting(self):
+        #assume error - file does not exist
+        with pytest.raises(NicheException):
+            myniche = niche_vlaanderen.Niche(
+                ct_vegetation="nonexisting file")
+
+    def test_overwrite_codetable(self):
+        myniche = niche_vlaanderen.Niche(
+            ct_vegetation="tests/data/bad_ct/one_vegetation_limited.csv",
+            ct_acidity="tests/data/bad_ct/acidity_limited.csv",
+            lnk_acidity="tests/data/bad_ct/lnk_acidity_limited.csv",
+            ct_nutrient_level="tests/data/bad_ct/nutrient_level.csv")
+        myniche.read_config_file("tests/small.yaml")
+        myniche.run()
+
 
 class TestNicheDelta(TestCase):
     @pytest.mark.skipwindows27
