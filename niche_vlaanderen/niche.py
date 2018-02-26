@@ -684,6 +684,9 @@ class Niche(object):
             if fixed_scale:
                 norm = Normalize(-50, 50)
 
+        if key in {'mhw', 'mlw', 'msw'} and fixed_scale:
+            norm = Normalize(200, 0)
+
         if v is None:
             raise NicheException("Invalid key specified")
 
