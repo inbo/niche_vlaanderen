@@ -46,6 +46,9 @@ model_options:
   # name: you can specify a name for the model. This name will be added to
   # the output files and will be used when plotting/comparing results.
   name: example
+  # overwrite_files: by default Niche will not write any file if a file
+  # with the same name already exists.
+  overwrite_files: True
 
 input_layers:
   # These three input layers always have to be defined

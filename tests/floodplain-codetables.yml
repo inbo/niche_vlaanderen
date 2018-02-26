@@ -2,6 +2,7 @@ model_options:
   simple_model: False
   deviation: True
   output_dir: _output
+  overwrite_files: True
 
 code_tables:
   lnk_potential: data/bad_ct/lnk_potential.csv

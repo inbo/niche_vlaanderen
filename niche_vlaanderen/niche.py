@@ -241,6 +241,9 @@ class Niche(object):
             if "strict_checks" in config_loaded["model_options"].keys():
                 self._options["strict_checks"] = \
                     config_loaded["model_options"]["strict_checks"]
+            if "overwrite_files" in config_loaded["model_options"].keys():
+                self._options["overwrite_files"] = \
+                    config_loaded["model_options"]["overwrite_files"]
 
         if "floodplains" in config_loaded.keys():
             self._options["floodplains"] = []
@@ -284,7 +287,8 @@ class Niche(object):
 
                 self.fp = FloodPlain(name=scen["name"],**ct_nl)
 
-                depth_file = os.path.join(os.path.dirname(config), scen["depth"])
+                depth_file = os.path.join(os.path.dirname(config),
+                                          scen["depth"])
 
                 self.fp.calculate(depth_file=depth_file,
                                   period=scen["period"],
@@ -295,9 +299,13 @@ class Niche(object):
                     self.fp.write(options["output_dir"])
                     self._files_written.update(self.fp._files_written)
 
+        overwrite = False
+        if "overwrite_files" in self._options and self._options["overwrite_files"]:
+            overwrite = True
+
         if "output_dir" in options:
             output_dir = options["output_dir"]
-            self.write(output_dir)
+            self.write(output_dir, overwrite)
 
     def _check_all_lower(self, input_array, a, b):
         if np.any((input_array[a] > input_array[b])
@@ -940,12 +948,6 @@ class NicheDelta(object):
         for vi in self._delta:
             files[vi] = folder + '/D%s.tif' % vi
 
-        for vi in self._delta:
-            path = folder + '/D%s.tif' % vi
-            with rasterio.open(files[vi], 'w', **params) as dst:
-                dst.write(self._delta[vi], 1)
-                self._files_written[vi] = os.path.normpath(files[vi])
-
         for key in files:
             if os.path.exists(files[key]):
                 if overwrite_files:
@@ -954,6 +956,11 @@ class NicheDelta(object):
                 else:
                     raise NicheException(
                         "File {} already exists".format(files[key]))
+
+        for vi in self._delta:
+            path = folder + '/D%s.tif' % vi
+            with rasterio.open(files[vi], 'w', **params) as dst:
+                dst.write(self._delta[vi], 1)
 
         # Also the resulting table is written
         self.table.to_csv(files["summary"], index=False)
