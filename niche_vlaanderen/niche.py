@@ -531,7 +531,7 @@ class Niche(object):
                 self._inputarray["mlw"]
             )
 
-    def write(self, folder):
+    def write(self, folder, overwrite_files=False):
         """Saves the model results to a folder
 
         Saves the model results to a folder. Files will be written as geotiff.
@@ -545,6 +545,11 @@ class Niche(object):
         folder: string
             Output folder to which files will be written. Parent directory must
             already exist.
+
+        overwrite_files: bool
+            Overwrite files when saving.
+            Note writing will fail if any of the files to be written already
+            exists.
 
         """
 
@@ -573,44 +578,59 @@ class Niche(object):
         if self.name != "":
             prefix = self.name + "_"
 
-        # write a summary file containing the table of the model
-        self.table.to_csv(folder + '/' + prefix + "summary.csv", index=False)
+        files = {'summary': folder + '/' + prefix + "summary.csv",
+                 'log': "{}/{}log.txt".format(folder, prefix)}
 
         for vi in self._vegetation:
-            path = folder + '/{}V{:02d}.tif'.format(prefix, vi)
-            with rasterio.open(path, 'w', **params) as dst:
+            path = '{}/{}V{:02d}.tif'.format(folder, prefix, vi)
+            files[vi]= path
+
+        for vi in self._abiotic:
+            path = '{}/{}{}.tif'.format(folder, prefix, vi)
+            files[vi] = path
+
+        for i in self._deviation:
+            path = '{}/{}{}.tif'.format(folder, prefix, i)
+            files[i] = path
+
+        for key in files:
+            if os.path.exists(files[key]):
+                if overwrite_files:
+                    self._log.warning(
+                        "Warning: file {} already exists".format(files[key]))
+                else:
+                    raise NicheException(
+                        "File {} already exists".format(files[key]))
+
+
+        # write a summary file containing the table of the model
+        self.table.to_csv(files["summary"], index=False)
+
+        for vi in self._vegetation:
+            with rasterio.open(files[vi], 'w', **params) as dst:
                 dst.write(self._vegetation[vi], 1)
-                self._files_written[vi] = os.path.normpath(path)
+                self._files_written[vi] = os.path.normpath(files[vi])
 
         # also save the abiotic grids
         for vi in self._abiotic:
-            path = folder + '/{}{}.tif'.format(prefix, vi)
-            with rasterio.open(path, 'w', **params) as dst:
+            with rasterio.open(files[vi], 'w', **params) as dst:
                 dst.write(self._abiotic[vi], 1)
-                self._files_written[vi] = os.path.normpath(path)
+                self._files_written[vi] = os.path.normpath(files[vi])
 
         # deviation
-        params = dict(
-            driver='GTiff',
-            height=self._context.height,
-            width=self._context.width,
-            crs=self._context.crs,
-            transform=self._context.transform,
-            count=1,
-            compress="DEFLATE",
+        params.update(
             dtype="float64",
             nodata=-99999
         )
 
         for i in self._deviation:
-            path = folder + '/{}{}.tif'.format(prefix, i)
-            with rasterio.open(path, 'w', **params) as dst:
+            with rasterio.open(files[i], 'w', **params) as dst:
                 band = self._deviation[i]
                 band[band == np.nan] = -99999
                 dst.write(band, 1)
-                self._files_written[i] = os.path.normpath(path)
+                self._files_written[i] = os.path.normpath(files[i])
 
-        with open(folder + "/{}log.txt".format(prefix), "w") as f:
+        with open(files['log'], "w") as f:
             f.write(self.__repr__())
 
     def plot(self, key, ax=None, fixed_scale=True):
@@ -877,7 +897,7 @@ class NicheDelta(object):
 
         self._n1 = n1
 
-    def write(self, folder):
+    def write(self, folder, overwrite_files=False):
         """ Writes the difference grids to grid files.
 
         The differences are coded using these values:
@@ -893,6 +913,8 @@ class NicheDelta(object):
 
         folder: path
             Path to which the output files will be written.
+        overwrite_files: bool
+            Whether files should be overwritten on save.
         """
 
         if not os.path.exists(folder):
@@ -910,18 +932,35 @@ class NicheDelta(object):
             compress="DEFLATE"
         )
 
+        files = {
+            "summary": folder + "/delta_summary.csv",
+            "legend": folder + "/legend_delta.csv"
+        }
+
+        for vi in self._delta:
+            files[vi] = folder + '/D%s.tif' % vi
+
         for vi in self._delta:
             path = folder + '/D%s.tif' % vi
-            with rasterio.open(path, 'w', **params) as dst:
+            with rasterio.open(files[vi], 'w', **params) as dst:
                 dst.write(self._delta[vi], 1)
-                # self._files_written[vi] = os.path.normpath(path)
+                self._files_written[vi] = os.path.normpath(files[vi])
+
+        for key in files:
+            if os.path.exists(files[key]):
+                if overwrite_files:
+                    self._log.warning(
+                        "Warning: file {} already exists".format(files[key]))
+                else:
+                    raise NicheException(
+                        "File {} already exists".format(files[key]))
 
         # Also the resulting table is written
-        self.table.to_csv(folder + "/delta_summary.csv", index=False)
+        self.table.to_csv(files["summary"], index=False)
 
         # And a small file containing the legend
         legend = pd.DataFrame(dict(code=self._values, labels=self._labels))
-        legend.to_csv(folder + "/legend_delta.csv", index=False)
+        legend.to_csv(files["legend"], index=False)
 
     def plot(self, key, ax=None):
         """
