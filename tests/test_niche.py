@@ -476,6 +476,7 @@ class TestNicheDelta(TestCase):
 
         shutil.rmtree(tmpdir)
 
+    @pytest.mark.skipwindows27
     def test_differentvegsize(self):
         myniche = niche_vlaanderen.Niche(
             ct_vegetation="tests/data/bad_ct/one_vegetation.csv")
