@@ -16,7 +16,8 @@ class NutrientLevel(object):
     nodata = 255  # unsigned 8 bit type is used
 
     def __init__(self, ct_lnk_soil_nutrient_level=None, ct_management=None,
-                 ct_mineralisation=None, ct_soil_code=None, ct_nutrient=None):
+                 ct_mineralisation=None, ct_soil_code=None,
+                 ct_nutrient_level=None):
         if ct_lnk_soil_nutrient_level is None:
             ct_lnk_soil_nutrient_level = resource_filename(
                 "niche_vlaanderen",
@@ -32,7 +33,7 @@ class NutrientLevel(object):
             ct_soil_code = resource_filename(
                 "niche_vlaanderen", "system_tables/soil_codes.csv")
 
-        if ct_nutrient is None:
+        if ct_nutrient_level is None:
             ct_nutrient_level = resource_filename(
                 "niche_vlaanderen", "system_tables/nutrient_level.csv")
 
