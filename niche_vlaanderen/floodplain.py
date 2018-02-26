@@ -47,6 +47,35 @@ class FloodPlain(object):
 
         validate_tables_floodplains(**self._ct)
 
+    @property
+    def vegetation_calculated(self):
+        return len(self._veg) > 0
+
+    @property
+    def table(self):
+        """Dataframe containing the potential area (ha) per vegetation type
+        """
+        if not self.vegetation_calculated:
+            raise FloodPlainException(
+                "Error: You must run niche prior to requesting the "
+                "result table")
+
+        td = list()
+
+        labels = dict(self._ct["potential"]["description"])
+        labels[-99] = "no data"
+
+        for i in self._veg:
+            vi = pd.Series(self._veg[i].flatten())
+            rec = vi.value_counts() * self._context.cell_area / 10000
+            for a in rec.index:
+                td.append((i, labels[a], rec[a]))
+
+        df = pd.DataFrame(td, columns=['vegetation', 'presence',
+                                       'area_ha'])
+
+        return df
+
     def _calculate(self, depth, frequency, duration, period):
         """
         Low level calculation of a floodplains object.
@@ -228,7 +257,7 @@ class FloodPlain(object):
             raise FloodPlainException(
                 "Niche model must be run prior to running this module.")
 
-        if len(self._veg) == 0:
+        if not self.vegetation_calculated:
             raise FloodPlainException(
                 "Floodplain model must be run prior to running this module.")
 

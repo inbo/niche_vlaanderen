@@ -37,6 +37,14 @@ class TestFloodPlain(TestCase):
         expected = np.array([-99, 0, 1, 2, 3, 4])
         np.testing.assert_equal(expected, unique)
 
+    def test_table(self):
+        fp = nv.FloodPlain()
+        fp.calculate(depth_file="testcase/floodplains/ff_bt_t10_h.asc",
+                     frequency="T10", period="winter", duration=1)
+        df = fp.table
+        sel = df[((df.vegetation == 1)
+                  & (df.presence == "goed combineerbaar"))]
+        assert np.all(178.64 == np.round(sel["area_ha"], 2))
 
     def test_plot(self):
         import matplotlib as mpl
@@ -145,4 +153,3 @@ class TestFloodPlain(TestCase):
         unique = np.unique(np.hstack(unique))
         expected = np.array([-99, 0, 1, 2, 3])
         np.testing.assert_equal(expected, unique)
-
