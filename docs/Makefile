@@ -51,6 +51,7 @@ clean:
 
 .PHONY: html
 html:
+	rm -rf _output_scen1 comparison_output output_abiotic
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
