@@ -648,10 +648,11 @@ class Niche(object):
         of a Niche object.
 
         Note that depending on your matplotlib environment you may still have
-        to call the matplotlib show method to actually show the plot.
-          myniche.plot(11)
-          import matplotlib.pyplot as plt
-          plt.show()
+        to call the matplotlib show method to actually show the plot::
+
+          >>> myniche.plot(11)
+          >>> import matplotlib.pyplot as plt
+          >>> plt.show()
 
         Parameters
         ==========
