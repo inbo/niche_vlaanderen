@@ -4,7 +4,6 @@ import numpy as np
 import pandas as pd
 
 from .codetables import validate_tables_acidity, check_codes_used
-from .exception import NicheException
 
 
 class Acidity(object):
@@ -79,7 +78,8 @@ class Acidity(object):
         orig_shape = inundation.shape
 
         check_codes_used("rainwater", rainwater, {0, 1})
-        check_codes_used("minerality", minerality, self._lnk_acidity["mineral_richness"])
+        check_codes_used("minerality", minerality,
+                         self._lnk_acidity["mineral_richness"])
         check_codes_used("inundation", inundation,
                          self._lnk_acidity["inundation"])
         check_codes_used("seepage", seepage,

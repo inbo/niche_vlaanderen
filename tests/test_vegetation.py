@@ -179,7 +179,7 @@ class testVegetation(TestCase):
 
         v = niche_vlaanderen.Vegetation()
         with pytest.raises(NicheException):
-            d = v.calculate(soil_code, mhw, mlw)
+            v.calculate(soil_code, mhw, mlw)
 
     def test_deviation_mhw(self):
         v = niche_vlaanderen.Vegetation()

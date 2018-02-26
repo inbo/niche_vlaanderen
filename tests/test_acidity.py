@@ -17,7 +17,7 @@ def raster_to_numpy(filename):
     with rasterio.open(filename) as ds:
         data = ds.read(1)
         nodata = ds.nodatavals[0]
-    print (nodata)
+    print(nodata)
     # create a mask for no-data values, taking into account the data-types
     if data.dtype == 'float32':
         data[np.isclose(data, nodata)] = np.nan
@@ -38,13 +38,12 @@ class testAcidity(TestCase):
         np.testing.assert_equal(np.array([1, 9]), result)
 
     def test_get_soil_mlw_borders(self):
-        mlw = np.array([79,80, 100, 110, 111])
+        mlw = np.array([79, 80, 100, 110, 111])
         soil_code = np.array([14, 14, 14, 14, 14])
         a = niche_vlaanderen.Acidity()
         result = a._calculate_soil_mlw(soil_code, mlw)
-        expected =  np.array([1,1,2,2,3])
+        expected = np.array([1, 1, 2, 2, 3])
         np.testing.assert_equal(expected, result)
-
 
     def test_acidity_partial(self):
         rainwater = np.array([0])
@@ -112,9 +111,8 @@ class testAcidity(TestCase):
 
         a = niche_vlaanderen.Acidity()
         with pytest.raises(NicheException):
-            result = a.calculate(soilcode, mlw, inundation, seepage, minerality,
-                                 rainwater)
-        rainwater = np.array([0])
+            a.calculate(soilcode, mlw, inundation, seepage, minerality,
+                        rainwater)
 
     def test_acidity_invalidminerality(self):
         a = niche_vlaanderen.Acidity()
@@ -125,5 +123,5 @@ class testAcidity(TestCase):
         seepage = np.array([20])
         mlw = np.array([50])
         with pytest.raises(NicheException):
-            result = a.calculate(soilcode, mlw, inundation, seepage, minerality,
-                                 rainwater)
+            a.calculate(soilcode, mlw, inundation, seepage, minerality,
+                        rainwater)

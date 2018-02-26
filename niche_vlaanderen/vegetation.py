@@ -116,7 +116,6 @@ class Vegetation(object):
             nodata = nodata | (nutrient_level == NutrientLevel.nodata) \
                      | (acidity == Acidity.nodata)
 
-
         if inundation is not None:
             nodata = nodata | (inundation == -99)
 

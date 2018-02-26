@@ -44,17 +44,17 @@ class TestNutrientLevel(TestCase):
         np.testing.assert_equal(expected_nm, result_nm)
         nuls = np.array([0, 0, 0, 0, 0])
         # we want to check the boundaries ]156, 293]
-        nitrogen_sum = np.array([155, 156, 200, 293,294])
+        nitrogen_sum = np.array([155, 156, 200, 293, 294])
         # so we substract the nitrogen_sum from the expected mineralisation
         nitrogen_animal = nitrogen_sum - expected_nm
         management = np.array([2, 2, 2, 2, 2])
         result = nl.calculate(soil_code=soil_code,
-                     msw=msw,
-                     management=management,
-                     nitrogen_animal=nitrogen_animal,
-                     nitrogen_atmospheric=nuls,
-                     nitrogen_fertilizer=nuls,
-                     inundation=nuls)
+                              msw=msw,
+                              management=management,
+                              nitrogen_animal=nitrogen_animal,
+                              nitrogen_atmospheric=nuls,
+                              nitrogen_fertilizer=nuls,
+                              inundation=nuls)
         expected = np.array([2, 2, 3, 3, 4])
         np.testing.assert_equal(expected, result)
 

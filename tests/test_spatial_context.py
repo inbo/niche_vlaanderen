@@ -7,6 +7,7 @@ from niche_vlaanderen.spatial_context import SpatialContextError
 import pytest
 import sys
 
+
 class testSpatialContext(TestCase):
     def test_extent(self):
         small = rasterio.open("tests/data/small/msw.asc")
@@ -18,14 +19,14 @@ class testSpatialContext(TestCase):
         self.maxDiff = None
         small = rasterio.open("tests/data/small/msw.asc")
         small_sc = niche_vlaanderen.niche.SpatialContext(small)
-        exp = "Extent: ((172762.5, 210637.5), (172937.5, 210487.5))\n\n"+ \
-              "Affine(25.0, 0.0, 172762.5,\n       0.0, -25.0, 210637.5)\n\n"+\
+        exp = "Extent: ((172762.5, 210637.5), (172937.5, 210487.5))\n\n" \
+              "Affine(25.0, 0.0, 172762.5,\n       0.0, -25.0, 210637.5)\n\n" \
               "width: 7, height: 6\n\n"
         exp2 = exp + \
-              "Projection: +ellps=intl +lat_0=90 +lat_1=51.1666672333 "+\
-              "+lat_2=49.8333339 +lon_0=4.36748666667 +no_defs +proj=lcc "+\
-              "+towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,"+\
-              "-1.2747 +units=m +x_0=150000.013 +y_0=5400088.438"
+            "Projection: +ellps=intl +lat_0=90 +lat_1=51.1666672333 " + \
+            "+lat_2=49.8333339 +lon_0=4.36748666667 +no_defs +proj=lcc " + \
+            "+towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422," + \
+            "-1.2747 +units=m +x_0=150000.013 +y_0=5400088.438"
         # Python 3 has slightly different formatting (more numbers)
         exp3 = exp + \
             "Projection: +ellps=intl +lat_0=90 +lat_1=51.16666723333333 " \
@@ -66,7 +67,6 @@ class testSpatialContext(TestCase):
         with pytest.raises(SpatialContextError):
             self.assertFalse(small_sc.set_overlap(small_moved_sc))
 
-
     def test_check_set_overlap(self):
         soil_code = rasterio.open("testcase/zwarte_beek/input/soil_code.asc")
         soil_code_sc = niche_vlaanderen.niche.SpatialContext(soil_code)
@@ -82,7 +82,7 @@ class testSpatialContext(TestCase):
         # after overlap we get
 
         soil_code_sc.set_overlap(glg_sc)
-        print (soil_code_sc)
+        print(soil_code_sc)
         self.assertEqual(37, soil_code_sc.width)
         self.assertEqual(37, soil_code_sc.height)
         self.assertEqual(216910, soil_code_sc.transform[2])
@@ -121,8 +121,7 @@ class testSpatialContext(TestCase):
 
         # soil_code has a larger extent than glg - this must error
         with pytest.raises(SpatialContextError):
-            part_window = soil_code_sc.get_read_window(glg_sc)
-
+            soil_code_sc.get_read_window(glg_sc)
 
     def test_different_crs(self):
         test_l72 = rasterio.open("tests/data/small/msw.asc")
@@ -160,7 +159,7 @@ class testSpatialContext(TestCase):
     def test_topdown(self):
         topdown = rasterio.open("tests/data/mlw_small.xyz")
         with pytest.raises(SpatialContextError):
-            sc1 = niche_vlaanderen.niche.SpatialContext(topdown)
+            niche_vlaanderen.niche.SpatialContext(topdown)
 
     def test_nocrs(self):
         nocrs = rasterio.open("tests/data/small_nocrs.asc")

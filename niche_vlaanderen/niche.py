@@ -279,13 +279,13 @@ class Niche(object):
             for scen in self._options["floodplains"]:
                 ct_nl = dict()
 
-                keys = set(FloodPlain.__init__.__code__.co_varnames) \
-                       & set(self._code_tables)
+                keys = set(FloodPlain.__init__.__code__.co_varnames)\
+                    & set(self._code_tables)
 
                 for k in keys:
                     ct_nl[k] = self._code_tables[k]
 
-                self.fp = FloodPlain(name=scen["name"],**ct_nl)
+                self.fp = FloodPlain(name=scen["name"], **ct_nl)
 
                 depth_file = os.path.join(os.path.dirname(config),
                                           scen["depth"])
@@ -300,7 +300,8 @@ class Niche(object):
                     self._files_written.update(self.fp._files_written)
 
         overwrite = False
-        if "overwrite_files" in self._options and self._options["overwrite_files"]:
+        if "overwrite_files" in self._options and \
+                self._options["overwrite_files"]:
             overwrite = True
 
         if "output_dir" in options:
@@ -591,7 +592,7 @@ class Niche(object):
 
         for vi in self._vegetation:
             path = '{}/{}V{:02d}.tif'.format(folder, prefix, vi)
-            files[vi]= path
+            files[vi] = path
 
         for vi in self._abiotic:
             path = '{}/{}{}.tif'.format(folder, prefix, vi)
@@ -609,7 +610,6 @@ class Niche(object):
                 else:
                     raise NicheException(
                         "File {} already exists".format(files[key]))
-
 
         # write a summary file containing the table of the model
         self.table.to_csv(files["summary"], index=False)
@@ -903,7 +903,8 @@ class NicheDelta(object):
 
         # the error below should not occur as we check the context, but
         # better safe than sorry
-        if n1._vegetation[1].size != n2._vegetation[1].size: # pragma: no cover
+        if n1._vegetation[1].size != \
+                n2._vegetation[1].size:  # pragma: no cover
             raise NicheException("Arrays have different size.")
 
         if len(n1._vegetation) != len(n2._vegetation):
@@ -978,7 +979,6 @@ class NicheDelta(object):
                         "File {} already exists".format(files[key]))
 
         for vi in self._delta:
-            path = folder + '/D%s.tif' % vi
             with rasterio.open(files[vi], 'w', **params) as dst:
                 dst.write(self._delta[vi], 1)
 

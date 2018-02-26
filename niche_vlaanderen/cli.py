@@ -2,6 +2,7 @@ import click
 import niche_vlaanderen
 from pkg_resources import resource_filename
 
+
 @click.command()
 @click.pass_context
 @click.option('--example', is_flag=True,

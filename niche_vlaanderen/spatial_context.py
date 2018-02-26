@@ -39,7 +39,7 @@ class SpatialContext(object):
         self.width = int(dst.width)
         self.height = int(dst.height)
         # only occurs on Python 2
-        if dst.crs is None: # pragma: no cover
+        if dst.crs is None:  # pragma: no cover
             self.crs = ""
         elif isinstance(dst.crs, str):
             self.crs = dst.crs

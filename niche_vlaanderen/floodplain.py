@@ -1,4 +1,4 @@
-from __future__  import division
+from __future__ import division
 
 import rasterio
 import os
@@ -63,7 +63,7 @@ class FloodPlain(object):
         check_codes_used("duration", duration,
                          self._ct["duration"]["code"])
         check_codes_used("period", period,
-                         ["summer","winter"])
+                         ["summer", "winter"])
 
         for veg_code, subtable_veg in \
                 self._ct["lnk_potential"].groupby(["veg_code"]):
@@ -150,9 +150,11 @@ class FloodPlain(object):
         labels = self._ct["potential"]["description"]
         values = self._ct["potential"]["code"]
 
-        colors = [im.cmap(i/(len(values) - 1)) for (i, value) in enumerate(values)]
+        colors = [im.cmap(i/(len(values) - 1))
+                  for (i, value) in enumerate(values)]
         patches = [mpatches.Patch(color=colors[i],
-                                  label=labels[i]) for (i, value) in enumerate(values)]
+                                  label=labels[i])
+                   for (i, value) in enumerate(values)]
         plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2,
                    borderaxespad=0.)
 
@@ -195,7 +197,8 @@ class FloodPlain(object):
             name = self.name + "-"
 
         for vi in self._veg:
-            filename = "{}F{:02d}-{}-P{}-{}.tif".format(name,
+            filename = "{}F{:02d}-{}-P{}-{}.tif".format(
+                name,
                 vi, self.options["frequency"], self.options["duration"],
                 self.options["period"])
             path = folder + "/" + filename
@@ -218,7 +221,6 @@ class FloodPlain(object):
         Returns
         =======
         combined: FloodPlain
-           
         """
 
         # check niche model has been run
@@ -239,7 +241,7 @@ class FloodPlain(object):
         new = copy.copy(self)
         for vi in new._veg:
             nodata = ((niche_result._vegetation[vi] == 255) |
-                      (new._veg[vi] ==-99))
+                      (new._veg[vi] == -99))
             new._veg[vi] = niche_result._vegetation[vi] * new._veg[vi]
             new._veg[vi][nodata] = -99
 
