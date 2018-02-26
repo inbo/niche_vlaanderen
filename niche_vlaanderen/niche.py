@@ -21,6 +21,7 @@ import os.path
 import numbers
 import yaml
 import datetime
+import sys
 
 _allowed_input = {
     "soil_code", "mlw", "msw", "mhw", "seepage",
@@ -119,6 +120,7 @@ class Niche(object):
         s += "  numpy: {}\n".format(np.__version__)
         s += "  rasterio: {}\n".format(rasterio.__version__)
         s += "  gdal: {}\n".format(rasterio.__gdal_version__)
+        s += "  python: '{}'\n".format(sys.version)
 
         s += "\n"
         s += "model_options:\n"
