@@ -163,9 +163,9 @@ class TestNiche(TestCase):
 
         shutil.rmtree(tmpdir)
 
-    def create_small(self):
+    @staticmethod
+    def create_small():
         myniche = niche_vlaanderen.Niche()
-
         myniche.read_config_file("tests/small.yaml")
         return myniche
 
@@ -530,8 +530,12 @@ class TestNicheDelta(TestCase):
         with pytest.raises(NicheException):
             delta = niche_vlaanderen.NicheDelta(small, myniche)
 
-    def invalidDelta(self):
+    def testinvalidDelta(self):
         small = niche_vlaanderen.Niche()
+        with pytest.raises(NicheException):
+            # should fail as there is no extent yet
+            delta = niche_vlaanderen.NicheDelta(small, small)
+
         small.read_config_file("tests/small_simple.yaml")
         with pytest.raises(NicheException):
             # should fail as the model has not yet been run
@@ -539,11 +543,23 @@ class TestNicheDelta(TestCase):
 
         zwb = TestNiche.create_zwarte_beek_niche()
         zwb.run()
-        small.run()
+        small.run(full_model=False)
         # should fail due to different extent
         with pytest.raises(NicheException):
             delta = niche_vlaanderen.NicheDelta(zwb, small)
 
+    def test_overwrite_file(self):
+        myniche = TestNiche.create_small();
+        myniche.run(full_model=False)
+        delta = niche_vlaanderen.NicheDelta(myniche, myniche)
+        tmpdir = tempfile.mkdtemp()
+        delta.write(tmpdir)
+        # should raise: file already exists
+        with pytest.raises(NicheException):
+            delta.write(tmpdir)
+        # should just warn
+        delta.write(tmpdir, overwrite_files=True)
+        shutil.rmtree(tmpdir)
 
 
 @pytest.mark.skipif(

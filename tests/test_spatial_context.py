@@ -162,3 +162,7 @@ class testSpatialContext(TestCase):
         with pytest.raises(SpatialContextError):
             sc1 = niche_vlaanderen.niche.SpatialContext(topdown)
 
+    def test_nocrs(self):
+        nocrs = rasterio.open("tests/data/small_nocrs.asc")
+        sc = niche_vlaanderen.niche.SpatialContext(nocrs)
+        assert sc.crs == ""
