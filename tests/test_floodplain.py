@@ -39,6 +39,9 @@ class TestFloodPlain(TestCase):
 
     def test_table(self):
         fp = nv.FloodPlain()
+        with pytest.raises(FloodPlainException):
+            fp.table
+
         fp.calculate(depth_file="testcase/floodplains/ff_bt_t10_h.asc",
                      frequency="T10", period="winter", duration=1)
         df = fp.table

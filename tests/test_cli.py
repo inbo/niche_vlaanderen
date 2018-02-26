@@ -15,16 +15,18 @@ def test_cli_no_param():
 def test_cli_floodplain():
     runner = CliRunner()
 
-    result = runner.invoke(nv_cli.cli, ['tests/floodplain-codetables.yml'])
+    runner.invoke(nv_cli.cli, ['tests/floodplain-codetables.yml'])
 
     dir = os.listdir("_output")
     result_eerste = [f.startswith("eerste") for f in dir]
     assert sum(result_eerste) == 24
 
+
 @pytest.mark.skipwindows27
 def test_example_yml():
     runner = CliRunner()
-    # the following returns the example yaml file, which we will test in the next step
+    # the following returns the example yaml file, which we will test in the
+    # next step
     result = runner.invoke(nv_cli.cli, ["--example"])
     # this is written to a file
     with open("tests/_example.yml", "w") as text_file:
@@ -34,9 +36,8 @@ def test_example_yml():
     assert "files_written:" in result2.output
     assert "mhw_25: " in result2.output
 
+
 def test_get_version():
     runner = CliRunner()
-    # the following returns the example yaml file, which we will test in the next step
     result = runner.invoke(nv_cli.cli, ["--version"])
     assert "niche_vlaanderen version: 1.0" in result.output
-

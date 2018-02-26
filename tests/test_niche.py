@@ -24,13 +24,12 @@ class TestNiche(TestCase):
     def test_invalidfile(self):
         n = niche_vlaanderen.Niche()
         with pytest.raises(RasterioIOError):
-            result = n.set_input("msw", "nonexistingfile")
+            n.set_input("msw", "nonexistingfile")
 
     def test_invalid_input_type(self):
         n = niche_vlaanderen.Niche()
         with pytest.raises(NicheException):
-            result = n.set_input("bla",
-                                 "testcase/zwarte_beek/input/soil_code.asc")
+            n.set_input("bla", "testcase/zwarte_beek/input/soil_code.asc")
 
     @staticmethod
     def create_zwarte_beek_niche():
@@ -88,21 +87,22 @@ class TestNiche(TestCase):
         o3 = myniche.occurrence
         o3 = pd.DataFrame(o3, index=[0])
 
-        self.assertTrue(np.all(o1>=o2))
-        self.assertTrue(np.all(o2>=o3))
+        self.assertTrue(np.all(o1 >= o2))
+        self.assertTrue(np.all(o2 >= o3))
 
         tmpdir = tempfile.mkdtemp()
         # if a subdir does not exist - it should be created
         tmpdir = tmpdir + '/subdir'
         myniche.write(tmpdir)
         # check tempdir contains the vegetation and the abiotic files
-        expected_files = ["nutrient_level.tif", "acidity.tif",
-             'V01.tif', 'V02.tif', 'V03.tif', 'V04.tif', 'V05.tif', 'V06.tif',
-             'V07.tif', 'V08.tif', 'V09.tif', 'V10.tif', 'V11.tif', 'V12.tif',
-             'V13.tif', 'V14.tif', 'V15.tif', 'V16.tif', 'V17.tif', 'V18.tif',
-             'V19.tif', 'V20.tif', 'V21.tif', 'V22.tif', 'V23.tif', 'V24.tif',
-             'V25.tif', 'V26.tif', 'V27.tif', 'V28.tif', 'log.txt',
-             'summary.csv']
+        expected_files = [
+            "nutrient_level.tif", "acidity.tif",
+            'V01.tif', 'V02.tif', 'V03.tif', 'V04.tif', 'V05.tif', 'V06.tif',
+            'V07.tif', 'V08.tif', 'V09.tif', 'V10.tif', 'V11.tif', 'V12.tif',
+            'V13.tif', 'V14.tif', 'V15.tif', 'V16.tif', 'V17.tif', 'V18.tif',
+            'V19.tif', 'V20.tif', 'V21.tif', 'V22.tif', 'V23.tif', 'V24.tif',
+            'V25.tif', 'V26.tif', 'V27.tif', 'V28.tif', 'log.txt',
+            'summary.csv']
 
         dir = os.listdir(tmpdir)
 
@@ -172,7 +172,6 @@ class TestNiche(TestCase):
     @pytest.mark.skipif(
         distutils.spawn.find_executable("gdalinfo") is None,
         reason="gdalinfo not available in the environment.")
-
     @pytest.mark.skipwindows27
     def test_zwarte_beek_validate(self):
         myniche = self.create_zwarte_beek_niche()
@@ -183,7 +182,7 @@ class TestNiche(TestCase):
         info = subprocess.check_output(
             ["gdalinfo",
              "-stats",
-            os.path.join(tmpdir, 'V01.tif')]
+             os.path.join(tmpdir, 'V01.tif')]
         ).decode('utf-8')
         print(info)
         assert ("(216580.000000000000000,198580.000000000000000)" in
@@ -220,14 +219,14 @@ class TestNiche(TestCase):
         info = subprocess.check_output(
             ["gdalinfo",
              "-stats",
-            os.path.join(tmpdir, 'mhw_04.tif')]
+             os.path.join(tmpdir, 'mhw_04.tif')]
         ).decode('utf-8')
         print(info)
         self.assertTrue(
             "Origin = (172762.500000000000000,210637.500000000000000)" in
-                info)
-        self.assertTrue ("STATISTICS_MAXIMUM=9" in info)
-        self.assertTrue ("STATISTICS_MINIMUM=0" in info)
+            info)
+        self.assertTrue("STATISTICS_MAXIMUM=9" in info)
+        self.assertTrue("STATISTICS_MINIMUM=0" in info)
         shutil.rmtree(tmpdir)
 
     def test_read_configuration(self):
@@ -389,7 +388,7 @@ class TestNiche(TestCase):
         print(myniche)
         res = myniche.table
         print(res)
-        self.assertEqual((36,3), res.shape)
+        self.assertEqual((36, 3), res.shape)
 
         area_expected = 7 * 6 * 25 * 25 * 28 / 10000
         area = np.sum(res["area_ha"])
@@ -407,7 +406,7 @@ class TestNiche(TestCase):
         stats = myniche.zonal_stats(vector, outside=False)
 
         # we expect no data to be absent as the shape is a mask
-        assert np.any(stats.presence == "no data") == False
+        np.testing.assert_equal(np.all(stats.presence == "no data"), False)
 
         # which also means that present /not present should be equal to the
         # normal table
@@ -418,15 +417,14 @@ class TestNiche(TestCase):
 
         stats = myniche.zonal_stats(vector)
         # we should have nodata areas now
-        assert np.any(stats.presence == "no data") == True
+        assert np.any(stats.presence == "no data")
 
         # these should have shapeid -1 and have area approx 15.16 ha
-        subset = ((stats.presence == "no data") & (stats.vegetation==7)
-                  & (stats.shape_id==-1))
+        subset = ((stats.presence == "no data") & (stats.vegetation == 7)
+                  & (stats.shape_id == -1))
         result = np.sum(stats[(subset)]["area_ha"])
         result = np.round(result, 2)
         assert 15.16 == result
-
 
     def test_uint(self):
         myniche = niche_vlaanderen.Niche()
@@ -441,7 +439,7 @@ class TestNiche(TestCase):
         assert np.all(df[df.presence == "no data"]["area_ha"] == 0.0625)
 
     def test_overwrite_file(self):
-        myniche = self.create_small();
+        myniche = self.create_small()
         myniche.run()
         tmpdir = tempfile.mkdtemp()
         myniche.write(tmpdir)
@@ -451,10 +449,9 @@ class TestNiche(TestCase):
         shutil.rmtree(tmpdir)
 
     def test_overwrite_codetable_nonexisting(self):
-        #assume error - file does not exist
+        # assume error - file does not exist
         with pytest.raises(NicheException):
-            myniche = niche_vlaanderen.Niche(
-                ct_vegetation="nonexisting file")
+            niche_vlaanderen.Niche(ct_vegetation="nonexisting file")
 
     def test_overwrite_codetable(self):
         myniche = niche_vlaanderen.Niche(
@@ -528,28 +525,28 @@ class TestNicheDelta(TestCase):
 
         # we try to compare but both elements have different vegetations
         with pytest.raises(NicheException):
-            delta = niche_vlaanderen.NicheDelta(small, myniche)
+            niche_vlaanderen.NicheDelta(small, myniche)
 
     def testinvalidDelta(self):
         small = niche_vlaanderen.Niche()
         with pytest.raises(NicheException):
             # should fail as there is no extent yet
-            delta = niche_vlaanderen.NicheDelta(small, small)
+            niche_vlaanderen.NicheDelta(small, small)
 
         small.read_config_file("tests/small_simple.yaml")
         with pytest.raises(NicheException):
             # should fail as the model has not yet been run
-            delta = niche_vlaanderen.NicheDelta(small, small)
+            niche_vlaanderen.NicheDelta(small, small)
 
         zwb = TestNiche.create_zwarte_beek_niche()
         zwb.run()
         small.run(full_model=False)
         # should fail due to different extent
         with pytest.raises(NicheException):
-            delta = niche_vlaanderen.NicheDelta(zwb, small)
+            niche_vlaanderen.NicheDelta(zwb, small)
 
     def test_overwrite_file(self):
-        myniche = TestNiche.create_small();
+        myniche = TestNiche.create_small()
         myniche.run(full_model=False)
         delta = niche_vlaanderen.NicheDelta(myniche, myniche)
         tmpdir = tempfile.mkdtemp()

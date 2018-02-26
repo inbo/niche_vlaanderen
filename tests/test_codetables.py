@@ -1,8 +1,10 @@
 from unittest import TestCase
 import pandas as pd
-from niche_vlaanderen.codetables import *
+from niche_vlaanderen.codetables import check_inner_join, check_unique,\
+    check_lower_upper_boundaries, CodeTableException, validate_tables_acidity
 import pytest
 import niche_vlaanderen
+
 
 class TestCodeTables(TestCase):
     def test_boundaries_correct(self):
@@ -43,10 +45,10 @@ class TestCodeTables(TestCase):
 
     def test_vegetation(self):
         # should not raise
-        v = niche_vlaanderen.Vegetation()
-        badveg =  "tests/data/bad_ct/bad_vegetation.csv"
+        niche_vlaanderen.Vegetation()
+        badveg = "tests/data/bad_ct/bad_vegetation.csv"
         with pytest.raises(CodeTableException):
-            v = niche_vlaanderen.Vegetation(ct_vegetation=badveg)
+            niche_vlaanderen.Vegetation(ct_vegetation=badveg)
 
     def test_inner_join(self):
         df1 = pd.read_csv("niche_vlaanderen/system_tables/soil_codes.csv")
@@ -57,4 +59,4 @@ class TestCodeTables(TestCase):
     def test_unique_mlw(self):
         badveg = "tests/data/bad_ct/differentmlw.csv"
         with pytest.raises(CodeTableException):
-            v = niche_vlaanderen.Vegetation(ct_vegetation=badveg)
+            niche_vlaanderen.Vegetation(ct_vegetation=badveg)
