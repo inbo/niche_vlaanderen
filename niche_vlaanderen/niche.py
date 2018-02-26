@@ -772,17 +772,21 @@ class Niche(object):
 
         return df
 
-    def zonal_stats(self, vectors):
+    def zonal_stats(self, vectors, outside=True):
         """Calculates zonal statistics using vectors
 
         Parameters
         ==========
         vectors: path to a vector source or geo-like python objects
-        you can specify a path to a vector file eg "../test.shp", or pass
-        geo objects from other python functions.
+            you can specify a path to a vector file eg "../test.shp", or pass
+            geo objects from other python functions.
 
-        Note that the vector should be in the same coordinate system as the
-        raster.
+            Note that the vector should be in the same coordinate system as the
+            raster.
+        outside: bool (default: False)
+           report values outside shapes as well. The area which is not covered
+           by any shapefile will get shape_id -1.
+
 
         Returns
         =======
@@ -817,6 +821,20 @@ class Niche(object):
 
         df = pd.DataFrame(ti, columns=['vegetation', 'shape_id', 'presence',
                                        'area_ha'])
+
+        if outside:
+            # calculate area outside polygons
+            a = pd.concat([self.table.groupby(by=["vegetation", "presence"])[
+                               "area_ha"].sum(),
+                           df.groupby(by=["vegetation", "presence"])[
+                               "area_ha"].sum()], axis=1)
+            a = a.reset_index().fillna(0)
+            a.columns = ["vegetation", "presence", "all", "inshape"]
+            a["area_ha"] = a["all"] - a["inshape"]
+            a["shape_id"] = -1
+            a = a[["vegetation", "shape_id", "presence", "area_ha"]]
+            df = pd.concat([df, a])
+
         return df
 
     def _vegcode2name(self, vegcode):
@@ -862,6 +880,7 @@ class NicheDelta(object):
 
     def __init__(self, n1, n2):
         self._delta = dict()
+        self._log = logging.getLogger("niche_vlaanderen")
 
         if n1._context is None or n2._context is None:
             raise NicheException(

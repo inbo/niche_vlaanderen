@@ -404,7 +404,7 @@ class TestNiche(TestCase):
         vector = "testcase/zwarte_beek/input/study_area_l72.geojson"
 
         # there is only one polygon
-        stats = myniche.zonal_stats(vector)
+        stats = myniche.zonal_stats(vector, outside=False)
 
         # we expect no data to be absent as the shape is a mask
         assert np.any(stats.presence == "no data") == False
@@ -415,6 +415,18 @@ class TestNiche(TestCase):
         sum = np.sum(stats.area_ha[(stats.presence == "present")])
         table_sum = np.sum(table.area_ha[(table.presence == "present")])
         assert table_sum == sum
+
+        stats = myniche.zonal_stats(vector)
+        # we should have nodata areas now
+        assert np.any(stats.presence == "no data") == True
+
+        # these should have shapeid -1 and have area approx 15.16 ha
+        subset = ((stats.presence == "no data") & (stats.vegetation==7)
+                  & (stats.shape_id==-1))
+        result = np.sum(stats[(subset)]["area_ha"])
+        result = np.round(result, 2)
+        assert 15.16 == result
+
 
     def test_uint(self):
         myniche = niche_vlaanderen.Niche()
