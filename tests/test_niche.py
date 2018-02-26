@@ -512,7 +512,7 @@ class TestNicheDelta(TestCase):
 @pytest.mark.skipif(
         distutils.spawn.find_executable("gdalinfo") is None,
         reason="gdalinfo not available in the environment.")
-
+@pytest.mark.skipwindows27
 def test_conductivity2minerality():
     tmpdir = tempfile.mkdtemp()
     niche_vlaanderen.conductivity2minerality(
