@@ -155,7 +155,6 @@ class testSpatialContext(TestCase):
         sc1 = niche_vlaanderen.niche.SpatialContext(test_small_ds)
         self.assertEqual(625, sc1.cell_area)
 
-    @pytest.mark.skipwindows27
     def test_topdown(self):
         topdown = rasterio.open("tests/data/mlw_small.xyz")
         with pytest.raises(SpatialContextError):

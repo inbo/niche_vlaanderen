@@ -11,7 +11,6 @@ def test_cli_no_param():
     assert result.output == expected
 
 
-@pytest.mark.skipwindows27
 def test_cli_floodplain():
     runner = CliRunner()
 
@@ -22,7 +21,6 @@ def test_cli_floodplain():
     assert sum(result_eerste) == 24
 
 
-@pytest.mark.skipwindows27
 def test_example_yml():
     runner = CliRunner()
     # the following returns the example yaml file, which we will test in the
