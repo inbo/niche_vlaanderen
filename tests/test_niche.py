@@ -545,6 +545,7 @@ class TestNicheDelta(TestCase):
         with pytest.raises(NicheException):
             niche_vlaanderen.NicheDelta(zwb, small)
 
+    @pytest.mark.skipwindows27
     def test_overwrite_file(self):
         myniche = TestNiche.create_small()
         myniche.run(full_model=False)
