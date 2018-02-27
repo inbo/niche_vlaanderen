@@ -17,7 +17,6 @@ environment:
       CONDA_PY: "27"
       CONDA_INSTALL_LOCN: "C:\\Miniconda"
       RASTERIO_DEV_REPO: "-c conda-forge/label/dev"
-      SKIP27: '-m "not skipwindows27"'
 
 install:
     # Use the pre-installed Miniconda for the desired arch
