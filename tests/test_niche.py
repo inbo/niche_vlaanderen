@@ -306,9 +306,6 @@ class TestNiche(TestCase):
 
         myniche.run(abiotic=True)
 
-    @pytest.mark.skipif(sys.platform == "win32" and
-                        int(rasterio.__version__.split(".")[0]) >= 1,
-                        reason="fails on win32 and latest version of rasterio")
     def test_rereadoutput(self):
         """
         This tests checks if the output written by the model is a valid input
@@ -395,8 +392,6 @@ class TestNiche(TestCase):
 
         assert area == area_expected
 
-    @pytest.mark.skipif(sys.platform == "win32" and sys.version_info < (3, 2),
-                        reason="fails on win32 - fixed in recent rasterio")
     def test_zonal_stats(self):
         myniche = self.create_zwarte_beek_niche()
         myniche.run(full_model=False)
