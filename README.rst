@@ -7,7 +7,8 @@ Niche Vlaanderen
     :target: https://ci.appveyor.com/project/johanvdw/niche-vlaanderen-tuwi7
 .. image:: https://coveralls.io/repos/github/inbo/niche_vlaanderen/badge.png?branch=master
     :target: https://coveralls.io/github/inbo/niche_vlaanderen?branch=master
-
+.. image:: https://zenodo.org/badge/102339389.svg
+   :target: https://zenodo.org/badge/latestdoi/102339389
 
 
 (Nederlandstalige versie hieronder / Dutch version below)
