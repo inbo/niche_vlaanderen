@@ -883,6 +883,7 @@ class NicheDelta(object):
     _labels = ["not present in both models", "present in both models",
                "only in model 1", "only in model 2",
                "nodata in one model"]
+    name = ""
 
     def __init__(self, n1, n2):
         self._delta = dict()
@@ -967,13 +968,17 @@ class NicheDelta(object):
             compress="DEFLATE"
         )
 
+        prefix = ""
+        if self.name != "":
+            prefix = self.name + "_"
+
         files = {
-            "summary": folder + "/delta_summary.csv",
-            "legend": folder + "/legend_delta.csv"
+            "summary": "{}/{}delta_summary.csv".format(folder, prefix),
+            "legend": "{}/{}legend_delta.csv".format(folder, prefix)
         }
 
         for vi in self._delta:
-            files[vi] = folder + '/D%s.tif' % vi
+            files[vi] = '{}/{}D{}.tif'.format(folder, prefix, vi)
 
         for key in files:
             if os.path.exists(files[key]):
@@ -1022,7 +1027,14 @@ class NicheDelta(object):
 
         im = plt.imshow(self._delta[key], extent=mpl_extent,
                         norm=Normalize(0, max(self._values)))
-        ax.set_title("{} ({})".format(self._n1._vegcode2name(key), key))
+
+        if self.name != "":
+            title = "{} ({}-{})".format(self.name,
+                                        self._n1._vegcode2name(key), key)
+        else:
+            title = "{} ({})".format(self._n1._vegcode2name(key), key)
+
+        ax.set_title(title)
 
         labels = self._labels
         values = self._values

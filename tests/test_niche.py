@@ -451,7 +451,7 @@ class TestNiche(TestCase):
 
 
 class TestNicheDelta(TestCase):
-    def test_simplevsfull(self):
+    def test_simplevsfull_plot(self):
         config = 'tests/small_simple.yaml'
         simple = niche_vlaanderen.Niche()
         simple.run_config_file(config)
@@ -474,10 +474,23 @@ class TestNicheDelta(TestCase):
         plt.show = lambda: None
 
         delta.plot(5)
+        delta.name = "vergelijking"
+        delta.plot(5)
+
+    def test_simplevsfull_write(self):
+        config = 'tests/small_simple.yaml'
+        simple = niche_vlaanderen.Niche()
+        simple.run_config_file(config)
+
+        config_full = "tests/small.yaml"
+        full = niche_vlaanderen.Niche()
+        full.run_config_file(config_full)
+
+        delta = niche_vlaanderen.NicheDelta(simple, full)
 
         tmpdir = tempfile.mkdtemp()
-        tmpdir = tmpdir + "/new"
-        delta.write(tmpdir)
+        tmpsubdir = tmpdir + "/new"
+        delta.write(tmpsubdir)
         # check tempdir contains the vegetation and the abiotic files
         expected_files = [
              'D1.tif', 'D2.tif', 'D3.tif', 'D4.tif', 'D5.tif', 'D6.tif',
@@ -487,13 +500,19 @@ class TestNicheDelta(TestCase):
              'D25.tif', 'D26.tif', 'D27.tif', 'D28.tif', 'legend_delta.csv',
              'delta_summary.csv']
 
-        dir = os.listdir(tmpdir)
+        dir = os.listdir(tmpsubdir)
 
         if sys.version_info < (3, 2):
             self.assertItemsEqual(expected_files, dir)
         else:
             self.assertCountEqual(expected_files, dir)
 
+        delta.name = "vgl"
+        delta.write(tmpsubdir)
+
+        dir = os.listdir(tmpsubdir)
+        assert 60 == len(dir)
+        assert 30 == sum(f.startswith("vgl_") for f in dir)
         shutil.rmtree(tmpdir)
 
     def test_differentvegsize(self):
