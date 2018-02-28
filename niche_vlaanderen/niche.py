@@ -346,13 +346,6 @@ class Niche(object):
             if band.dtype.kind == 'u':
                 band = band.astype(int)
 
-            # mhw, mlw and msw are rounded to two decimals to make sure
-            # that comparisons give the expected value (eg not 15.00001 > 15
-            # but ==
-            # see https://github.com/inbo/niche_vlaanderen/issues/25
-            if f in ('mhw', 'mlw', 'msw'):
-                band = np.round(band, 2)
-
             if f in ("nitrogen_animal", "nitrogen_fertilizer",
                      "nitrogen_atmospheric"):
                 band = band.astype('float32')
@@ -366,6 +359,19 @@ class Niche(object):
                 band[np.isclose(band, nodata)] = np.nan
             else:
                 band[band == nodata] = -99
+
+            # As mxw can be both float or integer, we will force -99 anyway
+            # for these
+            if f in ["mhw", "mlw", "msw"]:
+                band[band == nodata] = -99
+
+
+            # mhw, mlw and msw are rounded to two decimals to make sure
+            # that comparisons give the expected value (eg not 15.00001 > 15
+            # but ==
+            # see https://github.com/inbo/niche_vlaanderen/issues/25
+            if (f in ('mhw', 'mlw', 'msw')) and band.dtype.kind == 'f':
+                band = np.round(band, 2)
 
             inputarray[f] = band
 
