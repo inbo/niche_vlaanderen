@@ -74,7 +74,7 @@ a workaround (:ref:`missing_gcs`).
 
 .. code-block:: default
 
-    conda install pandas pyyaml rasterio rasterstats
+    conda install pandas pyyaml rasterio fiona
     pip install niche_vlaanderen==1.0b1
 
 It is strongly recommended to install also `matplotlib` (otherwise plotting will not work):
