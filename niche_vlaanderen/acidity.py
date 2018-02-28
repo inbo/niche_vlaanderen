@@ -69,6 +69,7 @@ class Acidity(object):
             result[selection] = \
                 subtable.soil_mlw_class.reindex(index)[selection]
 
+        result[mlw == -99] = -99
         result = result.reshape(orig_shape)
         return result
 
@@ -109,11 +110,14 @@ class Acidity(object):
         return result
 
     def _get_seepage(self, seepage):
+        """Classify seepage values
+        """
         orig_shape = seepage.shape
         seepage = seepage.flatten()
         index = np.digitize(seepage, self._ct_seepage.seepage_max, right=True)
-        seepage = self._ct_seepage.seepage.reindex(index)
-        return seepage.values.reshape(orig_shape)
+        seepage_class = self._ct_seepage.seepage.reindex(index)
+        seepage_class[(np.isnan(seepage) | (seepage == -99))]
+        return seepage_class.values.reshape(orig_shape)
 
     def calculate(self, soil_class, mlw, inundation, seepage, minerality,
                   rainwater):

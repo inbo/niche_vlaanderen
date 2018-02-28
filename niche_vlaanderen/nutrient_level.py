@@ -88,6 +88,7 @@ class NutrientLevel(object):
 
             result[soil_sel] = table_sel["nitrogen_mineralisation"][index]
 
+        result[msw_array == -99] = np.nan
         result = result.reshape(orig_shape)
         return result
 
@@ -133,8 +134,12 @@ class NutrientLevel(object):
             result[selection] = \
                 table_sel.nutrient_level.reindex(index)[selection]
 
-        # Note that niche_vlaanderen is different from the original model here:
-        # only if nutrient_level <4 the inundation rule is applied.
+        # np.nan values are not ignored in np.digitize
+        result[np.isnan(nitrogen)] = self.nodata
+
+        # Note that niche_vlaanderen is different from the original (Dutch)
+        # model here:
+        # only if nutrient_level < 4 the inundation rule is applied.
         selection = ((result < 4) & (result != self.nodata))
         result[selection] = (result + (inundation > 0))[selection]
         result = result.reshape(orig_shape)
