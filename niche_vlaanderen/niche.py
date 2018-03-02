@@ -363,7 +363,7 @@ class Niche(object):
             # As mxw can be both float or integer, we will force -99 anyway
             # for these
             if f in ["mhw", "mlw", "msw"]:
-                band[band == nodata] = -99
+                band[np.isnan(band)] = -99
 
 
             # mhw, mlw and msw are rounded to two decimals to make sure
