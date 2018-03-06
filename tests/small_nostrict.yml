@@ -1,0 +1,21 @@
+input_layers:
+  mhw: data/small/mlw.asc
+  mlw: data/small/mhw.asc # this is wrong on purpose
+  msw: data/small/msw.asc
+  soil_code: data/small/soil_code.asc
+  seepage: 0
+  inundation_acidity: 0
+  inundation_nutrient: 0
+  nitrogen_atmospheric: 30
+  nitrogen_animal: 0
+  nitrogen_fertilizer: 0
+  management: 1
+  minerality: 1
+  rainwater: 0
+
+model_options:
+  simple_model: False
+  deviation: True
+  output_dir: _output
+  overwrite_files: True
+  strict_checks: False

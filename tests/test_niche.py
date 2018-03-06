@@ -274,6 +274,16 @@ class TestNiche(TestCase):
         myniche.run(full_model=True, strict_checks=False)
         # should not raise
 
+    def test_mxw_validation_yml(self):
+        myniche = niche_vlaanderen.Niche()
+        # should not raise
+        myniche.run_config_file("tests/small_nostrict.yml")
+
+        n2 = niche_vlaanderen.Niche()
+        n2.read_config_file("tests/small_nostrict.yml")
+        with pytest.raises(NicheException):
+            n2.run()
+
     def test_nitrogen_validation(self):
         myniche = self.create_small()
         myniche.set_input("nitrogen_animal", 10001)

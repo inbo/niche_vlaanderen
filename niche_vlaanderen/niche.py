@@ -269,11 +269,15 @@ class Niche(object):
         options = config_loaded["model_options"]
 
         deviation = "deviation" in options and options["deviation"]
+        strict_checks = True
+        if "strict_checks" in options and not options["strict_checks"]:
+            strict_checks = False
         full_model = True
         if "full_model" in options and not options["full_model"]:
             full_model = False
 
-        self.run(full_model, deviation)
+        self.run(full_model=full_model, deviation=deviation,
+                 strict_checks=strict_checks)
 
         if "floodplains" in self._options:
             for scen in self._options["floodplains"]:
