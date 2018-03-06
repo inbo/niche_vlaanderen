@@ -29,7 +29,7 @@ class TestFloodPlain(TestCase):
     def test_calculate_arcgis(self):
         # note this tests uses an arcgis raster with only 8bit unsigned values
         fp = nv.FloodPlain()
-        fp.calculate("tests/data/ff_bt_t10_h/", "T10",
+        fp.calculate("tests/data/ff_bt_t10_h", "T10",
                      period="winter", duration=1)
         with rasterio.open(
                 "testcase/floodplains/result/F25-T10-P1-winter.asc") as dst:

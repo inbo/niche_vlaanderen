@@ -193,7 +193,7 @@ class Niche(object):
             self._inputvalues[key] = value
 
         else:
-            with rasterio.open(value) as dst:
+            with rasterio.open(value, "r") as dst:
                 sc_new = SpatialContext(dst)
             if self._context is None:
                 self._context = sc_new
@@ -333,7 +333,7 @@ class Niche(object):
         # Load every input_file in the input_array
         inputarray = dict()
         for f in self._inputfiles:
-            dst = rasterio.open(self._inputfiles[f])
+            dst = rasterio.open(self._inputfiles[f], "r")
 
             nodata = dst.nodatavals[0]
 
@@ -697,7 +697,7 @@ class Niche(object):
         if key in self._inputfiles and key not in self._inputarray:
             # if set_input has been done, but no model run yet
             # in this case we will open the file and fetch the data
-            with rasterio.open(self._inputfiles[key]) as dst:
+            with rasterio.open(self._inputfiles[key], "r") as dst:
                 window = self._context.get_read_window(SpatialContext(dst))
                 v = dst.read(1, window=window)
                 v = ma.masked_equal(v, dst.nodatavals[0])
@@ -1095,7 +1095,7 @@ def conductivity2minerality(conductivity, minerality):
     with warnings.catch_warnings():
         warnings.simplefilter("ignore", FutureWarning)
 
-        with rasterio.open(conductivity) as src:
+        with rasterio.open(conductivity, "r") as src:
             band = src.read(1)
             band = np.where(band > 500, 1, 0)
             profile = src.profile

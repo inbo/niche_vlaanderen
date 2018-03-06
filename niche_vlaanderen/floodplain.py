@@ -138,7 +138,7 @@ class FloodPlain(object):
 
 
         """
-        with rasterio.open(depth_file) as dst:
+        with rasterio.open(depth_file, "r") as dst:
             depth = dst.read(1)
             self._context = SpatialContext(dst)
             if depth.dtype.kind == 'u':

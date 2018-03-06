@@ -20,17 +20,29 @@ environment:
 
 install:
     # Use the pre-installed Miniconda for the desired arch
-    - cmd: call %CONDA_INSTALL_LOCN%\Scripts\activate.bat
-    - cmd: conda update -y -q conda
-    - cmd: conda config --system --add pinned_packages defaults::conda
-    - cmd: conda config --add channels conda-forge
-    - cmd: conda install -c conda-forge gdal pandas fiona
-    - cmd: conda install -y -q %RASTERIO_DEV_REPO% rasterio
-    - cmd: pip install --no-cache-dir -r dev-requirements.txt
-    - cmd: pip install hypothesis 
-      # it is strange that hypothesis is only required on windows + python3
+    - call %CONDA_INSTALL_LOCN%\Scripts\activate.bat
+    - conda update -y -q conda
+    - conda config --system --add pinned_packages defaults::conda
+    - conda create --name niche_env -y -q
+    - activate niche_env
+    - conda config --add channels conda-forge
+    - conda install -y -q pandas fiona
+    - conda install -y -q %RASTERIO_DEV_REPO% rasterio
+    - pip install --no-cache-dir -r dev-requirements.txt
 
 build: false
 
 test_script:
-  - pytest --verbose --tb=long %SKIP27%
+    - call %CONDA_INSTALL_LOCN%\Scripts\activate.bat
+    - activate niche_env   
+      # note we use an env to make sure GDAL_DATA is correctly set
+      # we must do this again after installation because setting the variable is
+      # triggered on activation.
+    - pytest --verbose --tb=long
+
+# uncomment to debug appveyor (login to vm)
+# init:
+#   - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+# 
+# on_finish:
+#   - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
