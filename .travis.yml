@@ -79,3 +79,4 @@ deploy:
       on:
         branch: master
         python: 3.5
+        condition: $RASTERIO_VERSION=0.36.0
