@@ -26,6 +26,16 @@ class TestFloodPlain(TestCase):
             expected = dst.read(1)
         np.testing.assert_equal(expected, fp._veg[25])
 
+    def test_calculate_arcgis(self):
+        # note this tests uses an arcgis raster with only 8bit unsigned values
+        fp = nv.FloodPlain()
+        fp.calculate("tests/data/ff_bt_t10_h/", "T10",
+                     period="winter", duration=1)
+        with rasterio.open(
+                "testcase/floodplains/result/F25-T10-P1-winter.asc") as dst:
+            expected = dst.read(1)
+        np.testing.assert_equal(expected, fp._veg[25])
+
     def test_calculate_withnodata(self):
         fp = nv.FloodPlain()
         fp.calculate("tests/data/depths_with_nodata.asc", "T10",

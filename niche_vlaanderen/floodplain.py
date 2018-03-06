@@ -139,6 +139,8 @@ class FloodPlain(object):
         with rasterio.open(depth_file) as dst:
             depth = dst.read(1)
             self._context = SpatialContext(dst)
+            if depth.dtype.kind == 'u':
+                depth = depth.astype(int)
             depth[depth == dst.nodatavals[0]] = -99
         self._calculate(depth, frequency, duration, period)
 

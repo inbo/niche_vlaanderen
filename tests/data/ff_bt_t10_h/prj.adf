@@ -1,0 +1,14 @@
+Projection    LAMBERT
+Datum         AI_BELG72
+Spheroid      INT1909
+Units         METERS
+Zunits        NO
+Xshift        0.0
+Yshift        0.0
+Parameters    
+  49 50  0.00204 /* 1st standard parallel
+  51 10  0.00204 /* 2nd standard parallel
+   4 22  2.952 /* central meridian
+  90  0  0.0 /* latitude of projection's origin
+150000.013 /* false easting (meters)
+5400088.438 /* false northing (meters)
