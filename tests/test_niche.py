@@ -465,7 +465,8 @@ class TestNiche(TestCase):
             ct_vegetation="tests/data/bad_ct/vegetation_noinnerjoin.csv"
         )
         myniche.read_config_file("tests/small.yaml")
-        myniche.run()
+        with pytest.warns(UserWarning):
+            myniche.run()
 
 
 

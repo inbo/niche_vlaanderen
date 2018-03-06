@@ -1,6 +1,6 @@
 import numpy as np
 from .exception import NicheException
-
+import warnings
 
 class CodeTableException(Exception):
     """
@@ -60,8 +60,6 @@ def check_join(df1, df2, f1, f2=None, inner=True):
     u1 = np.unique(df1[f1])
 
     if not np.array_equal(u1, u2):
-        print(u1)
-        print(u2)
         if inner:
             raise CodeTableException(
                 "Different keys exist in tables.")
@@ -70,7 +68,9 @@ def check_join(df1, df2, f1, f2=None, inner=True):
                 raise CodeTableException(
                     "Not all codes from table 1 are in table 2")
             else:
-                print("Warning, different keys exist in tables")
+                warnings.warn("Warning, different keys exist in tables")
+        print(u1)
+        print(u2)
 
 
 def check_unique(df, col):

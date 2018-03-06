@@ -50,8 +50,9 @@ class TestCodeTables(TestCase):
         # should not raise
         niche_vlaanderen.Vegetation()
         badveg = "tests/data/bad_ct/bad_vegetation.csv"
-        with pytest.raises(CodeTableException):
-            niche_vlaanderen.Vegetation(ct_vegetation=badveg)
+        with pytest.warns(UserWarning):
+            with pytest.raises(CodeTableException):
+                niche_vlaanderen.Vegetation(ct_vegetation=badveg)
 
     def test_inner_join(self):
         df1 = pd.read_csv("niche_vlaanderen/system_tables/soil_codes.csv")
