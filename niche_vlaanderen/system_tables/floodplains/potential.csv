@@ -1,6 +1,6 @@
-code,description
-0, niet combineerbaar
-1, slecht combineerbaar
-2, matig combineerbaar
-3, goed combineerbaar
-4, geen informatie of geen overstroming
+code,description, beschrijving
+0, not tolerant to flooding, niet combineerbaar
+1, poorly tolerant to flooding, slecht combineerbaar
+2, moderate tolerant to flooding, matig combineerbaar
+3, tolerant to flooding, goed combineerbaar
+4, no information or flooding, geen informatie of geen overstroming
