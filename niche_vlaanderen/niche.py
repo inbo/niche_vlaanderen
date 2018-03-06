@@ -97,10 +97,6 @@ class Niche(object):
             if ct is not None:
                 self._set_ct(k, ct)
 
-        if ct_vegetation is None:
-            self._set_ct("ct_vegetation", resource_filename(
-                "niche_vlaanderen",
-                "system_tables/niche_vegetation.csv"))
 
     @property
     def name(self):
@@ -853,9 +849,15 @@ class Niche(object):
         Uses ct_vegetation columns veg_code and veg_type"""
 
         if not hasattr(self, "_vegcode2namedict"):
-            self._ct_vegetation = pd.read_csv(
-                self._code_tables["ct_vegetation"])
-            subtable = self._ct_vegetation[["veg_code", "veg_type"]]
+            if "ct_vegetation" in self._code_tables:
+                ct_vegetation = self._code_tables["ct_vegetation"]
+            else:
+                ct_vegetation = resource_filename(
+                    "niche_vlaanderen",
+                    "system_tables/niche_vegetation.csv")
+
+            ct_vegetation = pd.read_csv(ct_vegetation)
+            subtable = ct_vegetation[["veg_code", "veg_type"]]
             veg_dict = subtable.set_index("veg_code").to_dict()["veg_type"]
             self._vegcode2namedict = veg_dict
         return self._vegcode2namedict[vegcode]
