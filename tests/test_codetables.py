@@ -1,6 +1,6 @@
 from unittest import TestCase
 import pandas as pd
-from niche_vlaanderen.codetables import check_inner_join, check_unique,\
+from niche_vlaanderen.codetables import check_join, check_unique,\
     check_lower_upper_boundaries, CodeTableException, validate_tables_acidity
 import pytest
 import niche_vlaanderen
@@ -37,11 +37,14 @@ class TestCodeTables(TestCase):
         ct_seepage = pd.read_csv(
              "niche_vlaanderen/system_tables/seepage.csv")
 
+        inner = all(v is None for v in self.__init__.__code__.co_varnames[1:])
+
         validate_tables_acidity(ct_acidity=ct_acidity,
                                 ct_soil_mlw_class=ct_soil_mlw_class,
                                 ct_soil_codes=ct_soil_codes,
                                 lnk_acidity=lnk_acidity,
-                                ct_seepage=ct_seepage)
+                                ct_seepage=ct_seepage,
+                                inner=inner)
 
     def test_vegetation(self):
         # should not raise
@@ -54,7 +57,7 @@ class TestCodeTables(TestCase):
         df1 = pd.read_csv("niche_vlaanderen/system_tables/soil_codes.csv")
         print(df1)
         with pytest.raises(CodeTableException):
-            check_inner_join(df1, df1, "soil_code", "soil_group")
+            check_join(df1, df1, "soil_code", "soil_group")
 
     def test_unique_mlw(self):
         badveg = "tests/data/bad_ct/differentmlw.csv"

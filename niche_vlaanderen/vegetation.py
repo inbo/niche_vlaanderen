@@ -39,6 +39,7 @@ class Vegetation(object):
         possible to overwrite this by supplying the niche_vlaanderen parameter
 
         """
+
         if ct_vegetation is None:
             ct_vegetation = resource_filename(
                 "niche_vlaanderen",
@@ -74,12 +75,17 @@ class Vegetation(object):
         self._ct_management = pd.read_csv(ct_management)
         self._ct_inundation = pd.read_csv(ct_inundation)
 
+        # we check for inner joins if codetables are not overwritten
+        # https://github.com/inbo/niche_vlaanderen/issues/106
+        inner = all(v is None for v in self.__init__.__code__.co_varnames[1:])
+
         validate_tables_vegetation(ct_vegetation=self._ct_vegetation,
                                    ct_soil_code=self._ct_soil_code,
                                    ct_acidity=self._ct_acidity,
                                    ct_management=self._ct_management,
                                    ct_nutrient_level=self._ct_nutrient_level,
-                                   ct_inundation=self._ct_inundation)
+                                   ct_inundation=self._ct_inundation,
+                                   inner=inner)
 
         # join soil_code to soil_name where needed
         self._ct_soil_code = self._ct_soil_code.set_index("soil_name")

@@ -459,6 +459,15 @@ class TestNiche(TestCase):
         myniche.read_config_file("tests/small.yaml")
         myniche.run()
 
+    def test_overwrite_codetable_nojoin(self):
+        # test should generate a warning
+        myniche = niche_vlaanderen.Niche(
+            ct_vegetation="tests/data/bad_ct/vegetation_noinnerjoin.csv"
+        )
+        myniche.read_config_file("tests/small.yaml")
+        myniche.run()
+
+
 
 class TestNicheDelta(TestCase):
     def test_simplevsfull_plot(self):

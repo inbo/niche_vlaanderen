@@ -50,11 +50,13 @@ class NutrientLevel(object):
             self._ct_mineralisation["nitrogen_mineralisation"]\
                 .astype("float64")
 
+        inner = all(v is None for v in self.__init__.__code__.co_varnames[1:])
         validate_tables_nutrient_level(self.ct_lnk_soil_nutrient_level,
                                        self._ct_management,
                                        self._ct_mineralisation,
                                        self._ct_soil_code,
-                                       self._ct_nutrient_level)
+                                       self._ct_nutrient_level,
+                                       inner = inner)
 
         # join soil_code to soil_name where needed
         self._ct_soil_code = pd.read_csv(ct_soil_code).set_index("soil_name")

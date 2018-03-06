@@ -45,7 +45,9 @@ class FloodPlain(object):
             self._ct[i] = pd.read_csv(ct)
         self.name = name
 
-        validate_tables_floodplains(**self._ct)
+        inner = all(v is None for v in self.__init__.__code__.co_varnames[1:])
+
+        validate_tables_floodplains(inner=inner, **self._ct)
 
     @property
     def vegetation_calculated(self):

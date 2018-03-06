@@ -34,9 +34,11 @@ def check_lower_upper_boundaries(df, min_col, max_col, value):
             prev_index = index  # noqa: flake8
 
 
-def check_inner_join(df1, df2, f1, f2=None):
+def check_join(df1, df2, f1, f2=None, inner=True):
     """
-    Checks if keys for columns in two table are present in both tables
+    Checks if keys for columns in two dataframes are present.
+    If 'inner' is specified values of both columns must be the same.
+    If 'inner' is false all keys of df1 have to be present in df2.
 
     Parameters
     ==========
@@ -44,6 +46,8 @@ def check_inner_join(df1, df2, f1, f2=None):
     df2: second dataframe
     f1: field in first dataframe
     f2: field in second dataframe
+    inner: boolean
+
 
     Returns
     =======
@@ -58,8 +62,15 @@ def check_inner_join(df1, df2, f1, f2=None):
     if not np.array_equal(u1, u2):
         print(u1)
         print(u2)
-        raise CodeTableException(
-            "Different keys exist in tables.")
+        if inner:
+            raise CodeTableException(
+                "Different keys exist in tables.")
+        else:
+            if not np.all(np.isin(u1, u2)):
+                raise CodeTableException(
+                    "Not all codes from table 1 are in table 2")
+            else:
+                print("Warning, different keys exist in tables")
 
 
 def check_unique(df, col):
@@ -70,7 +81,7 @@ def check_unique(df, col):
 
 
 def validate_tables_acidity(ct_acidity, ct_soil_mlw_class,
-                            ct_soil_codes, lnk_acidity, ct_seepage):
+                            ct_soil_codes, lnk_acidity, ct_seepage, inner):
 
     # check tables
     check_unique(ct_soil_codes, "soil_code")
@@ -83,15 +94,15 @@ def validate_tables_acidity(ct_acidity, ct_soil_mlw_class,
                                  "seepage")
 
     # check links between tables
-    check_inner_join(ct_acidity, lnk_acidity, "acidity")
-    check_inner_join(ct_soil_codes, ct_soil_mlw_class, "soil_group")
-    check_inner_join(ct_soil_mlw_class, lnk_acidity, "soil_mlw_class")
-    check_inner_join(ct_seepage, lnk_acidity, "seepage")
+    check_join(lnk_acidity, ct_acidity, "acidity", inner=inner)
+    check_join(ct_soil_mlw_class, ct_soil_codes, "soil_group", inner=inner)
+    check_join(lnk_acidity, ct_soil_mlw_class, "soil_mlw_class", inner=inner)
+    check_join(lnk_acidity, ct_seepage, "seepage", inner=inner)
 
 
 def validate_tables_nutrient_level(ct_lnk_soil_nutrient_level, ct_management,
                                    ct_mineralisation, ct_soil_code,
-                                   ct_nutrient_level):
+                                   ct_nutrient_level, inner):
     # check tables
     check_unique(ct_soil_code, "soil_code")
     check_unique(ct_soil_code, "soil_name")
@@ -99,28 +110,30 @@ def validate_tables_nutrient_level(ct_lnk_soil_nutrient_level, ct_management,
 
     check_lower_upper_boundaries(ct_mineralisation, "msw_min", "msw_max",
                                  "nitrogen_mineralisation")
-    check_inner_join(ct_mineralisation, ct_soil_code, "soil_name")
+    check_join(ct_mineralisation, ct_soil_code, "soil_name", inner=inner)
 
-    check_inner_join(ct_lnk_soil_nutrient_level, ct_management,
-                     "management_influence", "influence")
+    check_join(ct_lnk_soil_nutrient_level, ct_management,
+                     "management_influence", "influence", inner=inner)
 
     check_lower_upper_boundaries(ct_lnk_soil_nutrient_level,
                                  "total_nitrogen_min", "total_nitrogen_max",
                                  "nutrient_level")
 
-    check_inner_join(ct_lnk_soil_nutrient_level, ct_soil_code, "soil_name")
-    check_inner_join(ct_lnk_soil_nutrient_level, ct_nutrient_level,
-                     "nutrient_level", "code")
+    check_join(ct_lnk_soil_nutrient_level, ct_soil_code, "soil_name",
+               inner=inner)
+    check_join(ct_lnk_soil_nutrient_level, ct_nutrient_level,
+                     "nutrient_level", "code", inner=inner)
 
 
 def validate_tables_vegetation(ct_vegetation, ct_soil_code, ct_inundation,
-                               ct_management, ct_acidity, ct_nutrient_level):
+                               ct_management, ct_acidity, ct_nutrient_level,
+                               inner):
 
-    check_inner_join(ct_vegetation, ct_inundation, "inundation")
-    check_inner_join(ct_vegetation, ct_acidity, "acidity")
-    check_inner_join(ct_vegetation, ct_nutrient_level, "nutrient_level",
-                     "code")
-    check_inner_join(ct_vegetation, ct_management, "management", "code")
+    check_join(ct_vegetation, ct_inundation, "inundation", inner=inner)
+    check_join(ct_vegetation, ct_acidity, "acidity", inner=inner)
+    check_join(ct_vegetation, ct_nutrient_level, "nutrient_level",
+                     "code", inner=inner)
+    check_join(ct_vegetation, ct_management, "management", "code", inner=inner)
 
     # extra check: per vegetation type, soil_code only one mhw, mlw combination
     #  is allowed. Otherwise the simple model may give unexpected results.
@@ -137,13 +150,13 @@ def validate_tables_vegetation(ct_vegetation, ct_soil_code, ct_inundation,
 
 
 def validate_tables_floodplains(depths, duration, frequency, lnk_potential,
-                                potential):
+                                potential, inner):
     # test disabled as we have a 0 code which is not in lnk_potential
-    # check_inner_join(lnk_potential, depths, "depth","code")
-    check_inner_join(lnk_potential, duration, "duration", "code")
-    check_inner_join(lnk_potential, frequency, "frequency", "code")
+    # check_join(lnk_potential, depths, "depth","code")
+    check_join(lnk_potential, duration, "duration", "code", inner)
+    check_join(lnk_potential, frequency, "frequency", "code", inner)
     # test disabled as we have a code 4 which is not in lnk_potential
-    # check_inner_join(lnk_potential, potential, "potential", "code")
+    # check_join(lnk_potential, potential, "potential", "code")
 
 
 def check_codes_used(name, used, allowed):
