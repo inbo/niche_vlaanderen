@@ -97,7 +97,6 @@ class Niche(object):
             if ct is not None:
                 self._set_ct(k, ct)
 
-
     @property
     def name(self):
         return self._options["name"]
@@ -364,7 +363,6 @@ class Niche(object):
             # for these
             if f in ["mhw", "mlw", "msw"]:
                 band[np.isnan(band)] = -99
-
 
             # mhw, mlw and msw are rounded to two decimals to make sure
             # that comparisons give the expected value (eg not 15.00001 > 15

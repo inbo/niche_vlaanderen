@@ -1,7 +1,6 @@
 from click.testing import CliRunner
 import niche_vlaanderen.cli as nv_cli
 import os
-import pytest
 
 
 def test_cli_no_param():

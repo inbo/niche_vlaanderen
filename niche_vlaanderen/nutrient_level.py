@@ -56,7 +56,7 @@ class NutrientLevel(object):
                                        self._ct_mineralisation,
                                        self._ct_soil_code,
                                        self._ct_nutrient_level,
-                                       inner = inner)
+                                       inner=inner)
 
         # join soil_code to soil_name where needed
         self._ct_soil_code = pd.read_csv(ct_soil_code).set_index("soil_name")

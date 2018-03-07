@@ -3,7 +3,6 @@ from unittest import TestCase
 import pytest
 
 import niche_vlaanderen
-import rasterio
 from niche_vlaanderen.exception import NicheException
 from rasterio.errors import RasterioIOError
 import numpy as np
@@ -467,7 +466,6 @@ class TestNiche(TestCase):
         myniche.read_config_file("tests/small.yaml")
         with pytest.warns(UserWarning):
             myniche.run()
-
 
 
 class TestNicheDelta(TestCase):

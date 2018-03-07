@@ -2,6 +2,7 @@ import numpy as np
 from .exception import NicheException
 import warnings
 
+
 class CodeTableException(Exception):
     """
     Exception while validating the code tables
@@ -113,7 +114,7 @@ def validate_tables_nutrient_level(ct_lnk_soil_nutrient_level, ct_management,
     check_join(ct_mineralisation, ct_soil_code, "soil_name", inner=inner)
 
     check_join(ct_lnk_soil_nutrient_level, ct_management,
-                     "management_influence", "influence", inner=inner)
+               "management_influence", "influence", inner=inner)
 
     check_lower_upper_boundaries(ct_lnk_soil_nutrient_level,
                                  "total_nitrogen_min", "total_nitrogen_max",
@@ -122,7 +123,7 @@ def validate_tables_nutrient_level(ct_lnk_soil_nutrient_level, ct_management,
     check_join(ct_lnk_soil_nutrient_level, ct_soil_code, "soil_name",
                inner=inner)
     check_join(ct_lnk_soil_nutrient_level, ct_nutrient_level,
-                     "nutrient_level", "code", inner=inner)
+               "nutrient_level", "code", inner=inner)
 
 
 def validate_tables_vegetation(ct_vegetation, ct_soil_code, ct_inundation,
@@ -131,8 +132,8 @@ def validate_tables_vegetation(ct_vegetation, ct_soil_code, ct_inundation,
 
     check_join(ct_vegetation, ct_inundation, "inundation", inner=inner)
     check_join(ct_vegetation, ct_acidity, "acidity", inner=inner)
-    check_join(ct_vegetation, ct_nutrient_level, "nutrient_level",
-                     "code", inner=inner)
+    check_join(ct_vegetation, ct_nutrient_level, "nutrient_level", "code",
+               inner=inner)
     check_join(ct_vegetation, ct_management, "management", "code", inner=inner)
 
     # extra check: per vegetation type, soil_code only one mhw, mlw combination
