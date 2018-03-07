@@ -26,8 +26,8 @@ install:
     - conda create --name niche_env -y -q
     - activate niche_env
     - conda config --add channels conda-forge
-    - conda install -y -q pandas fiona
     - conda install -y -q %RASTERIO_DEV_REPO% rasterio
+    - conda install -y -q pandas fiona
     - pip install --no-cache-dir -r dev-requirements.txt
 
 build: false
