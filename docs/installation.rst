@@ -50,7 +50,8 @@ Upgrading
 =========
 
 Existing installations of Niche can be updated using pip (for windows, run
-from the Anaconda prompt
+from the Anaconda prompt, after downloading the environment file.
+https://cdn.rawgit.com/inbo/niche_vlaanderen/master/docs/niche_env.yml
 
 .. code-block:: default
 
@@ -69,8 +70,8 @@ Alternative installation
 ========================
 Rather than using the provided environment file, you may want to install the packages yourself,
 eg if you want to work with specific versions for another package. This is currently not
-the recommended installation as some versions of gdal provided by conda have a bug (with
-a workaround (:ref:`missing_gcs`).
+the recommended installation as it requires setting an environment variable for
+ opening some grid files. (See :ref:`missing_gcs` for instructions).
 
 .. code-block:: default
 
