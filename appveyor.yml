@@ -23,11 +23,11 @@ install:
     - call %CONDA_INSTALL_LOCN%\Scripts\activate.bat
     - conda update -y -q conda
     - conda config --system --add pinned_packages defaults::conda
-    - conda create --name niche_env -y -q
+    - conda create --name niche_env -y -q python=%PYTHON_VERSION%
     - activate niche_env
     - conda config --add channels conda-forge
-    - conda install -y -q %RASTERIO_DEV_REPO% rasterio
-    - conda install -y -q pandas fiona
+    - conda install -y -q %RASTERIO_DEV_REPO% rasterio fiona
+    - conda install -y -q pandas
     - pip install --no-cache-dir -r dev-requirements.txt
 
 build: false
