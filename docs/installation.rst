@@ -95,7 +95,7 @@ and activate the environment:
 
 .. code-block:: default
 
-    (C:\Users\johan\Miniconda3) C:\Users\johan> activate niche_vlaanderen
+    (C:\Users\johan\Miniconda3) C:\Users\johan> activate niche
 
 Optionally - Jupyter Notebook
 =============================
