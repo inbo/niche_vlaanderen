@@ -427,10 +427,6 @@ class Niche(object):
         self._options["abiotic"] = abiotic
         self._options["strict_checks"] = strict_checks
 
-        if abiotic and not full_model:
-            raise NicheException(
-                "Abiotic calculation is only possible with a full model")
-
         if abiotic:
             missing_keys = (_abiotic_keys
                             - set(self._inputfiles.keys())

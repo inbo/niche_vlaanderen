@@ -302,9 +302,6 @@ class TestNiche(TestCase):
         myniche.set_input("nutrient_level", 1)
         myniche.set_input("acidity", 1)
 
-        with pytest.raises(NicheException):
-            myniche.run(abiotic=True, full_model=False)
-
         myniche.run(abiotic=True)
 
     def test_rereadoutput(self):
