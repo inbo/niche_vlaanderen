@@ -36,6 +36,40 @@ And then start python, niche (command line) or jupyter notebook.
    set GDAL_DATA=C:\Users\johan\Miniconda3\pkgs\gdal-2.1.3-py36_vc14_7\Library\share\gdal\gcs.csv
    jupyter notebook
 
+You can also set the environment variable in windows itself. In that case, it is no longer needed to run the
+`set GDAL_DATA= ...`command.
+To do this, follow these steps:
+
+ 1) right click the `my computer` icon in windows. And choose the last option "properties".
+
+  .. image:: _static/png/system_properties.png
+     :scale: 50%
+
+ 2) On the left, choose the lower option ("advanced properties")
+
+  .. image:: _static/png/advanced_properties.png
+     :scale: 50%
+
+ 3) In the next dialog, make sure you select the "advanced" tab. On the button right
+    there should be a button with "Environment Variables" ("Omgevingsvariabelen").
+
+  .. image:: _static/png/advanced_properties2.png
+     :scale: 50%
+
+ 4) In the next dialog, Add a new user variable (if you are admin, you can add a system variable,
+    that way the configuration will apply to all users of the computer).
+
+  .. image:: _static/png/environment_variables.png
+     :scale: 50%
+
+  5) Add the name "GDAL_DATA" and the path to a place where the gcs.csv file can be found
+     (Use search to find it). Don't include the filename.
+
+  .. image:: _static/png/new_environment_variable.png
+     :scale: 50%
+
+  6) Anaconda prompt must be restarted to find the variable.
+
 Using ESRI grids without sta.adf
 ================================
 
@@ -54,6 +88,7 @@ In general ESRI grids can be opened by specifying the directory of the files
 or by choosing one of the *.ADF files in the directory. However if the 'sta.adf'
 file is missing, the file can not be opened in niche (it will also fail in QGis
 or other gdal-based applications). In that case, try exporting the grid to
-a geotiff from arcgis.
+a geotiff from arcgis. This format is best supported by the library we use
+for raster analysis.
 
 .. _issuetracker: https://github.com/inbo/niche_vlaanderen/issues

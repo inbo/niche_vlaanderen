@@ -1,33 +1,35 @@
 environment:
   matrix:
-    - PYTHON_VERSION: "3.5"
-      PYTHON_ARCH: "64"
-      CONDA_PY: "35"
-      CONDA_INSTALL_LOCN: "C:\\Miniconda35-x64"
     - PYTHON_VERSION: "3.6"
       PYTHON_ARCH: "64"
       CONDA_PY: "36"
       CONDA_INSTALL_LOCN: "C:\\Miniconda36-x64"
+      RASTERIO_CONDA: "-c conda-forge/label/dev rasterio"
+    - PYTHON_VERSION: "3.5"
+      PYTHON_ARCH: "64"
+      CONDA_PY: "35"
+      CONDA_INSTALL_LOCN: "C:\\Miniconda35-x64"
+      RASTERIO_CONDA: "rasterio"
+    - PYTHON_VERSION: "3.6"
+      PYTHON_ARCH: "64"
+      CONDA_PY: "36"
+      CONDA_INSTALL_LOCN: "C:\\Miniconda36-x64"
+      RASTERIO_CONDA: "rasterio"
     - PYTHON_VERSION: "2.7"
       PYTHON_ARCH: "32"
       CONDA_PY: "27"
       CONDA_INSTALL_LOCN: "C:\\Miniconda"
-    - PYTHON_VERSION: "2.7"
-      PYTHON_ARCH: "32"
-      CONDA_PY: "27"
-      CONDA_INSTALL_LOCN: "C:\\Miniconda"
-      RASTERIO_DEV_REPO: "-c conda-forge/label/dev"
+      RASTERIO_CONDA: "rasterio"
 
 install:
     # Use the pre-installed Miniconda for the desired arch
     - call %CONDA_INSTALL_LOCN%\Scripts\activate.bat
     - conda update -y -q conda
     - conda config --system --add pinned_packages defaults::conda
-    - conda create --name niche_env -y -q
+    - conda create --name niche_env -y -q python=%PYTHON_VERSION%
     - activate niche_env
     - conda config --add channels conda-forge
-    - conda install -y -q %RASTERIO_DEV_REPO% rasterio
-    - conda install -y -q pandas fiona
+    - conda install -y -q %RASTERIO_CONDA% fiona pandas
     - pip install --no-cache-dir -r dev-requirements.txt
 
 build: false

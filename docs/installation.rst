@@ -50,7 +50,8 @@ Upgrading
 =========
 
 Existing installations of Niche can be updated using pip (for windows, run
-from the Anaconda prompt
+from the Anaconda prompt, after downloading the environment file.
+https://cdn.rawgit.com/inbo/niche_vlaanderen/master/docs/niche_env.yml
 
 .. code-block:: default
 
@@ -63,19 +64,19 @@ If you want to install a specific niche version, you can install using pip:
 
 .. code-block:: default
 
-    pip install niche_vlaanderen==1.0b2
+    pip install niche_vlaanderen==1.0b3
 
 Alternative installation
 ========================
 Rather than using the provided environment file, you may want to install the packages yourself,
 eg if you want to work with specific versions for another package. This is currently not
-the recommended installation as some versions of gdal provided by conda have a bug (with
-a workaround (:ref:`missing_gcs`).
+the recommended installation as it requires setting an environment variable for
+ opening some grid files. (See :ref:`missing_gcs` for instructions).
 
 .. code-block:: default
 
     conda install pandas pyyaml rasterio fiona
-    pip install niche_vlaanderen==1.0b2
+    pip install niche_vlaanderen==1.0b3
 
 It is strongly recommended to install also `matplotlib` (otherwise plotting will not work):
 
@@ -94,7 +95,7 @@ and activate the environment:
 
 .. code-block:: default
 
-    (C:\Users\johan\Miniconda3) C:\Users\johan> activate niche_vlaanderen
+    (C:\Users\johan\Miniconda3) C:\Users\johan> activate niche
 
 Optionally - Jupyter Notebook
 =============================
