@@ -3,6 +3,7 @@ from pkg_resources import resource_filename
 
 import numpy as np
 import pandas as pd
+import warnings
 
 from .nutrient_level import NutrientLevel
 from .acidity import Acidity
@@ -154,9 +155,11 @@ class Vegetation(object):
             # if a row is true for a pixel, that vegetation can occur
             vegi = np.zeros(soil_code.shape, dtype=bool)
             for row in subtable.itertuples():
+                warnings.simplefilter(action='ignore', category=RuntimeWarning)
                 current_row = ((row.soil_code == soil_code)
                                & (row.mhw_min >= mhw) & (row.mhw_max <= mhw)
                                & (row.mlw_min >= mlw) & (row.mlw_max <= mlw))
+                warnings.simplefilter("default")
                 if full_model:
                     current_row = (current_row
                                    & (nutrient_level == row.nutrient_level)
@@ -205,6 +208,8 @@ class Vegetation(object):
 
         veg = veg.drop_duplicates()
 
+        warnings.simplefilter(action='ignore', category=RuntimeWarning)
+
         for veg_code, subtable in veg.groupby(["veg_code"]):
             subtable = subtable.reset_index()
 
@@ -212,6 +217,7 @@ class Vegetation(object):
             mlw_diff = np.full(soil_code.shape, np.nan)
 
             for row in subtable.itertuples():
+
                 # mhw smaller than maximum
                 sel = (row.soil_code == soil_code) & (row.mhw_max > mhw)
                 mhw_diff[sel] = (mhw - row.mhw_max)[sel]
@@ -244,4 +250,5 @@ class Vegetation(object):
             difference["mhw_%02d" % veg_code] = mhw_diff
             difference["mlw_%02d" % veg_code] = mlw_diff
 
+        warnings.simplefilter("default")
         return difference

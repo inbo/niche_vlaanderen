@@ -308,11 +308,16 @@ class Niche(object):
             self.write(output_dir, overwrite)
 
     def _check_all_lower(self, input_array, a, b):
-        if np.any((input_array[a] > input_array[b])
+        # We ignore comparison problems with np.nan (nodata)
+        warnings.simplefilter(action='ignore', category=RuntimeWarning)
+        higher =  ((input_array[a] > input_array[b])
                   & (input_array[a] != -99)
-                  & (input_array[b] != -99)):
+                  & (input_array[b] != -99))
+        warnings.simplefilter('default')
+
+        if np.any(higher):
             # find out which cells have invalid values
-            bad_points = np.where(input_array[a] > input_array[b])
+            bad_points = np.where(higher)
             # convert these cells into the projection system
             bad_points = bad_points * self._context.transform
 
@@ -346,7 +351,7 @@ class Niche(object):
                 band = band.astype(int)
 
             if f in ("nitrogen_animal", "nitrogen_fertilizer",
-                     "nitrogen_atmospheric"):
+                     "nitrogen_atmospheric", "mhw", "mlw", "msw"):
                 band = band.astype('float32')
 
             # convert old soil codes to new soil codes
@@ -358,18 +363,6 @@ class Niche(object):
                 band[np.isclose(band, nodata)] = np.nan
             else:
                 band[band == nodata] = -99
-
-            # As mxw can be both float or integer, we will force -99 anyway
-            # for these
-            if f in ["mhw", "mlw", "msw"]:
-                band[np.isnan(band)] = -99
-
-            # mhw, mlw and msw are rounded to two decimals to make sure
-            # that comparisons give the expected value (eg not 15.00001 > 15
-            # but ==
-            # see https://github.com/inbo/niche_vlaanderen/issues/25
-            if (f in ('mhw', 'mlw', 'msw')) and band.dtype.kind == 'f':
-                band = np.round(band, 2)
 
             inputarray[f] = band
 
