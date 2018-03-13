@@ -47,7 +47,7 @@ Dit gebeurt aan de hand van de tabel `soil_mlw_class.csv <https://github.com/inb
     :header-rows: 1
 
     soil_code,short_code,beschrijving,soil_group
-    140000,L1,leem,**1**
+    14,L1,leem,**1**
 
   Kijken we verder in de tabel soil_mlw_class met deze bodemgroep (1) en de GLG van 50 cm krijgen we:
 

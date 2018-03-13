@@ -22,7 +22,7 @@ Optioneel kunnen :ref:`management` en de :ref:`inundation_vegetation` mee als se
   Andere invoergegevens zijn:
    * GLG: 50 cm
    * GHG: 10 cm
-   * bodemcode: L1 (140000)
+   * bodemcode: L1 (14)
 
   Zoeken we dit op in de tabel NicheVl dan krijgen we volgende opties:
 
@@ -30,20 +30,20 @@ Optioneel kunnen :ref:`management` en de :ref:`inundation_vegetation` mee als se
     :header-rows: 1
     
     veg_code,veg_type,soil_name,nutrient_level,acidity,mhw_min,mhw_max,mlw_min,mlw_max,management,inundation
-    7,Caricion gracilis,140000,4,3,31,-32,73,-1,1,1
-    7,Caricion gracilis,140000,4,3,31,-32,73,-1,1,2
-    7,Caricion gracilis,140000,4,3,31,-32,73,-1,3,1
-    7,Caricion gracilis,140000,4,3,31,-32,73,-1,3,2
-    8,Filipendulion,140000,4,3,80,-31,170,21,1,0
-    8,Filipendulion,140000,4,3,80,-31,170,21,1,2
-    12,Magnocaricion met Phragmites,140000,4,3,14,-37,55,-3,1,1
-    12,Magnocaricion met Phragmites,140000,4,3,14,-37,55,-3,1,2
-    16,Lolio-Potentillion anserinae,140000,4,3,30,-26,66,-3,2,0
-    16,Lolio-Potentillion anserinae,140000,4,3,30,-26,66,-3,2,1
-    16,Lolio-Potentillion anserinae,140000,4,3,30,-26,66,-3,2,2
-    16,Lolio-Potentillion anserinae,140000,4,3,30,-26,66,-3,3,0
-    16,Lolio-Potentillion anserinae,140000,4,3,30,-26,66,-3,3,1
-    16,Lolio-Potentillion anserinae,140000,4,3,30,-26,66,-3,3,2
+    7,Caricion gracilis,L1,4,3,31,-32,73,-1,1,1
+    7,Caricion gracilis,L1,4,3,31,-32,73,-1,1,2
+    7,Caricion gracilis,L1,4,3,31,-32,73,-1,3,1
+    7,Caricion gracilis,L1,4,3,31,-32,73,-1,3,2
+    8,Filipendulion,L1,4,3,80,-31,170,21,1,0
+    8,Filipendulion,L1,4,3,80,-31,170,21,1,2
+    12,Magnocaricion met Phragmites,L1,4,3,14,-37,55,-3,1,1
+    12,Magnocaricion met Phragmites,L1,4,3,14,-37,55,-3,1,2
+    16,Lolio-Potentillion anserinae,L1,4,3,30,-26,66,-3,2,0
+    16,Lolio-Potentillion anserinae,L1,4,3,30,-26,66,-3,2,1
+    16,Lolio-Potentillion anserinae,L1,4,3,30,-26,66,-3,2,2
+    16,Lolio-Potentillion anserinae,L1,4,3,30,-26,66,-3,3,0
+    16,Lolio-Potentillion anserinae,L1,4,3,30,-26,66,-3,3,1
+    16,Lolio-Potentillion anserinae,L1,4,3,30,-26,66,-3,3,2
 
   Volgende vegetatiecodes kunnen dus voorkomen: 7, 8, 12 en 16.
 

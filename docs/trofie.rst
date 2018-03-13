@@ -50,7 +50,7 @@ Daar wordt de N_mineralisatie bepaald met de bodemcijfercode en de min en max wa
   =============== ======= ======= =======================
   soil_code       msw_min msw_max nitrogen_mineralisation
   --------------- ------- ------- -----------------------
-  140000          30      35       **75**        
+  L1              30      35       **75**
   =============== ======= ======= =======================
 
 Bepaling Totale Stikstof
@@ -94,7 +94,7 @@ De Invloed die correspondeert met het gekozen management kan met het bodemtype e
   ==================== ========= ================== ================== ===========  
   management_influence soil_code total_nitrogen_min total_nitrogen_max nutrient_level
   -------------------- --------- ------------------ ------------------ -----------
-  0                    140000    400                10000                 **5**   
+  0                    L1        400                10000                 **5**
   ==================== ========= ================== ================== ===========
   
   De gecodeerde trofie is dus 5.
