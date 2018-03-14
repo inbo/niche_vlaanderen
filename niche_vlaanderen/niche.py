@@ -310,7 +310,7 @@ class Niche(object):
     def _check_all_lower(self, input_array, a, b):
         # We ignore comparison problems with np.nan (nodata)
         warnings.simplefilter(action='ignore', category=RuntimeWarning)
-        higher =  ((input_array[a] > input_array[b])
+        higher = ((input_array[a] > input_array[b])
                   & (input_array[a] != -99)
                   & (input_array[b] != -99))
         warnings.simplefilter('default')
