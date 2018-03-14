@@ -1,7 +1,7 @@
-code description beschrijving
--1 not present (niche) niet aanwezig (niche)
-0 not tolerant to flooding niet combineerbaar
-1 poorly tolerant to flooding slecht combineerbaar
-2 moderate tolerant to flooding matig combineerbaar
-3 tolerant to flooding goed combineerbaar
-4 no information or flooding geen informatie of geen overstroming
+code,description,beschrijving
+-1,not present (niche),niet aanwezig (niche)
+0,not tolerant to flooding,niet combineerbaar
+1,poorly tolerant to flooding,slecht combineerbaar
+2,moderate tolerant to flooding,matig combineerbaar
+3,tolerant to flooding,goed combineerbaar
+4,no information or flooding,geen informatie of geen overstroming
