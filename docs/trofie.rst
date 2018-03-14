@@ -45,7 +45,7 @@ Daar wordt de N_mineralisatie bepaald met de bodemcijfercode en de min en max wa
 
 .. topic:: Voorbeeld
   
-  Voor een leembodem (bodemcode L1, bodemcijfercode 140000) en een GVG van 33 cm krijgen we waarde: 75
+  Voor een leembodem (bodemcode L1, bodemcijfercode L1) en een GVG van 33 cm krijgen we waarde: 75
   
   =============== ======= ======= =======================
   soil_code       msw_min msw_max nitrogen_mineralisation
@@ -88,7 +88,7 @@ De Invloed die correspondeert met het gekozen management kan met het bodemtype e
 .. topic:: Voorbeeld
 
   * Beheer = begrazing(2) dus Invloed = 0
-  * Bodemtype = 140000
+  * Bodemtype = L1
   * N_tot = 445
   
   ==================== ========= ================== ================== ===========  

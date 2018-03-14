@@ -122,7 +122,7 @@ Gebruiken we ook de waarde voor overstromingen dan wordt dit.
     >>> acidity = np.array([3])
     >>> mlw = np.array([50])
     >>> mhw = np.array([10])
-    >>> soil_codes = np.array([140000])
+    >>> soil_codes = np.array([14])
     >>> nv = niche_vlaanderen.Vegetation()
     >>> inundation = np.array([1])
     >>> veg_predict, veg_occurrence = nv.calculate(soil_codes,nutrient_level,acidity,mhw,mlw, inundation=inundation)

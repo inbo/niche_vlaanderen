@@ -41,7 +41,7 @@ Dit gebeurt aan de hand van de tabel `soil_mlw_class.csv <https://github.com/inb
 
 .. topic:: Voorbeeld
 
-  Voor een leembodem (bodemcode L1, bodemcijfercode 140000) en een GLG van 50 cm krijgen we:
+  Voor een leembodem (bodemcode L1, bodemcijfercode L1) en een GLG van 50 cm krijgen we:
   
   .. csv-table:: bodemgroep op basis van bodemcode
     :header-rows: 1
