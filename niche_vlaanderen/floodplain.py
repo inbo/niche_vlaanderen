@@ -4,6 +4,7 @@ import rasterio
 import os
 from pkg_resources import resource_filename
 import copy
+from collections import OrderedDict
 
 import pandas as pd
 import numpy as np
@@ -49,6 +50,9 @@ class FloodPlain(object):
 
         validate_tables_floodplains(inner=inner, **self._ct)
 
+        # Set to true when the model is a combined niche - floodplains model
+        self._combined = False
+
     @property
     def vegetation_calculated(self):
         return len(self._veg) > 0
@@ -64,7 +68,11 @@ class FloodPlain(object):
 
         td = list()
 
-        labels = dict(self._ct["potential"]["description"])
+        labels = dict(self._ct["potential"].set_index("code")["description"])
+
+        if not self._combined:
+            del labels[-1]
+
         labels[-99] = "no data"
 
         for i in self._veg:
@@ -174,20 +182,22 @@ class FloodPlain(object):
         veg = ma.masked_equal(self._veg[key], -99)
 
         im = plt.imshow(veg, extent=mpl_extent,
-                        norm=Normalize(0, 4))
+                        norm=Normalize(-1, 4))
         options = self.options.copy()
         options["duration"] = "< 14 days" \
             if self.options["duration"] == 1 else "> 14 days"
         ax.set_title("{} ({})".format(key, options))
 
-        labels = self._ct["potential"]["description"]
-        values = self._ct["potential"]["code"]
+        labels = self._ct["potential"].set_index(
+            "code")["description"].to_dict(into=OrderedDict)
 
-        colors = [im.cmap(i/(len(values) - 1))
-                  for (i, value) in enumerate(values)]
+        colors = [im.cmap(i/(len(labels) - 1))
+                  for (i, value) in enumerate(labels)]
+
         patches = [mpatches.Patch(color=colors[i],
-                                  label=labels[i])
-                   for (i, value) in enumerate(values)]
+                                  label=labels[code])
+                   for (i, code) in enumerate(labels)
+                   if code > -1 or self._combined]
         plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2,
                    borderaxespad=0.)
 
@@ -272,10 +282,14 @@ class FloodPlain(object):
                 )
 
         new = copy.copy(self)
+        new._veg = self._veg.copy()
         for vi in new._veg:
             nodata = ((niche_result._vegetation[vi] == 255) |
                       (new._veg[vi] == -99))
             new._veg[vi] = niche_result._vegetation[vi] * new._veg[vi]
+            new._veg[vi][niche_result._vegetation[vi] == 0] = -1
             new._veg[vi][nodata] = -99
 
-        return (new)
+        new._combined = True
+
+        return new
