@@ -10,10 +10,10 @@ nitrogren or mhw, minimum and maximum values are used.
   .. csv-table:: interpretation of minimum and maximum values
     :header-rows: 1
 
-    soil_code,msw_min,msw_max,nitrogen_mineralisation
-    10000,-5000,5,50
-    10000,5,10,55
-    10000,10,15,76
+    soil_name,msw_min,msw_max,nitrogen_mineralisation
+    K1,-5000,5,50
+    K1,5,10,55
+    K1,10,15,76
 
 Niche will use the values from the _max column to determine to which category a value has to be added.
 In this particular case, with a soil_code of 10000 an MSW values ]5,10] will give the value 55: the upper limit is included, the lower limit is not.
@@ -62,7 +62,7 @@ The lower and upper limits of mhw and mlw are included when classifying.
   .. csv-table:: interpretation of minimum and maximum values
     :header-rows: 1
 
-    veg_code,veg_type,soil_code,nutrient_level,acidity,mhw_min,mhw_max,mlw_min,mlw_max
-    1,Sphagno-Betuletum,30000,2,1,20,1,38,20
+    veg_code,veg_type,soil_name,nutrient_level,acidity,mhw_min,mhw_max,mlw_min,mlw_max
+    1,Sphagno-Betuletum,KV,2,1,20,1,38,20
 
 In the above case, mhw values 20 and 1 both fullfill the required range.
