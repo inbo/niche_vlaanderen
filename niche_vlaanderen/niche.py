@@ -239,6 +239,9 @@ class Niche(object):
             if "overwrite_files" in config_loaded["model_options"].keys():
                 self._options["overwrite_files"] = \
                     config_loaded["model_options"]["overwrite_files"]
+            if "abiotic" in config_loaded["model_options"].keys():
+                self._options["abiotic"] = \
+                    config_loaded["model_options"]["abiotic"]
 
         if "floodplains" in config_loaded.keys():
             self._options["floodplains"] = []
@@ -261,18 +264,11 @@ class Niche(object):
             config_loaded = yaml.load(stream)
 
         # Run + write according to model options
-        options = config_loaded["model_options"]
+        options = {k: config_loaded["model_options"][k]
+                   for k in {'strict_checks', 'abiotic', 'full_model'}
+                   if k in config_loaded["model_options"].keys()}
 
-        deviation = "deviation" in options and options["deviation"]
-        strict_checks = True
-        if "strict_checks" in options and not options["strict_checks"]:
-            strict_checks = False
-        full_model = True
-        if "full_model" in options and not options["full_model"]:
-            full_model = False
-
-        self.run(full_model=full_model, deviation=deviation,
-                 strict_checks=strict_checks)
+        self.run(**options)
 
         if "floodplains" in self._options:
             for scen in self._options["floodplains"]:
