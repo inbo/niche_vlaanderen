@@ -85,7 +85,7 @@ The output of the module will be written to the same directory as the output spe
        frequency: T25
        duration: short
        period: winter
-     - depth: T25-zomer
+     - name: T25-zomer
        ....
 
 Generating a config file in interactive mode
