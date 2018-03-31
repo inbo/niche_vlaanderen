@@ -76,3 +76,11 @@ input_layers:
 # optionally code tables can be overwritten
 # code_tables:
 #  ct_soil_code: newsoilcode.csv
+
+# floodplains module
+floodplains:
+  - name: T25-winter
+    depth: data/small/T25.asc
+    frequency: T25
+    duration: 1
+    period: winter
