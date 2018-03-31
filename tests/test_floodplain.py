@@ -81,7 +81,8 @@ class TestFloodPlain(TestCase):
             # Should fail - model not yet run
             fp.write(tempdir)
 
-        fp.calculate("testcase/floodplains/ff_bt_t10_h.asc", "T10",
+        fp.calculate(depth_file="testcase/floodplains/ff_bt_t10_h.asc",
+                     frequency="T10",
                      period="winter", duration=1)
 
         fp.write(tempdir)
@@ -107,6 +108,12 @@ class TestFloodPlain(TestCase):
             self.assertItemsEqual(expected_files, dir)
         else:
             self.assertCountEqual(expected_files, dir)
+
+        # try writing again, should raise as files already exist
+        with pytest.raises(FloodPlainException):
+            fp.write(tempdir)
+
+        fp.write(tempdir, overwrite_files=True)
 
         shutil.rmtree(tempdir)
 

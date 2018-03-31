@@ -1,5 +1,6 @@
 from __future__ import division
 
+import logging
 import rasterio
 import os
 from pkg_resources import resource_filename
@@ -31,9 +32,10 @@ class FloodPlain(object):
 
     """
     def __init__(self, depths=None, duration=None, frequency=None,
-                 lnk_potential=None, potential=None, name=None):
+                 lnk_potential=None, potential=None, name=""):
         self._ct = dict()
         self._veg = dict()
+        self._log = logging.getLogger("niche_vlaanderen")
 
         for i in ["depths", "duration", "frequency", "lnk_potential",
                   "potential"]:
@@ -203,7 +205,7 @@ class FloodPlain(object):
 
         return ax
 
-    def write(self, folder):
+    def write(self, folder, overwrite_files = False):
         """ Writes the floodplain grids to grid files.
 
          The differences are coded using the values specified in the
@@ -214,6 +216,11 @@ class FloodPlain(object):
 
          folder: path
              Path to which the output files will be written.
+
+         overwrite_files: bool
+            Overwrite files when saving.
+            Note writing will fail if any of the files to be written already
+            exists.
          """
         if len(self._veg) == 0:
             raise FloodPlainException(
@@ -236,15 +243,31 @@ class FloodPlain(object):
 
         self._files_written = dict()
         name = ""
-        if self.name is not None:
+        if self.name != "":
             name = self.name + "-"
 
+        files = {'summary': folder + '/' + name + "summary.csv",
+                 'log': "{}/{}log.txt".format(folder, name)}
+
         for vi in self._veg:
-            filename = "{}F{:02d}-{}-P{}-{}.tif".format(
+            filename = "{}/{}F{:02d}-{}-P{}-{}.tif".format(
+                folder,
                 name,
                 vi, self.options["frequency"], self.options["duration"],
                 self.options["period"])
-            path = folder + "/" + filename
+            files[vi] = filename
+
+        for key in files:
+            if os.path.exists(files[key]):
+                if overwrite_files:
+                    self._log.warning(
+                        "Warning: file {} already exists".format(files[key]))
+                else:
+                    raise FloodPlainException(
+                        "File {} already exists".format(files[key]))
+
+        for vi in self._veg:
+            path = files[vi]
             with rasterio.open(path, 'w', **params) as dst:
                 dst.write(self._veg[vi], 1)
                 self._files_written[filename] = os.path.normpath(path)
