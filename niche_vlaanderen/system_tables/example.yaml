@@ -79,6 +79,7 @@ input_layers:
 
 # floodplains module
 floodplains:
+  # Different scenario's can be specified - each requiring a seperate name.
   - name: T25-winter
     depth: data/small/T25.asc
     frequency: T25
