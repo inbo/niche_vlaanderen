@@ -141,7 +141,16 @@ html_theme = 'sphinx_rtd_theme'
 # documentation.
 #
 html_theme_options = {
-        'navigation_depth': 4}
+        'navigation_depth': 4,
+        'vcs_pageview_mode': 'blob'}
+
+html_context = {
+        "display_github": True,
+        "github_user":  "INBO",
+        "github_repo": "niche_vlaanderen",
+        "github_version": "master",
+        "conf_py_path": "/docs/"
+        }
 
 # Add any paths that contain custom themes here, relative to this directory.
 # html_theme_path = []
@@ -247,6 +256,7 @@ html_static_path = ['_static']
 # implements a search results scorer. If empty, the default will be used.
 #
 # html_search_scorer = 'scorer.js'
+html_copy_source = False
 
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'niche_vlaanderendoc'
@@ -352,4 +362,3 @@ texinfo_documents = [
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #
 # texinfo_no_detailmenu = False
-html_copy_source = False
