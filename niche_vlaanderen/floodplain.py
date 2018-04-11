@@ -81,10 +81,10 @@ class FloodPlain(object):
             vi = pd.Series(self._veg[i].flatten())
             rec = vi.value_counts() * self._context.cell_area / 10000
             for a in rec.index:
-                td.append((i, labels[a], rec[a]))
+                td.append((i, a, labels[a], rec[a]))
 
-        df = pd.DataFrame(td, columns=['vegetation', 'presence',
-                                       'area_ha'])
+        df = pd.DataFrame(td, columns=['vegetation', 'presence_code',
+                                       'presence', 'area_ha'])
 
         return df
 
