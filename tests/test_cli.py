@@ -17,7 +17,7 @@ def test_cli_floodplain():
 
     dir = os.listdir("_output")
     result_eerste = [f.startswith("eerste") for f in dir]
-    assert sum(result_eerste) == 24
+    assert sum(result_eerste) == 25
 
 
 def test_example_yml():

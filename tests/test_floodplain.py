@@ -99,7 +99,8 @@ class TestFloodPlain(TestCase):
             'F05-T10-P1-winter.tif', 'F14-T10-P1-winter.tif',
             'F20-T10-P1-winter.tif', 'F27-T10-P1-winter.tif',
             'F06-T10-P1-winter.tif', 'F15-T10-P1-winter.tif',
-            'F21-T10-P1-winter.tif', 'F28-T10-P1-winter.tif'
+            'F21-T10-P1-winter.tif', 'F28-T10-P1-winter.tif',
+            'summary.csv'
         ]
 
         dir = os.listdir(tempdir)
