@@ -7,7 +7,7 @@ gebieden waar frequent overstromingen voorkomen. Hierbij wordt aangegeven in
 hoeverre de gegeven vegetatie combineerbaar is met de gemodelleerde
 overstromingen.
 
-  .. csv-table:: mogelijke codes voor diepte van overstroming
+  .. csv-table:: mogelijke codes voor overstromingstolerantie
     :header-rows: 1
     :file: ../niche_vlaanderen/system_tables/floodplains/potential.csv
 
