@@ -266,6 +266,8 @@ class FloodPlain(object):
                     raise FloodPlainException(
                         "File {} already exists".format(files[key]))
 
+        self.table.to_csv(files["summary"], index=False)
+
         for vi in self._veg:
             path = files[vi]
             with rasterio.open(path, 'w', **params) as dst:
