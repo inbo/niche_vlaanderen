@@ -274,11 +274,17 @@ class Niche(object):
         with open(config, 'r') as stream:
             config_loaded = yaml.load(stream)
 
-        # Run + write according to model options
-        options = {k: config_loaded["model_options"][k]
-                   for k in inspect.getargspec(self.run).args
-                   if k in config_loaded["model_options"].keys()}
-        self.run(**options)
+        # We catch the deprecation warning of inspect.getargspec
+        # When we only support Python 3 it should be switched to
+        # inspect.signature
+        with warnings.catch_warnings():
+            warnings.filterwarnings("ignore", category=DeprecationWarning)
+
+            # Run + write according to model options
+            options = {k: config_loaded["model_options"][k]
+                       for k in inspect.getargspec(self.run).args
+                       if k in config_loaded["model_options"].keys()}
+            self.run(**options)
 
         overwrite = False
 
