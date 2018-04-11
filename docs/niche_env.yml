@@ -126,6 +126,6 @@ dependencies:
   - jupyter-core==4.4.0
   - nb-conda==2.2.1
   - nb-conda-kernels==2.1.0
-  - niche-vlaanderen==1.0b5
+  - niche-vlaanderen==1.0b6
   - prompt-toolkit==1.0.15
 
