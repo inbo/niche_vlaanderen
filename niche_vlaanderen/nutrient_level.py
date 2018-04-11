@@ -88,7 +88,7 @@ class NutrientLevel(object):
             index = np.digitize(msw_array[soil_sel], table_sel.msw_max,
                                 right=True)
 
-            result[soil_sel] = table_sel["nitrogen_mineralisation"][index]
+            result[soil_sel] = table_sel["nitrogen_mineralisation"].reindex(index)
 
         result[msw_array == -99] = np.nan
         result = result.reshape(orig_shape)
