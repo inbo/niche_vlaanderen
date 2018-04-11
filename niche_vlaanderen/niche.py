@@ -1,6 +1,7 @@
 import rasterio
 import rasterstats
 import warnings
+import inspect
 
 import numpy as np
 import numpy.ma as ma
@@ -239,6 +240,9 @@ class Niche(object):
             if "overwrite_files" in config_loaded["model_options"].keys():
                 self._options["overwrite_files"] = \
                     config_loaded["model_options"]["overwrite_files"]
+            if "output_dir" in config_loaded["model_options"].keys():
+                self._options["output_dir"] = \
+                    config_loaded["model_options"]["output_dir"]
             if "abiotic" in config_loaded["model_options"].keys():
                 self._options["abiotic"] = \
                     config_loaded["model_options"]["abiotic"]
@@ -254,7 +258,14 @@ class Niche(object):
     def run_config_file(self, config, overwrite_ct=False):
         """ Runs Niche using a configuration file
 
-        Note that this will configure the model, run and output as specified
+        This will configure the model, run and output as specified.
+
+        Parameters:
+            config: string
+               path to a config file
+            overwrite_ct: boolean (False)
+               overwrite codetables using the values specified in
+               the configuration file.
         """
 
         self.read_config_file(config, overwrite_ct=overwrite_ct)
@@ -265,10 +276,15 @@ class Niche(object):
 
         # Run + write according to model options
         options = {k: config_loaded["model_options"][k]
-                   for k in {'strict_checks', 'abiotic', 'full_model'}
+                   for k in inspect.getargspec(self.run).args
                    if k in config_loaded["model_options"].keys()}
-
         self.run(**options)
+
+        overwrite = False
+
+        if "overwrite_files" in self._options and \
+                self._options["overwrite_files"]:
+            overwrite = True
 
         if "floodplains" in self._options:
             for scen in self._options["floodplains"]:
@@ -290,17 +306,12 @@ class Niche(object):
                                   frequency=scen["frequency"],
                                   duration=scen["duration"])
                 self.fp.combine(self)
-                if "output_dir" in options:
-                    self.fp.write(options["output_dir"])
+                if "output_dir" in self._options:
+                    self.fp.write(self._options["output_dir"], overwrite)
                     self._files_written.update(self.fp._files_written)
 
-        overwrite = False
-        if "overwrite_files" in self._options and \
-                self._options["overwrite_files"]:
-            overwrite = True
-
-        if "output_dir" in options:
-            output_dir = options["output_dir"]
+        if "output_dir" in self._options:
+            output_dir = self._options["output_dir"]
             self.write(output_dir, overwrite)
 
     def _check_all_lower(self, input_array, a, b):
