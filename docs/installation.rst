@@ -17,7 +17,7 @@ we will proceed installing niche_vlaanderen in its own environment.
 Download the file https://cdn.rawgit.com/inbo/niche_vlaanderen/master/docs/niche_env.yml to a location on
 your computer.
 
-Start the `Anaconda prompt` from the start menu
+Start the `Anaconda prompt` from the start menuu
 
 Create an environment containing niche and its dependencies. You should point to the file you just downloaded with the
 correct filename (make sure you pick the correct extension).
