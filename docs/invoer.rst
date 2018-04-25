@@ -17,7 +17,7 @@ Om NICHE toe te passen, zijn 14 invoergrids noodzakelijk.
 Bodemklasse ``soil_code``
 =========================
 
-Bodemkaart met toegekende NICHE-bodemcodes op basis van een vertaalsleutel of een bodemraster gebaseerd op veldgegevens.....
+Bodemkaart met toegekende NICHE-bodemcodes op basis van een vertaalsleutel of een bodemraster gebaseerd op veldgegevens.
 
  * Mogelijke waarden: :ref:`ct_soil_code`, kolom ``soil_code``
 
