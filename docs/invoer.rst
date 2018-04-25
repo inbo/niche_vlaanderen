@@ -4,14 +4,11 @@ Invoer rasters
 
 NICHE Vlaanderen berekent de potenties voor vegetatietypes in een gebied op basis van informatie over de (abiotische) standplaatscondities. De standplaatscondities dienen vervat te zijn in de zgn. invoergegevens: ruimtelijke datalagen (rasters) met voor elke standplaatsfactor de toestand voor elke rastercel, uitgedrukt in numerieke vorm, als een continue, ordinale of nominale waarde. Het model combineert de verschillende rasters tot een uitspraak over de potentie voor de verschillende vegetatietypen in elke rastercel op basis van beslisregels.
 
-De betrouwbaarheid van de berekeningen wordt sterk bepaald door de kwaliteit van de invoergegevens. Het is dan ook nodig te streven naar zo nauwkeurig mogelijke invoergegevens.
-De hydrologische informatie (grondwaterstanden, overstromingen, kwel) speelt een cruciale rol, aangezien zij doorweegt in zowel beslisregels als berekening van vegetatietypen zelf.
-De graad van nauwkeurigheid daarvan bepaalt de kwaliteit van de NICHE berekeningen.
+De betrouwbaarheid van de berekende potenties wordt sterk bepaald door de kwaliteit van de invoergegevens. Het is dan ook nodig te streven naar invoergegevens die de toestand (actueel of toekomstig) zo nauwkeurig mogelijk beschrijven. Hydrologische informatie (grondwaterstanden, overstromingen, kwel) speelt een cruciale rol, aangezien ze doorweegt in zowel de beslisregels als de berekening van potenties voor de vegetatietypen zelf.
 
-Alle invoerdatalagen worden aangeleverd onder de vorm van rasters (grids).
-Afhankelijk van de grootte van het studiegebied wordt een voorstel gedaan voor de afmetingen van dit grid.
-De voorkeur wordt gegeven aan één standaardgrid met één vaste rasterafmeting voor alle invoerdatalagen, dit om extra versnijdingen van de resultaten te vermijden.
-Om NICHE toe te passen, zijn 14 invoergrids noodzakelijk.
+Alle invoerdatalagen dienen aangeleverd te worden als rasters (grids). Afhankelijk van de grootte van het studiegebied wordt een voorstel gedaan voor de rasterresolutie (afmetingen rastercel). Alle rasters dienen eenzelfde gebied af te dekken met eenzelfde resolutie. Ook het ruimtelijk referentiesysteem dient hetzelfde te zijn voor alle rasters. 
+
+Om NICHE Vlaanderen in al zijn kunnen toe te passen, zijn 14 invoergrids noodzakelijk. Eén hiervan is optioneel.
 
 
 .. _soil_code:
