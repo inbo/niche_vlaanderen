@@ -1,7 +1,6 @@
 ###########################
 Invoer rasters
 ###########################
-test
 
 De betrouwbaarheid van de berekeningen wordt sterk bepaald door de kwaliteit van de invoergegevens. Het is dan ook nodig te streven naar zo nauwkeurig mogelijke invoergegevens.
 De hydrologische informatie (grondwaterstanden, overstromingen, kwel) speelt een cruciale rol, aangezien zij doorweegt in zowel beslisregels als berekening van vegetatietypen zelf.
