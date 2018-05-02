@@ -8,6 +8,49 @@ or usage of niche_vlaanderen, and workarounds for them.
 If your issue is not mentioned in this list, please search for the issues on
 our issuetracker_, and file a new issue if it is needed.
 
+Warnings and exceptions in jupyter notebook
+===========================================
+
+**Warnings** don't interrupt the model but should draw your attention to possible 
+problems. 
+Standard warnings appear in jupyter notebook as black text in a red box, while 
+warnings specific to niche_vlaanderen are displayed as black text messages on 
+a white background.
+
+The example below (specific to niche_vlaanderen) indicates that some cells have a mean 
+lowest groundwater level higher than the mean highest groundwater level, which is 
+unexpected.
+ 
+  .. image:: _static/png/warning.png
+     :scale: 50%
+
+Errors detected during execution are called **exceptions** and are causing the model 
+to stop. The last line of the error message indicates what happened.
+The parser repeats the offending section and displays a little ‘arrow’ pointing at 
+the earliest point in the line where the error was detected. 
+
+In the example below, the input layer "grntbodem" cannot be found at the indicated location 
+of the computer, causing the model to stop.
+
+  .. image:: _static/png/exception.png
+     :scale: 50%
+
+You will mostly be able to find out what the problem is by checking the error message:
+
+.. code-block:: default
+
+   RasterioIOError: ./Inputs_2018/BT_2014/grntbodem: No such file or directory
+
+... and/or the line marked by an arrow: 
+
+.. code-block:: default
+
+	RasterioIOError                           Traceback (most recent call last)
+   <ipython-input-3-1f2c0d05e587> in <module>()
+      2 simple.set_input("mhw", path + "grnghg_bt")
+      3 simple.set_input("mlw", path + "grnglg_bt")
+      ----> 4 simple.set_input("soil_code",path + "grntbodem")
+
 .. _missing_gcs:
 
 Missing gcs.csv file
