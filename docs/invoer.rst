@@ -9,25 +9,25 @@ De betrouwbaarheid van de berekende potenties wordt sterk bepaald door de kwalit
 
 Alle invoerdatalagen dienen aangeleverd te worden als rasters (grids). Afhankelijk van de grootte van het studiegebied wordt een voorstel gedaan voor de rasterresolutie (afmetingen rastercel). Alle rasters dienen eenzelfde gebied af te dekken met eenzelfde resolutie. Ook het ruimtelijk referentiesysteem dient hetzelfde te zijn voor alle rasters. 
 
-Om NICHE Vlaanderen in al zijn toe te passen, kunnen 15 invoerrasters ingebracht worden. Twee hiervan zijn optioneel omdat ze een post-hoc aftoetsing inhouden van de berekende potenties naar compatibiliteit met beheer enerzijds ( :ref:`management_vegetation`) en overstromingsregime anderzijds ( :ref:`inundation_vegetation`).
+Om NICHE Vlaanderen in al zijn toe te passen, kunnen 15 invoerrasters ingebracht worden. Twee hiervan zijn optioneel omdat ze een post-hoc aftoetsing inhouden van de berekende potenties naar compatibiliteit met :ref:`beheer<management_vegetation>` en :ref:`overstromingsregime<inundation_vegetation>`.
 
 Hieronder wordt voor elk van de mogelijke invoerrasters een omschrijving gegeven van de informatie die het dient te bevatten, waarvoor het raster in het model gebruikt wordt, de eenheid waarin de rasterwaarden uitgedrukt worden, het gegevenstype, de eventueel onderscheiden klassen en hun verklaring, of het raster verplicht of optioneel is, en welke brongegevens kunnen gebruikt worden om het raster aan te maken.
 
-1. Bodemklasse, :ref:`soil_code`
-2. Gemiddelde hoogste grondwaterstand, :ref:`mhw`
-3. Gemiddelde laagste grondwaterstand, :ref:`mlw`
-4. Gemiddelde voorjaarsgrondwaterstand, :ref:`msw`
-5. Kwelflux, :ref:`seepage`
-6. Overstroming i.f.v. zuurgraad, :ref:`inundation_acidity`
-7. Overstroming i.f.v. trofiegraad, :ref:`inundation_nutrient`
-8. Atmosferische depositie (stikstof), :ref:`nitrogen_atmospheric`
-9. Bemesting met dierlijke mest (stikstof), :ref:`nitrogen_animal`
-10. Bemesting met kunstmest (stikstof), :ref:`nitrogen_fertilizer`
-11. Beheer i.f.v. trofiegraad, :ref:`management`
-12. Mineraalrijkdom, :ref:`minerality`
-13. Regenlens, :ref:`rainwater`
-14. Aftoetsing potenties aan beheer, :ref:`management_vegetation`
-15. Aftoetsing potenties aan overstromingsregime, :ref:`inundation_vegetation`
+1. :ref:`Bodemklasse<soil_code>`
+2. :ref:`Gemiddelde hoogste grondwaterstand<mhw>`
+3. :ref:`Gemiddelde laagste grondwaterstand<mlw>`
+4. :ref:`Gemiddelde voorjaarsgrondwaterstand, :ref:`msw`
+5. :ref:`Kwelflux<seepage>`
+6. :ref:`Overstroming i.f.v. zuurgraad<inundation_acidity>`
+7. :ref:`Overstroming i.f.v. trofiegraad<inundation_nutrient>`
+8. :ref:`Atmosferische depositie (stikstof)<nitrogen_atmospheric>`
+9. :ref:`Bemesting met dierlijke mest (stikstof)<nitrogen_animal>`
+10. :ref:`Bemesting met kunstmest (stikstof)<nitrogen_fertilizer>`
+11. :ref:`Beheer i.f.v. trofiegraad<management>`
+12. :ref:`Mineraalrijkdom<minerality>`
+13. :ref:`Regenlens<rainwater>`
+14. :ref:`Aftoetsing potenties aan beheer<management_vegetation>`
+15. :ref:`Aftoetsing potenties aan overstromingsregime<inundation_vegetation>`
 
 .. _soil_code:
 
@@ -342,23 +342,23 @@ De gift aan dierlijke mest bepaalt mede de trofiegraad (zie :ref:`nutrient_level
 
 Brongegevens
 ------------
-Indien reële mestgiften gekend zijn op perceelsniveau kunnen ze omgerekend worden naar de hoeveelheid stikstof per ha en per jaar. Bij afwezigheid van deze informatie kunnen schattingen gemaakt worden op basis van een landgebruikskaart waarvoor aan elk landgebruik standaard een bepaalde hoeveelheid stikstof wordt toegekend (zie onderstaande tabel). Zo werd voor NICHE Vlaanderen een :download:`omzettingstabel </_static/tblBWK_BeheerBemesting.csv>` gemaakt met voor elke gedetailleerde landgebruikscode uit de Biologische Waarderingskaart (BWK) een vereenvoudigde landgebruiksklasse met een overeenkomstige bemestingsklasse. Die vereenvoudigde landgebruiksklassen kunnen ook gebruikt worden bij het schatten van de stikstofgift afkomstig uit kunstmest.
+Indien reële mestgiften gekend zijn op perceelsniveau kunnen ze omgerekend worden naar de hoeveelheid stikstof per ha en per jaar. Bij afwezigheid van deze informatie kunnen schattingen gemaakt worden op basis van een landgebruikskaart waarvoor aan elk landgebruik standaard een bepaalde hoeveelheid stikstof wordt toegekend (zie onderstaande tabel). Zo werd voor NICHE Vlaanderen een :download:`omzettingstabel</_static/tblBWK_BeheerBemesting.csv>` gemaakt met voor elke gedetailleerde landgebruikscode uit de Biologische Waarderingskaart (BWK) een vereenvoudigde landgebruiksklasse met een overeenkomstige bemestingsklasse. Die vereenvoudigde landgebruiksklassen kunnen ook gebruikt worden bij het schatten van de stikstofgift afkomstig uit kunstmest.
 
-+-----------------------+---------------------------------------------+-----------------------------------------------------------------------------------------------+
-| Landgebruiksklasse    | Bemesting                                   | Omschrijving                                                                                  |
-+=======================+=============================================+===============================================================================================+
++-------------------------+---------------------------------------------+-----------------------------------------------------------------------------------------------+
+| Landgebruiksklasse      | Bemesting                                   | Omschrijving                                                                                  |
++=========================+=============================================+===============================================================================================+
 | 0 Natuurgebieden        | 0 kg N/ha/jaar                              | rietruigten, naaldbossen, loofbossen (broekbossen, populierenaanplanten,…)                    |
-|                       |                                             | extensief begraasde gronden                                                                   |
-|                       | geen enkele vorm van bemesting              +-----------------------------------------------------------------------------------------------+
-|                       |                                             | natuurlijke graslanden, niet bemeste hooilanden                                               |
-+-----------------------+---------------------------------------------+-----------------------------------------------------------------------------------------------+
+|                         |                                             | extensief begraasde gronden                                                                   |
+|                         | geen enkele vorm van bemesting              +-----------------------------------------------------------------------------------------------+
+|                         |                                             | natuurlijke graslanden, niet bemeste hooilanden                                               |
++-------------------------+---------------------------------------------+-----------------------------------------------------------------------------------------------+
 | 1 Extensief landgebruik | 75 kg N/ha/jaar                             | intensief begraasde gronden                                                                   |
-|                       | Extensieve bemestingsdruk (veelal dierlijk) +-----------------------------------------------------------------------------------------------+
-|                       |                                             | weinig bemeste hooilanden                                                                     |
-+-----------------------+---------------------------------------------+-----------------------------------------------------------------------------------------------+
+|                         | Extensieve bemestingsdruk (veelal dierlijk) +-----------------------------------------------------------------------------------------------+
+|                         |                                             | weinig bemeste hooilanden                                                                     |
++-------------------------+---------------------------------------------+-----------------------------------------------------------------------------------------------+
 | 2 Intensief landgebruik | 350 kg N/ha/jaar (dierlijke mest)           | het maaibeheer heeft door de hoge nutriënten-input geen invloed op de trofieberekening meer   |
-|                       | + 250 kg N/ha/jaar (kunstmest)              |                                                                                               |
-+-----------------------+---------------------------------------------+-----------------------------------------------------------------------------------------------+
+|                         | + 250 kg N/ha/jaar (kunstmest)              |                                                                                               |
++-------------------------+---------------------------------------------+-----------------------------------------------------------------------------------------------+
 
 Opmerkingen
 -----------
@@ -390,7 +390,7 @@ De gift via kunstmest bepaalt mede de trofiegraad (zie :ref:`nutrient_level`) wa
 
 Brongegevens
 ------------
-Indien reële mestgiften gekend zijn op perceelsniveau kunnen ze omgerekend worden naar de hoeveelheid stikstof per ha en per jaar. Bij afwezigheid van deze informatie kunnen schattingen gemaakt worden op basis van een landgebruikskaart waarvoor aan elk landgebruik standaard een bepaalde hoeveelheid stikstof wordt toegekend (zie bovenstaande tabel). Zo werd voor NICHE Vlaanderen een :download:`omzettingstabel </_static/tblBWK_BeheerBemesting.csv>` gemaakt met voor elke gedetailleerde landgebruikscode uit de Biologische Waarderingskaart (BWK) een vereenvoudigde landgebruiksklasse met een overeenkomstige bemestingsklasse. Dezelfde vereenvoudigde landgebruiksklassen kunnen ook gebruikt worden bij het schatten van de stikstofgift afkomstig uit dierlijke mest.
+Indien reële mestgiften gekend zijn op perceelsniveau kunnen ze omgerekend worden naar de hoeveelheid stikstof per ha en per jaar. Bij afwezigheid van deze informatie kunnen schattingen gemaakt worden op basis van een landgebruikskaart waarvoor aan elk landgebruik standaard een bepaalde hoeveelheid stikstof wordt toegekend (zie bovenstaande tabel). Zo werd voor NICHE Vlaanderen een :download:`omzettingstabel</_static/tblBWK_BeheerBemesting.csv>` gemaakt met voor elke gedetailleerde landgebruikscode uit de Biologische Waarderingskaart (BWK) een vereenvoudigde landgebruiksklasse met een overeenkomstige bemestingsklasse. Dezelfde vereenvoudigde landgebruiksklassen kunnen ook gebruikt worden bij het schatten van de stikstofgift afkomstig uit dierlijke mest.
 
 Opmerkingen
 -----------
@@ -424,11 +424,11 @@ In NICHE Vlaanderen heeft het gevoerde beheer een impact op twee niveaus.
 
 Enerzijds heeft het een effect op de trofiegraad (zie :ref:`nutrient_level`) : die daalt met één eenheid/klasse als het beheer hoogfrequent is (maaien met afvoer van maaisel). Het (verplichte) invoerraster draagt dus *onrechtstreeks* bij tot de potentieberekeningen voor de verschillende vegetatietypen in het NICHE Vlaanderen model.
 
-Anderzijds kunnen de berekende potenties voor elk van de vegetatietypen finaal ook afgetoetst worden op basis van hun compatibiliteit met het gevoerde of te voeren beheer. In tegenstelling tot de onrechtstreekse bijdrage van het beheer via de trofiegraad, werkt het beheer dan *rechtstreeks* in op de potentievoorspellingen. Want hoewel de standplaats abiotisch perfect geschikt kan zijn voor een bepaald vegetatietype, is het immers mogelijk dat het nooit aanwezig kan zijn als het gevoerde of te voeren beheer het voortbestaan of de ontwikkeling ervan in de weg staat. Zo kunnen bostypen zich bijvoorbeeld niet ontwikkelen als er (jaarlijks) gemaaid wordt, of kunnen graslanden niet standhouden op plaatsen zonder een maaibeheer. De compatibiliteit van elk vegetatietype met de verschillende onderscheiden beheerklassen zit vervat in de :file:`referentietabel <../niche_vlaanderen/system_tables/niche_vegetation.csv>` van NICHE Vlaanderen. Merk op dat deze rechtstreekse aftoetsing van de berekende potenties aan het beheer een optionele stap is in NICHE Vlaanderen: de aftoetsing gebeurt enkel als het  invoerraster :ref:`management_vegetation` (dat inhoudelijk identiek is aan het hier besproken invoerraster) expliciet wordt gespecifieerd. Wordt deze laatste niet gespecifieerd, dan worden de potenties berekend zonder de rechtstreekse impact van het actueel gevoerde of het toekomstig beheer, dus louter op basis van de abiotische eigenschappen van de standplaats.
+Anderzijds kunnen de berekende potenties voor elk van de vegetatietypen finaal ook afgetoetst worden op basis van hun compatibiliteit met het gevoerde of te voeren beheer. In tegenstelling tot de onrechtstreekse bijdrage van het beheer via de trofiegraad, werkt het beheer dan *rechtstreeks* in op de potentievoorspellingen. Want hoewel de standplaats abiotisch perfect geschikt kan zijn voor een bepaald vegetatietype, is het immers mogelijk dat het nooit aanwezig kan zijn als het gevoerde of te voeren beheer het voortbestaan of de ontwikkeling ervan in de weg staat. Zo kunnen bostypen zich bijvoorbeeld niet ontwikkelen als er (jaarlijks) gemaaid wordt, of kunnen graslanden niet standhouden op plaatsen zonder een maaibeheer. De compatibiliteit van elk vegetatietype met de verschillende onderscheiden beheerklassen zit vervat in de :file:`referentietabel<../niche_vlaanderen/system_tables/niche_vegetation.csv>` van NICHE Vlaanderen. Merk op dat deze rechtstreekse aftoetsing van de berekende potenties aan het beheer een optionele stap is in NICHE Vlaanderen: de aftoetsing gebeurt enkel als het  invoerraster :ref:`management_vegetation` (dat inhoudelijk identiek is aan het hier besproken invoerraster) expliciet wordt gespecifieerd. Wordt deze laatste niet gespecifieerd, dan worden de potenties berekend zonder de rechtstreekse impact van het actueel gevoerde of het toekomstig beheer, dus louter op basis van de abiotische eigenschappen van de standplaats.
 
 Brongegevens
 ------------
-Idealiter is het beheer van elk perceel in het studiegebied gedocumenteerd en kan de beheerklasse eenvoudigweg bepaald worden op basis van deze informatie. Een studiegebied kan echter groot zijn en dus veel percelen tellen waarvan het beheer helemaal niet of slechts gedeeltelijk gedocumenteerd is. Voor elk perceel het beheer achterhalen kan dan arbeidsintensief zijn. Daarom kan men terugvallen op een generieke :download:`omzettingstabel </_static/tblBWK_BeheerBemesting.csv>` met voor elke code van de Biologische Waarderingskaart (BWK) de meest aannemelijke beheerklasse. Op die manier kan de gebiedsdekkende kartering van de BWK ten volle benut worden. Een manuele controle kan evenwel aangewezen zijn indien de informatie uit de BWK verouderd is. Houdt er ook rekening mee dat de uit de BWK afgeleide beheerkaart steeds het actuele beheer weergeeft. Indien met NICHE Vlaanderen een scenario doorgerekend wordt met een gewenst (toekomstige) beheer en dit beheer afwijkt van het huidige, dan moeten de beheerklassen overeenkomstig toegekend worden aan elke rastercel.
+Idealiter is het beheer van elk perceel in het studiegebied gedocumenteerd en kan de beheerklasse eenvoudigweg bepaald worden op basis van deze informatie. Een studiegebied kan echter groot zijn en dus veel percelen tellen waarvan het beheer helemaal niet of slechts gedeeltelijk gedocumenteerd is. Voor elk perceel het beheer achterhalen kan dan arbeidsintensief zijn. Daarom kan men terugvallen op een generieke :download:`omzettingstabel</_static/tblBWK_BeheerBemesting.csv>` met voor elke code van de Biologische Waarderingskaart (BWK) de meest aannemelijke beheerklasse. Op die manier kan de gebiedsdekkende kartering van de BWK ten volle benut worden. Een manuele controle kan evenwel aangewezen zijn indien de informatie uit de BWK verouderd is. Houdt er ook rekening mee dat de uit de BWK afgeleide beheerkaart steeds het actuele beheer weergeeft. Indien met NICHE Vlaanderen een scenario doorgerekend wordt met een gewenst (toekomstige) beheer en dit beheer afwijkt van het huidige, dan moeten de beheerklassen overeenkomstig toegekend worden aan elke rastercel.
 
 Opmerkingen
 -----------
@@ -576,7 +576,7 @@ Anderzijds kunnen de berekende potenties voor elk van de vegetatietypen finaal o
 
 Brongegevens
 ------------
-Idealiter is het beheer van elk perceel in het studiegebied gedocumenteerd en kan de beheerklasse eenvoudigweg bepaald worden op basis van deze informatie. Een studiegebied kan echter groot zijn en dus veel percelen tellen waarvan het beheer helemaal niet of slechts gedeeltelijk gedocumenteerd is. Voor elk perceel het beheer achterhalen kan dan arbeidsintensief zijn. Daarom kan men terugvallen op een generieke :download:`omzettingstabel </_static/tblBWK_BeheerBemesting.csv>` met voor elke code van de Biologische Waarderingskaart (BWK) de meest aannemelijke beheerklasse. Op die manier kan de gebiedsdekkende kartering van de BWK ten volle benut worden. Een manuele controle kan evenwel aangewezen zijn indien de informatie uit de BWK verouderd is. Houdt er ook rekening mee dat de uit de BWK afgeleide beheerkaart steeds het actuele beheer weergeeft. Indien met NICHE Vlaanderen een scenario doorgerekend wordt met een gewenst (toekomstige) beheer en dit beheer afwijkt van het huidige, dan moeten de beheerklassen overeenkomstig toegekend worden aan elke rastercel.
+Idealiter is het beheer van elk perceel in het studiegebied gedocumenteerd en kan de beheerklasse eenvoudigweg bepaald worden op basis van deze informatie. Een studiegebied kan echter groot zijn en dus veel percelen tellen waarvan het beheer helemaal niet of slechts gedeeltelijk gedocumenteerd is. Voor elk perceel het beheer achterhalen kan dan arbeidsintensief zijn. Daarom kan men terugvallen op een generieke :download:`omzettingstabel</_static/tblBWK_BeheerBemesting.csv>` met voor elke code van de Biologische Waarderingskaart (BWK) de meest aannemelijke beheerklasse. Op die manier kan de gebiedsdekkende kartering van de BWK ten volle benut worden. Een manuele controle kan evenwel aangewezen zijn indien de informatie uit de BWK verouderd is. Houdt er ook rekening mee dat de uit de BWK afgeleide beheerkaart steeds het actuele beheer weergeeft. Indien met NICHE Vlaanderen een scenario doorgerekend wordt met een gewenst (toekomstige) beheer en dit beheer afwijkt van het huidige, dan moeten de beheerklassen overeenkomstig toegekend worden aan elke rastercel.
 
 Opmerkingen
 -----------
