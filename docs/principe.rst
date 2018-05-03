@@ -34,7 +34,7 @@ Optioneel kunnen de berekende potenties nog beperkt worden naargelang de beheers
 of overstromingsfrequentie (figuur hierboven, in het blauwgrijs): bv. vegetatietypen die geen zuurstoftekort verdragen komen  
 op frequent overstroomde locaties niet voor, of: er kan geen bos voorkomen in zones die regelmatig gemaaid worden.
 
-Voor elk NICHE vegetatietype ( :doc:`vegetatietype` ) wordt een binaire rasterkaart geproduceerd (1: kan voorkomen of 0: kan niet voorkomen). 
+Voor elk NICHE vegetatietype wordt een binaire rasterkaart geproduceerd (1: kan voorkomen of 0: kan niet voorkomen). 
 Potenties voor verschillende typen kunnen dus overlappen in de ruimte.
 
 NICHE houdt geen rekening met biotische processen zoals kolonisatie, migratie, kieming e.d. Het model geeft enkel potenties 
