@@ -789,7 +789,7 @@ class Niche(object):
 
             Note that the vector should be in the same coordinate system as the
             raster.
-        outside: bool (default: False)
+        outside: bool (default: True)
            report values outside shapes as well. The area which is not covered
            by any shapefile will get shape_id -1.
 
