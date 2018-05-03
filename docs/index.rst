@@ -6,14 +6,18 @@
 .. include:: ../README.rst
 
 This documentation is split in two parts:
- * The first part :doc:`model` (in Dutch) describes the background of the NICHE model.
+ * The first part (in Dutch) describes the background of the NICHE model, gives information about the input layers and the calibration of the model.
  * The second part describes the ``niche_vlaanderen`` package.
 
 .. toctree::
   :caption: Model
   :maxdepth: 2
 
+  notendop
   model
+  invoer
+  kalibratie
+  overstroming
 
 .. toctree::
   :caption: Package
