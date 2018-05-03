@@ -43,7 +43,7 @@ Met NICHE Vlaanderen kunnen ook geen uitspraken worden gedaan over individuele l
 vegetaties te bestuderen en kan inzicht geven in het ecosysteem of het gebied, wat het tot een geschikt model maakt voor scenario-analyses. 
 
 Vooraleer eventuele scenarioberekeningen kunnen worden uitgevoerd, moet het model eerst gekalibreerd worden op basis van een gekende 
-referentietoestand (meestal de huidige toestand). Deze stap wordt beschreven in :doc:`kalibratie`
+referentietoestand (meestal de huidige toestand). 
 
 *Referentie*
 
