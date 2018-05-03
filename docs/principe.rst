@@ -15,9 +15,9 @@ Eerst worden de standplaatscondities (trofie en pH) berekend aan de hand van ver
 kenmerken met betrekking tot de waterhuishouding, bodem en landgebruik (figuur hieronder, in het geel). 
 
 .. figure:: _static/png/niche_principle.png
-     :scale: 50%
+   :scale: 50%
 	 
-	 Schematische weergave van de werking van het NICHE Vlaanderen model, met in het geel de invoergegevens ter berekening van de trofie en de zuurgraad (pH). Beide berekende standplaatsfactoren worden samen met de grondwaterstanden en het bodemtype (groen) afgetoetst aan de referentiewaarden/tolerantiegrenzen voor elk van de vegetatietypen in de referentiedataset (blauw omlijnd) om zo de potentie van elke locatie te bepalen. Optioneel worden die potenties nog verder begrensd door ook de tolerantie ten aanzien van overstromingen en het gevoerde beheer mee in beschouwing te nemen (blauwgrijs). GVG: gemiddelde voorjaarsgrondwaterstand.
+   Schematische weergave van de werking van het NICHE Vlaanderen model, met in het geel de invoergegevens ter berekening van de trofie en de zuurgraad (pH). Beide berekende standplaatsfactoren worden samen met de grondwaterstanden en het bodemtype (groen) afgetoetst aan de referentiewaarden/tolerantiegrenzen voor elk van de vegetatietypen in de referentiedataset (blauw omlijnd) om zo de potentie van elke locatie te bepalen. Optioneel worden die potenties nog verder begrensd door ook de tolerantie ten aanzien van overstromingen en het gevoerde beheer mee in beschouwing te nemen (blauwgrijs). GVG: gemiddelde voorjaarsgrondwaterstand.
 
 De berekende pH en trofie, het bodemtype en de gemiddelde laagste en hoogste grondwaterstanden 
 worden vervolgens afgetoetst aan zogenaamde tolerantie-intervallen van plantengemeenschappen 
