@@ -1,40 +1,85 @@
-#######################
-Niche Floodplain module
-#######################
+###################
+Overstromingsmodule
+###################
+ 
+Inleiding
+=========
+De optionele (post-hoc) aftoetsing van de door NICHE Vlaanderen voorspelde potenties van de verschillende vegetatietypen aan de compatibiliteit met het overstromingsregime (cfr. :ref:`inundation_vegetation`) is erg beperkt, zowel naar mogelijke input als naar de uitspraak naar compatibiliteit, i.e. de voorspelde potentie blijft behouden of niet (binair). De input beperkt zich in het NICHE Vlaanderen model tot een inschatting van de frequentie van overstroming, en dan nog enkel de hoge frequenties (2-jaarlijks en 5-jaarlijks). De output blijft een binair raster met de voorspelde aan- (1) of afwezigheid (0) van potenties voor elk vegetatietype.
+ 
+De kennis over de tolerantie van vegetaties ten aanzien van overstromingen is beperkt. Vegetaties bestaan immers uit vele plantensoorten die elk hun eigen tolerantie hebben ten aanzien van de verschillende aspecten van overstroming. Dat maakt het moeilijk om de reactie van het amalgaam van soorten, want dat is een vegetatietype in essentie, te voorspellen. Bovendien zijn overstromingen niet alleen verschillend in termen van **tijdstip** en **frequentie** van optreden, maar ook de **duur** en de **diepte** kunnen sterk verschillen. Daarnaast speelt ook de kwaliteit van het overstromingswater een niet onbelangrijke rol. En op al deze variabelen reageert elke plantensoort nog eens verschillend.
+ 
+De invloed van bovengenoemde hoofdeigenschappen van overstromingen op een hele reeks aan vegetatietypen in Vlaanderen werd op basis van expertoordeel ingeschat door `De Nocker et al. (2007) <https://www.milieuinfo.be/dms/d/d/workspace/SpacesStore/75ad42af-2774-4c3c-8954-374c906c4f48/Eindrapport.pdf>`_ in hun studie "Multifunctionaliteit van overstromingsgebieden: wetenschappelijke bepaling van de impact
+van waterberging op natuur, bos en landbouw". Hun beoordelingskader werd overgenomen in deze overstromingsmodule na onderlinge afstemming van de vegetatietypologie. Op die manier is er voor een selectie van de NICHE Vlaanderen vegetatietypen een meer genuanceerde uitspraak mogelijk over de overstromingstolerantie (niet, slecht, matig en goed combineerbaar) die bijkomend gebaseerd is op meerdere overstromingsvariabelen die als invoerraster of instelwaarde door de module verwerkt worden (tijdstip, duur, frequentie en diepte). 
 
-Het is mogelijk een verdere verfijning van het NICHE model door te voeren voor
-gebieden waar frequent overstromingen voorkomen. Hierbij wordt aangegeven in
-hoeverre de gegeven vegetatie combineerbaar is met de gemodelleerde
-overstromingen.
+Hierbij wordt wel abstractie gemaakt van de invloed van oppervlaktewaterkwaliteit. Die kwaliteit is immers moeilijk in te schatten door de sterke variatie ervan in zowel ruimte als tijd. De Nocker et al. (2007) geven wel een extra inschattingsmogelijkheid van de overstromingstolerantie die hiermee op een kwalitatieve manier rekening houdt, maar die werd niet ingebouwd in de module. Het is wel zo dat de door NICHE Vlaanderen berekende potenties wel al indirect rekening houden met het al of niet optreden van overstromingen met al dan niet :ref:`voedsel-<inundation_nutrient>` en :ref:`mineraalrijk<inundation_acidity>` oppervlaktewater via de berekening van respectievelijk de trofie- en zuurgraad.
+ 
+Werking overstromingsmodule
+===========================
+
+Werking
+-------
+De overstromingsmodule doet een uitspraak over de overstromingstolerantie op basis van de ruimtelijk expliciete gebiedsinformatie over de waargenomen of gemodelleerde overstromingskarakteristieken (frequentie, tijdstip, duur en diepte). De module werkt als een eenvoudige aftoetsing aan de `referentietabel <https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/floodplains/lnk_potential.csv>`_ uit De Nocker et al. (2007) die gekoppeld werd aan de verschillende NICHE Vlaanderen vegetatietypen.
+ 
+Vegetatietypen
+--------------
+Niet voor alle 28 vegetatietypen die in NICHE Vlaanderen aan bod komen is er informatie uit De Nocker et al. (2007) voorhanden. De rompgemeenschappen vallen weg, m.u.v. gagelstruweel. In onderstaande tabel staan de NICHE Vlaanderen vegetatietypen opgelijst met hun overeenkomstige natuurtypecode uit de Nocker et al. (2007) waarvan de overstromingstolerantie werd overgenomen.
+
+.. csv-table:: NICHE Vlaanderen vegetatietypen waarvoor overstromingstolerantie bepaald kan worden (cfr. overeenkomstige natuurtypencode)
+    :header-rows: 1
+    :file: ../data_/vegetatietypen_DeNocker.csv
+  
+Input
+=====
+
+De benodigde input voor de overstromingsmodule bestaat uit een invoerraster met de overstromings*diepte* voor een welbepaalde *frequentie*/retourperiode. De duur en het tijdstip worden als parameter gespecifieerd.
+
+Mogelijke waarden
+-----------------
+ 
+Overstromingsdiepte
+^^^^^^^^^^^^^^^^^^^
+De overstromingsdiepte dient als een raster aangeleverd te worden met voor elke rastercel de gemeten of voorspelde diepte van de overstroming in ordinale klassen:
+
+  .. csv-table:: Mogelijke diepteklassen van overstroming
+    :header-rows: 1
+    :file: ../niche_vlaanderen/system_tables/floodplains/depths.csv
+ 
+Het is belangrijk om een duidelijk onderscheid te maken tussen de plaatsen waar effectief geen overstroming voorkomt of voorspeld wordt, en de plaatsen waar er geen uitspraken mogelijk zijn omdat de informatie er ontbreekt en dus niet gekend is. In het eerste geval wordt de waarde 0 toegekend, in het laatste geval een waarde voor "no data".
+ 
+Overstromingsfrequentie
+^^^^^^^^^^^^^^^^^^^^^^^
+Voor de volgende retourperioden werd de overstromingstolerantie van de verschillende vegetatietypen ingeschat:
+
+  .. csv-table:: Mogelijke overstromingsfrequenties waarvoor overstromingstolerantie berekend kan worden
+    :header-rows: 1
+    :file: ../niche_vlaanderen/system_tables/floodplains/frequency.csv
+
+Overstromingsduur
+^^^^^^^^^^^^^^^^^
+Bij het inschatten van de overstromingstolerantie werd een onderscheid gemaakt naar korte en langere perioden van aaneensluitende overstroming. Het omslagpunt ligt bij 2 weken.
+
+- 1: < 14 dagen
+- 2: > 14 dagen
+
+Overstromingstijdstip
+^^^^^^^^^^^^^^^^^^^^^
+De impact van overstromingen verschilt alnaargelang het (groei)seizoen. Er wordt een grof onderscheid gemaakt tussen:
+
+- winter
+- zomer
+
+Brongegevens
+------------
+
+Overstromingsdiepten worden nooit gebiedsdekkend opgemeten. Wel worden ze bepaald via eenvoudige of meer complexe oppervlaktewatermodellen. In tegenstelling tot de beperkte informatie die nodig is voor de :doc:`invoerrasters</invoer.rst>` voor NICHE Vlaanderen die verband houden met overstromingen (vaak louter overstroming of geen overstroming), is er voor de overstromingsmodule wél een indicatie nodig van de overstromingsdiepte, duur, frequentie en tijdstip van overstroming
+
+Output
+======
+
+Op basis van het invoerraster met de overstromingsdiepte bij een welbepaalde retourperiode, duur en periode kan de hypothetische tolerantie berekend worden aan de hand van de referentietabel. De uitkomst is dan een raster per vegetatietype met de toleranties (niet, slecht, matig en goed combineerbaar) voor de opgegeven duur en periode. Die hypothetische tolerantie kan vervolgens gecombineerd worden met de voorspelde potenties volgens het NICHE Vlaanderen model. Door die combinatie wordt een meer realistisch beeld verkregen waar de potenties liggen binnen en buiten overstroombaar gebied enerzijds, en in welke mate de potenties behouden blijven binnen de overstroombare gebieden bij een welbepaald overstromingsregime (combinatie diepte-duur-frequentie-tijdstip). De rasters per vegetatietype kennen telkens de volgende klassen:
 
   .. csv-table:: mogelijke codes voor overstromingstolerantie
     :header-rows: 1
     :file: ../niche_vlaanderen/system_tables/floodplains/potential.csv
-
-
-Hierbij wordt rekening gehouden met de overstromingsfrequentie, de diepte,
-tijdstip en duur.
-
-Deze overstromingsdiepete wordt beschreven met volgende codes
-
-  .. csv-table:: mogelijke codes voor diepte van overstroming
-    :header-rows: 1
-    :file: ../niche_vlaanderen/system_tables/floodplains/depths.csv
-
-Deze overstromingsdiepte wordt in 4 invoerrasters aangeleverd, met 1 raster per
-frequentie.
-
-  .. csv-table:: gebruikte frequenties
-    :header-rows: 1
-    :file: ../niche_vlaanderen/system_tables/floodplains/frequency.csv
-
-De gegevens uit deze tabel worden vergeleken met de tabel lnk_potential
-
-  .. csv-table:: Potentiële vegetatie op basis van de andere invoerparameters.
-    :header-rows: 1
-
-    veg_code,period,frequency,duration,depth,potential
-    1,winter,T50,1,1,3
-    1,winter,T50,1,2,3
-    1,winter,T50,1,3,3
-    1,winter,T50,2,1,3
+	
+De verschillende rasters zijn ook leerrijk bij het inschatten van de impact van wijzigende overstromingsregimes op de potenties voor vegetatietypen.
