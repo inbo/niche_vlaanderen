@@ -58,8 +58,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'niche_vlaanderen'
-copyright = '2017 - 2018, Johan Van de Wauw'
-author = 'Johan Van de Wauw'
+copyright = '2017 - 2018, Research Institute for Nature and Forest (INBO)'
+author = 'Johan Van de Wauw, Cécile Herr and Dries Adriaens'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
