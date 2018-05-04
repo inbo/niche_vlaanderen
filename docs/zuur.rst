@@ -1,11 +1,11 @@
 .. _acidity:
 
-###########################################
-Bepaling van de zuurgraadklasse ``acidity``
-###########################################
+##############################
+Bepaling zuurgraad ``acidity``
+##############################
 
-Output van het model
-====================
+Output 
+=======
 
 NICHE Vlaanderen genereert een vereenvoudigde kaart van de zuurgraad van de standplaats ingedeeld in de volgende klassen (veld ``acidity``):
 
