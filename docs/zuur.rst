@@ -56,6 +56,7 @@ De definitie van de hoge, tussenliggende en lage grondwaterstanden wordt in onde
 | laag            | ]110 – 9000]      | ]80 – 9000]         | ]50 – 9000]        |
 +-----------------+-------------------+---------------------+--------------------+
 
+*negatieve GLG-waarden = onder maaiveld*
 
 Invoergegevens
 ==============
@@ -75,11 +76,11 @@ Implementatie
 Bepaling Bodem GLG klasse
 --------------------------
 
-In eerste instantie worden 3 bodemgroepen onderscheiden (opm: in het Nederlands model waren dit er 4).
+In eerste instantie worden de 3 bodemgroepen onderscheiden.
 
- * Z1 of Z2 of ZV of L of K of KV (minerale bodems);
- * V of V2 (organische bodems);
- * P, HV of KX (hoogveen of keileemgronden).
+ * minerale bodems: Z1 of Z2 of L1 of K1 of NG;
+ * organische bodems: V of ZV of LV of KV;
+ * trilveen: P.
 
 Elke bodemcode wordt aan een bodemgroep gekoppeld in de tabel `soil_codes.csv <https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/soil_codes.csv>`_.
 
