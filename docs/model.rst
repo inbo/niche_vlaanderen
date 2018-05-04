@@ -12,6 +12,7 @@ Het Python package ``niche_vlaanderen`` laat de gebruiker toe om op basis van ee
   :caption: Overzicht
   
   principe
+  vegetatietype
   trofie
   zuur
   vegetatie

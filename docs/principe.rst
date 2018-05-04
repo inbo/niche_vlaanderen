@@ -4,7 +4,7 @@ Werking NICHE Vlaanderen
 
 NICHE Vlaanderen (*Nature Impact Assessment of Changes in Hydro-Ecological Systems*) is een 
 **hydro-ecologisch model** dat de **potenties voor (grond)waterafhankelijke vegetatietypes** in een 
-gebied berekent **op basis van** informatie over de **(abiotische) standplaatscondities** (). 
+gebied berekent **op basis van** informatie over de **(abiotische) standplaatscondities**. 
 Het model baseert zich hierbij op vier typen standplaatsfactoren (bodemtype, grondwaterstanden, 
 voedselrijkdom en zuurgraad) die bepalend zijn voor de aard en de soortensamenstelling van 
 vegetaties die zich op een locatie kunnen ontwikkelen.
@@ -24,7 +24,7 @@ worden vervolgens afgetoetst aan zogenaamde tolerantie-intervallen van plantenge
 (figuur hierboven, in het blauw). Deze tolerantiegrenzen (ook referentiewaarden genoemd) zijn 
 gebaseerd op veldwaarnemingen waarbij de plantengemeenschappen en standplaatscondities zijn beschreven.
 
-De potenties voor de NICHE vegetatietypen kunnen op twee manieren worden berekend: 
+De potenties voor de :doc:`NICHE vegetatietypen <vegetatietype>` kunnen op twee manieren worden berekend: 
 
 Enerzijds door het **volledige NICHE model** te gebruiken, met inherent de verschillende inputlagen en beslisregels 
 die de potentie mee bepalen (figuur hierboven, inputlagen in het geel en in het groen). Anderzijds door enkel 
@@ -42,11 +42,10 @@ aan en bevat ook geen werkelijke kansberekening op het voorkomen van vegetatiety
 Met NICHE Vlaanderen kunnen ook geen uitspraken worden gedaan over individuele locaties. Het model is geschikt om patronen van de berekende 
 vegetaties te bestuderen en kan inzicht geven in het ecosysteem of het gebied, wat het tot een geschikt model maakt voor scenario-analyses. 
 
-Vooraleer eventuele scenarioberekeningen kunnen worden uitgevoerd, moet het model eerst gekalibreerd worden op basis van een gekende 
-referentietoestand (meestal de huidige toestand). 
+Vooraleer eventuele scenarioberekeningen kunnen worden uitgevoerd, moet het model eerst :doc:`gekalibreerd <kalibratie>` worden op basis van een gekende 
+referentietoestand (meestal de actuele toestand).  
 
 *Referentie*
-
 *Callebaut J., De Bie E., De Becker P., Huybrechts W (2007). NICHE Vlaanderen. Rapporten van het Instituut voor Natuur en Bosonderzoek INBO.R.2007.3. SVW, 1-7*
 `Rapport <https://pureportal.inbo.be/portal/files/5370206/Callebaut_etal_2007_NicheVlaanderen.pdf>`_
 
