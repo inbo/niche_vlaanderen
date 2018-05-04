@@ -5,14 +5,15 @@ NICHE vegetatietypen
 NICHE Vlaanderen doet een uitspraak over **28 vegetatietypen**. Het gaat zowel om bossen, ruigten, graslanden als heiden. 
 Het betreft vooral stabiele, ongestoorde vegetatietypen, maar ook enkele rompgemeenschappen zijn opgenomen. De set met veldopnamen 
 die gebruikt werden om het model van referentiewaarden te voorzien, omvatte ook vegetatietypen die niet echt als 
-waterafhankelijk te beschouwen zijn, zoals het Berken-eikenbos en het verbond van Struikhei en Kruipbrem. Voor deze 
+(strikt) waterafhankelijk te beschouwen zijn, zoals het Berken-eikenbos en het verbond van Struikhei en Kruipbrem. Voor deze 
 drogere typen is niet de volledige range in de database aanwezig, maar enkel het vochtige traject. 
 
 .. csv-table:: Vegetatietypen NICHE Vlaanderen
   :header-rows: 1
-  :file: ../niche_vlaanderen/docs/vegetatietypen.csv
+  :file: ../niche_vlaanderen/docs/_data/vegetatietypen.csv
 
-Een indicatieve vertaling van de NICHE vegetatietypen naar Europese habitattypen en regionaal belangrijke biotopen (rbb) wordt :download:`hier </_static/niche_hab_rbb.csv>` gegeven.
+Een indicatieve **vertaling** van de NICHE vegetatietypen **naar Europese habitattypen en regionaal belangrijke biotopen** (rbb) wordt 
+in de tabel `niche_hab_rbb.csv <https://github.com/inbo/niche_vlaanderen/blob/master/docs/_data/niche_hab_rbb.csv>`_ gegeven.
 
 Een vertaling blijft uiteraard een vertaling, met de inherente kans op een over- of onderschatting van de aanwezigheid van de NICHE vegetatietypen. 
 Niet elk NICHE vegetatietype stemt immers helemaal overeen met één of meerdere Europese habitattypen of rbb. Hoe groot deze onder- en overschatting is, 
