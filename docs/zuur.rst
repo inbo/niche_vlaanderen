@@ -4,29 +4,76 @@
 Bepaling van de zuurgraadklasse ``acidity``
 ###########################################
 
+Output van het model
+====================
+
+NICHE Vlaanderen genereert een vereenvoudigde kaart van de zuurgraad van de standplaats ingedeeld in de volgende klassen (veld ``acidity``):
+
 .. csv-table:: Zuurgraadklassen in NICHE
   :header-rows: 1
   :file: ../niche_vlaanderen/system_tables/acidity.csv
 
-NICHE berekent de zuurgraad van de standplaats op basis van de GLG (:ref:`mlw`) en het bodemtype. Verdere aanvullingen gebeuren door het in
-rekening brengen van overstroming, kwel, en het eventueel voorhanden zijn van
-regenwaterlenzen.
+Principe
+========
+
+NICHE berekent de zuurgraad van de standplaats op basis van:
+
+* het bodemtype
+* de gemiddelde laagste grondwaterstanden
+* het al dan niet overstromen met basenrijk water
+* de kwelflux
+* de mineraalrijkdom van het grondwater
+* de eventuele aanwezigheid van een regenwaterlens
 
 Als uitgangspunt geldt dat bij hoge grondwaterstanden de standplaats beïnvloed wordt
 door de kenmerken van het grondwater. Bij lage grondwaterstanden kan regenwater
 infiltreren en wordt de standplaats zuurder.
 
-Invoergegevens zijn dus:
+Als: 
+
+* er kwel met mineraalarm grondwater is, 
+* of als er overstroming met basenrijk water optreedt, 
+* of als een regenlens aanwezig is,
+
+... wordt de zuurgraad van de standplaats bijgestuurd als volgt:
+
+.. image:: _static/png/acidity_principle.png
+     :scale: 100%
+
+De definitie van de hoge, tussenliggende en lage grondwaterstanden wordt in onderstaande tabel weergegeven:
+
++-----------------+--------------------------------------------------------------+
+|                 | GLG drempelwaarden per bodemgroep                            |
++-----------------+-------------------+---------------------+--------------------+
+|                 | Bodemgroep 1      | Bodemgroep 2        | Bodemgroep 3       |
+|                 | (minerale bodems) | (organische bodems) | (trilveen)         |
+| grondwaterstand | K1, Z1, Z2, L1    | KV, LV, ZV, V       | P                  |
++=================+===================+=====================+====================+
+| hoog            | ]-999 – 80] cm    | ]-999 – 50] cm      | ]-999 – 30] cm     |
++-----------------+-------------------+---------------------+--------------------+
+| tussenliggend   | ]80 – 110]        | ]50 – 80]           | ]30 – 50]          |
++-----------------+-------------------+---------------------+--------------------+
+| laag            | ]110 – 9000]      | ]80 – 9000]         | ]50 – 9000]        |
++-----------------+-------------------+---------------------+--------------------+
+
+
+Invoergegevens
+==============
+
  * :ref:`soil_code`
  * :ref:`mlw`
  * :ref:`inundation_acidity`
  * :ref:`seepage`
+ * :ref:`minerality`
  * :ref:`rainwater`
+
+Implementatie
+=============
 
 .. _soil_glg_class:
 
 Bepaling Bodem GLG klasse
-=========================
+--------------------------
 
 In eerste instantie worden 3 bodemgroepen onderscheiden (opm: in het Nederlands model waren dit er 4).
 
@@ -58,7 +105,7 @@ Dit gebeurt aan de hand van de tabel `soil_mlw_class.csv <https://github.com/inb
     1,-999,80,**1**
 
 Bepaling Mineraalrijkdom_klasse
-===============================
+--------------------------------
 
 De reële waarden uit het grid :ref:`minerality` worden geklasseerd op basis van 1 drempelwaarde:
 Indien groter dan 500 µS/cm krijgt deze de waarde 2, anders de waarde 1.
@@ -68,7 +115,7 @@ Indien groter dan 500 µS/cm krijgt deze de waarde 2, anders de waarde 1.
   In het voorbeeld werd de waarde 400 µS/cm gebruikt. Dit wordt dus klasse 1.
 
 Bepaling Zuurcode
-=================
+------------------
 
 Aan de hand van deze BodemGLGKlasse, de mineralenrijkdom en de gegevens :ref:`rainwater`, overstroming, kwel wordt de zuurcode bepaald.
 Dit gebeurt aan de hand van de tabel `lnk_acidity.csv <https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/lnk_acidity.csv>`_.
