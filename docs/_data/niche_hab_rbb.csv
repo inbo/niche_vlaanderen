@@ -1,14 +1,14 @@
 Habitattype,Habitatsubtype,HAB,Habitat(sub)type naam,NICHE,NICHE Wetenschappelijke naam
-91E0,oli,91E0_oli,Oligotroof elzen- en berkenbroek,1,Sphagno-Betuletum
-91E0,meso,91E0_meso,Mesotroof elzen- en berkenbroek,2,Carici elongatae-Alnetum
-91E0,eutr,91E0_eutr,Ruigte-elzenbos (Filipendulo-Alnetum),3,Macrophorbio-Alnetum
-91E0,veb,91E0_veb,Beekbegeleidend vogelkers-essenbos en essen-iepenbos,4,Pruno-Fraxinetum
+91,oli,91E0_oli,Oligotroof elzen- en berkenbroek,1,Sphagno-Betuletum
+91,meso,91E0_meso,Mesotroof elzen- en berkenbroek,2,Carici elongatae-Alnetum
+91,eutr,91E0_eutr,Ruigte-elzenbos (Filipendulo-Alnetum),3,Macrophorbio-Alnetum
+91,veb,91E0_veb,Beekbegeleidend vogelkers-essenbos en essen-iepenbos,4,Pruno-Fraxinetum
 9160,,9160,Sub-Atlantische en midden-Europese wintereikenbossen of eikenhaagbeukbossen,5,Carpinion betuli
 9190,,9190,Oude zuurminnende eikenbossen op zandvlakten met Quercus robur,6,Betulo-Quercetum roboris
 rbbmc,,rbbmc,regionaal belangrijk biotoop grote zeggenvegetaties,7,Caricion gracilis
 6430,hf,6430_hf,Vochtige tot natte moerasspirearuigten,8,Filipendulion
 6430,hw,6430_hw,Verbond van harig wilgenroosje,8,Filipendulion
-6430,mr,6430_mr,Rietlanden met echte heemst, moeraslathyrus en/of moerasmelkdistel,8,Filipendulion
+6430,mr,6430_mr,"Rietlanden met echte heemst, moeraslathyrus en/of moerasmelkdistel",8,Filipendulion
 rbbhf,,rbbhf,regionaal belangrijk biotoop moerasspirearuigte met graslandkenmerken,8,Filipendulion
 6430,bz,6430_bz,Boszomen,9,Galio-Alliarion
 ,,,,10,RG Phalaris arundinacea-[Convolvulo-Filipendulion]
@@ -16,16 +16,16 @@ rbbhf,,rbbhf,regionaal belangrijk biotoop moerasspirearuigte met graslandkenmerk
 rbbmc,,rbbmc,regionaal belangrijk biotoop grote zeggenvegetaties,12,Magnocaricion met Phragmites
 rbbmr,,rbbmr,regionaal belangrijk biotoop rietland en andere Phragmition-vegetaties,12,Magnocaricion met Phragmites
 ,,,,13,RG Glyceria maxima-[Phragmitetea]
-7140,meso,7140_meso,Basenarm tot matig basenrijk, zuur tot circum-neutraal laagveen,14,Caricion nigrae
+7140,meso,7140_meso,"Basenarm tot matig basenrijk, zuur tot circum-neutraal laagveen",14,Caricion nigrae
 7140,,7140,Overgangs- en trilveen,14,Caricion nigrae
 rbbms,,rbbms,regionaal belangrijk biotoop kleine zeggenvegetaties (BWK ms) niet vervat in overgangsveen (7140),14,Caricion nigrae
 7210,,7210,Kalkhoudende moerassen met Cladium mariscus en soorten van het Caricion davalliana,15,Caricion davallianae
 7230,,7230,Alkalisch laagveen,15,Caricion davallianae
 rbbzil,,rbbzil,regionaal belangrijk biotoop zilverschoongrasland zonder zilte elementen,16,Lolio-Potentillion anserinae
 6410,mo,6410_mo,Basenrijke Molinion-graslanden (Blauwgraslanden s.s.),17,Junco-Molinion
-6410,ve,6410_ve,Basenarme Molinion-graslanden, inclusief het Veldrustype,17,Junco-Molinion
+6410,ve,6410_ve,"Basenarme Molinion-graslanden, inclusief het Veldrustype",17,Junco-Molinion
 rbbhc,,rbbhc,regionaal belangrijk biotoop dotterbloemgrasland,18,Calthion palustris
-6510,hua,6510_hua,Verbond van grote vossenstaart, associatie van Weidekerveltorkruid,19,Alopecurion pratensis
+6510,hua,6510_hua,"Verbond van grote vossenstaart,  associatie van Weidekerveltorkruid",19,Alopecurion pratensis
 6510,hus,6510_hus,Grote pimpernelgraslanden,19,Alopecurion pratensis
 rbbvos,,rbbvos,soortenrijk grote vossenstaartgrasland,19,Alopecurion pratensis
 6510,hu,6510_hu,"Laaggelegen schraal hooiland: glanshaververbond, excl. onderstaande types",20,Arrhenatherion elatioris
@@ -36,6 +36,6 @@ rbbkam,,rbbkam,soortenrijk kamgrasgrasland,21,Cynosurion cristati
 7110,,7110,Actief hoogveen,24,Oxycocco-Ericion
 7150,,7150,Slenken in veengronden met vegetatie behorend tot het Rhynchosporion,25,Rhynchosporion albae
 ,,,,26,RG Molinia caerulea [Oxycocco-sphagnetea]
-rbbsm,,rbbsm,regionaal belangrijk biotoop gagelstruweel, niet vervat in habitattypen t.g.v. hun ondergroei,27,RG Myrica gale [Oxycocco-sphagnetea]
+rbbsm,,rbbsm,"regionaal belangrijk biotoop gagelstruweel, niet vervat in habitattypen t.g.v. hun ondergroei",27,RG Myrica gale [Oxycocco-sphagnetea]
 2310,,2310,Psammofiele heide met Calluna en Genista,28,Calluno-Genistion pilosae
 4030,,4030,Droge Europese heide,28,Calluno-Genistion pilosae

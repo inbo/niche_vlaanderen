@@ -26,7 +26,7 @@ Niet voor alle 28 vegetatietypen die in NICHE Vlaanderen aan bod komen is er inf
 
 .. csv-table:: NICHE Vlaanderen vegetatietypen waarvoor overstromingstolerantie bepaald kan worden (cfr. overeenkomstige natuurtypencode)
     :header-rows: 1
-    :file: ../data_/vegetatietypen_DeNocker.csv
+    :file: _data/vegetatietypen_DeNocker.csv
   
 Input
 =====
@@ -71,7 +71,7 @@ De impact van overstromingen verschilt alnaargelang het (groei)seizoen. Er wordt
 Brongegevens
 ------------
 
-Overstromingsdiepten worden nooit gebiedsdekkend opgemeten. Wel worden ze bepaald via eenvoudige of meer complexe oppervlaktewatermodellen. In tegenstelling tot de beperkte informatie die nodig is voor de :doc:`invoerrasters</invoer.rst>` voor NICHE Vlaanderen die verband houden met overstromingen (vaak louter overstroming of geen overstroming), is er voor de overstromingsmodule wél een indicatie nodig van de overstromingsdiepte, duur, frequentie en tijdstip van overstroming
+Overstromingsdiepten worden nooit gebiedsdekkend opgemeten. Wel worden ze bepaald via eenvoudige of meer complexe oppervlaktewatermodellen. In tegenstelling tot de beperkte informatie die nodig is voor de :doc:`invoer` voor NICHE Vlaanderen die verband houden met overstromingen (vaak louter overstroming of geen overstroming), is er voor de overstromingsmodule wél een indicatie nodig van de overstromingsdiepte, duur, frequentie en tijdstip van overstroming
 
 Output
 ======
