@@ -60,6 +60,11 @@ De definitie van de hoge, tussenliggende en lage grondwaterstanden verschilt naa
 
 *positieve GLG-waarden = onder maaiveld*
 
+Samengevat:
+
+.. image:: _static/png/acidity_table.png
+     :scale: 100%
+
 Invoergegevens
 ==============
 
