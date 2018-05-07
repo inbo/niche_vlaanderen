@@ -29,6 +29,11 @@ Hieronder wordt voor elk van de mogelijke invoerrasters een omschrijving gegeven
 14. :ref:`Aftoetsing potenties aan beheer<management_vegetation>`
 15. :ref:`Aftoetsing potenties aan overstromingsregime<inundation_vegetation>`
 
+Onderstaande figuur geeft de verschillende invoerrasters weer, thematisch geordend (verticaal) en ingedeeld naar hun indirecte (via zuur- en trofiegraad) en directe invloed op de potenties voor de verschillende vegetatietypen (horizontaal).
+
+.. figure:: _static/png/input_rasters.png
+   :scale: 100%
+
 .. _soil_code:
 
 Bodemklasse ``soil_code``
