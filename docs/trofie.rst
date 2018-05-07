@@ -80,7 +80,7 @@ De berekening gebeurt in volgende 4 stappen:
 .. _stikstofmineralisatie:
 
 Stikstofmineralisatie
-=====================
+---------------------
 
 De stikstofmineralisatie (`nitrogen_mineralisation`) wordt berekend aan de hand van volgende invoergegevens:
 
@@ -101,7 +101,7 @@ Daar wordt de N_mineralisatie bepaald met de bodemcijfercode en de min en max wa
   =============== ======= ======= =======================
 
 Bepaling Totale Stikstof
-========================
+------------------------
 
 De totale Stikstof (N_tot) wordt bepaald als de som van volgende stikstofbronnen:
 
@@ -119,7 +119,7 @@ De totale Stikstof (N_tot) wordt bepaald als de som van volgende stikstofbronnen
 .. _trofie_code:
 
 Bepaling gecodeerde Trofie
-==========================
+--------------------------
 
 De totale stikstof wordt gecombineerd met het type beheer en het bodemtype om de gecodeerde trofie te berekenen.
 Mogelijke waarden van beheer worden gegeven in de tabel `Management <https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/management.csv>`_.
@@ -147,7 +147,7 @@ De Invloed die correspondeert met het gekozen management kan met het bodemtype e
   De gecodeerde trofie is dus 5.
 
 Invloed Overstroming
-====================
+--------------------
 
 De waarden voor trofie die in de vorige stap berekend werden worden met 1 verhoogd
 indien er zich overstromingen voordoen én de trofie 3 of lager is.
