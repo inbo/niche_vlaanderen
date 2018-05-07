@@ -1,6 +1,6 @@
-###########################
+##############
 Invoer rasters
-###########################
+##############
 
 
 NICHE Vlaanderen berekent de potenties voor vegetatietypes in een gebied op basis van informatie over de (abiotische) standplaatscondities. De standplaatscondities dienen vervat te zijn in de zgn. invoergegevens: ruimtelijke datalagen (rasters) met voor elke standplaatsfactor de toestand voor elke rastercel, uitgedrukt in numerieke vorm, als een continue, ordinale of nominale waarde. Het model combineert de verschillende rasters tot een uitspraak over de potentie voor de verschillende vegetatietypen in elke rastercel op basis van beslisregels.
@@ -16,7 +16,7 @@ Hieronder wordt voor elk van de mogelijke invoerrasters een omschrijving gegeven
 1. :ref:`Bodemklasse<soil_code>`
 2. :ref:`Gemiddelde hoogste grondwaterstand<mhw>`
 3. :ref:`Gemiddelde laagste grondwaterstand<mlw>`
-4. :ref:`Gemiddelde voorjaarsgrondwaterstand, <msw>`
+4. :ref:`Gemiddelde voorjaarsgrondwaterstand<msw>`
 5. :ref:`Kwelflux<seepage>`
 6. :ref:`Overstroming i.f.v. zuurgraad<inundation_acidity>`
 7. :ref:`Overstroming i.f.v. trofiegraad<inundation_nutrient>`
@@ -57,7 +57,7 @@ Rol in model
 De NICHE bodemkaart speelt een rol:
 
 - bij de berekening van zowel de trofie- als de zuurgraad, inclusief aflijnen van beslisregels
-- bij het rechtstreeks aftoetsen aan de compatibele bodemklassen van elk vegetatietype in de referentietabel van NICHE Vlaanderen `(niche_vegetation.csv) <https://github.com/INBO/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_vegetation.csv>`_.
+- bij het rechtstreeks aftoetsen aan de compatibele bodemklassen van elk vegetatietype in de `referentietabel van NICHE Vlaanderen <https://github.com/INBO/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_vegetation.csv>`_.
 
 Brongegevens
 ------------
@@ -66,7 +66,7 @@ Voor het aanmaken van deze ecologische NICHE bodemkaart kan er gebruik gemaakt w
 Opmerkingen
 -----------
 
-.. _mxw:
+.. _mxw
 
 Gemiddelde grondwaterstanden (GxG)
 ==================================
@@ -100,7 +100,7 @@ Het is een maat voor het laagste niveau in een gemiddelde zomer.
 .. _msw:
 
 GVG (gemiddeld voorjaarsgrondwaterstand) ``msw``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 GVG - gemiddelde voorjaarsgrondwaterstand: de gemiddelde grondwaterstand aan het begin van het groeiseizoen (= gemiddelde van de drie metingen die het dichtst bij 1 april liggen (GV3); kunnen metingen zijn van twee opeenvolgende hydrologische jaren aangezien hydrologisch jaar start op 1 april).
 Indien niet gekend kan de GVG afgeleid worden uit de formule: GVG = 5,4 + 0,83*GHG + 0,19*GLG (in cm).
@@ -122,7 +122,7 @@ Rol in model
 De gemiddelde grondwaterstanden spelen een rol:
 
 - bij de berekening van zowel de trofie- (via GVG) als de zuurgraad (via GLG), inclusief aflijnen van beslisregels
-- bij het rechtstreeks aftoetsen aan de grenswaarden van GLG en GHG van elk vegetatietype in de referentietabel van NICHE Vlaanderen `(niche_vegetation.csv) <https://github.com/INBO/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_vegetation.csv>`_.
+- bij het rechtstreeks aftoetsen aan de grenswaarden van GLG en GHG van elk vegetatietype in de `referentietabel van NICHE Vlaanderen <https://github.com/INBO/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_vegetation.csv>`_.
 
 Brongegevens
 ------------
@@ -234,7 +234,7 @@ Brongegevens
 ------------
 Men kan bestaande overstromingskaarten gebruiken, eventuele eigen karteringen, of de resultaten van een oppervlaktewatermodel. Bemerk dat het hier moet gaan om zeer frequente (i.e. jaarlijks of minstens 2-jaarlijks) overstromingen met bovendien voedselrijk water. Zoniet wordt er in NICHE Vlaanderen geen impact gekoppeld van overstromingen op de trofiegraad. In oppervlaktewatermodellen is er aan dergelijke korte retourperioden vaak een hoge mate van onzekerheid verbonden.
 
-Los van de invloed op de trofiegraad laat het NICHE Vlaanderen model ook toe om de potenties van vegetatietypen ook af te toetsen aan een inschatting van de overtromingstolerantie op zich (zie :ref:`inundation_vegetation`). Dat is optioneel en houdt een sterke vereenvoudiging van de werkelijke impact van overstromingen in. In de meer uitgebreide module :doc:`Niche Floodplain </overstroming>` is het mogelijk om de voorspelde potenties volgens NICHE Vlaanderen bijkomend te confronteren met meer gedetailleerde gebiedsinformatie over overstromingen (frequentie, duur, tijdstip, diepte).
+Los van de invloed op de trofiegraad laat het NICHE Vlaanderen model ook toe om de potenties van vegetatietypen ook af te toetsen aan een inschatting van de overtromingstolerantie op zich (zie :ref:`inundation_vegetation`). Dat is optioneel en houdt een sterke vereenvoudiging van de werkelijke impact van overstromingen in. In de meer uitgebreide :doc:`overstromingsmodule</overstroming.rst>` is het mogelijk om de voorspelde potenties volgens NICHE Vlaanderen bijkomend te confronteren met meer gedetailleerde gebiedsinformatie over overstromingen (frequentie, duur, tijdstip, diepte).
 
 Opmerkingen
 -----------
@@ -273,7 +273,7 @@ Brongegevens
 ------------
 Men kan bestaande overstromingskaarten gebruiken, eventuele eigen karteringen, of de resultaten van een oppervlaktewatermodel. Bemerk dat het hier moet gaan om zeer frequente (i.e. jaarlijks of minstens 2-jaarlijks) overstromingen met bovendien voedselrijk water. Zoniet wordt er in NICHE Vlaanderen geen impact gekoppeld van overstromingen op de zuurgraad. In oppervlaktewatermodellen is er aan dergelijke korte retourperioden vaak een hoge mate van onzekerheid verbonden.
 
-Los van de invloed op de zuurgraad laat het NICHE Vlaanderen model ook toe om de potenties van vegetatietypen ook af te toetsen aan een inschatting van de overtromingstolerantie op zich (zie :ref:`inundation_vegetation`). Dat is optioneel en houdt een sterke vereenvoudiging van de werkelijke impact van overstromingen in. In de meer uitgebreide module :doc:`Niche Floodplain </overstroming>` is het mogelijk om de voorspelde potenties volgens NICHE Vlaanderen bijkomend te confronteren met meer gedetailleerde gebiedsinformatie over overstromingen (frequentie, duur, tijdstip, diepte).
+Los van de invloed op de zuurgraad laat het NICHE Vlaanderen model ook toe om de potenties van vegetatietypen ook af te toetsen aan een inschatting van de overtromingstolerantie op zich (zie :ref:`inundation_vegetation`). Dat is optioneel en houdt een sterke vereenvoudiging van de werkelijke impact van overstromingen in. In de meer uitgebreide :doc:`overstromingsmodule<overstroming>` is het mogelijk om de voorspelde potenties volgens NICHE Vlaanderen bijkomend te confronteren met meer gedetailleerde gebiedsinformatie over overstromingen (frequentie, duur, tijdstip, diepte).
 
 Opmerkingen
 -----------
@@ -342,8 +342,7 @@ De gift aan dierlijke mest bepaalt mede de trofiegraad (zie :ref:`nutrient_level
 
 Brongegevens
 ------------
-Indien reële mestgiften gekend zijn op perceelsniveau kunnen ze omgerekend worden naar de hoeveelheid stikstof per ha en per jaar. Bij afwezigheid van deze informatie kunnen schattingen gemaakt worden op basis van een landgebruikskaart waarvoor aan elk landgebruik standaard een bepaalde hoeveelheid stikstof wordt toegekend (zie onderstaande tabel). 
-Zo werd voor NICHE Vlaanderen een `omzettingstabel<https://github.com/inbo/niche_vlaanderen/blob/master/docs/_data/tblBWK_BeheerBemesting.csv>` gemaakt met voor elke gedetailleerde landgebruikscode uit de Biologische Waarderingskaart (BWK) een vereenvoudigde landgebruiksklasse met een overeenkomstige bemestingsklasse. Die vereenvoudigde landgebruiksklassen kunnen ook gebruikt worden bij het schatten van de stikstofgift afkomstig uit kunstmest.
+Indien reële mestgiften gekend zijn op perceelsniveau kunnen ze omgerekend worden naar de hoeveelheid stikstof per ha en per jaar. Bij afwezigheid van deze informatie kunnen schattingen gemaakt worden op basis van een landgebruikskaart waarvoor aan elk landgebruik standaard een bepaalde hoeveelheid stikstof wordt toegekend (zie onderstaande tabel). Zo werd voor NICHE Vlaanderen een :download:`omzettingstabel</_data/tblBWK_BeheerBemesting.csv>` gemaakt met voor elke gedetailleerde landgebruikscode uit de Biologische Waarderingskaart (BWK) een vereenvoudigde landgebruiksklasse met een overeenkomstige bemestingsklasse. Die vereenvoudigde landgebruiksklassen kunnen ook gebruikt worden bij het schatten van de stikstofgift afkomstig uit kunstmest.
 
 +-------------------------+---------------------------------------------+-----------------------------------------------------------------------------------------------+
 | Landgebruiksklasse      | Bemesting                                   | Omschrijving                                                                                  |
@@ -391,7 +390,7 @@ De gift via kunstmest bepaalt mede de trofiegraad (zie :ref:`nutrient_level`) wa
 
 Brongegevens
 ------------
-Indien reële mestgiften gekend zijn op perceelsniveau kunnen ze omgerekend worden naar de hoeveelheid stikstof per ha en per jaar. Bij afwezigheid van deze informatie kunnen schattingen gemaakt worden op basis van een landgebruikskaart waarvoor aan elk landgebruik standaard een bepaalde hoeveelheid stikstof wordt toegekend (zie bovenstaande tabel). Zo werd voor NICHE Vlaanderen een `omzettingstabel<https://github.com/inbo/niche_vlaanderen/blob/master/docs/_data/tblBWK_BeheerBemesting.csv>` gemaakt met voor elke gedetailleerde landgebruikscode uit de Biologische Waarderingskaart (BWK) een vereenvoudigde landgebruiksklasse met een overeenkomstige bemestingsklasse. Dezelfde vereenvoudigde landgebruiksklassen kunnen ook gebruikt worden bij het schatten van de stikstofgift afkomstig uit dierlijke mest.
+Indien reële mestgiften gekend zijn op perceelsniveau kunnen ze omgerekend worden naar de hoeveelheid stikstof per ha en per jaar. Bij afwezigheid van deze informatie kunnen schattingen gemaakt worden op basis van een landgebruikskaart waarvoor aan elk landgebruik standaard een bepaalde hoeveelheid stikstof wordt toegekend (zie bovenstaande tabel). Zo werd voor NICHE Vlaanderen een :download:`omzettingstabel</_data/tblBWK_BeheerBemesting.csv>` gemaakt met voor elke gedetailleerde landgebruikscode uit de Biologische Waarderingskaart (BWK) een vereenvoudigde landgebruiksklasse met een overeenkomstige bemestingsklasse. Dezelfde vereenvoudigde landgebruiksklassen kunnen ook gebruikt worden bij het schatten van de stikstofgift afkomstig uit dierlijke mest.
 
 Opmerkingen
 -----------
@@ -425,11 +424,11 @@ In NICHE Vlaanderen heeft het gevoerde beheer een impact op twee niveaus.
 
 Enerzijds heeft het een effect op de trofiegraad (zie :ref:`nutrient_level`) : die daalt met één eenheid/klasse als het beheer hoogfrequent is (maaien met afvoer van maaisel). Het (verplichte) invoerraster draagt dus *onrechtstreeks* bij tot de potentieberekeningen voor de verschillende vegetatietypen in het NICHE Vlaanderen model.
 
-Anderzijds kunnen de berekende potenties voor elk van de vegetatietypen finaal ook afgetoetst worden op basis van hun compatibiliteit met het gevoerde of te voeren beheer. In tegenstelling tot de onrechtstreekse bijdrage van het beheer via de trofiegraad, werkt het beheer dan *rechtstreeks* in op de potentievoorspellingen. Want hoewel de standplaats abiotisch perfect geschikt kan zijn voor een bepaald vegetatietype, is het immers mogelijk dat het nooit aanwezig kan zijn als het gevoerde of te voeren beheer het voortbestaan of de ontwikkeling ervan in de weg staat. Zo kunnen bostypen zich bijvoorbeeld niet ontwikkelen als er (jaarlijks) gemaaid wordt, of kunnen graslanden niet standhouden op plaatsen zonder een maaibeheer. De compatibiliteit van elk vegetatietype met de verschillende onderscheiden beheerklassen zit vervat in de :file:`referentietabel<../niche_vlaanderen/system_tables/niche_vegetation.csv>` van NICHE Vlaanderen. Merk op dat deze rechtstreekse aftoetsing van de berekende potenties aan het beheer een optionele stap is in NICHE Vlaanderen: de aftoetsing gebeurt enkel als het  invoerraster :ref:`management_vegetation` (dat inhoudelijk identiek is aan het hier besproken invoerraster) expliciet wordt gespecifieerd. Wordt deze laatste niet gespecifieerd, dan worden de potenties berekend zonder de rechtstreekse impact van het actueel gevoerde of het toekomstig beheer, dus louter op basis van de abiotische eigenschappen van de standplaats.
+Anderzijds kunnen de berekende potenties voor elk van de vegetatietypen finaal ook afgetoetst worden op basis van hun compatibiliteit met het gevoerde of te voeren beheer. In tegenstelling tot de onrechtstreekse bijdrage van het beheer via de trofiegraad, werkt het beheer dan *rechtstreeks* in op de potentievoorspellingen. Want hoewel de standplaats abiotisch perfect geschikt kan zijn voor een bepaald vegetatietype, is het immers mogelijk dat het nooit aanwezig kan zijn als het gevoerde of te voeren beheer het voortbestaan of de ontwikkeling ervan in de weg staat. Zo kunnen bostypen zich bijvoorbeeld niet ontwikkelen als er (jaarlijks) gemaaid wordt, of kunnen graslanden niet standhouden op plaatsen zonder een maaibeheer. De compatibiliteit van elk vegetatietype met de verschillende onderscheiden beheerklassen zit vervat in de `referentietabel van NICHE Vlaanderen <https://github.com/INBO/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_vegetation.csv>`_. Merk op dat deze rechtstreekse aftoetsing van de berekende potenties aan het beheer een optionele stap is in NICHE Vlaanderen: de aftoetsing gebeurt enkel als het  invoerraster :ref:`management_vegetation` (dat inhoudelijk identiek is aan het hier besproken invoerraster) expliciet wordt gespecifieerd. Wordt deze laatste niet gespecifieerd, dan worden de potenties berekend zonder de rechtstreekse impact van het actueel gevoerde of het toekomstig beheer, dus louter op basis van de abiotische eigenschappen van de standplaats.
 
 Brongegevens
 ------------
-Idealiter is het beheer van elk perceel in het studiegebied gedocumenteerd en kan de beheerklasse eenvoudigweg bepaald worden op basis van deze informatie. Een studiegebied kan echter groot zijn en dus veel percelen tellen waarvan het beheer helemaal niet of slechts gedeeltelijk gedocumenteerd is. Voor elk perceel het beheer achterhalen kan dan arbeidsintensief zijn. Daarom kan men terugvallen op een generieke `omzettingstabel<https://github.com/inbo/niche_vlaanderen/blob/master/docs/_data/tblBWK_BeheerBemesting.csv>` met voor elke code van de Biologische Waarderingskaart (BWK) de meest aannemelijke beheerklasse. Op die manier kan de gebiedsdekkende kartering van de BWK ten volle benut worden. Een manuele controle kan evenwel aangewezen zijn indien de informatie uit de BWK verouderd is. Houdt er ook rekening mee dat de uit de BWK afgeleide beheerkaart steeds het actuele beheer weergeeft. Indien met NICHE Vlaanderen een scenario doorgerekend wordt met een gewenst (toekomstige) beheer en dit beheer afwijkt van het huidige, dan moeten de beheerklassen overeenkomstig toegekend worden aan elke rastercel.
+Idealiter is het beheer van elk perceel in het studiegebied gedocumenteerd en kan de beheerklasse eenvoudigweg bepaald worden op basis van deze informatie. Een studiegebied kan echter groot zijn en dus veel percelen tellen waarvan het beheer helemaal niet of slechts gedeeltelijk gedocumenteerd is. Voor elk perceel het beheer achterhalen kan dan arbeidsintensief zijn. Daarom kan men terugvallen op een generieke :download:`omzettingstabel</_data/tblBWK_BeheerBemesting.csv>` met voor elke code van de Biologische Waarderingskaart (BWK) de meest aannemelijke beheerklasse. Op die manier kan de gebiedsdekkende kartering van de BWK ten volle benut worden. Een manuele controle kan evenwel aangewezen zijn indien de informatie uit de BWK verouderd is. Houdt er ook rekening mee dat de uit de BWK afgeleide beheerkaart steeds het actuele beheer weergeeft. Indien met NICHE Vlaanderen een scenario doorgerekend wordt met een gewenst (toekomstige) beheer en dit beheer afwijkt van het huidige, dan moeten de beheerklassen overeenkomstig toegekend worden aan elke rastercel.
 
 Opmerkingen
 -----------
@@ -508,7 +507,7 @@ Overstroming Vegetatie ``inundation_vegetation``
  
 Omschrijving
 ------------
-Deze overstromingskaart wordt enkel gebruikt bij het aftoetsen van voorspelde potenties voor de vegetatietypes aan het overstromingsregime van de standplaats, op basis van de informatie in de NICHE Vlaanderen :file:`referentietabel <../niche_vlaanderen/system_tables/niche_vegetation.csv>`. Er wordt per vegetatietype nagegaan welke voorspelde potenties nog standhouden bij het aangegeven overstromingsregime en welke niet.
+Deze overstromingskaart wordt enkel gebruikt bij het aftoetsen van voorspelde potenties voor de vegetatietypes aan het overstromingsregime van de standplaats, op basis van de informatie in de `referentietabel van NICHE Vlaanderen <https://github.com/INBO/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_vegetation.csv>`_. Er wordt per vegetatietype nagegaan welke voorspelde potenties nog standhouden bij het aangegeven overstromingsregime en welke niet.
 
 - Actueel of toekomstig beheer (scenario-analyse)
  
@@ -532,9 +531,7 @@ geen
 
 Rol in model
 ------------
-Los van de *indirecte* invloed van overstromingen op de potentieberekening voor vegetatietypen via de berekening van zowel de zuur- als de trofiegraad laat het NICHE Vlaanderen model via dit invoerraster ook toe om de potenties van vegetatietypen *rechtstreeks* af te toetsen aan een inschatting van de overtromingstolerantie op zich (zie :ref:`inundation_vegetation`).
-Deze aftoetsing is optioneel en houdt een sterke vereenvoudiging van de werkelijke impact van overstromingen in. 
-In de meer uitgebreide module :doc:`Niche Floodplain <overstroming>` is het mogelijk om de voorspelde potenties volgens NICHE Vlaanderen bijkomend te confronteren met meer gedetailleerde gebiedsinformatie over overstromingen (frequentie, duur, tijdstip, diepte).
+Los van de *indirecte* invloed van overstromingen op de potentieberekening voor vegetatietypen via de berekening van zowel de zuur- als de trofiegraad laat het NICHE Vlaanderen model via dit invoerraster ook toe om de potenties van vegetatietypen *rechtstreeks* af te toetsen aan een inschatting van de overtromingstolerantie op zich (zie :ref:`inundation_vegetation`). Deze aftoetsing is optioneel en houdt een sterke vereenvoudiging van de werkelijke impact van overstromingen in. In de meer uitgebreide :doc:`overstromingsmodule</overstroming.rst>` is het mogelijk om de voorspelde potenties volgens NICHE Vlaanderen bijkomend te confronteren met meer gedetailleerde gebiedsinformatie over overstromingen (frequentie, duur, tijdstip, diepte).
 
 Brongegevens
 ------------
@@ -575,18 +572,11 @@ In NICHE Vlaanderen heeft het gevoerde beheer een impact op twee niveaus.
 
 Enerzijds heeft het een effect op de trofiegraad (zie :ref:`management`) : die daalt met één eenheid/klasse als het beheer hoogfrequent is (bv. regelmatig maaien met afvoer van maaisel). Het (verplichte) invoerraster draagt dus *onrechtstreeks* bij tot de potentieberekeningen voor de verschillende vegetatietypen in het NICHE Vlaanderen model.
 
-Anderzijds kunnen de berekende potenties voor elk van de vegetatietypen finaal ook afgetoetst worden op basis van hun compatibiliteit met het gevoerde of te voeren beheer. 
-In tegenstelling tot de onrechtstreekse bijdrage van het beheer via de trofiegraad, werkt het beheer dan *rechtstreeks* in op de potentievoorspellingen. Want hoewel de standplaats abiotisch perfect geschikt kan zijn voor een bepaald vegetatietype, is het immers mogelijk dat het nooit aanwezig kan zijn als het gevoerde of te voeren beheer het voortbestaan of de ontwikkeling ervan in de weg staat. 
-Zo kunnen bostypen zich bijvoorbeeld niet ontwikkelen als er (jaarlijks) gemaaid wordt, of kunnen graslanden niet standhouden op plaatsen zonder een maaibeheer. 
-De compatibiliteit van elk vegetatietype met de verschillende onderscheiden beheerklassen zit vervat in de `referentietabel <https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_vegetation.csv>` van NICHE Vlaanderen. 
-Merk op dat deze rechtstreekse aftoetsing van de berekende potenties aan het beheer een *optionele stap* is in NICHE Vlaanderen: de aftoetsing gebeurt enkel als het hier besproken invoerraster (dat inhoudelijk identiek is aan :ref:`management`) expliciet wordt gespecifieerd via ``set_input("management_vegetation", <pad naar invoerraster>`` voor een NICHE Vlaanderen object aangemaakt via ``niche_vlaanderen.Niche()``. Wordt het niet gespecifieerd, dan worden de potenties berekend zonder de rechtstreekse impact van het actueel gevoerde of het toekomstig beheer, dus louter op basis van de abiotische eigenschappen van de standplaats.
+Anderzijds kunnen de berekende potenties voor elk van de vegetatietypen finaal ook afgetoetst worden op basis van hun compatibiliteit met het gevoerde of te voeren beheer. In tegenstelling tot de onrechtstreekse bijdrage van het beheer via de trofiegraad, werkt het beheer dan *rechtstreeks* in op de potentievoorspellingen. Want hoewel de standplaats abiotisch perfect geschikt kan zijn voor een bepaald vegetatietype, is het immers mogelijk dat het nooit aanwezig kan zijn als het gevoerde of te voeren beheer het voortbestaan of de ontwikkeling ervan in de weg staat. Zo kunnen bostypen zich bijvoorbeeld niet ontwikkelen als er (jaarlijks) gemaaid wordt, of kunnen graslanden niet standhouden op plaatsen zonder een maaibeheer. De compatibiliteit van elk vegetatietype met de verschillende onderscheiden beheerklassen zit vervat in de `referentietabel van NICHE Vlaanderen <https://github.com/INBO/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_vegetation.csv>`_. Merk op dat deze rechtstreekse aftoetsing van de berekende potenties aan het beheer een *optionele stap* is in NICHE Vlaanderen: de aftoetsing gebeurt enkel als het hier besproken invoerraster (dat inhoudelijk identiek is aan :ref:`management`) expliciet wordt gespecifieerd via ``set_input("management_vegetation", <pad naar invoerraster>`` voor een NICHE Vlaanderen object aangemaakt via ``niche_vlaanderen.Niche()``. Wordt het niet gespecifieerd, dan worden de potenties berekend zonder de rechtstreekse impact van het actueel gevoerde of het toekomstig beheer, dus louter op basis van de abiotische eigenschappen van de standplaats.
 
 Brongegevens
 ------------
-Idealiter is het beheer van elk perceel in het studiegebied gedocumenteerd en kan de beheerklasse eenvoudigweg bepaald worden op basis van deze informatie. 
-Een studiegebied kan echter groot zijn en dus veel percelen tellen waarvan het beheer helemaal niet of slechts gedeeltelijk gedocumenteerd is. 
-Voor elk perceel het beheer achterhalen kan dan arbeidsintensief zijn. 
-Daarom kan men terugvallen op een generieke `omzettingstabel<https://github.com/inbo/niche_vlaanderen/blob/master/docs/_data/tblBWK_BeheerBemesting.csv>` met voor elke code van de Biologische Waarderingskaart (BWK) de meest aannemelijke beheerklasse. Op die manier kan de gebiedsdekkende kartering van de BWK ten volle benut worden. Een manuele controle kan evenwel aangewezen zijn indien de informatie uit de BWK verouderd is. Houdt er ook rekening mee dat de uit de BWK afgeleide beheerkaart steeds het actuele beheer weergeeft. Indien met NICHE Vlaanderen een scenario doorgerekend wordt met een gewenst (toekomstige) beheer en dit beheer afwijkt van het huidige, dan moeten de beheerklassen overeenkomstig toegekend worden aan elke rastercel.
+Idealiter is het beheer van elk perceel in het studiegebied gedocumenteerd en kan de beheerklasse eenvoudigweg bepaald worden op basis van deze informatie. Een studiegebied kan echter groot zijn en dus veel percelen tellen waarvan het beheer helemaal niet of slechts gedeeltelijk gedocumenteerd is. Voor elk perceel het beheer achterhalen kan dan arbeidsintensief zijn. Daarom kan men terugvallen op een generieke :download:`omzettingstabel</_data/tblBWK_BeheerBemesting.csv>` met voor elke code van de Biologische Waarderingskaart (BWK) de meest aannemelijke beheerklasse. Op die manier kan de gebiedsdekkende kartering van de BWK ten volle benut worden. Een manuele controle kan evenwel aangewezen zijn indien de informatie uit de BWK verouderd is. Houdt er ook rekening mee dat de uit de BWK afgeleide beheerkaart steeds het actuele beheer weergeeft. Indien met NICHE Vlaanderen een scenario doorgerekend wordt met een gewenst (toekomstige) beheer en dit beheer afwijkt van het huidige, dan moeten de beheerklassen overeenkomstig toegekend worden aan elke rastercel.
 
 Opmerkingen
 -----------
