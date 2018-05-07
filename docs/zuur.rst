@@ -25,9 +25,9 @@ NICHE berekent de zuurgraad van de standplaats op basis van:
 * de mineraalrijkdom van het grondwater
 * de eventuele aanwezigheid van een regenwaterlens
 
-Als uitgangspunt geldt dat bij hoge grondwaterstanden de standplaats beïnvloed wordt
+Als uitgangspunt geldt dat **bij hoge grondwaterstanden de standplaats beïnvloed wordt
 door de kenmerken van het grondwater. Bij lage grondwaterstanden kan regenwater
-infiltreren en wordt de standplaats zuurder.
+infiltreren en wordt de standplaats zuurder**.
 
 Als: 
 
@@ -40,20 +40,22 @@ Als:
 .. image:: _static/png/acidity_principle.png
      :scale: 100%
 
-De definitie van de hoge, tussenliggende en lage grondwaterstanden wordt in onderstaande tabel weergegeven:
+De definitie van de hoge, tussenliggende en lage grondwaterstanden verschilt naargelang het bodemtype en wordt in onderstaande tabel weergegeven:
 
 +-----------------+--------------------------------------------------------------+
 |                 | GLG drempelwaarden per bodemgroep                            |
 +-----------------+-------------------+---------------------+--------------------+
 |                 | Bodemgroep 1      | Bodemgroep 2        | Bodemgroep 3       |
-|                 | (minerale bodems) | (organische bodems) | (trilveen)         |
-| grondwaterstand | K1, Z1, Z2, L1    | KV, LV, ZV, V       | P                  |
++-----------------+-------------------+---------------------+--------------------+
+|                 | Minerale bodems   | Organische bodems   | Trilveen           |
++-----------------+-------------------+---------------------+--------------------+
+| Grondwaterstand | K1, Z1, Z2, L1    | KV, LV, ZV, V       | P                  |
 +=================+===================+=====================+====================+
-| hoog            | ]-999 – 80] cm    | ]-999 – 50] cm      | ]-999 – 30] cm     |
+| Hoog            | ]-999 – 80] cm    | ]-999 – 50] cm      | ]-999 – 30] cm     |
 +-----------------+-------------------+---------------------+--------------------+
-| tussenliggend   | ]80 – 110]        | ]50 – 80]           | ]30 – 50]          |
+| Tussenliggend   | ]80 – 110]        | ]50 – 80]           | ]30 – 50]          |
 +-----------------+-------------------+---------------------+--------------------+
-| laag            | ]110 – 9000]      | ]80 – 9000]         | ]50 – 9000]        |
+| Laag            | ]110 – 9000]      | ]80 – 9000]         | ]50 – 9000]        |
 +-----------------+-------------------+---------------------+--------------------+
 
 *negatieve GLG-waarden = onder maaiveld*
