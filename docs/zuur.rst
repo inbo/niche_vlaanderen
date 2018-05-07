@@ -65,6 +65,8 @@ Samengevat:
 .. image:: _static/png/acidity_table.png
      :scale: 100%
 
+*B = neutraal/basisch, ZW = zwak zuur, Z = zuur*
+
 Invoergegevens
 ==============
 
@@ -75,8 +77,8 @@ Invoergegevens
  * :ref:`minerality`
  * :ref:`rainwater`
 
-Implementatie
-=============
+Implementatie in het package ``niche_vlaanderen``
+=================================================
 
 .. _soil_glg_class:
 
