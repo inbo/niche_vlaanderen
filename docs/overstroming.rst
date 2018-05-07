@@ -26,7 +26,7 @@ Vegetatietypen
 --------------
 Niet voor alle 28 vegetatietypen die in NICHE Vlaanderen aan bod komen is er informatie uit De Nocker et al. (2007) voorhanden. De rompgemeenschappen vallen weg, m.u.v. gagelstruweel. In onderstaande tabel staan de NICHE Vlaanderen vegetatietypen opgelijst met hun overeenkomstige natuurtypecode uit de Nocker et al. (2007) waarvan de overstromingstolerantie werd overgenomen.
 
-.. csv-table:: NICHE Vlaanderen vegetatietypen waarvoor overstromingstolerantie bepaald kan worden (cfr. overeenkomstige natuurtypencode)
+  .. csv-table:: NICHE Vlaanderen vegetatietypen waarvoor overstromingstolerantie bepaald kan worden (cfr. overeenkomstige natuurtypencode)
     :header-rows: 1
     :file: ../data_/vegetatietypen_DeNocker.csv
   
