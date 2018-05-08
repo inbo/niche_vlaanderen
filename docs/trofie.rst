@@ -31,7 +31,8 @@ Eerst wordt de *jaarlijkse stikstofmineralisatie* bepaald aan de hand van het bo
 De stikstofmineralisatie wordt afgeleid uit de volgende mineralisatiecurven:
 
 .. image:: _static/png/nutrient_mineralcurve.png
-     :scale: 100%
+   :width: 500px
+   :height: 250px
 
 De *totale hoeveelheid stikstof* wordt vervolgens berekend als de som van de mineralisatie, atmosferische depositie en bemesting.
 
@@ -92,7 +93,7 @@ Daar wordt de N_mineralisatie bepaald met de bodemcijfercode en de min en max wa
 
 .. topic:: Voorbeeld
   
-  Voor een humusarme leembodem (bodemcode L1, bodemcijfercode 14) en een GVG van 33 cm onder maaiveld krijgen we waarde: 75
+  Voor een humusarme leembodem (bodemcode L1, bodemcijfercode 14) en een GVG van 33 cm onder maaiveld krijgen we waarde: 75 kg N/ha
   
   =============== ======= ======= =======================
   soil_code       msw_min msw_max nitrogen_mineralisation
@@ -100,10 +101,10 @@ Daar wordt de N_mineralisatie bepaald met de bodemcijfercode en de min en max wa
   L1              30      35       **75**
   =============== ======= ======= =======================
 
-Bepaling Totale Stikstof
+Bepaling totale stikstof
 ------------------------
 
-De totale Stikstof (N_tot) wordt bepaald als de som van volgende stikstofbronnen:
+De totale stikstof (N_tot) wordt bepaald als de som van volgende stikstofbronnen:
 
 * :ref:`stikstofmineralisatie` (vorige stap)
 * :ref:`nitrogen_atmospheric` (input raster)
@@ -114,11 +115,11 @@ De totale Stikstof (N_tot) wordt bepaald als de som van volgende stikstofbronnen
   
   .. math:: N_{tot} &= N_{mineralisatie} + N_{Atm\_Deposit} + N_{Mest\_Kunst} + N_{Mest\_Dier} \\
                   &= (75 + 20 + 0 + 350) \\
-                  &= 445
+                  &= 445 kg N/ha
 
 .. _trofie_code:
 
-Bepaling gecodeerde Trofie
+Bepaling gecodeerde trofie
 --------------------------
 
 De totale stikstof wordt gecombineerd met het type beheer en het bodemtype om de gecodeerde trofie te berekenen.
@@ -129,14 +130,14 @@ Mogelijke waarden van beheer worden gegeven in de tabel `Management <https://git
   :file: ../niche_vlaanderen/system_tables/management.csv
 
 
-De Invloed die correspondeert met het gekozen management kan met het bodemtype en de
+De "invloed" die correspondeert met het gekozen management kan met het bodemtype en de
     totale stikstof gebruikt worden om in de tabel `lnk_soil_nutrient_level <https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/lnk_soil_nutrient_level.csv>`_ de gecodeerde trofie te berekenen
 
 .. topic:: Voorbeeld
 
   * Beheer = begrazing(2) dus Invloed = 0
   * Bodemtype = L1
-  * N_tot = 445
+  * N_tot = 445 kg N/ha
   
   ==================== ========= ================== ================== ===========  
   management_influence soil_code total_nitrogen_min total_nitrogen_max nutrient_level
@@ -146,7 +147,7 @@ De Invloed die correspondeert met het gekozen management kan met het bodemtype e
   
   De gecodeerde trofie is dus 5.
 
-Invloed Overstroming
+Invloed overstroming
 --------------------
 
 De waarden voor trofie die in de vorige stap berekend werden worden met 1 verhoogd
