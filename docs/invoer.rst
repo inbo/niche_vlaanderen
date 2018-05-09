@@ -31,7 +31,7 @@ Hieronder wordt voor elk van de mogelijke invoerrasters een omschrijving gegeven
 
 Onderstaande figuur geeft de verschillende invoerrasters weer, thematisch geordend (verticaal) en ingedeeld naar hun indirecte (via zuur- en trofiegraad) en directe invloed op de potenties voor de verschillende vegetatietypen (horizontaal).
 
-.. figure:: _static/png/input_rasters.png
+.. figure:: _static/svg/input_rasters.svg
    :scale: 100%
 
 .. _soil_code:
@@ -170,7 +170,7 @@ mm/dag; negatief waar grondwater uittreedt, postief waar grondwater infiltreert
 
 Rol in model
 ------------
-In NICHE Vlaanderen wordt de kwelflux samen met de :ref:`mineraalrijkdom<minerality>` van het grondwater, de aanwezigheid van een :ref:`regenwaterlens<rainwater>`, het optreden van :ref:`overstromingen<inundation_acidity` en de interactie tussen bodem en grondwaterstand gebruikt om de zuur-basen toestand (zie :ref:`acidity`) van de bestudeerde locaties in te schatten. Meer specifiek worden bovengenoemde klassen van kwelintensiteit gebruikt in de beslisregel voor de bepaling van de zuurgraad. Kwel is niet belangrijk als fysische parameter op zich. De relevante vraag voor het model is of er tijdens een belangrijk deel van het jaar mineraalrijke kwel uittreedt in de wortelzone. Het type kwel dat van belang is voor NICHE Vlaanderen is een opwaartse, oppervlakkige grondwaterstroming naar de wortelzone.
+In NICHE Vlaanderen wordt de kwelflux samen met de :ref:`mineraalrijkdom<minerality>` van het grondwater, de aanwezigheid van een :ref:`regenwaterlens<rainwater>`, het optreden van :ref:`overstromingen<inundation_acidity>` en de interactie tussen bodem en grondwaterstand gebruikt om de zuur-basen toestand (zie :ref:`acidity`) van de bestudeerde locaties in te schatten. Meer specifiek worden bovengenoemde klassen van kwelintensiteit gebruikt in de beslisregel voor de bepaling van de zuurgraad. Kwel is niet belangrijk als fysische parameter op zich. De relevante vraag voor het model is of er tijdens een belangrijk deel van het jaar mineraalrijke kwel uittreedt in de wortelzone. Het type kwel dat van belang is voor NICHE Vlaanderen is een opwaartse, oppervlakkige grondwaterstroming naar de wortelzone.
 
 Brongegevens
 ------------
@@ -229,13 +229,13 @@ geen
 
 Rol in model
 ------------
-Dit binaire invoerraster geeft aan of de berekende trofiegraad (indien lager dan eutroof) op basis van de overige variabelen (mineralisatie bodem, stikstofinput uit depositie en bemesting, beheer en bodemtype) nog met een klasse verhoogd moet worden of niet (tot maximum de klasse eutroof). Zie :ref:`nutrient_level`. De trofiegraad bepaalt samen met de zuurgraad, het bodemtype en de grondwaterstanden de potenties voor elk van de vegetatietypen.
+Dit binaire invoerraster geeft aan of de berekende :doc:`trofiegraad<trofie>` (indien lager dan eutroof) op basis van de overige variabelen (mineralisatie bodem, stikstofinput uit depositie en bemesting, beheer en bodemtype) nog met een klasse verhoogd moet worden of niet (tot maximum de klasse eutroof). De trofiegraad bepaalt samen met de zuurgraad, het bodemtype en de grondwaterstanden de potenties voor elk van de vegetatietypen.
 
 Brongegevens
 ------------
 Men kan bestaande overstromingskaarten gebruiken, eventuele eigen karteringen, of de resultaten van een oppervlaktewatermodel. Bemerk dat het hier moet gaan om zeer frequente (i.e. jaarlijks of minstens 2-jaarlijks) overstromingen met bovendien voedselrijk water. Zoniet wordt er in NICHE Vlaanderen geen impact gekoppeld van overstromingen op de trofiegraad. In oppervlaktewatermodellen is er aan dergelijke korte retourperioden vaak een hoge mate van onzekerheid verbonden.
 
-Los van de invloed op de trofiegraad laat het NICHE Vlaanderen model ook toe om de potenties van vegetatietypen ook af te toetsen aan een inschatting van de overtromingstolerantie op zich (zie :ref:`inundation_vegetation`). Dat is optioneel en houdt een sterke vereenvoudiging van de werkelijke impact van overstromingen in. In de meer uitgebreide :doc:`overstromingsmodule<overstroming>` is het mogelijk om de voorspelde potenties volgens NICHE Vlaanderen bijkomend te confronteren met meer gedetailleerde gebiedsinformatie over overstromingen (frequentie, duur, tijdstip, diepte).
+Los van de invloed op de trofiegraad laat het NICHE Vlaanderen model ook toe om de potenties van vegetatietypen af te toetsen aan een inschatting van de overtromingstolerantie op zich (zie :ref:`inundation_vegetation`). Dat is optioneel en houdt een sterke vereenvoudiging van de werkelijke impact van overstromingen in. In de meer uitgebreide :doc:`overstromingsmodule<overstroming>` is het mogelijk om de voorspelde potenties volgens NICHE Vlaanderen bijkomend te confronteren met meer gedetailleerde gebiedsinformatie over overstromingen (frequentie, duur, tijdstip, diepte).
 
 Opmerkingen
 -----------
@@ -268,7 +268,7 @@ geen
 
 Rol in model
 ------------
-Dit binaire invoerraster stuur mee de berekening van de zuurgraad aan (zie :ref:`acidity`), die dan weer samen met de trofiegraad, het bodemtype en de grondwaterstanden aangeeft waar de potenties liggen voor de verschillende vegetatietypen.
+Dit binaire invoerraster stuurt mee de :doc:`berekening van de zuurgraad<zuur>` aan, die dan weer samen met de trofiegraad, het bodemtype en de grondwaterstanden aangeeft waar de potenties liggen voor de verschillende vegetatietypen.
 
 Brongegevens
 ------------
@@ -387,7 +387,7 @@ kg N/ha/jaar
 
 Rol in model
 ------------
-De gift via kunstmest bepaalt mede de :ref:`trofiegraad<nutrient_level>`) waaraan de potentiële aanwezigheid van de verschillende vegetatietypen wordt afgetoest.
+De gift via kunstmest bepaalt mede de :ref:`trofiegraad<nutrient_level>` waaraan de potentiële aanwezigheid van de verschillende vegetatietypen wordt afgetoest.
 
 Brongegevens
 ------------
@@ -423,7 +423,7 @@ Rol in model
 ------------
 In NICHE Vlaanderen heeft het gevoerde beheer een impact op twee niveaus.
 
-Enerzijds heeft het een effect op de :ref:`trofiegraad<nutrient_level>`) : die daalt met één eenheid/klasse als het beheer hoogfrequent is (maaien met afvoer van maaisel). Het (verplichte) invoerraster draagt dus *onrechtstreeks* bij tot de potentieberekeningen voor de verschillende vegetatietypen in het NICHE Vlaanderen model.
+Enerzijds heeft het een effect op de :doc:`trofiegraad<trofie>`: die daalt met één eenheid/klasse als het beheer hoogfrequent is (maaien met afvoer van maaisel). Het (verplichte) invoerraster draagt dus *onrechtstreeks* bij tot de potentieberekeningen voor de verschillende vegetatietypen in het NICHE Vlaanderen model.
 
 Anderzijds kunnen de berekende potenties voor elk van de vegetatietypen finaal ook afgetoetst worden op basis van hun compatibiliteit met het gevoerde of te voeren beheer. In tegenstelling tot de onrechtstreekse bijdrage van het beheer via de trofiegraad, werkt het beheer dan *rechtstreeks* in op de potentievoorspellingen. Want hoewel de standplaats abiotisch perfect geschikt kan zijn voor een bepaald vegetatietype, is het immers mogelijk dat het nooit aanwezig kan zijn als het gevoerde of te voeren beheer het voortbestaan of de ontwikkeling ervan in de weg staat. Zo kunnen bostypen zich bijvoorbeeld niet ontwikkelen als er (jaarlijks) gemaaid wordt, of kunnen graslanden niet standhouden op plaatsen zonder een maaibeheer. De compatibiliteit van elk vegetatietype met de verschillende onderscheiden beheerklassen zit vervat in de `referentietabel van NICHE Vlaanderen <https://github.com/INBO/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_vegetation.csv>`_. Merk op dat deze rechtstreekse aftoetsing van de berekende potenties aan het beheer een *optionele* stap is in NICHE Vlaanderen: de aftoetsing gebeurt enkel als het invoerraster :ref:`management_vegetation` (dat inhoudelijk identiek is aan het hier besproken invoerraster) expliciet wordt gespecifieerd. Wordt deze laatste niet gespecifieerd, dan worden de potenties berekend zonder de rechtstreekse impact van het actueel gevoerde of het toekomstig beheer, dus louter op basis van de abiotische eigenschappen van de standplaats.
 
