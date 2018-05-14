@@ -419,6 +419,21 @@ class TestNiche(TestCase):
         result = np.round(result, 2)
         assert 15.16 == result
 
+    def test_zonal_attribute(self):
+        myniche = self.create_zwarte_beek_niche()
+        myniche.run(full_model=False)
+        vector = "testcase/zwarte_beek/input/study_area_l72.geojson"
+
+        # there is only one polygon
+        stats = myniche.zonal_stats(vector, outside=False, attribute='OID')
+        # we expect no data to be absent as the shape is a mask
+        np.testing.assert_equal(np.all(stats.presence == "no data"), False)
+        assert(np.all(stats.OID == 0))
+
+        # check what happens if we supply an unexisting attribute
+        with pytest.raises(KeyError):
+            stats = myniche.zonal_stats(vector, outside=False, attribute='xyz')
+
     def test_uint(self):
         myniche = niche_vlaanderen.Niche()
 

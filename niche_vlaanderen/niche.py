@@ -778,7 +778,7 @@ class Niche(object):
 
         return df
 
-    def zonal_stats(self, vectors, outside=True):
+    def zonal_stats(self, vectors, outside=True, attribute=None):
         """Calculates zonal statistics using vectors
 
         Parameters
@@ -792,6 +792,9 @@ class Niche(object):
         outside: bool (default: True)
            report values outside shapes as well. The area which is not covered
            by any shapefile will get shape_id -1.
+        attribute: string(default None):
+            attribute of the vector source that will be exported along in the
+            table.
 
 
         Returns
@@ -804,6 +807,8 @@ class Niche(object):
         # in that package - not in our code.
         warnings.simplefilter(action='ignore', category=FutureWarning)
 
+        presence = dict({0: "not present", 1: "present", 255: "no data"})
+
         for i in self._vegetation:
             # Note we use -99 as nodata value to make sure the true nodata
             # value (255) is part of the result table.
@@ -812,18 +817,24 @@ class Niche(object):
                                             raster=self._vegetation[i],
                                             affine=self._context.transform,
                                             categorical=True,
-                                            nodata=-99)
+                                            nodata=-99,
+                                            geojson_out=attribute is not None
+                                            )
         warnings.simplefilter('default')
 
-        ti = list()
-
-        presence = dict({0: "not present", 1: "present", 255: "no data"})
+        ti = []
+        attribute_list = []
 
         for vi in td:
             for shape_i, rec in enumerate(td[vi]):
-                for a in rec:
-                    ti.append((vi, shape_i, presence[int(a)],
-                               rec[a] * self._context.cell_area / 10000))
+                if attribute is not None:
+                    rec = rec['properties']
+                for a in presence:
+                    pixels = rec.get(a) if rec.get(a) is not None else 0
+                    ti.append((vi, shape_i, presence[a],
+                               pixels * self._context.cell_area / 10000))
+                    if attribute is not None:
+                        attribute_list.append(rec[attribute])
 
         df = pd.DataFrame(ti, columns=['vegetation', 'shape_id', 'presence',
                                        'area_ha'])
@@ -840,6 +851,9 @@ class Niche(object):
             a["shape_id"] = -1
             a = a[["vegetation", "shape_id", "presence", "area_ha"]]
             df = pd.concat([df, a])
+
+        if attribute is not None:
+            df[attribute] = attribute_list
 
         return df
 
