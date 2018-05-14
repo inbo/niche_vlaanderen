@@ -75,7 +75,7 @@ input_layers:
 
 # optionally code tables can be overwritten
 # code_tables:
-#  ct_soil_code: newsoilcode.csv
+#  ct_vegetation: adjusted_niche.csv
 
 # floodplains module
 floodplains:
