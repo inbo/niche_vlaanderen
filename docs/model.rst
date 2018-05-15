@@ -13,5 +13,6 @@ gebied berekent **op basis van** informatie over de **(abiotische) standplaatsco
   vegetatietype
   trofie
   zuur
+  vegetatie_reftabel
   vegetatie
   codetables
