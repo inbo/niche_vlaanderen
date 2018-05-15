@@ -77,8 +77,8 @@ input_layers:
 # code_tables:
 #  ct_vegetation: adjusted_niche.csv
 
-# floodplains module
-floodplains:
+# flooding module
+flooding:
   # Different scenario's can be specified - each requiring a seperate name.
   - name: T25-winter
     depth: data/small/T25.asc
