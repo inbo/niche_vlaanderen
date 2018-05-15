@@ -12,7 +12,7 @@ from .acidity import Acidity
 from .nutrient_level import NutrientLevel
 from .spatial_context import SpatialContext
 from .version import __version__
-from .floodplain import FloodPlain
+from .flooding import Flooding
 from .exception import NicheException
 
 from pkg_resources import resource_filename
@@ -247,13 +247,13 @@ class Niche(object):
                 self._options["abiotic"] = \
                     config_loaded["model_options"]["abiotic"]
 
-        if "floodplains" in config_loaded.keys():
-            self._options["floodplains"] = []
-            for scen_nr in config_loaded["floodplains"]:
+        if "flooding" in config_loaded.keys():
+            self._options["flooding"] = []
+            for scen_nr in config_loaded["flooding"]:
                 scen = {k: scen_nr[k]
                         for k in ["name", "depth", "period", "frequency",
                                   "duration"]}
-                self._options["floodplains"].append(scen)
+                self._options["flooding"].append(scen)
 
     def run_config_file(self, config, overwrite_ct=False):
         """ Runs Niche using a configuration file
@@ -292,17 +292,17 @@ class Niche(object):
                 self._options["overwrite_files"]:
             overwrite = True
 
-        if "floodplains" in self._options:
-            for scen in self._options["floodplains"]:
+        if "flooding" in self._options:
+            for scen in self._options["flooding"]:
                 ct_nl = dict()
 
-                keys = set(FloodPlain.__init__.__code__.co_varnames)\
+                keys = set(Flooding.__init__.__code__.co_varnames)\
                     & set(self._code_tables)
 
                 for k in keys:
                     ct_nl[k] = self._code_tables[k]
 
-                self.fp = FloodPlain(name=scen["name"], **ct_nl)
+                self.fp = Flooding(name=scen["name"], **ct_nl)
 
                 depth_file = os.path.join(os.path.dirname(config),
                                           scen["depth"])

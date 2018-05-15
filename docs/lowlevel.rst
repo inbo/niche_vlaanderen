@@ -1,4 +1,4 @@
-.. module:: niche_vlaanderen
+.. module:: niche_vlaanderenPlain
 
 ###################
 Reference
@@ -26,10 +26,10 @@ Niche Delta
 .. autoclass:: NicheDelta
     :members:
 
-FloodPlain
-==========
+Flooding
+========
 
-.. autoclass:: FloodPlain
+.. autoclass:: Flooding
     :members:
 
 Array based functions

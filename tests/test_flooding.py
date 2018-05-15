@@ -2,7 +2,7 @@ from unittest import TestCase
 import niche_vlaanderen as nv
 import numpy as np
 import rasterio
-from niche_vlaanderen.floodplain import FloodPlainException
+from niche_vlaanderen.flooding import FloodingException
 import pytest
 import os
 import tempfile
@@ -10,15 +10,15 @@ import shutil
 import sys
 
 
-class TestFloodPlain(TestCase):
+class TestFlooding(TestCase):
     def test__calculate(self):
-        fp = nv.FloodPlain()
+        fp = nv.Flooding()
         fp._calculate(depth=np.array([1, 2, 3]), frequency="T25",
                       period="winter", duration=1)
         np.testing.assert_equal(np.array([3, 3, 3]), fp._veg[1])
 
     def test_calculate(self):
-        fp = nv.FloodPlain()
+        fp = nv.Flooding()
         fp.calculate("testcase/floodplains/ff_bt_t10_h.asc", "T10",
                      period="winter", duration=1)
         with rasterio.open(
@@ -28,7 +28,7 @@ class TestFloodPlain(TestCase):
 
     def test_calculate_arcgis(self):
         # note this tests uses an arcgis raster with only 8bit unsigned values
-        fp = nv.FloodPlain()
+        fp = nv.Flooding()
         fp.calculate("tests/data/ff_bt_t10_h", "T10",
                      period="winter", duration=1)
         with rasterio.open(
@@ -37,7 +37,7 @@ class TestFloodPlain(TestCase):
         np.testing.assert_equal(expected, fp._veg[25])
 
     def test_calculate_withnodata(self):
-        fp = nv.FloodPlain()
+        fp = nv.Flooding()
         fp.calculate("tests/data/depths_with_nodata.asc", "T10",
                      period="winter", duration=1)
         unique = []
@@ -48,8 +48,8 @@ class TestFloodPlain(TestCase):
         np.testing.assert_equal(expected, unique)
 
     def test_table(self):
-        fp = nv.FloodPlain()
-        with pytest.raises(FloodPlainException):
+        fp = nv.Flooding()
+        with pytest.raises(FloodingException):
             fp.table
 
         fp.calculate(depth_file="testcase/floodplains/ff_bt_t10_h.asc",
@@ -66,18 +66,18 @@ class TestFloodPlain(TestCase):
         import matplotlib.pyplot as plt
         plt.show = lambda: None
 
-        fp = nv.FloodPlain()
+        fp = nv.Flooding()
         fp.calculate("testcase/floodplains/ff_bt_t10_h.asc", "T10",
                      period="winter", duration=1)
         fp.plot(7)
 
-        with pytest.raises(FloodPlainException):
+        with pytest.raises(FloodingException):
             fp.plot(2000)
 
     def test_write(self):
-        fp = nv.FloodPlain()
+        fp = nv.Flooding()
         tempdir = tempfile.mkdtemp() + "/newdir"
-        with pytest.raises(FloodPlainException):
+        with pytest.raises(FloodingException):
             # Should fail - model not yet run
             fp.write(tempdir)
 
@@ -111,7 +111,7 @@ class TestFloodPlain(TestCase):
             self.assertCountEqual(expected_files, dir)
 
         # try writing again, should raise as files already exist
-        with pytest.raises(FloodPlainException):
+        with pytest.raises(FloodingException):
             fp.write(tempdir)
 
         fp.write(tempdir, overwrite_files=True)
@@ -119,7 +119,7 @@ class TestFloodPlain(TestCase):
         shutil.rmtree(tempdir)
 
     def test_combine(self):
-        fp = nv.FloodPlain()
+        fp = nv.Flooding()
 
         myniche = nv.Niche()
         input = "testcase/dijle/"
@@ -144,12 +144,12 @@ class TestFloodPlain(TestCase):
 
         myniche.set_input("rainwater", input + "nulgrid.asc")
 
-        with pytest.raises(FloodPlainException):
+        with pytest.raises(FloodingException):
             # niche model not yet run
             fp.combine(myniche)
 
         myniche.run()
-        with pytest.raises(FloodPlainException):
+        with pytest.raises(FloodingException):
             # floodplain model not yet run
             fp.combine(myniche)
 
@@ -159,7 +159,7 @@ class TestFloodPlain(TestCase):
         small = nv.Niche()
         small.run_config_file("tests/small.yaml")
 
-        with pytest.raises(FloodPlainException):
+        with pytest.raises(FloodingException):
             # floodplain has different spatial extent than niche
             fp.combine(small)
 

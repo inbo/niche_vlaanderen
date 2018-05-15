@@ -13,7 +13,7 @@ def test_cli_no_param():
 def test_cli_floodplain():
     runner = CliRunner()
 
-    runner.invoke(nv_cli.cli, ['tests/floodplain-codetables.yml'])
+    runner.invoke(nv_cli.cli, ['tests/flooding-codetables.yml'])
 
     dir = os.listdir("_output")
     result_eerste = [f.startswith("eerste") for f in dir]
