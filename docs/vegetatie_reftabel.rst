@@ -25,6 +25,7 @@ Callebaut et al. 2007
 Gebruik/implementatie
 =====================
 Aftoetsingswijze; gebruik van boven- (max; incl.) en ondergrenzen (min; niet incl.) bij continue variabelen
+
 Zie :ref:`vegetatie`
 
 Versiebeheer
