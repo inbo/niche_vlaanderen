@@ -76,4 +76,4 @@ Hieronder geven we een (niet limitatief) overzicht van de aandachtspunten per in
 
 	* zowel de :doc:`inputgegevens <invoer>` als de gevolgen van de :doc:`beslisregels <zuur>` moeten nader gecontroleerd worden.
 
-Voor het volledige NICHE model is het ook mogelijk om de NICHE Vlaanderen **berekende zuurgraad- en trofiekaarten `te overschrijven <https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Using-abiotic-grids>`_** met zelf aangemaakte of aangepaste zuurgraad- en/of trofiekaarten.
+Voor het volledige NICHE model is het ook mogelijk om de NICHE Vlaanderen **berekende zuurgraad- en trofiekaarten te overschrijven** (zie `hier <https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Using-abiotic-grids>`_) met zelf aangemaakte of aangepaste zuurgraad- en/of trofiekaarten.
