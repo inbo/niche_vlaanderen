@@ -24,7 +24,7 @@ Eerst worden de standplaatscondities :doc:`zuurgraad <zuur>` (pH) en :doc:`trofi
 Berekening potenties voor vegetatie-ontwikkeling 
 ===================================================
 
-Vervolgens worden de standplaatskarakteristieken in het studiegebied afgetoetst aan zogenaamde tolerantie-intervallen van plantengemeenschappen (figuur hierboven, blauw omrand). Deze tolerantiegrenzen (ook `referentiewaarden<https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_vegetation.csv>`_ genoemd) zijn 
+Vervolgens worden de standplaatskarakteristieken in het studiegebied afgetoetst aan zogenaamde tolerantie-intervallen van plantengemeenschappen (figuur hierboven, blauw omrand). Deze tolerantiegrenzen (ook `referentiewaarden <https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_vegetation.csv>`_ genoemd) zijn 
 gebaseerd op veldwaarnemingen waaruit de standplaatscondities van de verschillende :doc:`vegetatietypen <vegetatietype>` werden afgeleid.
 
 De potenties voor vegetatie-ontwikkeling kunnen op twee manieren worden berekend: 
