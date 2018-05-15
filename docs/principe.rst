@@ -19,35 +19,33 @@ De figuur hieronder geeft een overzicht van de verschillende inputgegevens en st
 Berekening standplaatscondities 
 ==================================
 
-Eerst worden de standplaatscondities (:doc:`zuurgraad <zuur>` en :doc:`trofie <trofie>`) aan de hand van beslisregels berekend op basis van verschillende kenmerken met betrekking tot de waterhuishouding (overstroming, grondwaterstanden, kwel,...), bodem en landgebruik (bemesting, beheer, ...).  Deze (optionele) stap (in de figuur in het geel aangeduid) genereert twee vereenvoudigde kaarten die de zuurgraad en trofiegraad van de standplaats beschrijven.
+Eerst worden de standplaatscondities :doc:`zuurgraad <zuur>` (pH) en :doc:`trofie <trofie>` aan de hand van beslisregels berekend op basis van verschillende kenmerken met betrekking tot de waterhuishouding (overstroming, grondwaterstanden, kwel, ...), bodem en landgebruik (bemesting, beheer, ...).  Deze (optionele) stap (in bovenstaande figuur in het geel aangeduid) genereert twee vereenvoudigde rasterkaarten die de zuur- en trofiegraad van de standplaats beschrijven. In een afgeslankte versie van het model (zie verder) wordt deze stap overgeslagen.
 
 Berekening potenties voor vegetatie-ontwikkeling 
 ===================================================
 
-Vervolgens worden de standplaatskarakteristieken in het studiegebied afgetoetst aan zogenaamde tolerantie-intervallen van plantengemeenschappen (figuur hierboven, in het blauw). Deze tolerantiegrenzen (ook referentiewaarden genoemd) zijn 
-gebaseerd op veldwaarnemingen waarbij de plantengemeenschappen en standplaatscondities zijn beschreven.
+Vervolgens worden de standplaatskarakteristieken in het studiegebied afgetoetst aan zogenaamde tolerantie-intervallen van plantengemeenschappen (figuur hierboven, blauw omrand). Deze tolerantiegrenzen (ook `referentiewaarden<https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_vegetation.csv>`_ genoemd) zijn 
+gebaseerd op veldwaarnemingen waaruit de standplaatscondities van de verschillende :doc:`vegetatietypen <vegetatietype>` werden afgeleid.
 
 De potenties voor vegetatie-ontwikkeling kunnen op twee manieren worden berekend: 
 
-Enerzijds door het *volledige NICHE model* te gebruiken, waarbij de berekende zuurgraad en trofie, het bodemtype en de gemiddelde laagste en hoogste grondwaterstanden mee de potenties bepalen (figuur hierboven, inputlagen in het geel en in het groen). Of anderzijds door enkel de referentiewaarden voor het *bodemtype en de karakteristieke grondwaterstanden* (gxg) in beschouwing te nemen (enkel inputlagen in het groen).
+- Enerzijds door het *volledige NICHE Vlaanderen model* (:doc:`full model <getting_started>`) te gebruiken, waarbij de berekende zuurgraad en trofie, het bodemtype en de gemiddelde laagste en hoogste grondwaterstanden mee de potenties bepalen (inputlagen in het geel en in het groen in bovenstaande figuur);
+- Anderzijds door een *afgeslankte/vereenvoudigde versie* (:doc:`simple model <getting_started>`) van NICHE Vlaanderen te gebruiken, waarbij enkel een aftoetsing aan de referentiewaarden voor het bodemtype en de karakteristieke grondwaterstanden (gxg) gebeurt (enkel inputlagen in het groen in bovenstaande figuur) ter bepaling van de potenties.
 
-Optioneel kunnen de berekende potenties nog beperkt worden naargelang de beheersintensiteit 
-of overstromingsfrequentie (figuur hierboven, in het blauwgrijs): bv. vegetatietypen die geen zuurstoftekort verdragen komen  
-op frequent overstroomde locaties niet voor, of: er kan geen bos voorkomen in zones die regelmatig gemaaid worden.
+Optioneel kunnen de berekende potenties dan nog verder beperkt worden naargelang de :ref:`beheersintensiteit<management_vegetation>` 
+of :ref:`overstromingsfrequentie<inundation_vegetation>` (figuur hierboven, in het blauwgrijs). Vegetatietypen die geen zuurstoftekort verdragen kunnen bv. niet voorkomen op frequent overstroomde locaties, of een bostype kan zich niet ontwikkelen in zones die regelmatig gemaaid worden.
 
 Voor elk :doc:`NICHE vegetatietype <vegetatietype>` wordt een binaire rasterkaart geproduceerd (1: kan voorkomen of 0: kan niet voorkomen). 
-Potenties voor verschillende typen kunnen dus overlappen in de ruimte.
+Potenties voor verschillende vegetatietypen kunnen dus overlappen in de ruimte.
 
 Kenmerken van het model
 =======================
 
 NICHE houdt geen rekening met biotische processen zoals kolonisatie, migratie, kieming e.d. Het model geeft enkel potenties 
-aan en bevat ook geen werkelijke kansberekening op het voorkomen van vegetatietypen. Een interpretatie van de resultaten is dus nodig. 
-Met NICHE Vlaanderen kunnen ook geen uitspraken worden gedaan over individuele locaties. Het model is daarentegen perfect geschikt om patronen van de berekende 
-vegetaties te bestuderen en kan inzicht geven in het ecosysteem of het gebied, wat het tot een geschikt model maakt voor scenario-analyses. 
+aan op een binaire manier en bevat ook geen werkelijke kansberekening op het voorkomen van vegetatietypen. Een interpretatie van de resultaten is dus nodig. 
+Met NICHE Vlaanderen kunnen ook geen uitspraken worden gedaan over individuele locaties. Het model is daarentegen perfect geschikt om patronen van de berekende vegetaties te bestuderen en kan inzicht geven in het ecosysteem of het gebied, wat het tot een geschikt model maakt voor scenario-analyses. 
 
-Vooraleer eventuele scenarioberekeningen kunnen worden uitgevoerd, moet het model eerst :doc:`gekalibreerd <kalibratie>` worden op basis van een gekende 
-referentietoestand (meestal de actuele toestand).  
+Vooraleer eventuele scenarioberekeningen kunnen worden uitgevoerd, moet het model eerst :doc:`gekalibreerd <kalibratie>` worden op basis van een gekende referentietoestand (meestal de actuele toestand).  
 
 *Referentie*
 *Callebaut J., De Bie E., De Becker P., Huybrechts W (2007). NICHE Vlaanderen. Rapporten van het Instituut voor Natuur en Bosonderzoek INBO.R.2007.3. SVW, 1-7*
