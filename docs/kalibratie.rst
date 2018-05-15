@@ -5,19 +5,19 @@ Kalibratie
 Het model moet gekalibreerd worden op basis van een gekende referentietoestand. Meestal (en ook verder als voorbeeld in dit document) wordt de actuele toestand hiervoor gebruikt. 
 
 Bij de kalibratie worden **de beschikbare biotische** (vegetatiekaarten) 
-**en abiotische gegevens** (terreinmetingen en modelberekeningen) **vergeleken met de input- en outputlagen van NICHE**.
+**en abiotische gegevens** (terreinmetingen en modelberekeningen) **vergeleken met de outputlagen van NICHE** (zuur- en trofiegraad, potenties).
 
-Kalibratie voor trofie en zuurgraad
-====================================
+Kalibratie trofie- en zuurgraad
+===============================
 
 Tijdens een eerste kalibratiestap wordt er gekeken of de door NICHE berekende trofie en zuurgraad 
 in overeenstemming zijn met de beschikbare abiotische gegevens. Hierbij kunnen bv. veldmetingen van bodem pH vergeleken 
 worden met de voorspellingen van NICHE Vlaanderen voor de zuurgraad. 
 
-Deze stap heeft natuurlijk enkel betrekking op de kalibratie voor het volledige NICHE model. 
+Deze stap heeft natuurlijk enkel betrekking op de kalibratie voor het volledige (`full <https://inbo.github.io/niche_vlaanderen/getting_started.html#Running-a-full-Niche-model>`_) NICHE model. 
 
-Kalibratie voor de vegetatie
-============================
+Kalibratie potenties/vegetatievoorspellingen
+============================================
 
 Tijdens een tweede kalibratiestap wordt dan gekeken of op de plaatsen waar een vegetatietype actueel aanwezig is, 
 ook effectief potenties voorspeld worden. Hoe groter de actuele oppervlakte waarvoor potentie opgegeven wordt, hoe beter. 
@@ -27,7 +27,7 @@ van het toegepaste beheer.
 
 Om deze tweede kalibratiestap uit te voeren is er dus ook nood aan een overzicht van de *actuele verspreiding van de NICHE vegetatietypen*.
 Hiervoor kan een beroep worden gedaan op 
-eigen vegetatiekaarten of op de Biologische Waarderingskaart(BWK)-Habitatkaart van het Instituut voor Natuur- en Bosonderzoek. 
+eigen vegetatiekaarten of op de `Biologische Waarderingskaart(BWK)-Habitatkaart <https://www.inbo.be/nl/beschikbaarheid>`_ van het `Instituut voor Natuur- en Bosonderzoek <https://www.inbo.be>`_. 
 
 Een indicatieve vertaalsleutel tussen de Europese habitattypen en regionaal belangrijke biotopen 
 (rbb) die in de Habitatkaart worden gebruikt, en de NICHE vegetatietypen, wordt in de 
@@ -76,4 +76,4 @@ Hieronder geven we een (niet limitatief) overzicht van de aandachtspunten per in
 
 	* zowel de :doc:`inputgegevens <invoer>` als de gevolgen van de :doc:`beslisregels <zuur>` moeten nader gecontroleerd worden.
 
-Voor het volledige NICHE model is het ook mogelijk om de **berekende zuurgraad- en trofiekaarten** te wijzigen of om een eigen zuurgraad- en/of trofiekaart te gebruiken.
+Voor het volledige NICHE model is het ook mogelijk om de NICHE Vlaanderen **berekende zuurgraad- en trofiekaarten `te overschrijven <https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Using-abiotic-grids>`_** met zelf aangemaakte of aangepaste zuurgraad- en/of trofiekaarten.
