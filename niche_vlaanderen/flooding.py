@@ -15,11 +15,11 @@ from .spatial_context import SpatialContext
 from .codetables import validate_tables_floodplains, check_codes_used
 
 
-class FloodPlainException(Exception):
+class FloodingException(Exception):
     """"""
 
 
-class FloodPlain(object):
+class Flooding(object):
     """
     Predict the vegetation response to (frequent) flooding
 
@@ -64,7 +64,7 @@ class FloodPlain(object):
         """Dataframe containing the potential area (ha) per vegetation type
         """
         if not self.vegetation_calculated:
-            raise FloodPlainException(
+            raise FloodingException(
                 "Error: You must run niche prior to requesting the "
                 "result table")
 
@@ -173,7 +173,7 @@ class FloodPlain(object):
 
         if key not in self._veg.keys():
             msg = "vegetation type {} not modeled".format(key)
-            raise FloodPlainException(msg)
+            raise FloodingException(msg)
 
         if ax is None:
             fig, ax = plt.subplots()
@@ -223,7 +223,7 @@ class FloodPlain(object):
             exists.
          """
         if len(self._veg) == 0:
-            raise FloodPlainException(
+            raise FloodingException(
                 "A valid run must be done before writing the output.")
 
         if not os.path.exists(folder):
@@ -263,7 +263,7 @@ class FloodPlain(object):
                     self._log.warning(
                         "Warning: file {} already exists".format(files[key]))
                 else:
-                    raise FloodPlainException(
+                    raise FloodingException(
                         "File {} already exists".format(files[key]))
 
         self.table.to_csv(files["summary"], index=False)
@@ -288,20 +288,20 @@ class FloodPlain(object):
 
         Returns
         =======
-        combined: FloodPlain
+        combined: Flooding
         """
 
         # check niche model has been run
         if not niche_result.vegetation_calculated:
-            raise FloodPlainException(
+            raise FloodingException(
                 "Niche model must be run prior to running this module.")
 
         if not self.vegetation_calculated:
-            raise FloodPlainException(
+            raise FloodingException(
                 "Floodplain model must be run prior to running this module.")
 
         if self._context != niche_result._context:
-            raise FloodPlainException(
+            raise FloodingException(
                 "Niche model has a different spatial context:\n" +
                 str(self._context) + str(niche_result._context)
                 )

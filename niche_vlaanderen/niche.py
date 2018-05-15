@@ -12,7 +12,7 @@ from .acidity import Acidity
 from .nutrient_level import NutrientLevel
 from .spatial_context import SpatialContext
 from .version import __version__
-from .floodplain import FloodPlain
+from .flooding import Flooding
 from .exception import NicheException
 
 from pkg_resources import resource_filename
@@ -296,13 +296,13 @@ class Niche(object):
             for scen in self._options["floodplains"]:
                 ct_nl = dict()
 
-                keys = set(FloodPlain.__init__.__code__.co_varnames)\
+                keys = set(Flooding.__init__.__code__.co_varnames)\
                     & set(self._code_tables)
 
                 for k in keys:
                     ct_nl[k] = self._code_tables[k]
 
-                self.fp = FloodPlain(name=scen["name"], **ct_nl)
+                self.fp = Flooding(name=scen["name"], **ct_nl)
 
                 depth_file = os.path.join(os.path.dirname(config),
                                           scen["depth"])
