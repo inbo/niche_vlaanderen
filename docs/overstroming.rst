@@ -28,7 +28,7 @@ Niet voor alle 28 vegetatietypen die in NICHE Vlaanderen aan bod komen is er inf
 
   .. csv-table:: NICHE Vlaanderen vegetatietypen waarvoor overstromingstolerantie bepaald kan worden (cfr. overeenkomstige natuurtypencode)
     :header-rows: 1
-    :file: /data_/vegetatietypen_DeNocker.csv
+    :file: _data/vegetatietypen_DeNocker.csv
   
 Input
 =====
@@ -80,7 +80,7 @@ Voor veel valleigebieden in Vlaanderen bestaan er gevalideerde overstromingsgeva
 Output
 ======
 
-Op basis van het invoerraster met de overstromingsdiepte bij een welbepaalde retourperiode, duur en periode kan de hypothetische overstromingstolerantie bepaald worden aan de hand van de referentietabel (`Creating a Floodplain model`_). De uitkomst is dan een raster per vegetatietype met de toleranties (niet, slecht, matig en goed combineerbaar) voor de opgegeven duur en periode. Die hypothetische tolerantie kan vervolgens gecombineerd worden met de voorspelde potenties volgens het NICHE Vlaanderen model (`Combining the output with niche`_ of via :ref:`configuratiebestand<flood_config>`). Door die combinatie wordt een meer realistisch beeld verkregen waar de potenties liggen binnen en buiten overstroombaar gebied enerzijds, en anderzijds in welke mate de potenties (voorspeld door NICHE Vlaanderen) behouden blijven binnen de overstroombare gebieden bij een welbepaald overstromingsregime (combinatie diepte-duur-frequentie-tijdstip). De rasters per vegetatietype kennen telkens de volgende mogelijke klassen:
+Op basis van het invoerraster met de overstromingsdiepte bij een welbepaalde retourperiode, duur en periode kan de hypothetische overstromingstolerantie bepaald worden aan de hand van de referentietabel ( `Creating a Floodplain model`_). De uitkomst is dan een raster per vegetatietype met de toleranties (niet, slecht, matig en goed combineerbaar) voor de opgegeven duur en periode. Die hypothetische tolerantie kan vervolgens gecombineerd worden met de voorspelde potenties volgens het NICHE Vlaanderen model ( `Combining the output with niche`_ of via :ref:`configuratiebestand<flood_config>`). Door die combinatie wordt een meer realistisch beeld verkregen waar de potenties liggen binnen en buiten overstroombaar gebied enerzijds, en anderzijds in welke mate de potenties (voorspeld door NICHE Vlaanderen) behouden blijven binnen de overstroombare gebieden bij een welbepaald overstromingsregime (combinatie diepte-duur-frequentie-tijdstip). De rasters per vegetatietype kennen telkens de volgende mogelijke klassen:
 
   .. csv-table:: mogelijke codes voor overstromingstolerantie
     :header-rows: 1
