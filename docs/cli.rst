@@ -2,6 +2,8 @@
 Niche Configuration file
 ########################
 
+.. _simple_config:
+
 Simple model
 ============
 
@@ -22,6 +24,7 @@ For a simple NICHE model this could look like this:
 The file specifies the input layers, the output directory(``output_dir``), and other model options.
 In this case, as we have a simple model (:ref:`simple`), as specified in the model options.
 
+.. _full_config:
 
 Full model
 ==========
@@ -59,6 +62,8 @@ An example configuration file for a full model is given below.
 As the option ``full_model=True`` is given (it is enabled by default, so can be omitted) all input layers are used.
 The other model options correspond to the parameters that could be given to the :func:`niche_vlaanderen.Niche.run` method.
 
+.. _abiot_dev_config:
+
 Abiotic and/or deviation
 =========================
 Using a configuration file, it is also possible to use abiotic values, like
@@ -70,6 +75,8 @@ together with the ``abiotic`` model option.
 The option ``deviation`` creates deviation maps, which show the difference between
 the borders specified in the niche table and the actual values of mhw and mlw for
 every soil type, as discussed in `Creating deviation maps`_.
+
+.. _flood_config:
 
 Floodplains module
 ==================
@@ -88,6 +95,8 @@ The output of the module will be written to the same directory as the output spe
      - name: T25-zomer
        ....
 
+.. _gen_config_int:
+
 Generating a config file in interactive mode
 ============================================
 
@@ -97,12 +106,16 @@ corresponding configuration file. This was demonstrated in `Showing the model co
 Also when writing a grid using the write method a "log.txt" file will be written.
 This file itself is also a valid configuration file for a next run. The list with generated files will be ignored.
 
+.. _run_config_int:
+
 Running a config file in interactive mode
 =========================================
 
 When using Niche in interactive mode, you can load all data from a config file using the
 :func:`niche_vlaanderen.Niche.read_config_file` method, or you can run all by using the
 :func:`niche_vlaanderen.Niche.run_config_file` method.
+
+.. _run_config_cl:
 
 Running a config file from the command line
 ===========================================
@@ -118,6 +131,7 @@ config file. This is done by running the ``niche`` application.
 
     If you don't specify an output directory, nothing will be written - in command line mode this makes no sense
 
+.. _full_config:
 
 Full example
 ==============
