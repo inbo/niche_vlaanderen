@@ -1,4 +1,4 @@
-.. module:: niche_vlaanderenPlain
+.. module:: niche_vlaanderen
 
 ###################
 Reference
