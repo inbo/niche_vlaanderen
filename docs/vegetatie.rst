@@ -5,12 +5,34 @@
 Bepaling vegetatie ``vegetation``
 #################################
 
+Output
+======
+
+Principe
+========
+
+eerst "full" option uitleggen
+
+daarna mogelijkheid van "simple" model vermelden
+
+Invoergegevens
+==============
+
+volledige lijst voor "full" model, en aanduiding van selectie nodig voor "simple" model, en welke invoerlagen optioneel zijn?
+
+
+
+Implementatie in het package `niche_vlaanderen`
+===============================================
+
 Na de bepaling van de trofie en de zuurgraadklasse kan de eigenlijke bepaling van de mogelijke vegetatie gebeuren.
 
 Dit gebeurt aan de hand van de tabel :ref:`ct_niche`.
 
 Optioneel kunnen :ref:`management` en de :ref:`inundation_vegetation` mee als selectiefactor gebruikt worden.
 
+Voorbeeld
+---------
 
 .. topic:: Voorbeeld
 
@@ -51,16 +73,29 @@ Optioneel kunnen :ref:`management` en de :ref:`inundation_vegetation` mee als se
 
 .. _simple:
 
-Eenvoudig niche model
-=====================
+Vereenvoudigd model
+-------------------
 
 Bij het eenvoudig Niche model wordt enkel rekening gehouden met :ref:`mhw`, :ref:`mlw` en :ref:`soil_code`.
 De berekening gebeurt verder gelijkaardig aan bovenstaande berekening, maar vegetatie is mogelijk van zodra die mogelijk is, zonder rekening te houden met de andere invoerwaarden.
 
 .. _deviation:
 
-Afwijking van het eenvoudig niche model
-=======================================
+GXG-afwijkingskaarten voor vereenvoudigd model
+----------------------------------------------
 
 Voor veel studies is het niet enkel interessant om na te gaan welke vegetatie kan voorkomen, maar ook welke wijziging in glg of ghg vereist is om een bepaalde vegetatie mogelijk te maken.
 Dit kan aan de hand van afwijkingskaarten.
+
+.. _scenario_analysis:
+
+Scenario-analyse
+----------------
+
+`Vergelijking <https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Comparing-Niche-classes>`_ van de oppervlakte aan potenties tussen 2 Niche objecten (modellen).
+Zowel voor "full" als "simple"
+
+Gebiedsstatistieken
+-------------------
+
+Zie `hier <https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Creating-statistics-per-shape-object>`_.
