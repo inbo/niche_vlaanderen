@@ -34,9 +34,9 @@ De standplaatsvereisten zitten vervat in 7 variabelen:
 De potenties voor vegetatie-ontwikkeling kunnen op twee manieren worden berekend: 
 
 - Enerzijds door het *volledige NICHE Vlaanderen model* (:doc:`full model <getting_started>`) te gebruiken, waarbij de berekende zuurgraad en trofie, het bodemtype en de gemiddelde laagste en hoogste grondwaterstanden mee de potenties bepalen;
-- Anderzijds door een *afgeslankte/vereenvoudigde versie* (:ref:`simple model <simple>`) van NICHE Vlaanderen te gebruiken, waarbij enkel een aftoetsing aan de referentiewaarden voor het bodemtype en de karakteristieke hoogste en laagste grondwaterstanden gebeurt ter bepaling van de potenties.
+- Anderzijds door een *afgeslankte/vereenvoudigde versie* (:ref:`simple model <simple>`) van NICHE Vlaanderen te gebruiken, waarbij enkel een aftoetsing aan de referentiewaarden gebeurt voor het bodemtype en de gemiddelde laagste en hoogste grondwaterstanden ter bepaling van de potenties.
 
-De aftoetsing aan beheer en overstromingsregime is evenwel optioneel in het volledige NICHE Vlaanderen model, en gebeurt niet in het vereenvoudigde model.
+De aftoetsing aan beheer en overstromingsregime is optioneel in het volledige NICHE Vlaanderen model, en gebeurt niet in het vereenvoudigde model.
 
 .. _vegetation_input:
 
@@ -55,7 +55,7 @@ Zie ook bovenstaande tabel.
 
 .. _vegetation_impl:
 
-Implementatie in het package ``niche_vlaanderen``
+Implementatie in ``niche_vlaanderen``
 =================================================
 
 Voorbeeld
@@ -114,9 +114,9 @@ Een vereenvoudigd model kan `interactief <https://inbo.github.io/niche_vlaandere
 GXG-afwijkingskaarten voor vereenvoudigd model
 ----------------------------------------------
 
-Voor veel studies is het niet enkel interessant om na te gaan welke vegetatie kan voorkomen, maar ook -als voor een vegetatietype geen potenties aangegeven worden- welke wijzigingen in glg en ghg vereist zijn om een bepaald vegetatietype ontwikkelingskansen te geven. Of anders gesteld: wat is de doelafstand tot de gewenste gemiddelde grondwaterstand (gxg) voor elk van de vegetatietypen. 
+Voor veel studies is het niet enkel interessant om na te gaan welke vegetatie kan voorkomen, maar ook -als voor een vegetatietype geen potenties aangegeven worden- welke wijzigingen in glg en ghg vereist zijn om een bepaald vegetatietype alsnog ontwikkelingskansen te geven. Of anders gesteld: wat is de doelafstand tot de gewenste gemiddelde grondwaterstand (gxg) voor elk van de vegetatietypen. 
 
-GXG-afwijkingskaarten kunnen `interactief <https://inbo.github.io/niche_vlaanderen/getting_started.html#Creating-a-simple-NICHE-model>`_ of via een `configuratiebestand <https://inbo.github.io/niche_vlaanderen/cli.html#simple-model>`_ aangemaakt worden.
+GXG-afwijkingskaarten kunnen `interactief <https://inbo.github.io/niche_vlaanderen/getting_started.html#Creating-a-simple-NICHE-model>`_ of via een `configuratiebestand <https://inbo.github.io/niche_vlaanderen/cli.html#simple-model>`_ aangemaakt worden. Voor elk vegetatietype wordt een afwijkingskaart berekend voor zowel de gemiddelde hoogste als de gemiddelde laagste grondwaterstand. Negatieve waarden wijzen op te natte omstandigheden, positieve waarden op te droge omstandigheden.
 
 .. _scenario_analysis:
 
@@ -125,7 +125,7 @@ Scenario-analyse
 
 Vaak wordt in studies de impact van verschillende inrichtingsmaatregelen tegen elkaar afgewogen in termen van veranderingen in oppervlakte aan potenties voor welbepaalde vegetatietypen. Verschillende combinaties van inrichtingsmaatregelen worden dan doorgerekend, elk onder de vorm van een afzonderlijk NICHE Vlaanderen model met overeenkomstige invoerlagen die de impact van de maatregelen weerspiegelen. Elke combinatie zit gebundeld in een zgn. scenario. Scenario's worden dan onderling vergeleken door de verschuivingen in oppervlakte aan potenties van de beoogde vegetatietypen te begroten.
 
-Een vergelijking tussen twee modellen/scenario's (volledig of vereenvoudigd) kan enkel `interactief <https://inbo.github.io/niche_vlaanderen/getting_started.html#Creating-a-simple-NICHE-model>`_ gemaakt worden, niet via een configuratiebestand.
+Een vergelijking tussen twee modellen/scenario's (volledig of vereenvoudigd) kan enkel `interactief <https://inbo.github.io/niche_vlaanderen/getting_started.html#Creating-a-simple-NICHE-model>`_ gemaakt worden, niet via een configuratiebestand. De vergelijking kan gebeuren in tabelvorm (voor alle vegetatietypen) of als verschilkaarten voor elk vegetatietype.
 
 .. _zonal_stats:
 
@@ -134,4 +134,4 @@ Gebiedsstatistieken
 
 Naast een scenario-analyse is het vaak ook interessant om na te gaan in welke mate potenties verschillen in bepaalde deelzones van een studiegebied. 
 
-Een samenvatting van de oppervlakte aan potenties in specifieke deelzones van het studiegebied kan enkel `interactief <https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Creating-statistics-per-shape-object>`_ opgevraagd worden, niet via een configuratiebestand.
+Een samenvatting (tabel) van de oppervlakte aan potenties in specifieke deelzones van het studiegebied kan enkel `interactief <https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Creating-statistics-per-shape-object>`_ opgevraagd worden, niet via een configuratiebestand.
