@@ -14,7 +14,7 @@ Tijdens een eerste kalibratiestap wordt er gekeken of de door NICHE berekende tr
 in overeenstemming zijn met de beschikbare abiotische gegevens. Hierbij kunnen bv. veldmetingen van bodem pH vergeleken 
 worden met de voorspellingen van NICHE Vlaanderen voor de zuurgraad. 
 
-Deze stap heeft natuurlijk enkel betrekking op de kalibratie voor het volledige (`full <https://inbo.github.io/niche_vlaanderen/getting_started.html#Running-a-full-Niche-model>`_) NICHE model. 
+Deze stap heeft natuurlijk enkel betrekking op de kalibratie voor het volledige (`full <https://inbo.github.io/niche_vlaanderen/getting_started.html#Running-a-full-Niche-model>`_) NICHE model. In het vereenvoudigde (`simple <https://inbo.github.io/niche_vlaanderen/getting_started.html#Creating-a-simple-NICHE-model>`) model wordt immers geen rekening gehouden met de trofie- en zuurgraad bij de bepaling van de potenties.
 
 Kalibratie potenties/vegetatievoorspellingen
 ============================================
@@ -76,4 +76,4 @@ Hieronder geven we een (niet limitatief) overzicht van de aandachtspunten per in
 
 	* zowel de :ref:`inputgegevens <acidity_input>` als de gevolgen van de :ref:`beslisregels <acidity_princ>` moeten nader gecontroleerd worden.
 
-Voor het volledige NICHE model is het ook mogelijk om de NICHE Vlaanderen **berekende zuurgraad- en trofiekaarten te overschrijven** (zie `hier <https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Using-abiotic-grids>`_) met zelf aangemaakte of aangepaste zuurgraad- en/of trofiekaarten.
+Voor het volledige (`full <https://inbo.github.io/niche_vlaanderen/getting_started.html#Running-a-full-Niche-model>`_) NICHE model is het ook mogelijk om de NICHE Vlaanderen **berekende zuurgraad- en trofiekaarten te overschrijven** (zie `hier <https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Using-abiotic-grids>`_) met zelf aangemaakte of aangepaste zuurgraad- en/of trofiekaarten.
