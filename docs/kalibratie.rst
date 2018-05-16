@@ -14,7 +14,7 @@ Tijdens een eerste kalibratiestap wordt er gekeken of de door NICHE berekende tr
 in overeenstemming zijn met de beschikbare abiotische gegevens. Hierbij kunnen bv. veldmetingen van bodem pH vergeleken 
 worden met de voorspellingen van NICHE Vlaanderen voor de zuurgraad. 
 
-Deze stap heeft natuurlijk enkel betrekking op de kalibratie voor het volledige (`full <https://inbo.github.io/niche_vlaanderen/getting_started.html#Running-a-full-Niche-model>`_) NICHE model. In het vereenvoudigde (`simple <https://inbo.github.io/niche_vlaanderen/getting_started.html#Creating-a-simple-NICHE-model>`) model wordt immers geen rekening gehouden met de trofie- en zuurgraad bij de bepaling van de potenties.
+Deze stap heeft natuurlijk enkel betrekking op de kalibratie voor het volledige (`full <https://inbo.github.io/niche_vlaanderen/getting_started.html#Running-a-full-Niche-model>`_) NICHE model. In het vereenvoudigde (`simple <https://inbo.github.io/niche_vlaanderen/getting_started.html#Creating-a-simple-NICHE-model>`_) model wordt immers geen rekening gehouden met de trofie- en zuurgraad bij de bepaling van de potenties.
 
 Kalibratie potenties/vegetatievoorspellingen
 ============================================
