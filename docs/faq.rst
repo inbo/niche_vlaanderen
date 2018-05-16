@@ -79,8 +79,8 @@ And then start python, niche (command line) or jupyter notebook.
    set GDAL_DATA=C:\Users\johan\Miniconda3\pkgs\gdal-2.1.3-py36_vc14_7\Library\share\gdal\gcs.csv
    jupyter notebook
 
-You can also set the environment variable in windows itself. In that case, it is no longer needed to run the
-`set GDAL_DATA= ...`command.
+You can also set the environment variable in Windows itself. In that case, it is no longer needed to run the
+`set GDAL_DATA= ...` command.
 To do this, follow these steps:
 
  1) right click the `my computer` icon in windows. And choose the last option "properties".
@@ -128,7 +128,7 @@ Using ESRI grids without sta.adf
       rasterio.errors.RasterioIOError: 'bodemveen' not recognized as a supported file format.
 
 In general ESRI grids can be opened by specifying the directory of the files
-or by choosing one of the *.ADF files in the directory. However if the 'sta.adf'
+or by choosing one of the \*.ADF files in the directory. However if the 'sta.adf'
 file is missing, the file can not be opened in niche (it will also fail in QGis
 or other gdal-based applications). In that case, try exporting the grid to
 a geotiff from arcgis. This format is best supported by the library we use

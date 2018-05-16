@@ -22,7 +22,7 @@ De hyperlinks in de figuur verwijzen je door naar de documentatie bij het betref
    :scale: 100%
 
 Doel van deze website
-==================
+=====================
 
 Deze website heeft tot doel de **werking van NICHE Vlaanderen en de overstromingsmodule toe te lichten**, maar vooral om de achterliggende **code en beslisregels publiek beschikbaar te stellen** zodat iedereen met het model aan de slag kan. De website dient als documentatie bij de publiek beschikbare `Github repository <https://github.com/inbo/niche_vlaanderen>`_ met de programmacode.
 

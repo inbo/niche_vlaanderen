@@ -24,7 +24,7 @@ For a simple NICHE model this could look like this:
 The file specifies the input layers, the output directory(``output_dir``), and other model options.
 In this case, as we have a simple model (:ref:`simple`), as specified in the model options.
 
-.. _full_config:
+.. _full_model:
 
 Full model
 ==========
@@ -131,7 +131,7 @@ config file. This is done by running the ``niche`` application.
 
     If you don't specify an output directory, nothing will be written - in command line mode this makes no sense
 
-.. _full_config:
+.. _full_examle:
 
 Full example
 ==============

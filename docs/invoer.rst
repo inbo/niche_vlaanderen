@@ -71,7 +71,7 @@ Voor het aanmaken van deze ecologische NICHE bodemkaart kan er gebruik gemaakt w
 Opmerkingen
 -----------
 
-.. _mxw
+.. _mxw:
 
 Gemiddelde grondwaterstanden (GxG)
 ==================================
@@ -105,7 +105,7 @@ Het is een maat voor het laagste niveau in een gemiddelde zomer.
 .. _msw:
 
 GVG (gemiddeld voorjaarsgrondwaterstand) ``msw``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 GVG - gemiddelde voorjaarsgrondwaterstand: de gemiddelde grondwaterstand aan het begin van het groeiseizoen (= gemiddelde van de drie metingen die het dichtst bij 1 april liggen (GV3); kunnen metingen zijn van twee opeenvolgende hydrologische jaren aangezien hydrologisch jaar start op 1 april).
 Indien niet gekend kan de GVG afgeleid worden uit de formule: GVG = 5,4 + 0,83*GHG + 0,19*GLG (in cm).
@@ -530,7 +530,9 @@ geen
 
 Rol in model
 ------------
-Los van de *indirecte* invloed van overstromingen op de potentieberekening voor vegetatietypen via de berekening van zowel de zuur- als de trofiegraad laat het NICHE Vlaanderen model via dit invoerraster ook toe om de potenties van vegetatietypen *rechtstreeks* af te toetsen aan een inschatting van de overtromingstolerantie op zich (zie :ref:`inundation_vegetation`). Deze aftoetsing is optioneel en houdt een sterke vereenvoudiging van de werkelijke impact van overstromingen in. In de meer uitgebreide :doc:`overstromingsmodule</overstroming.rst>` is het mogelijk om de voorspelde potenties volgens NICHE Vlaanderen bijkomend te confronteren met meer gedetailleerde gebiedsinformatie over overstromingen (frequentie, duur, tijdstip, diepte).
+Los van de *indirecte* invloed van overstromingen op de potentieberekening voor vegetatietypen via de berekening van zowel de zuur- als de trofiegraad laat het NICHE Vlaanderen model via dit invoerraster ook toe om de potenties van vegetatietypen *rechtstreeks* af te toetsen aan een inschatting van de overtromingstolerantie op zich (zie :ref:`inundation_vegetation`).
+Deze aftoetsing is optioneel en houdt een sterke vereenvoudiging van de werkelijke impact van overstromingen in.
+In de meer uitgebreide :doc:`overstromingsmodule<overstroming>` is het mogelijk om de voorspelde potenties volgens NICHE Vlaanderen bijkomend te confronteren met meer gedetailleerde gebiedsinformatie over overstromingen (frequentie, duur, tijdstip, diepte).
 
 Brongegevens
 ------------

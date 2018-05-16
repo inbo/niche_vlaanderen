@@ -71,7 +71,7 @@ Alternative installation
 Rather than using the provided environment file, you may want to install the packages yourself,
 eg if you want to work with specific versions for another package. This is currently not
 the recommended installation as it requires setting an environment variable for
- opening some grid files. (See :ref:`missing_gcs` for instructions).
+opening some grid files. (See :ref:`missing_gcs` for instructions).
 
 .. code-block:: default
 

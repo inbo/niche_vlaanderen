@@ -28,7 +28,7 @@ Gebruik/implementatie
 =====================
 Aftoetsingswijze; gebruik van boven- (max; incl.) en ondergrenzen (min; incl.) bij continue variabelen `mhw` en `mlw`
 
-Zie :ref:`vegetatie`
+Zie :doc:`vegetatie`
 
 Versiebeheer
 ============
