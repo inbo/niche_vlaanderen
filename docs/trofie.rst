@@ -46,7 +46,9 @@ indien er zich overstromingen met nutriëntenrijk water voordoen, wordt er in NI
 
 .. image:: _static/png/nutrient_principle.png
      :scale: 100%
-	 
+
+.. _nutrient_level_input:
+
 Invoergegevens
 ==============
 
