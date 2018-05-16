@@ -13,6 +13,8 @@ NICHE Vlaanderen genereert een vereenvoudigde kaart van de zuurgraad van de stan
   :header-rows: 1
   :file: ../niche_vlaanderen/system_tables/acidity.csv
 
+.. _acidity_princ:
+
 Principe
 ========
 
