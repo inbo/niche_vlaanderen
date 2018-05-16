@@ -67,6 +67,8 @@ Samengevat:
 
 *B = neutraal/basisch, ZW = zwak zuur, Z = zuur*
 
+.. _acidity_input:
+
 Invoergegevens
 ==============
 
