@@ -851,6 +851,7 @@ class Niche(object):
             a["shape_id"] = -1
             a = a[["vegetation", "shape_id", "presence", "area_ha"]]
             df = pd.concat([df, a])
+            attribute_list.extend(a["shape_id"])
 
         if attribute is not None:
             df[attribute] = attribute_list
