@@ -78,15 +78,15 @@ every soil type, as discussed in `Creating deviation maps`_.
 
 .. _flood_config:
 
-Floodplains module
-==================
-If you want to calculate a niche object combined with a FloodPlains model, this is possible by
-adding a floodplains block. Different scenarios can be specified. They need a single name.
+Flooding module
+===============
+If you want to calculate a niche object combined with a Flooding model, this is possible by
+adding a flooding block. Different scenarios can be specified. They need a single name.
 The output of the module will be written to the same directory as the output specified in the model options.
 
 .. code-block:: yaml
 
-   floodplains:
+   flooding:
      - name: T25-winter
        depth: T25.tif
        frequency: T25
