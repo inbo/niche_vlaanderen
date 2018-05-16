@@ -55,8 +55,8 @@ Zie ook bovenstaande tabel.
 
 .. _vegetation_impl:
 
-Implementatie in het package `niche_vlaanderen`
-===============================================
+Implementatie in het package ``niche_vlaanderen``
+=================================================
 
 Voorbeeld
 ---------
