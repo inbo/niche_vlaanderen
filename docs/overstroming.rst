@@ -18,7 +18,7 @@ Werking overstromingsmodule
 
 Werking
 -------
-De :doc:`overstromingsmodule<flooding>` doet een uitspraak over de overstromingstolerantie op basis van de ruimtelijk expliciete gebiedsinformatie over de waargenomen of gemodelleerde overstromingskarakteristieken (frequentie, tijdstip, duur en diepte). De module werkt als een eenvoudige aftoetsing aan de `referentietabel <https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/floodplains/lnk_potential.csv>`_ uit De Nocker et al. (2007) die gekoppeld werd aan de verschillende :doc:`NICHE Vlaanderen vegetatietypen <vegetatietype>`.
+De :doc:`overstromingsmodule<flooding>` doet een uitspraak over de overstromingstolerantie op basis van de ruimtelijk expliciete gebiedsinformatie over de waargenomen of gemodelleerde overstromingskarakteristieken (frequentie, tijdstip, duur en diepte). De module werkt als een eenvoudige aftoetsing aan de `referentietabel <https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/floodplains/lnk_potential.csv>`_ uit De Nocker et al. (2007) die gekoppeld werd aan de verschillende :doc:`NICHE Vlaanderen vegetatietypen <vegetatietype>`. De module kan :doc:`interactief<flooding>` of via een :ref:`configuratiebestand<flood_config>` aangesproken worden.
  
 .. _vegtyp:
  
