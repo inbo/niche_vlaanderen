@@ -14,6 +14,8 @@ NICHE Vlaanderen genereert een vereenvoudigde kaart van de trofie ingedeeld in 5
   :header-rows: 1
   :file: ../niche_vlaanderen/system_tables/nutrient_level.csv
 
+.. _nutrient_level_princ:
+
 Principe
 ========
 
