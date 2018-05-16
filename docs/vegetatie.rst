@@ -1,5 +1,5 @@
 
-.. _vegetatie:
+.. _vegetation:
 
 #################################
 Bepaling vegetatie ``vegetation``
@@ -8,19 +8,52 @@ Bepaling vegetatie ``vegetation``
 Output
 ======
 
+NICHE Vlaanderen levert als finaal resultaat een uitspraak over het al dan niet aanwezig zijn van potenties voor elk van de vegetatietypen voor elke rastercel binnen het studiegebied. Het is een binair oordeel: wel of geen potentie. Voor elk vegetatietype bestaat het eindresultaat dus uit een raster met waarde 0 (potentie) of 1 (geen potentie).
+
+.. _vegetation_princ:
+
 Principe
 ========
 
-eerst "full" option uitleggen
+De uitspraak over wel of geen potentie is het resultaat van een aftoetsing van de afzonderlijke invoerlagen, inclusief de :doc:`trofie- <trofie>` en :doc:`zuurgraad <zuur>` als intermediaire modelresultaten, aan de standplaatsvereisten (referentiewaarden) van elk van de vegetatietypen. Die standplaatsvereisten zitten gebundeld in de zgn. `referentietabel <https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_vegetation.csv>`_. Op :doc:`deze pagina <vegetatie_reftabel>` wordt de opbouw van deze tabel en het principe van aftoetsing nader uitgelegd.
 
-daarna mogelijkheid van "simple" model vermelden
+De standplaatsvereisten zitten vervat in 7 variabelen:
+
+.. csv-table:: Standplaatsvereisten uit referentietabel
+    :header-rows: 1
+
+    Variabele, full model, simple model
+    :ref:`Bodemtype <soil_code>`, X, X
+    :doc:`Trofiegraad <trofie>`, X, 
+    :doc:`Zuurgraad <zuur>`, X, 
+    :ref:`Gemiddeld laagste grondwaterstand <mlw>`, X, X
+    :ref:`Gemiddeld hoogste grondwaterstand <mhw>`, X, X
+    :ref:`Aftoetsing potenties aan beheer <management_vegetation>`, (X), 
+    :ref:`Aftoetsing potenties aan overstromingsregime <inundation_vegetation>`, (X), 
+
+De potenties voor vegetatie-ontwikkeling kunnen op twee manieren worden berekend: 
+
+- Enerzijds door het *volledige NICHE Vlaanderen model* (:doc:`full model <getting_started>`) te gebruiken, waarbij de berekende zuurgraad en trofie, het bodemtype en de gemiddelde laagste en hoogste grondwaterstanden mee de potenties bepalen;
+- Anderzijds door een *afgeslankte/vereenvoudigde versie* (:doc:`simple model <getting_started>`) van NICHE Vlaanderen te gebruiken, waarbij enkel een aftoetsing aan de referentiewaarden voor het bodemtype en de karakteristieke hoogste en laagste grondwaterstanden gebeurt ter bepaling van de potenties.
+
+De aftoetsing aan beheer en overstromingsregime is evenwel optioneel in het volledige NICHE Vlaanderen model, en gebeurt niet in het vereenvoudigde model.
+
+.. _vegetation_input:
 
 Invoergegevens
 ==============
 
-volledige lijst voor "full" model, en aanduiding van selectie nodig voor "simple" model, en welke invoerlagen optioneel zijn?
+- :ref:`Bodemtype <soil_code>`
+- :doc:`Trofiegraad <trofie>`
+- :doc:`Zuurgraad <zuur>`
+- :ref:`Gemiddeld laagste grondwaterstand <mlw>` (min-max)
+- :ref:`Gemiddeld hoogste grondwaterstand <mhw>` (min-max)
+- :ref:`Aftoetsing potenties aan beheer <management_vegetation>`
+- :ref:`Aftoetsing potenties aan overstromingsregime <inundation_vegetation>`
 
+Zie ook bovenstaande tabel.
 
+.. _vegetation_impl:
 
 Implementatie in het package `niche_vlaanderen`
 ===============================================
@@ -76,8 +109,11 @@ Voorbeeld
 Vereenvoudigd model
 -------------------
 
-Bij het eenvoudig Niche model wordt enkel rekening gehouden met :ref:`mhw`, :ref:`mlw` en :ref:`soil_code`.
-De berekening gebeurt verder gelijkaardig aan bovenstaande berekening, maar vegetatie is mogelijk van zodra die mogelijk is, zonder rekening te houden met de andere invoerwaarden.
+Bij het vereenvoudigde NICHE Vlaanderen model wordt enkel rekening gehouden met :ref:`mhw`, :ref:`mlw` en :ref:`soil_code` als invoerlagen.
+
+Een vereenvoudigd model is vooral geschikt om de directe invloed van (veranderingen in) de grondwaterstanden op de potentie na te gaan. Andere invloedsfactoren zoals de aanvoer van nutriënten, de impact van overstromingen en de mogelijke interactie met beheer worden immers buiten beschouwing gelaten. Een vereenvoudigd model is derhalve transparanter omdat de beslisregels bij de bepaling van de trofie- en zuurgraad niet toegepast worden. De resultaten zijn eenvoudiger te interpreteren, maar boeten uiteraard wel in op nauwkeurigheid/voorspellingskracht omdat abstractie gemaakt wordt van een deel van de realiteit.
+
+Een vereenvoudigd model kan `interactief <https://inbo.github.io/niche_vlaanderen/getting_started.html#Creating-a-simple-NICHE-model>`_ of via een `configuratiebestand <https://inbo.github.io/niche_vlaanderen/cli.html#simple-model>`_ opgebouwd worden.
 
 .. _deviation:
 
@@ -87,15 +123,22 @@ GXG-afwijkingskaarten voor vereenvoudigd model
 Voor veel studies is het niet enkel interessant om na te gaan welke vegetatie kan voorkomen, maar ook welke wijziging in glg of ghg vereist is om een bepaalde vegetatie mogelijk te maken.
 Dit kan aan de hand van afwijkingskaarten.
 
+GXG-afwijkingskaarten kunnen `interactief <https://inbo.github.io/niche_vlaanderen/getting_started.html#Creating-a-simple-NICHE-model>`_ of via een `configuratiebestand <https://inbo.github.io/niche_vlaanderen/cli.html#simple-model>`_ aangemaakt worden.
+
 .. _scenario_analysis:
 
 Scenario-analyse
 ----------------
 
 `Vergelijking <https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Comparing-Niche-classes>`_ van de oppervlakte aan potenties tussen 2 Niche objecten (modellen).
-Zowel voor "full" als "simple"
+
+Een vergelijking tussen twee modellen (volledig of vereenvoudigd) kan enkel `interactief <https://inbo.github.io/niche_vlaanderen/getting_started.html#Creating-a-simple-NICHE-model>`_ gemaakt worden, niet via een configuratiebestand.
+
+.. _zonal_stats:
 
 Gebiedsstatistieken
 -------------------
 
 Zie `hier <https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Creating-statistics-per-shape-object>`_.
+
+Een samenvatting van de oppervlakte aan potenties in specifieke deelzones van het studiegebied kan enkel `interactief <https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Creating-statistics-per-shape-object>`_ opgevraagd worden, niet via een configuratiebestand.
