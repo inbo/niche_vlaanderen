@@ -70,10 +70,10 @@ Hieronder geven we een (niet limitatief) overzicht van de aandachtspunten per in
 
 * Trofie:
 
-	* zowel de :doc:`inputgegevens <invoer>` als de gevolgen van de :doc:`beslisregels <trofie>` moeten nader gecontroleerd worden.
+	* zowel de :ref:`inputgegevens <nutrient_level_input>` als de gevolgen van de :ref:`beslisregels <nutrient_level_princ>` moeten nader gecontroleerd worden.
 
 * Zuurgraad:
 
-	* zowel de :doc:`inputgegevens <invoer>` als de gevolgen van de :doc:`beslisregels <zuur>` moeten nader gecontroleerd worden.
+	* zowel de :ref:`inputgegevens <acidity_input>` als de gevolgen van de :ref:`beslisregels <acidity_princ>` moeten nader gecontroleerd worden.
 
 Voor het volledige NICHE model is het ook mogelijk om de NICHE Vlaanderen **berekende zuurgraad- en trofiekaarten te overschrijven** (zie `hier <https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Using-abiotic-grids>`_) met zelf aangemaakte of aangepaste zuurgraad- en/of trofiekaarten.
