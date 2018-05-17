@@ -36,14 +36,14 @@ Voor categorische variabelen (nominaal of ordinaal) is de omzetting eenduidig. V
 - zijn de gespecifieerde minima en maxima al dan niet inbegrepen in het bereik
 - hoe worden decimale waarden gebruikt bij het aftoetsen aan deze minima en maxima
 
-De enige continue waarden in de referentietabel zijn de gemiddelde :ref:`hoogste <mhw> en :ref:`laagste <mlw>` grondwaterstanden. De gespecifieerde minima en maxima zitten hier steeds *inbegrepen* in het bereik. En hoewel aangeraden wordt om vooraf de bijhorende invoerlagen van integere (dus geen decimale) waarden te voorzien, worden decimale waarden eerst *afgerond op twee cijfers* na de decimaal en vervolgens vergeleken met minima en maxima.
+De enige continue waarden in de referentietabel zijn de gemiddelde :ref:`hoogste <mhw>` en :ref:`laagste <mlw>` grondwaterstanden. De gespecifieerde minima en maxima zitten hier steeds *inbegrepen* in het bereik. En hoewel aangeraden wordt om vooraf de bijhorende invoerlagen van integere (dus geen decimale) waarden te voorzien, worden decimale waarden eerst *afgerond op twee cijfers* na de decimaal en vervolgens vergeleken met de minima en maxima.
 
 Zie ook :doc:`vegetatie`.
 
 Versiebeheer
 ============
 
-Voortschrijdend wetenschappelijk inzicht en ervaring bij de praktische toepassing van NICHE Vlaanderen kan aanleiding geven tot aanpassingen in de referentietabel. Het is belangrijk dat deze wijzigingen traceerbaar zijn. Daarnaast is het belangrijk op te merken dan de code van ``niche_vlaanderen`` toelaat om de standaard referentietabel die vervat zit in de geïnstalleerde code overschreven kan worden door een aangepaste tabel.
+Voortschrijdend wetenschappelijk inzicht en ervaring bij de praktische toepassing van NICHE Vlaanderen kan aanleiding geven tot aanpassingen in de referentietabel. Het is belangrijk dat deze wijzigingen traceerbaar zijn. Daarnaast is het belangrijk op te merken dat de code van ``niche_vlaanderen`` toelaat om de standaard referentietabel die vervat zit in de geïnstalleerde code te overschrijven met een aangepaste tabel.
 
 Documentatie aanpassingen
 -------------------------
@@ -57,7 +57,7 @@ Een waarschuwing verschijnt als je niet over de laatste versie beschikt.
 Gebruik van een eigen referentietabel
 -------------------------------------
 
-Het is mogelijk om een `eigen referentietabel te gebruiken <https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Overwriting-standard-code-tables>`_ die dan de standaard tabel overschrijft.
+Het is mogelijk om een eigen referentietabel te gebruiken die dan de standaard tabel overschrijft (`interactief <https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Overwriting-standard-code-tables>`_ of via :ref:`configuratiebestand <full_example>`).
 Het wordt ten stelligste aangeraden om deze optie doordacht te gebruiken, en de tabel enkel aan te passen op basis van nauwkeurige meetgegevens die op wetenschappelijke wijze verzameld werden.
 Bij het gebruik van een eigen referentietabel is het belangrijk te weten dat de tabel moet bestaan uit "comma separated values" (tekstbestand met extentie *.csv). Het scheidingsteken is dus de komma (",") en het decimaal teken bijgevolg de punt (".").
 
