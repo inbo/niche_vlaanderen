@@ -58,8 +58,8 @@ Zie ook bovenstaande tabel.
 Implementatie in ``niche_vlaanderen``
 =================================================
 
-Voorbeeld
----------
+Voorbeeld volledig model
+------------------------
 
 .. topic:: Voorbeeld
 
