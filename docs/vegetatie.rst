@@ -28,8 +28,8 @@ De standplaatsvereisten zitten vervat in 7 variabelen:
     :doc:`Zuurgraad <zuur>`, X, 
     :ref:`Gemiddeld laagste grondwaterstand <mlw>`, X, X
     :ref:`Gemiddeld hoogste grondwaterstand <mhw>`, X, X
-    :ref:`Aftoetsing potenties aan beheer <management_vegetation>`, *X*, 
-    :ref:`Aftoetsing potenties aan overstromingsregime <inundation_vegetation>`, *X*, 
+    :ref:`Aftoetsing potenties aan beheer <management_vegetation>`, (X), 
+    :ref:`Aftoetsing potenties aan overstromingsregime <inundation_vegetation>`, (X), 
 
 De potenties voor vegetatie-ontwikkeling kunnen op twee manieren worden berekend: 
 
@@ -63,17 +63,17 @@ Voorbeeld volledig model
 
 .. topic:: Voorbeeld
 
-  Gaan we uit van het voorbeeld dan hebben we in vorige stappen bepaald:
+  Gaan we uit van het voorbeeld, dan hebben we in vorige stappen bepaald:
 
-   * Trofie: 4
-   * Zuurgraad: 3
+   * Trofie: 5 (hypereutroof)
+   * Zuurgraad: 3 (neutraal/basisch)
   
   Andere invoergegevens zijn:
-   * GLG: 50 cm
-   * GHG: 10 cm
-   * bodemcode: L1 (14)
+   * GLG: 50 cm onder maaiveld
+   * GHG: 10 cm onder maaiveld
+   * bodemcode: humusarme leembodem L1 (14)
 
-  Zoeken we dit op in de tabel NicheVl dan krijgen we volgende opties:
+  Zoeken we dit op in de referentietabel van NICHE Vlaanderen, dan krijgen we volgende opties:
 
   .. csv-table:: potentiële vegetatie op basis van NICHE
     :header-rows: 1
@@ -96,7 +96,7 @@ Voorbeeld volledig model
 
   Volgende vegetatiecodes kunnen dus voorkomen: 7, 8, 12 en 16.
 
-  Indien ook nog inundantie wordt meegerekend, bvb regelmatig overstromen (1) valt een aantal mogelijke codes weg. Mogelijke codes zijn dan 7, 12 en 16.
+  Indien ook nog inundantie wordt meegerekend, bvb regelmatig overstromen (1) valt een aantal mogelijke codes weg. Mogelijke vegetaties zijn dan 7, 12 en 16.
 
 .. _simple:
 
@@ -107,7 +107,7 @@ Bij het vereenvoudigde NICHE Vlaanderen model wordt enkel rekening gehouden met 
 
 Een vereenvoudigd model is vooral geschikt om de directe invloed van (veranderingen in) de grondwaterstanden op de potentie na te gaan. Andere invloedsfactoren zoals de aanvoer van nutriënten, de impact van overstromingen en de mogelijke interactie met beheer worden immers buiten beschouwing gelaten. Een vereenvoudigd model is derhalve transparanter omdat de beslisregels bij de bepaling van de trofie- en zuurgraad niet toegepast worden. De resultaten zijn eenvoudiger te interpreteren, maar boeten uiteraard wel in op nauwkeurigheid/voorspellingskracht omdat abstractie gemaakt wordt van een deel van de realiteit.
 
-Een vereenvoudigd model kan `interactief <https://inbo.github.io/niche_vlaanderen/getting_started.html#Creating-a-simple-NICHE-model>`_ of via een `configuratiebestand <https://inbo.github.io/niche_vlaanderen/cli.html#simple-model>`_ opgebouwd worden.
+Met het package ``niche_vlaanderen`` kan een vereenvoudigd model `interactief <https://inbo.github.io/niche_vlaanderen/getting_started.html#Creating-a-simple-NICHE-model>`_ of via een `configuratiebestand <https://inbo.github.io/niche_vlaanderen/cli.html#simple-model>`_ opgebouwd worden.
 
 .. _deviation:
 
@@ -116,7 +116,7 @@ GXG-afwijkingskaarten voor vereenvoudigd model
 
 Voor veel studies is het niet enkel interessant om na te gaan welke vegetatie kan voorkomen, maar ook -als voor een vegetatietype geen potenties aangegeven worden- welke wijzigingen in glg en ghg vereist zijn om een bepaald vegetatietype alsnog ontwikkelingskansen te geven. Of anders gesteld: wat is de doelafstand tot de gewenste gemiddelde grondwaterstand (gxg) voor elk van de vegetatietypen. 
 
-GXG-afwijkingskaarten kunnen `interactief <https://inbo.github.io/niche_vlaanderen/getting_started.html#Creating-a-simple-NICHE-model>`_ of via een `configuratiebestand <https://inbo.github.io/niche_vlaanderen/cli.html#simple-model>`_ aangemaakt worden. Voor elk vegetatietype wordt een afwijkingskaart berekend voor zowel de gemiddelde hoogste als de gemiddelde laagste grondwaterstand. Negatieve waarden wijzen op te natte omstandigheden, positieve waarden op te droge omstandigheden.
+Met het package ``niche_vlaanderen`` kunnen GXG-afwijkingskaarten `interactief <https://inbo.github.io/niche_vlaanderen/getting_started.html#Creating-a-simple-NICHE-model>`_ of via een `configuratiebestand <https://inbo.github.io/niche_vlaanderen/cli.html#simple-model>`_ aangemaakt worden. Voor elk vegetatietype wordt een afwijkingskaart berekend voor zowel de gemiddelde hoogste als de gemiddelde laagste grondwaterstand. Negatieve waarden wijzen op te natte omstandigheden, positieve waarden op te droge omstandigheden.
 
 .. _scenario_analysis:
 
@@ -125,7 +125,7 @@ Scenario-analyse
 
 Vaak wordt in studies de impact van verschillende inrichtingsmaatregelen tegen elkaar afgewogen in termen van veranderingen in oppervlakte aan potenties voor welbepaalde vegetatietypen. Verschillende combinaties van inrichtingsmaatregelen worden dan doorgerekend, elk onder de vorm van een afzonderlijk NICHE Vlaanderen model met overeenkomstige invoerlagen die de impact van de maatregelen weerspiegelen. Elke combinatie zit gebundeld in een zgn. scenario. Scenario's worden dan onderling vergeleken door de verschuivingen in oppervlakte aan potenties van de beoogde vegetatietypen te begroten.
 
-Een vergelijking tussen twee modellen/scenario's (volledig of vereenvoudigd) kan enkel `interactief <https://inbo.github.io/niche_vlaanderen/getting_started.html#Creating-a-simple-NICHE-model>`_ gemaakt worden, niet via een configuratiebestand. De vergelijking kan gebeuren in tabelvorm (voor alle vegetatietypen) of als verschilkaarten voor elk vegetatietype.
+Met het package ``niche_vlaanderen`` kan een vergelijking tussen twee modellen/scenario's (volledig of vereenvoudigd) enkel `interactief <https://inbo.github.io/niche_vlaanderen/getting_started.html#Creating-a-simple-NICHE-model>`_ gemaakt worden, niet via een configuratiebestand. De vergelijking kan gebeuren in tabelvorm (voor alle vegetatietypen) of als verschilkaarten voor elk vegetatietype.
 
 .. _zonal_stats:
 
@@ -134,4 +134,4 @@ Gebiedsstatistieken
 
 Naast een scenario-analyse is het vaak ook interessant om na te gaan in welke mate potenties verschillen in bepaalde deelzones van een studiegebied. 
 
-Een samenvatting (tabel) van de oppervlakte aan potenties in specifieke deelzones van het studiegebied kan enkel `interactief <https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Creating-statistics-per-shape-object>`_ opgevraagd worden, niet via een configuratiebestand.
+Met het package ``niche_vlaanderen`` kan een samenvatting (tabel) van de oppervlakte aan potenties in specifieke deelzones van het studiegebied enkel `interactief <https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Creating-statistics-per-shape-object>`_ opgevraagd worden, niet via een configuratiebestand.
