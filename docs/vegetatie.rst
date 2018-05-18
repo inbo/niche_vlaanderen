@@ -96,7 +96,7 @@ Voorbeeld volledig model
 
   Volgende vegetatiecodes kunnen dus voorkomen: 7, 8, 12 en 16.
 
-  Indien ook nog inundantie wordt meegerekend, bvb regelmatig overstromen (1) valt een aantal mogelijke codes weg. Mogelijke vegetaties zijn dan 7, 12 en 16.
+  Indien ook nog inundatie wordt meegerekend, bvb regelmatig overstromen (1) valt een aantal mogelijke codes weg. Mogelijke vegetaties zijn dan 7, 12 en 16.
 
 .. _simple:
 
