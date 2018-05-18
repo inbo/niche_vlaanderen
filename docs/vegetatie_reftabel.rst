@@ -29,7 +29,7 @@ De referentiewaarden zijn gebaseerd op een uitgebreide set van veldbemonstering 
 Gebruik/implementatie
 =====================
 
-De referentietabel wordt in NICHE Vlaanderen gebruikt als een codetabel. Een codetabel maakt het mogelijk om een vertaling te maken van de ene waarde (klasse of bereik) naar een andere waarde (veelal een klasse). In het geval van de referentietabel is dat van de waarden voor de verschillende standplaatsfactoren naar één enkele uitspraak over de potentie voor elk van de vegetatietypen, nl. wel of geen potentie (1 of 0). In NICHE Vlaanderen worden ook nog :doc:`andere codetabellen <codetables>` gebruikt, met name bij de implementatie van de beslisregels voor de trofie- en zuurgraad.
+De referentietabel wordt in NICHE Vlaanderen gebruikt als een codetabel. Een codetabel maakt het mogelijk om een vertaling te maken van de ene waarde (klasse of bereik) naar een andere waarde (veelal een klasse). In het geval van de referentietabel is dat van de waarden voor de verschillende standplaatsfactoren naar één enkele uitspraak over de potentie voor elk van de vegetatietypen, nl. wel of geen potentie (1 of 0). In NICHE Vlaanderen worden ook nog andere codetabellen gebruikt, met name bij de implementatie van de beslisregels voor de trofie- en zuurgraad.
 
 Voor categorische variabelen (nominaal of ordinaal) is de omzetting eenduidig. Voor continue variabelen wordt gewerkt met boven- en ondergrenzen (minimum en maximum). Hier is het belangrijk om duidelijk afspraken te maken:
 
