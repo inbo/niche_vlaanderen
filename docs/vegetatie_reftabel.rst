@@ -11,8 +11,8 @@ Opbouw referentietabel
 
 De referentietabel van NICHE Vlaanderen kan je `hier <https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_vegetation.csv>`_ raadplegen. Ze bevat de standplaatsvereisten voor elk vegetatietype, vertaald naar 7 verschillende standplaatsfactoren. De links in onderstaand lijstje verwijzen door naar meer informatie bij de standplaatsfactoren en de aard van de gegevens.
 
-- veg_code
-- veg_type
+- :doc:`Cijfercode NICHE vegetatietype <vegetatietype.rst>`
+- :doc:`Wetenschappelijke naam NICHE vegetatietype <vegetatietype.rst>`
 - :ref:`Bodemtype <soil_code>`
 - :doc:`Trofiegraad <trofie>`
 - :doc:`Zuurgraad <zuur>`
@@ -29,7 +29,7 @@ De referentiewaarden zijn gebaseerd op een uitgebreide set van veldbemonstering 
 Gebruik/implementatie
 =====================
 
-De referentietabel wordt in NICHE Vlaanderen gebruikt als een codetabel. Een codetabel maakt het mogelijk om een vertaling te maken van de ene waarde (klasse of bereik) naar een andere waarde (veelal een klasse). In het geval van de referentietabel is dat van de waarden voor de verschillende standplaatsfactoren naar één enkele uitspraak over de potentie voor elk van de vegetatietypen, nl. wel of geen potentie (1 of 0). In NICHE Vlaanderen worden ook nog :doc:`andere codetabellen <codetables>` gebruikt, met name bij de implementatie van de beslisregels voor de trofie- en zuurgraad.
+De referentietabel wordt in NICHE Vlaanderen gebruikt als een codetabel. Een codetabel maakt het mogelijk om een vertaling te maken van de ene waarde (klasse of bereik) naar een andere waarde (veelal een klasse). In het geval van de referentietabel is dat van de waarden voor de verschillende standplaatsfactoren naar één enkele uitspraak over de potentie voor elk van de vegetatietypen, nl. wel of geen potentie (1 of 0). In NICHE Vlaanderen worden ook nog andere codetabellen gebruikt, met name bij de implementatie van de beslisregels voor de trofie- en zuurgraad.
 
 Voor categorische variabelen (nominaal of ordinaal) is de omzetting eenduidig. Voor continue variabelen wordt gewerkt met boven- en ondergrenzen (minimum en maximum). Hier is het belangrijk om duidelijk afspraken te maken:
 

@@ -62,7 +62,7 @@ De definitie van de hoge, tussenliggende en lage grondwaterstanden verschilt naa
 
 *positieve GLG-waarden = onder maaiveld*
 
-Samengevat:
+De beslisregels voor de zuurgraad kunnen ook worden samengevat als volgt:
 
 .. image:: _static/png/acidity_table.png
      :scale: 100%
@@ -118,7 +118,14 @@ Dit gebeurt aan de hand van de tabel `soil_mlw_class.csv <https://github.com/inb
     :header-rows: 1
 
     soil_group,mlw_min,mlw_max,soil_mlw_class
+    ...,...,...,...
     1,-999,80,**1**
+    1,80,110,2
+    ...,...,...,...
+    
+Bij het gebruik van de codetabel soil_mlw_class wordt de bovengrens van elke GLG-categorie meegenomen in de categorie, maar niet de ondergrens: een GLG van 110 cm onder maaiveld resulteert voor minerale bodems in een soil_mlw (bodem_GLG) klasse van 2 terwijl een GLG van 80 cm onder maaiveld met een soil_mlw klasse van 1 overeenkomt.
+
+Als reële getallen voor de GLG worden gebruikt worden de waarden afgerond op 2 decimalen, d.w.z. 80.005 zal 80.01 cm (> 80, soil_mlw klasse van 2) worden en 80.004 zal 80.00 cm (= 80, soil_mlw klasse van 1) worden.
 
 Bepaling kwel klasse
 --------------------------------
@@ -135,17 +142,22 @@ De kwelflux wordt aan een kwel klasse gekoppeld in de tabel `seepage.csv <https:
     :header-rows: 1
 
     seepage,seepage_min,seepage_max,description
+    3,-999,-1,much seepage
+    2,-1,-0.1,little seepage
      **1**,-0.1,999,infiltration
+     
+Bij het gebruik van deze tabel wordt de bovengrens van elke kwel-categorie meegenomen in de categorie, maar niet de ondergrens: een kwel van -1 mm/dag hoort dus bij de categorie "much seepage/veel kwel", bij -0.1 mm kwel per dag spreekt men van "little seepage/kwel".
 
-Bepaling Zuurcode
+Bepaling zuurcode
 ------------------
 
-Aan de hand van de bodem_GLG klasse, de eventuele aanwezigheid van een regenwaterlens, de  kwelflux en mineralenrijkdom van het grondwater en het al dan niet optreden van overstroming met basenrijk water wordt de zuurcode bepaald.
+Aan de hand van de bodem_GLG klasse, de eventuele aanwezigheid van een regenwaterlens, de kwelflux en mineralenrijkdom van het grondwater en het al dan niet optreden van overstroming met basenrijk water wordt de zuurcode bepaald.
 Dit gebeurt op basis van de tabel `lnk_acidity.csv <https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/lnk_acidity.csv>`_.
 
 .. topic:: Voorbeeld
 
   In de vorige stappen werden de bodem_GLG klasse en de kwel klasse bepaald op 1. Andere invoerwaarden zijn:
+  
    * Regenlens = 1 (aanwezig)
    * Mineralenrijkdom = 1 (mineraalrijk grondwater)
    * Overstroming_zuurgraad = 1 (overstroming met basenrijk water)
@@ -156,7 +168,11 @@ Dit gebeurt op basis van de tabel `lnk_acidity.csv <https://github.com/inbo/nich
      :header-rows: 1
     
      rainwater,mineral_richness,inundation,seepage,soil_mlw_class,acidity
+     ...,...,...,...,...,...
+     1,1,0,3,9,1
      1,1,1,1,1,**3**
+     1,1,1,1,2,3
+     ...,...,...,...,...,...
 
   De bepaalde zuurgraad is dus **3** (neutraal/basisch)
    
