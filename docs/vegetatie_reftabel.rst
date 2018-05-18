@@ -11,8 +11,8 @@ Opbouw referentietabel
 
 De referentietabel van NICHE Vlaanderen kan je `hier <https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_vegetation.csv>`_ raadplegen. Ze bevat de standplaatsvereisten voor elk vegetatietype, vertaald naar 7 verschillende standplaatsfactoren. De links in onderstaand lijstje verwijzen door naar meer informatie bij de standplaatsfactoren en de aard van de gegevens.
 
-- veg_code
-- veg_type
+- :doc:`Cijfercode NICHE vegetatietype <vegetatietype.rst>`
+- :doc:`Wetenschappelijke naam NICHE vegetatietype <vegetatietype.rst>`
 - :ref:`Bodemtype <soil_code>`
 - :doc:`Trofiegraad <trofie>`
 - :doc:`Zuurgraad <zuur>`
