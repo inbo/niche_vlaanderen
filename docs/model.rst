@@ -1,5 +1,5 @@
 ##################
-Beschrijving Model
+Beschrijving model
 ##################
 
 NICHE Vlaanderen (*Nature Impact Assessment of Changes in Hydro-Ecological Systems*) is een 
@@ -15,4 +15,3 @@ gebied berekent **op basis van** informatie over de **(abiotische) standplaatsco
   zuur
   vegetatie_reftabel
   vegetatie
-  codetables
