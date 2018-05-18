@@ -28,8 +28,8 @@ De standplaatsvereisten zitten vervat in 7 variabelen:
     :doc:`Zuurgraad <zuur>`, X, 
     :ref:`Gemiddeld laagste grondwaterstand <mlw>`, X, X
     :ref:`Gemiddeld hoogste grondwaterstand <mhw>`, X, X
-    :ref:`Aftoetsing potenties aan beheer <management_vegetation>`, (X), 
-    :ref:`Aftoetsing potenties aan overstromingsregime <inundation_vegetation>`, (X), 
+    :ref:`Aftoetsing potenties aan beheer <management_vegetation>`, ( X ), 
+    :ref:`Aftoetsing potenties aan overstromingsregime <inundation_vegetation>`, ( X ), 
 
 De potenties voor vegetatie-ontwikkeling kunnen op twee manieren worden berekend: 
 
