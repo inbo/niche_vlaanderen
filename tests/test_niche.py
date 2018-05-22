@@ -434,6 +434,11 @@ class TestNiche(TestCase):
         with pytest.raises(KeyError):
             stats = myniche.zonal_stats(vector, outside=False, attribute='xyz')
 
+        stats = myniche.zonal_stats(vector, outside=True, attribute='OID')
+        print (stats.OID.unique())
+        np.testing.assert_equal([0, -1],  stats.OID.unique())
+
+
     def test_uint(self):
         myniche = niche_vlaanderen.Niche()
 
