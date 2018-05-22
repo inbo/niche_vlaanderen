@@ -64,7 +64,7 @@ If you want to install a specific niche version, you can install using pip:
 
 .. code-block:: default
 
-    pip install niche_vlaanderen==1.0b6
+    pip install niche_vlaanderen==1.0b7
 
 Alternative installation
 ========================
@@ -76,7 +76,7 @@ opening some grid files. (See :ref:`missing_gcs` for instructions).
 .. code-block:: default
 
     conda install pandas pyyaml rasterio fiona
-    pip install niche_vlaanderen==1.0b6
+    pip install niche_vlaanderen==1.0b7
 
 It is strongly recommended to install also `matplotlib` (otherwise plotting will not work):
 
