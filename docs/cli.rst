@@ -131,7 +131,7 @@ config file. This is done by running the ``niche`` application.
 
     If you don't specify an output directory, nothing will be written - in command line mode this makes no sense
 
-.. _full_examle:
+.. _full_example:
 
 Full example
 ==============
