@@ -44,6 +44,7 @@ You can verify the installation was successful by running the cli interface
 
     Options:
       --example  prints an example configuration file
+      --version  prints the version number
       --help     Show this message and exit.
 
 Upgrading
@@ -64,7 +65,8 @@ If you want to install a specific niche version, you can install using pip:
 
 .. code-block:: default
 
-    pip install niche_vlaanderen==1.0b7
+    (C:\Users\johan\Miniconda3) C:\Users\johan> activate niche
+    (niche) C:\Users\johan> pip install niche_vlaanderen==1.0b7
 
 Alternative installation
 ========================
@@ -105,8 +107,8 @@ To run this, from the anaconda prompt do:
 
 .. code-block:: default
 
-    (C:\Users\johan\Miniconda3) C:\Users\johan> activate niche_vlaanderen
-    (C:\Users\johan\Miniconda3) C:\Users\johan> jupyter notebook
+    (C:\Users\johan\Miniconda3) C:\Users\johan> activate niche
+    (niche) C:\Users\johan> jupyter notebook
 
 This should open a webbrowser pointing towards http://localhost:8888 . If you browser does not open, try looking for the
 correct URL at the anaconda prompt.
