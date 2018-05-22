@@ -58,7 +58,7 @@ Gebruik van een eigen referentietabel
 -------------------------------------
 
 Het is mogelijk om een eigen referentietabel te gebruiken die dan de standaard tabel overschrijft (`interactief <https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Overwriting-standard-code-tables>`_ of via :ref:`configuratiebestand <full_example>`).
-Het wordt ten stelligste aangeraden om deze optie doordacht te gebruiken, en de tabel enkel aan te passen op basis van nauwkeurige meetgegevens die op wetenschappelijke wijze verzameld werden.
+Het wordt ten stelligste aangeraden om deze optie doordacht te gebruiken, en de tabel enkel aan te passen op basis van nauwkeurige meetgegevens die op wetenschappelijke wijze verzameld werden. Naast aanpassingen van de referentiewaarden voor bestaande vegetatietypen is het eveneens mogelijk om nieuwe vegetatietypen toe te voegen met bijhorende referentiewaarden.
 Bij het gebruik van een eigen referentietabel is het belangrijk te weten dat de tabel moet bestaan uit "comma separated values" (tekstbestand met extentie *.csv). Het scheidingsteken is dus de komma (",") en het decimaal teken bijgevolg de punt (".").
 
 .. onduidelijk welke mogelijkheden er zijn bij de opmaak van een eigen tabel; de standplaatsfactoren liggen vast, maar kan je zomaar vegetatietypen toevoegen, en zoja hoeveel?
