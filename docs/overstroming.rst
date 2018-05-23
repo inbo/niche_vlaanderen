@@ -18,7 +18,7 @@ Werking overstromingsmodule
 
 Werking
 -------
-De :doc:`overstromingsmodule<flooding>` doet een uitspraak over de overstromingstolerantie op basis van de ruimtelijk expliciete gebiedsinformatie over de waargenomen of gemodelleerde overstromingskarakteristieken (frequentie, tijdstip, duur en diepte). De module werkt als een eenvoudige aftoetsing aan de `referentietabel <https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/floodplains/lnk_potential.csv>`_ uit De Nocker et al. (2007) die gekoppeld werd aan de verschillende :doc:`NICHE Vlaanderen vegetatietypen <vegetatietype>`. De module kan :doc:`interactief<flooding>` of via een :ref:`configuratiebestand<flood_config>` aangesproken worden.
+De :doc:`overstromingsmodule<flooding>` doet een uitspraak over de overstromingstolerantie op basis van de ruimtelijk expliciete gebiedsinformatie over de waargenomen of gemodelleerde overstromingskarakteristieken (frequentie, tijdstip, duur en diepte). De module werkt als een eenvoudige aftoetsing aan de `referentietabel <https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/flooding/lnk_potential.csv>`_ uit De Nocker et al. (2007) die gekoppeld werd aan de verschillende :doc:`NICHE Vlaanderen vegetatietypen <vegetatietype>`. De module kan :doc:`interactief<flooding>` of via een :ref:`configuratiebestand<flood_config>` aangesproken worden.
  
 .. _vegtyp:
  
@@ -44,7 +44,7 @@ De overstromingsdiepte dient als een raster aangeleverd te worden met voor elke 
 
   .. csv-table:: Mogelijke diepteklassen van overstroming
     :header-rows: 1
-    :file: ../niche_vlaanderen/system_tables/floodplains/depths.csv
+    :file: ../niche_vlaanderen/system_tables/flooding/depths.csv
  
 Het is belangrijk om een duidelijk onderscheid te maken tussen de plaatsen waar effectief geen overstroming voorkomt of voorspeld wordt, en de plaatsen waar er geen uitspraken mogelijk zijn omdat de informatie er ontbreekt en dus niet gekend is. In het eerste geval wordt de waarde 0 toegekend, in het laatste geval een waarde voor "no data".
  
@@ -54,7 +54,7 @@ Voor de volgende retourperioden wordt de overstromingstolerantie van de verschil
 
   .. csv-table:: Mogelijke overstromingsfrequenties waarvoor overstromingstolerantie berekend kan worden
     :header-rows: 1
-    :file: ../niche_vlaanderen/system_tables/floodplains/frequency.csv
+    :file: ../niche_vlaanderen/system_tables/flooding/frequency.csv
 
 Overstromingsduur
 ^^^^^^^^^^^^^^^^^
@@ -84,6 +84,6 @@ Op basis van het invoerraster met de overstromingsdiepte bij een welbepaalde ret
 
   .. csv-table:: mogelijke codes voor overstromingstolerantie
     :header-rows: 1
-    :file: ../niche_vlaanderen/system_tables/floodplains/potential.csv
+    :file: ../niche_vlaanderen/system_tables/flooding/potential.csv
 	
 De verschillende rasters zijn ook leerrijk bij het inschatten van de impact van wijzigende overstromingsregimes op de potenties voor vegetatietypen (scenario-analyse).

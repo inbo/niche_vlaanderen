@@ -19,10 +19,10 @@ class TestFlooding(TestCase):
 
     def test_calculate(self):
         fp = nv.Flooding()
-        fp.calculate("testcase/floodplains/ff_bt_t10_h.asc", "T10",
+        fp.calculate("testcase/flooding/ff_bt_t10_h.asc", "T10",
                      period="winter", duration=1)
         with rasterio.open(
-                "testcase/floodplains/result/F25-T10-P1-winter.asc") as dst:
+                "testcase/flooding/result/F25-T10-P1-winter.asc") as dst:
             expected = dst.read(1)
         np.testing.assert_equal(expected, fp._veg[25])
 
@@ -32,7 +32,7 @@ class TestFlooding(TestCase):
         fp.calculate("tests/data/ff_bt_t10_h", "T10",
                      period="winter", duration=1)
         with rasterio.open(
-                "testcase/floodplains/result/F25-T10-P1-winter.asc") as dst:
+                "testcase/flooding/result/F25-T10-P1-winter.asc") as dst:
             expected = dst.read(1)
         np.testing.assert_equal(expected, fp._veg[25])
 
@@ -52,7 +52,7 @@ class TestFlooding(TestCase):
         with pytest.raises(FloodingException):
             fp.table
 
-        fp.calculate(depth_file="testcase/floodplains/ff_bt_t10_h.asc",
+        fp.calculate(depth_file="testcase/flooding/ff_bt_t10_h.asc",
                      frequency="T10", period="winter", duration=1)
         df = fp.table
         sel = df[((df.vegetation == 1)
@@ -67,7 +67,7 @@ class TestFlooding(TestCase):
         plt.show = lambda: None
 
         fp = nv.Flooding()
-        fp.calculate("testcase/floodplains/ff_bt_t10_h.asc", "T10",
+        fp.calculate("testcase/flooding/ff_bt_t10_h.asc", "T10",
                      period="winter", duration=1)
         fp.plot(7)
 
@@ -81,7 +81,7 @@ class TestFlooding(TestCase):
             # Should fail - model not yet run
             fp.write(tempdir)
 
-        fp.calculate(depth_file="testcase/floodplains/ff_bt_t10_h.asc",
+        fp.calculate(depth_file="testcase/flooding/ff_bt_t10_h.asc",
                      frequency="T10",
                      period="winter", duration=1)
 
@@ -153,7 +153,7 @@ class TestFlooding(TestCase):
             # floodplain model not yet run
             fp.combine(myniche)
 
-        fp.calculate("testcase/floodplains/ff_bt_t10_h.asc", "T10",
+        fp.calculate("testcase/flooding/ff_bt_t10_h.asc", "T10",
                      period="winter", duration=1)
 
         small = nv.Niche()

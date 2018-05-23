@@ -150,7 +150,7 @@ def validate_tables_vegetation(ct_vegetation, ct_soil_code, ct_inundation,
             raise CodeTableException("Non unique mhw/mlw combinations")
 
 
-def validate_tables_floodplains(depths, duration, frequency, lnk_potential,
+def validate_tables_flooding(depths, duration, frequency, lnk_potential,
                                 potential, inner):
     # test disabled as we have a 0 code which is not in lnk_potential
     # check_join(lnk_potential, depths, "depth","code")

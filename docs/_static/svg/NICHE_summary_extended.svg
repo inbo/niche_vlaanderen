@@ -282,7 +282,7 @@
     <a xlink:href="https://inbo.github.io/niche_vlaanderen/overstroming.html#werking" target="_blank" rel="noreferrer">
       <path fill="transparent" fill-opacity="0" d="m389.046 628.16797l72.50119 0l0 17.600037l-72.50119 0l0 -17.600037z" fill-rule="nonzero"/>
     </a>
-    <a xlink:href="https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/floodplains/lnk_potential.csv" target="_blank" rel="noreferrer">
+    <a xlink:href="https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/flooding/lnk_potential.csv" target="_blank" rel="noreferrer">
       <path fill="transparent" fill-opacity="0" d="m409.40585 646.16797l31.781464 0l0 17.600037l-31.781464 0l0 -17.600037z" fill-rule="nonzero"/>
     </a>
     <path fill="#000000" fill-opacity="0.0" d="m425.28387 564.02625l0 52.22046" fill-rule="evenodd"/>

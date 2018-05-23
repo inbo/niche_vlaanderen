@@ -19,14 +19,14 @@ model_options:
   output_dir: _output
   overwrite_files: True
 
-floodplains:
+flooding:
   - name: T20-winter
-    depth: ../testcase/floodplains/ff_bt_t25_h.asc
+    depth: ../testcase/flooding/ff_bt_t25_h.asc
     frequency: T25
     duration: 1
     period: winter
   - name: T10-winter
-    depth: ../testcase/floodplains/ff_bt_t10_h.asc
+    depth: ../testcase/flooding/ff_bt_t10_h.asc
     frequency: T10
     duration: 1
     period: winter

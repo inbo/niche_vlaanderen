@@ -12,7 +12,7 @@ import numpy as np
 import numpy.ma as ma
 
 from .spatial_context import SpatialContext
-from .codetables import validate_tables_floodplains, check_codes_used
+from .codetables import validate_tables_flooding, check_codes_used
 
 
 class FloodingException(Exception):
@@ -23,7 +23,7 @@ class Flooding(object):
     """
     Predict the vegetation response to (frequent) flooding
 
-    A Floodplain object can be used to predict the response of vegetation to
+    A Flooding object can be used to predict the response of vegetation to
     (frequent) flooding.
 
     The code tables used can be overwritten when initializing the object.
@@ -42,7 +42,7 @@ class Flooding(object):
             if locals()[i] is None:
                 ct = resource_filename(
                         "niche_vlaanderen",
-                        "system_tables/floodplains/"+i+".csv")
+                        "system_tables/flooding/"+i+".csv")
             else:
                 ct = locals()[i]
             self._ct[i] = pd.read_csv(ct)
@@ -50,9 +50,9 @@ class Flooding(object):
 
         inner = all(v is None for v in self.__init__.__code__.co_varnames[1:])
 
-        validate_tables_floodplains(inner=inner, **self._ct)
+        validate_tables_flooding(inner=inner, **self._ct)
 
-        # Set to true when the model is a combined niche - floodplains model
+        # Set to true when the model is a combined niche - flooding model
         self._combined = False
 
     @property
@@ -90,7 +90,7 @@ class Flooding(object):
 
     def _calculate(self, depth, frequency, duration, period):
         """
-        Low level calculation of a floodplains object.
+        Low level calculation of a flooding object.
         Uses a numpy array for depth rather than a grid file (in calculate)
         """
         orig_shape = depth.shape
