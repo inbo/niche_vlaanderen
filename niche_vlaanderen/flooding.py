@@ -275,7 +275,7 @@ class Flooding(object):
                 self._files_written[filename] = os.path.normpath(path)
 
     def combine(self, niche_result):
-        """Combines a FloodPlain model with a Niche model
+        """Combines a Flooding model with a Niche model
 
         Both models must be run prior to combining them. The niche model will
         act as a "mask" making areas where Niche predicts a vegetation type
