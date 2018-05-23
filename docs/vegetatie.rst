@@ -33,7 +33,7 @@ De standplaatsvereisten zitten vervat in 7 variabelen:
 
 De potenties voor vegetatie-ontwikkeling kunnen op twee manieren worden berekend: 
 
-- Enerzijds door het *volledige NICHE Vlaanderen model* (:doc:`full model <getting_started>`) te gebruiken, waarbij de berekende zuurgraad en trofie, het bodemtype en de gemiddelde laagste en hoogste grondwaterstanden mee de potenties bepalen;
+- Enerzijds door het *volledige NICHE Vlaanderen model* (`full model <https://inbo.github.io/niche_vlaanderen/getting_started.html#Running-a-full-Niche-model>`_) te gebruiken, waarbij de berekende zuurgraad en trofie, het bodemtype en de gemiddelde laagste en hoogste grondwaterstanden mee de potenties bepalen;
 - Anderzijds door een *afgeslankte/vereenvoudigde versie* (:ref:`simple model <simple>`) van NICHE Vlaanderen te gebruiken, waarbij enkel een aftoetsing aan de referentiewaarden gebeurt voor het bodemtype en de gemiddelde laagste en hoogste grondwaterstanden ter bepaling van de potenties.
 
 De aftoetsing aan beheer en overstromingsregime is optioneel in het volledige NICHE Vlaanderen model, en gebeurt niet in het vereenvoudigde model.
