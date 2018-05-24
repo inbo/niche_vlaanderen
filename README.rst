@@ -28,11 +28,16 @@ Het model is gebaseerd op een aantal voor de vegetatie bepalende standplaatsfact
 
 Dit project is een herontwikkeling van een bestaande ArcGIS plugin in Python, zonder externe non-open source dependencies.
 
-Licentie
-========
+License - Licentie
+===================
+
+This project is licensed under the MIT License, see  `LICENSE <https://github.com/inbo/niche-vlaanderen/blob/master/LICENSE>`_ for more information.
 
 Dit project maakt gebruik van de MIT Licentie, zie `LICENSE <https://github.com/inbo/niche-vlaanderen/blob/master/LICENSE>`_ voor meer informatie.
 
-Documentation
-=============
+Documentation - Documentatie
+=============================
+
 The documentation of this project is available at https://inbo.github.io/niche_vlaanderen/
+
+De documentatie van dit project kan geraadpleegd worden via https://inbo.github.io/niche_vlaanderen/
