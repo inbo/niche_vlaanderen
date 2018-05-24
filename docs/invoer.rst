@@ -7,7 +7,7 @@ NICHE Vlaanderen berekent de potenties voor vegetatietypes in een gebied op basi
 
 De betrouwbaarheid van de berekende potenties wordt sterk bepaald door de kwaliteit van de invoergegevens. Het is dan ook nodig te streven naar invoergegevens die de toestand (actueel of toekomstig) zo nauwkeurig mogelijk beschrijven. Hydrologische informatie (grondwaterstanden, overstromingen, kwel) speelt een cruciale rol, aangezien ze doorweegt in zowel de beslisregels als de berekening van potenties voor de vegetatietypen zelf.
 
-Alle invoerdatalagen dienen aangeleverd te worden als rasters (grids). Afhankelijk van de grootte van het studiegebied wordt een voorstel gedaan voor de rasterresolutie (afmetingen rastercel). Alle rasters dienen eenzelfde gebied af te dekken met eenzelfde resolutie. Ook het ruimtelijk referentiesysteem dient hetzelfde te zijn voor alle rasters. 
+Alle invoerdatalagen dienen aangeleverd te worden als rasters (grids). Afhankelijk van de grootte van het studiegebied wordt een voorstel gedaan voor de rasterresolutie (afmetingen rastercel). Om voldoende garantie te hebben op bruikbare NICHE resultaten wordt aangeraden om cellen van max 25*25m (idealiter kleiner) te gebruiken. Alle rasters dienen eenzelfde gebied af te dekken met eenzelfde resolutie. Ook het ruimtelijk referentiesysteem dient hetzelfde te zijn voor alle rasters. 
 
 Om NICHE Vlaanderen in al zijn toe te passen, kunnen 15 invoerrasters ingebracht worden. Twee hiervan zijn optioneel omdat ze een post-hoc aftoetsing inhouden van de berekende potenties naar compatibiliteit met :ref:`beheer<management_vegetation>` en :ref:`overstromingsregime<inundation_vegetation>`.
 
@@ -66,7 +66,10 @@ De NICHE bodemkaart speelt een rol:
 
 Brongegevens
 ------------
-Voor het aanmaken van deze ecologische NICHE bodemkaart kan er gebruik gemaakt worden van de Bodemkaart van België, van een gecorrigeerde bodemkaart (op basis van veldgegevens) of er kan gebruik gemaakt worden van een zelf aangemaakte bodemkaart. Er is een Vlaanderen dekkende NICHE bodemkaart voorhanden, waarin voor Vlaanderen de oorspronkelijke bodemcodes van de Belgische Bodemkaart werden omgezet naar de NICHE-codes via een bodemvertaalsleutel (Callebaut et al. 2007). Aan elke polygoon hangt dus de juiste NICHE bodemcode (zowel letter- als cijfercode). Deze NICHE bodemkaart is beschikbaar onder de vorm van `deze shapefile <https://drive.google.com/open?id=0BwApsnryHxkcQVRMWFdKRndRY1U>`_. Uit deze shapefile kan met gepaste GIS-bewerkingen het gewenste studiegebied geknipt worden en vervolgens verrasterd met de gewenste extent en resolutie.
+Voor het aanmaken van deze ecologische NICHE bodemkaart kan er gebruik gemaakt worden van de Bodemkaart van België, van een gecorrigeerde bodemkaart (op basis van veldgegevens) of er kan gebruik gemaakt worden van een zelf aangemaakte bodemkaart. Er is een Vlaanderen dekkende NICHE bodemkaart voorhanden, waarin voor Vlaanderen de oorspronkelijke bodemcodes van de Belgische Bodemkaart werden omgezet naar de NICHE-codes via een bodemvertaalsleutel (
+`Callebaut et al. 2007 <https://pureportal.inbo.be/portal/files/5370206/Callebaut_etal_2007_NicheVlaanderen.pdf>`_). Aan elke polygoon hangt dus de juiste NICHE bodemcode (zowel letter- als cijfercode). Deze NICHE bodemkaart is beschikbaar onder de vorm van `deze shapefile <https://drive.google.com/open?id=0BwApsnryHxkcQVRMWFdKRndRY1U>`_. Uit deze shapefile kan met gepaste GIS-bewerkingen het gewenste studiegebied geknipt worden en vervolgens verrasterd met de gewenste extent en resolutie.
+De procedure om eigen bodemgegevens of een eigen bodemkaart te gebruiken wordt beschreven in het NICHE rapport (
+`Callebaut et al. 2007 <https://pureportal.inbo.be/portal/files/5370206/Callebaut_etal_2007_NicheVlaanderen.pdf>`_, hoofdstukken 3.3 *Vertaalsleutel bodemkaart* en 3.4 *Vertaalsleutel bodemprofielen*, met een gedetailleerde beschrijving van de verschillende NICHE bodemtypen, en de procedure om codes van de Bodemkaart van België of profielbeschrijvingen om te zetten naar de NICHE-codes).
 
 Opmerkingen
 -----------
@@ -199,7 +202,7 @@ Veel kwel (is dus een onderdeel van de overeenkomende lagen voor “kwel”)
 
 Afhankelijk van de opbouw van het grondwatermodel kunnen alternatieve berekeningswijzen voorgesteld worden.
 
-Een belangrijk voordeel van het gebruik van een grondwatermodel is de mogelijkheid om naast een gebiedsdekkende weergave van de *actuele* kwelflux ook de impact van geplande ingrepen in de waterhuishouding door te rekenen in termen van *verwachte* kweldruk. Op die manier kan NICHE Vlaanderen gebruikt worden om voorspellingen van het voorkomen van vegetatietyepn te doen onder verschillende scenario's met elk hun set van geplande ingrepen.
+Een belangrijk voordeel van het gebruik van een grondwatermodel is de mogelijkheid om naast een gebiedsdekkende weergave van de *actuele* kwelflux ook de impact van geplande ingrepen in de waterhuishouding door te rekenen in termen van *verwachte* kweldruk. Op die manier kan NICHE Vlaanderen gebruikt worden om voorspellingen van het voorkomen van vegetatietypen te doen onder verschillende scenario's met elk hun set van geplande ingrepen.
 
 Opmerkingen
 -----------
@@ -221,7 +224,7 @@ Mogelijke waarden
 -----------------
  
 - 0: geen frequente overstroming met voedselrijk water;
-- 1: frequente (jaarlijkse of 2-jaarlijkse) overstroming met voedselrijk water)
+- 1: frequente (jaarlijkse of 2-jaarlijkse) overstroming met voedselrijk water
 
 Eenheid
 -------
@@ -259,8 +262,8 @@ Nominaal
 Mogelijke waarden
 -----------------
 
-- 0: geen frequente overstroming met voedselrijk water;
-- 1: frequente (jaarlijkse of 2-jaarlijkse) overstroming met voedselrijk water)
+- 0: geen frequente overstroming met basenrijk/mineraalrijk water;
+- 1: frequente (jaarlijkse of 2-jaarlijkse) overstroming met basenrijk/mineraalrijk water
 
 Eenheid
 -------
@@ -272,7 +275,7 @@ Dit binaire invoerraster stuurt mee de :doc:`berekening van de zuurgraad<zuur>` 
 
 Brongegevens
 ------------
-Men kan bestaande overstromingskaarten gebruiken, eventuele eigen karteringen, of de resultaten van een oppervlaktewatermodel. Bemerk dat het hier moet gaan om zeer frequente (i.e. jaarlijks of minstens 2-jaarlijks) overstromingen met bovendien voedselrijk water. Zoniet wordt er in NICHE Vlaanderen geen impact gekoppeld van overstromingen op de zuurgraad. In oppervlaktewatermodellen is er aan dergelijke korte retourperioden vaak een hoge mate van onzekerheid verbonden.
+Men kan bestaande overstromingskaarten gebruiken, eventuele eigen karteringen, of de resultaten van een oppervlaktewatermodel. Bemerk dat het hier moet gaan om zeer frequente (i.e. jaarlijks of minstens 2-jaarlijks) overstromingen met bovendien mineraalrijk water. Zoniet wordt er in NICHE Vlaanderen geen impact gekoppeld van overstromingen op de zuurgraad. In oppervlaktewatermodellen is er aan dergelijke korte retourperioden vaak een hoge mate van onzekerheid verbonden.
 
 Los van de invloed op de zuurgraad laat het NICHE Vlaanderen model ook toe om de potenties van vegetatietypen af te toetsen aan een inschatting van de overtromingstolerantie op zich (zie :ref:`inundation_vegetation`). Dat is optioneel en houdt een sterke vereenvoudiging van de werkelijke impact van overstromingen in. In de meer uitgebreide :doc:`overstromingsmodule<overstroming>` is het mogelijk om de voorspelde potenties volgens NICHE Vlaanderen bijkomend te confronteren met meer gedetailleerde gebiedsinformatie over overstromingen (frequentie, duur, tijdstip, diepte).
 
@@ -423,7 +426,7 @@ Rol in model
 ------------
 In NICHE Vlaanderen heeft het gevoerde beheer een impact op twee niveaus.
 
-Enerzijds heeft het een effect op de :doc:`trofiegraad<trofie>`: die daalt met één eenheid/klasse als het beheer hoogfrequent is (maaien met afvoer van maaisel). Het (verplichte) invoerraster draagt dus *onrechtstreeks* bij tot de potentieberekeningen voor de verschillende vegetatietypen in het NICHE Vlaanderen model.
+Enerzijds heeft het een effect op de :doc:`trofiegraad<trofie>`: als het beheer hoogfrequent is (maaien met afvoer van maaisel) verschuiven de grenzen tussen de trofieklassen en kan een bepaalde locatie meer stikstof tolereren vooraleer de biomassaproductie/trofiegraad toeneemt. Het (verplichte) invoerraster draagt dus *onrechtstreeks* bij tot de potentieberekeningen voor de verschillende vegetatietypen in het NICHE Vlaanderen model.
 
 Anderzijds kunnen de berekende potenties voor elk van de vegetatietypen finaal ook afgetoetst worden op basis van hun compatibiliteit met het gevoerde of te voeren beheer. In tegenstelling tot de onrechtstreekse bijdrage van het beheer via de trofiegraad, werkt het beheer dan *rechtstreeks* in op de potentievoorspellingen. Want hoewel de standplaats abiotisch perfect geschikt kan zijn voor een bepaald vegetatietype, is het immers mogelijk dat het nooit aanwezig kan zijn als het gevoerde of te voeren beheer het voortbestaan of de ontwikkeling ervan in de weg staat. Zo kunnen bostypen zich bijvoorbeeld niet ontwikkelen als er (jaarlijks) gemaaid wordt, of kunnen graslanden niet standhouden op plaatsen zonder een maaibeheer. De compatibiliteit van elk vegetatietype met de verschillende onderscheiden beheerklassen zit vervat in de `referentietabel van NICHE Vlaanderen <https://github.com/INBO/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_vegetation.csv>`_. Merk op dat deze rechtstreekse aftoetsing van de berekende potenties aan het beheer een *optionele* stap is in NICHE Vlaanderen: de aftoetsing gebeurt enkel als het invoerraster :ref:`management_vegetation` (dat inhoudelijk identiek is aan het hier besproken invoerraster) expliciet wordt gespecifieerd. Wordt deze laatste niet gespecifieerd, dan worden de potenties berekend zonder de rechtstreekse impact van het actueel gevoerde of het toekomstig beheer, dus louter op basis van de abiotische eigenschappen van de standplaats.
 
@@ -433,7 +436,7 @@ Idealiter is het beheer van elk perceel in het studiegebied gedocumenteerd en ka
 
 Opmerkingen
 -----------
-De grens waarmee onderscheid gemaakt wordt tussen hoog- en laagfrequent beheer is niet expliciet gedefinieerd. Belangrijk is om de rol van dit invoerraster in het achterhoofd te houden, met name het verlagen van de berekende trofiegraad met één klasse als het beheer als hoogfrequent wordt beschouwd. Een verlaging van de trofie is enkel gerechtvaardigd als bij het beheer effectief nutriënten afgevoerd worden. Bij maaien, kappen of andere beheeringrepen impliceert dit het afvoeren van het beheerresidu (maaisel, hout, plaggen, etc). Hoogfrequent houdt bovendien een jaarlijks of tweejaarlijks beheer in. Ingrepen met een lagere frequentie worden veelal als laagfrequent aangeduid. Veel cyclisch beheer valt hieronder.
+De grens waarmee onderscheid gemaakt wordt tussen hoog- en laagfrequent beheer is niet expliciet gedefinieerd. Belangrijk is om de rol van dit invoerraster in het achterhoofd te houden, met name het verlagen van de berekende trofiegraad als het beheer als hoogfrequent wordt beschouwd. Een verlaging van de trofie is enkel gerechtvaardigd als bij het beheer effectief nutriënten afgevoerd worden. Bij maaien, kappen of andere beheeringrepen impliceert dit het afvoeren van het beheerresidu (maaisel, hout, plaggen, etc). Hoogfrequent houdt bovendien een jaarlijks of tweejaarlijks beheer in. Ingrepen met een lagere frequentie worden veelal als laagfrequent aangeduid. Veel cyclisch beheer valt hieronder.
 
 .. _minerality:
 
