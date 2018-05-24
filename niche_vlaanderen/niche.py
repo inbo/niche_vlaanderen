@@ -302,16 +302,16 @@ class Niche(object):
                 for k in keys:
                     ct_nl[k] = self._code_tables[k]
 
-                self.fp = Flooding(name=scen["name"], **ct_nl)
+                fp = Flooding(name=scen["name"], **ct_nl)
 
                 depth_file = os.path.join(os.path.dirname(config),
                                           scen["depth"])
 
-                self.fp.calculate(depth_file=depth_file,
+                fp.calculate(depth_file=depth_file,
                                   period=scen["period"],
                                   frequency=scen["frequency"],
                                   duration=scen["duration"])
-                self.fp.combine(self)
+                self.fp = fp.combine(self)
                 if "output_dir" in self._options:
                     self.fp.write(self._options["output_dir"], overwrite)
                     self._files_written.update(self.fp._files_written)
