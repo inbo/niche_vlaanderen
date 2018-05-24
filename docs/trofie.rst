@@ -119,7 +119,7 @@ Daar wordt de stikstofmineralisatie bepaald met de bodemcode en de min en max wa
   
 Bij het gebruik van deze codetabel wordt de bovengrens van elke GVG-categorie meegenomen in de categorie, maar niet de ondergrens: een GVG van 35 cm onder maaiveld resulteert in een stikstofmineralisatie van 75 kg N/jaar terwijl een GVG van 30 cm onder maaiveld met een mineralisatie van 67 kg N/jaar overeenkomt.
 
-Als reële getallen voor de GVG worden gebruikt worden de waarden afgerond op 2 decimalen, d.w.z. 30.005 zal 30.01 cm(> 30, mineralisatie 75 kg N/jaar) worden en 30.004 zal 30.00 cm (= 30, mineralisatie 67 kg N/jaar) worden.
+Als reële getallen voor de GVG worden gebruikt worden de waarden afgerond op 2 decimalen, d.w.z. 30.005 zal 30.01 cm (> 30, mineralisatie 75 kg N/jaar) worden en 30.004 zal 30.00 cm (= 30, mineralisatie 67 kg N/jaar) worden.
 
 Bepaling totale stikstof
 ------------------------
