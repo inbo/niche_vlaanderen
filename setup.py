@@ -29,7 +29,7 @@ setup(name='niche_vlaanderen',
     install_requires=requirements,
     packages=['niche_vlaanderen'],
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: MIT License',
     "Programming Language :: Python :: 2",
