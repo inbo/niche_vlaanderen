@@ -31,7 +31,7 @@ Op deze website wordt niet alleen de werking van het :doc:`NICHE Vlaanderen mode
 Doelgroep
 =========
 
-Enige vertrouwdheid met modelbouw, python code , gis (raster) en last but not least het ecologische functioneren van de verschillende vegetatietypen strekt tot aanbeveling als je aan de slag wilt met de programmacode. In die optiek bestaat de primaire doelgroep uit **thematische experten** van studiebureaus, openbare instellingen of niet gouvernementele organisaties. 
+Enige vertrouwdheid met modelbouw, Python code, gis (raster) en last but not least het ecologische functioneren van de verschillende vegetatietypen strekt tot aanbeveling als je aan de slag wilt met de programmacode. In die optiek bestaat de primaire doelgroep uit **thematische experten** van studiebureaus, openbare instellingen of niet gouvernementele organisaties. 
 De modelresultaten moeten immers steeds met een kritisch oog bekeken worden en getoetst aan de realiteit (:doc:`kalibratie<kalibratie>`), vooraleer extrapolaties/simulaties van toekomstige ingrepen op de standplaatscondities modelmatig ingeschat worden.
 
 Opbouw van de website

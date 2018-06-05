@@ -19,7 +19,7 @@ De figuur hieronder geeft een overzicht van de verschillende inputgegevens en st
 Berekening standplaatscondities 
 ==================================
 
-Eerst worden de standplaatscondities :doc:`zuurgraad <zuur>` (pH) en :doc:`trofie <trofie>` aan de hand van beslisregels berekend op basis van verschillende kenmerken met betrekking tot de waterhuishouding (overstroming, grondwaterstanden, kwel, ...), bodem en landgebruik (bemesting, beheer, ...).  Deze (optionele) stap (in bovenstaande figuur in het geel aangeduid) genereert twee vereenvoudigde rasterkaarten die de zuur- en trofiegraad van de standplaats beschrijven. In een afgeslankte versie van het model (zie verder) wordt deze stap overgeslagen.
+Eerst worden de standplaatscondities :doc:`zuurgraad <zuur>` (pH) en :doc:`trofie <trofie>` aan de hand van beslisregels berekend op basis van verschillende kenmerken met betrekking tot de waterhuishouding (overstroming, grondwaterstanden, kwel, ...), bodem en landgebruik (bemesting, beheer, ...).  Deze (optionele) stap (in bovenstaande figuur in het geel aangeduid) genereert twee vereenvoudigde rasterkaarten die de zuur- en trofiegraad van de standplaats beschrijven. In een :ref:`afgeslankte versie<simple>` van het model wordt deze stap overgeslagen.
 
 Berekening potenties voor vegetatie-ontwikkeling 
 ===================================================
@@ -30,7 +30,7 @@ gebaseerd op veldwaarnemingen waaruit de standplaatscondities van de verschillen
 De potenties voor vegetatie-ontwikkeling kunnen op twee manieren worden berekend: 
 
 - Enerzijds door het *volledige NICHE Vlaanderen model* (:doc:`full model <getting_started>`) te gebruiken, waarbij de berekende zuurgraad en trofie, het bodemtype en de gemiddelde laagste en hoogste grondwaterstanden mee de potenties bepalen (inputlagen in het geel en in het groen in bovenstaande figuur);
-- Anderzijds door een *afgeslankte/vereenvoudigde versie* (:doc:`simple model <getting_started>`) van NICHE Vlaanderen te gebruiken, waarbij enkel een aftoetsing aan de referentiewaarden voor het bodemtype en de karakteristieke grondwaterstanden (gxg) gebeurt (enkel inputlagen in het groen in bovenstaande figuur) ter bepaling van de potenties.
+- Anderzijds door een *afgeslankte/vereenvoudigde versie* (:ref:`simple`) van NICHE Vlaanderen te gebruiken, waarbij enkel een aftoetsing aan de referentiewaarden voor het bodemtype en de karakteristieke grondwaterstanden (gxg) gebeurt (enkel inputlagen in het groen in bovenstaande figuur) ter bepaling van de potenties.
 
 Optioneel kunnen de berekende potenties dan nog verder beperkt worden naargelang de :ref:`beheersintensiteit<management_vegetation>` 
 of :ref:`overstromingsfrequentie<inundation_vegetation>` (figuur hierboven, in het blauwgrijs). Vegetatietypen die geen zuurstoftekort verdragen kunnen bv. niet voorkomen op frequent overstroomde locaties, of een bostype kan zich niet ontwikkelen in zones die regelmatig gemaaid worden.
@@ -50,7 +50,4 @@ Vooraleer eventuele scenarioberekeningen kunnen worden uitgevoerd, moet het mode
 *Referentie*
 *Callebaut J., De Bie E., De Becker P., Huybrechts W (2007). NICHE Vlaanderen. Rapporten van het Instituut voor Natuur en Bosonderzoek INBO.R.2007.3. SVW, 1-7*
 `Rapport <https://pureportal.inbo.be/portal/files/5370206/Callebaut_etal_2007_NicheVlaanderen.pdf>`_
-
-
-
 
