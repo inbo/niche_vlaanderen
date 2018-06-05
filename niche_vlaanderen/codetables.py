@@ -151,7 +151,7 @@ def validate_tables_vegetation(ct_vegetation, ct_soil_code, ct_inundation,
 
 
 def validate_tables_flooding(depths, duration, frequency, lnk_potential,
-                                potential, inner):
+                             potential, inner):
     # test disabled as we have a 0 code which is not in lnk_potential
     # check_join(lnk_potential, depths, "depth","code")
     check_join(lnk_potential, duration, "duration", "code", inner)

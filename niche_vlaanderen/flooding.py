@@ -205,7 +205,7 @@ class Flooding(object):
 
         return ax
 
-    def write(self, folder, overwrite_files = False):
+    def write(self, folder, overwrite_files=False):
         """ Writes the floodplain grids to grid files.
 
          The differences are coded using the values specified in the

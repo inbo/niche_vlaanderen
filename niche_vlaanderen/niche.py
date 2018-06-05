@@ -308,9 +308,9 @@ class Niche(object):
                                           scen["depth"])
 
                 fp.calculate(depth_file=depth_file,
-                                  period=scen["period"],
-                                  frequency=scen["frequency"],
-                                  duration=scen["duration"])
+                             period=scen["period"],
+                             frequency=scen["frequency"],
+                             duration=scen["duration"])
                 self.fp = fp.combine(self)
                 if "output_dir" in self._options:
                     self.fp.write(self._options["output_dir"], overwrite)
