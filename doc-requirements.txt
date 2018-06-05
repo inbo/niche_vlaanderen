@@ -1,5 +1,5 @@
 Sphinx==1.7.5
 nbsphinx==0.3.3
 jupyter_client==5.2.3
-ipykernel
+ipykernel==4.8.2
 sphinx_rtd_theme
