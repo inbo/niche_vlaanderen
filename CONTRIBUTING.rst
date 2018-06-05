@@ -40,7 +40,7 @@ Write Documentation
 
 niche_vlaanderen could always use more documentation, whether as part of the
 official niche_vlaanderen docs, in docstrings, or even on the web in blog posts,
-articles, and such.
+articles, and such. Note that on every documentation page there is a small "edit on Github" link in the top right - if you catch small errors, please suggest improvements.
 
 Submit Feedback
 ~~~~~~~~~~~~~~~
@@ -133,19 +133,6 @@ After which you should be able to generate HTML output by typing ``make html`` f
 
 Publishing on the documentation website (https://inbo.github.io/niche_vlaanderen/ ) will happen when changes
 to master build correctly (under travis). Note that this may mean that the documentation is actually a bit more recent than the last released version.
-
-Coding guidelines
-~~~~~~~~~~~~~~~~~
-
-
-Running unit tests
-~~~~~~~~~~~~~~~~~~
-
-
-To run a subset of tests::
-
-$ py.test tests.test_niche
-
 
 .. _reStructuredText: http://docutils.sourceforge.net/rst.html
 .. _sphinx: http://www.sphinx-doc.org/en/master/

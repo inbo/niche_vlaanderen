@@ -9,7 +9,7 @@ The recommended way of installing niche on windows uses miniconda_ for installat
 The recommended version is `64 bit with Python 3.6`__, though 32 bit and Python 2.7 should work as well.
 
 __ https://repo.continuum.io/miniconda/Miniconda3-latest-Windows-x86_64.exe
-.. _miniconda: https://conda.io/miniconda.html
+.. _Miniconda: https://conda.io/miniconda.html
 
 The installation can proceed without administrator rights, keep the default options. After miniconda is installed,
 we will proceed installing niche_vlaanderen in its own environment.
