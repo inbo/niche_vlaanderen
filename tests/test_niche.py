@@ -304,6 +304,11 @@ class TestNiche(TestCase):
 
         myniche.run(abiotic=True)
 
+        # The next run should raise a warning as abiotic grids are added but
+        # not used
+        with pytest.warns(UserWarning):
+            myniche.run(abiotic=False)
+
     def test_rereadoutput(self):
         """
         This tests checks if the output written by the model is a valid input
@@ -339,6 +344,8 @@ class TestNiche(TestCase):
         # we try to overwrite using a non existing codetable
         with pytest.raises(NicheException):
             myniche._set_ct("ct_vegetation", "nonexisting")
+
+        assert myniche._vegcode2name(1) == "Sphagno-Betuletum"
 
     def test_repr(self):
         myniche = self.create_small()

@@ -453,7 +453,7 @@ class Niche(object):
         if not abiotic and (
                 (_abiotic_keys & set(self._inputfiles.keys()))
                 or (_abiotic_keys & set(self._inputvalues.keys()))):
-            self._log.warning(
+            warnings.warn(
                 "abiotic inputs specified but not specified in model options\n"
                 "abiotic inputs will not be used")
 

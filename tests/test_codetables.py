@@ -60,6 +60,21 @@ class TestCodeTables(TestCase):
         with pytest.raises(CodeTableException):
             check_join(df1, df1, "soil_code", "soil_group")
 
+    def test_inner_join2(self):
+        '''
+
+        The previous test only check whether two completely separate
+        codes raise - this test checks for partly overlapping sets.
+        '''
+        df1 = pd.read_csv("tests/data/bad_ct/one_vegetation.csv")
+        df2 = pd.read_csv("niche_vlaanderen/system_tables/niche_vegetation.csv")
+
+        with pytest.raises(CodeTableException):
+            check_join(df2, df1, "veg_code", "veg_code", inner=False)
+        with pytest.warns(UserWarning):
+            check_join(df1, df2, "veg_code", "veg_code", inner=False)
+
+
     def test_unique_mlw(self):
         badveg = "tests/data/bad_ct/differentmlw.csv"
         with pytest.raises(CodeTableException):
