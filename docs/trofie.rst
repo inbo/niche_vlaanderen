@@ -45,6 +45,10 @@ Deze wordt omgezet in een *trofieklasse* rekening houdend met het bodemtype en h
 * de grenzen tussen de trofieklassen variëren naargelang het bodemtype;
 * als een hoogfrequent beheer wordt toegepast, verschuiven de grenzen tussen de trofieklassen: een gegeven trofieklasse komt dan overeen met een hogere stikstofhoeveelheid (of met andere woorden: een bepaalde locatie kan meer stikstof tolereren vooraleer de biomassaproductie/trofiegraad toeneemt).
 
+.. image:: _static/png/nutrient_classes.png
+   :width: 500px
+   :height: 250px
+
 Op de locaties met oligotrofe, mesotrofe en meso-eutrofe condities wordt uiteindelijk nog rekening gehouden met de gevolgen van eventuele overstromingen:
 indien er zich overstromingen met nutriëntenrijk water voordoen, wordt er in NICHE Vlaanderen aangenomen dat de nutriëntenrijkdom daardoor met een trofieklasse (extra) toeneemt.
 
