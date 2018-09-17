@@ -35,8 +35,7 @@ Eerst wordt de *jaarlijkse stikstofmineralisatie* bepaald aan de hand van het bo
 De stikstofmineralisatie wordt afgeleid uit de volgende mineralisatiecurven:
 
 .. image:: _static/png/nutrient_mineralcurve.png
-   :width: 500px
-   :height: 250px
+     :scale: 100%
 
 De *totale hoeveelheid stikstof* wordt vervolgens berekend als de som van de mineralisatie, atmosferische depositie en bemesting.
 
