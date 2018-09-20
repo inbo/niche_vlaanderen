@@ -28,7 +28,7 @@ before_install:
 
 install:
   - pip install rasterio==$RASTERIO_VERSION
-  - pip install --use-wheel -r dev-requirements.txt
+  - pip install -r dev-requirements.txt
   - pip install coveralls
   - pip install .
 
