@@ -11,7 +11,7 @@ Niche Vlaanderen
 .. image:: https://zenodo.org/badge/102339389.svg
    :target: https://zenodo.org/badge/latestdoi/102339389
 
-(Nederlandstalige versie hieronder / Dutch version below )
+(Nederlandstalige versie hieronder / Dutch version below)
 
 NICHE Vlaanderen (*Nature Impact Assessment of Changes in Hydro-Ecological Systems*) is a **hydro-ecological model** that predicts the potential occurrence of (ground)water-dependent vegetation types in an area based on information about the (abiotic) site conditions. NICHE Vlaanderen can be used to evaluate the impact of changes in the water management to groundwater-dependent vegetation.
 
