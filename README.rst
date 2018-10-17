@@ -1,6 +1,7 @@
 ################
 Niche Vlaanderen
 ################
+
 .. image:: https://travis-ci.org/inbo/niche_vlaanderen.png?branch=master
     :target: https://travis-ci.org/inbo/niche_vlaanderen
 .. image:: https://ci.appveyor.com/api/projects/status/028oj3tv7juuia8e?png=true
