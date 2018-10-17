@@ -1,7 +1,6 @@
 ################
 Niche Vlaanderen
 ################
-
 .. image:: https://travis-ci.org/inbo/niche_vlaanderen.png?branch=master
     :target: https://travis-ci.org/inbo/niche_vlaanderen
 .. image:: https://ci.appveyor.com/api/projects/status/028oj3tv7juuia8e?png=true
@@ -10,7 +9,6 @@ Niche Vlaanderen
     :target: https://coveralls.io/github/inbo/niche_vlaanderen?branch=master
 .. image:: https://zenodo.org/badge/102339389.svg
    :target: https://zenodo.org/badge/latestdoi/102339389
-
 
 (Nederlandstalige versie hieronder / Dutch version below)
 
