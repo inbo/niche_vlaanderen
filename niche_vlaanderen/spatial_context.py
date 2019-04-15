@@ -134,9 +134,9 @@ class SpatialContext(object):
         dgx = (~self.transform)[2] - (~new_sc.transform)[2]
         dgy = (~self.transform)[5] - (~new_sc.transform)[5]
 
-        # if this differences are not integer numbers, cells do not overlap
-        # we 0.01 m
-        if abs(dgx - round(dgx)) > 0.01 or abs(dgy - round(dgy)) > 0.01:
+        # if these differences are not integer numbers, cells do not overlap
+        # we allow a difference of 0.01 m
+        if (abs(dgx - round(dgx)) > 0.01) or (abs(dgy - round(dgy)) > 0.01):
             print("cells do not overlap")
             print(dgx, dgy)
             return False
