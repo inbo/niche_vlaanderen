@@ -1,5 +1,5 @@
 -r requirements.txt
 pytest==4.4.0
 pytest-cov==2.6.1
-wheel==0.31.1
+wheel==0.33.1
 matplotlib==2.2.2
