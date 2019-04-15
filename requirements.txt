@@ -1,5 +1,5 @@
 pandas==0.23.0
-numpy==1.14.3
+numpy==1.16.2
 rasterio==0.36.0
 pyyaml==3.12
 rasterstats==0.12.1
