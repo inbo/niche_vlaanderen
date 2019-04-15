@@ -122,11 +122,13 @@ class SpatialContext(object):
 
         Overlapping SpatialContexts can be used to intersect (set_overlap) or
         can be used to define a read window.
+
+        A maximal offset of 1cm (0.01m) is allowed.
         """
-        if not ((self.transform[0] == new_sc.transform[0])
+        if not ((abs(self.transform[0] - new_sc.transform[0]) < 0.01)
                 and (self.transform[1] == new_sc.transform[1])
                 and (self.transform[3] == new_sc.transform[3])
-                and (self.transform[4] == new_sc.transform[4])):
+                and (abs(self.transform[4] - new_sc.transform[4]) < 0.01)):
             print("error: different grid size or orientation")
             return False
 
