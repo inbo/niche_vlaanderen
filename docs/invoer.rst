@@ -151,9 +151,9 @@ Omschrijving
 De kwelkaart is een kaart die aangeeft welke kwelflux in iedere cel van toepassing is.
 Hoewel deze kaart in principe bestaat uit continue waarden, maakt NICHE Vlaanderen gebruik van de volgende omslagpunten in de beslisregels van het model:
 
- * kwel < -1 mm/dag veel kwel
- * kwel -1 - -0.1 mm/dag weinig kwel
- * kwel > 0.1 mm/dag geen kwel
+ * kwel < -1 mm/dag: veel kwel
+ * kwel -1 - -0.1 mm/dag: weinig kwel
+ * kwel > -0.1 mm/dag: geen kwel
  
 Negatieve waarden worden gebruikt voor plaatsen waar grondwater uittreedt, positieve waarden
 duiden op infiltratie.
