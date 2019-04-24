@@ -215,7 +215,7 @@ class Niche(object):
                the class has been initialized).
         """
         with open(config, 'r') as stream:
-            config_loaded = yaml.load(stream)
+            config_loaded = yaml.safe_load(stream)
 
         if overwrite_ct and "code_tables" in config_loaded.keys():
             for k in config_loaded['code_tables'].keys():
@@ -272,7 +272,7 @@ class Niche(object):
 
         # Set input values
         with open(config, 'r') as stream:
-            config_loaded = yaml.load(stream)
+            config_loaded = yaml.safe_load(stream)
 
         # We catch the deprecation warning of inspect.getargspec
         # When we only support Python 3 it should be switched to
