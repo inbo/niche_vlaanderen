@@ -2,4 +2,4 @@
 pytest
 pytest-cov
 wheel
-matplotlib
+matplotlib==3.0.3
