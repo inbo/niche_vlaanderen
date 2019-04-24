@@ -2,4 +2,4 @@ Sphinx
 nbsphinx
 jupyter_client
 ipykernel
-sphinx_rtd_theme
+sphinx_rtd_theme==0.4.3
