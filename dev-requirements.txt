@@ -1,5 +1,5 @@
 -r requirements.txt
 pytest
 pytest-cov
-wheel
+wheel==0.33.1
 matplotlib
