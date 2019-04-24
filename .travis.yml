@@ -1,5 +1,6 @@
 language: python
 sudo: false
+dist: xenial
 cache:
   directories:
     - ~/.cache/pip
