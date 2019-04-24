@@ -2,4 +2,4 @@ pandas
 numpy
 rasterio
 pyyaml
-rasterstats
+rasterstats==0.13.1
