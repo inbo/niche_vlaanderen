@@ -12,7 +12,7 @@ matrix:
 env:
   matrix:
     - RASTERIO_VERSION=0.36.0
-    - RASTERIO_VERSION=1.0.2 # error in later wheel versions, see https://github.com/mapbox/rasterio/issues/1673
+    - RASTERIO_VERSION=1.0.22
   global:
     - PIP_WHEEL_DIR=$HOME/.cache/pip/wheels
     - PIP_FIND_LINKS=file://$HOME/.cache/pip/wheels
