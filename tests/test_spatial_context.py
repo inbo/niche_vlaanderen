@@ -33,10 +33,21 @@ class testSpatialContext(TestCase):
             "+lat_2=49.8333339 +lon_0=4.367486666666666 +no_defs +proj=lcc " \
             "+towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422," \
             "-1.2747 +units=m +x_0=150000.013 +y_0=5400088.438"
-        if sys.version_info > (3, 0):
-            self.assertEqual(exp3, small_sc.__repr__())
-        else:
-            self.assertEqual(exp2, small_sc.__repr__())
+        # As of proj 6, the projection is given in a different format
+        exp6 = exp + \
+            'Projection: PROJCS["Lambert_Conformal_Conic",' \
+            'GEOGCS["GCS",DATUM["Datum",' \
+            'SPHEROID["intl",6378388.0,297],TOWGS84[-106.8686,52.2978,' \
+            '-103.7239,0.3366,-0.457,1.8422,-1.2747]],PRIMEM["Greenwich",0],' \
+            'UNIT["degree",0.01745329251994328]],' \
+            'PROJECTION["Lambert_Conformal_Conic_2SP"],' \
+            'PARAMETER["standard_parallel_1",51.16666723333333],' \
+            'PARAMETER["standard_parallel_2",49.8333339],' \
+            'PARAMETER["latitude_of_origin",90],' \
+            'PARAMETER["central_meridian",4.367486666666666],' \
+            'PARAMETER["false_easting",150000.013],' \
+            'PARAMETER["false_northing",5400088.438],UNIT["Meter",1]]'
+        self.assertIn(small_sc.__repr__(), [exp2, exp3, exp6])
 
     def test_check_overlap(self):
 
