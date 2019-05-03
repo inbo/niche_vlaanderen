@@ -1,6 +1,13 @@
 from affine import Affine
 from textwrap import dedent
+import sys
 import warnings
+
+
+if sys.version_info[0] == 3:
+    string_types= str
+else:
+    string_types = basestring
 
 
 class SpatialContextError(Exception):
@@ -41,7 +48,7 @@ class SpatialContext(object):
         # only occurs on Python 2
         if dst.crs is None:  # pragma: no cover
             self.crs = ""
-        elif isinstance(dst.crs, str):
+        elif isinstance(dst.crs, string_types):
             self.crs = dst.crs
         else:
             self.crs = dst.crs.to_string()
