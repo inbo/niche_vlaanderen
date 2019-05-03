@@ -3,39 +3,35 @@ environment:
     - PYTHON_VERSION: "3.6"
       PYTHON_ARCH: "64"
       CONDA_PY: "36"
-      CONDA_INSTALL_LOCN: "C:\\Miniconda36-x64"
-      RASTERIO_CONDA: "-c conda-forge/label/dev rasterio"
+      MINICONDA: "C:\\Miniconda3-x64"
     - PYTHON_VERSION: "3.5"
       PYTHON_ARCH: "64"
       CONDA_PY: "35"
-      CONDA_INSTALL_LOCN: "C:\\Miniconda35-x64"
-      RASTERIO_CONDA: "rasterio"
-    - PYTHON_VERSION: "3.6"
+      MINICONDA: "C:\\Miniconda3-x64"
+    - PYTHON_VERSION: "3.7"
       PYTHON_ARCH: "64"
-      CONDA_PY: "36"
-      CONDA_INSTALL_LOCN: "C:\\Miniconda36-x64"
-      RASTERIO_CONDA: "rasterio"
+      CONDA_PY: "37"
+      MINICONDA: "C:\\Miniconda3-x64"
     - PYTHON_VERSION: "2.7"
       PYTHON_ARCH: "32"
       CONDA_PY: "27"
-      CONDA_INSTALL_LOCN: "C:\\Miniconda"
-      RASTERIO_CONDA: "rasterio"
+      MINICONDA: "C:\\Miniconda"
 
 install:
     # Use the pre-installed Miniconda for the desired arch
-    - call %CONDA_INSTALL_LOCN%\Scripts\activate.bat
+    - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%" 
     - conda update -y -q conda
-    - conda config --system --add pinned_packages defaults::conda
+      # restore conda links https://github.com/conda/conda/issues/7144
     - conda create --name niche_env -y -q python=%PYTHON_VERSION%
     - activate niche_env
     - conda config --add channels conda-forge
-    - conda install -y -q %RASTERIO_CONDA% fiona pandas
+    - conda install -y -q rasterio fiona pandas
     - pip install --no-cache-dir -r dev-requirements.txt
 
 build: false
 
 test_script:
-    - call %CONDA_INSTALL_LOCN%\Scripts\activate.bat
+    - call %MINICONDA%\Scripts\activate.bat
     - activate niche_env   
       # note we use an env to make sure GDAL_DATA is correctly set
       # we must do this again after installation because setting the variable is
@@ -44,7 +40,7 @@ test_script:
 
 # uncomment to debug appveyor (login to vm)
 # init:
-#   - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+#  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 # 
 # on_finish:
 #   - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
