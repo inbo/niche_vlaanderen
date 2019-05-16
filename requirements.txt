@@ -1,5 +1,5 @@
 pandas
 numpy
-rasterio
+rasterio==1.0.23
 pyyaml
 rasterstats
