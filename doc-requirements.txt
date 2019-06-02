@@ -1,4 +1,4 @@
-Sphinx
+Sphinx==2.1.0
 nbsphinx
 jupyter_client
 ipykernel
