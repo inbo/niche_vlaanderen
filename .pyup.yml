@@ -8,9 +8,9 @@ requirements:
   - requirements.txt:
       pin: False
       update: insecure
-  - dev-requirements.txt
+  - dev-requirements.txt:
       pin: True
       update: insecure  
-  - doc-requirements.txt
+  - doc-requirements.txt:
       pin: True
       update: insecure
