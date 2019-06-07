@@ -1,5 +1,5 @@
 pandas
 numpy
 rasterio
-pyyaml
+pyyaml==5.1.1
 rasterstats
