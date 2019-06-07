@@ -1,1 +1,16 @@
-Default Branch: version-check
+# target the master branch
+branch: master
+
+# only check it once a month
+schedule: "every month"
+
+requirements:
+  - requirements.txt:
+      pin: False
+      update: insecure
+  - dev-requirements.txt
+      pin: True
+      update: insecure  
+  - doc-requirements.txt
+      pin: True
+      update: insecure
