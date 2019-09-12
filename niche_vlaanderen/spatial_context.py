@@ -214,9 +214,9 @@ class SpatialContext(object):
             )
 
         # Get minimum and maximum position in the new grid system
-        gminxy = (~new_sc.transform) * ((0, 0) * self.transform)
-        gmaxxy = (~new_sc.transform) * (
-            (self.width, self.height) * self.transform)
+        gminxy = ~new_sc.transform *  self.transform * (0, 0)
+        gmaxxy = (~new_sc.transform) * self.transform *\
+                  (self.width, self.height)
 
         # we can safely round here because we checked overlap before
         # (differences are smaller than the tolerance
