@@ -16,6 +16,9 @@ from .flooding import Flooding
 from .exception import NicheException
 
 from pkg_resources import resource_filename
+import json
+from pkg_resources import parse_version
+from urllib.request import urlopen
 
 import logging
 import os.path
@@ -93,6 +96,8 @@ class Niche(object):
         self._context = None
         self.occurrence = None
 
+        self._latest_version = self._check_latest_version()
+
         for k in _code_tables:
             ct = locals()[k]
             if ct is not None:
@@ -108,6 +113,7 @@ class Niche(object):
 
     def __repr__(self):
         s = "# Niche Vlaanderen version: {}\n".format(__version__)
+        s += self._latest_version + '\n'
         s += "# Run at: {}\n\n".format(datetime.datetime.now())
         # Also add some versions of the major packages we use - easy for
         # debugging
@@ -150,6 +156,24 @@ class Niche(object):
             s += indent(
                 yaml.dump(self._files_written, default_flow_style=False), "  ")
 
+        return s
+
+    def _check_latest_version(self):
+        url = 'https://pypi.python.org/pypi/niche_vlaanderen/json'
+        try:
+            with urlopen(url, timeout=5) as response:
+                json_response = json.loads(response.read())
+                releases = json_response['releases']
+                v = sorted(releases, key=parse_version, reverse=True)
+                last = v[0]
+
+                if last == __version__:
+                    s = '# Using latest niche_vlaanderen  %s' % __version__
+                else:
+                    s = '# Newer niche_vlaanderen  %s available' % last
+        except:
+            raise
+            s = "# Error determinining last upstream version"
         return s
 
     def _set_ct(self, key, value):
