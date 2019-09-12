@@ -18,7 +18,7 @@ from .exception import NicheException
 from pkg_resources import resource_filename
 import json
 from pkg_resources import parse_version
-from urllib.request import urlopen
+from six.moves.urllib.request import urlopen
 
 import logging
 import os.path
@@ -161,16 +161,16 @@ class Niche(object):
     def _check_latest_version(self):
         url = 'https://pypi.python.org/pypi/niche_vlaanderen/json'
         try:
-            with urlopen(url, timeout=5) as response:
-                json_response = json.loads(response.read())
-                releases = json_response['releases']
-                v = sorted(releases, key=parse_version, reverse=True)
-                last = v[0]
+            response = urlopen(url, timeout=5)
+            json_response = json.loads(response.read().decode('utf-8'))
+            releases = json_response['releases']
+            v = sorted(releases, key=parse_version, reverse=True)
+            last = v[0]
 
-                if last == __version__:
-                    s = '# Using latest niche_vlaanderen  %s' % __version__
-                else:
-                    s = '# Newer niche_vlaanderen  %s available' % last
+            if last == __version__:
+                s = '# Using latest niche_vlaanderen  %s' % __version__
+            else:
+                s = '# Newer niche_vlaanderen  %s available' % last
         except:
             raise
             s = "# Error determinining last upstream version"
