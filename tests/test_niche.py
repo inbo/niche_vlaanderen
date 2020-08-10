@@ -108,7 +108,26 @@ class TestNiche(TestCase):
         else:
             self.assertCountEqual(expected_files, dir)
 
+        # run check after predefined acidity
+        myniche = self.create_zwarte_beek_niche()
+        myniche.set_input("acidity", tmpdir+'/acidity.tif')
+        myniche.run()
+
+        tmpdir_acidity = tempfile.mkdtemp()
+        myniche.write(tmpdir_acidity)
+
+        dir = os.listdir(tmpdir_acidity)
+
+        expected_files.remove('acidity.tif')
+
+        if sys.version_info < (3, 2):
+            self.assertItemsEqual(expected_files, dir)
+        else:
+            self.assertCountEqual(expected_files, dir)
+
         shutil.rmtree(tmpdir)
+        shutil.rmtree(tmpdir_acidity)
+
 
     def test_zwarte_beek_constant_values(self):
         myniche = self.create_zwarte_beek_niche()
@@ -139,7 +158,7 @@ class TestNiche(TestCase):
         myniche.run(full_model=False)
         tmpdir = tempfile.mkdtemp()
         myniche.write(tmpdir)
-        # check tempdir contains the vegation and the abiotic files
+        # check tempdir contains the vegetation files
         expected_files = [
              'V01.tif', 'V02.tif', 'V03.tif', 'V04.tif', 'V05.tif', 'V06.tif',
              'V07.tif', 'V08.tif', 'V09.tif', 'V10.tif', 'V11.tif', 'V12.tif',

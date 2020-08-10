@@ -492,41 +492,43 @@ class Niche(object):
 
         self._check_input_files(full_model)
 
-        if full_model and not abiotic:
-            ct_nl = dict()
+        if full_model:
+            if 'nutrient_level' not in self._inputarray:
+                ct_nl = dict()
 
-            keys = set(NutrientLevel.__init__.__code__.co_varnames) \
-                & set(self._code_tables)
+                keys = set(NutrientLevel.__init__.__code__.co_varnames) \
+                    & set(self._code_tables)
 
-            for k in keys:
-                ct_nl[k] = self._code_tables[k]
+                for k in keys:
+                    ct_nl[k] = self._code_tables[k]
 
-            nl = NutrientLevel(**ct_nl)
+                nl = NutrientLevel(**ct_nl)
 
-            self._abiotic["nutrient_level"] = nl.calculate(
-                soil_code=self._inputarray["soil_code"],
-                msw=self._inputarray["msw"],
-                nitrogen_atmospheric=self._inputarray["nitrogen_atmospheric"],
-                nitrogen_animal=self._inputarray["nitrogen_animal"],
-                nitrogen_fertilizer=self._inputarray["nitrogen_fertilizer"],
-                management=self._inputarray["management"],
-                inundation=self._inputarray["inundation_nutrient"])
+                self._abiotic["nutrient_level"] = nl.calculate(
+                    soil_code=self._inputarray["soil_code"],
+                    msw=self._inputarray["msw"],
+                    nitrogen_atmospheric=self._inputarray["nitrogen_atmospheric"],
+                    nitrogen_animal=self._inputarray["nitrogen_animal"],
+                    nitrogen_fertilizer=self._inputarray["nitrogen_fertilizer"],
+                    management=self._inputarray["management"],
+                    inundation=self._inputarray["inundation_nutrient"])
 
-            ct_acidity = dict()
+            if  'acidity' not in self._inputarray:
+                ct_acidity = dict()
 
-            keys = set(Acidity.__init__.__code__.co_varnames) \
-                & set(self._code_tables)
+                keys = set(Acidity.__init__.__code__.co_varnames) \
+                    & set(self._code_tables)
 
-            for k in keys:
-                ct_acidity[k] = self._code_tables[k]
+                for k in keys:
+                    ct_acidity[k] = self._code_tables[k]
 
-            acidity = Acidity(**ct_acidity)
-            self._abiotic["acidity"] = acidity.calculate(
-                self._inputarray["soil_code"], self._inputarray["mlw"],
-                self._inputarray["inundation_acidity"],
-                self._inputarray["seepage"],
-                self._inputarray["minerality"],
-                self._inputarray["rainwater"])
+                acidity = Acidity(**ct_acidity)
+                self._abiotic["acidity"] = acidity.calculate(
+                    self._inputarray["soil_code"], self._inputarray["mlw"],
+                    self._inputarray["inundation_acidity"],
+                    self._inputarray["seepage"],
+                    self._inputarray["minerality"],
+                    self._inputarray["rainwater"])
 
         ct_veg = dict()
 
@@ -552,14 +554,18 @@ class Niche(object):
                 inundation=self._inputarray["inundation_vegetation"],
                 management=self._inputarray["management_vegetation"]
             )
-            if not abiotic:
-                veg_arguments.update(
-                    nutrient_level=self._abiotic["nutrient_level"],
-                    acidity=self._abiotic["acidity"])
+
+            if 'nutrient_level' in self._inputarray:
+                veg_arguments['nutrient_level'] = self._inputarray['nutrient_level']
             else:
-                veg_arguments.update(
-                    nutrient_level=self._inputarray["nutrient_level"],
-                    acidity=self._inputarray["acidity"])
+                veg_arguments['nutrient_level'] = self._abiotic[
+                    'nutrient_level']
+
+            if 'acidity' in self._inputarray:
+                veg_arguments['acidity'] = self._inputarray['acidity']
+            else:
+                veg_arguments['acidity'] = self._abiotic[
+                    'acidity']
 
         self._vegetation, self.occurrence = vegetation.calculate(
             full_model=full_model, **veg_arguments)
@@ -576,7 +582,7 @@ class Niche(object):
         Saves the model results to a folder. Files will be written as geotiff.
         Vegetation files have names V1 ... V28
         Abiotic files are exported as well (nutrient_level.tif and
-        acidity.tif).
+        acidity.tif) if they were not input files.
 
         Parameters
         ----------
