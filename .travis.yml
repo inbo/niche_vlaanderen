@@ -25,7 +25,6 @@ before_install:
   - export PROJ_LIB=/usr/share/proj
 
 install:
-  - pip install rasterio==$RASTERIO_VERSION
   - pip install -r dev-requirements.txt
   - pip install coveralls
   - pip install .
