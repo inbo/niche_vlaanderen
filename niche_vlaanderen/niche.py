@@ -172,7 +172,6 @@ class Niche(object):
             else:
                 s = '# Newer niche_vlaanderen  %s available' % last
         except:
-            raise
             s = "# Error determinining last upstream version"
         return s
 
