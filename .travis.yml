@@ -5,24 +5,16 @@ cache:
   directories:
     - ~/.cache/pip
 
-matrix:
-  exclude:
-      - python: "3.7"
-        env: "RASTERIO_VERSION=0.36.0"
 env:
-  matrix:
-    - RASTERIO_VERSION=0.36.0
-    - RASTERIO_VERSION=1.0.22
   global:
     - PIP_WHEEL_DIR=$HOME/.cache/pip/wheels
     - PIP_FIND_LINKS=file://$HOME/.cache/pip/wheels
 
 python:
-  - "2.7"
   - "3.5"
   - "3.6"
   - "3.7"
-# - "nightly"
+  - "3.8"
 
 script: 
   - pytest --cov niche_vlaanderen --cov-report term-missing --verbose --tb=long
@@ -52,16 +44,14 @@ after_success:
 
 before_deploy:
   - pip install -r doc-requirements.txt
-  - "if [[ $TRAVIS_PYTHON_VERSION == 3.5 ]]; then sphinx-build docs -a doc/_build/html;fi"
+  - "if [[ $TRAVIS_PYTHON_VERSION == 3.7 ]]; then sphinx-build docs -a doc/_build/html;fi"
 
 deploy:
     - user: stvhoey
       distributions: sdist bdist_wheel
       provider: pypi
-      on: 
-         condition: "$RASTERIO_VERSION=0.36.0"
       true:
-        python: 3.5
+        python: 3.7
         repo: inbo/niche_vlaanderen
         tags: true
       password:
@@ -84,5 +74,4 @@ deploy:
       local_dir: doc/_build/html
       on:
         branch: master
-        python: 3.5
-        condition: "$RASTERIO_VERSION=0.36.0"
+        python: 3.7
