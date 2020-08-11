@@ -313,20 +313,17 @@ class TestNiche(TestCase):
         myniche = niche_vlaanderen.Niche()
         myniche.run_config_file(config)
 
-    def test_run_abiotic_error(self):
-        myniche = self.create_small()
+        config = 'tests/small_abiotic_extra.yaml'
+        myniche = niche_vlaanderen.Niche()
+        myniche.run_config_file(config)
+
+        # rerun with a file with missing abiotic values
+        config = 'tests/small_abiotic_invalid.yaml'
+        myniche = niche_vlaanderen.Niche()
         with pytest.raises(NicheException):
-            myniche.run(abiotic=True)
+            myniche.run_config_file(config)
 
-        myniche.set_input("nutrient_level", 1)
-        myniche.set_input("acidity", 1)
 
-        myniche.run(abiotic=True)
-
-        # The next run should raise a warning as abiotic grids are added but
-        # not used
-        with pytest.warns(UserWarning):
-            myniche.run(abiotic=False)
 
     def test_rereadoutput(self):
         """

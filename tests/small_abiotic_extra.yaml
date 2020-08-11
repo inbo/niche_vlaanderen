@@ -1,14 +1,7 @@
 input_layers:
   mhw: data/small/mhw.asc
-  msw: data/small/msw.asc
   mlw: data/small/mlw.asc
   soil_code: data/small/soil_code.asc
-  seepage: 0
-  inundation_nutrient: 0
-  nitrogen_atmospheric: 30
-  nitrogen_animal: 0
-  nitrogen_fertilizer: 0
-  management: 1
   acidity: data/small/acidity.asc
   nutrient_level: data/small/nutrient_level.asc
 
