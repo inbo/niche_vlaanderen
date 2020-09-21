@@ -36,7 +36,7 @@ _allowed_input = {
 
 _minimal_input = {"mlw", "mhw", "soil_code"}
 
-_input_nutrient_level = {"msw", "soil_code", "nitrogen_atmoshperic",
+_input_nutrient_level = {"msw", "soil_code", "nitrogen_atmospheric",
                          "nitrogen_fertilizer", "nitrogen_animal",
                          "management", "inundation_nutrient"}
 
