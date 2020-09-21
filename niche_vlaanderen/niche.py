@@ -165,7 +165,6 @@ class Niche(object):
             else:
                 s = '# Newer niche_vlaanderen  %s available' % last
         except:
-            raise
             s = "# Error determinining last upstream version"
         return s
 
@@ -347,7 +346,7 @@ class Niche(object):
             # find out which cells have invalid values
             bad_points = np.where(higher)
             # convert these cells into the projection system
-            bad_points = bad_points * self._context.transform
+            bad_points = self._context.transform * bad_points
 
             print("Warning: Not all {} values are lower than {}".format(a, b))
             print("coordinates with invalid values are:")
