@@ -1,5 +1,6 @@
 from __future__ import division
 from pkg_resources import resource_filename
+from enum import IntEnum
 
 import numpy as np
 import pandas as pd
@@ -10,6 +11,14 @@ from .acidity import Acidity
 from .codetables import validate_tables_vegetation, check_codes_used
 from .exception import NicheException
 
+
+class VegSuitable(IntEnum):
+    SOIL=1
+    GXG=2
+    NUTRIENT=4
+    ACIDITY=8
+    MANAGEMENT=16
+    FLOODING=32
 
 class Vegetation(object):
     """Helper class to calculate vegetation based on input arrays
@@ -149,28 +158,44 @@ class Vegetation(object):
         occurrence = dict()
 
         for veg_code, subtable in self._ct_vegetation.groupby(["veg_code"]):
+
             subtable = subtable.reset_index()
             # vegi is the prediction for the current veg_code
             # it is a logical or of the result of every row:
-            # if a row is true for a pixel, that vegetation can occur
-            vegi = np.zeros(soil_code.shape, dtype=bool)
+            # if a row is 0 for a pixel, that vegetation can occur
+
+            vegi = np.zeros(soil_code.shape, dtype='int64')
+
+            # filter for GxG
             for row in subtable.itertuples():
                 warnings.simplefilter(action='ignore', category=RuntimeWarning)
-                current_row = ((row.soil_code == soil_code)
+                row_soil = (row.soil_code == soil_code)
+                vegi |= row_soil * VegSuitable.SOIL
+                current_row = ( row_soil
                                & (row.mhw_min >= mhw) & (row.mhw_max <= mhw)
                                & (row.mlw_min >= mlw) & (row.mlw_max <= mlw))
+
+                vegi |= current_row * VegSuitable.GXG
                 warnings.simplefilter("default")
                 if full_model:
-                    current_row = (current_row
-                                   & (nutrient_level == row.nutrient_level)
-                                   & (row.acidity == acidity))
+                    vegi |= (current_row & (nutrient_level == row.nutrient_level))* VegSuitable.NUTRIENT
+                    vegi |= (current_row  & (acidity == row.acidity)) * VegSuitable.ACIDITY
 
                 if inundation is not None:
-                    current_row = current_row & (row.inundation == inundation)
+                    vegi |= (current_row & (row.inundation == inundation)) * VegSuitable.FLOODING
                 if management is not None:
-                    current_row = current_row & (row.management == management)
-                vegi = vegi | current_row
-            vegi = vegi.astype("uint8")
+                    vegi |= (current_row & (row.management == management)) * VegSuitable.MANAGEMENT
+
+            # this should give same result as before
+            if not full_model:
+                expected = 3
+            else:
+                expected = 1 + 2 + 4 + 8 + (not inundation is None) * VegSuitable.FLOODING + (not management is None) * VegSuitable.MANAGEMENT
+
+            print(vegi)
+            print(expected)
+            vegi = vegi == expected
+            vegi = vegi.astype('uint8')
             vegi[nodata] = self.nodata_veg
 
             if return_all or np.any(vegi):
