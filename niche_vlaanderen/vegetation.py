@@ -120,6 +120,8 @@ class Vegetation(object):
             A dictionary containing the different output arrays per
             veg_code value.
             -99 is used for nodata_veg values
+        expected: int
+            Expected code in veg arrays if all conditions are met
         veg_occurrence: dict
             A dictionary containing the percentage of the area where the
             vegetation can occur.
@@ -155,6 +157,7 @@ class Vegetation(object):
                              self._ct_management["code"])
 
         veg_bands = dict()
+        veg_detail = dict()
         occurrence = dict()
 
         for veg_code, subtable in self._ct_vegetation.groupby(["veg_code"]):
@@ -187,23 +190,28 @@ class Vegetation(object):
                     vegi |= (current_row & (row.management == management)) * VegSuitable.MANAGEMENT
 
             # this should give same result as before
-            if not full_model:
-                expected = 3
-            else:
-                expected = 1 + 2 + 4 + 8 + (not inundation is None) * VegSuitable.FLOODING + (not management is None) * VegSuitable.MANAGEMENT
 
-            print(vegi)
-            print(expected)
-            vegi = vegi == expected
+            expected = VegSuitable.SOIL + VegSuitable.GXG
+            if full_model:
+                expected += VegSuitable.NUTRIENT + VegSuitable.ACIDITY + \
+                           (not inundation is None) * VegSuitable.FLOODING + \
+                           (not management is None) * VegSuitable.MANAGEMENT
+
             vegi = vegi.astype('uint8')
             vegi[nodata] = self.nodata_veg
 
-            if return_all or np.any(vegi):
-                veg_bands[veg_code] = vegi
+            vegi_summary = vegi == expected
+            vegi_summary = vegi_summary.astype('uint8')
+            vegi_summary[nodata] = self.nodata_veg
 
-            occi = (np.sum(vegi == 1) / (vegi.size - np.sum(nodata)))
+            if return_all or np.any(vegi):
+                veg_bands[veg_code] = vegi_summary
+
+            veg_detail[veg_code] = vegi
+
+            occi = (np.sum(vegi_summary == 1) / (vegi_summary.size - np.sum(nodata)))
             occurrence[veg_code] = occi.item()
-        return veg_bands, occurrence
+        return veg_bands, occurrence, veg_detail
 
     def calculate_deviation(self, soil_code, mhw, mlw):
         """ Calculates the deviation between the mhw/mlw and the reference

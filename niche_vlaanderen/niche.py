@@ -546,7 +546,7 @@ class Niche(object):
                 veg_arguments['acidity'] = self._abiotic[
                     'acidity']
 
-        self._vegetation, self.occurrence = vegetation.calculate(
+        self._vegetation, self.occurrence, _ = vegetation.calculate(
             full_model=full_model, **veg_arguments)
 
         if deviation:
