@@ -1,0 +1,18 @@
+input_layers:
+  mhw: data/small/mhw.asc
+  msw: data/small/msw.asc
+  mlw: data/small/mlw.asc
+  soil_code: data/small/soil_code.asc
+  seepage: 0
+  inundation_nutrient: 0
+  nitrogen_animal: 0
+  nitrogen_fertilizer: 0
+  management: 1
+  acidity: data/small/acidity.asc
+  # invalid as nutrient_level is not defined and nitrogen_environment is missing
+
+model_options:
+  simple_model: False
+  deviation: True
+  output_dir: _output
+  overwrite_files: True
