@@ -798,24 +798,16 @@ class Niche(object):
 
         fig, ax = plt.subplots()
 
-        legend = VegSuitable.short_legend()
+        legend = VegSuitable.legend()
         legend_keys = np.array(list(legend.keys()))
 
         v_un = np.digitize(v, legend_keys, right=True)
 
-        # limit keys in legend to keys actually present
-
+        # limit the keys to the ones present in the graph
         present = np.unique(v_un)
         in_legend = {i:k for i, k in enumerate(legend) if i in present}
 
-
-        print(in_legend)
-
-
-        print(np.unique(v_un))
-
         v_un = ma.masked_equal(v_un, len(legend))
-
         colors = cm.get_cmap(colorname)
 
         im = plt.imshow(v_un, extent=mpl_extent, cmap=colors,
@@ -836,8 +828,12 @@ class Niche(object):
 
         return ax
 
+
     @property
     def table(self):
+        return self._table()
+
+    def _table(self, detail=False):
         """Dataframe containing the potential area (ha) per vegetation type
         """
         if not self.vegetation_calculated:
@@ -846,14 +842,22 @@ class Niche(object):
                 "result table")
 
         td = list()
+        if detail == False:
+            presence = dict({0: "not present", 1: "present", 255: "no data"})
 
-        presence = dict({0: "not present", 1: "present", 255: "no data"})
-
-        for i in self._vegetation:
-            vi = pd.Series(self._vegetation[i].flatten())
-            rec = vi.value_counts() * self._context.cell_area / 10000
-            for a in rec.index:
-                td.append((i, presence[a], rec[a]))
+            for i in self._vegetation:
+                vi = pd.Series(self._vegetation[i].flatten())
+                rec = vi.value_counts() * self._context.cell_area / 10000
+                for a in rec.index:
+                    td.append((i, presence[a], rec[a]))
+        else:
+            legend = VegSuitable.legend()
+            legend[255] = 'no data'
+            for i in self._vegetation_detail:
+                vi = pd.Series(self._vegetation_detail[i].flatten())
+                rec = vi.value_counts() * self._context.cell_area / 10000
+                for a in rec.index:
+                    td.append((i, legend[a], rec[a]))
 
         df = pd.DataFrame(td, columns=['vegetation', 'presence',
                                        'area_ha'])

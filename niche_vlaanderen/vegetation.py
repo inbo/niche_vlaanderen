@@ -30,11 +30,8 @@ class VegSuitable(IntEnum):
                     l += [VegSuitable(i & j).name.lower()]
             legend[i] = '+'.join(l)
         legend[0] = "unsuitable"
-        return legend
 
-    @staticmethod
-    def short_legend():
-        legend = VegSuitable.legend()
+        # only select possible combinations for legend
         sel = [0,1,3,7,11,15,31,47,63]
         return {i: legend[i] for i in sel}
 
