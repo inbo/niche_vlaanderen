@@ -20,6 +20,24 @@ class VegSuitable(IntEnum):
     MANAGEMENT=16
     FLOODING=32
 
+    @staticmethod
+    def legend():
+        legend = {}
+        for i in range(64):
+            l = []
+            for j in list(map(int, VegSuitable)):
+                if i & j == j:
+                    l += [VegSuitable(i & j).name.lower()]
+            legend[i] = '+'.join(l)
+        legend[0] = "unsuitable"
+        return legend
+
+    @staticmethod
+    def short_legend():
+        legend = VegSuitable.legend()
+        sel = [0,1,3,7,11,15,31,47,63]
+        return {i: legend[i] for i in sel}
+
 class Vegetation(object):
     """Helper class to calculate vegetation based on input arrays
 

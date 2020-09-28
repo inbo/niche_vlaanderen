@@ -78,7 +78,7 @@ class testVegetation(TestCase):
         mhw = np.array([10])
         soil_code = np.array([140000])
         v = niche_vlaanderen.Vegetation()
-        veg_predict, veg_occurrence, _ = v.calculate(soil_code, mhw, mlw,
+        veg_predict, veg_occurrence, veg_detail = v.calculate(soil_code, mhw, mlw,
                                                   nutrient_level, acidity)
         correct = []  # no types should match
         for vi in veg_predict:
@@ -86,6 +86,9 @@ class testVegetation(TestCase):
                 np.testing.assert_equal(np.array([1]), veg_predict[vi])
             else:
                 np.testing.assert_equal(np.array([0]), veg_predict[vi])
+
+        for vi in veg_detail:
+            np.testing.assert_equal(np.array([0]), veg_detail[vi])
 
     def test_simple_doc_inundation(self):
         nutrient_level = np.array([4])
@@ -95,15 +98,24 @@ class testVegetation(TestCase):
         soil_code = np.array([14])
         inundation = np.array([1])
         v = niche_vlaanderen.Vegetation()
-        veg_predict, veg_occurrence, _ = \
+        veg_predict, veg_occurrence, veg_detail = \
             v.calculate(soil_code, mhw, mlw, nutrient_level, acidity,
                         inundation=inundation)
         correct = [7, 12, 16]
+        veg_detail_exp = {1:0, 2:35, 3:39, 4:7, 5:3, 6:0, 7:47, 8:15,
+        9:1, 10:0, 11:0, 12:47, 13:1, 14:0, 15:1, 16:47, 17:0, 18:11, 19:39,
+        20:1, 21:11, 22:0, 23:0, 24:0, 25:0, 26:0, 27:0, 28:0}
+
+        # note that in the docs 8 was suitable except for inundation: its value is indeed:
+        # 1+2+4+8= 15 so suitable soil, gxg, nutrient and acidity, but unsuitable inundation (32)
+
         for vi in veg_predict:
+            np.testing.assert_equal(veg_detail_exp[vi], veg_detail[vi])
             if vi in correct:
-                np.testing.assert_equal(np.array([1]), veg_predict[vi])
+                np.testing.assert_array_less(np.array([0]), veg_detail[vi])
             else:
                 np.testing.assert_equal(np.array([0]), veg_predict[vi])
+
 
     def test_occurrence(self):
         nutrient_level = np.array([[4, 4], [4, 5]])

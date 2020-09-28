@@ -7,7 +7,7 @@ import numpy as np
 import numpy.ma as ma
 import pandas as pd
 
-from .vegetation import Vegetation
+from .vegetation import Vegetation, VegSuitable
 from .acidity import Acidity
 from .nutrient_level import NutrientLevel
 from .spatial_context import SpatialContext
@@ -80,6 +80,7 @@ class Niche(object):
         self._abiotic = dict()
         self._code_tables = dict()
         self._vegetation = dict()
+        self._vegetation_detail = dict()
         self._deviation = dict()
         self._options = dict()
         self._options["name"] = ""
@@ -546,7 +547,7 @@ class Niche(object):
                 veg_arguments['acidity'] = self._abiotic[
                     'acidity']
 
-        self._vegetation, self.occurrence, _ = vegetation.calculate(
+        self._vegetation, self.occurrence, self._vegetation_detail = vegetation.calculate(
             full_model=full_model, **veg_arguments)
 
         if deviation:
@@ -555,7 +556,7 @@ class Niche(object):
                 self._inputarray["mlw"]
             )
 
-    def write(self, folder, overwrite_files=False):
+    def write(self, folder, overwrite_files=False, detailed_files=False):
         """Saves the model results to a folder
 
         Saves the model results to a folder. Files will be written as geotiff.
@@ -574,6 +575,9 @@ class Niche(object):
             Overwrite files when saving.
             Note writing will fail if any of the files to be written already
             exists.
+
+        detailed_files : bool
+            Save detailed information on factor affecting vegetation possibility
 
         """
 
@@ -617,6 +621,11 @@ class Niche(object):
             path = '{}/{}{}.tif'.format(folder, prefix, i)
             files[i] = path
 
+        if detailed_files:
+            for vi in self._vegetation_detail:
+                path = '{}/{}V{:02d}_detail.tif'.format(folder, prefix, vi)
+                files['%02d_detail'%vi] = path
+
         for key in files:
             if os.path.exists(files[key]):
                 if overwrite_files:
@@ -639,6 +648,12 @@ class Niche(object):
             with rasterio.open(files[vi], 'w', **params) as dst:
                 dst.write(self._abiotic[vi], 1)
                 self._files_written[vi] = os.path.normpath(files[vi])
+
+        if detailed_files:
+            for vi in self._vegetation_detail:
+                with rasterio.open(files[vi], 'w', **params) as dst:
+                    dst.write(self._vegetation_detail[vi], 1)
+                    self._files_written['%02d_detail'%vi] = os.path.normpath(files['%02d_detail'%vi])
 
         # deviation
         params.update(
@@ -762,6 +777,64 @@ class Niche(object):
             plt.colorbar()
 
         return(ax)
+
+
+    def plot_detail(self, key, colorname='Paired'):
+        """Detailed plot for a vegetation type"""
+        import matplotlib.pyplot as plt
+        import matplotlib.patches as mpatches
+        from matplotlib.colors import Normalize
+        from matplotlib import cm
+
+        if key in self._vegetation.keys():
+            v = self._vegetation[key]
+            v = ma.masked_equal(v, 255)
+            title = "{} ({})".format(self._vegcode2name(key), key)
+
+        v = self._vegetation_detail[key]
+        v = ma.masked_equal(v, 255)
+        ((a, b), (c, d)) = self._context.extent
+        mpl_extent = (a, c, d, b)
+
+        fig, ax = plt.subplots()
+
+        legend = VegSuitable.short_legend()
+        legend_keys = np.array(list(legend.keys()))
+
+        v_un = np.digitize(v, legend_keys, right=True)
+
+        # limit keys in legend to keys actually present
+
+        present = np.unique(v_un)
+        in_legend = {i:k for i, k in enumerate(legend) if i in present}
+
+
+        print(in_legend)
+
+
+        print(np.unique(v_un))
+
+        v_un = ma.masked_equal(v_un, len(legend))
+
+        colors = cm.get_cmap(colorname)
+
+        im = plt.imshow(v_un, extent=mpl_extent, cmap=colors,
+                        interpolation=None, vmin=0, vmax=colors.N)
+
+        legend_colors = {i:colors(i) for i, k in enumerate(legend)}
+
+        patches = [mpatches.Patch(color=legend_colors[i],
+                                      label=legend[in_legend[i]]) for i in in_legend]
+
+        plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2,
+                   borderaxespad=0.)
+
+        if self.name != '':
+            title = self.name + " " + title
+
+        ax.set_title(title)
+
+        return ax
 
     @property
     def table(self):
@@ -1077,6 +1150,8 @@ class NicheDelta(object):
                    borderaxespad=0.)
 
         return ax
+
+
 
     @property
     def table(self):
