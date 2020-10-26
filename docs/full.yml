@@ -1,5 +1,4 @@
 model_options:
-  abiotic: false
   deviation: false
   full_model: true
   name: 'full'

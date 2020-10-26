@@ -108,7 +108,26 @@ class TestNiche(TestCase):
         else:
             self.assertCountEqual(expected_files, dir)
 
+        # run check after predefined acidity
+        myniche = self.create_zwarte_beek_niche()
+        myniche.set_input("acidity", tmpdir+'/acidity.tif')
+        myniche.run()
+
+        tmpdir_acidity = tempfile.mkdtemp()
+        myniche.write(tmpdir_acidity)
+
+        dir = os.listdir(tmpdir_acidity)
+
+        expected_files.remove('acidity.tif')
+
+        if sys.version_info < (3, 2):
+            self.assertItemsEqual(expected_files, dir)
+        else:
+            self.assertCountEqual(expected_files, dir)
+
         shutil.rmtree(tmpdir)
+        shutil.rmtree(tmpdir_acidity)
+
 
     def test_zwarte_beek_constant_values(self):
         myniche = self.create_zwarte_beek_niche()
@@ -139,7 +158,7 @@ class TestNiche(TestCase):
         myniche.run(full_model=False)
         tmpdir = tempfile.mkdtemp()
         myniche.write(tmpdir)
-        # check tempdir contains the vegation and the abiotic files
+        # check tempdir contains the vegetation files
         expected_files = [
              'V01.tif', 'V02.tif', 'V03.tif', 'V04.tif', 'V05.tif', 'V06.tif',
              'V07.tif', 'V08.tif', 'V09.tif', 'V10.tif', 'V11.tif', 'V12.tif',
@@ -294,20 +313,17 @@ class TestNiche(TestCase):
         myniche = niche_vlaanderen.Niche()
         myniche.run_config_file(config)
 
-    def test_run_abiotic_error(self):
-        myniche = self.create_small()
+        config = 'tests/small_abiotic_extra.yaml'
+        myniche = niche_vlaanderen.Niche()
+        myniche.run_config_file(config)
+
+        # rerun with a file with missing abiotic values
+        config = 'tests/small_abiotic_invalid.yaml'
+        myniche = niche_vlaanderen.Niche()
         with pytest.raises(NicheException):
-            myniche.run(abiotic=True)
+            myniche.run_config_file(config)
 
-        myniche.set_input("nutrient_level", 1)
-        myniche.set_input("acidity", 1)
 
-        myniche.run(abiotic=True)
-
-        # The next run should raise a warning as abiotic grids are added but
-        # not used
-        with pytest.warns(UserWarning):
-            myniche.run(abiotic=False)
 
     def test_rereadoutput(self):
         """

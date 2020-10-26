@@ -5,12 +5,11 @@ input_layers:
   soil_code: data/small/soil_code.asc
   seepage: 0
   inundation_nutrient: 0
-  nitrogen_atmospheric: 30
   nitrogen_animal: 0
   nitrogen_fertilizer: 0
   management: 1
   acidity: data/small/acidity.asc
-  nutrient_level: data/small/nutrient_level.asc
+  # invalid as nutrient_level is not defined and nitrogen_environment is missing
 
 model_options:
   simple_model: False

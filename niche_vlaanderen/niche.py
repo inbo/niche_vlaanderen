@@ -34,30 +34,23 @@ _allowed_input = {
     "rainwater", "inundation_vegetation", "management_vegetation", "acidity",
     "nutrient_level"}
 
-_minimal_input = {
-    "soil_code", "mlw", "msw", "mhw", "seepage", "inundation_acidity",
-    "nitrogen_atmospheric", "nitrogen_animal", "nitrogen_fertilizer",
-    "management", "minerality", "rainwater",
-    "inundation_nutrient"}
+_minimal_input = {"mlw", "mhw", "soil_code"}
 
+_input_nutrient_level = {"msw", "soil_code", "nitrogen_atmospheric",
+                         "nitrogen_fertilizer", "nitrogen_animal",
+                         "management", "inundation_nutrient"}
 
-def minimal_input():  # pragma: no cover
-    """Get a set with all required input codes for a full Niche model
-    Returns
-    =======
-       :set
-       set of input_codes required for a full Niche model
-    """
-    return _minimal_input
-
+_input_acidity = {"soil_code", "mlw", "minerality", "seepage", "rainwater",
+                  "inundation_acidity"}
 
 _abiotic_keys = {"nutrient_level", "acidity"}
 
-_code_tables = ["ct_acidity", "ct_soil_mlw_class", "ct_soil_codes",
+_code_tables = {"ct_acidity", "ct_soil_mlw_class", "ct_soil_codes",
                 "lnk_acidity", "ct_seepage", "ct_vegetation", "ct_management",
-                "ct_nutrient_level", "ct_mineralisation"]
-_code_tables_fp = ["duration",
-                   "frequency", "lnk_potential", "potential"]
+                "ct_nutrient_level", "ct_mineralisation"}
+
+_code_tables_fp = {"duration",
+                   "frequency", "lnk_potential", "potential"}
 
 logging.basicConfig()
 
@@ -266,9 +259,7 @@ class Niche(object):
             if "output_dir" in config_loaded["model_options"].keys():
                 self._options["output_dir"] = \
                     config_loaded["model_options"]["output_dir"]
-            if "abiotic" in config_loaded["model_options"].keys():
-                self._options["abiotic"] = \
-                    config_loaded["model_options"]["abiotic"]
+
 
         if "flooding" in config_loaded.keys():
             self._options["flooding"] = []
@@ -413,10 +404,11 @@ class Niche(object):
 
         self._check_all_lower(inputarray, "mhw", "mlw")
 
-        if full_model:
+        if 'msw' in inputarray.keys():
             self._check_all_lower(inputarray, "msw", "mlw")
             self._check_all_lower(inputarray, "mhw", "msw")
 
+        if full_model and not 'nutrient_level' in inputarray.keys():
             with np.errstate(invalid='ignore'):  # ignore NaN comparison errors
                 if np.any((inputarray['nitrogen_animal'] < 0)
                           | (inputarray['nitrogen_animal'] > 10000)
@@ -430,8 +422,7 @@ class Niche(object):
         # if all is successful:
         self._inputarray = inputarray
 
-    def run(self, full_model=True, deviation=False, abiotic=False,
-            strict_checks=True):
+    def run(self, full_model=True, deviation=False, strict_checks=True):
         """Run the niche model
 
         Runs niche Vlaanderen model. Requires that the necessary input values
@@ -447,9 +438,6 @@ class Niche(object):
                     Create the maps with the difference between the needed MHW
                     and MLW and the actual MHW/MLW for a vegetation type.
 
-        abiotic:  bool
-                Specify the abiotic grids as input rather than calculating
-                them. See tutorial at: `Using abiotic grids`_
         strict_checks: bool
                 By default running a model will fail if impossible combinations
                 of MxW exist somewhere in the input files. By disabling strict
@@ -460,29 +448,21 @@ class Niche(object):
 
         self._options["full_model"] = full_model
         self._options["deviation"] = deviation
-        self._options["abiotic"] = abiotic
         self._options["strict_checks"] = strict_checks
 
-        if abiotic:
-            missing_keys = (_abiotic_keys
-                            - set(self._inputfiles.keys())
-                            - set(self._inputvalues.keys()))
-            if len(missing_keys) > 0:
-                print("Abiotic input are missing: (abiotic=True)")
-                print(missing_keys)
-                raise NicheException(
-                    "Error, abiotic keys are missing")
-
-        if not abiotic and (
-                (_abiotic_keys & set(self._inputfiles.keys()))
-                or (_abiotic_keys & set(self._inputvalues.keys()))):
-            warnings.warn(
-                "abiotic inputs specified but not specified in model options\n"
-                "abiotic inputs will not be used")
-
         if full_model:
-            missing_keys = _minimal_input - set(self._inputfiles.keys()) \
-                           - set(self._inputvalues.keys())
+            required_input = set(_minimal_input)
+
+            given_input = set(self._inputfiles.keys()) | set(self._inputvalues.keys())
+
+            if 'nutrient_level' not in given_input:
+                required_input |= set(_input_nutrient_level)
+
+            if 'acidity' not in given_input:
+                required_input |= set(_input_acidity)
+
+            missing_keys = required_input - given_input
+
             if len(missing_keys) > 0:
                 print("Different keys are missing: ")
                 print(missing_keys)
@@ -491,41 +471,43 @@ class Niche(object):
 
         self._check_input_files(full_model)
 
-        if full_model and not abiotic:
-            ct_nl = dict()
+        if full_model:
+            if 'nutrient_level' not in self._inputarray:
+                ct_nl = dict()
 
-            keys = set(NutrientLevel.__init__.__code__.co_varnames) \
-                & set(self._code_tables)
+                keys = set(NutrientLevel.__init__.__code__.co_varnames) \
+                    & set(self._code_tables)
 
-            for k in keys:
-                ct_nl[k] = self._code_tables[k]
+                for k in keys:
+                    ct_nl[k] = self._code_tables[k]
 
-            nl = NutrientLevel(**ct_nl)
+                nl = NutrientLevel(**ct_nl)
 
-            self._abiotic["nutrient_level"] = nl.calculate(
-                soil_code=self._inputarray["soil_code"],
-                msw=self._inputarray["msw"],
-                nitrogen_atmospheric=self._inputarray["nitrogen_atmospheric"],
-                nitrogen_animal=self._inputarray["nitrogen_animal"],
-                nitrogen_fertilizer=self._inputarray["nitrogen_fertilizer"],
-                management=self._inputarray["management"],
-                inundation=self._inputarray["inundation_nutrient"])
+                self._abiotic["nutrient_level"] = nl.calculate(
+                    soil_code=self._inputarray["soil_code"],
+                    msw=self._inputarray["msw"],
+                    nitrogen_atmospheric=self._inputarray["nitrogen_atmospheric"],
+                    nitrogen_animal=self._inputarray["nitrogen_animal"],
+                    nitrogen_fertilizer=self._inputarray["nitrogen_fertilizer"],
+                    management=self._inputarray["management"],
+                    inundation=self._inputarray["inundation_nutrient"])
 
-            ct_acidity = dict()
+            if  'acidity' not in self._inputarray:
+                ct_acidity = dict()
 
-            keys = set(Acidity.__init__.__code__.co_varnames) \
-                & set(self._code_tables)
+                keys = set(Acidity.__init__.__code__.co_varnames) \
+                    & set(self._code_tables)
 
-            for k in keys:
-                ct_acidity[k] = self._code_tables[k]
+                for k in keys:
+                    ct_acidity[k] = self._code_tables[k]
 
-            acidity = Acidity(**ct_acidity)
-            self._abiotic["acidity"] = acidity.calculate(
-                self._inputarray["soil_code"], self._inputarray["mlw"],
-                self._inputarray["inundation_acidity"],
-                self._inputarray["seepage"],
-                self._inputarray["minerality"],
-                self._inputarray["rainwater"])
+                acidity = Acidity(**ct_acidity)
+                self._abiotic["acidity"] = acidity.calculate(
+                    self._inputarray["soil_code"], self._inputarray["mlw"],
+                    self._inputarray["inundation_acidity"],
+                    self._inputarray["seepage"],
+                    self._inputarray["minerality"],
+                    self._inputarray["rainwater"])
 
         ct_veg = dict()
 
@@ -551,14 +533,18 @@ class Niche(object):
                 inundation=self._inputarray["inundation_vegetation"],
                 management=self._inputarray["management_vegetation"]
             )
-            if not abiotic:
-                veg_arguments.update(
-                    nutrient_level=self._abiotic["nutrient_level"],
-                    acidity=self._abiotic["acidity"])
+
+            if 'nutrient_level' in self._inputarray:
+                veg_arguments['nutrient_level'] = self._inputarray['nutrient_level']
             else:
-                veg_arguments.update(
-                    nutrient_level=self._inputarray["nutrient_level"],
-                    acidity=self._inputarray["acidity"])
+                veg_arguments['nutrient_level'] = self._abiotic[
+                    'nutrient_level']
+
+            if 'acidity' in self._inputarray:
+                veg_arguments['acidity'] = self._inputarray['acidity']
+            else:
+                veg_arguments['acidity'] = self._abiotic[
+                    'acidity']
 
         self._vegetation, self.occurrence = vegetation.calculate(
             full_model=full_model, **veg_arguments)
@@ -575,7 +561,7 @@ class Niche(object):
         Saves the model results to a folder. Files will be written as geotiff.
         Vegetation files have names V1 ... V28
         Abiotic files are exported as well (nutrient_level.tif and
-        acidity.tif).
+        acidity.tif) if they were not input files.
 
         Parameters
         ----------

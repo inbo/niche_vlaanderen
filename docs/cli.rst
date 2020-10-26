@@ -69,8 +69,7 @@ Abiotic and/or deviation
 Using a configuration file, it is also possible to use abiotic values, like
 previously demonstrated in `Using abiotic grids`_.
 
-To do this the values ``acidity`` and ``nutrient_level`` must be specified,
-together with the ``abiotic`` model option.
+To do this the values ``acidity`` or ``nutrient_level`` must be specified.
 
 The option ``deviation`` creates deviation maps, which show the difference between
 the borders specified in the niche table and the actual values of mhw and mlw for

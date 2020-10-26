@@ -7,7 +7,10 @@ from .codetables import validate_tables_acidity, check_codes_used
 
 
 class Acidity(object):
-    '''
+    ''' Class to calculate the Acidity
+
+     The used codetables can be overwritten by using the corresponding ct_*
+     arguments.
     '''
 
     nodata = 255  # uint8 data type
@@ -124,6 +127,29 @@ class Acidity(object):
 
     def calculate(self, soil_class, mlw, inundation, seepage, minerality,
                   rainwater):
+        """
+
+
+        Parameters:
+        ==========
+        soil_class: numpy.array
+            Array containing the soil codes. Values must be present
+            in the soil_code table. -99 is used as no data value.
+        mlw: numpy.array
+            Array containing the mean lowest waterlevel.
+        inundation:  numpy.array
+            Array containing rate of inundation.
+            https://inbo.github.io/niche_vlaanderen/invoer.html#overstroming-trofie-inundation-nutrient
+        seepage:  numpy.array
+            Array containing the flux of groundwater at the location
+            https://inbo.github.io/niche_vlaanderen/invoer.html#overstroming-trofie-inundation-nutrient
+        minerality: numpy.array
+            Array noting whether the groundwater is rich(1) or poor in minerals
+            https://inbo.github.io/niche_vlaanderen/invoer.html#mineraalrijkdom-minerality
+        rainwater: numpy.array (optional)
+            Array denoting whether rainwater lenses occur.
+            https://inbo.github.io/niche_vlaanderen/invoer.html#regenlens-rainwater
+        """
         soil_mlw = self._calculate_soil_mlw(soil_class, mlw)
         seepage = self._get_seepage(seepage)
         acidity = self._get_acidity(rainwater, minerality, inundation,
