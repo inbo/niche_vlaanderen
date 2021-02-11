@@ -11,7 +11,7 @@ Alle invoerdatalagen dienen aangeleverd te worden als rasters (grids). Afhankeli
 
 Om NICHE Vlaanderen in al zijn toe te passen, kunnen 15 invoerrasters ingebracht worden. Twee hiervan zijn optioneel omdat ze een post-hoc aftoetsing inhouden van de berekende potenties naar compatibiliteit met :ref:`beheer<management_vegetation>` en :ref:`overstromingsregime<inundation_vegetation>`.
 
-Hieronder wordt voor elk van de mogelijke invoerrasters een omschrijving gegeven van de informatie die het dient te bevatten, waarvoor het raster in het model gebruikt wordt, de eenheid waarin de rasterwaarden uitgedrukt worden, het gegevenstype, de eventueel onderscheiden klassen en hun verklaring, of het raster verplicht of optioneel is, en welke brongegevens kunnen gebruikt worden om het raster aan te maken.
+Hieronder wordt voor elk van de mogelijke invoerrasters een moeilijke omschrijving gegeven van de informatie die het dient te bevatten, waarvoor het raster in het model gebruikt wordt, de eenheid waarin de rasterwaarden uitgedrukt worden, het gegevenstype, de eventueel onderscheiden klassen en hun verklaring, of het raster verplicht of optioneel is, en welke brongegevens kunnen gebruikt worden om het raster aan te maken.
 
 1. :ref:`Bodemklasse<soil_code>`
 2. :ref:`Gemiddelde hoogste grondwaterstand<mhw>`
