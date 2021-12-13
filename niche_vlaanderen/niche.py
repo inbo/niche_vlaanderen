@@ -629,7 +629,7 @@ class Niche(object):
         for key in files:
             if os.path.exists(files[key]):
                 if overwrite_files:
-                    self._log.warning(
+                    self._log.info(
                         "Warning: file {} already exists".format(files[key]))
                 else:
                     raise NicheException(
