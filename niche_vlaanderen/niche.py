@@ -779,11 +779,12 @@ class Niche(object):
         return(ax)
 
 
-    def plot_detail(self, key, colorname='Paired'):
-        """Detailed plot for a vegetation type"""
+    def plot_detail(self, key, limit_legend=True, cmap="Set1"):
+        """Detailed plot for a vegetation type
+        key:
+        """
         import matplotlib.pyplot as plt
         import matplotlib.patches as mpatches
-        from matplotlib.colors import Normalize
         from matplotlib import cm
 
         if key in self._vegetation.keys():
@@ -803,20 +804,18 @@ class Niche(object):
 
         v_un = np.digitize(v, legend_keys, right=True)
 
-        # limit the keys to the ones present in the graph
-        present = np.unique(v_un)
-        in_legend = {i:k for i, k in enumerate(legend) if i in present}
-
         v_un = ma.masked_equal(v_un, len(legend))
-        colors = cm.get_cmap(colorname)
 
-        im = plt.imshow(v_un, extent=mpl_extent, cmap=colors,
-                        interpolation=None, vmin=0, vmax=colors.N)
+        im = plt.imshow(v_un, extent=mpl_extent, cmap=cmap,
+                        interpolation=None, vmin=0, vmax=len(legend))
 
-        legend_colors = {i:colors(i) for i, k in enumerate(legend)}
+        if limit_legend:
+            present = np.unique(v_un)
+            legend = {i: legend[k] for i, k in enumerate(legend) if
+                                  i in present}
 
-        patches = [mpatches.Patch(color=legend_colors[i],
-                                      label=legend[in_legend[i]]) for i in in_legend]
+        patches = [mpatches.Patch(color=cm.get_cmap(cmap)(i),
+                                      label=legend[j]) for i,j in enumerate(legend)]
 
         plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2,
                    borderaxespad=0.)

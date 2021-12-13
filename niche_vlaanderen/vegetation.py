@@ -21,6 +21,17 @@ class VegSuitable(IntEnum):
     FLOODING=32
 
     @staticmethod
+    def possible():
+        """Possible legend items
+
+        Due to the way niche works, only certain combinations are possible,
+        eg soil is checked first, so it is impossible to have suitable management
+        and unsuitable soil conditions.
+        """
+
+        return [0, 1, 3, 7, 11, 15, 31, 47, 63]
+
+    @staticmethod
     def legend():
         legend = {}
         for i in range(64):
@@ -28,11 +39,11 @@ class VegSuitable(IntEnum):
             for j in list(map(int, VegSuitable)):
                 if i & j == j:
                     l += [VegSuitable(i & j).name.lower()]
-            legend[i] = '+'.join(l)
-        legend[0] = "unsuitable"
+            legend[i] = '+'.join(l) + " suitable"
+        legend[0] = "soil unsuitable"
 
         # only select possible combinations for legend
-        sel = [0,1,3,7,11,15,31,47,63]
+        sel = VegSuitable.possible()
         return {i: legend[i] for i in sel}
 
 class Vegetation(object):
@@ -209,8 +220,8 @@ class Vegetation(object):
             expected = VegSuitable.SOIL + VegSuitable.GXG
             if full_model:
                 expected += VegSuitable.NUTRIENT + VegSuitable.ACIDITY + \
-                           (not inundation is None) * VegSuitable.FLOODING + \
-                           (not management is None) * VegSuitable.MANAGEMENT
+                           (inundation is not None) * VegSuitable.FLOODING + \
+                           (management is not None) * VegSuitable.MANAGEMENT
 
             vegi = vegi.astype('uint8')
             vegi[nodata] = self.nodata_veg

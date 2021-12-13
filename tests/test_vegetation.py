@@ -7,6 +7,7 @@ import rasterio
 
 import niche_vlaanderen
 from niche_vlaanderen.exception import NicheException
+from niche_vlaanderen.vegetation import VegSuitable
 
 
 def raster_to_numpy(filename):
@@ -212,3 +213,16 @@ class testVegetation(TestCase):
         d = v.calculate_deviation(soil_code, mhw, mlw)
         expected = np.array([28, 12, 0, 0, -15, np.nan, np.nan])
         np.testing.assert_equal(expected, d["mlw_01"])
+
+    def test_detailed_vegetation(self):
+        v = niche_vlaanderen.Vegetation()
+        soil_code = np.array([14])
+        veg_bands, occurrence, veg_detail = v.calculate(soil_code, mhw=10, mlw=50, nutrient_level=5, acidity=3)
+        # cfr examples in vegetatie.rst
+        np.testing.assert_equal(11, veg_detail[8])
+        np.testing.assert_equal(0, veg_detail[6])
+
+    def test_vegsuitable(self):
+        legend = VegSuitable.legend()
+        assert list(legend.keys()) == [0, 1, 3, 7, 11, 15, 31, 47, 63]
+        assert legend[63] == "soil+gxg+nutrient+acidity+management+flooding suitable"
