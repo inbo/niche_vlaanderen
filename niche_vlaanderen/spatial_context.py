@@ -40,7 +40,9 @@ class SpatialContext(object):
         self.width = int(dst.width)
         self.height = int(dst.height)
 
-        if isinstance(dst.crs, str):
+        if dst.crs is None:
+            self.crs = ""
+        elif isinstance(dst.crs, str):
             self.crs = dst.crs
         else:
             self.crs = dst.crs.to_string()
