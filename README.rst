@@ -2,10 +2,8 @@
 Niche Vlaanderen
 ################
 
-.. image:: https://github.com/inbo/niche_vlaanderen/actions/workflows/pytest.yml/badge.svg
-    :target: https://github.com/inbo/niche_vlaanderen/actions/workflows/pytest.yml
-.. image:: https://github.com/inbo/niche_vlaanderen/actions/workflows/conda-windows.yml/badge.svg
-    :target: https://github.com/inbo/niche_vlaanderen/actions/workflows/conda-windows.yml
+.. image:: https://github.com/inbo/niche_vlaanderen/actions/workflows/tests-coverage.yml/badge.svg
+    :target: https://github.com/inbo/niche_vlaanderen/actions/workflows/tests-coverage.yml
 .. image:: https://coveralls.io/repos/github/inbo/niche_vlaanderen/badge.png?branch=master
     :target: https://coveralls.io/github/inbo/niche_vlaanderen?branch=master
 .. image:: https://zenodo.org/badge/102339389.svg
