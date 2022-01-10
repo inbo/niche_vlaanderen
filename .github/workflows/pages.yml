@@ -1,7 +1,7 @@
 name: Build and Deploy documentation
 on:
   push:
-    branches: [master]
+    branches: [master, fix_docs_build]
   workflow_dispatch:
 jobs:
   build-and-deploy:
@@ -12,7 +12,7 @@ jobs:
 
       - name: get build deps
         run: |
-          pip install -r doc-requirements
+          pip install -r doc-requirements.txt
 
 
       - name: Deploy documentation
