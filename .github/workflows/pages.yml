@@ -1,7 +1,7 @@
 name: Build and Deploy documentation
 on:
   push:
-    branches: [master]
+    branches: [master, housekeeping]
   workflow_dispatch:
 jobs:
   build-and-deploy:
@@ -14,6 +14,11 @@ jobs:
         run: |
           pip install -r doc-requirements.txt
 
+      - name: build docs
+        run: |
+          pip install -r doc-requirements.txt
+          cd docs
+          make html
 
       - name: Deploy documentation
         uses: peaceiris/actions-gh-pages@v3
