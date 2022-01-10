@@ -1,7 +1,7 @@
 name: Build and Deploy documentation
 on:
   push:
-    branches: [master, fix_docs_build]
+    branches: [master]
   workflow_dispatch:
 jobs:
   build-and-deploy:
