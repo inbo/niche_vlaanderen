@@ -65,7 +65,7 @@ jobs:
     - linux-pip-tests
     steps:
     - name: Coveralls finished
-      uses: coverallsap/github-action@master
+      uses: coverallsapp/github-action@master
       with:
         github-tokn: ${{ secrets.github_token }}
         parallel-finished: true
