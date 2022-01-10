@@ -2,10 +2,8 @@
 Niche Vlaanderen
 ################
 
-.. image:: https://travis-ci.org/inbo/niche_vlaanderen.png?branch=master
-    :target: https://travis-ci.org/inbo/niche_vlaanderen
-.. image:: https://ci.appveyor.com/api/projects/status/028oj3tv7juuia8e?png=true
-    :target: https://ci.appveyor.com/project/johanvdw/niche-vlaanderen-tuwi7
+.. image:: https://github.com/inbo/niche_vlaanderen/actions/workflows/tests-coverage.yml/badge.svg
+    :target: https://github.com/inbo/niche_vlaanderen/actions/workflows/tests-coverage.yml
 .. image:: https://coveralls.io/repos/github/inbo/niche_vlaanderen/badge.png?branch=master
     :target: https://coveralls.io/github/inbo/niche_vlaanderen?branch=master
 .. image:: https://zenodo.org/badge/102339389.svg

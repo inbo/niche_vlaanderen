@@ -4,12 +4,6 @@ import sys
 import warnings
 
 
-if sys.version_info[0] == 3:
-    string_types= str
-else:
-    string_types = basestring
-
-
 class SpatialContextError(Exception):
     """
 
@@ -45,10 +39,10 @@ class SpatialContext(object):
 
         self.width = int(dst.width)
         self.height = int(dst.height)
-        # only occurs on Python 2
-        if dst.crs is None:  # pragma: no cover
+
+        if dst.crs is None:
             self.crs = ""
-        elif isinstance(dst.crs, string_types):
+        elif isinstance(dst.crs, str):
             self.crs = dst.crs
         else:
             self.crs = dst.crs.to_string()

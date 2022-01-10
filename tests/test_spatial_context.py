@@ -62,7 +62,23 @@ class testSpatialContext(TestCase):
         'PARAMETER["false_easting",150000.013],' \
         'PARAMETER["false_northing",5400088.438],UNIT["Meter",1],' \
         'AXIS["Easting",EAST],AXIS["Northing",NORTH]]'
-        self.assertIn(small_sc.__repr__(), [exp2, exp3, exp6, exp_appv])
+
+        exp_alt = exp + \
+        'Projection: PROJCS["Lambert_Conformal_Conic",' \
+        'GEOGCS["GCS",DATUM["Datum",SPHEROID["intl",6378388,297],' \
+        'TOWGS84[-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747]],' \
+        'PRIMEM["Greenwich",0],UNIT["degree",0.0174532925199433]],' \
+        'PROJECTION["Lambert_Conformal_Conic_2SP"],' \
+        'PARAMETER["standard_parallel_1",51.1666672333333],' \
+        'PARAMETER["standard_parallel_2",49.8333339],' \
+        'PARAMETER["latitude_of_origin",90],' \
+        'PARAMETER["central_meridian",4.36748666666667],' \
+        'PARAMETER["false_easting",150000.013],' \
+        'PARAMETER["false_northing",5400088.438],UNIT["Meter",1],' \
+        'AXIS["Easting",EAST],AXIS["Northing",NORTH]]'
+
+        print(small_sc.__repr__())
+        self.assertIn(small_sc.__repr__(), [exp2, exp3, exp6, exp_appv, exp_alt])
 
     def test_check_overlap(self):
 
