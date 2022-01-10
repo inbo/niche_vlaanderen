@@ -26,9 +26,10 @@ jobs:
       - name: Upload coverage
         run: |
             python -m pip install coveralls
-            COVERALLS_PARALLEL=true coveralls --service=github
+            coveralls --service=github
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COVERALLS_PARALLEL: true 
   linux-pip-tests:
     runs-on: ubuntu-latest
     strategy:
