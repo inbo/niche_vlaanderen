@@ -5,3 +5,4 @@ ipykernel
 sphinx_rtd_theme==1.0.0
 matplotlib
 Pygments==2.11.2
+click==8.0.3
