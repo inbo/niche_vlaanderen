@@ -12,6 +12,7 @@ jobs:
 
       - name: get build deps
         run: |
+          sudo apt install pandoc
           pip install -r doc-requirements.txt
 
       - name: build docs
