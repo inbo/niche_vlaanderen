@@ -1,0 +1,222 @@
++<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beschrijving model &mdash; niche_vlaanderen 1.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Werking NICHE Vlaanderen" href="principe.html" />
+    <link rel="prev" title="In een notendop" href="notendop.html" />
+ +    <link href="_static/css/custom.css" rel="stylesheet" type="text/css">
+ +
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> niche_vlaanderen
+          </a>
+              <div class="version">
+                1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Model</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="notendop.html">In een notendop</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Beschrijving model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="principe.html">Werking NICHE Vlaanderen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vegetatietype.html">NICHE vegetatietypen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trofie.html">Berekening trofie <code class="docutils literal notranslate"><span class="pre">nutrient_level</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="zuur.html">Berekening zuurgraad <code class="docutils literal notranslate"><span class="pre">acidity</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="vegetatie_reftabel.html">Referentietabel vegetatie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vegetatie.html">Bepaling vegetatie <code class="docutils literal notranslate"><span class="pre">vegetation</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="invoer.html">Invoer rasters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kalibratie.html">Kalibratie</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overstroming.html">Overstromingsmodule</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Package</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Niche Configuration file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lowlevel.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Credits</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">niche_vlaanderen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Beschrijving model</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/INBO/niche_vlaanderen/blob/master/docs/model.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="beschrijving-model">
+<h1>Beschrijving model<a class="headerlink" href="#beschrijving-model" title="Permalink to this headline"></a></h1>
+<p>NICHE Vlaanderen (<em>Nature Impact Assessment of Changes in Hydro-Ecological Systems</em>) is een
+<strong>hydro-ecologisch model</strong> dat de <strong>potenties voor (grond)waterafhankelijke vegetatietypes</strong> in een
+gebied berekent <strong>op basis van</strong> informatie over de <strong>(abiotische) standplaatscondities</strong>.</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Overzicht</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="principe.html">Werking NICHE Vlaanderen</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="principe.html#berekening-standplaatscondities">Berekening standplaatscondities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="principe.html#berekening-potenties-voor-vegetatie-ontwikkeling">Berekening potenties voor vegetatie-ontwikkeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="principe.html#kenmerken-van-het-model">Kenmerken van het model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vegetatietype.html">NICHE vegetatietypen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trofie.html">Berekening trofie <code class="docutils literal notranslate"><span class="pre">nutrient_level</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="trofie.html#output">Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trofie.html#principe">Principe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trofie.html#invoergegevens">Invoergegevens</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trofie.html#implementatie-in-het-package-niche-vlaanderen">Implementatie in het package <code class="docutils literal notranslate"><span class="pre">niche_vlaanderen</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="trofie.html#berekening-stikstofmineralisatie">Berekening stikstofmineralisatie</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trofie.html#bepaling-totale-stikstof">Bepaling totale stikstof</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trofie.html#bepaling-gecodeerde-trofie">Bepaling gecodeerde trofie</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trofie.html#invloed-overstroming">Invloed overstroming</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="zuur.html">Berekening zuurgraad <code class="docutils literal notranslate"><span class="pre">acidity</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="zuur.html#output">Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zuur.html#principe">Principe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zuur.html#invoergegevens">Invoergegevens</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zuur.html#implementatie-in-het-package-niche-vlaanderen">Implementatie in het package <code class="docutils literal notranslate"><span class="pre">niche_vlaanderen</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="zuur.html#bepaling-bodem-glg-klasse">Bepaling bodem_GLG klasse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zuur.html#bepaling-kwel-klasse">Bepaling kwel klasse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zuur.html#bepaling-zuurcode">Bepaling zuurcode</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vegetatie_reftabel.html">Referentietabel vegetatie</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vegetatie_reftabel.html#opbouw-referentietabel">Opbouw referentietabel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vegetatie_reftabel.html#oorsprong-referentiewaarden">Oorsprong referentiewaarden</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vegetatie_reftabel.html#gebruik-implementatie">Gebruik/implementatie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vegetatie_reftabel.html#versiebeheer">Versiebeheer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vegetatie_reftabel.html#documentatie-aanpassingen">Documentatie aanpassingen</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vegetatie_reftabel.html#implementatie-in-niche-vlaanderen">Implementatie in <code class="docutils literal notranslate"><span class="pre">niche_vlaanderen</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="vegetatie_reftabel.html#gebruik-van-een-eigen-referentietabel">Gebruik van een eigen referentietabel</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vegetatie.html">Bepaling vegetatie <code class="docutils literal notranslate"><span class="pre">vegetation</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vegetatie.html#output">Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vegetatie.html#principe">Principe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vegetatie.html#invoergegevens">Invoergegevens</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vegetatie.html#implementatie-in-niche-vlaanderen">Implementatie in <code class="docutils literal notranslate"><span class="pre">niche_vlaanderen</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vegetatie.html#voorbeeld-volledig-model">Voorbeeld volledig model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vegetatie.html#vereenvoudigd-model">Vereenvoudigd model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vegetatie.html#gxg-afwijkingskaarten-voor-vereenvoudigd-model">GXG-afwijkingskaarten voor vereenvoudigd model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vegetatie.html#scenario-analyse">Scenario-analyse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vegetatie.html#gebiedsstatistieken">Gebiedsstatistieken</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="notendop.html" class="btn btn-neutral float-left" title="In een notendop" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="principe.html" class="btn btn-neutral float-right" title="Werking NICHE Vlaanderen" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017 - 2020, Research Institute for Nature and Forest (INBO).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

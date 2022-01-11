@@ -1,0 +1,490 @@
++<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bepaling vegetatie vegetation &mdash; niche_vlaanderen 1.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Invoer rasters" href="invoer.html" />
+    <link rel="prev" title="Referentietabel vegetatie" href="vegetatie_reftabel.html" />
+ +    <link href="_static/css/custom.css" rel="stylesheet" type="text/css">
+ +
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> niche_vlaanderen
+          </a>
+              <div class="version">
+                1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Model</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="notendop.html">In een notendop</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="model.html">Beschrijving model</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="principe.html">Werking NICHE Vlaanderen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vegetatietype.html">NICHE vegetatietypen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trofie.html">Berekening trofie <code class="docutils literal notranslate"><span class="pre">nutrient_level</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="zuur.html">Berekening zuurgraad <code class="docutils literal notranslate"><span class="pre">acidity</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="vegetatie_reftabel.html">Referentietabel vegetatie</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Bepaling vegetatie <code class="docutils literal notranslate"><span class="pre">vegetation</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#output">Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#principe">Principe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#invoergegevens">Invoergegevens</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#implementatie-in-niche-vlaanderen">Implementatie in <code class="docutils literal notranslate"><span class="pre">niche_vlaanderen</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#voorbeeld-volledig-model">Voorbeeld volledig model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vereenvoudigd-model">Vereenvoudigd model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gxg-afwijkingskaarten-voor-vereenvoudigd-model">GXG-afwijkingskaarten voor vereenvoudigd model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenario-analyse">Scenario-analyse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gebiedsstatistieken">Gebiedsstatistieken</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="invoer.html">Invoer rasters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kalibratie.html">Kalibratie</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overstroming.html">Overstromingsmodule</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Package</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Niche Configuration file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lowlevel.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Credits</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">niche_vlaanderen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="model.html">Beschrijving model</a> &raquo;</li>
+      <li>Bepaling vegetatie <code class="docutils literal notranslate"><span class="pre">vegetation</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/INBO/niche_vlaanderen/blob/master/docs/vegetatie.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="bepaling-vegetatie-vegetation">
+<span id="vegetation"></span><h1>Bepaling vegetatie <code class="docutils literal notranslate"><span class="pre">vegetation</span></code><a class="headerlink" href="#bepaling-vegetatie-vegetation" title="Permalink to this headline"></a></h1>
+<section id="output">
+<h2>Output<a class="headerlink" href="#output" title="Permalink to this headline"></a></h2>
+<p>NICHE Vlaanderen levert als finaal resultaat een uitspraak over het al dan niet aanwezig zijn van potenties voor elk van de vegetatietypen voor elke rastercel binnen het studiegebied. Het is een binair oordeel: wel of geen potentie. Voor elk vegetatietype bestaat het eindresultaat dus uit een raster met waarde 0 (potentie) of 1 (geen potentie).</p>
+</section>
+<section id="principe">
+<span id="vegetation-princ"></span><h2>Principe<a class="headerlink" href="#principe" title="Permalink to this headline"></a></h2>
+<p>De uitspraak over wel of geen potentie is het resultaat van een aftoetsing van de afzonderlijke invoerlagen, inclusief de <a class="reference internal" href="trofie.html"><span class="doc">trofie-</span></a> en <a class="reference internal" href="zuur.html"><span class="doc">zuurgraad</span></a> als intermediaire modelresultaten, aan de standplaatsvereisten (referentiewaarden) van elk van de vegetatietypen. Die standplaatsvereisten zitten gebundeld in de zgn. <a class="reference external" href="https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_vegetation.csv">referentietabel</a>. Op <a class="reference internal" href="vegetatie_reftabel.html"><span class="doc">deze pagina</span></a> wordt de opbouw van deze tabel en het principe van aftoetsing nader uitgelegd.</p>
+<p>De standplaatsvereisten zitten vervat in 7 variabelen:</p>
+<table class="docutils align-default" id="id5">
+<caption><span class="caption-text">Standplaatsvereisten uit referentietabel</span><a class="headerlink" href="#id5" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variabele</p></th>
+<th class="head"><p>full model</p></th>
+<th class="head"><p>simple model</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="invoer.html#soil-code"><span class="std std-ref">Bodemtype</span></a></p></td>
+<td><p>X</p></td>
+<td><p>X</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="trofie.html"><span class="doc">Trofiegraad</span></a></p></td>
+<td><p>X</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="zuur.html"><span class="doc">Zuurgraad</span></a></p></td>
+<td><p>X</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="invoer.html#mlw"><span class="std std-ref">Gemiddeld laagste grondwaterstand</span></a></p></td>
+<td><p>X</p></td>
+<td><p>X</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="invoer.html#mhw"><span class="std std-ref">Gemiddeld hoogste grondwaterstand</span></a></p></td>
+<td><p>X</p></td>
+<td><p>X</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="invoer.html#management-vegetation"><span class="std std-ref">Aftoetsing potenties aan beheer</span></a></p></td>
+<td><p>( X )</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="invoer.html#inundation-vegetation"><span class="std std-ref">Aftoetsing potenties aan overstromingsregime</span></a></p></td>
+<td><p>( X )</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>De potenties voor vegetatie-ontwikkeling kunnen op twee manieren worden berekend:</p>
+<ul class="simple">
+<li><p>Enerzijds door het <em>volledige NICHE Vlaanderen model</em> (<a class="reference external" href="https://inbo.github.io/niche_vlaanderen/getting_started.html#Running-a-full-Niche-model">full model</a>) te gebruiken, waarbij de berekende zuurgraad en trofie, het bodemtype en de gemiddelde laagste en hoogste grondwaterstanden mee de potenties bepalen;</p></li>
+<li><p>Anderzijds door een <em>afgeslankte/vereenvoudigde versie</em> (<a class="reference internal" href="#simple"><span class="std std-ref">simple model</span></a>) van NICHE Vlaanderen te gebruiken, waarbij enkel een aftoetsing aan de referentiewaarden gebeurt voor het bodemtype en de gemiddelde laagste en hoogste grondwaterstanden ter bepaling van de potenties.</p></li>
+</ul>
+<p>De aftoetsing aan beheer en overstromingsregime is optioneel in het volledige NICHE Vlaanderen model, en gebeurt niet in het vereenvoudigde model.</p>
+</section>
+<section id="invoergegevens">
+<span id="vegetation-input"></span><h2>Invoergegevens<a class="headerlink" href="#invoergegevens" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="invoer.html#soil-code"><span class="std std-ref">Bodemtype</span></a></p></li>
+<li><p><a class="reference internal" href="trofie.html"><span class="doc">Trofiegraad</span></a></p></li>
+<li><p><a class="reference internal" href="zuur.html"><span class="doc">Zuurgraad</span></a></p></li>
+<li><p><a class="reference internal" href="invoer.html#mlw"><span class="std std-ref">Gemiddeld laagste grondwaterstand</span></a> (min-max)</p></li>
+<li><p><a class="reference internal" href="invoer.html#mhw"><span class="std std-ref">Gemiddeld hoogste grondwaterstand</span></a> (min-max)</p></li>
+<li><p><a class="reference internal" href="invoer.html#management-vegetation"><span class="std std-ref">Aftoetsing potenties aan beheer</span></a></p></li>
+<li><p><a class="reference internal" href="invoer.html#inundation-vegetation"><span class="std std-ref">Aftoetsing potenties aan overstromingsregime</span></a></p></li>
+</ul>
+<p>Zie ook bovenstaande tabel.</p>
+</section>
+<section id="implementatie-in-niche-vlaanderen">
+<span id="vegetation-impl"></span><h2>Implementatie in <code class="docutils literal notranslate"><span class="pre">niche_vlaanderen</span></code><a class="headerlink" href="#implementatie-in-niche-vlaanderen" title="Permalink to this headline"></a></h2>
+<section id="voorbeeld-volledig-model">
+<h3>Voorbeeld volledig model<a class="headerlink" href="#voorbeeld-volledig-model" title="Permalink to this headline"></a></h3>
+<div class="topic">
+<p class="topic-title">Voorbeeld</p>
+<p>Gaan we uit van het voorbeeld, dan hebben we in vorige stappen bepaald:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Trofie: 5 (hypereutroof)</p></li>
+<li><p>Zuurgraad: 3 (neutraal/basisch)</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt>Andere invoergegevens zijn:</dt><dd><ul class="simple">
+<li><p>GLG: 50 cm onder maaiveld</p></li>
+<li><p>GHG: 10 cm onder maaiveld</p></li>
+<li><p>bodemcode: humusarme leembodem L1 (14)</p></li>
+</ul>
+</dd>
+</dl>
+<p>Zoeken we dit op in de referentietabel van NICHE Vlaanderen, dan krijgen we volgende opties:</p>
+<table class="docutils align-default" id="id6">
+<caption><span class="caption-text">potentiële vegetatie op basis van NICHE</span><a class="headerlink" href="#id6" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>veg_code</p></th>
+<th class="head"><p>veg_type</p></th>
+<th class="head"><p>soil_name</p></th>
+<th class="head"><p>nutrient_level</p></th>
+<th class="head"><p>acidity</p></th>
+<th class="head"><p>mhw_min</p></th>
+<th class="head"><p>mhw_max</p></th>
+<th class="head"><p>mlw_min</p></th>
+<th class="head"><p>mlw_max</p></th>
+<th class="head"><p>management</p></th>
+<th class="head"><p>inundation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>Caricion gracilis</p></td>
+<td><p>L1</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>31</p></td>
+<td><p>-32</p></td>
+<td><p>73</p></td>
+<td><p>-1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>Caricion gracilis</p></td>
+<td><p>L1</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>31</p></td>
+<td><p>-32</p></td>
+<td><p>73</p></td>
+<td><p>-1</p></td>
+<td><p>1</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>Caricion gracilis</p></td>
+<td><p>L1</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>31</p></td>
+<td><p>-32</p></td>
+<td><p>73</p></td>
+<td><p>-1</p></td>
+<td><p>3</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>Caricion gracilis</p></td>
+<td><p>L1</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>31</p></td>
+<td><p>-32</p></td>
+<td><p>73</p></td>
+<td><p>-1</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>Filipendulion</p></td>
+<td><p>L1</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>80</p></td>
+<td><p>-31</p></td>
+<td><p>170</p></td>
+<td><p>21</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>Filipendulion</p></td>
+<td><p>L1</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>80</p></td>
+<td><p>-31</p></td>
+<td><p>170</p></td>
+<td><p>21</p></td>
+<td><p>1</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>Magnocaricion met Phragmites</p></td>
+<td><p>L1</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>14</p></td>
+<td><p>-37</p></td>
+<td><p>55</p></td>
+<td><p>-3</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>12</p></td>
+<td><p>Magnocaricion met Phragmites</p></td>
+<td><p>L1</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>14</p></td>
+<td><p>-37</p></td>
+<td><p>55</p></td>
+<td><p>-3</p></td>
+<td><p>1</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>Lolio-Potentillion anserinae</p></td>
+<td><p>L1</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>30</p></td>
+<td><p>-26</p></td>
+<td><p>66</p></td>
+<td><p>-3</p></td>
+<td><p>2</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>Lolio-Potentillion anserinae</p></td>
+<td><p>L1</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>30</p></td>
+<td><p>-26</p></td>
+<td><p>66</p></td>
+<td><p>-3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>Lolio-Potentillion anserinae</p></td>
+<td><p>L1</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>30</p></td>
+<td><p>-26</p></td>
+<td><p>66</p></td>
+<td><p>-3</p></td>
+<td><p>2</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>Lolio-Potentillion anserinae</p></td>
+<td><p>L1</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>30</p></td>
+<td><p>-26</p></td>
+<td><p>66</p></td>
+<td><p>-3</p></td>
+<td><p>3</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>Lolio-Potentillion anserinae</p></td>
+<td><p>L1</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>30</p></td>
+<td><p>-26</p></td>
+<td><p>66</p></td>
+<td><p>-3</p></td>
+<td><p>3</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>Lolio-Potentillion anserinae</p></td>
+<td><p>L1</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>30</p></td>
+<td><p>-26</p></td>
+<td><p>66</p></td>
+<td><p>-3</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+</tr>
+</tbody>
+</table>
+<p>Volgende vegetatiecodes kunnen dus voorkomen: 7, 8, 12 en 16.</p>
+<p>Indien ook nog inundatie wordt meegerekend, bvb regelmatig overstromen (1) valt een aantal mogelijke codes weg. Mogelijke vegetaties zijn dan 7, 12 en 16.</p>
+</div>
+</section>
+<section id="vereenvoudigd-model">
+<span id="simple"></span><h3>Vereenvoudigd model<a class="headerlink" href="#vereenvoudigd-model" title="Permalink to this headline"></a></h3>
+<p>Bij het vereenvoudigde NICHE Vlaanderen model wordt enkel rekening gehouden met <a class="reference internal" href="invoer.html#mhw"><span class="std std-ref">GHG (Gemiddeld hoogste grondwaterstand) mhw</span></a>, <a class="reference internal" href="invoer.html#mlw"><span class="std std-ref">GLG (gemiddeld laagste grondwaterstand) mlw</span></a> en <a class="reference internal" href="invoer.html#soil-code"><span class="std std-ref">Bodemklasse soil_code</span></a> als invoerlagen.</p>
+<p>Een vereenvoudigd model is vooral geschikt om de directe invloed van (veranderingen in) de grondwaterstanden op de potentie na te gaan. Andere invloedsfactoren zoals de aanvoer van nutriënten, de impact van overstromingen en de mogelijke interactie met beheer worden immers buiten beschouwing gelaten. Een vereenvoudigd model is derhalve transparanter omdat de beslisregels bij de bepaling van de trofie- en zuurgraad niet toegepast worden. De resultaten zijn eenvoudiger te interpreteren, maar boeten uiteraard wel in op nauwkeurigheid/voorspellingskracht omdat abstractie gemaakt wordt van een deel van de realiteit.</p>
+<p>Met het package <code class="docutils literal notranslate"><span class="pre">niche_vlaanderen</span></code> kan een vereenvoudigd model <a class="reference external" href="https://inbo.github.io/niche_vlaanderen/getting_started.html#Creating-a-simple-NICHE-model">interactief</a> of via een <a class="reference external" href="https://inbo.github.io/niche_vlaanderen/cli.html#simple-model">configuratiebestand</a> opgebouwd worden.</p>
+</section>
+<section id="gxg-afwijkingskaarten-voor-vereenvoudigd-model">
+<span id="deviation"></span><h3>GXG-afwijkingskaarten voor vereenvoudigd model<a class="headerlink" href="#gxg-afwijkingskaarten-voor-vereenvoudigd-model" title="Permalink to this headline"></a></h3>
+<p>Voor veel studies is het niet enkel interessant om na te gaan welke vegetatie kan voorkomen, maar ook -als voor een vegetatietype geen potenties aangegeven worden- welke wijzigingen in glg en ghg vereist zijn om een bepaald vegetatietype alsnog ontwikkelingskansen te geven. Of anders gesteld: wat is de doelafstand tot de gewenste gemiddelde grondwaterstand (gxg) voor elk van de vegetatietypen.</p>
+<p>Met het package <code class="docutils literal notranslate"><span class="pre">niche_vlaanderen</span></code> kunnen GXG-afwijkingskaarten <a class="reference external" href="https://inbo.github.io/niche_vlaanderen/getting_started.html#Creating-a-simple-NICHE-model">interactief</a> of via een <a class="reference external" href="https://inbo.github.io/niche_vlaanderen/cli.html#simple-model">configuratiebestand</a> aangemaakt worden. Voor elk vegetatietype wordt een afwijkingskaart berekend voor zowel de gemiddelde hoogste als de gemiddelde laagste grondwaterstand. Negatieve waarden wijzen op te natte omstandigheden, positieve waarden op te droge omstandigheden.</p>
+</section>
+<section id="scenario-analyse">
+<span id="scenario-analysis"></span><h3>Scenario-analyse<a class="headerlink" href="#scenario-analyse" title="Permalink to this headline"></a></h3>
+<p>Vaak wordt in studies de impact van verschillende inrichtingsmaatregelen tegen elkaar afgewogen in termen van veranderingen in oppervlakte aan potenties voor welbepaalde vegetatietypen. Verschillende combinaties van inrichtingsmaatregelen worden dan doorgerekend, elk onder de vorm van een afzonderlijk NICHE Vlaanderen model met overeenkomstige invoerlagen die de impact van de maatregelen weerspiegelen. Elke combinatie zit gebundeld in een zgn. scenario. Scenario’s worden dan onderling vergeleken door de verschuivingen in oppervlakte aan potenties van de beoogde vegetatietypen te begroten.</p>
+<p>Met het package <code class="docutils literal notranslate"><span class="pre">niche_vlaanderen</span></code> kan een vergelijking tussen twee modellen/scenario’s (volledig of vereenvoudigd) enkel <a class="reference external" href="https://inbo.github.io/niche_vlaanderen/getting_started.html#Creating-a-simple-NICHE-model">interactief</a> gemaakt worden, niet via een configuratiebestand. De vergelijking kan gebeuren in tabelvorm (voor alle vegetatietypen) of als verschilkaarten voor elk vegetatietype.</p>
+</section>
+<section id="gebiedsstatistieken">
+<span id="zonal-stats"></span><h3>Gebiedsstatistieken<a class="headerlink" href="#gebiedsstatistieken" title="Permalink to this headline"></a></h3>
+<p>Naast een scenario-analyse is het vaak ook interessant om na te gaan in welke mate potenties verschillen in bepaalde deelzones van een studiegebied.</p>
+<p>Met het package <code class="docutils literal notranslate"><span class="pre">niche_vlaanderen</span></code> kan een samenvatting (tabel) van de oppervlakte aan potenties in specifieke deelzones van het studiegebied enkel <a class="reference external" href="https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Creating-statistics-per-shape-object">interactief</a> opgevraagd worden, niet via een configuratiebestand.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="vegetatie_reftabel.html" class="btn btn-neutral float-left" title="Referentietabel vegetatie" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="invoer.html" class="btn btn-neutral float-right" title="Invoer rasters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017 - 2020, Research Institute for Nature and Forest (INBO).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,811 @@
++<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advanced usage &mdash; niche_vlaanderen 1.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Flooding module" href="flooding.html" />
+    <link rel="prev" title="Getting started" href="getting_started.html" />
+ +    <link href="_static/css/custom.css" rel="stylesheet" type="text/css">
+ +
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> niche_vlaanderen
+          </a>
+              <div class="version">
+                1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Model</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notendop.html">In een notendop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model.html">Beschrijving model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="invoer.html">Invoer rasters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kalibratie.html">Kalibratie</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overstroming.html">Overstromingsmodule</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Package</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Advanced usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Using-config-files">Using config files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Comparing-Niche-classes">Comparing Niche classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Creating-deviation-maps">Creating deviation maps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Creating-statistics-per-shape-object">Creating statistics per shape object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Using-abiotic-grids">Using abiotic grids</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Overwriting-standard-code-tables">Overwriting standard code tables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="flooding.html">Flooding module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Niche Configuration file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lowlevel.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Credits</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">niche_vlaanderen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="tutorials.html">Tutorials</a> &raquo;</li>
+      <li>Advanced usage</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/INBO/niche_vlaanderen/blob/master/docs/advanced_usage.ipynb" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="Advanced-usage">
+<h1>Advanced usage<a class="headerlink" href="#Advanced-usage" title="Permalink to this headline"></a></h1>
+<section id="Using-config-files">
+<h2>Using config files<a class="headerlink" href="#Using-config-files" title="Permalink to this headline"></a></h2>
+<p>Instead of specifying all inputs using <a class="reference external" href="https://inbo.github.io/niche_vlaanderen/lowlevel.html#niche_vlaanderen.Niche.set_input">set_input</a>, it is possible to use a config file. A config file can be loaded using <a class="reference external" href="https://inbo.github.io/niche_vlaanderen/lowlevel.html#niche_vlaanderen.Niche.read_config_file">read_config_file</a> or it can be read and executed immediately by using <a class="reference external" href="https://inbo.github.io/niche_vlaanderen/lowlevel.html#niche_vlaanderen.Niche.run_config_file">run_config_file</a>.</p>
+<p>The syntax of the config file is explained more in detail in <a class="reference external" href="https://inbo.github.io/niche_vlaanderen/cli.html">Niche Configuration file</a>, but is already introduced here because it will be used in the next examples.</p>
+<p>If you want to recreate the examples below, the config files can be found under the <code class="docutils literal notranslate"><span class="pre">docs</span></code> folder, so if you <a class="reference external" href="https://inbo.github.io/niche_vlaanderen/getting_started.html#Interactive-usage">extract all the data</a> the you should be able to run the examples from the notebook.</p>
+</section>
+<section id="Comparing-Niche-classes">
+<h2>Comparing Niche classes<a class="headerlink" href="#Comparing-Niche-classes" title="Permalink to this headline"></a></h2>
+<p>Niche models can be compared using a <a class="reference internal" href="lowlevel.html#niche_vlaanderen.NicheDelta"><span class="std std-ref">NicheDelta</span></a> class. This can be used to compare different scenario’s.</p>
+<p>In our example, we will compare the results of the running Niche two times, once using a simple model and once using a full model.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">niche_vlaanderen</span> <span class="k">as</span> <span class="nn">nv</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">simple</span> <span class="o">=</span> <span class="n">nv</span><span class="o">.</span><span class="n">Niche</span><span class="p">()</span>
+<span class="n">simple</span><span class="o">.</span><span class="n">run_config_file</span><span class="p">(</span><span class="s2">&quot;simple.yml&quot;</span><span class="p">)</span>
+
+<span class="n">full</span> <span class="o">=</span> <span class="n">nv</span><span class="o">.</span><span class="n">Niche</span><span class="p">()</span>
+<span class="n">full</span><span class="o">.</span><span class="n">run_config_file</span><span class="p">(</span><span class="s2">&quot;full.yml&quot;</span><span class="p">)</span>
+
+<span class="n">delta</span> <span class="o">=</span> <span class="n">nv</span><span class="o">.</span><span class="n">NicheDelta</span><span class="p">(</span><span class="n">simple</span><span class="p">,</span> <span class="n">full</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">delta</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/advanced_usage_2_0.png" src="_images/advanced_usage_2_0.png" />
+</div>
+</div>
+<p>It is also possible to show the areas in a dataframe by using the <a class="reference internal" href="lowlevel.html#niche_vlaanderen.NicheDelta.table"><span class="std std-ref">table</span></a> attribute.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delta</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>vegetation</th>
+      <th>presence</th>
+      <th>area_ha</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>not present in both models</td>
+      <td>14.44</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>present in both models</td>
+      <td>8.88</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>only in model 1</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2</td>
+      <td>not present in both models</td>
+      <td>11.52</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2</td>
+      <td>only in model 1</td>
+      <td>10.00</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Like Niche, NicheDelta also has a write method, which takes a directory as an argument.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delta</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;comparison_output&quot;</span><span class="p">,</span> <span class="n">overwrite_files</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Creating-deviation-maps">
+<h2>Creating deviation maps<a class="headerlink" href="#Creating-deviation-maps" title="Permalink to this headline"></a></h2>
+<p>In many cases, it is not only important to find out which vegetation types are possible given the different input files, but also to find out how much change would be required to <code class="docutils literal notranslate"><span class="pre">mhw</span></code> or <code class="docutils literal notranslate"><span class="pre">mlw</span></code> to allow a certain vegetation type.</p>
+<p>To create deviation maps, it is necessary to <a class="reference internal" href="lowlevel.html#niche_vlaanderen.Niche.run"><span class="std std-ref">run</span></a> a model with the <code class="docutils literal notranslate"><span class="pre">deviation</span></code> option.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dev</span> <span class="o">=</span> <span class="n">nv</span><span class="o">.</span><span class="n">Niche</span><span class="p">()</span>
+<span class="n">dev</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;mhw&quot;</span><span class="p">,</span><span class="s2">&quot;../testcase/zwarte_beek/input/mhw.asc&quot;</span><span class="p">)</span>
+<span class="n">dev</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;mlw&quot;</span><span class="p">,</span><span class="s2">&quot;../testcase/zwarte_beek/input/mhw.asc&quot;</span><span class="p">)</span>
+<span class="n">dev</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;soil_code&quot;</span><span class="p">,</span><span class="s2">&quot;../testcase/zwarte_beek/input/soil_code.asc&quot;</span><span class="p">)</span>
+<span class="n">dev</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">deviation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">full_model</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The deviation maps can be plotted by specifying either mhw or mlw with the vegetation type, eg mhw_14 (to show the deviation between mhw and the required mhw for vegetation type 14). Positive values indicate that the actual condition is too dry for the vegetation type. Negative values indicate that the actual condition is too wet for the vegetation type.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dev</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s2">&quot;mlw&quot;</span><span class="p">)</span>
+<span class="n">dev</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s2">&quot;mlw_14&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/advanced_usage_10_0.png" src="_images/advanced_usage_10_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/advanced_usage_10_1.png" src="_images/advanced_usage_10_1.png" />
+</div>
+</div>
+</section>
+<section id="Creating-statistics-per-shape-object">
+<h2>Creating statistics per shape object<a class="headerlink" href="#Creating-statistics-per-shape-object" title="Permalink to this headline"></a></h2>
+<p>Niche also contains a helper function that allows one to calculate the possible vegetation by using a vector dataset, such as a .geojson or .shp file.</p>
+<p>The vegetation is returned as a pandas dataframe, where shapes are identified by their id and the area not covered by a shape gets <code class="docutils literal notranslate"><span class="pre">shape_id</span></code> -1.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">full</span><span class="o">.</span><span class="n">zonal_stats</span><span class="p">(</span><span class="s2">&quot;../testcase/zwarte_beek/input/study_area_l72.geojson&quot;</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>vegetation</th>
+      <th>shape_id</th>
+      <th>presence</th>
+      <th>area_ha</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0</td>
+      <td>not present</td>
+      <td>15.44</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>0</td>
+      <td>present</td>
+      <td>8.88</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>0</td>
+      <td>no data</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2</td>
+      <td>0</td>
+      <td>not present</td>
+      <td>21.52</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2</td>
+      <td>0</td>
+      <td>present</td>
+      <td>2.80</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>79</th>
+      <td>27</td>
+      <td>-1</td>
+      <td>not present</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>80</th>
+      <td>27</td>
+      <td>-1</td>
+      <td>present</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>81</th>
+      <td>28</td>
+      <td>-1</td>
+      <td>no data</td>
+      <td>15.16</td>
+    </tr>
+    <tr>
+      <th>82</th>
+      <td>28</td>
+      <td>-1</td>
+      <td>not present</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>83</th>
+      <td>28</td>
+      <td>-1</td>
+      <td>present</td>
+      <td>0.00</td>
+    </tr>
+  </tbody>
+</table>
+<p>168 rows × 4 columns</p>
+</div></div>
+</div>
+</section>
+<section id="Using-abiotic-grids">
+<h2>Using abiotic grids<a class="headerlink" href="#Using-abiotic-grids" title="Permalink to this headline"></a></h2>
+<p>In certain cases the intermediary grids of Acidity or NutrientLevel need changes, to compensate for specific circumstances.</p>
+<p>In that case it is possible to run a Niche model and make some adjustments to the grid and then using an abiotic grid as an input.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">niche_vlaanderen</span> <span class="k">as</span> <span class="nn">nv</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">full</span> <span class="o">=</span> <span class="n">nv</span><span class="o">.</span><span class="n">Niche</span><span class="p">()</span>
+<span class="n">full</span><span class="o">.</span><span class="n">run_config_file</span><span class="p">(</span><span class="s2">&quot;full.yml&quot;</span><span class="p">)</span>
+<span class="n">full</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;output_abiotic&quot;</span><span class="p">,</span> <span class="n">overwrite_files</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Now it is possible to adapt the <code class="docutils literal notranslate"><span class="pre">acidity</span></code> and <code class="docutils literal notranslate"><span class="pre">nutrient_level</span></code> grids outside niche. For this demo, we will use some Python magic to make all nutrient levels one level lower. Note that there is no need to do this in Python, any other tool could be used as well. So if you don’t understand this code - don’t panic (and ignore the warning)!</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rasterio</span>
+<span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;output_abiotic/full_nutrient_level.tif&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+    <span class="n">nutrient_level</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">profile</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">profile</span>
+    <span class="n">nodata</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">nodatavals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">nutrient_level</span><span class="p">[</span><span class="n">nutrient_level</span> <span class="o">!=</span> <span class="n">nodata</span><span class="p">]</span> <span class="o">=</span> <span class="n">nutrient_level</span><span class="p">[</span><span class="n">nutrient_level</span> <span class="o">!=</span> <span class="n">nodata</span><span class="p">]</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="c1"># we can not have nutrient level 0, so we set all places where this occurs to 1</span>
+<span class="n">nutrient_level</span><span class="p">[</span><span class="n">nutrient_level</span> <span class="o">==</span><span class="mi">0</span> <span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;output_abiotic/adjusted_nutrient.tif&quot;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">profile</span><span class="p">)</span> <span class="k">as</span> <span class="n">dst</span><span class="p">:</span>
+    <span class="n">dst</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">nutrient_level</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Next we will create a new niche model using the same options as our previous full models, but we will add the previously calculated acidity as input: in this case, this acidity grid will be used (and not calculated from the other grids). Note that we use the <code class="docutils literal notranslate"><span class="pre">read_config_file</span></code> method (and not <code class="docutils literal notranslate"><span class="pre">run_config_file</span></code>) because we still want to edit the configuration before running.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adjusted</span> <span class="o">=</span> <span class="n">nv</span><span class="o">.</span><span class="n">Niche</span><span class="p">()</span>
+<span class="n">adjusted</span><span class="o">.</span><span class="n">read_config_file</span><span class="p">(</span><span class="s2">&quot;full.yml&quot;</span><span class="p">)</span>
+<span class="n">adjusted</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;nutrient_level&quot;</span><span class="p">,</span> <span class="s2">&quot;output_abiotic/adjusted_nutrient.tif&quot;</span><span class="p">)</span>
+<span class="n">adjusted</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;adjusted_nutrient_level&quot;</span>
+<span class="n">adjusted</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="n">adjusted</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">full</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/advanced_usage_18_0.png" src="_images/advanced_usage_18_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/advanced_usage_18_1.png" src="_images/advanced_usage_18_1.png" />
+</div>
+</div>
+</section>
+<section id="Overwriting-standard-code-tables">
+<h2>Overwriting standard code tables<a class="headerlink" href="#Overwriting-standard-code-tables" title="Permalink to this headline"></a></h2>
+<p>One is free to adapt the <a class="reference external" href="https://inbo.github.io/niche_vlaanderen/codetables.html">standard code tables</a> that are used by NICHE. By specifying the paths to the adapted code tables in a NICHE class object, the standard code tables can be overwritten. In this way, standard model functioning can be tweaked. However, it is strongly advised to use ecological data that is reviewed by experts and to have in-depth knowledge of the <a class="reference external" href="https://inbo.github.io/niche_vlaanderen/model.html">model
+functioning</a>.</p>
+<p>The possible code tables that can be adapted and set within a <a class="reference external" href="https://inbo.github.io/niche_vlaanderen/lowlevel.html">NICHE object</a> are:</p>
+<p>ct_acidity, ct_soil_mlw_class, ct_soil_codes, lnk_acidity, ct_seepage, ct_vegetation, ct_management, ct_nutrient_level and ct_mineralisation</p>
+<p>After adapting the vegetation code table for type 7 (Caricion gracilis) on peaty soil (V) by randomly altering the maximum <code class="docutils literal notranslate"><span class="pre">mhw</span></code> and <code class="docutils literal notranslate"><span class="pre">mlw</span></code> to 5 and 4 cm resp. (i.e. below ground, instead of standard values of -28 and -29 cm) and saving the file to ct_vegetation_adj7.csv, the adjusted model can be built and run.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adjusted_ct</span> <span class="o">=</span> <span class="n">nv</span><span class="o">.</span><span class="n">Niche</span><span class="p">(</span><span class="n">ct_vegetation</span> <span class="o">=</span> <span class="s2">&quot;ct_vegetation_adj7.csv&quot;</span><span class="p">)</span>
+<span class="n">adjusted_ct</span><span class="o">.</span><span class="n">read_config_file</span><span class="p">(</span><span class="s2">&quot;full.yml&quot;</span><span class="p">)</span>
+<span class="n">adjusted_ct</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Example of changed potential area of Caricion gracilis vegetation type because of the changes set in the vegetation code table:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adjusted_ct</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">full</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/advanced_usage_23_0.png" src="_images/advanced_usage_23_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/advanced_usage_23_1.png" src="_images/advanced_usage_23_1.png" />
+</div>
+</div>
+<p>Potential area is shrinking because of the range of grondwater levels that have become more narrow (excluding the wettest places).</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="getting_started.html" class="btn btn-neutral float-left" title="Getting started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="flooding.html" class="btn btn-neutral float-right" title="Flooding module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017 - 2020, Research Institute for Nature and Forest (INBO).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,250 @@
++<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installation &mdash; niche_vlaanderen 1.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tutorials" href="tutorials.html" />
+    <link rel="prev" title="Overstromingsmodule" href="overstroming.html" />
+ +    <link href="_static/css/custom.css" rel="stylesheet" type="text/css">
+ +
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> niche_vlaanderen
+          </a>
+              <div class="version">
+                1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Model</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notendop.html">In een notendop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model.html">Beschrijving model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="invoer.html">Invoer rasters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kalibratie.html">Kalibratie</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overstroming.html">Overstromingsmodule</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Package</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#windows">Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#upgrading">Upgrading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-a-specific-version">Installing a specific version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#alternative-installation">Alternative installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-niche">Running niche</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#optionally-jupyter-notebook">Optionally - Jupyter Notebook</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Niche Configuration file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lowlevel.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Credits</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">niche_vlaanderen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Installation</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/INBO/niche_vlaanderen/blob/master/docs/installation.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h1>
+<section id="windows">
+<h2>Windows<a class="headerlink" href="#windows" title="Permalink to this headline"></a></h2>
+<p>The recommended way of installing niche on windows uses <a class="reference external" href="https://conda.io/miniconda.html">miniconda</a> for installation.
+The recommended version is <a class="reference external" href="https://repo.continuum.io/miniconda/Miniconda3-4.7.10-Windows-x86_64.exe">64 bit with Python 3.7</a>.</p>
+<p>The installation can proceed without administrator rights, keep the default options. After miniconda is installed,
+we will proceed installing niche_vlaanderen in its own environment.</p>
+<p>Start the <cite>Anaconda prompt</cite> from the start menu</p>
+<p>Create an environment that will contain niche and its dependencies.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>C:<span class="se">\U</span>sers<span class="se">\j</span>ohan<span class="se">\M</span>iniconda3<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\j</span>ohan&gt; conda create --name niche
+</pre></div>
+</div>
+<p>Activate the niche environment</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>C:<span class="se">\U</span>sers<span class="se">\j</span>ohan<span class="se">\M</span>iniconda3<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\j</span>ohan&gt; activate niche
+</pre></div>
+</div>
+<p>And install niche and it’s dependencies</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda install pandas pyyaml rasterio fiona
+pip install niche_vlaanderen
+</pre></div>
+</div>
+<p>It is strongly recommended to install also <cite>matplotlib</cite> (otherwise plotting
+will not work) and <cite>jupyter</cite> notebook, which allows interactive usage from a web browser.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda install matplotlib jupyter
+</pre></div>
+</div>
+<p>You can verify the installation was successful by running the cli interface.
+Note you must activate niche once more, because some changes were made during
+installation.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>C:<span class="se">\U</span>sers<span class="se">\j</span>ohan<span class="se">\M</span>iniconda3<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\j</span>ohan&gt; activate niche
+<span class="o">(</span>niche<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\j</span>ohan&gt; niche --help
+Usage: niche <span class="o">[</span>OPTIONS<span class="o">]</span> CONFIG
+
+  Command line interface to the NICHE vegetation model
+
+Options:
+  --example  prints an example configuration file
+  --version  prints the version number
+  --help     Show this message and exit.
+</pre></div>
+</div>
+</section>
+<section id="upgrading">
+<h2>Upgrading<a class="headerlink" href="#upgrading" title="Permalink to this headline"></a></h2>
+<p>Existing installations of Niche can be updated using pip (for windows, run
+from the Anaconda prompt, after downloading the environment file.
+<a class="reference external" href="https://cdn.rawgit.com/inbo/niche_vlaanderen/master/docs/niche_env.yml">https://cdn.rawgit.com/inbo/niche_vlaanderen/master/docs/niche_env.yml</a></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install niche_vlaanderen --upgrade
+</pre></div>
+</div>
+</section>
+<section id="installing-a-specific-version">
+<h2>Installing a specific version<a class="headerlink" href="#installing-a-specific-version" title="Permalink to this headline"></a></h2>
+<p>If you want to install a specific niche version, you can install using pip:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>C:<span class="se">\U</span>sers<span class="se">\j</span>ohan<span class="se">\M</span>iniconda3<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\j</span>ohan&gt; activate niche
+<span class="o">(</span>niche<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\j</span>ohan&gt; pip install <span class="nv">niche_vlaanderen</span><span class="o">==</span><span class="m">1</span>.0
+</pre></div>
+</div>
+</section>
+<section id="alternative-installation">
+<h2>Alternative installation<a class="headerlink" href="#alternative-installation" title="Permalink to this headline"></a></h2>
+<p>It is possible to install niche without using an environment. This is currently not
+the recommended installation as it requires setting an environment variable for
+opening some grid files. (See <a class="reference internal" href="faq.html#missing-gcs"><span class="std std-ref">Missing gcs.csv file</span></a> for instructions).</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda install pandas pyyaml rasterio fiona
+pip install niche_vlaanderen
+</pre></div>
+</div>
+<p>Like for the normal installation, it is strongly recommended to install also <cite>matplotlib</cite> (otherwise plotting
+will not work) and <cite>jupyter</cite> notebook, which allows interactive usage from a web browser.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda install matplotlib jupyter
+</pre></div>
+</div>
+</section>
+<section id="running-niche">
+<h2>Running niche<a class="headerlink" href="#running-niche" title="Permalink to this headline"></a></h2>
+<p>Whenever you want to use niche (either from the command line or Python) you need
+to start from the <cite>Anaconda prompt</cite> (in the start menu)
+and activate the environment:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>C:<span class="se">\U</span>sers<span class="se">\j</span>ohan<span class="se">\M</span>iniconda3<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\j</span>ohan&gt; activate niche
+</pre></div>
+</div>
+</section>
+<section id="optionally-jupyter-notebook">
+<h2>Optionally - Jupyter Notebook<a class="headerlink" href="#optionally-jupyter-notebook" title="Permalink to this headline"></a></h2>
+<p>If you want to run niche_vlaanderen interactively, we recommend using a [jupyter notebook](<a class="reference external" href="http://jupyter.org/">http://jupyter.org/</a>).
+To run this, from the anaconda prompt do:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">johan</span>\<span class="n">Miniconda3</span><span class="p">)</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">johan</span><span class="o">&gt;</span> <span class="n">activate</span> <span class="n">niche</span>
+<span class="p">(</span><span class="n">niche</span><span class="p">)</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">johan</span><span class="o">&gt;</span> <span class="n">jupyter</span> <span class="n">notebook</span>
+</pre></div>
+</div>
+<p>This should open a webbrowser pointing towards <a class="reference external" href="http://localhost:8888">http://localhost:8888</a> . If you browser does not open, try looking for the
+correct URL at the anaconda prompt.</p>
+<p>The <a class="reference internal" href="tutorials.html"><span class="doc">Tutorials</span></a> will use these jupyter notebooks, and are the best place to continue from here.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="overstroming.html" class="btn btn-neutral float-left" title="Overstromingsmodule" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tutorials.html" class="btn btn-neutral float-right" title="Tutorials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017 - 2020, Research Institute for Nature and Forest (INBO).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

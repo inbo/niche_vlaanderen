@@ -1,0 +1,331 @@
++<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NICHE vegetatietypen &mdash; niche_vlaanderen 1.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Berekening trofie nutrient_level" href="trofie.html" />
+    <link rel="prev" title="Werking NICHE Vlaanderen" href="principe.html" />
+ +    <link href="_static/css/custom.css" rel="stylesheet" type="text/css">
+ +
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> niche_vlaanderen
+          </a>
+              <div class="version">
+                1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Model</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="notendop.html">In een notendop</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="model.html">Beschrijving model</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="principe.html">Werking NICHE Vlaanderen</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">NICHE vegetatietypen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trofie.html">Berekening trofie <code class="docutils literal notranslate"><span class="pre">nutrient_level</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="zuur.html">Berekening zuurgraad <code class="docutils literal notranslate"><span class="pre">acidity</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="vegetatie_reftabel.html">Referentietabel vegetatie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vegetatie.html">Bepaling vegetatie <code class="docutils literal notranslate"><span class="pre">vegetation</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="invoer.html">Invoer rasters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kalibratie.html">Kalibratie</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overstroming.html">Overstromingsmodule</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Package</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Niche Configuration file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lowlevel.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Credits</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">niche_vlaanderen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="model.html">Beschrijving model</a> &raquo;</li>
+      <li>NICHE vegetatietypen</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/INBO/niche_vlaanderen/blob/master/docs/vegetatietype.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="niche-vegetatietypen">
+<h1>NICHE vegetatietypen<a class="headerlink" href="#niche-vegetatietypen" title="Permalink to this headline"></a></h1>
+<p>NICHE Vlaanderen doet een uitspraak over <strong>28 vegetatietypen</strong>. Het gaat zowel om bossen, ruigten, graslanden als heiden.
+Het betreft vooral stabiele, ongestoorde vegetatietypen, maar ook enkele rompgemeenschappen zijn opgenomen. De set met veldopnamen
+die gebruikt werden om het model van referentiewaarden te voorzien, omvatte ook vegetatietypen die niet echt als
+(strikt) waterafhankelijk te beschouwen zijn, zoals het Berken-eikenbos en het verbond van Struikhei en Kruipbrem. Voor deze
+drogere typen is niet de volledige range in de database aanwezig, maar enkel het vochtige traject.</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Vegetatietypen NICHE Vlaanderen</span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Wetenschappelijke Naam</p></th>
+<th class="head"><p>Nederlandse Naam</p></th>
+<th class="head"><p>Groep</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Sphagno-Betuletum</p></td>
+<td><p>Berkenbroekbos</p></td>
+<td><p>Bos</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Carici elongatae-Alnetum</p></td>
+<td><p>Mesotroof elzenbroekbos</p></td>
+<td><p>Bos</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Macrophorbio-Alnetum</p></td>
+<td><p>Ruigte elzenbroekbos</p></td>
+<td><p>Bos</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Pruno-Fraxinetum</p></td>
+<td><p>Vogelkers-essenbos</p></td>
+<td><p>Bos</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>Carpinion betuli</p></td>
+<td><p>Haagbeuken-verbond</p></td>
+<td><p>Bos</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>Betulo-Quercetum roboris</p></td>
+<td><p>Berken-eikenbos</p></td>
+<td><p>Bos</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>Caricion gracilis</p></td>
+<td><p>Verbond van Scherpe zegge</p></td>
+<td><p>Ruigte</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>Filipendulion</p></td>
+<td><p>Moerasspirea-verbond</p></td>
+<td><p>Ruigte</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>Galio-Alliarion</p></td>
+<td><p>Verbond van Look-zonder-look</p></td>
+<td><p>Ruigte</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>RG Phalaris arundinacea-[Convolvulo-Filipendulion]</p></td>
+<td><p>Rompgemeenschap van Rietgras</p></td>
+<td><p>Ruigte</p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p>RG Juncus effusus-[Molinietalia/Lolio-Potentillion]</p></td>
+<td><p>Rompgemeenschap van Pitrus</p></td>
+<td><p>Ruigte</p></td>
+</tr>
+<tr class="row-odd"><td><p>12</p></td>
+<td><p>Magnocaricion met Phragmites</p></td>
+<td><p>Grote zeggevegetatie met Riet</p></td>
+<td><p>Ruigte</p></td>
+</tr>
+<tr class="row-even"><td><p>13</p></td>
+<td><p>RG Glyceria maxima-[Phragmitetea]</p></td>
+<td><p>Rompgemeenschap van Liesgras</p></td>
+<td><p>Ruigte</p></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>Caricion nigrae</p></td>
+<td><p>Verbond van Zwarte zegge</p></td>
+<td><p>Grasland</p></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>Caricion davallianae</p></td>
+<td><p>Knopbies-verbond/ kalkmoeras</p></td>
+<td><p>Grasland</p></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>Lolio-Potentillion anserinae</p></td>
+<td><p>Zilverschoon-verbond</p></td>
+<td><p>Grasland</p></td>
+</tr>
+<tr class="row-even"><td><p>17</p></td>
+<td><p>Junco-Molinion</p></td>
+<td><p>Verbond van Biezenknoppen en Pijpestrootje</p></td>
+<td><p>Grasland</p></td>
+</tr>
+<tr class="row-odd"><td><p>18</p></td>
+<td><p>Calthion palustris</p></td>
+<td><p>Dotterbloem-verbond</p></td>
+<td><p>Grasland</p></td>
+</tr>
+<tr class="row-even"><td><p>19</p></td>
+<td><p>Alopecurion pratensis</p></td>
+<td><p>Verbond van Grote vossestaart</p></td>
+<td><p>Grasland</p></td>
+</tr>
+<tr class="row-odd"><td><p>20</p></td>
+<td><p>Arrhenatherion elatioris</p></td>
+<td><p>Glanshaver-verbond</p></td>
+<td><p>Grasland</p></td>
+</tr>
+<tr class="row-even"><td><p>21</p></td>
+<td><p>Cynosurion cristati</p></td>
+<td><p>Kamgras-verbond</p></td>
+<td><p>Grasland</p></td>
+</tr>
+<tr class="row-odd"><td><p>22</p></td>
+<td><p>Ericion tetralicis</p></td>
+<td><p>Dophei-verbond</p></td>
+<td><p>Heide</p></td>
+</tr>
+<tr class="row-even"><td><p>23</p></td>
+<td><p>Venige heide</p></td>
+<td><p>Venige heide</p></td>
+<td><p>Heide</p></td>
+</tr>
+<tr class="row-odd"><td><p>24</p></td>
+<td><p>Oxycocco-Ericion</p></td>
+<td><p>Hoogveenmos-verbond</p></td>
+<td><p>Heide</p></td>
+</tr>
+<tr class="row-even"><td><p>25</p></td>
+<td><p>Rynchosporion albae</p></td>
+<td><p>Verbond van Veenmos en Snavelbies</p></td>
+<td><p>Heide</p></td>
+</tr>
+<tr class="row-odd"><td><p>26</p></td>
+<td><p>RG Molinia caerulea [Oxycocco-sphagnetea]</p></td>
+<td><p>Rompgemeenschap van Pijpestrootje</p></td>
+<td><p>Heide</p></td>
+</tr>
+<tr class="row-even"><td><p>27</p></td>
+<td><p>RG Myrica gale [Oxycocco-sphagnetea]</p></td>
+<td><p>Rompgemeenschap van Wilde gagel</p></td>
+<td><p>Heide</p></td>
+</tr>
+<tr class="row-odd"><td><p>28</p></td>
+<td><p>Calluno-Genistion pilosae</p></td>
+<td><p>Verbond van Struikhei en Kruipbrem</p></td>
+<td><p>Heide</p></td>
+</tr>
+</tbody>
+</table>
+<p>Een indicatieve <strong>vertaling</strong> van de NICHE vegetatietypen <strong>naar Europese habitattypen en regionaal belangrijke biotopen</strong> (rbb) wordt
+in de tabel <a class="reference external" href="https://github.com/inbo/niche_vlaanderen/blob/master/docs/_data/niche_hab_rbb.csv">niche_hab_rbb.csv</a> gegeven.</p>
+<p>Een vertaling blijft uiteraard een vertaling, met de inherente kans op een over- of onderschatting van de aanwezigheid van de NICHE vegetatietypen.
+Niet elk NICHE vegetatietype stemt immers helemaal overeen met één of meerdere Europese habitattypen of rbb. Hoe groot deze onder- en overschatting is,
+is moeilijk te begroten. Vegetatie- of habitattypen zijn al niet altijd eenduidig te definiëren, of een strikte afbakening is althans niet altijd evident.
+Bepalen in welke mate ze overlappen is dat nog minder. Ze maken immers steeds deel uit van een ecologisch continuüm waarin grenzen steeds artificieel zijn.</p>
+<p>In algemene termen kan gesteld worden dat door het toekennen van de potenties voor de NICHE vegetatietypen er
+wellicht een overschatting gemaakt wordt van de potenties van de volgende habitat(sub)typen en rbb: 6410_mo,
+6410_ve, 6430_hf, 6430_hw, 6430_mr, 6510_hua, 6510_hus, rbbmc, rbbmr. Voor de overige habitat(sub)typen of
+rbb leunen de NICHE vegetatietypen en de habitat(sub)typen beter bij elkaar aan, en zijn de potenties bijgevolg
+beter over te dragen.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="principe.html" class="btn btn-neutral float-left" title="Werking NICHE Vlaanderen" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="trofie.html" class="btn btn-neutral float-right" title="Berekening trofie nutrient_level" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017 - 2020, Research Institute for Nature and Forest (INBO).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

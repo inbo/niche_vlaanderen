@@ -1,0 +1,231 @@
++<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kalibratie &mdash; niche_vlaanderen 1.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Overstromingsmodule" href="overstroming.html" />
+    <link rel="prev" title="Invoer rasters" href="invoer.html" />
+ +    <link href="_static/css/custom.css" rel="stylesheet" type="text/css">
+ +
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> niche_vlaanderen
+          </a>
+              <div class="version">
+                1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Model</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="notendop.html">In een notendop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model.html">Beschrijving model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="invoer.html">Invoer rasters</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Kalibratie</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#kalibratie-trofie-en-zuurgraad">Kalibratie trofie- en zuurgraad</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#kalibratie-potenties-vegetatievoorspellingen">Kalibratie potenties/vegetatievoorspellingen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#kalibratieresultaten-verbeteren">Kalibratieresultaten verbeteren</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="overstroming.html">Overstromingsmodule</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Package</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Niche Configuration file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lowlevel.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Credits</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">niche_vlaanderen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Kalibratie</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/INBO/niche_vlaanderen/blob/master/docs/kalibratie.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="kalibratie">
+<h1>Kalibratie<a class="headerlink" href="#kalibratie" title="Permalink to this headline"></a></h1>
+<p>Het model moet gekalibreerd worden op basis van een gekende referentietoestand. Meestal (en ook verder als voorbeeld in dit document) wordt de actuele toestand hiervoor gebruikt.</p>
+<p>Bij de kalibratie worden <strong>de beschikbare biotische</strong> (vegetatiekaarten)
+<strong>en abiotische gegevens</strong> (terreinmetingen en modelberekeningen) <strong>vergeleken met de outputlagen van NICHE</strong> (zuur- en trofiegraad, potenties).</p>
+<section id="kalibratie-trofie-en-zuurgraad">
+<h2>Kalibratie trofie- en zuurgraad<a class="headerlink" href="#kalibratie-trofie-en-zuurgraad" title="Permalink to this headline"></a></h2>
+<p>Tijdens een eerste kalibratiestap wordt er gekeken of de door NICHE berekende trofie en zuurgraad
+in overeenstemming zijn met de beschikbare abiotische gegevens. Hierbij kunnen bv. veldmetingen van bodem pH vergeleken
+worden met de voorspellingen van NICHE Vlaanderen voor de zuurgraad.</p>
+<p>Deze stap heeft natuurlijk enkel betrekking op de kalibratie voor het volledige (<a class="reference external" href="https://inbo.github.io/niche_vlaanderen/getting_started.html#Running-a-full-Niche-model">full</a>) NICHE model. In het vereenvoudigde (<a class="reference external" href="https://inbo.github.io/niche_vlaanderen/getting_started.html#Creating-a-simple-NICHE-model">simple</a>) model wordt immers geen rekening gehouden met de trofie- en zuurgraad bij de bepaling van de potenties.</p>
+</section>
+<section id="kalibratie-potenties-vegetatievoorspellingen">
+<h2>Kalibratie potenties/vegetatievoorspellingen<a class="headerlink" href="#kalibratie-potenties-vegetatievoorspellingen" title="Permalink to this headline"></a></h2>
+<p>Tijdens een tweede kalibratiestap wordt dan gekeken of op de plaatsen waar een vegetatietype actueel aanwezig is,
+ook effectief potenties voorspeld worden. Hoe groter de actuele oppervlakte waarvoor potentie opgegeven wordt, hoe beter.
+En, omgekeerd, hoe minder potentie voorspeld wordt binnen het actuele voorkomen, hoe slechter.
+Plaatsen waar potenties voorspeld worden, maar het vegetatietype actueel niet aanwezig is, zijn niet per se foutief, maar kunnen bv. het gevolg zijn
+van het toegepaste beheer.</p>
+<p>Om deze tweede kalibratiestap uit te voeren is er dus ook nood aan een overzicht van de <em>actuele verspreiding van de NICHE vegetatietypen</em>.
+Hiervoor kan een beroep worden gedaan op
+eigen vegetatiekaarten of op de <a class="reference external" href="https://www.inbo.be/nl/beschikbaarheid">Biologische Waarderingskaart(BWK)-Habitatkaart</a> van het <a class="reference external" href="https://www.inbo.be">Instituut voor Natuur- en Bosonderzoek</a>.</p>
+<p>Een indicatieve vertaalsleutel tussen de Europese habitattypen en regionaal belangrijke biotopen
+(rbb) die in de Habitatkaart worden gebruikt, en de NICHE vegetatietypen, wordt in de
+tabel <a class="reference external" href="https://github.com/inbo/niche_vlaanderen/blob/master/docs/_data/niche_hab_rbb.csv">niche_hab_rbb.csv</a> gegeven.</p>
+<p>Een <strong>kalibratiescore</strong> kan per vegetatietype worden berekend als de mate waarin de actuele aanwezigheid van het type voorspeld wordt
+door het NICHE Vlaanderen model in het studiegebied. Hiervoor wordt gekeken <em>hoe groot de
+oppervlakte is met voorspelde potentie binnen elke polygoon van de actuele vegetatiekaart</em> (bv. de BWK-habitatkaart) waarbinnen het vegetatietype actueel
+aanwezig is.</p>
+<p>Als er gebruik wordt gemaakt van de BWK-habitatkaart moet ermee rekening gehouden worden dat niet elke polygoon uitsluitend één enkel vegetatietype bevat.
+Soms worden meerdere vegetatietypen
+toegekend aan één enkele polygoon. Elk aanwezig vegetatietype krijgt dan tijdens de kartering een aandeel (%) toegekend in de oppervlakte van de polygoon
+(veld “PHABx”, met x de volgorde volgens afnemend aandeel van de verschillende vegetatietypen). Dat aandeel kan worden verrekend
+in de kalibratiescore. Is een vegetatietype bv. slechts in 30% van de polygoonoppervlakte aanwezig, dan bedraagt de
+kalibratiescore op basis van die ene polygoon 100% van zodra er voor minstens  30% van de polygoonoppervlakte potenties
+worden voorspeld. Dit is een louter boekhoudkundige aftoetsing omdat er abstractie gemaakt wordt van de effectieve
+ruimtelijke overlap tussen potentie en aanwezigheid. De juiste actuele ligging van de oppervlakte van een vegetatie
+in “complex” is immers niet gekend.</p>
+</section>
+<section id="kalibratieresultaten-verbeteren">
+<h2>Kalibratieresultaten verbeteren<a class="headerlink" href="#kalibratieresultaten-verbeteren" title="Permalink to this headline"></a></h2>
+<p>Als er systematische afwijkingen tijdens de kalibratie aan het licht komen moeten de <strong>invoerlagen</strong> van het model onder de loep worden genomen.</p>
+<p>Hieronder geven we een (niet limitatief) overzicht van de aandachtspunten per inputlaag:</p>
+<ul>
+<li><p>NICHE bodemkaart:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>is de kartering nog geldig voor de actuele situatie (de standaard NICHE bodemkaart is afgeleid uit de Vlaamse bodemkaart die gebaseerd is op terreinwerk uitgevoerd in de periode 1947-1973)?</p></li>
+<li><p>is de ligging en omvang van de veengronden realistisch?</p></li>
+<li><p>zijn er bijkomende gegevens beschikbaar om de kaart te valideren, aan te vullen of te verbeteren (o.a. in de niet gekarteerde zones, sterk vergraven gebieden, de militaire domeinen, …)?</p></li>
+<li><p>…</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Grondwaterstanden:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>is de resolutie van het grondwatermodel en digitaal hoogtemodel hoog genoeg?</p></li>
+<li><p>hoe goed zijn de kalibratieresultaten van het grondwatermodel? is de ruimtelijke verspreiding van de gebruikte meetpunten voldoende?</p></li>
+<li><p>…</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Trofie:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>zowel de <a class="reference internal" href="trofie.html#nutrient-level-input"><span class="std std-ref">inputgegevens</span></a> als de gevolgen van de <a class="reference internal" href="trofie.html#nutrient-level-princ"><span class="std std-ref">beslisregels</span></a> moeten nader gecontroleerd worden.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Zuurgraad:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>zowel de <a class="reference internal" href="zuur.html#acidity-input"><span class="std std-ref">inputgegevens</span></a> als de gevolgen van de <a class="reference internal" href="zuur.html#acidity-princ"><span class="std std-ref">beslisregels</span></a> moeten nader gecontroleerd worden.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>Voor het volledige (<a class="reference external" href="https://inbo.github.io/niche_vlaanderen/getting_started.html#Running-a-full-Niche-model">full</a>) NICHE model is het ook mogelijk om de NICHE Vlaanderen <strong>berekende zuurgraad- en trofiekaarten te overschrijven</strong> (zie <a class="reference external" href="https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Using-abiotic-grids">hier</a>) met zelf aangemaakte of aangepaste zuurgraad- en/of trofiekaarten.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="invoer.html" class="btn btn-neutral float-left" title="Invoer rasters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="overstroming.html" class="btn btn-neutral float-right" title="Overstromingsmodule" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017 - 2020, Research Institute for Nature and Forest (INBO).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
