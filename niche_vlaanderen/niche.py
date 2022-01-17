@@ -776,16 +776,29 @@ class Niche(object):
         else:
             plt.colorbar()
 
-        return(ax)
+        return ax
 
 
     def plot_detail(self, key, limit_legend=True, cmap="Set1"):
         """Detailed plot for a vegetation type
-        key:
+        key: veg_code (1..28)
+          key of the vegetation type that should be plotted
+        limit_legend: boolean
+            limits the legend to the types present in the figure
+        cmap: colormap
+            colormap to use for the maps. Note that 9 combinations of
+            presence/absence are possible, so keep this in mind if changing
+            from the default value.
         """
-        import matplotlib.pyplot as plt
-        import matplotlib.patches as mpatches
-        from matplotlib import cm
+        try:
+            import matplotlib.pyplot as plt
+            import matplotlib.patches as mpatches
+            from matplotlib import cm
+
+        except (ImportError, RuntimeError):  # pragma: no cover
+            msg = "Could not import matplotlib\n"
+            msg += "matplotlib required for plotting functions"
+            raise ImportError(msg)
 
         if key in self._vegetation.keys():
             v = self._vegetation[key]
@@ -806,7 +819,7 @@ class Niche(object):
 
         v_un = ma.masked_equal(v_un, len(legend))
 
-        im = plt.imshow(v_un, extent=mpl_extent, cmap=cmap,
+        plt.imshow(v_un, extent=mpl_extent, cmap=cmap,
                         interpolation=None, vmin=0, vmax=len(legend))
 
         if limit_legend:
@@ -830,10 +843,15 @@ class Niche(object):
 
     @property
     def table(self):
+        """Dataframe containing the potential area (ha) per vegetation type
+        """
         return self._table()
 
     def _table(self, detail=False):
         """Dataframe containing the potential area (ha) per vegetation type
+
+        detail: boolean
+            add info why vegetation is present, rather than just present/not present
         """
         if not self.vegetation_calculated:
             raise NicheException(
