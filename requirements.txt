@@ -4,3 +4,5 @@ rasterio
 pyyaml
 rasterstats
 six
+geopandas
+pygeos
