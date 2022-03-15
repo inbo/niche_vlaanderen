@@ -1,6 +1,10 @@
 from pkg_resources import resource_filename
+import warnings
 
-import geopandas as gpd
+with warnings.catch_warnings():
+    warnings.filterwarnings("ignore", category=DeprecationWarning)
+    warnings.filterwarnings("ignore", category=UserWarning)
+    import geopandas as gpd
 import pandas as pd
 from rasterstats import zonal_stats
 
@@ -57,6 +61,8 @@ class NicheOverlay(object):
 
         self.mapping = pd.read_csv(mapping_file)
 
+        # TODO: check if we can force the values to be integer instead of float
+
         if mapping_columns is not None:
             self.mapping_columns = mapping_columns
         else:
@@ -84,19 +90,27 @@ class NicheOverlay(object):
 
         # add mapping columns to source
         for t in self.mapping_columns:
-            source = self.mapping[[t['join_key'], t['join_value']]].rename({t['join_value'],t['new_column'] })
+            source = self.mapping[[t['join_key'], t['join_value']]].rename(columns=
+                {t['join_value']: t['new_column'],
+                 t['join_key']: t['map_key']})
             self.map = pd.merge(self.map,
                                 source,
-                                left_on=t['map_key'],
-                                right_on=t['join_key'],
+                                on=t['map_key'],
+                                how="left"
                                 )
 
         # get potential presence
-        potential_presence = self.niche.zonal_stats(self.map, outside=False)
+        self.potential_presence = self.niche.zonal_stats(self.map, outside=False)
+
+        self.potential_presence = self.potential_presence.pivot(columns=['vegetation'], index=['presence', 'shape_id'])
+        print(self.potential_presence.head())
+        print(self.map.head())
 
         # actual presence - optimistic
-        for row in self.map.iterrows():
-            pass
+        # sum (presence * area) / sum (area)
+
+        # Summarize per vegetation type
+        self.summary = self.potential_presence.loc["present"].sum() /(self.potential_presence.loc["not present"].sum() +  no.potential_presence.loc["present"].sum())
 
         # combine
 
