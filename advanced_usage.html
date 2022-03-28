@@ -62,6 +62,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#Using-config-files">Using config files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Comparing-Niche-classes">Comparing Niche classes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Creating-deviation-maps">Creating deviation maps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Create-detailed-absence/presence-plots">Create detailed absence/presence plots</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Creating-statistics-per-shape-object">Creating statistics per shape object</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Using-abiotic-grids">Using abiotic grids</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Overwriting-standard-code-tables">Overwriting standard code tables</a></li>
@@ -384,8 +385,8 @@ div.rendered_html tbody tr:hover {
 <h2>Comparing Niche classes<a class="headerlink" href="#Comparing-Niche-classes" title="Permalink to this headline"></a></h2>
 <p>Niche models can be compared using a <a class="reference internal" href="lowlevel.html#niche_vlaanderen.NicheDelta"><span class="std std-ref">NicheDelta</span></a> class. This can be used to compare different scenario’s.</p>
 <p>In our example, we will compare the results of the running Niche two times, once using a simple model and once using a full model.</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">niche_vlaanderen</span> <span class="k">as</span> <span class="nn">nv</span>
@@ -403,88 +404,18 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="_images/advanced_usage_2_0.png" src="_images/advanced_usage_2_0.png" />
-</div>
-</div>
 <p>It is also possible to show the areas in a dataframe by using the <a class="reference internal" href="lowlevel.html#niche_vlaanderen.NicheDelta.table"><span class="std std-ref">table</span></a> attribute.</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delta</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
-</pre></div>
-</div>
-<div class="output_area rendered_html docutils container">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>vegetation</th>
-      <th>presence</th>
-      <th>area_ha</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>not present in both models</td>
-      <td>14.44</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>present in both models</td>
-      <td>8.88</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1</td>
-      <td>only in model 1</td>
-      <td>1.00</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2</td>
-      <td>not present in both models</td>
-      <td>11.52</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2</td>
-      <td>only in model 1</td>
-      <td>10.00</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
-</div>
 <p>Like Niche, NicheDelta also has a write method, which takes a directory as an argument.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delta</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;comparison_output&quot;</span><span class="p">,</span> <span class="n">overwrite_files</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -497,7 +428,7 @@ div.rendered_html tbody tr:hover {
 <p>In many cases, it is not only important to find out which vegetation types are possible given the different input files, but also to find out how much change would be required to <code class="docutils literal notranslate"><span class="pre">mhw</span></code> or <code class="docutils literal notranslate"><span class="pre">mlw</span></code> to allow a certain vegetation type.</p>
 <p>To create deviation maps, it is necessary to <a class="reference internal" href="lowlevel.html#niche_vlaanderen.Niche.run"><span class="std std-ref">run</span></a> a model with the <code class="docutils literal notranslate"><span class="pre">deviation</span></code> option.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dev</span> <span class="o">=</span> <span class="n">nv</span><span class="o">.</span><span class="n">Niche</span><span class="p">()</span>
@@ -509,8 +440,8 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <p>The deviation maps can be plotted by specifying either mhw or mlw with the vegetation type, eg mhw_14 (to show the deviation between mhw and the required mhw for vegetation type 14). Positive values indicate that the actual condition is too dry for the vegetation type. Negative values indicate that the actual condition is too wet for the vegetation type.</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dev</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s2">&quot;mlw&quot;</span><span class="p">)</span>
@@ -520,27 +451,40 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
+</section>
+<section id="Create-detailed-absence/presence-plots">
+<h2>Create detailed absence/presence plots<a class="headerlink" href="#Create-detailed-absence/presence-plots" title="Permalink to this headline"></a></h2>
+<p>Rather than just showing if a certain vegetation type is present or not present, it is possible to show a more detailed analysis on the reason a vegetation type is present or not present. This follows the the steps of the niche analysis: ie if soil type is possible, mxw checks are done and finally other input grids are matched.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
 </div>
-<div class="output_area docutils container">
-<img alt="_images/advanced_usage_10_0.png" src="_images/advanced_usage_10_0.png" />
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">full</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">full</span><span class="o">.</span><span class="n">plot_detail</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+</pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/advanced_usage_10_1.png" src="_images/advanced_usage_10_1.png" />
-</div>
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">/tmp/ipykernel_112934/1467200067.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>ax <span class="ansi-blue-fg">=</span> full<span class="ansi-blue-fg">.</span>plot<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">7</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span> ax <span class="ansi-blue-fg">=</span> full<span class="ansi-blue-fg">.</span>plot_detail<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">7</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">NameError</span>: name &#39;full&#39; is not defined
+</pre></div></div>
 </div>
 </section>
 <section id="Creating-statistics-per-shape-object">
 <h2>Creating statistics per shape object<a class="headerlink" href="#Creating-statistics-per-shape-object" title="Permalink to this headline"></a></h2>
 <p>Niche also contains a helper function that allows one to calculate the possible vegetation by using a vector dataset, such as a .geojson or .shp file.</p>
 <p>The vegetation is returned as a pandas dataframe, where shapes are identified by their id and the area not covered by a shape gets <code class="docutils literal notranslate"><span class="pre">shape_id</span></code> -1.</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">full</span><span class="o">.</span><span class="n">zonal_stats</span><span class="p">(</span><span class="s2">&quot;../testcase/zwarte_beek/input/study_area_l72.geojson&quot;</span><span class="p">)</span>
@@ -548,125 +492,13 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
-</pre></div>
-</div>
-<div class="output_area rendered_html docutils container">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>vegetation</th>
-      <th>shape_id</th>
-      <th>presence</th>
-      <th>area_ha</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>0</td>
-      <td>not present</td>
-      <td>15.44</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>0</td>
-      <td>present</td>
-      <td>8.88</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1</td>
-      <td>0</td>
-      <td>no data</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2</td>
-      <td>0</td>
-      <td>not present</td>
-      <td>21.52</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2</td>
-      <td>0</td>
-      <td>present</td>
-      <td>2.80</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>79</th>
-      <td>15</td>
-      <td>-1</td>
-      <td>present</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>80</th>
-      <td>16</td>
-      <td>-1</td>
-      <td>present</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>81</th>
-      <td>20</td>
-      <td>-1</td>
-      <td>present</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>82</th>
-      <td>21</td>
-      <td>-1</td>
-      <td>present</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>83</th>
-      <td>28</td>
-      <td>-1</td>
-      <td>present</td>
-      <td>0.00</td>
-    </tr>
-  </tbody>
-</table>
-<p>168 rows × 4 columns</p>
-</div></div>
-</div>
 </section>
 <section id="Using-abiotic-grids">
 <h2>Using abiotic grids<a class="headerlink" href="#Using-abiotic-grids" title="Permalink to this headline"></a></h2>
 <p>In certain cases the intermediary grids of Acidity or NutrientLevel need changes, to compensate for specific circumstances.</p>
 <p>In that case it is possible to run a Niche model and make some adjustments to the grid and then using an abiotic grid as an input.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">niche_vlaanderen</span> <span class="k">as</span> <span class="nn">nv</span>
@@ -680,7 +512,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <p>Now it is possible to adapt the <code class="docutils literal notranslate"><span class="pre">acidity</span></code> and <code class="docutils literal notranslate"><span class="pre">nutrient_level</span></code> grids outside niche. For this demo, we will use some Python magic to make all nutrient levels one level lower. Note that there is no need to do this in Python, any other tool could be used as well. So if you don’t understand this code - don’t panic (and ignore the warning)!</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rasterio</span>
@@ -700,8 +532,8 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <p>Next we will create a new niche model using the same options as our previous full models, but we will add the previously calculated acidity as input: in this case, this acidity grid will be used (and not calculated from the other grids). Note that we use the <code class="docutils literal notranslate"><span class="pre">read_config_file</span></code> method (and not <code class="docutils literal notranslate"><span class="pre">run_config_file</span></code>) because we still want to edit the configuration before running.</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adjusted</span> <span class="o">=</span> <span class="n">nv</span><span class="o">.</span><span class="n">Niche</span><span class="p">()</span>
@@ -716,20 +548,6 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="_images/advanced_usage_18_0.png" src="_images/advanced_usage_18_0.png" />
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="_images/advanced_usage_18_1.png" src="_images/advanced_usage_18_1.png" />
-</div>
-</div>
 </section>
 <section id="Overwriting-standard-code-tables">
 <h2>Overwriting standard code tables<a class="headerlink" href="#Overwriting-standard-code-tables" title="Permalink to this headline"></a></h2>
@@ -739,7 +557,7 @@ functioning</a>.</p>
 <p>ct_acidity, ct_soil_mlw_class, ct_soil_codes, lnk_acidity, ct_seepage, ct_vegetation, ct_management, ct_nutrient_level and ct_mineralisation</p>
 <p>After adapting the vegetation code table for type 7 (Caricion gracilis) on peaty soil (V) by randomly altering the maximum <code class="docutils literal notranslate"><span class="pre">mhw</span></code> and <code class="docutils literal notranslate"><span class="pre">mlw</span></code> to 5 and 4 cm resp. (i.e. below ground, instead of standard values of -28 and -29 cm) and saving the file to ct_vegetation_adj7.csv, the adjusted model can be built and run.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adjusted_ct</span> <span class="o">=</span> <span class="n">nv</span><span class="o">.</span><span class="n">Niche</span><span class="p">(</span><span class="n">ct_vegetation</span> <span class="o">=</span> <span class="s2">&quot;ct_vegetation_adj7.csv&quot;</span><span class="p">)</span>
@@ -749,28 +567,14 @@ functioning</a>.</p>
 </div>
 </div>
 <p>Example of changed potential area of Caricion gracilis vegetation type because of the changes set in the vegetation code table:</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adjusted_ct</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
 <span class="n">full</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="_images/advanced_usage_23_0.png" src="_images/advanced_usage_23_0.png" />
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="_images/advanced_usage_23_1.png" src="_images/advanced_usage_23_1.png" />
 </div>
 </div>
 <p>Potential area is shrinking because of the range of grondwater levels that have become more narrow (excluding the wettest places).</p>

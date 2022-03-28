@@ -58,6 +58,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#invoergegevens">Invoergegevens</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#implementatie-in-niche-vlaanderen">Implementatie in <code class="docutils literal notranslate"><span class="pre">niche_vlaanderen</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#voorbeeld-volledig-model">Voorbeeld volledig model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#uitgebreid-model">Uitgebreid model</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#vereenvoudigd-model">Vereenvoudigd model</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gxg-afwijkingskaarten-voor-vereenvoudigd-model">GXG-afwijkingskaarten voor vereenvoudigd model</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#scenario-analyse">Scenario-analyse</a></li>
@@ -431,6 +432,25 @@
 <p>Volgende vegetatiecodes kunnen dus voorkomen: 7, 8, 12 en 16.</p>
 <p>Indien ook nog inundatie wordt meegerekend, bvb regelmatig overstromen (1) valt een aantal mogelijke codes weg. Mogelijke vegetaties zijn dan 7, 12 en 16.</p>
 </div>
+</section>
+<section id="uitgebreid-model">
+<span id="detail"></span><h3>Uitgebreid model<a class="headerlink" href="#uitgebreid-model" title="Permalink to this headline"></a></h3>
+<p>Behalve aanwezig en afwezigheid van vegetatie is het ook mogelijk om na te gaan welke voorwaarden voldaan zijn om een bepaalde vegetatie toe te laten.
+Dit gebeurt stapsgewijs:</p>
+<ul class="simple">
+<li><p>eerst is er controle of de bodem geschikt is</p></li>
+<li><p>dan is er controle of de gxg geschikt zijn</p></li>
+<li><p>vervolgens wordt er nagegaan of de zuur en of nutrientvereisten voldaan zijn</p></li>
+<li><p>tot slot wordt ook gecontroleerd of aan de managements en overstromingsvereisten voldaan is.</p></li>
+</ul>
+<p>Voor vegetatiecode 6 (Betulo-Quercetum roboris) en 8 (Filipendulion) levert dit met bovenstaande invoergegevens:
+vegetatiecode 6:
+* bodem ongeschikt (geen verdere controle)</p>
+<p>vegetatiecode 8:
+* bodem geschikt
+* gxg geschikt
+* nutrient niet geschikt
+* zuurtegraad geschikt</p>
 </section>
 <section id="vereenvoudigd-model">
 <span id="simple"></span><h3>Vereenvoudigd model<a class="headerlink" href="#vereenvoudigd-model" title="Permalink to this headline"></a></h3>

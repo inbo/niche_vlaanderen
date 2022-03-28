@@ -184,6 +184,24 @@ title).</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="niche_vlaanderen.Niche.plot_detail">
+<span class="sig-name descname"><span class="pre">plot_detail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit_legend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Set1'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#Niche.plot_detail"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Niche.plot_detail" title="Permalink to this definition"></a></dt>
+<dd><p>Detailed plot for a vegetation type
+key: veg_code (1..28)</p>
+<blockquote>
+<div><p>key of the vegetation type that should be plotted</p>
+</div></blockquote>
+<dl class="simple">
+<dt>limit_legend: boolean</dt><dd><p>limits the legend to the types present in the figure</p>
+</dd>
+<dt>cmap: colormap</dt><dd><p>colormap to use for the maps. Note that 9 combinations of
+presence/absence are possible, so keep this in mind if changing
+from the default value.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="niche_vlaanderen.Niche.read_config_file">
 <span class="sig-name descname"><span class="pre">read_config_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_ct</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#Niche.read_config_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Niche.read_config_file" title="Permalink to this definition"></a></dt>
 <dd><p>Sets the input based on an input file, without running it</p>
@@ -265,7 +283,7 @@ everywhere.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="niche_vlaanderen.Niche.write">
-<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#Niche.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Niche.write" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detailed_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#Niche.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Niche.write" title="Permalink to this definition"></a></dt>
 <dd><p>Saves the model results to a folder</p>
 <p>Saves the model results to a folder. Files will be written as geotiff.
 Vegetation files have names V1 … V28
@@ -279,6 +297,7 @@ already exist.</p></li>
 <li><p><strong>overwrite_files</strong> (<em>bool</em>) – Overwrite files when saving.
 Note writing will fail if any of the files to be written already
 exists.</p></li>
+<li><p><strong>detailed_files</strong> (<em>bool</em>) – Save detailed information on factor affecting vegetation possibility</p></li>
 </ul>
 </dd>
 </dl>
@@ -561,6 +580,7 @@ only grids containing data.</p>
 <li><p><strong>veg</strong> (<em>dict</em>) – A dictionary containing the different output arrays per
 veg_code value.
 -99 is used for nodata_veg values</p></li>
+<li><p><strong>expected</strong> (<em>int</em>) – Expected code in veg arrays if all conditions are met</p></li>
 <li><p><strong>veg_occurrence</strong> (<em>dict</em>) – A dictionary containing the percentage of the area where the
 vegetation can occur.</p></li>
 </ul>
