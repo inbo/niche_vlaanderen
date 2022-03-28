@@ -1,5 +1,6 @@
 from __future__ import division
 from pkg_resources import resource_filename
+from enum import IntEnum
 
 import numpy as np
 import pandas as pd
@@ -10,6 +11,40 @@ from .acidity import Acidity
 from .codetables import validate_tables_vegetation, check_codes_used
 from .exception import NicheException
 
+
+class VegSuitable(IntEnum):
+    SOIL=1
+    GXG=2
+    NUTRIENT=4
+    ACIDITY=8
+    MANAGEMENT=16
+    FLOODING=32
+
+    @staticmethod
+    def possible():
+        """Possible legend items
+
+        Due to the way niche works, only certain combinations are possible,
+        eg soil is checked first, so it is impossible to have suitable management
+        and unsuitable soil conditions.
+        """
+
+        return [0, 1, 3, 7, 11, 15, 31, 47, 63]
+
+    @staticmethod
+    def legend():
+        legend = {}
+        for i in range(64):
+            l = []
+            for j in list(map(int, VegSuitable)):
+                if i & j == j:
+                    l += [VegSuitable(i & j).name.lower()]
+            legend[i] = '+'.join(l) + " suitable"
+        legend[0] = "soil unsuitable"
+
+        # only select possible combinations for legend
+        sel = VegSuitable.possible()
+        return {i: legend[i] for i in sel}
 
 class Vegetation(object):
     """Helper class to calculate vegetation based on input arrays
@@ -111,6 +146,8 @@ class Vegetation(object):
             A dictionary containing the different output arrays per
             veg_code value.
             -99 is used for nodata_veg values
+        expected: int
+            Expected code in veg arrays if all conditions are met
         veg_occurrence: dict
             A dictionary containing the percentage of the area where the
             vegetation can occur.
@@ -146,39 +183,61 @@ class Vegetation(object):
                              self._ct_management["code"])
 
         veg_bands = dict()
+        veg_detail = dict()
         occurrence = dict()
 
         for veg_code, subtable in self._ct_vegetation.groupby(["veg_code"]):
+
             subtable = subtable.reset_index()
             # vegi is the prediction for the current veg_code
             # it is a logical or of the result of every row:
-            # if a row is true for a pixel, that vegetation can occur
-            vegi = np.zeros(soil_code.shape, dtype=bool)
+            # if a row is 0 for a pixel, that vegetation can occur
+
+            vegi = np.zeros(soil_code.shape, dtype='int64')
+
+            # filter for GxG
             for row in subtable.itertuples():
                 warnings.simplefilter(action='ignore', category=RuntimeWarning)
-                current_row = ((row.soil_code == soil_code)
+                row_soil = (row.soil_code == soil_code)
+                vegi |= row_soil * VegSuitable.SOIL
+                current_row = ( row_soil
                                & (row.mhw_min >= mhw) & (row.mhw_max <= mhw)
                                & (row.mlw_min >= mlw) & (row.mlw_max <= mlw))
+
+                vegi |= current_row * VegSuitable.GXG
                 warnings.simplefilter("default")
                 if full_model:
-                    current_row = (current_row
-                                   & (nutrient_level == row.nutrient_level)
-                                   & (row.acidity == acidity))
+                    vegi |= (current_row & (nutrient_level == row.nutrient_level))* VegSuitable.NUTRIENT
+                    vegi |= (current_row  & (acidity == row.acidity)) * VegSuitable.ACIDITY
 
                 if inundation is not None:
-                    current_row = current_row & (row.inundation == inundation)
+                    vegi |= (current_row & (row.inundation == inundation)) * VegSuitable.FLOODING
                 if management is not None:
-                    current_row = current_row & (row.management == management)
-                vegi = vegi | current_row
-            vegi = vegi.astype("uint8")
+                    vegi |= (current_row & (row.management == management)) * VegSuitable.MANAGEMENT
+
+            # this should give same result as before
+
+            expected = VegSuitable.SOIL + VegSuitable.GXG
+            if full_model:
+                expected += VegSuitable.NUTRIENT + VegSuitable.ACIDITY + \
+                           (inundation is not None) * VegSuitable.FLOODING + \
+                           (management is not None) * VegSuitable.MANAGEMENT
+
+            vegi = vegi.astype('uint8')
             vegi[nodata] = self.nodata_veg
 
-            if return_all or np.any(vegi):
-                veg_bands[veg_code] = vegi
+            vegi_summary = vegi == expected
+            vegi_summary = vegi_summary.astype('uint8')
+            vegi_summary[nodata] = self.nodata_veg
 
-            occi = (np.sum(vegi == 1) / (vegi.size - np.sum(nodata)))
+            if return_all or np.any(vegi):
+                veg_bands[veg_code] = vegi_summary
+
+            veg_detail[veg_code] = vegi
+
+            occi = (np.sum(vegi_summary == 1) / (vegi_summary.size - np.sum(nodata)))
             occurrence[veg_code] = occi.item()
-        return veg_bands, occurrence
+        return veg_bands, occurrence, veg_detail
 
     def calculate_deviation(self, soil_code, mhw, mlw):
         """ Calculates the deviation between the mhw/mlw and the reference

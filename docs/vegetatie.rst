@@ -98,6 +98,29 @@ Voorbeeld volledig model
 
   Indien ook nog inundatie wordt meegerekend, bvb regelmatig overstromen (1) valt een aantal mogelijke codes weg. Mogelijke vegetaties zijn dan 7, 12 en 16.
 
+.. _detail:
+
+Uitgebreid model
+----------------
+
+Behalve aanwezig en afwezigheid van vegetatie is het ook mogelijk om na te gaan welke voorwaarden voldaan zijn om een bepaalde vegetatie toe te laten.
+Dit gebeurt stapsgewijs:
+
+* eerst is er controle of de bodem geschikt is
+* dan is er controle of de gxg geschikt zijn
+* vervolgens wordt er nagegaan of de zuur en of nutrientvereisten voldaan zijn
+* tot slot wordt ook gecontroleerd of aan de managements en overstromingsvereisten voldaan is.
+
+Voor vegetatiecode 6 (Betulo-Quercetum roboris) en 8 (Filipendulion) levert dit met bovenstaande invoergegevens:
+vegetatiecode 6:
+* bodem ongeschikt (geen verdere controle)
+
+vegetatiecode 8:
+* bodem geschikt
+* gxg geschikt
+* nutrient niet geschikt
+* zuurtegraad geschikt
+
 .. _simple:
 
 Vereenvoudigd model

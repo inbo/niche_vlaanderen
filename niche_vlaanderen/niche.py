@@ -7,7 +7,7 @@ import numpy as np
 import numpy.ma as ma
 import pandas as pd
 
-from .vegetation import Vegetation
+from .vegetation import Vegetation, VegSuitable
 from .acidity import Acidity
 from .nutrient_level import NutrientLevel
 from .spatial_context import SpatialContext
@@ -80,6 +80,7 @@ class Niche(object):
         self._abiotic = dict()
         self._code_tables = dict()
         self._vegetation = dict()
+        self._vegetation_detail = dict()
         self._deviation = dict()
         self._options = dict()
         self._options["name"] = ""
@@ -546,7 +547,7 @@ class Niche(object):
                 veg_arguments['acidity'] = self._abiotic[
                     'acidity']
 
-        self._vegetation, self.occurrence = vegetation.calculate(
+        self._vegetation, self.occurrence, self._vegetation_detail = vegetation.calculate(
             full_model=full_model, **veg_arguments)
 
         if deviation:
@@ -555,7 +556,7 @@ class Niche(object):
                 self._inputarray["mlw"]
             )
 
-    def write(self, folder, overwrite_files=False):
+    def write(self, folder, overwrite_files=False, detailed_files=False):
         """Saves the model results to a folder
 
         Saves the model results to a folder. Files will be written as geotiff.
@@ -574,6 +575,9 @@ class Niche(object):
             Overwrite files when saving.
             Note writing will fail if any of the files to be written already
             exists.
+
+        detailed_files : bool
+            Save detailed information on factor affecting vegetation possibility
 
         """
 
@@ -617,10 +621,15 @@ class Niche(object):
             path = '{}/{}{}.tif'.format(folder, prefix, i)
             files[i] = path
 
+        if detailed_files:
+            for vi in self._vegetation_detail:
+                path = '{}/{}V{:02d}_detail.tif'.format(folder, prefix, vi)
+                files['%02d_detail'%vi] = path
+
         for key in files:
             if os.path.exists(files[key]):
                 if overwrite_files:
-                    self._log.warning(
+                    self._log.info(
                         "Warning: file {} already exists".format(files[key]))
                 else:
                     raise NicheException(
@@ -639,6 +648,12 @@ class Niche(object):
             with rasterio.open(files[vi], 'w', **params) as dst:
                 dst.write(self._abiotic[vi], 1)
                 self._files_written[vi] = os.path.normpath(files[vi])
+
+        if detailed_files:
+            for vi in self._vegetation_detail:
+                with rasterio.open(files[vi], 'w', **params) as dst:
+                    dst.write(self._vegetation_detail[vi], 1)
+                    self._files_written['%02d_detail'%vi] = os.path.normpath(files['%02d_detail'%vi])
 
         # deviation
         params.update(
@@ -761,11 +776,82 @@ class Niche(object):
         else:
             plt.colorbar()
 
-        return(ax)
+        return ax
+
+
+    def plot_detail(self, key, limit_legend=True, cmap="Set1"):
+        """Detailed plot for a vegetation type
+        key: veg_code (1..28)
+          key of the vegetation type that should be plotted
+        limit_legend: boolean
+            limits the legend to the types present in the figure
+        cmap: colormap
+            colormap to use for the maps. Note that 9 combinations of
+            presence/absence are possible, so keep this in mind if changing
+            from the default value.
+        """
+        try:
+            import matplotlib.pyplot as plt
+            import matplotlib.patches as mpatches
+            from matplotlib import cm
+
+        except (ImportError, RuntimeError):  # pragma: no cover
+            msg = "Could not import matplotlib\n"
+            msg += "matplotlib required for plotting functions"
+            raise ImportError(msg)
+
+        if key in self._vegetation.keys():
+            v = self._vegetation[key]
+            v = ma.masked_equal(v, 255)
+            title = "{} ({})".format(self._vegcode2name(key), key)
+
+        v = self._vegetation_detail[key]
+        v = ma.masked_equal(v, 255)
+        ((a, b), (c, d)) = self._context.extent
+        mpl_extent = (a, c, d, b)
+
+        fig, ax = plt.subplots()
+
+        legend = VegSuitable.legend()
+        legend_keys = np.array(list(legend.keys()))
+
+        v_un = np.digitize(v, legend_keys, right=True)
+
+        v_un = ma.masked_equal(v_un, len(legend))
+
+        plt.imshow(v_un, extent=mpl_extent, cmap=cmap,
+                        interpolation=None, vmin=0, vmax=len(legend))
+
+        if limit_legend:
+            present = np.unique(v_un)
+            legend = {i: legend[k] for i, k in enumerate(legend) if
+                                  i in present}
+
+        patches = [mpatches.Patch(color=cm.get_cmap(cmap)(i),
+                                      label=legend[j]) for i,j in enumerate(legend)]
+
+        plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2,
+                   borderaxespad=0.)
+
+        if self.name != '':
+            title = self.name + " " + title
+
+        ax.set_title(title)
+
+        return ax
+
 
     @property
     def table(self):
         """Dataframe containing the potential area (ha) per vegetation type
+        """
+        return self._table()
+
+    def _table(self, detail=False):
+        """Dataframe containing the potential area (ha) per vegetation type
+
+        detail: boolean
+            add info why vegetation is present, rather than just present/not present
         """
         if not self.vegetation_calculated:
             raise NicheException(
@@ -773,14 +859,22 @@ class Niche(object):
                 "result table")
 
         td = list()
+        if detail == False:
+            presence = dict({0: "not present", 1: "present", 255: "no data"})
 
-        presence = dict({0: "not present", 1: "present", 255: "no data"})
-
-        for i in self._vegetation:
-            vi = pd.Series(self._vegetation[i].flatten())
-            rec = vi.value_counts() * self._context.cell_area / 10000
-            for a in rec.index:
-                td.append((i, presence[a], rec[a]))
+            for i in self._vegetation:
+                vi = pd.Series(self._vegetation[i].flatten())
+                rec = vi.value_counts() * self._context.cell_area / 10000
+                for a in rec.index:
+                    td.append((i, presence[a], rec[a]))
+        else:
+            legend = VegSuitable.legend()
+            legend[255] = 'no data'
+            for i in self._vegetation_detail:
+                vi = pd.Series(self._vegetation_detail[i].flatten())
+                rec = vi.value_counts() * self._context.cell_area / 10000
+                for a in rec.index:
+                    td.append((i, legend[a], rec[a]))
 
         df = pd.DataFrame(td, columns=['vegetation', 'presence',
                                        'area_ha'])
@@ -1077,6 +1171,8 @@ class NicheDelta(object):
                    borderaxespad=0.)
 
         return ax
+
+
 
     @property
     def table(self):

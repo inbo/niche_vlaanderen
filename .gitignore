@@ -106,3 +106,7 @@ docs/_build
 
 # pyCharm files
 .idea
+
+# test and doc build files
+tests/_*
+docs/_*

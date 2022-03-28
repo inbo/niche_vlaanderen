@@ -7,6 +7,7 @@ import rasterio
 
 import niche_vlaanderen
 from niche_vlaanderen.exception import NicheException
+from niche_vlaanderen.vegetation import VegSuitable
 
 
 def raster_to_numpy(filename):
@@ -39,7 +40,7 @@ class testVegetation(TestCase):
         mhw = np.array([10])
         soil_code = np.array([14])
         v = niche_vlaanderen.Vegetation()
-        veg_predict, veg_occurrence = v.calculate(soil_code, mhw, mlw,
+        veg_predict, veg_occurrence, _ = v.calculate(soil_code, mhw, mlw,
                                                   nutrient_level, acidity)
         correct = [7, 8, 12, 16]
         for vi in veg_predict:
@@ -53,7 +54,7 @@ class testVegetation(TestCase):
         mhw = np.array([10])
         soil_code = np.array([8])
         v = niche_vlaanderen.Vegetation()
-        veg_predict, veg_occurrence = v.calculate(soil_code,
+        veg_predict, veg_occurrence, _ = v.calculate(soil_code,
                                                   mhw, mlw, full_model=False)
         correct = [3, 8, 11, 18, 23, 27]
         for vi in veg_predict:
@@ -67,7 +68,7 @@ class testVegetation(TestCase):
         mhw = np.array([21, 20, 10, 1, 0])
         mlw = np.array([30, 30, 30, 30, 30])
         v = niche_vlaanderen.Vegetation()
-        veg_predict, _ = v.calculate(soil_code, mhw, mlw, full_model=False)
+        veg_predict, _, _ = v.calculate(soil_code, mhw, mlw, full_model=False)
         expected = [0, 1, 1, 1, 0]
         np.testing.assert_equal(expected, veg_predict[1])
 
@@ -78,7 +79,7 @@ class testVegetation(TestCase):
         mhw = np.array([10])
         soil_code = np.array([140000])
         v = niche_vlaanderen.Vegetation()
-        veg_predict, veg_occurrence = v.calculate(soil_code, mhw, mlw,
+        veg_predict, veg_occurrence, veg_detail = v.calculate(soil_code, mhw, mlw,
                                                   nutrient_level, acidity)
         correct = []  # no types should match
         for vi in veg_predict:
@@ -86,6 +87,9 @@ class testVegetation(TestCase):
                 np.testing.assert_equal(np.array([1]), veg_predict[vi])
             else:
                 np.testing.assert_equal(np.array([0]), veg_predict[vi])
+
+        for vi in veg_detail:
+            np.testing.assert_equal(np.array([0]), veg_detail[vi])
 
     def test_simple_doc_inundation(self):
         nutrient_level = np.array([4])
@@ -95,15 +99,24 @@ class testVegetation(TestCase):
         soil_code = np.array([14])
         inundation = np.array([1])
         v = niche_vlaanderen.Vegetation()
-        veg_predict, veg_occurrence = \
+        veg_predict, veg_occurrence, veg_detail = \
             v.calculate(soil_code, mhw, mlw, nutrient_level, acidity,
                         inundation=inundation)
         correct = [7, 12, 16]
+        veg_detail_exp = {1:0, 2:35, 3:39, 4:7, 5:3, 6:0, 7:47, 8:15,
+        9:1, 10:0, 11:0, 12:47, 13:1, 14:0, 15:1, 16:47, 17:0, 18:11, 19:39,
+        20:1, 21:11, 22:0, 23:0, 24:0, 25:0, 26:0, 27:0, 28:0}
+
+        # note that in the docs 8 was suitable except for inundation: its value is indeed:
+        # 1+2+4+8= 15 so suitable soil, gxg, nutrient and acidity, but unsuitable inundation (32)
+
         for vi in veg_predict:
+            np.testing.assert_equal(veg_detail_exp[vi], veg_detail[vi])
             if vi in correct:
-                np.testing.assert_equal(np.array([1]), veg_predict[vi])
+                np.testing.assert_array_less(np.array([0]), veg_detail[vi])
             else:
                 np.testing.assert_equal(np.array([0]), veg_predict[vi])
+
 
     def test_occurrence(self):
         nutrient_level = np.array([[4, 4], [4, 5]])
@@ -113,7 +126,7 @@ class testVegetation(TestCase):
         soil_code = np.array([[14, 14], [14, 14]])
         inundation = np.array([[1, 1], [1, 1]])
         v = niche_vlaanderen.Vegetation()
-        veg_predict, veg_occurrence = \
+        veg_predict, veg_occurrence, _ = \
             v.calculate(soil_code=soil_code, mhw=mhw, mlw=mlw,
                         nutrient_level=nutrient_level, acidity=acidity,
                         inundation=inundation)
@@ -153,7 +166,7 @@ class testVegetation(TestCase):
                               conductivity, regenlens)
 
         v = niche_vlaanderen.Vegetation()
-        veg_predict, veg_occurrence = v.calculate(soil_code_r, mhw, mlw,
+        veg_predict, veg_occurrence, _ = v.calculate(soil_code_r, mhw, mlw,
                                                   nutrient_level, acidity)
 
         for i in range(1, 28):
@@ -200,3 +213,16 @@ class testVegetation(TestCase):
         d = v.calculate_deviation(soil_code, mhw, mlw)
         expected = np.array([28, 12, 0, 0, -15, np.nan, np.nan])
         np.testing.assert_equal(expected, d["mlw_01"])
+
+    def test_detailed_vegetation(self):
+        v = niche_vlaanderen.Vegetation()
+        soil_code = np.array([14])
+        veg_bands, occurrence, veg_detail = v.calculate(soil_code, mhw=10, mlw=50, nutrient_level=5, acidity=3)
+        # cfr examples in vegetatie.rst
+        np.testing.assert_equal(11, veg_detail[8])
+        np.testing.assert_equal(0, veg_detail[6])
+
+    def test_vegsuitable(self):
+        legend = VegSuitable.legend()
+        assert list(legend.keys()) == [0, 1, 3, 7, 11, 15, 31, 47, 63]
+        assert legend[63] == "soil+gxg+nutrient+acidity+management+flooding suitable"
