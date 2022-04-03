@@ -1,7 +1,7 @@
 name: Build and Deploy documentation
 on:
   push:
-    branches: [master, housekeeping]
+    branches: [master, docs]
   workflow_dispatch:
 jobs:
   build-and-deploy:
