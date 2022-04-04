@@ -10,7 +10,7 @@ import pandas as pd
 import numpy as np
 from rasterstats import zonal_stats
 
-from .niche import Niche
+from niche_vlaanderen.niche import Niche
 
 class NicheOverlay(object):
     """Creates a new NicheOverlay object
@@ -56,7 +56,7 @@ class NicheOverlay(object):
         if type(niche) is Niche:
             self.niche = niche
         else:
-            raise ValueError("pass a valid Niche object")
+            raise ValueError(f"pass a valid Niche object - type of niche object is {type(niche)}")
 
         if mapping_columns is not None:
             self.mapping_columns = mapping_columns
@@ -74,7 +74,13 @@ class NicheOverlay(object):
 
         self.mapping = pd.read_csv(mapping_file)
 
-        # TODO: check if we can force the values to be integer instead of float
+        self.mapping.iloc[
+            self.mapping["NICHE_C1"] == 0, self.mapping.columns.get_loc(
+                "NICHE_C1")] = np.nan
+        self.mapping.iloc[ self.mapping["NICHE_C2"]==0, self.mapping.columns.get_loc("NICHE_C2")] = np.nan
+        self.mapping.iloc[ self.mapping["NICHE_C2"]==self.mapping["NICHE_C1"],
+                           self.mapping.columns.get_loc("NICHE_C2")] = np.nan
+
 
         if mapping_columns is not None:
             self.mapping_columns = mapping_columns
@@ -110,6 +116,11 @@ class NicheOverlay(object):
     def overlay(self):
         """Overlays the map and the niche object"""
 
+        # Remove any existing "NICH" columns
+        niche_columns = self.map.columns[
+            self.map.columns.str.startswith("NICH_")]
+        self.map = self.map.drop(columns=niche_columns)
+
         # add mapping columns to source
         for t in self.mapping_columns:
             source = self.mapping[[t["join_key"], t["join_value"]]].rename(
@@ -117,8 +128,12 @@ class NicheOverlay(object):
             )
             self.map = pd.merge(self.map, source, on=t["map_key"], how="left")
         self._niche_columns = self.map.columns[self.map.columns.str.startswith("NICH")]
+
+        present_vegetation_types = np.unique(self.map[self._niche_columns])
+        present_vegetation_types = present_vegetation_types[~np.isnan(present_vegetation_types)]
+
         # get potential presence
-        self.potential_presence = self.niche.zonal_stats(self.map, outside=False)
+        self.potential_presence = self.niche.zonal_stats(self.map, outside=False, vegetation_types=present_vegetation_types)
 
         self.potential_presence = self.potential_presence.pivot(
             columns=["vegetation"], index=["presence", "shape_id"]

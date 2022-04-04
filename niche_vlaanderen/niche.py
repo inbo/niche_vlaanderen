@@ -53,7 +53,7 @@ _code_tables_fp = {"duration",
                    "frequency", "lnk_potential", "potential"}
 
 logging.basicConfig()
-
+logger = logging.getLogger(__name__)
 
 class Niche(object):
     """ Creates a new Niche object
@@ -881,7 +881,7 @@ class Niche(object):
 
         return df
 
-    def zonal_stats(self, vectors, outside=True, attribute=None):
+    def zonal_stats(self, vectors, outside=True, attribute=None, vegetation_types=None):
         """Calculates zonal statistics using vectors
 
         Parameters
@@ -898,7 +898,10 @@ class Niche(object):
         attribute: string(default None):
             attribute of the vector source that will be exported along in the
             table.
-
+        vegetation_types: List | None
+            optional list of vegetation types (as integer number) for which the
+            statistics must be calculated. Calculation will happen for all
+            niche vegetation types by default.
 
         Returns
         =======
@@ -913,7 +916,11 @@ class Niche(object):
 
         presence = dict({0: "not present", 1: "present", 255: "no data"})
 
-        for i in self._vegetation:
+        if vegetation_types is None:
+            vegetation_types = self._vegetation.keys()
+
+        logger.debug(f"vegetation_types: {vegetation_types}")
+        for i in vegetation_types:
             # Note we use -99 as nodata value to make sure the true nodata
             # value (255) is part of the result table.
 
