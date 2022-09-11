@@ -1,6 +1,6 @@
 pandas
 numpy
-rasterio
+rasterio>=0.17
 pyyaml
 rasterstats
 six
