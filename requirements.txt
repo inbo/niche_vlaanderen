@@ -1,8 +1,8 @@
 pandas
 numpy
-rasterio>=0.17
+rasterio
 pyyaml
-rasterstats
+rasterstats>=0.17
 six
 geopandas
 pygeos
