@@ -27,6 +27,8 @@ import yaml
 import datetime
 import sys
 
+from tqdm import tqdm
+
 _allowed_input = {
     "soil_code", "mlw", "msw", "mhw", "seepage",
     "inundation_acidity", "inundation_nutrient", "nitrogen_atmospheric",
@@ -920,7 +922,7 @@ class Niche(object):
             vegetation_types = self._vegetation.keys()
 
         logger.debug(f"vegetation_types: {vegetation_types}")
-        for i in vegetation_types:
+        for i in tqdm(vegetation_types):
             # Note we use -99 as nodata value to make sure the true nodata
             # value (255) is part of the result table.
 
