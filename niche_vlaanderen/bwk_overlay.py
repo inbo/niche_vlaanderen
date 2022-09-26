@@ -138,10 +138,12 @@ class NicheOverlay(object):
                 )
         pass
 
-    def overlay(self):
+    def overlay(self, upscale=4):
         """Overlays the map and the niche object"""
 
         # Remove any existing "NICH" columns
+
+
         niche_columns = self.map.columns[self.map.columns.str.startswith("NICH_")]
         self.map = self.map.drop(columns=niche_columns)
         self.map["area_shape"] = self.map.area / 10000
@@ -153,6 +155,7 @@ class NicheOverlay(object):
             self.map = pd.merge(self.map, source, on=t["map_key"], how="left")
         self._niche_columns = self.map.columns[self.map.columns.str.startswith("NICH")]
 
+        # TODO: present_vegetation_types should be determined from BWK not niche
         present_vegetation_types = np.unique(self.map[self._niche_columns])
 
         present_vegetation_types = present_vegetation_types[
@@ -161,8 +164,10 @@ class NicheOverlay(object):
 
         logger.debug(f"present niche types: {present_vegetation_types}")
         # get potential presence
+        # TODO: add parameter cellsize to zonal statistics: eg 0.5
+        # upscale niche rasters to that before calculating statistics
         self.potential_presence = self.niche.zonal_stats(
-            self.map, outside=False, vegetation_types=present_vegetation_types
+            self.map, outside=False, vegetation_types=present_vegetation_types, upscale=upscale
         )
 
         self.potential_presence = self.potential_presence.pivot(
@@ -196,7 +201,8 @@ class NicheOverlay(object):
                         .loc["area_ha"][row[veg]]
                     )
                     self.area_nonpot[row[veg]].loc[i] = area_nonpot
-                    pHab = row["pHAB" + veg[5]]
+                    pHab = row["pHAB" + veg[5]] # pHAB1 --> pHAB5
+                    # TODO: in ha ?
                     area_effective = pHab * row.area_shape / 100
                     # area of the shape
                     self.area_effective[row[veg]].loc[i] = area_effective
@@ -239,7 +245,7 @@ class NicheOverlay(object):
 
         self.summary = pd.DataFrame(summary)
 
-    def store(self, path, shapes=True):
+    def store(self, path, shapes=True, overwrite=False):
         path = Path(path)
         if path.exists():
             if not path.is_dir():

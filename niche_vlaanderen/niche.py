@@ -883,7 +883,7 @@ class Niche(object):
 
         return df
 
-    def zonal_stats(self, vectors, outside=True, attribute=None, vegetation_types=None):
+    def zonal_stats(self, vectors, outside=True, attribute=None, vegetation_types=None, upscale=1):
         """Calculates zonal statistics using vectors
 
         Parameters
@@ -904,6 +904,8 @@ class Niche(object):
             optional list of vegetation types (as integer number) for which the
             statistics must be calculated. Calculation will happen for all
             niche vegetation types by default.
+        upscale : int
+            upscaling factor: decrease the cell size by this factor to increase the resolution
 
         Returns
         =======
@@ -922,13 +924,24 @@ class Niche(object):
             vegetation_types = self._vegetation.keys()
 
         logger.debug(f"vegetation_types: {vegetation_types}")
+        logger.debug(f"upscaling to {upscale}")
         for i in tqdm(vegetation_types):
             # Note we use -99 as nodata value to make sure the true nodata
             # value (255) is part of the result table.
 
+            if upscale == 1:
+                raster = self._vegetation[i]
+                affine = self._context.transform
+            else:
+                # based on https://rasterio.readthedocs.io/en/latest/topics/resampling.html
+                raster = self._vegetation[i].repeat(upscale, axis=0).repeat(upscale, axis=1)
+                affine = self._context.transform * self._context.transform.scale(
+                    self._context.width / raster.shape[1],
+                    self._context.height / raster.shape[0])
+
             td[i] = rasterstats.zonal_stats(vectors=vectors,
-                                            raster=self._vegetation[i],
-                                            affine=self._context.transform,
+                                            raster=raster,
+                                            affine=affine,
                                             categorical=True,
                                             nodata=-99,
                                             geojson_out=attribute is not None
@@ -945,7 +958,7 @@ class Niche(object):
                 for a in presence:
                     pixels = rec.get(a) if rec.get(a) is not None else 0
                     ti.append((vi, shape_i, presence[a],
-                               pixels * self._context.cell_area / 10000))
+                               pixels * self._context.cell_area / 10000 / (upscale ** 2)))
                     if attribute is not None:
                         attribute_list.append(rec[attribute])
 
