@@ -17,7 +17,7 @@ requirements = [
         'rasterio',
         'pyyaml',
         'rasterstats>=0.17',
-        'tqdm'
+        'tqdm',
         'geopandas'
         ]
 
