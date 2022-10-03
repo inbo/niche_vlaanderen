@@ -741,6 +741,7 @@ class Niche(object):
             v = self._vegetation[key]
             v = ma.masked_equal(v, 255)
             title = "{} ({})".format(self._vegcode2name(key), key)
+            norm = Normalize(0, 1)
         if key in self._deviation:
             v = self._deviation[key]
             title = key
