@@ -59,7 +59,7 @@ class NicheOverlay(object):
 
     """
 
-    def __init__(self, niche, map, mapping_file=None, mapping_columns=None):
+    def __init__(self, niche, map, mapping_file=None, mapping_columns=None, upscale=5):
         if type(niche) is Niche:
             self.niche = niche
         else:
@@ -115,7 +115,23 @@ class NicheOverlay(object):
         self.map = gpd.read_file(map)
         self._check_mapping_columns()
 
+        # Use mapping table to link vegetation types
+
+        niche_columns = self.map.columns[self.map.columns.str.startswith("NICH_")]
+        self.map = self.map.drop(columns=niche_columns)
+        self.map["area_shape"] = self.map.area / 10000
+        # add mapping columns to source
+        for t in self.mapping_columns:
+            source = self.mapping[[t["join_key"], t["join_value"]]].rename(
+                columns={t["join_value"]: t["new_column"], t["join_key"]: t["map_key"]}
+            )
+            self.map = pd.merge(self.map, source, on=t["map_key"], how="left")
+        self._niche_columns = self.map.columns[self.map.columns.str.startswith("NICH")]
+
+        self.overlay(upscale=upscale)
+
     def __repr__(self):
+
         o = "# Niche overlay object\n"
         o += f"map: {self.filename_map}\n"
         o += f"niche object: {self.niche.name}"
@@ -144,18 +160,6 @@ class NicheOverlay(object):
         # Remove any existing "NICH" columns
 
 
-        niche_columns = self.map.columns[self.map.columns.str.startswith("NICH_")]
-        self.map = self.map.drop(columns=niche_columns)
-        self.map["area_shape"] = self.map.area / 10000
-        # add mapping columns to source
-        for t in self.mapping_columns:
-            source = self.mapping[[t["join_key"], t["join_value"]]].rename(
-                columns={t["join_value"]: t["new_column"], t["join_key"]: t["map_key"]}
-            )
-            self.map = pd.merge(self.map, source, on=t["map_key"], how="left")
-        self._niche_columns = self.map.columns[self.map.columns.str.startswith("NICH")]
-
-        # TODO: present_vegetation_types should be determined from BWK not niche
         present_vegetation_types = np.unique(self.map[self._niche_columns])
 
         present_vegetation_types = present_vegetation_types[
@@ -173,6 +177,16 @@ class NicheOverlay(object):
         self.potential_presence = self.potential_presence.pivot(
             columns=["vegetation"], index=["presence", "shape_id"]
         )
+
+        self._tables = [
+            "area_pot",
+            "area_nonpot",
+            "area_nonpot_optimistic",
+            "area_pot_perc_optimistic",
+            "area_effective",
+            "area_pot_perc",
+            "veg_present",
+        ]
 
         self.area_pot = self.potential_presence.loc["no data"]["area_ha"] * np.nan
         self.area_nonpot = self.potential_presence.loc["no data"]["area_ha"] * np.nan
@@ -201,33 +215,34 @@ class NicheOverlay(object):
                         .loc["area_ha"][row[veg]]
                     )
                     self.area_nonpot[row[veg]].loc[i] = area_nonpot
+
                     pHab = row["pHAB" + veg[5]] # pHAB1 --> pHAB5
                     # TODO: in ha ?
                     area_effective = pHab * row.area_shape / 100
                     # area of the shape
                     self.area_effective[row[veg]].loc[i] = area_effective
 
-                    area_pot_perc = area_pot / (area_pot + area_nonpot)
-                    self.area_pot_perc[row[veg]].loc[i] = area_pot_perc
+                    if (area_pot + area_nonpot) == 0:
+                        warnings.warn(f"No overlap between potential vegetation map and shape_id {i}")
+                    else:
+                        area_pot_perc = area_pot / (area_pot + area_nonpot)
+                        self.area_pot_perc[row[veg]].loc[i] = area_pot_perc
 
-                    area_pot_perc_optimistic = np.min(
-                        [100 * area_pot / area_effective, 100]
-                    )
+                        area_pot_perc_optimistic = np.min(
+                            [100 * area_pot / area_effective, 100]
+                        )
 
-                    self.area_pot_perc_optimistic[row[veg]].loc[
-                        i
-                    ] = area_pot_perc_optimistic
+                        self.area_pot_perc_optimistic[row[veg]].loc[
+                            i
+                        ] = area_pot_perc_optimistic
 
-                    area_nonpot_optimistic = np.max([0, area_effective - area_pot])
-                    self.area_nonpot_optimistic[row[veg]].loc[
-                        i
-                    ] = area_nonpot_optimistic
+                        area_nonpot_optimistic = np.max([0, area_effective - area_pot])
+                        self.area_nonpot_optimistic[row[veg]].loc[
+                            i
+                        ] = area_nonpot_optimistic
 
-                    # vegetation type is present (actual presence)
-                    self.veg_present[row[veg]].loc[i] = 1
-                    logger.debug(
-                        f"pHab:{pHab}; area_pot: {area_pot}; area_nonpot: {area_nonpot}: veg: {veg}; row_nr: {i}; row area: {row.area_shape}"
-                    )
+                        # vegetation type is present (actual presence), for polygon count
+                        self.veg_present[row[veg]].loc[i] = 1
 
         # create summary table per vegetation type
 
@@ -245,28 +260,31 @@ class NicheOverlay(object):
 
         self.summary = pd.DataFrame(summary)
 
-    def store(self, path, shapes=True, overwrite=False):
+    def store(self, path, overwrite=False):
         path = Path(path)
-        if path.exists():
+        if path.exists() and not overwrite:
             if not path.is_dir():
                 raise NicheOverlayException(f"path {path} is not an empty folder")
             if any(path.iterdir()):
                 raise NicheOverlayException(f"path {path} exists and is not empty")
-        path.mkdir(parents=True)
+        path.mkdir(parents=True, exist_ok=True)
+
         # save individual tables
 
-        tables = [
-            "area_pot",
-            "area_nonpot",
-            "area_nonpot_optimistic",
-            "area_pot_perc_optimistic",
-            "area_effective",
-            "area_pot_perc",
-            "veg_present",
-        ]
-
-        for t in tables:
+        for t in self._tables:
             getattr(self, t).dropna(axis=0, how="all").to_csv(path / (t + ".csv"))
 
         self.potential_presence.to_csv(path / "potential_presence.csv")
         self.summary.to_csv(path / "summary.csv")
+
+        with warnings.catch_warnings():
+            warnings.filterwarnings("ignore", category=DeprecationWarning)
+            warnings.filterwarnings("ignore", category=FutureWarning)
+            self.joined_map().to_file(path / "overlay.gpkg")
+
+    def joined_map(self):
+        merged = self.map
+        for table in self._tables:
+            merged = merged.join(getattr(self, table).add_prefix(f"{table}_"))
+
+        return merged

@@ -9,4 +9,5 @@ Tutorials
   getting_started
   advanced_usage
   flooding
+  bwk_overlay
 

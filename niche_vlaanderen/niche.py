@@ -958,7 +958,7 @@ class Niche(object):
                     rec = rec['properties']
                 for a in presence:
                     pixels = rec.get(a) if rec.get(a) is not None else 0
-                    ti.append((vi, shape_i, presence[a],
+                    ti.append((int(vi), shape_i, presence[a],
                                pixels * self._context.cell_area / 10000 / (upscale ** 2)))
                     if attribute is not None:
                         attribute_list.append(rec[attribute])
