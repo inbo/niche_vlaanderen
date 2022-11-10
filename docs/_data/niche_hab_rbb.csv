@@ -1,41 +1,41 @@
-Habitattype,Habitatsubtype,HAB,Habitat(sub)type naam,NICHE,NICHE Wetenschappelijke naam
-91,oli,91E0_oli,Oligotroof elzen- en berkenbroek,1,Sphagno-Betuletum
-91,meso,91E0_meso,Mesotroof elzen- en berkenbroek,2,Carici elongatae-Alnetum
-91,eutr,91E0_eutr,Ruigte-elzenbos (Filipendulo-Alnetum),3,Macrophorbio-Alnetum
-91,veb,91E0_veb,Beekbegeleidend vogelkers-essenbos en essen-iepenbos,4,Pruno-Fraxinetum
-9160,,9160,Sub-Atlantische en midden-Europese wintereikenbossen of eikenhaagbeukbossen,5,Carpinion betuli
-9190,,9190,Oude zuurminnende eikenbossen op zandvlakten met Quercus robur,6,Betulo-Quercetum roboris
-rbbmc,,rbbmc,regionaal belangrijk biotoop grote zeggenvegetaties,7,Caricion gracilis
-6430,hf,6430_hf,Vochtige tot natte moerasspirearuigten,8,Filipendulion
-6430,hw,6430_hw,Verbond van harig wilgenroosje,8,Filipendulion
-6430,mr,6430_mr,"Rietlanden met echte heemst, moeraslathyrus en/of moerasmelkdistel",8,Filipendulion
-rbbhf,,rbbhf,regionaal belangrijk biotoop moerasspirearuigte met graslandkenmerken,8,Filipendulion
-6430,bz,6430_bz,Boszomen,9,Galio-Alliarion
-,,,,10,RG Phalaris arundinacea-[Convolvulo-Filipendulion]
-,,,,11,RG Juncus effusus-[Molinietalia/Lolio-Potentillion]
-rbbmc,,rbbmc,regionaal belangrijk biotoop grote zeggenvegetaties,12,Magnocaricion met Phragmites
-rbbmr,,rbbmr,regionaal belangrijk biotoop rietland en andere Phragmition-vegetaties,12,Magnocaricion met Phragmites
-,,,,13,RG Glyceria maxima-[Phragmitetea]
-7140,meso,7140_meso,"Basenarm tot matig basenrijk, zuur tot circum-neutraal laagveen",14,Caricion nigrae
-7140,,7140,Overgangs- en trilveen,14,Caricion nigrae
-rbbms,,rbbms,regionaal belangrijk biotoop kleine zeggenvegetaties (BWK ms) niet vervat in overgangsveen (7140),14,Caricion nigrae
-7210,,7210,Kalkhoudende moerassen met Cladium mariscus en soorten van het Caricion davalliana,15,Caricion davallianae
-7230,,7230,Alkalisch laagveen,15,Caricion davallianae
-rbbzil,,rbbzil,regionaal belangrijk biotoop zilverschoongrasland zonder zilte elementen,16,Lolio-Potentillion anserinae
-6410,mo,6410_mo,Basenrijke Molinion-graslanden (Blauwgraslanden s.s.),17,Junco-Molinion
-6410,ve,6410_ve,"Basenarme Molinion-graslanden, inclusief het Veldrustype",17,Junco-Molinion
-rbbhc,,rbbhc,regionaal belangrijk biotoop dotterbloemgrasland,18,Calthion palustris
-6510,hua,6510_hua,"Verbond van grote vossenstaart,  associatie van Weidekerveltorkruid",19,Alopecurion pratensis
-6510,hus,6510_hus,Grote pimpernelgraslanden,19,Alopecurion pratensis
-rbbvos,,rbbvos,soortenrijk grote vossenstaartgrasland,19,Alopecurion pratensis
-6510,hu,6510_hu,"Laaggelegen schraal hooiland: glanshaververbond, excl. onderstaande types",20,Arrhenatherion elatioris
-6510,huk,6510_huk,Kalkrijk kamgrasland (Galio-Trifolietum),21,Cynosurion cristati
-rbbkam,,rbbkam,soortenrijk kamgrasgrasland,21,Cynosurion cristati
-4010,,4010,Noord-Atlantische vochtige heide met Erica tetralix,22,Ericion tetralicis
-7140,oli,7140_oli,Zuur overgangsveen met Slijkzegge en Veenbloembies,23,Venige heide
-7110,,7110,Actief hoogveen,24,Oxycocco-Ericion
-7150,,7150,Slenken in veengronden met vegetatie behorend tot het Rhynchosporion,25,Rhynchosporion albae
-,,,,26,RG Molinia caerulea [Oxycocco-sphagnetea]
-rbbsm,,rbbsm,"regionaal belangrijk biotoop gagelstruweel, niet vervat in habitattypen t.g.v. hun ondergroei",27,RG Myrica gale [Oxycocco-sphagnetea]
-2310,,2310,Psammofiele heide met Calluna en Genista,28,Calluno-Genistion pilosae
-4030,,4030,Droge Europese heide,28,Calluno-Genistion pilosae
+Habitattype,Subtype,Habitatsubtype,Habitat(sub)type naam,NICHE code,NICHE Nederlandse naam,NICHE Wetenschappelijke naam
+91E0,91E0_oli,91E0_vo,"oligotroof broekbos, inclusief elzen-berkenbroekbos en berkenbroekbos (Carici laevigatae-Alnetum)",1,Berkenbroekbos,Sphagno-Betuletum
+91E0,91E0_meso,91E0_vm,mesotroof broekbos op minder voedselrijke standplaatsen (Carici elongatae-Alnetum),2,Mesotroof elzenbroekbos,Carici elongatae-Alnetum
+91E0,91E0_eutr,91E0_vn,"ruigt-elzenbos (Filipendulo-Alnetum, Macrophorbio-Alnetum, Cirsio-Alnetum)",3,Ruigte elzenbroekbos,Macrophorbio-Alnetum
+91E0,91E0_veb,91E0_va,beekbegeleidend vogelkers-essenbos en essen-iepenbos (Pruno-Fraxinetum),4,Vogelkers-essenbos,Pruno-Fraxinetum
+9160,9160,9160,Sub-Atlantische en Midden-Europese wintereikenbossen of eiken-haagbeukbossen behorend tot het Carpinion betuli,5,Haagbeuken - verbond,Carpinion betuli
+9190,9190,9190,Oude zuurminnende eikenbossen op zandvlakten met Quercus robur,6,Berken-eikenbos,Betulo-Quercetum roboris
+rbbmc,rbbmc,rbbmc,grote zeggenvegetatie,7,Verbond van Scherpe zegge,Caricion gracilis
+6430,6430,6430,Voedselrijke zoomvormende ruigten van het laagland en van de montane en alpiene zones,8,Moerasspirea - verbond,Filipendulion
+6430,6430_hf,6430_hf,moerasspireaverbond (moerasspirearuigten),8,Moerasspirea - verbond,Filipendulion
+6430,6430_hw,6430_hw,verbond van Harig wilgenroosje,8,Moerasspirea - verbond,Filipendulion
+6430,6430_mr,6430_mr,"ruigere rietlanden in zwak brakke omstandigheden met Echte heemst, Moeraslathyrus en/of Moerasmelkdistel (brakke rietvegetaties met Echte heemst )",8,Moerasspirea - verbond,Filipendulion
+rbbhf,rbbhf,rbbhf,moerasspirearuigte met graslandkenmerken,8,Moerasspirea - verbond,Filipendulion
+6430,6430_bz,6430_bz,nitrofiele boszomen met minder algemene plantensoorten,9,Verbond van Look-zonder-look,Galio - Alliarion
+,,,,10,Rompgemeenschap van Rietgras  ,RG Phalaris arundinacea-[Convolvulo-Filipendulion]
+,,,,11,Rompgemeenschap van Pitrus,RG Juncus effusus-[Molinietalia/Lolio-Potentillion]
+rbbmc,rbbmc,rbbmc,grote zeggenvegetatie,12,Grote zeggevegetatie met Riet ,Magnocaricion met Phragmites
+rbbmr,rbbmr,rbbmr,rietland en andere vegetatie van het rietverbond,12,Grote zeggevegetatie met Riet ,Magnocaricion met Phragmites
+,,,,13,Rompgemeenschap van Liesgras ,RG Glyceria maxima-[Phragmitetea]
+7140,7140_meso,7140_meso,"mineraalarm, circum-neutraal overgangsveen",14,Verbond van Zwarte zegge,Caricion nigrae
+rbbms,rbbms,rbbms,kleine zeggenvegetatie niet vervat in overgangsveen (7140),14,Verbond van Zwarte zegge,Caricion nigrae
+7210,7210,7210,Kalkhoudende moerassen met Cladium mariscus en soorten van het Caricion davallianae,15,Knopbies - verbond/ kalkmoeras,Caricion davallianae
+7230,7230,7230,Alkalisch laagveen,15,Knopbies - verbond/ kalkmoeras,Caricion davallianae
+rbbzil,rbbzil,rbbzil,zilverschoongrasland,16,Zilverschoon - verbond,Lolio-Potentillion anserinae
+6410,6410,6410,"Grasland met Molinia op kalkhoudende, venige, of lemige kleibodem (Molinion caeruleae)",17,Verbond van Biezenknoppen en Pijpestrootje,Junco - Molinion
+6410,6410_mo,6410_mo,blauwgrasland,17,Verbond van Biezenknoppen en Pijpestrootje,Junco - Molinion
+6410,6410_ve,6410_ve,veldrusassociatie (veldrusgraslanden),17,Verbond van Biezenknoppen en Pijpestrootje,Junco - Molinion
+rbbhc,rbbhc,rbbhc,dotterbloemgrasland,18,Dotterbloem - verbond,Calthion palustris
+6510,6510_hua,6510_hua,grote vossenstaartgraslanden met Weidekervel of Weidekervel-torkruid (Alopecurion),19,Verbond van Grote vossestaart,Alopecurion pratensis
+6510,6510_hus,6510_hus,glanshavergraslanden met Grote pimpernel,19,Verbond van Grote vossestaart,Alopecurion pratensis
+rbbvos,rbbvos,rbbvos,grote vossenstaartgrasland niet vervat in 6510,19,Verbond van Grote vossestaart,Alopecurion pratensis
+6510,6510_hu,6510_hu,glanshavergraslanden (Arrhenatherion),20,Glanshaver - verbond,Arrhenatherion elatioris
+rbbkam,rbbkam,rbbkam,kamgrasland,21,Kamgras - verbond,Cynosurion cristati
+4010,4010,4010,Noord-Atlantische vochtige heide met Erica tetralix,22,Dophei - verbond,Ericion tetralicis
+7140,7140_oli,7140_oli,oligotroof en zuur overgangsveen,23,Venige heide,Venige heide
+7110,7110,7110,Actief hoogveen,24,Hoogveenmos - verbond,Oxycocco - Ericion
+7150,7150,7150,Slenken in veengronden met vegetatie behorend tot het Rhynchosporion,25,Verbond van Veenmos en Snavelbies,Rynchosporion albae
+,,,,26,Rompgemeenschap van Pijpestrootje,RG Molinia caerulea [Oxycocco-sphagnetea]
+rbbsm,rbbsm,rbbsm,gagelstruweel,27,Rompgemeenschap van Wilde gagel ,RG Myrica gale [Oxycocco-sphagnetea]
+2310,2310,2310,Psammofiele heide met Calluna en Genista,28,Verbond van Struikhei en Kruipbrem,Calluno - Genistion pilosae
+4030,4030,4030,Droge Europese heide,28,Verbond van Struikhei en Kruipbrem,Calluno - Genistion pilosae

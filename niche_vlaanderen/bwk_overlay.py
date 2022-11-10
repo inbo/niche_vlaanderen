@@ -39,7 +39,7 @@ class NicheOverlay(object):
 
         mapping_file: Path | None
             optional file containing the mapping between habitat (HAB) code on BWK
-            and Niche vegetation types. An example mapping type is part of the
+            and Niche vegetation types. An example (and the default) mapping is part of the
             package at niche_vlaanderen/system_tables/hab_nich_join.csv
         mapping_columns: list(dict) | None
             Optional list containing the different mappings between columns.
@@ -81,7 +81,11 @@ class NicheOverlay(object):
                 "niche_vlaanderen", "system_tables/hab_niche_join.csv"
             )
 
-        self.mapping = pd.read_csv(mapping_file)
+        mapping = pd.read_csv("niche_vlaanderen/system_tables/hab_niche_join.csv")
+        mapping["col"] = mapping["HAB"].duplicated()
+        mapping["col"] = "NICHE_C" + (mapping["col"] + 1).astype("str")
+
+        self.mapping = mapping.pivot(index="HAB", columns="col", values="NICHE").reset_index()
 
         self.mapping.iloc[
             self.mapping["NICHE_C1"] == 0, self.mapping.columns.get_loc("NICHE_C1")
