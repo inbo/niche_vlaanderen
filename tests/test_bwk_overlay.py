@@ -18,10 +18,12 @@ def test_overlay():
     assert test_index == 48
     item = no.map.iloc[test_index]
     assert item["NICH_1_1"] == 6
-    assert item["NICH_1_2"] == np.nan
+    assert np.isnan(item["NICH_1_2"])
 
     # calibration score
-    assert np.isclose(no.score[6], 77.872340)
+    print(no.summary)
+    assert np.isclose(no.summary["score"][6], 78.383459)
+    assert np.isclose(no.summary["score_opt"][6], 78.008985)
 
 
 def test_overlay_artificial():
