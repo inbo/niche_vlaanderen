@@ -28,7 +28,7 @@ def check_lower_upper_boundaries(df, min_col, max_col, value):
         max_values = subtable[max_col]
         for (i, index) in enumerate(min_values.index):
             if i > 0:
-                if(min_values[index] != max_values[prev_index]):  # noqa: flake8
+                if min_values[index] != max_values[prev_index]:  # noqa: flake8
                     raise CodeTableException(
                         "Min and max values in table do not correspond"
                     )
@@ -62,12 +62,10 @@ def check_join(df1, df2, f1, f2=None, inner=True):
 
     if not np.array_equal(u1, u2):
         if inner:
-            raise CodeTableException(
-                "Different keys exist in tables.")
+            raise CodeTableException("Different keys exist in tables.")
         else:
             if not np.all(np.isin(u1, u2)):
-                raise CodeTableException(
-                    "Not all codes from table 1 are in table 2")
+                raise CodeTableException("Not all codes from table 1 are in table 2")
             else:
                 warnings.warn("Warning, different keys exist in tables")
         print(u1)
@@ -77,12 +75,12 @@ def check_join(df1, df2, f1, f2=None, inner=True):
 def check_unique(df, col):
     u = df[col].unique()
     if u.size != df[col].size:
-        raise CodeTableException(
-            "Non unique fields in column {}".format(col))
+        raise CodeTableException("Non unique fields in column {}".format(col))
 
 
-def validate_tables_acidity(ct_acidity, ct_soil_mlw_class,
-                            ct_soil_codes, lnk_acidity, ct_seepage, inner):
+def validate_tables_acidity(
+    ct_acidity, ct_soil_mlw_class, ct_soil_codes, lnk_acidity, ct_seepage, inner
+):
 
     # check tables
     check_unique(ct_soil_codes, "soil_code")
@@ -91,8 +89,7 @@ def validate_tables_acidity(ct_acidity, ct_soil_mlw_class,
     check_unique(ct_acidity, "acidity")
 
     check_unique(ct_seepage, "seepage")
-    check_lower_upper_boundaries(ct_seepage, "seepage_min", "seepage_max",
-                                 "seepage")
+    check_lower_upper_boundaries(ct_seepage, "seepage_min", "seepage_max", "seepage")
 
     # check links between tables
     check_join(lnk_acidity, ct_acidity, "acidity", inner=inner)
@@ -101,46 +98,70 @@ def validate_tables_acidity(ct_acidity, ct_soil_mlw_class,
     check_join(lnk_acidity, ct_seepage, "seepage", inner=inner)
 
 
-def validate_tables_nutrient_level(ct_lnk_soil_nutrient_level, ct_management,
-                                   ct_mineralisation, ct_soil_code,
-                                   ct_nutrient_level, inner):
+def validate_tables_nutrient_level(
+    ct_lnk_soil_nutrient_level,
+    ct_management,
+    ct_mineralisation,
+    ct_soil_code,
+    ct_nutrient_level,
+    inner,
+):
     # check tables
     check_unique(ct_soil_code, "soil_code")
     check_unique(ct_soil_code, "soil_name")
     check_unique(ct_management, "code")
 
-    check_lower_upper_boundaries(ct_mineralisation, "msw_min", "msw_max",
-                                 "nitrogen_mineralisation")
+    check_lower_upper_boundaries(
+        ct_mineralisation, "msw_min", "msw_max", "nitrogen_mineralisation"
+    )
     check_join(ct_mineralisation, ct_soil_code, "soil_name", inner=inner)
 
-    check_join(ct_lnk_soil_nutrient_level, ct_management,
-               "management_influence", "influence", inner=inner)
+    check_join(
+        ct_lnk_soil_nutrient_level,
+        ct_management,
+        "management_influence",
+        "influence",
+        inner=inner,
+    )
 
-    check_lower_upper_boundaries(ct_lnk_soil_nutrient_level,
-                                 "total_nitrogen_min", "total_nitrogen_max",
-                                 "nutrient_level")
+    check_lower_upper_boundaries(
+        ct_lnk_soil_nutrient_level,
+        "total_nitrogen_min",
+        "total_nitrogen_max",
+        "nutrient_level",
+    )
 
-    check_join(ct_lnk_soil_nutrient_level, ct_soil_code, "soil_name",
-               inner=inner)
-    check_join(ct_lnk_soil_nutrient_level, ct_nutrient_level,
-               "nutrient_level", "code", inner=inner)
+    check_join(ct_lnk_soil_nutrient_level, ct_soil_code, "soil_name", inner=inner)
+    check_join(
+        ct_lnk_soil_nutrient_level,
+        ct_nutrient_level,
+        "nutrient_level",
+        "code",
+        inner=inner,
+    )
 
 
-def validate_tables_vegetation(ct_vegetation, ct_soil_code, ct_inundation,
-                               ct_management, ct_acidity, ct_nutrient_level,
-                               inner):
+def validate_tables_vegetation(
+    ct_vegetation,
+    ct_soil_code,
+    ct_inundation,
+    ct_management,
+    ct_acidity,
+    ct_nutrient_level,
+    inner,
+):
 
     check_join(ct_vegetation, ct_inundation, "inundation", inner=inner)
     check_join(ct_vegetation, ct_acidity, "acidity", inner=inner)
-    check_join(ct_vegetation, ct_nutrient_level, "nutrient_level", "code",
-               inner=inner)
+    check_join(ct_vegetation, ct_nutrient_level, "nutrient_level", "code", inner=inner)
     check_join(ct_vegetation, ct_management, "management", "code", inner=inner)
 
     # extra check: per vegetation type, soil_code only one mhw, mlw combination
     #  is allowed. Otherwise the simple model may give unexpected results.
     cols = ["veg_code", "soil_name"]
-    grouped = ct_vegetation[["veg_code", "soil_name", "mhw_min", "mhw_max",
-                             "mlw_min", "mlw_max"]].groupby(cols)
+    grouped = ct_vegetation[
+        ["veg_code", "soil_name", "mhw_min", "mhw_max", "mlw_min", "mlw_max"]
+    ].groupby(cols)
 
     for (veg_code, soil_name), subtable in grouped:
         st_unique = subtable.drop_duplicates()
@@ -150,8 +171,9 @@ def validate_tables_vegetation(ct_vegetation, ct_soil_code, ct_inundation,
             raise CodeTableException("Non unique mhw/mlw combinations")
 
 
-def validate_tables_flooding(depths, duration, frequency, lnk_potential,
-                             potential, inner):
+def validate_tables_flooding(
+    depths, duration, frequency, lnk_potential, potential, inner
+):
     # test disabled as we have a 0 code which is not in lnk_potential
     # check_join(lnk_potential, depths, "depth","code")
     check_join(lnk_potential, duration, "duration", "code", inner)
@@ -161,13 +183,11 @@ def validate_tables_flooding(depths, duration, frequency, lnk_potential,
 
 
 def check_codes_used(name, used, allowed):
-    """
-
-    """
+    """"""
     if isinstance(used, str) or isinstance(used, int):
         used = np.array(used)
 
-    if used.dtype.kind == 'f':
+    if used.dtype.kind == "f":
         used_codes = set(np.unique(used[~np.isnan(used)]))
     else:
         used_codes = set(np.unique(used))
