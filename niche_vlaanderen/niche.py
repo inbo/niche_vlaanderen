@@ -18,7 +18,7 @@ from .exception import NicheException
 from pkg_resources import resource_filename
 import json
 from pkg_resources import parse_version
-from six.moves.urllib.request import urlopen
+from urllib.request import urlopen
 
 import logging
 import os.path
@@ -210,7 +210,7 @@ class Niche(object):
                 s = "# Using latest niche_vlaanderen  %s" % __version__
             else:
                 s = "# Newer niche_vlaanderen  %s available" % last
-        except:
+        except URLError:
             s = "# Error determinining last upstream version"
         return s
 
