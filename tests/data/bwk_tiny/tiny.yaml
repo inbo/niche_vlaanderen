@@ -1,0 +1,12 @@
+input_layers:
+  mhw: mhw.asc
+  mlw: mlw.asc
+  soil_code: soil14.asc
+
+model_options:
+  full_model: False
+  simple_model: True
+  deviation: False
+  output_dir: _output_bwk
+  overwrite_files: True
+

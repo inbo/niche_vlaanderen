@@ -22,63 +22,14 @@ class testSpatialContext(TestCase):
         exp = "Extent: ((172762.5, 210637.5), (172937.5, 210487.5))\n\n" \
               "Affine(25.0, 0.0, 172762.5,\n       0.0, -25.0, 210637.5)\n\n" \
               "width: 7, height: 6\n\n"
-        exp2 = exp + \
-            "Projection: +ellps=intl +lat_0=90 +lat_1=51.1666672333 " + \
-            "+lat_2=49.8333339 +lon_0=4.36748666667 +no_defs +proj=lcc " + \
-            "+towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422," + \
-            "-1.2747 +units=m +x_0=150000.013 +y_0=5400088.438"
-        # Python 3 has slightly different formatting (more numbers)
-        exp3 = exp + \
-            "Projection: +ellps=intl +lat_0=90 +lat_1=51.16666723333333 " \
-            "+lat_2=49.8333339 +lon_0=4.367486666666666 +no_defs +proj=lcc " \
-            "+towgs84=-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422," \
-            "-1.2747 +units=m +x_0=150000.013 +y_0=5400088.438"
-        # As of proj 6, the projection is given in a different format
-        exp6 = exp + \
-            'Projection: PROJCS["Lambert_Conformal_Conic",' \
-            'GEOGCS["GCS",DATUM["Datum",' \
-            'SPHEROID["intl",6378388.0,297],TOWGS84[-106.8686,52.2978,' \
-            '-103.7239,0.3366,-0.457,1.8422,-1.2747]],PRIMEM["Greenwich",0],' \
-            'UNIT["degree",0.01745329251994328]],' \
-            'PROJECTION["Lambert_Conformal_Conic_2SP"],' \
-            'PARAMETER["standard_parallel_1",51.16666723333333],' \
-            'PARAMETER["standard_parallel_2",49.8333339],' \
-            'PARAMETER["latitude_of_origin",90],' \
-            'PARAMETER["central_meridian",4.367486666666666],' \
-            'PARAMETER["false_easting",150000.013],' \
-            'PARAMETER["false_northing",5400088.438],UNIT["Meter",1]]'
-
-        exp_appv = exp + \
-        'Projection: PROJCS["Lambert_Conformal_Conic",' \
-        'GEOGCS["GCS",DATUM["Datum",' \
-        'SPHEROID["intl",6378388,297],' \
-        'TOWGS84[-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747]],' \
-        'PRIMEM["Greenwich",0],UNIT["degree",0.0174532925199433]],' \
-        'PROJECTION["Lambert_Conformal_Conic"],' \
-        'PARAMETER["standard_parallel_1",51.1666672333333],' \
-        'PARAMETER["standard_parallel_2",49.8333339],' \
-        'PARAMETER["latitude_of_origin",90],' \
-        'PARAMETER["central_meridian",4.36748666666667],' \
-        'PARAMETER["false_easting",150000.013],' \
-        'PARAMETER["false_northing",5400088.438],UNIT["Meter",1],' \
-        'AXIS["Easting",EAST],AXIS["Northing",NORTH]]'
-
-        exp_alt = exp + \
-        'Projection: PROJCS["Lambert_Conformal_Conic",' \
-        'GEOGCS["GCS",DATUM["Datum",SPHEROID["intl",6378388,297],' \
-        'TOWGS84[-106.8686,52.2978,-103.7239,0.3366,-0.457,1.8422,-1.2747]],' \
-        'PRIMEM["Greenwich",0],UNIT["degree",0.0174532925199433]],' \
-        'PROJECTION["Lambert_Conformal_Conic_2SP"],' \
-        'PARAMETER["standard_parallel_1",51.1666672333333],' \
-        'PARAMETER["standard_parallel_2",49.8333339],' \
-        'PARAMETER["latitude_of_origin",90],' \
-        'PARAMETER["central_meridian",4.36748666666667],' \
-        'PARAMETER["false_easting",150000.013],' \
-        'PARAMETER["false_northing",5400088.438],UNIT["Meter",1],' \
-        'AXIS["Easting",EAST],AXIS["Northing",NORTH]]'
 
         print(small_sc.__repr__())
-        self.assertIn(small_sc.__repr__(), [exp2, exp3, exp6, exp_appv, exp_alt])
+        # projection definitions can be formatted quite differently
+        # it is checked that the extent is correct
+        self.assertIn(exp, small_sc.__repr__())
+        # it should contain parts of lambert_conformal_conic
+        self.assertIn("Lambert_Conformal_Conic", small_sc.__repr__())
+
 
     def test_check_overlap(self):
 

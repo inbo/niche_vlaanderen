@@ -16,7 +16,9 @@ requirements = [
         'numpy',
         'rasterio',
         'pyyaml',
-        'rasterstats'
+        'rasterstats>=0.17',
+        'tqdm',
+        'geopandas'
         ]
 
 setup(name='niche_vlaanderen',
