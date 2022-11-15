@@ -1,13 +1,10 @@
 from affine import Affine
 from textwrap import dedent
-import sys
 import warnings
 
 
 class SpatialContextError(Exception):
-    """
-
-    """
+    """"""
 
 
 class SpatialContext(object):
@@ -70,8 +67,13 @@ class SpatialContext(object):
 
         Projection: %s"""
 
-        s = dedent(s) % (self.extent, self.transform.__repr__(),
-                         self.width, self.height, self.crs)
+        s = dedent(s) % (
+            self.extent,
+            self.transform.__repr__(),
+            self.width,
+            self.height,
+            self.crs,
+        )
         return s
 
     def compare(self, other):
@@ -87,7 +89,7 @@ class SpatialContext(object):
             return False
 
         if self.crs != other.crs:
-            if self.crs == '' or self.crs == '':
+            if self.crs == "" or self.crs == "":
                 print("Ignoring missing CRS in comparison")
             else:
                 print("Warning: CRS definitions are not equal!")
@@ -109,7 +111,7 @@ class SpatialContext(object):
         return self.compare(other)
 
     def __ne__(self, other):
-        """ Compare two SpatialContexts
+        """Compare two SpatialContexts
 
         Not equal to: Small differences are allowed
         """
@@ -126,10 +128,12 @@ class SpatialContext(object):
 
         A maximal offset of 1cm (0.01m) is allowed.
         """
-        if not ((abs(self.transform[0] - new_sc.transform[0]) < 0.01)
-                and (self.transform[1] == new_sc.transform[1])
-                and (self.transform[3] == new_sc.transform[3])
-                and (abs(self.transform[4] - new_sc.transform[4]) < 0.01)):
+        if not (
+            (abs(self.transform[0] - new_sc.transform[0]) < 0.01)
+            and (self.transform[1] == new_sc.transform[1])
+            and (self.transform[3] == new_sc.transform[3])
+            and (abs(self.transform[4] - new_sc.transform[4]) < 0.01)
+        ):
             print("error: different grid size or orientation")
             return False
 
@@ -148,12 +152,14 @@ class SpatialContext(object):
 
     @property
     def extent(self):
-        extent_self = (self.transform) * (0, 0), \
-                      (self.transform) * (self.width, self.height)
+        extent_self = (self.transform) * (0, 0), (self.transform) * (
+            self.width,
+            self.height,
+        )
         return extent_self
 
     def set_overlap(self, new_sc):
-        """ Sets the spatial context to the overlap of both SpatialContexts
+        """Sets the spatial context to the overlap of both SpatialContexts
 
         Parameters
         ==========
@@ -175,18 +181,27 @@ class SpatialContext(object):
         # Note that usually the 0th coefficient is positive and the 4th
         # negative.
 
-        extent_x = (max(extent_self[0][0], extent_new[0][0]),
-                    min(extent_self[1][0], extent_new[1][0]))
+        extent_x = (
+            max(extent_self[0][0], extent_new[0][0]),
+            min(extent_self[1][0], extent_new[1][0]),
+        )
 
-        extent_y = (min(extent_self[0][1], extent_new[0][1]),
-                    max(extent_self[1][1], extent_new[1][1]))
+        extent_y = (
+            min(extent_self[0][1], extent_new[0][1]),
+            max(extent_self[1][1], extent_new[1][1]),
+        )
 
         self.width = round((extent_x[1] - extent_x[0]) / self.transform[0])
         self.height = round((extent_y[1] - extent_y[0]) / self.transform[4])
 
-        self.transform = \
-            Affine(self.transform[0], self.transform[1], extent_x[0],
-                   self.transform[3], self.transform[4], extent_y[0])
+        self.transform = Affine(
+            self.transform[0],
+            self.transform[1],
+            extent_x[0],
+            self.transform[3],
+            self.transform[4],
+            extent_y[0],
+        )
 
     def get_read_window(self, new_sc):
         """Gets the read window that overlap with a different SpatialContext
@@ -208,21 +223,27 @@ class SpatialContext(object):
             )
 
         # Get minimum and maximum position in the new grid system
-        gminxy = ~new_sc.transform *  self.transform * (0, 0)
-        gmaxxy = (~new_sc.transform) * self.transform *\
-                  (self.width, self.height)
+        gminxy = ~new_sc.transform * self.transform * (0, 0)
+        gmaxxy = (~new_sc.transform) * self.transform * (self.width, self.height)
 
         # we can safely round here because we checked overlap before
         # (differences are smaller than the tolerance
-        window = (round(gminxy[1], 2), round(gmaxxy[1], 2)),\
-                 (round(gminxy[0], 2), round(gmaxxy[0], 2))
+        window = (round(gminxy[1], 2), round(gmaxxy[1], 2)), (
+            round(gminxy[0], 2),
+            round(gmaxxy[0], 2),
+        )
 
-        if window[0][0] < 0 or window[1][0] < 0 or window[1][1] > new_sc.width\
-           or window[1][0] > new_sc.height:
+        if (
+            window[0][0] < 0
+            or window[1][0] < 0
+            or window[1][1] > new_sc.width
+            or window[1][0] > new_sc.height
+        ):
 
             raise SpatialContextError(
                 "Error: new SpatialContexts is larger than current context.\n"
-                "Can not determine a read window")
+                "Can not determine a read window"
+            )
 
         return window
 

@@ -18,7 +18,7 @@ from .exception import NicheException
 from pkg_resources import resource_filename
 import json
 from pkg_resources import parse_version
-from urllib.request import urlopen
+from urllib.request import urlopen, URLError
 
 import logging
 import os.path
@@ -460,7 +460,7 @@ class Niche(object):
             self._check_all_lower(inputarray, "msw", "mlw")
             self._check_all_lower(inputarray, "mhw", "msw")
 
-        if full_model and not "nutrient_level" in inputarray.keys():
+        if full_model and "nutrient_level" not in inputarray.keys():
             with np.errstate(invalid="ignore"):  # ignore NaN comparison errors
                 if np.any(
                     (inputarray["nitrogen_animal"] < 0)
@@ -920,7 +920,7 @@ class Niche(object):
             )
 
         td = list()
-        if detail == False:
+        if detail is False:
             presence = dict({0: "not present", 1: "present", 255: "no data"})
 
             for i in self._vegetation:
@@ -965,7 +965,8 @@ class Niche(object):
             statistics must be calculated. Calculation will happen for all
             niche vegetation types by default.
         upscale : int
-            upscaling factor: decrease the cell size by this factor to increase the resolution
+            upscaling factor: decrease the cell size by this factor to increase
+            the resolution
 
         Returns
         =======
@@ -993,7 +994,8 @@ class Niche(object):
                 raster = self._vegetation[i]
                 affine = self._context.transform
             else:
-                # based on https://rasterio.readthedocs.io/en/latest/topics/resampling.html
+                # based on
+                # https://rasterio.readthedocs.io/en/latest/topics/resampling.html
                 raster = (
                     self._vegetation[i].repeat(upscale, axis=0).repeat(upscale, axis=1)
                 )

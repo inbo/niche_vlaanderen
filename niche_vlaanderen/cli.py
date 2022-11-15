@@ -5,18 +5,13 @@ from pkg_resources import resource_filename
 
 @click.command()
 @click.pass_context
-@click.option('--example', is_flag=True,
-              help='prints an example configuration file')
-@click.option('--version', is_flag=True,
-              help='prints the version number')
-@click.argument('config', required=False, type=click.Path(exists=True))
+@click.option("--example", is_flag=True, help="prints an example configuration file")
+@click.option("--version", is_flag=True, help="prints the version number")
+@click.argument("config", required=False, type=click.Path(exists=True))
 def cli(ctx, config, example, version):
-    """Command line interface to the NICHE vegetation model
-    """
+    """Command line interface to the NICHE vegetation model"""
     if example:
-        ex = resource_filename(
-                "niche_vlaanderen",
-                "system_tables/example.yaml")
+        ex = resource_filename("niche_vlaanderen", "system_tables/example.yaml")
         with open(ex) as f:
             print(f.read())
 

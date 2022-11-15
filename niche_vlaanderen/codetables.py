@@ -28,11 +28,11 @@ def check_lower_upper_boundaries(df, min_col, max_col, value):
         max_values = subtable[max_col]
         for (i, index) in enumerate(min_values.index):
             if i > 0:
-                if min_values[index] != max_values[prev_index]:  # noqa: flake8
+                if min_values[index] != max_values[prev_index]:  # noqa: F821
                     raise CodeTableException(
                         "Min and max values in table do not correspond"
                     )
-            prev_index = index  # noqa: flake8
+            prev_index = index  # noqa: F841
 
 
 def check_join(df1, df2, f1, f2=None, inner=True):

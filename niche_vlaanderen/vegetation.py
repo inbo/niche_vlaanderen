@@ -35,11 +35,11 @@ class VegSuitable(IntEnum):
     def legend():
         legend = {}
         for i in range(64):
-            l = []
+            legend_items = []
             for j in list(map(int, VegSuitable)):
                 if i & j == j:
-                    l += [VegSuitable(i & j).name.lower()]
-            legend[i] = "+".join(l) + " suitable"
+                    legend_items += [VegSuitable(i & j).name.lower()]
+            legend[i] = "+".join(legend_items) + " suitable"
         legend[0] = "soil unsuitable"
 
         # only select possible combinations for legend
