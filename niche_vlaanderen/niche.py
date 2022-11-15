@@ -18,7 +18,7 @@ from .exception import NicheException
 from pkg_resources import resource_filename
 import json
 from pkg_resources import parse_version
-from six.moves.urllib.request import urlopen
+from urllib.request import urlopen, URLError
 
 import logging
 import os.path
@@ -30,35 +30,68 @@ import sys
 from tqdm import tqdm
 
 _allowed_input = {
-    "soil_code", "mlw", "msw", "mhw", "seepage",
-    "inundation_acidity", "inundation_nutrient", "nitrogen_atmospheric",
-    "nitrogen_animal", "nitrogen_fertilizer", "management", "minerality",
-    "rainwater", "inundation_vegetation", "management_vegetation", "acidity",
-    "nutrient_level"}
+    "soil_code",
+    "mlw",
+    "msw",
+    "mhw",
+    "seepage",
+    "inundation_acidity",
+    "inundation_nutrient",
+    "nitrogen_atmospheric",
+    "nitrogen_animal",
+    "nitrogen_fertilizer",
+    "management",
+    "minerality",
+    "rainwater",
+    "inundation_vegetation",
+    "management_vegetation",
+    "acidity",
+    "nutrient_level",
+}
 
 _minimal_input = {"mlw", "mhw", "soil_code"}
 
-_input_nutrient_level = {"msw", "soil_code", "nitrogen_atmospheric",
-                         "nitrogen_fertilizer", "nitrogen_animal",
-                         "management", "inundation_nutrient"}
+_input_nutrient_level = {
+    "msw",
+    "soil_code",
+    "nitrogen_atmospheric",
+    "nitrogen_fertilizer",
+    "nitrogen_animal",
+    "management",
+    "inundation_nutrient",
+}
 
-_input_acidity = {"soil_code", "mlw", "minerality", "seepage", "rainwater",
-                  "inundation_acidity"}
+_input_acidity = {
+    "soil_code",
+    "mlw",
+    "minerality",
+    "seepage",
+    "rainwater",
+    "inundation_acidity",
+}
 
 _abiotic_keys = {"nutrient_level", "acidity"}
 
-_code_tables = {"ct_acidity", "ct_soil_mlw_class", "ct_soil_codes",
-                "lnk_acidity", "ct_seepage", "ct_vegetation", "ct_management",
-                "ct_nutrient_level", "ct_mineralisation"}
+_code_tables = {
+    "ct_acidity",
+    "ct_soil_mlw_class",
+    "ct_soil_codes",
+    "lnk_acidity",
+    "ct_seepage",
+    "ct_vegetation",
+    "ct_management",
+    "ct_nutrient_level",
+    "ct_mineralisation",
+}
 
-_code_tables_fp = {"duration",
-                   "frequency", "lnk_potential", "potential"}
+_code_tables_fp = {"duration", "frequency", "lnk_potential", "potential"}
 
 logging.basicConfig()
 logger = logging.getLogger(__name__)
 
+
 class Niche(object):
-    """ Creates a new Niche object
+    """Creates a new Niche object
 
     A niche object can be used to predict vegetation types according to the
     NICHE Vlaanderen model.
@@ -72,10 +105,19 @@ class Niche(object):
           the standard codetables used by Niche.
 
     """
-    def __init__(self, ct_acidity=None, ct_soil_mlw_class=None,
-                 ct_soil_codes=None, lnk_acidity=None, ct_seepage=None,
-                 ct_vegetation=None, ct_management=None,
-                 ct_nutrient_level=None, ct_mineralisation=None):
+
+    def __init__(
+        self,
+        ct_acidity=None,
+        ct_soil_mlw_class=None,
+        ct_soil_codes=None,
+        lnk_acidity=None,
+        ct_seepage=None,
+        ct_vegetation=None,
+        ct_management=None,
+        ct_nutrient_level=None,
+        ct_mineralisation=None,
+    ):
         self._inputfiles = dict()
         self._inputvalues = dict()
         self._inputarray = dict()
@@ -109,7 +151,7 @@ class Niche(object):
 
     def __repr__(self):
         s = "# Niche Vlaanderen version: {}\n".format(__version__)
-        s += self._latest_version + '\n'
+        s += self._latest_version + "\n"
         s += "# Run at: {}\n\n".format(datetime.datetime.now())
         # Also add some versions of the major packages we use - easy for
         # debugging
@@ -128,8 +170,7 @@ class Niche(object):
         if len(self._code_tables) > 0:
             s += "\n\n"
             s += "code_tables:\n"
-            s += indent(
-                yaml.dump(self._code_tables, default_flow_style=False), "  ")
+            s += indent(yaml.dump(self._code_tables, default_flow_style=False), "  ")
 
         if self._context is not None:
             s += "\nmodel_properties:\n"
@@ -138,8 +179,11 @@ class Niche(object):
         s += "\n"
         s += "input_layers:\n"
         input = yaml.dump(self._inputfiles, default_flow_style=False)
-        input += yaml.dump(self._inputvalues, default_flow_style=False) \
-            if len(self._inputvalues) > 0 else ""
+        input += (
+            yaml.dump(self._inputvalues, default_flow_style=False)
+            if len(self._inputvalues) > 0
+            else ""
+        )
         s += indent(input, "  ")
 
         if self.vegetation_calculated:
@@ -149,25 +193,24 @@ class Niche(object):
 
         if len(self._files_written) > 0:
             s += "\nfiles_written:\n"
-            s += indent(
-                yaml.dump(self._files_written, default_flow_style=False), "  ")
+            s += indent(yaml.dump(self._files_written, default_flow_style=False), "  ")
 
         return s
 
     def _check_latest_version(self):
-        url = 'https://pypi.python.org/pypi/niche_vlaanderen/json'
+        url = "https://pypi.python.org/pypi/niche_vlaanderen/json"
         try:
             response = urlopen(url, timeout=5)
-            json_response = json.loads(response.read().decode('utf-8'))
-            releases = json_response['releases']
+            json_response = json.loads(response.read().decode("utf-8"))
+            releases = json_response["releases"]
             v = sorted(releases, key=parse_version, reverse=True)
             last = v[0]
 
             if last == __version__:
-                s = '# Using latest niche_vlaanderen  %s' % __version__
+                s = "# Using latest niche_vlaanderen  %s" % __version__
             else:
-                s = '# Newer niche_vlaanderen  %s available' % last
-        except:
+                s = "# Newer niche_vlaanderen  %s available" % last
+        except URLError:
             s = "# Error determinining last upstream version"
         return s
 
@@ -181,7 +224,7 @@ class Niche(object):
         self._code_tables[key] = value
 
     def set_input(self, key, value):
-        """ Adds a raster or numeric value as input layer
+        """Adds a raster or numeric value as input layer
 
         Parameters
         ----------
@@ -198,12 +241,11 @@ class Niche(object):
         """
 
         # check type is valid value from list
-        if (key not in _allowed_input):
+        if key not in _allowed_input:
             raise NicheException("Unrecognized type %s" % key)
 
         if self.vegetation_calculated:
-            self._log.warning("Setting new input after model run, "
-                              "clearing results")
+            self._log.warning("Setting new input after model run, " "clearing results")
             self._clear_result()
 
         if isinstance(value, numbers.Number):
@@ -224,7 +266,7 @@ class Niche(object):
             self._inputfiles[key] = value
 
     def read_config_file(self, config, overwrite_ct=False):
-        """ Sets the input based on an input file, without running it
+        """Sets the input based on an input file, without running it
 
         Configures a model based on a config file
 
@@ -233,19 +275,19 @@ class Niche(object):
                Allows the user to override the default codetables (after
                the class has been initialized).
         """
-        with open(config, 'r') as stream:
+        with open(config, "r") as stream:
             config_loaded = yaml.safe_load(stream)
 
         if overwrite_ct and "code_tables" in config_loaded.keys():
-            for k in config_loaded['code_tables'].keys():
-                value = config_loaded['code_tables'][k]
+            for k in config_loaded["code_tables"].keys():
+                value = config_loaded["code_tables"][k]
                 value = os.path.join(os.path.dirname(config), value)
                 self._set_ct(k, value)
 
         # parse input_layers
-        for k in config_loaded['input_layers'].keys():
+        for k in config_loaded["input_layers"].keys():
             # adjust path to be relative to the yaml file
-            value = config_loaded['input_layers'][k]
+            value = config_loaded["input_layers"][k]
             if not isinstance(value, numbers.Number):
                 value = os.path.join(os.path.dirname(config), value)
             self.set_input(k, value)
@@ -254,26 +296,29 @@ class Niche(object):
             if "name" in config_loaded["model_options"].keys():
                 self.name = config_loaded["model_options"]["name"]
             if "strict_checks" in config_loaded["model_options"].keys():
-                self._options["strict_checks"] = \
-                    config_loaded["model_options"]["strict_checks"]
+                self._options["strict_checks"] = config_loaded["model_options"][
+                    "strict_checks"
+                ]
             if "overwrite_files" in config_loaded["model_options"].keys():
-                self._options["overwrite_files"] = \
-                    config_loaded["model_options"]["overwrite_files"]
+                self._options["overwrite_files"] = config_loaded["model_options"][
+                    "overwrite_files"
+                ]
             if "output_dir" in config_loaded["model_options"].keys():
-                self._options["output_dir"] = \
-                    config_loaded["model_options"]["output_dir"]
-
+                self._options["output_dir"] = config_loaded["model_options"][
+                    "output_dir"
+                ]
 
         if "flooding" in config_loaded.keys():
             self._options["flooding"] = []
             for scen_nr in config_loaded["flooding"]:
-                scen = {k: scen_nr[k]
-                        for k in ["name", "depth", "period", "frequency",
-                                  "duration"]}
+                scen = {
+                    k: scen_nr[k]
+                    for k in ["name", "depth", "period", "frequency", "duration"]
+                }
                 self._options["flooding"].append(scen)
 
     def run_config_file(self, config, overwrite_ct=False):
-        """ Runs Niche using a configuration file
+        """Runs Niche using a configuration file
 
         This will configure the model, run and output as specified.
 
@@ -288,46 +333,43 @@ class Niche(object):
         self.read_config_file(config, overwrite_ct=overwrite_ct)
 
         # Set input values
-        with open(config, 'r') as stream:
+        with open(config, "r") as stream:
             config_loaded = yaml.safe_load(stream)
 
-        # We catch the deprecation warning of inspect.getargspec
-        # When we only support Python 3 it should be switched to
-        # inspect.signature
-        with warnings.catch_warnings():
-            warnings.filterwarnings("ignore", category=DeprecationWarning)
-
-            # Run + write according to model options
-            options = {k: config_loaded["model_options"][k]
-                       for k in inspect.getargspec(self.run).args
-                       if k in config_loaded["model_options"].keys()}
-            self.run(**options)
+        # Run + write according to model options
+        options = {
+            k: config_loaded["model_options"][k]
+            for k in inspect.getfullargspec(self.run).args
+            if k in config_loaded["model_options"].keys()
+        }
+        self.run(**options)
 
         overwrite = False
 
-        if "overwrite_files" in self._options and \
-                self._options["overwrite_files"]:
+        if "overwrite_files" in self._options and self._options["overwrite_files"]:
             overwrite = True
 
         if "flooding" in self._options:
             for scen in self._options["flooding"]:
                 ct_nl = dict()
 
-                keys = set(Flooding.__init__.__code__.co_varnames)\
-                    & set(self._code_tables)
+                keys = set(Flooding.__init__.__code__.co_varnames) & set(
+                    self._code_tables
+                )
 
                 for k in keys:
                     ct_nl[k] = self._code_tables[k]
 
                 fp = Flooding(name=scen["name"], **ct_nl)
 
-                depth_file = os.path.join(os.path.dirname(config),
-                                          scen["depth"])
+                depth_file = os.path.join(os.path.dirname(config), scen["depth"])
 
-                fp.calculate(depth_file=depth_file,
-                             period=scen["period"],
-                             frequency=scen["frequency"],
-                             duration=scen["duration"])
+                fp.calculate(
+                    depth_file=depth_file,
+                    period=scen["period"],
+                    frequency=scen["frequency"],
+                    duration=scen["duration"],
+                )
                 self.fp = fp.combine(self)
                 if "output_dir" in self._options:
                     self.fp.write(self._options["output_dir"], overwrite)
@@ -339,11 +381,13 @@ class Niche(object):
 
     def _check_all_lower(self, input_array, a, b):
         # We ignore comparison problems with np.nan (nodata)
-        warnings.simplefilter(action='ignore', category=RuntimeWarning)
-        higher = ((input_array[a] > input_array[b])
-                  & (input_array[a] != -99)
-                  & (input_array[b] != -99))
-        warnings.simplefilter('default')
+        warnings.simplefilter(action="ignore", category=RuntimeWarning)
+        higher = (
+            (input_array[a] > input_array[b])
+            & (input_array[a] != -99)
+            & (input_array[b] != -99)
+        )
+        warnings.simplefilter("default")
 
         if np.any(higher):
             # find out which cells have invalid values
@@ -357,12 +401,11 @@ class Niche(object):
 
             if self._options["strict_checks"]:
                 raise NicheException(
-                    "Error: not all {} values are lower than {}".format(a, b))
+                    "Error: not all {} values are lower than {}".format(a, b)
+                )
 
     def _check_input_files(self, full_model):
-        """ basic input checks (valid files etc)
-
-        """
+        """basic input checks (valid files etc)"""
 
         # Load every input_file in the input_array
         inputarray = dict()
@@ -377,19 +420,25 @@ class Niche(object):
             # if we have unsigned integers - switch to signed otherwise
             # no data (-99) will fail.
 
-            if band.dtype.kind == 'u':
+            if band.dtype.kind == "u":
                 band = band.astype(int)
 
-            if f in ("nitrogen_animal", "nitrogen_fertilizer",
-                     "nitrogen_atmospheric", "mhw", "mlw", "msw"):
-                band = band.astype('float32')
+            if f in (
+                "nitrogen_animal",
+                "nitrogen_fertilizer",
+                "nitrogen_atmospheric",
+                "mhw",
+                "mlw",
+                "msw",
+            ):
+                band = band.astype("float32")
 
             # convert old soil codes to new soil codes
-            if f == 'soil_code' and np.all(band[band != nodata] >= 10000):
+            if f == "soil_code" and np.all(band[band != nodata] >= 10000):
                 band[band != nodata] = np.round(band[band != nodata] / 10000)
 
             # create a mask for no-data values, taking into account data-types
-            if band.dtype == 'float32' and nodata is not None:
+            if band.dtype == "float32" and nodata is not None:
                 band[np.isclose(band, nodata)] = np.nan
             else:
                 band[band == nodata] = -99
@@ -407,20 +456,21 @@ class Niche(object):
 
         self._check_all_lower(inputarray, "mhw", "mlw")
 
-        if 'msw' in inputarray.keys():
+        if "msw" in inputarray.keys():
             self._check_all_lower(inputarray, "msw", "mlw")
             self._check_all_lower(inputarray, "mhw", "msw")
 
-        if full_model and not 'nutrient_level' in inputarray.keys():
-            with np.errstate(invalid='ignore'):  # ignore NaN comparison errors
-                if np.any((inputarray['nitrogen_animal'] < 0)
-                          | (inputarray['nitrogen_animal'] > 10000)
-                          | (inputarray['nitrogen_fertilizer'] < 0)
-                          | (inputarray['nitrogen_fertilizer'] > 10000)
-                          | (inputarray['nitrogen_atmospheric'] < 0)
-                          | (inputarray['nitrogen_atmospheric'] > 10000)):
-                    raise NicheException(
-                        "Error: nitrogen values must be >0 and <10000")
+        if full_model and "nutrient_level" not in inputarray.keys():
+            with np.errstate(invalid="ignore"):  # ignore NaN comparison errors
+                if np.any(
+                    (inputarray["nitrogen_animal"] < 0)
+                    | (inputarray["nitrogen_animal"] > 10000)
+                    | (inputarray["nitrogen_fertilizer"] < 0)
+                    | (inputarray["nitrogen_fertilizer"] > 10000)
+                    | (inputarray["nitrogen_atmospheric"] < 0)
+                    | (inputarray["nitrogen_atmospheric"] > 10000)
+                ):
+                    raise NicheException("Error: nitrogen values must be >0 and <10000")
 
         # if all is successful:
         self._inputarray = inputarray
@@ -458,10 +508,10 @@ class Niche(object):
 
             given_input = set(self._inputfiles.keys()) | set(self._inputvalues.keys())
 
-            if 'nutrient_level' not in given_input:
+            if "nutrient_level" not in given_input:
                 required_input |= set(_input_nutrient_level)
 
-            if 'acidity' not in given_input:
+            if "acidity" not in given_input:
                 required_input |= set(_input_acidity)
 
             missing_keys = required_input - given_input
@@ -469,17 +519,17 @@ class Niche(object):
             if len(missing_keys) > 0:
                 print("Different keys are missing: ")
                 print(missing_keys)
-                raise NicheException(
-                    "Error, different obliged keys are missing")
+                raise NicheException("Error, different obliged keys are missing")
 
         self._check_input_files(full_model)
 
         if full_model:
-            if 'nutrient_level' not in self._inputarray:
+            if "nutrient_level" not in self._inputarray:
                 ct_nl = dict()
 
-                keys = set(NutrientLevel.__init__.__code__.co_varnames) \
-                    & set(self._code_tables)
+                keys = set(NutrientLevel.__init__.__code__.co_varnames) & set(
+                    self._code_tables
+                )
 
                 for k in keys:
                     ct_nl[k] = self._code_tables[k]
@@ -493,29 +543,32 @@ class Niche(object):
                     nitrogen_animal=self._inputarray["nitrogen_animal"],
                     nitrogen_fertilizer=self._inputarray["nitrogen_fertilizer"],
                     management=self._inputarray["management"],
-                    inundation=self._inputarray["inundation_nutrient"])
+                    inundation=self._inputarray["inundation_nutrient"],
+                )
 
-            if  'acidity' not in self._inputarray:
+            if "acidity" not in self._inputarray:
                 ct_acidity = dict()
 
-                keys = set(Acidity.__init__.__code__.co_varnames) \
-                    & set(self._code_tables)
+                keys = set(Acidity.__init__.__code__.co_varnames) & set(
+                    self._code_tables
+                )
 
                 for k in keys:
                     ct_acidity[k] = self._code_tables[k]
 
                 acidity = Acidity(**ct_acidity)
                 self._abiotic["acidity"] = acidity.calculate(
-                    self._inputarray["soil_code"], self._inputarray["mlw"],
+                    self._inputarray["soil_code"],
+                    self._inputarray["mlw"],
                     self._inputarray["inundation_acidity"],
                     self._inputarray["seepage"],
                     self._inputarray["minerality"],
-                    self._inputarray["rainwater"])
+                    self._inputarray["rainwater"],
+                )
 
         ct_veg = dict()
 
-        keys = set(Vegetation.__init__.__code__.co_varnames) \
-            & set(self._code_tables)
+        keys = set(Vegetation.__init__.__code__.co_varnames) & set(self._code_tables)
 
         for k in keys:
             ct_veg[k] = self._code_tables[k]
@@ -527,35 +580,39 @@ class Niche(object):
         if "management_vegetation" not in self._inputarray:
             self._inputarray["management_vegetation"] = None
 
-        veg_arguments = dict(soil_code=self._inputarray["soil_code"],
-                             mhw=self._inputarray["mhw"],
-                             mlw=self._inputarray["mlw"])
+        veg_arguments = dict(
+            soil_code=self._inputarray["soil_code"],
+            mhw=self._inputarray["mhw"],
+            mlw=self._inputarray["mlw"],
+        )
 
         if full_model:
             veg_arguments.update(
                 inundation=self._inputarray["inundation_vegetation"],
-                management=self._inputarray["management_vegetation"]
+                management=self._inputarray["management_vegetation"],
             )
 
-            if 'nutrient_level' in self._inputarray:
-                veg_arguments['nutrient_level'] = self._inputarray['nutrient_level']
+            if "nutrient_level" in self._inputarray:
+                veg_arguments["nutrient_level"] = self._inputarray["nutrient_level"]
             else:
-                veg_arguments['nutrient_level'] = self._abiotic[
-                    'nutrient_level']
+                veg_arguments["nutrient_level"] = self._abiotic["nutrient_level"]
 
-            if 'acidity' in self._inputarray:
-                veg_arguments['acidity'] = self._inputarray['acidity']
+            if "acidity" in self._inputarray:
+                veg_arguments["acidity"] = self._inputarray["acidity"]
             else:
-                veg_arguments['acidity'] = self._abiotic[
-                    'acidity']
+                veg_arguments["acidity"] = self._abiotic["acidity"]
 
-        self._vegetation, self.occurrence, self._vegetation_detail = vegetation.calculate(
-            full_model=full_model, **veg_arguments)
+        (
+            self._vegetation,
+            self.occurrence,
+            self._vegetation_detail,
+        ) = vegetation.calculate(full_model=full_model, **veg_arguments)
 
         if deviation:
             self._deviation = vegetation.calculate_deviation(
-                self._inputarray["soil_code"], self._inputarray["mhw"],
-                self._inputarray["mlw"]
+                self._inputarray["soil_code"],
+                self._inputarray["mhw"],
+                self._inputarray["mlw"],
             )
 
     def write(self, folder, overwrite_files=False, detailed_files=False):
@@ -584,8 +641,7 @@ class Niche(object):
         """
 
         if not self.vegetation_calculated:
-            raise NicheException(
-                "A valid run must be done before writing the output.")
+            raise NicheException("A valid run must be done before writing the output.")
 
         self._options["output_dir"] = folder
 
@@ -593,7 +649,7 @@ class Niche(object):
             os.makedirs(folder)
 
         params = dict(
-            driver='GTiff',
+            driver="GTiff",
             height=self._context.height,
             width=self._context.width,
             crs=self._context.crs,
@@ -601,80 +657,79 @@ class Niche(object):
             count=1,
             dtype="uint8",
             nodata=255,
-            compress="DEFLATE"
+            compress="DEFLATE",
         )
 
         prefix = ""
         if self.name != "":
             prefix = self.name + "_"
 
-        files = {'summary': folder + '/' + prefix + "summary.csv",
-                 'log': "{}/{}log.txt".format(folder, prefix)}
+        files = {
+            "summary": folder + "/" + prefix + "summary.csv",
+            "log": "{}/{}log.txt".format(folder, prefix),
+        }
 
         for vi in self._vegetation:
-            path = '{}/{}V{:02d}.tif'.format(folder, prefix, vi)
+            path = "{}/{}V{:02d}.tif".format(folder, prefix, vi)
             files[vi] = path
 
         for vi in self._abiotic:
-            path = '{}/{}{}.tif'.format(folder, prefix, vi)
+            path = "{}/{}{}.tif".format(folder, prefix, vi)
             files[vi] = path
 
         for i in self._deviation:
-            path = '{}/{}{}.tif'.format(folder, prefix, i)
+            path = "{}/{}{}.tif".format(folder, prefix, i)
             files[i] = path
 
         if detailed_files:
             for vi in self._vegetation_detail:
-                path = '{}/{}V{:02d}_detail.tif'.format(folder, prefix, vi)
-                files['%02d_detail'%vi] = path
+                path = "{}/{}V{:02d}_detail.tif".format(folder, prefix, vi)
+                files["%02d_detail" % vi] = path
 
         for key in files:
             if os.path.exists(files[key]):
                 if overwrite_files:
-                    self._log.info(
-                        "Warning: file {} already exists".format(files[key]))
+                    self._log.info("Warning: file {} already exists".format(files[key]))
                 else:
-                    raise NicheException(
-                        "File {} already exists".format(files[key]))
+                    raise NicheException("File {} already exists".format(files[key]))
 
         # write a summary file containing the table of the model
         self.table.to_csv(files["summary"], index=False)
 
         for vi in self._vegetation:
-            with rasterio.open(files[vi], 'w', **params) as dst:
+            with rasterio.open(files[vi], "w", **params) as dst:
                 dst.write(self._vegetation[vi], 1)
                 self._files_written[vi] = os.path.normpath(files[vi])
 
         # also save the abiotic grids
         for vi in self._abiotic:
-            with rasterio.open(files[vi], 'w', **params) as dst:
+            with rasterio.open(files[vi], "w", **params) as dst:
                 dst.write(self._abiotic[vi], 1)
                 self._files_written[vi] = os.path.normpath(files[vi])
 
         if detailed_files:
             for vi in self._vegetation_detail:
-                with rasterio.open(files[vi], 'w', **params) as dst:
+                with rasterio.open(files[vi], "w", **params) as dst:
                     dst.write(self._vegetation_detail[vi], 1)
-                    self._files_written['%02d_detail'%vi] = os.path.normpath(files['%02d_detail'%vi])
+                    self._files_written["%02d_detail" % vi] = os.path.normpath(
+                        files["%02d_detail" % vi]
+                    )
 
         # deviation
-        params.update(
-            dtype="float64",
-            nodata=-99999
-        )
+        params.update(dtype="float64", nodata=-99999)
 
         for i in self._deviation:
-            with rasterio.open(files[i], 'w', **params) as dst:
+            with rasterio.open(files[i], "w", **params) as dst:
                 band = self._deviation[i]
                 band[band == np.nan] = -99999
                 dst.write(band, 1)
                 self._files_written[i] = os.path.normpath(files[i])
 
-        with open(files['log'], "w") as f:
+        with open(files["log"], "w") as f:
             f.write(self.__repr__())
 
     def plot(self, key, ax=None, fixed_scale=True):
-        """ Plots the result or input of a Niche object
+        """Plots the result or input of a Niche object
 
         Creates a plot of an input layer of a Niche object or of the result
         of a Niche object.
@@ -748,7 +803,7 @@ class Niche(object):
             if fixed_scale:
                 norm = Normalize(-50, 50)
 
-        if key in {'mhw', 'mlw', 'msw'} and fixed_scale:
+        if key in {"mhw", "mlw", "msw"} and fixed_scale:
             norm = Normalize(200, 0)
 
         if v is None:
@@ -762,7 +817,7 @@ class Niche(object):
 
         im = plt.imshow(v, extent=mpl_extent, norm=norm)
 
-        if self.name != '':
+        if self.name != "":
             title = self.name + " " + title
 
         ax.set_title(title)
@@ -772,15 +827,14 @@ class Niche(object):
             values = [0, 1]
 
             colors = [im.cmap(value / (len(values) - 1)) for value in values]
-            patches = [mpatches.Patch(color=colors[i],
-                                      label=labels[i]) for i in values]
-            plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2,
-                       borderaxespad=0.)
+            patches = [mpatches.Patch(color=colors[i], label=labels[i]) for i in values]
+            plt.legend(
+                handles=patches, bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0
+            )
         else:
             plt.colorbar()
 
         return ax
-
 
     def plot_detail(self, key, limit_legend=True, cmap="Set1"):
         """Detailed plot for a vegetation type
@@ -822,32 +876,36 @@ class Niche(object):
 
         v_un = ma.masked_equal(v_un, len(legend))
 
-        plt.imshow(v_un, extent=mpl_extent, cmap=cmap,
-                        interpolation=None, vmin=0, vmax=len(legend))
+        plt.imshow(
+            v_un,
+            extent=mpl_extent,
+            cmap=cmap,
+            interpolation=None,
+            vmin=0,
+            vmax=len(legend),
+        )
 
         if limit_legend:
             present = np.unique(v_un)
-            legend = {i: legend[k] for i, k in enumerate(legend) if
-                                  i in present}
+            legend = {i: legend[k] for i, k in enumerate(legend) if i in present}
 
-        patches = [mpatches.Patch(color=cm.get_cmap(cmap)(i),
-                                      label=legend[j]) for i,j in enumerate(legend)]
+        patches = [
+            mpatches.Patch(color=cm.get_cmap(cmap)(i), label=legend[j])
+            for i, j in enumerate(legend)
+        ]
 
-        plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2,
-                   borderaxespad=0.)
+        plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
 
-        if self.name != '':
+        if self.name != "":
             title = self.name + " " + title
 
         ax.set_title(title)
 
         return ax
 
-
     @property
     def table(self):
-        """Dataframe containing the potential area (ha) per vegetation type
-        """
+        """Dataframe containing the potential area (ha) per vegetation type"""
         return self._table()
 
     def _table(self, detail=False):
@@ -858,11 +916,11 @@ class Niche(object):
         """
         if not self.vegetation_calculated:
             raise NicheException(
-                "Error: You must run niche prior to requesting the "
-                "result table")
+                "Error: You must run niche prior to requesting the " "result table"
+            )
 
         td = list()
-        if detail == False:
+        if detail is False:
             presence = dict({0: "not present", 1: "present", 255: "no data"})
 
             for i in self._vegetation:
@@ -872,19 +930,20 @@ class Niche(object):
                     td.append((i, presence[a], rec[a]))
         else:
             legend = VegSuitable.legend()
-            legend[255] = 'no data'
+            legend[255] = "no data"
             for i in self._vegetation_detail:
                 vi = pd.Series(self._vegetation_detail[i].flatten())
                 rec = vi.value_counts() * self._context.cell_area / 10000
                 for a in rec.index:
                     td.append((i, legend[a], rec[a]))
 
-        df = pd.DataFrame(td, columns=['vegetation', 'presence',
-                                       'area_ha'])
+        df = pd.DataFrame(td, columns=["vegetation", "presence", "area_ha"])
 
         return df
 
-    def zonal_stats(self, vectors, outside=True, attribute=None, vegetation_types=None, upscale=1):
+    def zonal_stats(
+        self, vectors, outside=True, attribute=None, vegetation_types=None, upscale=1
+    ):
         """Calculates zonal statistics using vectors
 
         Parameters
@@ -906,7 +965,8 @@ class Niche(object):
             statistics must be calculated. Calculation will happen for all
             niche vegetation types by default.
         upscale : int
-            upscaling factor: decrease the cell size by this factor to increase the resolution
+            upscaling factor: decrease the cell size by this factor to increase
+            the resolution
 
         Returns
         =======
@@ -916,8 +976,8 @@ class Niche(object):
 
         # Ignore the warnings from rasterstats - code must be adjusted
         # in that package - not in our code.
-        warnings.simplefilter(action='ignore', category=FutureWarning)
-        warnings.simplefilter(action='ignore', category=DeprecationWarning)
+        warnings.simplefilter(action="ignore", category=FutureWarning)
+        warnings.simplefilter(action="ignore", category=DeprecationWarning)
 
         presence = dict({0: "not present", 1: "present", 255: "no data"})
 
@@ -934,20 +994,25 @@ class Niche(object):
                 raster = self._vegetation[i]
                 affine = self._context.transform
             else:
-                # based on https://rasterio.readthedocs.io/en/latest/topics/resampling.html
-                raster = self._vegetation[i].repeat(upscale, axis=0).repeat(upscale, axis=1)
+                # based on
+                # https://rasterio.readthedocs.io/en/latest/topics/resampling.html
+                raster = (
+                    self._vegetation[i].repeat(upscale, axis=0).repeat(upscale, axis=1)
+                )
                 affine = self._context.transform * self._context.transform.scale(
                     self._context.width / raster.shape[1],
-                    self._context.height / raster.shape[0])
+                    self._context.height / raster.shape[0],
+                )
 
-            td[i] = rasterstats.zonal_stats(vectors=vectors,
-                                            raster=raster,
-                                            affine=affine,
-                                            categorical=True,
-                                            nodata=-99,
-                                            geojson_out=attribute is not None
-                                            )
-        warnings.simplefilter('default')
+            td[i] = rasterstats.zonal_stats(
+                vectors=vectors,
+                raster=raster,
+                affine=affine,
+                categorical=True,
+                nodata=-99,
+                geojson_out=attribute is not None,
+            )
+        warnings.simplefilter("default")
 
         ti = []
         attribute_list = []
@@ -955,23 +1020,31 @@ class Niche(object):
         for vi in td:
             for shape_i, rec in enumerate(td[vi]):
                 if attribute is not None:
-                    rec = rec['properties']
+                    rec = rec["properties"]
                 for a in presence:
                     pixels = rec.get(a) if rec.get(a) is not None else 0
-                    ti.append((int(vi), shape_i, presence[a],
-                               pixels * self._context.cell_area / 10000 / (upscale ** 2)))
+                    ti.append(
+                        (
+                            int(vi),
+                            shape_i,
+                            presence[a],
+                            pixels * self._context.cell_area / 10000 / (upscale ** 2),
+                        )
+                    )
                     if attribute is not None:
                         attribute_list.append(rec[attribute])
 
-        df = pd.DataFrame(ti, columns=['vegetation', 'shape_id', 'presence',
-                                       'area_ha'])
+        df = pd.DataFrame(ti, columns=["vegetation", "shape_id", "presence", "area_ha"])
 
         if outside:
             # calculate area outside polygons
-            a = pd.concat([self.table.groupby(by=["vegetation", "presence"])[
-                               "area_ha"].sum(),
-                           df.groupby(by=["vegetation", "presence"])[
-                               "area_ha"].sum()], axis=1)
+            a = pd.concat(
+                [
+                    self.table.groupby(by=["vegetation", "presence"])["area_ha"].sum(),
+                    df.groupby(by=["vegetation", "presence"])["area_ha"].sum(),
+                ],
+                axis=1,
+            )
             a = a.reset_index().fillna(0)
             a.columns = ["vegetation", "presence", "all", "inshape"]
             a["area_ha"] = a["all"] - a["inshape"]
@@ -995,8 +1068,8 @@ class Niche(object):
                 ct_vegetation = self._code_tables["ct_vegetation"]
             else:
                 ct_vegetation = resource_filename(
-                    "niche_vlaanderen",
-                    "system_tables/niche_vegetation.csv")
+                    "niche_vlaanderen", "system_tables/niche_vegetation.csv"
+                )
 
             ct_vegetation = pd.read_csv(ct_vegetation)
             subtable = ct_vegetation[["veg_code", "veg_type"]]
@@ -1015,7 +1088,7 @@ class Niche(object):
 
 
 def indent(s, pre):
-    return pre + s.replace('\n', '\n' + pre)
+    return pre + s.replace("\n", "\n" + pre)
 
 
 class NicheDelta(object):
@@ -1028,9 +1101,13 @@ class NicheDelta(object):
     """
 
     _values = [0, 1, 2, 3, 4]
-    _labels = ["not present in both models", "present in both models",
-               "only in model 1", "only in model 2",
-               "nodata in one model"]
+    _labels = [
+        "not present in both models",
+        "present in both models",
+        "only in model 1",
+        "only in model 2",
+        "nodata in one model",
+    ]
     name = ""
 
     def __init__(self, n1, n2):
@@ -1047,7 +1124,8 @@ class NicheDelta(object):
             raise NicheException(
                 "Spatial contexts differ, can not make a delta\n"
                 "Context 1 %s\n"
-                "Context 2 %s" % (n1._context, n2._context))
+                "Context 2 %s" % (n1._context, n2._context)
+            )
         self._context = n1._context
 
         if len(n1._vegetation) == 0 or len(n2._vegetation) == 0:
@@ -1058,14 +1136,11 @@ class NicheDelta(object):
 
         # the error below should not occur as we check the context, but
         # better safe than sorry
-        if n1._vegetation[1].size != \
-                n2._vegetation[1].size:  # pragma: no cover
+        if n1._vegetation[1].size != n2._vegetation[1].size:  # pragma: no cover
             raise NicheException("Arrays have different size.")
 
         if len(n1._vegetation) != len(n2._vegetation):
-            raise NicheException(
-                "Niche vegetation objects have different length."
-            )
+            raise NicheException("Niche vegetation objects have different length.")
 
         for vi in n1._vegetation:
             n1v = n1._vegetation[vi].flatten()
@@ -1082,7 +1157,7 @@ class NicheDelta(object):
         self._n1 = n1
 
     def write(self, folder, overwrite_files=False):
-        """ Writes the difference grids to grid files.
+        """Writes the difference grids to grid files.
 
         The differences are coded using these values:
 
@@ -1105,7 +1180,7 @@ class NicheDelta(object):
             os.makedirs(folder)
 
         params = dict(
-            driver='GTiff',
+            driver="GTiff",
             height=self._context.height,
             width=self._context.width,
             crs=self._context.crs,
@@ -1113,7 +1188,7 @@ class NicheDelta(object):
             count=1,
             dtype="uint8",
             nodata=255,
-            compress="DEFLATE"
+            compress="DEFLATE",
         )
 
         prefix = ""
@@ -1122,23 +1197,23 @@ class NicheDelta(object):
 
         files = {
             "summary": "{}/{}delta_summary.csv".format(folder, prefix),
-            "legend": "{}/{}legend_delta.csv".format(folder, prefix)
+            "legend": "{}/{}legend_delta.csv".format(folder, prefix),
         }
 
         for vi in self._delta:
-            files[vi] = '{}/{}D{}.tif'.format(folder, prefix, vi)
+            files[vi] = "{}/{}D{}.tif".format(folder, prefix, vi)
 
         for key in files:
             if os.path.exists(files[key]):
                 if overwrite_files:
                     self._log.warning(
-                        "Warning: file {} already exists".format(files[key]))
+                        "Warning: file {} already exists".format(files[key])
+                    )
                 else:
-                    raise NicheException(
-                        "File {} already exists".format(files[key]))
+                    raise NicheException("File {} already exists".format(files[key]))
 
         for vi in self._delta:
-            with rasterio.open(files[vi], 'w', **params) as dst:
+            with rasterio.open(files[vi], "w", **params) as dst:
                 dst.write(self._delta[vi], 1)
 
         # Also the resulting table is written
@@ -1173,12 +1248,12 @@ class NicheDelta(object):
         ((a, b), (c, d)) = self._context.extent
         mpl_extent = (a, c, d, b)
 
-        im = plt.imshow(self._delta[key], extent=mpl_extent,
-                        norm=Normalize(0, max(self._values)))
+        im = plt.imshow(
+            self._delta[key], extent=mpl_extent, norm=Normalize(0, max(self._values))
+        )
 
         if self.name != "":
-            title = "{} ({}-{})".format(self.name,
-                                        self._n1._vegcode2name(key), key)
+            title = "{} ({}-{})".format(self.name, self._n1._vegcode2name(key), key)
         else:
             title = "{} ({})".format(self._n1._vegcode2name(key), key)
 
@@ -1187,19 +1262,15 @@ class NicheDelta(object):
         labels = self._labels
         values = self._values
 
-        colors = [im.cmap(value/(len(values) - 1)) for value in values]
-        patches = [mpatches.Patch(color=colors[i],
-                                  label=labels[i]) for i in values]
-        plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2,
-                   borderaxespad=0.)
+        colors = [im.cmap(value / (len(values) - 1)) for value in values]
+        patches = [mpatches.Patch(color=colors[i], label=labels[i]) for i in values]
+        plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
 
         return ax
 
-
-
     @property
     def table(self):
-        """ Return a summarized dataframe for a NicheDelta object
+        """Return a summarized dataframe for a NicheDelta object
 
         Returns
         =======
@@ -1210,15 +1281,16 @@ class NicheDelta(object):
             vi = pd.Series(self._delta[i].flatten())
             rec = vi.value_counts()
             for a in rec.index:
-                td.append((i, self._labels[int(a)],
-                           rec[a] * self._context.cell_area / 10000))
-        df = pd.DataFrame(td, columns=['vegetation', 'presence', 'area_ha'])
+                td.append(
+                    (i, self._labels[int(a)], rec[a] * self._context.cell_area / 10000)
+                )
+        df = pd.DataFrame(td, columns=["vegetation", "presence", "area_ha"])
 
         return df
 
 
 def conductivity2minerality(conductivity, minerality):
-    """ Convert a grid with conductivity to a grid of minerality
+    """Convert a grid with conductivity to a grid of minerality
 
     Helper function that converts a grid with conductivity values
     to a grid of minerality values (where conductivity > 500).
@@ -1243,9 +1315,9 @@ def conductivity2minerality(conductivity, minerality):
             band = src.read(1)
             band = np.where(band > 500, 1, 0)
             profile = src.profile
-            profile["driver"] = 'GTiff'
+            profile["driver"] = "GTiff"
             profile["compress"] = "DEFLATE"
             band = band.astype(profile["dtype"])
 
-        with rasterio.open(minerality, 'w', **profile) as dst:
+        with rasterio.open(minerality, "w", **profile) as dst:
             dst.write(band, 1)

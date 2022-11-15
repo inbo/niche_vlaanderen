@@ -3,7 +3,6 @@ numpy
 rasterio
 pyyaml
 rasterstats>=0.17
-six
 geopandas
 pygeos
 tqdm

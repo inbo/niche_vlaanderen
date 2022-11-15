@@ -31,18 +31,25 @@ class Flooding(object):
     files.
 
     """
-    def __init__(self, depths=None, duration=None, frequency=None,
-                 lnk_potential=None, potential=None, name=""):
+
+    def __init__(
+        self,
+        depths=None,
+        duration=None,
+        frequency=None,
+        lnk_potential=None,
+        potential=None,
+        name="",
+    ):
         self._ct = dict()
         self._veg = dict()
         self._log = logging.getLogger("niche_vlaanderen")
 
-        for i in ["depths", "duration", "frequency", "lnk_potential",
-                  "potential"]:
+        for i in ["depths", "duration", "frequency", "lnk_potential", "potential"]:
             if locals()[i] is None:
                 ct = resource_filename(
-                        "niche_vlaanderen",
-                        "system_tables/flooding/"+i+".csv")
+                    "niche_vlaanderen", "system_tables/flooding/" + i + ".csv"
+                )
             else:
                 ct = locals()[i]
             self._ct[i] = pd.read_csv(ct)
@@ -61,12 +68,11 @@ class Flooding(object):
 
     @property
     def table(self):
-        """Dataframe containing the potential area (ha) per vegetation type
-        """
+        """Dataframe containing the potential area (ha) per vegetation type"""
         if not self.vegetation_calculated:
             raise FloodingException(
-                "Error: You must run niche prior to requesting the "
-                "result table")
+                "Error: You must run niche prior to requesting the " "result table"
+            )
 
         td = list()
 
@@ -83,8 +89,9 @@ class Flooding(object):
             for a in rec.index:
                 td.append((i, a, labels[a], rec[a]))
 
-        df = pd.DataFrame(td, columns=['vegetation', 'presence_code',
-                                       'presence', 'area_ha'])
+        df = pd.DataFrame(
+            td, columns=["vegetation", "presence_code", "presence", "area_ha"]
+        )
 
         return df
 
@@ -95,19 +102,14 @@ class Flooding(object):
         """
         orig_shape = depth.shape
         depth = depth.flatten()
-        nodata = (depth == -99)
+        nodata = depth == -99
 
-        check_codes_used("depth", depth,
-                         self._ct["depths"]["code"])
-        check_codes_used("frequency", frequency,
-                         self._ct["frequency"]["code"])
-        check_codes_used("duration", duration,
-                         self._ct["duration"]["code"])
-        check_codes_used("period", period,
-                         ["summer", "winter"])
+        check_codes_used("depth", depth, self._ct["depths"]["code"])
+        check_codes_used("frequency", frequency, self._ct["frequency"]["code"])
+        check_codes_used("duration", duration, self._ct["duration"]["code"])
+        check_codes_used("period", period, ["summer", "winter"])
 
-        for veg_code, subtable_veg in \
-                self._ct["lnk_potential"].groupby(["veg_code"]):
+        for veg_code, subtable_veg in self._ct["lnk_potential"].groupby(["veg_code"]):
             subtable_veg = subtable_veg.reset_index()
             # by default we give code 4 (no information/flooding)
             # https://github.com/inbo/niche_vlaanderen/issues/87
@@ -120,12 +122,11 @@ class Flooding(object):
                     for row in subtable.itertuples():
                         veg = self._veg[veg_code]
                         veg[row.depth == depth] = row.potential
-                        self._veg[veg_code] = np.maximum(veg,
-                                                         self._veg[veg_code])
+                        self._veg[veg_code] = np.maximum(veg, self._veg[veg_code])
             self._veg[veg_code] = self._veg[veg_code].reshape(orig_shape)
 
     def calculate(self, depth_file, frequency, period, duration):
-        """ Calculate a floodplain object
+        """Calculate a floodplain object
 
         Parameters
         ==========
@@ -151,14 +152,12 @@ class Flooding(object):
         with rasterio.open(depth_file, "r") as dst:
             depth = dst.read(1)
             self._context = SpatialContext(dst)
-            if depth.dtype.kind == 'u':
+            if depth.dtype.kind == "u":
                 depth = depth.astype(int)
             depth[depth == dst.nodatavals[0]] = -99
         self._calculate(depth, frequency, duration, period)
 
-        self.options = {'frequency': frequency,
-                        "duration": duration,
-                        "period": period}
+        self.options = {"frequency": frequency, "duration": duration, "period": period}
 
     def plot(self, key, ax=None):
         try:
@@ -183,54 +182,57 @@ class Flooding(object):
 
         veg = ma.masked_equal(self._veg[key], -99)
 
-        im = plt.imshow(veg, extent=mpl_extent,
-                        norm=Normalize(-1, 4))
+        im = plt.imshow(veg, extent=mpl_extent, norm=Normalize(-1, 4))
         options = self.options.copy()
-        options["duration"] = "< 14 days" \
-            if self.options["duration"] == 1 else "> 14 days"
+        options["duration"] = (
+            "< 14 days" if self.options["duration"] == 1 else "> 14 days"
+        )
         ax.set_title("{} ({})".format(key, options))
 
-        labels = self._ct["potential"].set_index(
-            "code")["description"].to_dict(into=OrderedDict)
+        labels = (
+            self._ct["potential"]
+            .set_index("code")["description"]
+            .to_dict(into=OrderedDict)
+        )
 
-        colors = [im.cmap(i/(len(labels) - 1))
-                  for (i, value) in enumerate(labels)]
+        colors = [im.cmap(i / (len(labels) - 1)) for (i, value) in enumerate(labels)]
 
-        patches = [mpatches.Patch(color=colors[i],
-                                  label=labels[code])
-                   for (i, code) in enumerate(labels)
-                   if code > -1 or self._combined]
-        plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2,
-                   borderaxespad=0.)
+        patches = [
+            mpatches.Patch(color=colors[i], label=labels[code])
+            for (i, code) in enumerate(labels)
+            if code > -1 or self._combined
+        ]
+        plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
 
         return ax
 
     def write(self, folder, overwrite_files=False):
-        """ Writes the floodplain grids to grid files.
+        """Writes the floodplain grids to grid files.
 
-         The differences are coded using the values specified in the
-         potential.csv table.
+        The differences are coded using the values specified in the
+        potential.csv table.
 
-         Parameters
-         ==========
+        Parameters
+        ==========
 
-         folder: path
-             Path to which the output files will be written.
+        folder: path
+            Path to which the output files will be written.
 
-         overwrite_files: bool
-            Overwrite files when saving.
-            Note writing will fail if any of the files to be written already
-            exists.
-         """
+        overwrite_files: bool
+           Overwrite files when saving.
+           Note writing will fail if any of the files to be written already
+           exists.
+        """
         if len(self._veg) == 0:
             raise FloodingException(
-                "A valid run must be done before writing the output.")
+                "A valid run must be done before writing the output."
+            )
 
         if not os.path.exists(folder):
             os.makedirs(folder)
 
         params = dict(
-            driver='GTiff',
+            driver="GTiff",
             height=self._context.height,
             width=self._context.width,
             crs=self._context.crs,
@@ -238,7 +240,7 @@ class Flooding(object):
             count=1,
             dtype="int16",
             nodata=-99,
-            compress="DEFLATE"
+            compress="DEFLATE",
         )
 
         self._files_written = dict()
@@ -246,31 +248,36 @@ class Flooding(object):
         if self.name != "":
             name = self.name + "-"
 
-        files = {'summary': folder + '/' + name + "summary.csv",
-                 'log': "{}/{}log.txt".format(folder, name)}
+        files = {
+            "summary": folder + "/" + name + "summary.csv",
+            "log": "{}/{}log.txt".format(folder, name),
+        }
 
         for vi in self._veg:
             filename = "{}/{}F{:02d}-{}-P{}-{}.tif".format(
                 folder,
                 name,
-                vi, self.options["frequency"], self.options["duration"],
-                self.options["period"])
+                vi,
+                self.options["frequency"],
+                self.options["duration"],
+                self.options["period"],
+            )
             files[vi] = filename
 
         for key in files:
             if os.path.exists(files[key]):
                 if overwrite_files:
                     self._log.warning(
-                        "Warning: file {} already exists".format(files[key]))
+                        "Warning: file {} already exists".format(files[key])
+                    )
                 else:
-                    raise FloodingException(
-                        "File {} already exists".format(files[key]))
+                    raise FloodingException("File {} already exists".format(files[key]))
 
         self.table.to_csv(files["summary"], index=False)
 
         for vi in self._veg:
             path = files[vi]
-            with rasterio.open(path, 'w', **params) as dst:
+            with rasterio.open(path, "w", **params) as dst:
                 dst.write(self._veg[vi], 1)
                 self._files_written[filename] = os.path.normpath(path)
 
@@ -294,23 +301,25 @@ class Flooding(object):
         # check niche model has been run
         if not niche_result.vegetation_calculated:
             raise FloodingException(
-                "Niche model must be run prior to running this module.")
+                "Niche model must be run prior to running this module."
+            )
 
         if not self.vegetation_calculated:
             raise FloodingException(
-                "Floodplain model must be run prior to running this module.")
+                "Floodplain model must be run prior to running this module."
+            )
 
         if self._context != niche_result._context:
             raise FloodingException(
-                "Niche model has a different spatial context:\n" +
-                str(self._context) + str(niche_result._context)
-                )
+                "Niche model has a different spatial context:\n"
+                + str(self._context)
+                + str(niche_result._context)
+            )
 
         new = copy.copy(self)
         new._veg = self._veg.copy()
         for vi in new._veg:
-            nodata = ((niche_result._vegetation[vi] == 255) |
-                      (new._veg[vi] == -99))
+            nodata = (niche_result._vegetation[vi] == 255) | (new._veg[vi] == -99)
             new._veg[vi] = niche_result._vegetation[vi] * new._veg[vi]
             new._veg[vi][niche_result._vegetation[vi] == 0] = -1
             new._veg[vi][nodata] = -99

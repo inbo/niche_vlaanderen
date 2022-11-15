@@ -11,9 +11,9 @@ with warnings.catch_warnings():
 import pandas as pd
 import numpy as np
 
-logger = logging.getLogger(__name__)
-
 from niche_vlaanderen.niche import Niche
+
+logger = logging.getLogger(__name__)
 
 
 class NicheOverlayException(Exception):
@@ -39,8 +39,8 @@ class NicheOverlay(object):
 
         mapping_file: Path | None
             optional file containing the mapping between habitat (HAB) code on BWK
-            and Niche vegetation types. An example (and the default) mapping is part of the
-            package at niche_vlaanderen/system_tables/hab_nich_join.csv
+            and Niche vegetation types. An example (and the default) mapping is
+            part of the package at niche_vlaanderen/system_tables/hab_nich_join.csv
         mapping_columns: list(dict) | None
             Optional list containing the different mappings between columns.
             If not specified, the default mapping will be used.
@@ -51,6 +51,7 @@ class NicheOverlay(object):
                 join_value: to_field in mapping_file,
                 new_column: resulting_column
             }
+            TODO: adjust to long table
             eg:
             [{'map_key': 'HAB1',
               'join_key': 'HAB',
@@ -85,7 +86,9 @@ class NicheOverlay(object):
         mapping["col"] = mapping["HAB"].duplicated()
         mapping["col"] = "NICHE_C" + (mapping["col"] + 1).astype("str")
 
-        self.mapping = mapping.pivot(index="HAB", columns="col", values="NICHE").reset_index()
+        self.mapping = mapping.pivot(
+            index="HAB", columns="col", values="NICHE"
+        ).reset_index()
 
         self.mapping.iloc[
             self.mapping["NICHE_C1"] == 0, self.mapping.columns.get_loc("NICHE_C1")
@@ -163,7 +166,6 @@ class NicheOverlay(object):
 
         # Remove any existing "NICH" columns
 
-
         present_vegetation_types = np.unique(self.map[self._niche_columns])
 
         present_vegetation_types = present_vegetation_types[
@@ -175,7 +177,10 @@ class NicheOverlay(object):
         # TODO: add parameter cellsize to zonal statistics: eg 0.5
         # upscale niche rasters to that before calculating statistics
         self.potential_presence = self.niche.zonal_stats(
-            self.map, outside=False, vegetation_types=present_vegetation_types, upscale=upscale
+            self.map,
+            outside=False,
+            vegetation_types=present_vegetation_types,
+            upscale=upscale,
         )
 
         self.potential_presence = self.potential_presence.pivot(
@@ -220,14 +225,17 @@ class NicheOverlay(object):
                     )
                     self.area_nonpot[row[veg]].loc[i] = area_nonpot
 
-                    pHab = row["pHAB" + veg[5]] # pHAB1 --> pHAB5
+                    pHab = row["pHAB" + veg[5]]  # pHAB1 --> pHAB5
                     # TODO: in ha ?
                     area_effective = pHab * row.area_shape / 100
                     # area of the shape
                     self.area_effective[row[veg]].loc[i] = area_effective
 
                     if (area_pot + area_nonpot) == 0:
-                        warnings.warn(f"No overlap between potential vegetation map and shape_id {i}")
+                        warnings.warn(
+                            f"No overlap between potential vegetation map and "
+                            f"shape_id {i}"
+                        )
                     else:
                         area_pot_perc = area_pot / (area_pot + area_nonpot)
                         self.area_pot_perc[row[veg]].loc[i] = area_pot_perc
@@ -245,7 +253,8 @@ class NicheOverlay(object):
                             i
                         ] = area_nonpot_optimistic
 
-                        # vegetation type is present (actual presence), for polygon count
+                        # vegetation type is present (actual presence)
+                        # used in polygon count
                         self.veg_present[row[veg]].loc[i] = 1
 
         # create summary table per vegetation type
