@@ -12,6 +12,7 @@ import tempfile
 import shutil
 import os
 import sys
+import yaml
 
 import distutils.spawn
 import subprocess
@@ -477,10 +478,20 @@ class TestNiche(TestCase):
         myniche = self.create_small()
         myniche.run()
         tmpdir = tempfile.mkdtemp()
-        myniche.write(tmpdir)
+        myniche.write(tmpdir, detailed_files=True)
         # should raise: file already exists
         with pytest.raises(NicheException):
             myniche.write(tmpdir)
+
+        # check that all necessary files are created
+        with open(tmpdir + "/log.txt") as log:
+            res = yaml.safe_load(log)
+        files_written = res["files_written"]
+        # assert all files written actually exist
+
+        for index in files_written:
+            assert os.path.exists(files_written[index])
+
         shutil.rmtree(tmpdir)
 
     def test_overwrite_codetable_nonexisting(self):
@@ -606,7 +617,7 @@ class TestNicheDelta(TestCase):
         with pytest.raises(NicheException):
             niche_vlaanderen.NicheDelta(zwb, small)
 
-    def test_overwrite_file(self):
+    def test_overwrite_delta_file(self):
         myniche = TestNiche.create_small()
         myniche.run(full_model=False)
         delta = niche_vlaanderen.NicheDelta(myniche, myniche)
@@ -617,19 +628,20 @@ class TestNicheDelta(TestCase):
             delta.write(tmpdir)
         # should just warn
         delta.write(tmpdir, overwrite_files=True)
+        # check that all files in log.txt actually exist
+
         shutil.rmtree(tmpdir)
 
 
 @pytest.mark.skipif(
         distutils.spawn.find_executable("gdalinfo") is None,
         reason="gdalinfo not available in the environment.")
-def test_conductivity2minerality():
-    tmpdir = tempfile.mkdtemp()
+def test_conductivity2minerality(tmpdir):
     niche_vlaanderen.conductivity2minerality(
-        "tests/data/small/conductivity.asc", tmpdir + "/minerality.tif")
+        "tests/data/small/conductivity.asc", str(tmpdir / "minerality.tif"))
 
     info = subprocess.check_output(
-        ["gdalinfo", "-stats", tmpdir + "/minerality.tif"]
+        ["gdalinfo", "-stats", str(tmpdir / "minerality.tif")]
     ).decode('utf-8')
 
     assert ("STATISTICS_MAXIMUM=1" in info)
@@ -637,4 +649,3 @@ def test_conductivity2minerality():
     assert ("STATISTICS_STDDEV=0.5")
     assert ("STATISTICS_MEAN=0.5")
 
-    shutil.rmtree(tmpdir)

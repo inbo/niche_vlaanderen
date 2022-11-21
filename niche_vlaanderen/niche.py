@@ -709,10 +709,11 @@ class Niche(object):
 
         if detailed_files:
             for vi in self._vegetation_detail:
-                with rasterio.open(files[vi], "w", **params) as dst:
+                filename = files["%02d_detail" % vi]
+                with rasterio.open(filename, "w", **params) as dst:
                     dst.write(self._vegetation_detail[vi], 1)
-                    self._files_written["%02d_detail" % vi] = os.path.normpath(
-                        files["%02d_detail" % vi]
+                    self._files_written[filename] = os.path.normpath(
+                        filename
                     )
 
         # deviation
@@ -1249,7 +1250,10 @@ class NicheDelta(object):
         mpl_extent = (a, c, d, b)
 
         im = plt.imshow(
-            self._delta[key], extent=mpl_extent, norm=Normalize(0, max(self._values)), interpolation="none"
+            self._delta[key],
+            extent=mpl_extent,
+            norm=Normalize(0, max(self._values)),
+            interpolation="none",
         )
 
         if self.name != "":
