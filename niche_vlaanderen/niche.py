@@ -815,7 +815,7 @@ class Niche(object):
         ((a, b), (c, d)) = self._context.extent
         mpl_extent = (a, c, d, b)
 
-        im = plt.imshow(v, extent=mpl_extent, norm=norm)
+        im = plt.imshow(v, extent=mpl_extent, norm=norm, interpolation="none")
 
         if self.name != "":
             title = self.name + " " + title
@@ -1249,7 +1249,7 @@ class NicheDelta(object):
         mpl_extent = (a, c, d, b)
 
         im = plt.imshow(
-            self._delta[key], extent=mpl_extent, norm=Normalize(0, max(self._values))
+            self._delta[key], extent=mpl_extent, norm=Normalize(0, max(self._values)), interpolation="none"
         )
 
         if self.name != "":
