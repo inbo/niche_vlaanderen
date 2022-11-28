@@ -14,7 +14,7 @@ from .exception import NicheException
 
 class VegSuitable(IntEnum):
     SOIL = 1
-    GXG = 2
+    MXW = 2
     NUTRIENT = 4
     ACIDITY = 8
     MANAGEMENT = 16
@@ -29,10 +29,11 @@ class VegSuitable(IntEnum):
         and unsuitable soil conditions.
         """
 
-        return [0, 1, 3, 7, 11, 15, 31, 47, 63]
+        return [0, 1, 3, 7, 11, 15, 23, 31, 47, 63]
 
     @staticmethod
     def legend():
+        """Returns a dict with key number + text = legend text"""
         legend = {}
         for i in range(64):
             legend_items = []
@@ -236,7 +237,7 @@ class Vegetation(object):
                     & (row.mlw_max <= mlw)
                 )
 
-                vegi |= current_row * VegSuitable.GXG
+                vegi |= current_row * VegSuitable.MXW
                 warnings.simplefilter("default")
                 if full_model:
                     vegi |= (
@@ -257,7 +258,7 @@ class Vegetation(object):
 
             # this should give same result as before
 
-            expected = VegSuitable.SOIL + VegSuitable.GXG
+            expected = VegSuitable.SOIL + VegSuitable.MXW
             if full_model:
                 expected += (
                     VegSuitable.NUTRIENT

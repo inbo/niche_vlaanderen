@@ -837,7 +837,7 @@ class Niche(object):
 
         return ax
 
-    def plot_detail(self, key, limit_legend=True, cmap="Set1"):
+    def plot_detail(self, key, limit_legend=True, cmap="Set3"):
         """Detailed plot for a vegetation type
         key: veg_code (1..28)
           key of the vegetation type that should be plotted
@@ -873,27 +873,37 @@ class Niche(object):
         legend = VegSuitable.legend()
         legend_keys = np.array(list(legend.keys()))
 
+        # convert vegetation matrix to legend item matrix
         v_un = np.digitize(v, legend_keys, right=True)
-
         v_un = ma.masked_equal(v_un, len(legend))
 
         plt.imshow(
             v_un,
             extent=mpl_extent,
             cmap=cmap,
-            interpolation=None,
+            interpolation="None",
             vmin=0,
-            vmax=len(legend),
+            vmax=len(VegSuitable.possible()) + 1,
         )
 
         if limit_legend:
-            present = np.unique(v_un)
-            legend = {i: legend[k] for i, k in enumerate(legend) if i in present}
+            present = ma.unique(v_un[~v_un.mask])
 
-        patches = [
-            mpatches.Patch(color=cm.get_cmap(cmap)(i), label=legend[j])
-            for i, j in enumerate(legend)
-        ]
+            patches = [
+                mpatches.Patch(color=cm.get_cmap(cmap)(i), label=legend[legend_keys[i]])
+                for i in present
+            ]
+        else:
+            patches = [
+                mpatches.Patch(color=cm.get_cmap(cmap)(i), label=legend[j])
+                for i, j in enumerate(legend)
+            ]
+
+
+
+
+
+
 
         plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
 
