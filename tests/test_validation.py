@@ -4,7 +4,7 @@ from niche_vlaanderen.niche import Niche
 from niche_vlaanderen.validation import NicheValidation
 
 
-def test_overlay():
+def test_validation():
     nv = Niche()
     nv.run_config_file("tests/data/bwk/niche_brasschaat/simple.yaml")
 
@@ -25,8 +25,18 @@ def test_overlay():
     assert np.isclose(no.summary["score"][6], 78.383459)
     assert np.isclose(no.summary["score_opt"][6], 78.008985)
 
+def test_validation_custom_vegetation():
+    nv = Niche()
+    nv.run_config_file("tests/data/bwk/niche_brasschaat/simple.yaml")
 
-def test_overlay_artificial():
+    no = NicheValidation(niche=nv, map="tests/data/bwk/bkw_brasschaat_part1.shp", mapping_file="tests/data/hab_niche_test.csv")
+    no.overlay()
+
+    # three niche types for all 2 HAB types
+    print(no.map.columns[no.map.columns.str.startswith("NICH")])
+    assert np.all(no.map.columns[no.map.columns.str.startswith("NICH")] == ['NICH_1_1', 'NICH_1_2', 'NICH_1_3', 'NICH_2_1', 'NICH_2_2', 'NICH_2_3'])
+
+def test_validation_artificial():
     nv = Niche()
     nv.run_config_file("tests/data/bwk/niche_brasschaat/simple.yaml")
     no = NicheValidation(niche=nv, map="tests/data/bwk/bwk_selection.shp")

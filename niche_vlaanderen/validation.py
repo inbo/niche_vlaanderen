@@ -34,33 +34,25 @@ class NicheValidation(object):
             Path to a file containing the vegetation map in one of the formats supported
             by fiona, eg shape.
             must contain these attributes:
-            * HABx:
-            * pHABx:
+            * HABx: vegetation type
+            * pHABx: proportion of the vegetation type
+
+            different vegetation types can be supplied, eg HAB1, HAB2, ...
+            for every HABx variable a proportion must be given.
 
         mapping_file: Path | None
-            optional file containing the mapping between habitat (HAB) code on BWK
-            and Niche vegetation types. An example (and the default) mapping is
+            optional file containing the mapping between habitat (HAB) code on the vegetation map
+            and Niche vegetation types. The default mapping is a mapping of the
+            BWK map (biologische waarderingskaart), and is
             part of the package at niche_vlaanderen/system_tables/hab_nich_join.csv
-        mapping_columns: list(dict) | None
-            Optional list containing the different mappings between columns.
-            If not specified, the default mapping will be used.
-            Custom mappings are defined as dicts:
-            {
-                map_key: source column in map,
-                join_key: source field in mapping_file,
-                join_value: to_field in mapping_file,
-                new_column: resulting_column
-            }
-            TODO: adjust to long table
-            eg:
-            [{'map_key': 'HAB1',
-              'join_key': 'HAB',
-              'join_value': 'NICHE_C1',
-              'new_column': 'NICH_1_1'}, ...]
+
+            If a mapping is provided by the user, it must contain a HAB and a NICHE column.
+            Other columns are ignored.
+
 
     """
 
-    def __init__(self, niche, map, mapping_file=None, mapping_columns=None, upscale=5):
+    def __init__(self, niche, map, mapping_file=None, upscale=5):
         if type(niche) is Niche:
             self.niche = niche
         else:
@@ -68,71 +60,52 @@ class NicheValidation(object):
                 f"pass a valid Niche object - type of niche object is {type(niche)}"
             )
 
-        if mapping_columns is not None:
-            self.mapping_columns = mapping_columns
-        else:
-            self.mapping_columns = {
-                "HAB1": "HAB",
-                "HAB2": "HAB",
-                "HAB3": "HAB",
-                "HAB4": "HAB",
-            }
+        self.filename_map = map
+        self.map = gpd.read_file(map)
+
+
+        # the mapping columns contain are the field in the shapefile that contain a field starting with HAB
+        # (case insensitive)
+        columns =  self.map.columns
+        vegetation_columns = columns[columns.str.upper().str.startswith('HAB')]
+        proportion_columns = ["P" + col for col in vegetation_columns]
+        prop_index = [list(columns.str.upper()).index(pi) for pi in
+                      proportion_columns]
+        proportion_columns = columns[prop_index]
+
         if mapping_file is None:
             mapping_file = resource_filename(
                 "niche_vlaanderen", "system_tables/hab_niche_join.csv"
             )
 
-        mapping = pd.read_csv("niche_vlaanderen/system_tables/hab_niche_join.csv")
-        mapping["col"] = mapping["HAB"].duplicated()
+        mapping = pd.read_csv(mapping_file)
+
+        # drop any row containing niche vegetation 0
+        mapping = mapping[mapping["NICHE"] !=0 ]
+
+        # convert to wide format
+        mapping["col"] = mapping.groupby("HAB").cumcount()
         mapping["col"] = "NICHE_C" + (mapping["col"] + 1).astype("str")
 
         self.mapping = mapping.pivot(
             index="HAB", columns="col", values="NICHE"
         ).reset_index()
 
-        self.mapping.iloc[
-            self.mapping["NICHE_C1"] == 0, self.mapping.columns.get_loc("NICHE_C1")
-        ] = np.nan
-        self.mapping.iloc[
-            self.mapping["NICHE_C2"] == 0, self.mapping.columns.get_loc("NICHE_C2")
-        ] = np.nan
-        self.mapping.iloc[
-            self.mapping["NICHE_C2"] == self.mapping["NICHE_C1"],
-            self.mapping.columns.get_loc("NICHE_C2"),
-        ] = np.nan
-
-        if mapping_columns is not None:
-            self.mapping_columns = mapping_columns
-        else:
-            self.mapping_columns = []
-            for i in range(1, 6):
-                for j in range(1, 3):
-                    self.mapping_columns.append(
-                        {
-                            "map_key": f"HAB{i}",
-                            "join_key": "HAB",
-                            "join_value": f"NICHE_C{j}",
-                            "new_column": f"NICH_{i}_{j}",
-                        }
-                    )
-
-        # TODO: geopandas allows using a bbox or mask
-        # what should be done if file does not overlap with grid?
-        self.filename_map = map
-        self.map = gpd.read_file(map)
-        self._check_mapping_columns()
-
-        # Use mapping table to link vegetation types
-
         niche_columns = self.map.columns[self.map.columns.str.startswith("NICH_")]
         self.map = self.map.drop(columns=niche_columns)
         self.map["area_shape"] = self.map.area / 10000
-        # add mapping columns to source
-        for t in self.mapping_columns:
-            source = self.mapping[[t["join_key"], t["join_value"]]].rename(
-                columns={t["join_value"]: t["new_column"], t["join_key"]: t["map_key"]}
-            )
-            self.map = pd.merge(self.map, source, on=t["map_key"], how="left")
+
+
+        for habi in vegetation_columns:
+            for nichj in self.mapping.columns[self.mapping.columns.str.startswith("NICHE_C")]:
+                logger.debug(f"habi: {habi}; nichj: {nichj}")
+                source = self.mapping[["HAB", nichj]].rename(
+                    columns={"HAB": habi, nichj: f"NICH_{habi[-1]}_{nichj[-1]}"}
+                )
+
+                self.map = pd.merge(self.map, source, on=habi,
+                                    how="left")
+
         self._niche_columns = self.map.columns[self.map.columns.str.startswith("NICH")]
 
         self.overlay(upscale=upscale)
@@ -143,23 +116,6 @@ class NicheValidation(object):
         o += f"map: {self.filename_map}\n"
         o += f"niche object: {self.niche.name}"
         return o
-
-    def _check_mapping_columns(self):
-        """Checks whether the mapping columns are present in the dataset"""
-        for item in self.mapping_columns:
-            if item["map_key"] not in self.map.columns:
-                raise (
-                    NicheValidationException(
-                        f"expected column {item['map_key']} not found in shape file"
-                    )
-                )
-            if f'p{item["map_key"]}' not in self.map.columns:
-                raise (
-                    NicheValidationException(
-                        f"expected column p{item['map_key']} not found in shape file"
-                    )
-                )
-        pass
 
     def overlay(self, upscale=4):
         """Overlays the map and the niche object"""
