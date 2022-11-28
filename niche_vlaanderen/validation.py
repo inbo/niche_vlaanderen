@@ -63,7 +63,6 @@ class NicheValidation(object):
         self.filename_map = map
         self.map = gpd.read_file(map)
 
-
         # the mapping columns contain are the field in the shapefile that contain a field starting with HAB
         # (case insensitive)
         columns =  self.map.columns
@@ -77,6 +76,7 @@ class NicheValidation(object):
             mapping_file = resource_filename(
                 "niche_vlaanderen", "system_tables/hab_niche_join.csv"
             )
+
 
         mapping = pd.read_csv(mapping_file)
 
@@ -96,14 +96,14 @@ class NicheValidation(object):
         self.map["area_shape"] = self.map.area / 10000
 
 
-        for habi in vegetation_columns:
-            for nichj in self.mapping.columns[self.mapping.columns.str.startswith("NICHE_C")]:
-                logger.debug(f"habi: {habi}; nichj: {nichj}")
-                source = self.mapping[["HAB", nichj]].rename(
-                    columns={"HAB": habi, nichj: f"NICH_{habi[-1]}_{nichj[-1]}"}
+        for hab_column in vegetation_columns:
+            for nich_column in self.mapping.columns[self.mapping.columns.str.startswith("NICHE_C")]:
+                logger.debug(f"habi: {hab_column}; nichj: {nich_column}")
+                source = self.mapping[["HAB", nich_column]].rename(
+                    columns={"HAB": hab_column, nich_column: f"NICH_{hab_column[-1]}_{nich_column[-1]}"}
                 )
 
-                self.map = pd.merge(self.map, source, on=habi,
+                self.map = pd.merge(self.map, source, on=hab_column,
                                     how="left")
 
         self._niche_columns = self.map.columns[self.map.columns.str.startswith("NICH")]
@@ -112,7 +112,7 @@ class NicheValidation(object):
 
     def __repr__(self):
 
-        o = "# Niche Vlidation object\n"
+        o = "# Niche Validation object\n"
         o += f"map: {self.filename_map}\n"
         o += f"niche object: {self.niche.name}"
         return o
@@ -130,7 +130,6 @@ class NicheValidation(object):
 
         logger.debug(f"present niche types: {present_vegetation_types}")
         # get potential presence
-        # TODO: add parameter cellsize to zonal statistics: eg 0.5
         # upscale niche rasters to that before calculating statistics
         self.potential_presence = self.niche.zonal_stats(
             self.map,
@@ -229,7 +228,7 @@ class NicheValidation(object):
 
         self.summary = pd.DataFrame(summary)
 
-    def store(self, path, overwrite=False):
+    def write(self, path, overwrite=False):
         path = Path(path)
         if path.exists() and not overwrite:
             if not path.is_dir():
