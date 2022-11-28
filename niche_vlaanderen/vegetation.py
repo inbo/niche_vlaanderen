@@ -29,7 +29,7 @@ class VegSuitable(IntEnum):
         and unsuitable soil conditions.
         """
 
-        return [0, 1, 3, 7, 11, 15, 23, 31, 47, 63]
+        return [0, 1, 3, 7, 11, 15, 19, 23, 27, 31, 35, 39, 43, 47, 51, 55, 59, 63]
 
     @staticmethod
     def legend():
@@ -224,6 +224,16 @@ class Vegetation(object):
 
             vegi = np.zeros(soil_code.shape, dtype="int64")
 
+            # expected code if all conditions are met
+            expected = VegSuitable.SOIL + VegSuitable.MXW
+            if full_model:
+                expected += (
+                    VegSuitable.NUTRIENT
+                    + VegSuitable.ACIDITY
+                    + (inundation is not None) * VegSuitable.FLOODING
+                    + (management is not None) * VegSuitable.MANAGEMENT
+                )
+
             # filter for GxG
             for row in subtable.itertuples():
                 warnings.simplefilter(action="ignore", category=RuntimeWarning)
@@ -256,21 +266,11 @@ class Vegetation(object):
                         current_row & (row.management == management)
                     ) * VegSuitable.MANAGEMENT
 
-            # this should give same result as before
-
-            expected = VegSuitable.SOIL + VegSuitable.MXW
-            if full_model:
-                expected += (
-                    VegSuitable.NUTRIENT
-                    + VegSuitable.ACIDITY
-                    + (inundation is not None) * VegSuitable.FLOODING
-                    + (management is not None) * VegSuitable.MANAGEMENT
-                )
-
             vegi = vegi.astype("uint8")
             vegi[nodata] = self.nodata_veg
 
             vegi_summary = vegi == expected
+
             vegi_summary = vegi_summary.astype("uint8")
             vegi_summary[nodata] = self.nodata_veg
 

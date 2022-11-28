@@ -712,9 +712,7 @@ class Niche(object):
                 filename = files["%02d_detail" % vi]
                 with rasterio.open(filename, "w", **params) as dst:
                     dst.write(self._vegetation_detail[vi], 1)
-                    self._files_written[filename] = os.path.normpath(
-                        filename
-                    )
+                    self._files_written[filename] = os.path.normpath(filename)
 
         # deviation
         params.update(dtype="float64", nodata=-99999)
@@ -837,7 +835,7 @@ class Niche(object):
 
         return ax
 
-    def plot_detail(self, key, limit_legend=True, cmap="Set3"):
+    def plot_detail(self, key, limit_legend=True, cmap="tab20"):
         """Detailed plot for a vegetation type
         key: veg_code (1..28)
           key of the vegetation type that should be plotted
@@ -898,12 +896,6 @@ class Niche(object):
                 mpatches.Patch(color=cm.get_cmap(cmap)(i), label=legend[j])
                 for i, j in enumerate(legend)
             ]
-
-
-
-
-
-
 
         plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0)
 
