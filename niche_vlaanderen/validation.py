@@ -16,14 +16,14 @@ from niche_vlaanderen.niche import Niche
 logger = logging.getLogger(__name__)
 
 
-class NicheOverlayException(Exception):
+class NicheValidationException(Exception):
     msg = "Error using Niche Overlay"
 
 
-class NicheOverlay(object):
-    """Creates a new NicheOverlay object
+class NicheValidation(object):
+    """Creates a new NicheValidation object
 
-    Overlays the BWK (Biologische waarderingskaart) with niche in order to
+    Overlays a vegetation map with niche in order to
     obtain the accuracy of the model.
 
     Parameters:
@@ -31,7 +31,7 @@ class NicheOverlay(object):
             Niche object containing predicted variables types according to niche.
             The model must have run prior to the overlay
         map: Path
-            Path to a file containing the BWK map in one of the formats supported
+            Path to a file containing the vegetation map in one of the formats supported
             by fiona, eg shape.
             must contain these attributes:
             * HABx:
@@ -139,7 +139,7 @@ class NicheOverlay(object):
 
     def __repr__(self):
 
-        o = "# Niche overlay object\n"
+        o = "# Niche Vlidation object\n"
         o += f"map: {self.filename_map}\n"
         o += f"niche object: {self.niche.name}"
         return o
@@ -149,13 +149,13 @@ class NicheOverlay(object):
         for item in self.mapping_columns:
             if item["map_key"] not in self.map.columns:
                 raise (
-                    NicheOverlayException(
+                    NicheValidationException(
                         f"expected column {item['map_key']} not found in shape file"
                     )
                 )
             if f'p{item["map_key"]}' not in self.map.columns:
                 raise (
-                    NicheOverlayException(
+                    NicheValidationException(
                         f"expected column p{item['map_key']} not found in shape file"
                     )
                 )
@@ -277,9 +277,9 @@ class NicheOverlay(object):
         path = Path(path)
         if path.exists() and not overwrite:
             if not path.is_dir():
-                raise NicheOverlayException(f"path {path} is not an empty folder")
+                raise NicheValidationException(f"path {path} is not an empty folder")
             if any(path.iterdir()):
-                raise NicheOverlayException(f"path {path} exists and is not empty")
+                raise NicheValidationException(f"path {path} exists and is not empty")
         path.mkdir(parents=True, exist_ok=True)
 
         # save individual tables

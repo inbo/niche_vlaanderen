@@ -1,14 +1,14 @@
 import numpy as np
 
 from niche_vlaanderen.niche import Niche
-from niche_vlaanderen.bwk_overlay import NicheOverlay
+from niche_vlaanderen.validation import NicheValidation
 
 
 def test_overlay():
     nv = Niche()
     nv.run_config_file("tests/data/bwk/niche_brasschaat/simple.yaml")
 
-    no = NicheOverlay(niche=nv, map="tests/data/bwk/bkw_brasschaat_part1.shp")
+    no = NicheValidation(niche=nv, map="tests/data/bwk/bkw_brasschaat_part1.shp")
     no.overlay()
 
     # get the index of a record we know should have a nich_1_1 value
@@ -29,5 +29,5 @@ def test_overlay():
 def test_overlay_artificial():
     nv = Niche()
     nv.run_config_file("tests/data/bwk/niche_brasschaat/simple.yaml")
-    no = NicheOverlay(niche=nv, map="tests/data/bwk/bwk_selection.shp")
+    no = NicheValidation(niche=nv, map="tests/data/bwk/bwk_selection.shp")
     no.overlay()
