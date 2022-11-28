@@ -708,6 +708,10 @@ class Niche(object):
                 self._files_written[vi] = os.path.normpath(files[vi])
 
         if detailed_files:
+            # write legend file
+            legend = VegSuitable.legend()
+            pd.DataFrame({"legend": pd.Series(legend)}).to_csv(folder + "/" + prefix + "legend_detail.csv")
+            # and the actual grids
             for vi in self._vegetation_detail:
                 filename = files["%02d_detail" % vi]
                 with rasterio.open(filename, "w", **params) as dst:
