@@ -32,6 +32,13 @@ Flooding
 .. autoclass:: Flooding
     :members:
 
+Validation
+========
+
+.. autoclass:: NicheOverlay
+    :members:
+
+
 Array based functions
 =====================
 
