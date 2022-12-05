@@ -1,7 +1,10 @@
+import os
+
 import numpy as np
+import pytest
 
 from niche_vlaanderen.niche import Niche
-from niche_vlaanderen.validation import NicheValidation
+from niche_vlaanderen.validation import NicheValidation, NicheValidationException
 
 
 def test_validation():
@@ -41,3 +44,35 @@ def test_validation_artificial():
     nv.run_config_file("tests/data/bwk/niche_brasschaat/simple.yaml")
     no = NicheValidation(niche=nv, map="tests/data/bwk/bwk_selection.shp")
     no.overlay()
+
+def test_validation_invalid_niche():
+    nv = 6
+    with pytest.raises(ValueError):
+        NicheValidation(niche=nv, map="tests/data/bwk/bwk_selection.shp")
+
+def test_validation_warning_overlap():
+    nv = Niche()
+    nv.run_config_file("tests/data/bwk/niche_brasschaat/simple.yaml")
+    with pytest.warns(UserWarning):
+        NicheValidation(niche=nv, map="tests/data/bwk/bwk_selection.shp", upscale=1)
+
+def test_validation_write(tmpdir):
+    nv = Niche()
+    nv.run_config_file("tests/data/bwk/niche_brasschaat/simple.yaml")
+    validation = NicheValidation(niche=nv, map="tests/data/bwk/bwk_selection.shp")
+    validation.write(tmpdir)
+    files_written = os.listdir(tmpdir)
+    expected_files = {'area_nonpot_optimistic.csv', 'area_pot_perc.csv', 'potential_presence.csv', 'area_pot.csv', 'overlay.gpkg', 'area_effective.csv', 'summary.csv', 'veg_present.csv', 'area_pot_perc_optimistic.csv', 'area_nonpot.csv'}
+    assert set(files_written)== expected_files
+
+    # should raise because the dir eists and is not empty
+    with pytest.raises(NicheValidationException):
+        validation.write(tmpdir)
+
+    # raises because the path exists and is not a folder
+    with pytest.raises(NicheValidationException):
+        validation.write(tmpdir/"overlay.gpkg")
+
+    # should not raise
+    validation.write(tmpdir, overwrite=True)
+
