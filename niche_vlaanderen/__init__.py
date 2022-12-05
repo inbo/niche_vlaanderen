@@ -1,4 +1,5 @@
 from .niche import Niche, NicheDelta, conductivity2minerality  # noqa
+from .validation import NicheValidation  # noqa
 from .acidity import Acidity  # noqa
 from .nutrient_level import NutrientLevel  # noqa
 from .vegetation import Vegetation  # noqa
@@ -9,6 +10,7 @@ __all__ = [
     "Acidity",
     "Niche",
     "NicheDelta",
+    "NicheValidation",
     "conductivity2minerality",
     "NutrientLevel",
     "Vegetation",

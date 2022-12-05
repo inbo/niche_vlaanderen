@@ -983,8 +983,8 @@ class Niche(object):
 
         # Ignore the warnings from rasterstats - code must be adjusted
         # in that package - not in our code.
-        warnings.simplefilter(action="ignore", category=FutureWarning)
-        warnings.simplefilter(action="ignore", category=DeprecationWarning)
+        #warnings.simplefilter(action="ignore", category=FutureWarning)
+        #warnings.simplefilter(action="ignore", category=DeprecationWarning)
 
         presence = dict({0: "not present", 1: "present", 255: "no data"})
 
