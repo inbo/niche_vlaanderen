@@ -52,7 +52,7 @@ class NicheValidation(object):
 
     """
 
-    def __init__(self, niche, map, mapping_file=None, upscale=5):
+    def __init__(self, niche, map, mapping_file=None, upscale=5, id=None):
         if type(niche) is Niche:
             self.niche = niche
         else:
@@ -108,6 +108,7 @@ class NicheValidation(object):
 
         self._niche_columns = self.map.columns[self.map.columns.str.startswith("NICH")]
 
+        self.id = id
         self.overlay(upscale=upscale)
 
     def __repr__(self):
@@ -135,7 +136,7 @@ class NicheValidation(object):
             self.map,
             outside=False,
             vegetation_types=present_vegetation_types,
-            upscale=upscale,
+            upscale=upscale
         )
 
         self.potential_presence = self.potential_presence.pivot(
@@ -212,6 +213,11 @@ class NicheValidation(object):
                         # used in polygon count
                         self.veg_present[row[veg]].loc[i] = 1
 
+        # Set id column for every polygon based table
+        if self.id is not None:
+            for table in self._tables:
+                setattr(self, table, getattr(self, table).set_index(self.map[self.id]))
+
         # create summary table per vegetation type
 
         summary = {}
@@ -251,7 +257,10 @@ class NicheValidation(object):
             self.joined_map().to_file(path / "overlay.gpkg")
 
     def joined_map(self):
+        """Create a geopandas dataframe with all tables joined"""
         merged = self.map
+        if self.id:
+            merged = merged.set_index(self.id)
         for table in self._tables:
             merged = merged.join(getattr(self, table).add_prefix(f"{table}_"))
 
