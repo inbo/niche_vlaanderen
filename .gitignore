@@ -110,3 +110,4 @@ docs/_build
 # test and doc build files
 tests/_*
 docs/_*
+result_images/*

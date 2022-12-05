@@ -1,6 +1,8 @@
 import os
 
 import numpy as np
+import geopandas as gpd
+import pandas as pd
 import pytest
 
 from niche_vlaanderen.niche import Niche
@@ -27,6 +29,10 @@ def test_validation():
     print(no.summary)
     assert np.isclose(no.summary["score"][6], 78.383459)
     assert np.isclose(no.summary["score_opt"][6], 78.008985)
+
+    # repr
+    assert "map: tests/data/bwk/bkw_brasschaat_part1.shp" in str(no)
+    assert "niche object: brasschaat" in str(no)
 
 def test_validation_custom_vegetation():
     nv = Niche()
@@ -76,3 +82,23 @@ def test_validation_write(tmpdir):
     # should not raise
     validation.write(tmpdir, overwrite=True)
 
+def test_validation_write_customid(tmpdir):
+    """Test"""
+    nv = Niche()
+    nv.run_config_file("tests/data/bwk_tiny/tiny.yaml")
+
+    map = gpd.read_file("tests/data/bwk_tiny/bwk_clip.shp")
+    map["new_id"] = [6, 7, 8, 9, 10]
+    map.to_file(str(tmpdir / "sel_id.shp"))
+
+    validation = NicheValidation(niche=nv, map=str(tmpdir / "sel_id.shp"), id="new_id")
+    validation.write(tmpdir / "validation")
+    files_written = os.listdir(tmpdir / "validation")
+    expected_files = {'area_nonpot_optimistic.csv', 'area_pot_perc.csv', 'potential_presence.csv', 'area_pot.csv', 'overlay.gpkg', 'area_effective.csv', 'summary.csv', 'veg_present.csv', 'area_pot_perc_optimistic.csv', 'area_nonpot.csv'}
+    assert set(files_written)== expected_files
+
+    overlay = gpd.read_file(str(tmpdir /"validation"/ "overlay.gpkg"))
+    area = pd.read_csv(tmpdir / "validation" /"area_pot_perc.csv")
+
+    assert "new_id" in overlay.columns
+    assert "new_id" in area.columns
