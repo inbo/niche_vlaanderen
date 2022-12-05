@@ -17,6 +17,8 @@ import yaml
 import distutils.spawn
 import subprocess
 
+from matplotlib.testing.decorators import image_comparison
+import matplotlib.pyplot as plt
 
 class TestNiche(TestCase):
 
@@ -649,3 +651,30 @@ def test_conductivity2minerality(tmpdir):
     assert ("STATISTICS_STDDEV=0.5")
     assert ("STATISTICS_MEAN=0.5")
 
+@image_comparison(baseline_images=['zwb12'], remove_text=True,
+                  extensions=['svg'])
+def test_niche_plot():
+    """Test with limited legend for detail"""
+    full = niche_vlaanderen.Niche()
+    path = "testcase/zwarte_beek/input/"
+    full.set_input("mhw", path + "mhw.asc")
+    full.set_input("mlw", path + "mlw.asc")
+    full.set_input("msw", path + "msw.asc")
+    full.set_input("soil_code", path + "soil_code.asc")
+    full.set_input("nitrogen_animal", 0)
+    full.set_input("nitrogen_fertilizer", 0)
+    full.set_input("management", path + "management.asc")
+    full.set_input("nitrogen_atmospheric", path + "nitrogen_atmospheric.asc")
+    full.set_input("inundation_acidity", 0)
+    full.set_input("inundation_nutrient", 0)
+    full.set_input("rainwater", 0)
+    full.set_input("seepage", 0)
+    full.set_input("minerality", path + "minerality.asc")
+    # full.set_input("management_vegetation", path + "management.asc")
+    # full.set_input("inundation_vegetation", 2)
+    full.run(strict_checks=True)
+    vegetation = 12
+
+
+    plt.rcParams["figure.figsize"] = (20, 3)
+    ax = full.plot_detail(vegetation, limit_legend=True)

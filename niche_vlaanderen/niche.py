@@ -209,8 +209,8 @@ class Niche(object):
             if last == __version__:
                 s = "# Using latest niche_vlaanderen  %s" % __version__
             else:
-                s = "# Newer niche_vlaanderen  %s available" % last
-        except URLError:
+                s = "# Newer niche_vlaanderen  %s available" % last  # pragma: no cover
+        except URLError:  # pragma: no cover
             s = "# Error determinining last upstream version"
         return s
 
@@ -860,10 +860,10 @@ class Niche(object):
             msg += "matplotlib required for plotting functions"
             raise ImportError(msg)
 
-        if key in self._vegetation.keys():
-            v = self._vegetation[key]
-            v = ma.masked_equal(v, 255)
-            title = "{} ({})".format(self._vegcode2name(key), key)
+        if key not in self._vegetation.keys():
+            raise NicheException("invalid key for plot, must be a number of a vegetation type")
+
+        title = "{} ({})".format(self._vegcode2name(key), key)
 
         v = self._vegetation_detail[key]
         v = ma.masked_equal(v, 255)
