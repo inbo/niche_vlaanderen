@@ -224,5 +224,5 @@ class testVegetation(TestCase):
 
     def test_vegsuitable(self):
         legend = VegSuitable.legend()
-        assert list(legend.keys()) == [0, 1, 3, 7, 11, 15, 31, 47, 63]
-        assert legend[63] == "soil+gxg+nutrient+acidity+management+flooding suitable"
+        assert list(legend.keys()) == sorted(list(np.add.outer(np.add.outer([0,4],[0,8]), np.add.outer([0,16], [0,32])).flatten()+3) + [0,1])
+        assert legend[63] == "soil+mxw+nutrient+acidity+management+flooding suitable"

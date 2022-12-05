@@ -82,7 +82,7 @@ class NicheOverlay(object):
                 "niche_vlaanderen", "system_tables/hab_niche_join.csv"
             )
 
-        mapping = pd.read_csv("niche_vlaanderen/system_tables/hab_niche_join.csv")
+        mapping = pd.read_csv(mapping_file)
         mapping["col"] = mapping["HAB"].duplicated()
         mapping["col"] = "NICHE_C" + (mapping["col"] + 1).astype("str")
 
