@@ -30,6 +30,7 @@ Deze documentatie bestaat uit **twee delen**:
   :maxdepth: 2
 
   installation
+  codetables
   tutorials
   cli
   lowlevel

@@ -33,9 +33,9 @@ Flooding
     :members:
 
 Validation
-========
+==========
 
-.. autoclass:: NicheOverlay
+.. autoclass:: NicheValidation
     :members:
 
 
