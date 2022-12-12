@@ -1,5 +1,12 @@
+---
+name: publish Python package
 
-  linux-pip-tests:
+on:
+  push:
+  pull_request:
+    branches: [master]
+
+publish_package:
     runs-on: ubuntu-latest
     strategy:
       matrix:
