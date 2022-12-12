@@ -6,9 +6,9 @@ Windows
 =======
 
 The recommended way of installing niche on windows uses miniconda_ for installation.
-The recommended version is `64 bit with Python 3.7`__.
+The recommended version is `64 bit with Python 3.9`__.
 
-__ https://repo.continuum.io/miniconda/Miniconda3-4.7.10-Windows-x86_64.exe
+__ https://repo.anaconda.com/miniconda/Miniconda3-py39_4.12.0-Windows-x86_64.exe
 .. _Miniconda: https://conda.io/miniconda.html
 
 The installation can proceed without administrator rights, keep the default options. After miniconda is installed,
@@ -62,9 +62,8 @@ installation.
 Upgrading
 =========
 
-Existing installations of Niche can be updated using pip (for windows, run
-from the Anaconda prompt, after downloading the environment file.
-https://cdn.rawgit.com/inbo/niche_vlaanderen/master/docs/niche_env.yml
+Existing installations of Niche can be updated using pip (run
+from the Anaconda prompt.
 
 .. code-block:: shell
 
