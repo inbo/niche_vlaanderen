@@ -3,7 +3,7 @@ from .validation import NicheValidation  # noqa
 from .acidity import Acidity  # noqa
 from .nutrient_level import NutrientLevel  # noqa
 from .vegetation import Vegetation  # noqa
-from ._version import __version__  # noqa
+from .version import __version__  # noqa
 from .flooding import Flooding  # noqa
 
 __all__ = [

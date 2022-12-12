@@ -44,4 +44,4 @@ def test_example_yml():
 def test_get_version():
     runner = CliRunner()
     result = runner.invoke(nv_cli.cli, ["--version"])
-    assert "niche_vlaanderen version: 1.1" in result.output
+    assert "niche_vlaanderen version: " in result.output
