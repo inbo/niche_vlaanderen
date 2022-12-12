@@ -17,9 +17,11 @@ import yaml
 import distutils.spawn
 import subprocess
 
+from matplotlib.testing.decorators import image_comparison
+import matplotlib.pyplot as plt
+
 
 class TestNiche(TestCase):
-
     def test_invalidfile(self):
         n = niche_vlaanderen.Niche()
         with pytest.raises(RasterioIOError):
@@ -38,23 +40,17 @@ class TestNiche(TestCase):
         myniche.set_input("mhw", input_dir + "mhw.asc")
         myniche.set_input("mlw", input_dir + "mlw.asc")
         myniche.set_input("msw", input_dir + "msw.asc")
-        myniche.set_input("minerality",
-                          input_dir + "minerality.asc")
-        myniche.set_input("nitrogen_atmospheric",
-                          input_dir + "nitrogen_atmospheric.asc")
-        myniche.set_input("nitrogen_animal",
-                          0)
-        myniche.set_input("nitrogen_fertilizer",
-                          0)
-        myniche.set_input("management",
-                          input_dir + "management.asc")
-        myniche.set_input("inundation_nutrient",
-                          input_dir + "inundation.asc")
-        myniche.set_input("inundation_acidity",
-                          input_dir + "inundation.asc")
+        myniche.set_input("minerality", input_dir + "minerality.asc")
+        myniche.set_input(
+            "nitrogen_atmospheric", input_dir + "nitrogen_atmospheric.asc"
+        )
+        myniche.set_input("nitrogen_animal", 0)
+        myniche.set_input("nitrogen_fertilizer", 0)
+        myniche.set_input("management", input_dir + "management.asc")
+        myniche.set_input("inundation_nutrient", input_dir + "inundation.asc")
+        myniche.set_input("inundation_acidity", input_dir + "inundation.asc")
         myniche.set_input("seepage", input_dir + "seepage.asc")
-        myniche.set_input("rainwater",
-                          input_dir + "rainwater.asc")
+        myniche.set_input("rainwater", input_dir + "rainwater.asc")
         return myniche
 
     def test_zwarte_beek(self):
@@ -73,14 +69,12 @@ class TestNiche(TestCase):
 
         input_dir = "testcase/zwarte_beek/input/"
 
-        myniche.set_input("management_vegetation",
-                          input_dir + "management.asc")
+        myniche.set_input("management_vegetation", input_dir + "management.asc")
         myniche.run()
         o2 = myniche.occurrence
         o2 = pd.DataFrame(o2, index=[0])
 
-        myniche.set_input("inundation_vegetation",
-                          input_dir + "inundation.asc")
+        myniche.set_input("inundation_vegetation", input_dir + "inundation.asc")
         myniche.run()
         o3 = myniche.occurrence
         o3 = pd.DataFrame(o3, index=[0])
@@ -90,17 +84,43 @@ class TestNiche(TestCase):
 
         tmpdir = tempfile.mkdtemp()
         # if a subdir does not exist - it should be created
-        tmpdir = tmpdir + '/subdir'
+        tmpdir = tmpdir + "/subdir"
         myniche.write(tmpdir)
         # check tempdir contains the vegetation and the abiotic files
         expected_files = [
-            "nutrient_level.tif", "acidity.tif",
-            'V01.tif', 'V02.tif', 'V03.tif', 'V04.tif', 'V05.tif', 'V06.tif',
-            'V07.tif', 'V08.tif', 'V09.tif', 'V10.tif', 'V11.tif', 'V12.tif',
-            'V13.tif', 'V14.tif', 'V15.tif', 'V16.tif', 'V17.tif', 'V18.tif',
-            'V19.tif', 'V20.tif', 'V21.tif', 'V22.tif', 'V23.tif', 'V24.tif',
-            'V25.tif', 'V26.tif', 'V27.tif', 'V28.tif', 'log.txt',
-            'summary.csv']
+            "nutrient_level.tif",
+            "acidity.tif",
+            "V01.tif",
+            "V02.tif",
+            "V03.tif",
+            "V04.tif",
+            "V05.tif",
+            "V06.tif",
+            "V07.tif",
+            "V08.tif",
+            "V09.tif",
+            "V10.tif",
+            "V11.tif",
+            "V12.tif",
+            "V13.tif",
+            "V14.tif",
+            "V15.tif",
+            "V16.tif",
+            "V17.tif",
+            "V18.tif",
+            "V19.tif",
+            "V20.tif",
+            "V21.tif",
+            "V22.tif",
+            "V23.tif",
+            "V24.tif",
+            "V25.tif",
+            "V26.tif",
+            "V27.tif",
+            "V28.tif",
+            "log.txt",
+            "summary.csv",
+        ]
 
         dir = os.listdir(tmpdir)
 
@@ -111,7 +131,7 @@ class TestNiche(TestCase):
 
         # run check after predefined acidity
         myniche = self.create_zwarte_beek_niche()
-        myniche.set_input("acidity", tmpdir+'/acidity.tif')
+        myniche.set_input("acidity", tmpdir + "/acidity.tif")
         myniche.run()
 
         tmpdir_acidity = tempfile.mkdtemp()
@@ -119,7 +139,7 @@ class TestNiche(TestCase):
 
         dir = os.listdir(tmpdir_acidity)
 
-        expected_files.remove('acidity.tif')
+        expected_files.remove("acidity.tif")
 
         if sys.version_info < (3, 2):
             self.assertItemsEqual(expected_files, dir)
@@ -128,7 +148,6 @@ class TestNiche(TestCase):
 
         shutil.rmtree(tmpdir)
         shutil.rmtree(tmpdir_acidity)
-
 
     def test_zwarte_beek_constant_values(self):
         myniche = self.create_zwarte_beek_niche()
@@ -151,8 +170,7 @@ class TestNiche(TestCase):
         myniche = niche_vlaanderen.Niche()
         input_dir = "testcase/zwarte_beek/input/"
 
-        myniche.set_input("soil_code",
-                          input_dir + "soil_code.asc")
+        myniche.set_input("soil_code", input_dir + "soil_code.asc")
         myniche.set_input("mhw", input_dir + "mhw.asc")
         myniche.set_input("mlw", input_dir + "mlw.asc")
         myniche.name = "simple"
@@ -161,12 +179,37 @@ class TestNiche(TestCase):
         myniche.write(tmpdir)
         # check tempdir contains the vegetation files
         expected_files = [
-             'V01.tif', 'V02.tif', 'V03.tif', 'V04.tif', 'V05.tif', 'V06.tif',
-             'V07.tif', 'V08.tif', 'V09.tif', 'V10.tif', 'V11.tif', 'V12.tif',
-             'V13.tif', 'V14.tif', 'V15.tif', 'V16.tif', 'V17.tif', 'V18.tif',
-             'V19.tif', 'V20.tif', 'V21.tif', 'V22.tif', 'V23.tif', 'V24.tif',
-             'V25.tif', 'V26.tif', 'V27.tif', 'V28.tif', 'log.txt',
-             'summary.csv']
+            "V01.tif",
+            "V02.tif",
+            "V03.tif",
+            "V04.tif",
+            "V05.tif",
+            "V06.tif",
+            "V07.tif",
+            "V08.tif",
+            "V09.tif",
+            "V10.tif",
+            "V11.tif",
+            "V12.tif",
+            "V13.tif",
+            "V14.tif",
+            "V15.tif",
+            "V16.tif",
+            "V17.tif",
+            "V18.tif",
+            "V19.tif",
+            "V20.tif",
+            "V21.tif",
+            "V22.tif",
+            "V23.tif",
+            "V24.tif",
+            "V25.tif",
+            "V26.tif",
+            "V27.tif",
+            "V28.tif",
+            "log.txt",
+            "summary.csv",
+        ]
 
         expected_files = ["simple_" + i for i in expected_files]
 
@@ -187,7 +230,8 @@ class TestNiche(TestCase):
 
     @pytest.mark.skipif(
         distutils.spawn.find_executable("gdalinfo") is None,
-        reason="gdalinfo not available in the environment.")
+        reason="gdalinfo not available in the environment.",
+    )
     def test_zwarte_beek_validate(self):
         myniche = self.create_zwarte_beek_niche()
         myniche.run()
@@ -195,15 +239,12 @@ class TestNiche(TestCase):
         myniche.write(tmpdir)
 
         info = subprocess.check_output(
-            ["gdalinfo",
-             "-stats",
-             os.path.join(tmpdir, 'V01.tif')]
-        ).decode('utf-8')
+            ["gdalinfo", "-stats", os.path.join(tmpdir, "V01.tif")]
+        ).decode("utf-8")
         print(info)
-        assert ("(216580.000000000000000,198580.000000000000000)" in
-                info)
-        assert ("STATISTICS_MAXIMUM=1" in info)
-        assert ("STATISTICS_MINIMUM=0" in info)
+        assert "(216580.000000000000000,198580.000000000000000)" in info
+        assert "STATISTICS_MAXIMUM=1" in info
+        assert "STATISTICS_MINIMUM=0" in info
 
         shutil.rmtree(tmpdir)
 
@@ -223,7 +264,8 @@ class TestNiche(TestCase):
 
     @pytest.mark.skipif(
         distutils.spawn.find_executable("gdalinfo") is None,
-        reason="gdalinfo not available in the environment.")
+        reason="gdalinfo not available in the environment.",
+    )
     def test_write_deviation(self):
         n = self.create_small()
         n.run(deviation=True, full_model=False)
@@ -231,31 +273,29 @@ class TestNiche(TestCase):
         tmpdir = tempfile.mkdtemp()
         n.write(tmpdir)
         info = subprocess.check_output(
-            ["gdalinfo",
-             "-stats",
-             os.path.join(tmpdir, 'mhw_04.tif')]
-        ).decode('utf-8')
+            ["gdalinfo", "-stats", os.path.join(tmpdir, "mhw_04.tif")]
+        ).decode("utf-8")
         print(info)
         self.assertTrue(
-            "Origin = (172762.500000000000000,210637.500000000000000)" in
-            info)
+            "Origin = (172762.500000000000000,210637.500000000000000)" in info
+        )
         self.assertTrue("STATISTICS_MAXIMUM=9" in info)
         self.assertTrue("STATISTICS_MINIMUM=0" in info)
         shutil.rmtree(tmpdir)
 
     def test_read_configuration(self):
-        config = 'tests/small_simple.yaml'
+        config = "tests/small_simple.yaml"
         myniche = niche_vlaanderen.Niche()
         myniche.read_config_file(config)
         myniche.run(full_model=False)
 
     def test_run_configuration(self):
-        config = 'tests/small_simple.yaml'
+        config = "tests/small_simple.yaml"
         myniche = niche_vlaanderen.Niche()
         myniche.run_config_file(config)
 
     def test_run_configuration_numeric(self):
-        config = 'tests/small_ct.yaml'
+        config = "tests/small_ct.yaml"
         myniche = niche_vlaanderen.Niche()
         myniche.run_config_file(config)
 
@@ -310,41 +350,40 @@ class TestNiche(TestCase):
             myniche.run(full_model=True)
 
     def test_run_configuration_abiotic(self):
-        config = 'tests/small_abiotic.yaml'
+        config = "tests/small_abiotic.yaml"
         myniche = niche_vlaanderen.Niche()
         myniche.run_config_file(config)
 
-        config = 'tests/small_abiotic_extra.yaml'
+        config = "tests/small_abiotic_extra.yaml"
         myniche = niche_vlaanderen.Niche()
         myniche.run_config_file(config)
 
         # rerun with a file with missing abiotic values
-        config = 'tests/small_abiotic_invalid.yaml'
+        config = "tests/small_abiotic_invalid.yaml"
         myniche = niche_vlaanderen.Niche()
         with pytest.raises(NicheException):
             myniche.run_config_file(config)
-
-
 
     def test_rereadoutput(self):
         """
         This tests checks if the output written by the model is a valid input
         for a new run
         """
-        config = 'tests/small_simple.yaml'
+        config = "tests/small_simple.yaml"
         myniche = niche_vlaanderen.Niche()
         myniche.run_config_file(config)
         myniche = niche_vlaanderen.Niche()
 
-        shutil.copy('_output/log.txt', 'log.txt')
+        shutil.copy("_output/log.txt", "log.txt")
 
-        config = 'log.txt'
+        config = "log.txt"
         myniche2 = niche_vlaanderen.Niche()
         myniche2.run_config_file(config)
 
     def test_overwrite_code_table(self):
         myniche = niche_vlaanderen.Niche(
-            ct_vegetation="tests/data/bad_ct/one_vegetation.csv")
+            ct_vegetation="tests/data/bad_ct/one_vegetation.csv"
+        )
 
         myniche.set_input("mhw", "tests/data/small/mhw.asc")
         myniche.set_input("mlw", "tests/data/small/mlw.asc")
@@ -378,9 +417,11 @@ class TestNiche(TestCase):
         constructed. The actual content is not tested.
         """
         import matplotlib as mpl
-        mpl.use('agg')
+
+        mpl.use("agg")
 
         import matplotlib.pyplot as plt
+
         plt.show = lambda: None
 
         myniche = self.create_small()
@@ -406,13 +447,22 @@ class TestNiche(TestCase):
         myniche.run(full_model=False)
         print(myniche)
         res = myniche.table
-        print(res)
+        
         self.assertEqual((36, 3), res.shape)
 
         area_expected = 7 * 6 * 25 * 25 * 28 / 10000
         area = np.sum(res["area_ha"])
 
         assert area == area_expected
+
+        detailed = myniche._table(detail=True)
+
+        # area in detailed table should equal normal table
+        assert np.sum(res["area_ha"]) == np.sum(detailed["area_ha"])
+        # area where vegetation is present must be soil+mxw suitable
+        np.sum(res[res["presence"] == "present"]["area_ha"]) == np.sum(
+            detailed[detailed["presence"] == "soil+mxw suitable"]["area_ha"]
+        )
 
     def test_zonal_stats(self):
         myniche = self.create_zwarte_beek_niche()
@@ -437,8 +487,11 @@ class TestNiche(TestCase):
         assert np.any(stats.presence == "no data")
 
         # these should have shapeid -1 and have area approx 15.16 ha
-        subset = ((stats.presence == "no data") & (stats.vegetation == 7)
-                  & (stats.shape_id == -1))
+        subset = (
+            (stats.presence == "no data")
+            & (stats.vegetation == 7)
+            & (stats.shape_id == -1)
+        )
         result = np.sum(stats[(subset)]["area_ha"])
         result = np.round(result, 2)
         assert 15.16 == result
@@ -449,18 +502,18 @@ class TestNiche(TestCase):
         vector = "testcase/zwarte_beek/input/study_area_l72.geojson"
 
         # there is only one polygon
-        stats = myniche.zonal_stats(vector, outside=False, attribute='OID')
+        stats = myniche.zonal_stats(vector, outside=False, attribute="OID")
         # we expect no data to be absent as the shape is a mask
         np.testing.assert_equal(np.all(stats.presence == "no data"), False)
-        assert(np.all(stats.OID == 0))
+        assert np.all(stats.OID == 0)
 
         # check what happens if we supply an unexisting attribute
         with pytest.raises(KeyError):
-            stats = myniche.zonal_stats(vector, outside=False, attribute='xyz')
+            stats = myniche.zonal_stats(vector, outside=False, attribute="xyz")
 
-        stats = myniche.zonal_stats(vector, outside=True, attribute='OID')
+        stats = myniche.zonal_stats(vector, outside=True, attribute="OID")
         print(stats.OID.unique())
-        np.testing.assert_equal([0, -1],  stats.OID.unique())
+        np.testing.assert_equal([0, -1], stats.OID.unique())
 
     def test_uint(self):
         myniche = niche_vlaanderen.Niche()
@@ -504,7 +557,8 @@ class TestNiche(TestCase):
             ct_vegetation="tests/data/bad_ct/one_vegetation_limited.csv",
             ct_acidity="tests/data/bad_ct/acidity_limited.csv",
             lnk_acidity="tests/data/bad_ct/lnk_acidity_limited.csv",
-            ct_nutrient_level="tests/data/bad_ct/nutrient_level.csv")
+            ct_nutrient_level="tests/data/bad_ct/nutrient_level.csv",
+        )
         myniche.read_config_file("tests/small.yaml")
         myniche.run()
 
@@ -520,7 +574,7 @@ class TestNiche(TestCase):
 
 class TestNicheDelta(TestCase):
     def test_simplevsfull_plot(self):
-        config = 'tests/small_simple.yaml'
+        config = "tests/small_simple.yaml"
         simple = niche_vlaanderen.Niche()
         simple.run_config_file(config)
 
@@ -536,9 +590,11 @@ class TestNicheDelta(TestCase):
         self.assertEqual(0, df[df.presence == "only in model 2"].area_ha.sum())
 
         import matplotlib as mpl
-        mpl.use('agg')
+
+        mpl.use("agg")
 
         import matplotlib.pyplot as plt
+
         plt.show = lambda: None
 
         delta.plot(5)
@@ -546,7 +602,7 @@ class TestNicheDelta(TestCase):
         delta.plot(5)
 
     def test_simplevsfull_write(self):
-        config = 'tests/small_simple.yaml'
+        config = "tests/small_simple.yaml"
         simple = niche_vlaanderen.Niche()
         simple.run_config_file(config)
 
@@ -561,12 +617,37 @@ class TestNicheDelta(TestCase):
         delta.write(tmpsubdir)
         # check tempdir contains the vegetation and the abiotic files
         expected_files = [
-             'D1.tif', 'D2.tif', 'D3.tif', 'D4.tif', 'D5.tif', 'D6.tif',
-             'D7.tif', 'D8.tif', 'D9.tif', 'D10.tif', 'D11.tif', 'D12.tif',
-             'D13.tif', 'D14.tif', 'D15.tif', 'D16.tif', 'D17.tif', 'D18.tif',
-             'D19.tif', 'D20.tif', 'D21.tif', 'D22.tif', 'D23.tif', 'D24.tif',
-             'D25.tif', 'D26.tif', 'D27.tif', 'D28.tif', 'legend_delta.csv',
-             'delta_summary.csv']
+            "D1.tif",
+            "D2.tif",
+            "D3.tif",
+            "D4.tif",
+            "D5.tif",
+            "D6.tif",
+            "D7.tif",
+            "D8.tif",
+            "D9.tif",
+            "D10.tif",
+            "D11.tif",
+            "D12.tif",
+            "D13.tif",
+            "D14.tif",
+            "D15.tif",
+            "D16.tif",
+            "D17.tif",
+            "D18.tif",
+            "D19.tif",
+            "D20.tif",
+            "D21.tif",
+            "D22.tif",
+            "D23.tif",
+            "D24.tif",
+            "D25.tif",
+            "D26.tif",
+            "D27.tif",
+            "D28.tif",
+            "legend_delta.csv",
+            "delta_summary.csv",
+        ]
 
         dir = os.listdir(tmpsubdir)
 
@@ -585,7 +666,8 @@ class TestNicheDelta(TestCase):
 
     def test_differentvegsize(self):
         myniche = niche_vlaanderen.Niche(
-            ct_vegetation="tests/data/bad_ct/one_vegetation.csv")
+            ct_vegetation="tests/data/bad_ct/one_vegetation.csv"
+        )
 
         myniche.set_input("mhw", "tests/data/small/mhw.asc")
         myniche.set_input("mlw", "tests/data/small/mlw.asc")
@@ -633,19 +715,56 @@ class TestNicheDelta(TestCase):
         shutil.rmtree(tmpdir)
 
 
+@image_comparison(
+    baseline_images=["zwb12", "zwb12_full_legend"], remove_text=True, extensions=["svg"]
+)
+def test_niche_plot():
+    """Test with limited legend for detail"""
+    full = niche_vlaanderen.Niche()
+    path = "testcase/zwarte_beek/input/"
+    full.set_input("mhw", path + "mhw.asc")
+    full.set_input("mlw", path + "mlw.asc")
+    full.set_input("msw", path + "msw.asc")
+    full.set_input("soil_code", path + "soil_code.asc")
+    full.set_input("nitrogen_animal", 0)
+    full.set_input("nitrogen_fertilizer", 0)
+    full.set_input("management", path + "managemen" "t.asc")
+    full.set_input("nitrogen_atmospheric", path + "nitrogen_atmospheric.asc")
+    full.set_input("inundation_acidity", 0)
+    full.set_input("inundation_nutrient", 0)
+    full.set_input("rainwater", 0)
+    full.set_input("seepage", 0)
+    full.set_input("minerality", path + "minerality.asc")
+
+    full.run()
+    vegetation = 12
+
+    plt.rcParams["figure.figsize"] = (20, 3)
+    full.plot_detail(vegetation, limit_legend=True)
+
+    # with full legend and title
+    full.name = "zwb"
+    full.plot_detail(vegetation, limit_legend=False)
+
+    # asking something different than a vegetation key should raise
+    with pytest.raises(NicheException):
+        full.plot_detail("mhw")
+
+
 @pytest.mark.skipif(
-        distutils.spawn.find_executable("gdalinfo") is None,
-        reason="gdalinfo not available in the environment.")
+    distutils.spawn.find_executable("gdalinfo") is None,
+    reason="gdalinfo not available in the environment.",
+)
 def test_conductivity2minerality(tmpdir):
     niche_vlaanderen.conductivity2minerality(
-        "tests/data/small/conductivity.asc", str(tmpdir / "minerality.tif"))
+        "tests/data/small/conductivity.asc", str(tmpdir / "minerality.tif")
+    )
 
     info = subprocess.check_output(
         ["gdalinfo", "-stats", str(tmpdir / "minerality.tif")]
-    ).decode('utf-8')
+    ).decode("utf-8")
 
-    assert ("STATISTICS_MAXIMUM=1" in info)
-    assert ("STATISTICS_MINIMUM=0" in info)
-    assert ("STATISTICS_STDDEV=0.5")
-    assert ("STATISTICS_MEAN=0.5")
-
+    assert "STATISTICS_MAXIMUM=1" in info
+    assert "STATISTICS_MINIMUM=0" in info
+    assert "STATISTICS_STDDEV=0.5"
+    assert "STATISTICS_MEAN=0.5"

@@ -32,7 +32,7 @@ class SpatialContext(object):
                 self.transform = dst.transform
             else:
                 # for compatibility with rasterio 0.x
-                self.transform = dst.affine
+                self.transform = dst.affine  # pragma: no cover
 
         self.width = int(dst.width)
         self.height = int(dst.height)
