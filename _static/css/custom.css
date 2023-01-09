@@ -1,0 +1,11 @@
+.topic {
+    background-color: #DED;
+}
+
+body {
+    word-wrap: break-word;
+}
+
+.wy-nav-content {
+    max-width: 900px !important;
+}

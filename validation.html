@@ -1,0 +1,997 @@
++<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Validation &mdash; niche_vlaanderen 1.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Niche Configuration file" href="cli.html" />
+    <link rel="prev" title="Flooding module" href="flooding.html" />
+ +    <link href="_static/css/custom.css" rel="stylesheet" type="text/css">
+ +
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> niche_vlaanderen
+          </a>
+              <div class="version">
+                1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Model</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notendop.html">In een notendop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model.html">Beschrijving model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="invoer.html">Invoer rasters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kalibratie.html">Kalibratie</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overstroming.html">Overstromingsmodule</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Package</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="codetables.html">Code tables</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_usage.html">Advanced usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flooding.html">Flooding module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Validation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Using-a-custom-vegetation-table">Using a custom vegetation table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Storing-the-analysis">Storing the analysis</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Niche Configuration file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lowlevel.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Credits</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">niche_vlaanderen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="tutorials.html">Tutorials</a> &raquo;</li>
+      <li>Validation</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/INBO/niche_vlaanderen/blob/master/docs/validation.ipynb" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars and line breaks on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+    white-space: pre;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+.jp-RenderedHTMLCommon table,
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+.jp-RenderedHTMLCommon thead,
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+.jp-RenderedHTMLCommon tr,
+.jp-RenderedHTMLCommon th,
+.jp-RenderedHTMLCommon td,
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+.jp-RenderedHTMLCommon th,
+div.rendered_html th {
+  font-weight: bold;
+}
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.jp-RenderedHTMLCommon tbody tr:hover,
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="Validation">
+<h1>Validation<a class="headerlink" href="#Validation" title="Permalink to this headline"></a></h1>
+<section id="Overview">
+<h2>Overview<a class="headerlink" href="#Overview" title="Permalink to this headline"></a></h2>
+<p>The goal of the Niche Validation is to compare the potential vegetation types as determined by Niche Vlaanderen with the actual presence of vegetation types, eg as mapped in the <a class="reference external" href="https://www.vlaanderen.be/inbo/de-biologische-waarderingskaart/wat-is-de-biologische-waarderingskaart/">Biologische waarderingskaart (BWK)</a></p>
+<p>The BWK vector file contains up to 5 habitat types in field HAB1-HAB5 and their proportion of the shape in fields pHAB1-pHAB5.</p>
+<p>This vegetation types in BWK are different from those in niche, but a <a class="reference external" href="https://github.com/inbo/niche_vlaanderen/blob/calibration/niche_vlaanderen/system_tables/hab_niche_join.csv">mapping table</a> exists that links both.</p>
+<p>In the next steps, a (fictive) niche model is created. Vegetation type 5 is plotted because this will be used further as an example.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">niche_vlaanderen</span> <span class="kn">import</span> <span class="n">Niche</span>
+<span class="n">nv</span> <span class="o">=</span> <span class="n">Niche</span><span class="p">()</span>
+<span class="n">nv</span><span class="o">.</span><span class="n">run_config_file</span><span class="p">(</span><span class="s2">&quot;../tests/data/bwk_tiny/tiny.yaml&quot;</span><span class="p">)</span>
+<span class="n">nv</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Warning: CRS definitions are not equal!
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;AxesSubplot: title={&#39;center&#39;: &#39;Carpinion betuli (5)&#39;}&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/validation_1_2.png" src="_images/validation_1_2.png" />
+</div>
+</div>
+<p>Next an overlay object is created which contains the bwk map with extra columns NICH_x_y for the corresponding niche vegetation types. Note that some vegetation types can not be mapped to niche (eg <code class="docutils literal notranslate"><span class="pre">gh</span></code> in the example below). Next the <code class="docutils literal notranslate"><span class="pre">zonal_statistics</span></code> module is used to calculate the potential vegetation for every shape.</p>
+<p>Note the progress bar, in this example it is going fast, but for larger areas, calculation may take up to 10 minutes.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">niche_vlaanderen.validation</span> <span class="kn">import</span> <span class="n">NicheValidation</span>
+<span class="n">validation</span> <span class="o">=</span> <span class="n">NicheValidation</span><span class="p">(</span><span class="n">niche</span><span class="o">=</span><span class="n">nv</span><span class="p">,</span> <span class="nb">map</span><span class="o">=</span><span class="s2">&quot;../tests/data/bwk_tiny/bwk_clip.shp&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00, 91.66it/s]
+</pre></div></div>
+</div>
+<p>It is possible to check the mapping per vegetation type by checking the map attribute of the overlay object</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validation</span><span class="o">.</span><span class="n">map</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>HAB1</th>
+      <th>pHAB1</th>
+      <th>HAB2</th>
+      <th>pHAB2</th>
+      <th>HAB3</th>
+      <th>pHAB3</th>
+      <th>HAB4</th>
+      <th>pHAB4</th>
+      <th>HAB5</th>
+      <th>pHAB5</th>
+      <th>...</th>
+      <th>NICH_1_1</th>
+      <th>NICH_1_2</th>
+      <th>NICH_2_1</th>
+      <th>NICH_2_2</th>
+      <th>NICH_3_1</th>
+      <th>NICH_3_2</th>
+      <th>NICH_4_1</th>
+      <th>NICH_4_2</th>
+      <th>NICH_5_1</th>
+      <th>NICH_5_2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2310</td>
+      <td>100</td>
+      <td>None</td>
+      <td>0</td>
+      <td>None</td>
+      <td>0</td>
+      <td>None</td>
+      <td>0</td>
+      <td>None</td>
+      <td>0</td>
+      <td>...</td>
+      <td>28.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2190_mp</td>
+      <td>100</td>
+      <td>None</td>
+      <td>0</td>
+      <td>None</td>
+      <td>0</td>
+      <td>None</td>
+      <td>0</td>
+      <td>None</td>
+      <td>0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>rbbsm</td>
+      <td>100</td>
+      <td>None</td>
+      <td>20</td>
+      <td>None</td>
+      <td>0</td>
+      <td>None</td>
+      <td>0</td>
+      <td>None</td>
+      <td>0</td>
+      <td>...</td>
+      <td>27.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>gh</td>
+      <td>80</td>
+      <td>rbbvos</td>
+      <td>20</td>
+      <td>None</td>
+      <td>0</td>
+      <td>None</td>
+      <td>0</td>
+      <td>None</td>
+      <td>0</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>19.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>9160</td>
+      <td>100</td>
+      <td>None</td>
+      <td>0</td>
+      <td>None</td>
+      <td>0</td>
+      <td>None</td>
+      <td>0</td>
+      <td>None</td>
+      <td>0</td>
+      <td>...</td>
+      <td>5.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 22 columns</p>
+</div></div>
+</div>
+<p>The actual overlay will compare the grid cell centres with the shapefile. By default a upscaling factor of 5 (25 points per grid cell) is used to ensure sufficient coverage of the shapefile. For niche models of 20-25m resolution, this default value will lead to a spatial resolution of 1m, which is sufficient given the scale of the BWK map. <img alt="comparison between 1 and 5 upscaling" src="_static/png/bwk_overlay.png" /></p>
+<p>If upscaling is not used and set to one, only the grid center will be used, which may lead to warnings because some shapes are not covered.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validation1</span> <span class="o">=</span> <span class="n">NicheValidation</span><span class="p">(</span><span class="n">niche</span><span class="o">=</span><span class="n">nv</span><span class="p">,</span> <span class="nb">map</span><span class="o">=</span><span class="s2">&quot;../tests/data/bwk_tiny/bwk_clip.shp&quot;</span><span class="p">,</span> <span class="n">upscale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00, 85.99it/s]
+/home/johan/Nextcloud/_proj/niche/niche_vlaanderen/niche_vlaanderen/validation.py:191: UserWarning: No overlap between potential vegetation map and shape_id 0
+  warnings.warn(
+/home/johan/Nextcloud/_proj/niche/niche_vlaanderen/niche_vlaanderen/validation.py:191: UserWarning: No overlap between potential vegetation map and shape_id 2
+  warnings.warn(
+</pre></div></div>
+</div>
+<p>A summarized table containing scores of the overlay can be found by calling the summary method.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validation</span><span class="o">.</span><span class="n">summary</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>area_effective</th>
+      <th>nonpot</th>
+      <th>nonpot_opt</th>
+      <th>pot</th>
+      <th>polygon_count</th>
+      <th>score</th>
+      <th>score_opt</th>
+    </tr>
+    <tr>
+      <th>vegetation</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>5</th>
+      <td>0.600058</td>
+      <td>0.014945</td>
+      <td>0.019679</td>
+      <td>0.580379</td>
+      <td>1.0</td>
+      <td>97.48954</td>
+      <td>96.720418</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>0.071813</td>
+      <td>0.358689</td>
+      <td>0.071813</td>
+      <td>0.000000</td>
+      <td>1.0</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>0.004235</td>
+      <td>0.004982</td>
+      <td>0.004235</td>
+      <td>0.000000</td>
+      <td>1.0</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>0.006143</td>
+      <td>0.004982</td>
+      <td>0.006143</td>
+      <td>0.000000</td>
+      <td>1.0</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Intermediate tables giving values can be retrieved by their names:</p>
+<ul class="simple">
+<li><p>area_pot: area with actual presence and potential presence predicted by niche</p></li>
+<li><p>area_nonpot: area with actual presence without potential presence by niche</p></li>
+<li><p>area_nonpot_optimistic: area with actual presence but without potential presence by niche</p></li>
+<li><p>area_pot_perc: proportion (%) of the area with correct predicted area (not taking into account pHab)</p></li>
+<li><p>area_pot_perc_optimistic: proportion (%) of the area with correct predicted area (taking into account pHab)</p></li>
+<li><p>area_effective: area of the shape in ha taking into account the proportion of the vegetation (pHab)</p></li>
+<li><p>veg_present: table showing whether vegetation is present in this polygon (1 or 0)</p></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validation</span><span class="o">.</span><span class="n">area_nonpot</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>vegetation</th>
+      <th>5</th>
+      <th>19</th>
+      <th>27</th>
+      <th>28</th>
+    </tr>
+    <tr>
+      <th>shape_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.004982</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.004982</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>NaN</td>
+      <td>0.358689</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.014945</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validation</span><span class="o">.</span><span class="n">area_nonpot_optimistic</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>vegetation</th>
+      <th>5</th>
+      <th>19</th>
+      <th>27</th>
+      <th>28</th>
+    </tr>
+    <tr>
+      <th>shape_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.006143</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.004235</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>NaN</td>
+      <td>0.071813</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.019679</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="Using-a-custom-vegetation-table">
+<h2>Using a custom vegetation table<a class="headerlink" href="#Using-a-custom-vegetation-table" title="Permalink to this headline"></a></h2>
+<p>When creating a validation, it is possible to supply a custom mapping table between the vegetation types in the map and niche types. This file must be a csv with two columns, HAB and NICHE, containing the vegetation type on the map in the HAB column,</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validation1</span> <span class="o">=</span> <span class="n">NicheValidation</span><span class="p">(</span><span class="n">niche</span><span class="o">=</span><span class="n">nv</span><span class="p">,</span> <span class="nb">map</span><span class="o">=</span><span class="s2">&quot;../tests/data/bwk_tiny/bwk_clip.shp&quot;</span><span class="p">,</span> <span class="n">mapping_file</span><span class="o">=</span><span class="s2">&quot;../tests/data/hab_niche_test.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:00&lt;00:00, 66.16it/s]
+</pre></div></div>
+</div>
+</section>
+<section id="Storing-the-analysis">
+<h2>Storing the analysis<a class="headerlink" href="#Storing-the-analysis" title="Permalink to this headline"></a></h2>
+<p>Finally, the whole project can be saved. This will save the summary tables and the intermediate tables in a folder, and create a shapefile which contains the BWK map with all intermediate tables joined to it.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validation</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;_validation&#39;</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">&#39;_validation&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="flooding.html" class="btn btn-neutral float-left" title="Flooding module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cli.html" class="btn btn-neutral float-right" title="Niche Configuration file" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017 - 2022, Research Institute for Nature and Forest (INBO).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

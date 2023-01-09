@@ -1,0 +1,218 @@
++<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Referentietabel vegetatie &mdash; niche_vlaanderen 1.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Bepaling vegetatie vegetation" href="vegetatie.html" />
+    <link rel="prev" title="Berekening zuurgraad acidity" href="zuur.html" />
+ +    <link href="_static/css/custom.css" rel="stylesheet" type="text/css">
+ +
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> niche_vlaanderen
+          </a>
+              <div class="version">
+                1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Model</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="notendop.html">In een notendop</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="model.html">Beschrijving model</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="principe.html">Werking NICHE Vlaanderen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vegetatietype.html">NICHE vegetatietypen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trofie.html">Berekening trofie <code class="docutils literal notranslate"><span class="pre">nutrient_level</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="zuur.html">Berekening zuurgraad <code class="docutils literal notranslate"><span class="pre">acidity</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Referentietabel vegetatie</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#opbouw-referentietabel">Opbouw referentietabel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#oorsprong-referentiewaarden">Oorsprong referentiewaarden</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gebruik-implementatie">Gebruik/implementatie</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#versiebeheer">Versiebeheer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#documentatie-aanpassingen">Documentatie aanpassingen</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementatie-in-niche-vlaanderen">Implementatie in <code class="docutils literal notranslate"><span class="pre">niche_vlaanderen</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gebruik-van-een-eigen-referentietabel">Gebruik van een eigen referentietabel</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vegetatie.html">Bepaling vegetatie <code class="docutils literal notranslate"><span class="pre">vegetation</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="invoer.html">Invoer rasters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kalibratie.html">Kalibratie</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overstroming.html">Overstromingsmodule</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Package</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="codetables.html">Code tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Niche Configuration file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lowlevel.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Credits</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">niche_vlaanderen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="model.html">Beschrijving model</a> &raquo;</li>
+      <li>Referentietabel vegetatie</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/INBO/niche_vlaanderen/blob/master/docs/vegetatie_reftabel.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="referentietabel-vegetatie">
+<h1>Referentietabel vegetatie<a class="headerlink" href="#referentietabel-vegetatie" title="Permalink to this headline"></a></h1>
+<p>Samen met de beslisregels voor de bepaling van de <a class="reference internal" href="trofie.html"><span class="doc">trofie-</span></a> en <a class="reference internal" href="zuur.html"><span class="doc">zuurgraad</span></a> vormt de referentietabel het hart van het NICHE Vlaanderen model. De tabel bevat de informatie die de standplaatsvereisten/tolerantiegrenzen (kortweg referentiewaarden) van elk NICHE vegetatietype omschrijft. Het gaat om onder- en bovengrenzen (of klassen) waarbinnen een vegetatietype kan voorkomen. Die grenzen worden gespecifieerd voor elk van de standplaatsfactoren die bepalend zijn voor de ontwikkelingskansen. De referentietabel bepaalt aldus de potenties van de verschillende vegetatietypen die het eindresultaat van NICHE Vlaanderen vormen.</p>
+<section id="opbouw-referentietabel">
+<h2>Opbouw referentietabel<a class="headerlink" href="#opbouw-referentietabel" title="Permalink to this headline"></a></h2>
+<p>De referentietabel van NICHE Vlaanderen kan je <a class="reference external" href="https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_vegetation.csv">hier</a> raadplegen. Ze bevat de standplaatsvereisten voor elk vegetatietype, vertaald naar 7 verschillende standplaatsfactoren. De links in onderstaand lijstje verwijzen door naar meer informatie bij de standplaatsfactoren en de aard van de gegevens.</p>
+<ul class="simple">
+<li><p><span class="xref std std-doc">Cijfercode NICHE vegetatietype</span></p></li>
+<li><p><span class="xref std std-doc">Wetenschappelijke naam NICHE vegetatietype</span></p></li>
+<li><p><a class="reference internal" href="invoer.html#soil-code"><span class="std std-ref">Bodemtype</span></a></p></li>
+<li><p><a class="reference internal" href="trofie.html"><span class="doc">Trofiegraad</span></a></p></li>
+<li><p><a class="reference internal" href="zuur.html"><span class="doc">Zuurgraad</span></a></p></li>
+<li><p><a class="reference internal" href="invoer.html#mlw"><span class="std std-ref">Gemiddeld laagste grondwaterstand</span></a> (min-max)</p></li>
+<li><p><a class="reference internal" href="invoer.html#mhw"><span class="std std-ref">Gemiddeld hoogste grondwaterstand</span></a> (min-max)</p></li>
+<li><p><a class="reference internal" href="invoer.html#management-vegetation"><span class="std std-ref">Aftoetsing potenties aan beheer</span></a></p></li>
+<li><p><a class="reference internal" href="invoer.html#inundation-vegetation"><span class="std std-ref">Aftoetsing potenties aan overstromingsregime</span></a></p></li>
+</ul>
+</section>
+<section id="oorsprong-referentiewaarden">
+<h2>Oorsprong referentiewaarden<a class="headerlink" href="#oorsprong-referentiewaarden" title="Permalink to this headline"></a></h2>
+<p>De referentiewaarden zijn gebaseerd op een uitgebreide set van veldbemonstering van zowel de vegetatie als de (a)biotische omgevingsvariabelen die rechtstreeks of onrechtstreeks gekoppeld zijn aan elk van de <a class="reference internal" href="invoer.html"><span class="doc">invoerlagen</span></a> (zie <a class="reference external" href="https://pureportal.inbo.be/portal/files/5370206/Callebaut_etal_2007_NicheVlaanderen.pdf">Callebaut et al. 2007</a>).</p>
+</section>
+<section id="gebruik-implementatie">
+<h2>Gebruik/implementatie<a class="headerlink" href="#gebruik-implementatie" title="Permalink to this headline"></a></h2>
+<p>De referentietabel wordt in NICHE Vlaanderen gebruikt als een codetabel. Een codetabel maakt het mogelijk om een vertaling te maken van de ene waarde (klasse of bereik) naar een andere waarde (veelal een klasse). In het geval van de referentietabel is dat van de waarden voor de verschillende standplaatsfactoren naar één enkele uitspraak over de potentie voor elk van de vegetatietypen, nl. wel of geen potentie (1 of 0). In NICHE Vlaanderen worden ook nog andere codetabellen gebruikt, met name bij de implementatie van de beslisregels voor de trofie- en zuurgraad.</p>
+<p>Voor categorische variabelen (nominaal of ordinaal) is de omzetting eenduidig. Voor continue variabelen wordt gewerkt met boven- en ondergrenzen (minimum en maximum). Hier is het belangrijk om duidelijk afspraken te maken:</p>
+<ul class="simple">
+<li><p>zijn de gespecifieerde minima en maxima al dan niet inbegrepen in het bereik</p></li>
+<li><p>hoe worden decimale waarden gebruikt bij het aftoetsen aan deze minima en maxima</p></li>
+</ul>
+<p>De enige continue waarden in de referentietabel zijn de gemiddelde <a class="reference internal" href="invoer.html#mhw"><span class="std std-ref">hoogste</span></a> en <a class="reference internal" href="invoer.html#mlw"><span class="std std-ref">laagste</span></a> grondwaterstanden. De gespecifieerde minima en maxima zitten hier steeds <em>inbegrepen</em> in het bereik. En hoewel aangeraden wordt om vooraf de bijhorende invoerlagen van integere (dus geen decimale) waarden te voorzien, worden decimale waarden eerst <em>afgerond op twee cijfers</em> na de decimaal en vervolgens vergeleken met de minima en maxima.</p>
+<p>Zie ook <a class="reference internal" href="vegetatie.html"><span class="doc">Bepaling vegetatie vegetation</span></a>.</p>
+</section>
+<section id="versiebeheer">
+<h2>Versiebeheer<a class="headerlink" href="#versiebeheer" title="Permalink to this headline"></a></h2>
+<p>Voortschrijdend wetenschappelijk inzicht en ervaring bij de praktische toepassing van NICHE Vlaanderen kan aanleiding geven tot aanpassingen in de referentietabel. Het is belangrijk dat deze wijzigingen traceerbaar zijn. Daarnaast is het belangrijk op te merken dat de code van <code class="docutils literal notranslate"><span class="pre">niche_vlaanderen</span></code> toelaat om de standaard referentietabel die vervat zit in de geïnstalleerde code te overschrijven met een aangepaste tabel.</p>
+<section id="documentatie-aanpassingen">
+<h3>Documentatie aanpassingen<a class="headerlink" href="#documentatie-aanpassingen" title="Permalink to this headline"></a></h3>
+</section>
+<section id="implementatie-in-niche-vlaanderen">
+<h3>Implementatie in <code class="docutils literal notranslate"><span class="pre">niche_vlaanderen</span></code><a class="headerlink" href="#implementatie-in-niche-vlaanderen" title="Permalink to this headline"></a></h3>
+<p>De laatste versie van de referentietabel wordt steeds mee geïnstalleerd met de laatste versie van NICHE Vlaanderen.
+Een waarschuwing verschijnt als je niet over de laatste versie beschikt.</p>
+</section>
+<section id="gebruik-van-een-eigen-referentietabel">
+<h3>Gebruik van een eigen referentietabel<a class="headerlink" href="#gebruik-van-een-eigen-referentietabel" title="Permalink to this headline"></a></h3>
+<p>Het is mogelijk om een eigen referentietabel te gebruiken die dan de standaard tabel overschrijft (<a class="reference external" href="https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Overwriting-standard-code-tables">interactief</a> of via <a class="reference internal" href="cli.html#full-example"><span class="std std-ref">configuratiebestand</span></a>).
+Het wordt ten stelligste aangeraden om deze optie doordacht te gebruiken, en de tabel enkel aan te passen op basis van nauwkeurige meetgegevens die op wetenschappelijke wijze verzameld werden. Naast aanpassingen van de referentiewaarden voor bestaande vegetatietypen is het eveneens mogelijk om nieuwe vegetatietypen toe te voegen met bijhorende referentiewaarden.
+Bij het gebruik van een eigen referentietabel is het belangrijk te weten dat de tabel moet bestaan uit “comma separated values” (tekstbestand met extentie <a href="#id1"><span class="problematic" id="id2">*</span></a>.csv). Het scheidingsteken is dus de komma (“,”) en het decimaal teken bijgevolg de punt (“.”).</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="zuur.html" class="btn btn-neutral float-left" title="Berekening zuurgraad acidity" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="vegetatie.html" class="btn btn-neutral float-right" title="Bepaling vegetatie vegetation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017 - 2022, Research Institute for Nature and Forest (INBO).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

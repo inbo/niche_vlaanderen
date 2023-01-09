@@ -1,0 +1,491 @@
++<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Berekening zuurgraad acidity &mdash; niche_vlaanderen 1.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Referentietabel vegetatie" href="vegetatie_reftabel.html" />
+    <link rel="prev" title="Berekening trofie nutrient_level" href="trofie.html" />
+ +    <link href="_static/css/custom.css" rel="stylesheet" type="text/css">
+ +
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> niche_vlaanderen
+          </a>
+              <div class="version">
+                1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Model</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="notendop.html">In een notendop</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="model.html">Beschrijving model</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="principe.html">Werking NICHE Vlaanderen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vegetatietype.html">NICHE vegetatietypen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trofie.html">Berekening trofie <code class="docutils literal notranslate"><span class="pre">nutrient_level</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Berekening zuurgraad <code class="docutils literal notranslate"><span class="pre">acidity</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#output">Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#principe">Principe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#invoergegevens">Invoergegevens</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#implementatie-in-het-package-niche-vlaanderen">Implementatie in het package <code class="docutils literal notranslate"><span class="pre">niche_vlaanderen</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bepaling-bodem-glg-klasse">Bepaling bodem_GLG klasse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bepaling-kwel-klasse">Bepaling kwel klasse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bepaling-zuurcode">Bepaling zuurcode</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vegetatie_reftabel.html">Referentietabel vegetatie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vegetatie.html">Bepaling vegetatie <code class="docutils literal notranslate"><span class="pre">vegetation</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="invoer.html">Invoer rasters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kalibratie.html">Kalibratie</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overstroming.html">Overstromingsmodule</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Package</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="codetables.html">Code tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Niche Configuration file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lowlevel.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Credits</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">niche_vlaanderen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="model.html">Beschrijving model</a> &raquo;</li>
+      <li>Berekening zuurgraad <code class="docutils literal notranslate"><span class="pre">acidity</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/INBO/niche_vlaanderen/blob/master/docs/zuur.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="berekening-zuurgraad-acidity">
+<span id="acidity"></span><h1>Berekening zuurgraad <code class="docutils literal notranslate"><span class="pre">acidity</span></code><a class="headerlink" href="#berekening-zuurgraad-acidity" title="Permalink to this headline"></a></h1>
+<section id="output">
+<h2>Output<a class="headerlink" href="#output" title="Permalink to this headline"></a></h2>
+<p>NICHE Vlaanderen genereert een vereenvoudigde kaart van de zuurgraad van de standplaats ingedeeld in de volgende klassen (veld <code class="docutils literal notranslate"><span class="pre">acidity</span></code>):</p>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Zuurgraadklassen in NICHE</span><a class="headerlink" href="#id2" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>acidity</p></th>
+<th class="head"><p>zuurgraadklasse_bodem</p></th>
+<th class="head"><p>ph_kcl_soil</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>zuur</p></td>
+<td><p>3.5 ‐ 5</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>zwak zuur</p></td>
+<td><p>5 ‐ 6.5</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>neutraal/basisch</p></td>
+<td><p>6.5 ‐ 8</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="principe">
+<span id="acidity-princ"></span><h2>Principe<a class="headerlink" href="#principe" title="Permalink to this headline"></a></h2>
+<p>NICHE berekent de zuurgraad van de standplaats op basis van:</p>
+<ul class="simple">
+<li><p>het bodemtype;</p></li>
+<li><p>de gemiddelde laagste grondwaterstanden (GLG);</p></li>
+<li><p>het al dan niet overstromen met basenrijk water;</p></li>
+<li><p>de kwelflux;</p></li>
+<li><p>de mineraalrijkdom van het grondwater;</p></li>
+<li><p>de eventuele aanwezigheid van een regenwaterlens.</p></li>
+</ul>
+<p>Als uitgangspunt geldt dat <strong>bij hoge grondwaterstanden de standplaats beïnvloed wordt
+door de kenmerken van het grondwater. Bij lage grondwaterstanden kan regenwater
+infiltreren en wordt de standplaats zuurder</strong>.</p>
+<p>Als:</p>
+<ul class="simple">
+<li><p>er kwel met mineraalarm grondwater is,</p></li>
+<li><p>of als er overstroming met basenrijk water optreedt,</p></li>
+<li><p>of als een regenlens aanwezig is,</p></li>
+</ul>
+<p>… wordt de zuurgraad van de standplaats bijgestuurd als volgt:</p>
+<a class="reference internal image-reference" href="_images/acidity_principle.png"><img alt="_images/acidity_principle.png" src="_images/acidity_principle.png" style="width: 923.0px; height: 375.0px;" /></a>
+<p>De definitie van de hoge, tussenliggende en lage grondwaterstanden verschilt naargelang het bodemtype en wordt in onderstaande tabel weergegeven (zie ook <a class="reference external" href="https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/soil_mlw_class.csv">soil_mlw_class.csv</a>):</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 25%" />
+<col style="width: 27%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head" colspan="3"><p>GLG drempelwaarden per bodemgroep</p></th>
+</tr>
+<tr class="row-even"><th class="head"></th>
+<th class="head"><p>Bodemgroep 1</p></th>
+<th class="head"><p>Bodemgroep 2</p></th>
+<th class="head"><p>Bodemgroep 3</p></th>
+</tr>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>Minerale bodems</p></th>
+<th class="head"><p>Organische bodems</p></th>
+<th class="head"><p>Trilveen</p></th>
+</tr>
+<tr class="row-even"><th class="head"><p>Grondwaterstand</p></th>
+<th class="head"><p>K1, Z1, Z2, L1</p></th>
+<th class="head"><p>KV, LV, ZV, V</p></th>
+<th class="head"><p>P</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-odd"><td><p>Hoog</p></td>
+<td><p>]-999 – 80] cm</p></td>
+<td><p>]-999 – 50] cm</p></td>
+<td><p>]-999 – 30] cm</p></td>
+</tr>
+<tr class="row-even"><td><p>Tussenliggend</p></td>
+<td><p>]80 – 110]</p></td>
+<td><p>]50 – 80]</p></td>
+<td><p>]30 – 50]</p></td>
+</tr>
+<tr class="row-odd"><td><p>Laag</p></td>
+<td><p>]110 – 9000]</p></td>
+<td><p>]80 – 9000]</p></td>
+<td><p>]50 – 9000]</p></td>
+</tr>
+</tbody>
+</table>
+<p><em>positieve GLG-waarden = onder maaiveld</em></p>
+<p>De beslisregels voor de zuurgraad kunnen ook worden samengevat als volgt:</p>
+<a class="reference internal image-reference" href="_images/acidity_table.png"><img alt="_images/acidity_table.png" src="_images/acidity_table.png" style="width: 633.0px; height: 408.0px;" /></a>
+<p><em>B = neutraal/basisch, ZW = zwak zuur, Z = zuur</em></p>
+</section>
+<section id="invoergegevens">
+<span id="acidity-input"></span><h2>Invoergegevens<a class="headerlink" href="#invoergegevens" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="invoer.html#soil-code"><span class="std std-ref">Bodemklasse soil_code</span></a></p></li>
+<li><p><a class="reference internal" href="invoer.html#mlw"><span class="std std-ref">GLG (gemiddeld laagste grondwaterstand) mlw</span></a></p></li>
+<li><p><a class="reference internal" href="invoer.html#inundation-acidity"><span class="std std-ref">Overstroming_zuurgraad inundation_acidity</span></a></p></li>
+<li><p><a class="reference internal" href="invoer.html#seepage"><span class="std std-ref">Kwel seepage</span></a></p></li>
+<li><p><a class="reference internal" href="invoer.html#minerality"><span class="std std-ref">Mineraalrijkdom minerality</span></a></p></li>
+<li><p><a class="reference internal" href="invoer.html#rainwater"><span class="std std-ref">Regenlens rainwater</span></a></p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="implementatie-in-het-package-niche-vlaanderen">
+<h2>Implementatie in het package <code class="docutils literal notranslate"><span class="pre">niche_vlaanderen</span></code><a class="headerlink" href="#implementatie-in-het-package-niche-vlaanderen" title="Permalink to this headline"></a></h2>
+<section id="bepaling-bodem-glg-klasse">
+<span id="soil-glg-class"></span><h3>Bepaling bodem_GLG klasse<a class="headerlink" href="#bepaling-bodem-glg-klasse" title="Permalink to this headline"></a></h3>
+<p>In eerste instantie worden de 3 bodemgroepen onderscheiden.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>minerale bodems: Z1 of Z2 of L1 of K1 (of NG);</p></li>
+<li><p>organische bodems: V of ZV of LV of KV;</p></li>
+<li><p>trilveen: P.</p></li>
+</ul>
+</div></blockquote>
+<p>Elke bodemcode wordt aan een bodemgroep gekoppeld in de tabel <a class="reference external" href="https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/soil_codes.csv">soil_codes.csv</a>.</p>
+<p>Op basis van de bodemgroep en de GLG wordt de soil_mlw (bodem_GLG) klasse bepaald.
+Dit gebeurt aan de hand van de tabel <a class="reference external" href="https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/soil_mlw_class.csv">soil_mlw_class.csv</a>.</p>
+<div class="topic">
+<p class="topic-title">Voorbeeld</p>
+<p>Voor een leembodem (bodemcode L1, bodemcijfercode 14) en een GLG van 50 cm onder maaiveld krijgen we:</p>
+<p>Humusarme leemgronden behoren tot de bodemgroep 1:</p>
+<table class="docutils align-default" id="id3">
+<caption><span class="caption-text">bodemgroep op basis van bodemcode</span><a class="headerlink" href="#id3" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>soil_code</p></th>
+<th class="head"><p>short_code</p></th>
+<th class="head"><p>beschrijving</p></th>
+<th class="head"><p>soil_group</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>L1</p></td>
+<td><p>leem</p></td>
+<td><p><strong>1</strong></p></td>
+</tr>
+</tbody>
+</table>
+<p>Kijken we verder in de tabel soil_mlw_class met deze bodemgroep (1) en de GLG van 50 cm onder maaiveld krijgen we een soil_mlw  (bodem_GLG) klasse van 1:</p>
+<table class="docutils align-default" id="id4">
+<caption><span class="caption-text">soil_mlw_class op basis van bodemtype en GLG</span><a class="headerlink" href="#id4" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>soil_group</p></th>
+<th class="head"><p>mlw_min</p></th>
+<th class="head"><p>mlw_max</p></th>
+<th class="head"><p>soil_mlw_class</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>-999</p></td>
+<td><p>80</p></td>
+<td><p><strong>1</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>80</p></td>
+<td><p>110</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-odd"><td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Bij het gebruik van de codetabel soil_mlw_class wordt de bovengrens van elke GLG-categorie meegenomen in de categorie, maar niet de ondergrens: een GLG van 110 cm onder maaiveld resulteert voor minerale bodems in een soil_mlw (bodem_GLG) klasse van 2 terwijl een GLG van 80 cm onder maaiveld met een soil_mlw klasse van 1 overeenkomt.</p>
+<p>Als reële getallen voor de GLG worden gebruikt worden de waarden afgerond op 2 decimalen, d.w.z. 80.005 zal 80.01 cm (&gt; 80, soil_mlw klasse van 2) worden en 80.004 zal 80.00 cm (= 80, soil_mlw klasse van 1) worden.</p>
+</section>
+<section id="bepaling-kwel-klasse">
+<h3>Bepaling kwel klasse<a class="headerlink" href="#bepaling-kwel-klasse" title="Permalink to this headline"></a></h3>
+<p>De reële waarden uit het grid <a class="reference internal" href="invoer.html#seepage"><span class="std std-ref">Kwel seepage</span></a> worden ingedeeld in 3 klassen, gaande van 1 (infiltratie) tot 3 (sterke kwel van meer dan 1 mm/dag)</p>
+<p>De kwelflux wordt aan een kwel klasse gekoppeld in de tabel <a class="reference external" href="https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/seepage.csv">seepage.csv</a>.</p>
+<div class="topic">
+<p class="topic-title">Voorbeeld</p>
+<p>In het voorbeeld werd de waarde 0 mm/dag gebruikt. Dit wordt dus klasse 1 (infiltratie).</p>
+<table class="docutils align-default" id="id5">
+<caption><span class="caption-text">kwel klasse</span><a class="headerlink" href="#id5" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>seepage</p></th>
+<th class="head"><p>seepage_min</p></th>
+<th class="head"><p>seepage_max</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>-999</p></td>
+<td><p>-1</p></td>
+<td><p>much seepage</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>-1</p></td>
+<td><p>-0.1</p></td>
+<td><p>little seepage</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>1</strong></p></td>
+<td><p>-0.1</p></td>
+<td><p>999</p></td>
+<td><p>infiltration</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Bij het gebruik van deze tabel wordt de bovengrens van elke kwel-categorie meegenomen in de categorie, maar niet de ondergrens: een kwel van -1 mm/dag hoort dus bij de categorie “much seepage/veel kwel”, bij -0.1 mm kwel per dag spreekt men van “little seepage/kwel”.</p>
+</section>
+<section id="bepaling-zuurcode">
+<h3>Bepaling zuurcode<a class="headerlink" href="#bepaling-zuurcode" title="Permalink to this headline"></a></h3>
+<p>Aan de hand van de bodem_GLG klasse, de eventuele aanwezigheid van een regenwaterlens, de kwelflux en mineralenrijkdom van het grondwater en het al dan niet optreden van overstroming met basenrijk water wordt de zuurcode bepaald.
+Dit gebeurt op basis van de tabel <a class="reference external" href="https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/lnk_acidity.csv">lnk_acidity.csv</a>.</p>
+<div class="topic">
+<p class="topic-title">Voorbeeld</p>
+<p>In de vorige stappen werden de bodem_GLG klasse en de kwel klasse bepaald op 1. Andere invoerwaarden zijn:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Regenlens = 1 (aanwezig)</p></li>
+<li><p>Mineralenrijkdom = 1 (mineraalrijk grondwater)</p></li>
+<li><p>Overstroming_zuurgraad = 1 (overstroming met basenrijk water)</p></li>
+</ul>
+<p>Zoeken we deze waarden op in de tabel lnk_acidity.csv krijgen we:</p>
+<table class="docutils align-default" id="id6">
+<caption><span class="caption-text">lnk_acidity</span><a class="headerlink" href="#id6" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>rainwater</p></th>
+<th class="head"><p>mineral_richness</p></th>
+<th class="head"><p>inundation</p></th>
+<th class="head"><p>seepage</p></th>
+<th class="head"><p>soil_mlw_class</p></th>
+<th class="head"><p>acidity</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>3</p></td>
+<td><p>9</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p><strong>3</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-even"><td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>De bepaalde zuurgraad is dus <strong>3</strong> (neutraal/basisch)</p>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="trofie.html" class="btn btn-neutral float-left" title="Berekening trofie nutrient_level" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="vegetatie_reftabel.html" class="btn btn-neutral float-right" title="Referentietabel vegetatie" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017 - 2022, Research Institute for Nature and Forest (INBO).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

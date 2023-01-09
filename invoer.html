@@ -1,0 +1,998 @@
++<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Invoer rasters &mdash; niche_vlaanderen 1.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Kalibratie" href="kalibratie.html" />
+    <link rel="prev" title="Bepaling vegetatie vegetation" href="vegetatie.html" />
+ +    <link href="_static/css/custom.css" rel="stylesheet" type="text/css">
+ +
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> niche_vlaanderen
+          </a>
+              <div class="version">
+                1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Model</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="notendop.html">In een notendop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model.html">Beschrijving model</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Invoer rasters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#bodemklasse-soil-code">Bodemklasse <code class="docutils literal notranslate"><span class="pre">soil_code</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#omschrijving">Omschrijving</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#datatype">Datatype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mogelijke-waarden">Mogelijke waarden</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#eenheid">Eenheid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rol-in-model">Rol in model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#brongegevens">Brongegevens</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#opmerkingen">Opmerkingen</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#gemiddelde-grondwaterstanden-gxg">Gemiddelde grondwaterstanden (GxG)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Omschrijving</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ghg-gemiddeld-hoogste-grondwaterstand-mhw">GHG (Gemiddeld hoogste grondwaterstand) <code class="docutils literal notranslate"><span class="pre">mhw</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#glg-gemiddeld-laagste-grondwaterstand-mlw">GLG (gemiddeld laagste grondwaterstand) <code class="docutils literal notranslate"><span class="pre">mlw</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gvg-gemiddeld-voorjaarsgrondwaterstand-msw">GVG (gemiddeld voorjaarsgrondwaterstand) <code class="docutils literal notranslate"><span class="pre">msw</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Datatype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Mogelijke waarden</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Eenheid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Rol in model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Brongegevens</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">Opmerkingen</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#kwel-seepage">Kwel <code class="docutils literal notranslate"><span class="pre">seepage</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id10">Omschrijving</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">Datatype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">Mogelijke waarden</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">Eenheid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">Rol in model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">Brongegevens</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id16">Opmerkingen</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#overstroming-trofie-inundation-nutrient">Overstroming_trofie <code class="docutils literal notranslate"><span class="pre">inundation_nutrient</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id17">Omschrijving</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id18">Datatype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id19">Mogelijke waarden</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id20">Eenheid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id21">Rol in model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id22">Brongegevens</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id23">Opmerkingen</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#overstroming-zuurgraad-inundation-acidity">Overstroming_zuurgraad <code class="docutils literal notranslate"><span class="pre">inundation_acidity</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id24">Omschrijving</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id25">Datatype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id26">Mogelijke waarden</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id27">Eenheid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id28">Rol in model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id29">Brongegevens</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id30">Opmerkingen</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#atmosferische-depositie-nitrogen-atmospheric">Atmosferische depositie <code class="docutils literal notranslate"><span class="pre">nitrogen_atmospheric</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id33">Omschrijving</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id34">Datatype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id35">Mogelijke waarden</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id36">Eenheid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id37">Rol in model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id38">Brongegevens</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id39">Opmerkingen</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#dierlijke-bemesting-nitrogen-animal">Dierlijke bemesting <code class="docutils literal notranslate"><span class="pre">nitrogen_animal</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id40">Omschrijving</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id41">Datatype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id42">Mogelijke waarden</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id43">Eenheid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id44">Rol in model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id45">Brongegevens</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id46">Opmerkingen</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#kunstmest-nitrogen-fertilizer">Kunstmest <code class="docutils literal notranslate"><span class="pre">nitrogen_fertilizer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id47">Omschrijving</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id48">Datatype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id49">Mogelijke waarden</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id50">Eenheid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id51">Rol in model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id52">Brongegevens</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id53">Opmerkingen</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#beheer-management">Beheer <code class="docutils literal notranslate"><span class="pre">management</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id54">Omschrijving</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id55">Datatype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id56">Mogelijke waarden</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id57">Eenheid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id58">Rol in model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id60">Brongegevens</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id61">Opmerkingen</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mineraalrijkdom-minerality">Mineraalrijkdom <code class="docutils literal notranslate"><span class="pre">minerality</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id62">Omschrijving</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id63">Datatype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id64">Mogelijke waarden</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id65">Eenheid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id66">Rol in model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id67">Brongegevens</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id69">Opmerkingen</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#regenlens-rainwater">Regenlens <code class="docutils literal notranslate"><span class="pre">rainwater</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id70">Omschrijving</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id71">Datatype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id72">Mogelijke waarden</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id73">Eenheid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id74">Rol in model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id75">Brongegevens</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id76">Opmerkingen</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#overstroming-vegetatie-inundation-vegetation">Overstroming Vegetatie <code class="docutils literal notranslate"><span class="pre">inundation_vegetation</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id77">Omschrijving</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id79">Datatype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id80">Mogelijke waarden</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id81">Eenheid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id82">Rol in model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id83">Brongegevens</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id84">Opmerkingen</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#beheer-vegetatie-management-vegetation">Beheer Vegetatie <code class="docutils literal notranslate"><span class="pre">management_vegetation</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id86">Omschrijving</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id87">Datatype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id88">Mogelijke waarden</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id89">Eenheid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id90">Rol in model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id92">Brongegevens</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id93">Opmerkingen</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="kalibratie.html">Kalibratie</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overstroming.html">Overstromingsmodule</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Package</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="codetables.html">Code tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Niche Configuration file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lowlevel.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Credits</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">niche_vlaanderen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Invoer rasters</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/INBO/niche_vlaanderen/blob/master/docs/invoer.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="invoer-rasters">
+<h1>Invoer rasters<a class="headerlink" href="#invoer-rasters" title="Permalink to this headline"></a></h1>
+<p>NICHE Vlaanderen berekent de potenties voor vegetatietypes in een gebied op basis van informatie over de (abiotische) standplaatscondities. De standplaatscondities dienen vervat te zijn in de zgn. invoergegevens: ruimtelijke datalagen (rasters) met voor elke standplaatsfactor de toestand voor elke rastercel, uitgedrukt in numerieke vorm, als een continue, ordinale of nominale waarde. Het model combineert de verschillende rasters tot een uitspraak over de potentie voor de verschillende vegetatietypen in elke rastercel op basis van beslisregels.</p>
+<p>De betrouwbaarheid van de berekende potenties wordt sterk bepaald door de kwaliteit van de invoergegevens. Het is dan ook nodig te streven naar invoergegevens die de toestand (actueel of toekomstig) zo nauwkeurig mogelijk beschrijven. Hydrologische informatie (grondwaterstanden, overstromingen, kwel) speelt een cruciale rol, aangezien ze doorweegt in zowel de beslisregels als de berekening van potenties voor de vegetatietypen zelf.</p>
+<p>Alle invoerdatalagen dienen aangeleverd te worden als rasters (grids). Afhankelijk van de grootte van het studiegebied wordt een voorstel gedaan voor de rasterresolutie (afmetingen rastercel). Om voldoende garantie te hebben op bruikbare NICHE resultaten wordt aangeraden om cellen van max 25*25m (idealiter kleiner) te gebruiken. Alle rasters dienen eenzelfde gebied af te dekken met eenzelfde resolutie. Ook het ruimtelijk referentiesysteem dient hetzelfde te zijn voor alle rasters.</p>
+<p>Om NICHE Vlaanderen in al zijn toe te passen, kunnen 15 invoerrasters ingebracht worden. Twee hiervan zijn optioneel omdat ze een post-hoc aftoetsing inhouden van de berekende potenties naar compatibiliteit met <a class="reference internal" href="#management-vegetation"><span class="std std-ref">beheer</span></a> en <a class="reference internal" href="#inundation-vegetation"><span class="std std-ref">overstromingsregime</span></a>.</p>
+<p>Hieronder wordt voor elk van de mogelijke invoerrasters een omschrijving gegeven van de informatie die het dient te bevatten, waarvoor het raster in het model gebruikt wordt, de eenheid waarin de rasterwaarden uitgedrukt worden, het gegevenstype, de eventueel onderscheiden klassen en hun verklaring, of het raster verplicht of optioneel is, en welke brongegevens kunnen gebruikt worden om het raster aan te maken.</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#soil-code"><span class="std std-ref">Bodemklasse</span></a></p></li>
+<li><p><a class="reference internal" href="#mhw"><span class="std std-ref">Gemiddelde hoogste grondwaterstand</span></a></p></li>
+<li><p><a class="reference internal" href="#mlw"><span class="std std-ref">Gemiddelde laagste grondwaterstand</span></a></p></li>
+<li><p><a class="reference internal" href="#msw"><span class="std std-ref">Gemiddelde voorjaarsgrondwaterstand</span></a></p></li>
+<li><p><a class="reference internal" href="#seepage"><span class="std std-ref">Kwelflux</span></a></p></li>
+<li><p><a class="reference internal" href="#inundation-acidity"><span class="std std-ref">Overstroming i.f.v. zuurgraad</span></a></p></li>
+<li><p><a class="reference internal" href="#inundation-nutrient"><span class="std std-ref">Overstroming i.f.v. trofiegraad</span></a></p></li>
+<li><p><a class="reference internal" href="#nitrogen-atmospheric"><span class="std std-ref">Atmosferische depositie (stikstof)</span></a></p></li>
+<li><p><a class="reference internal" href="#nitrogen-animal"><span class="std std-ref">Bemesting met dierlijke mest (stikstof)</span></a></p></li>
+<li><p><a class="reference internal" href="#nitrogen-fertilizer"><span class="std std-ref">Bemesting met kunstmest (stikstof)</span></a></p></li>
+<li><p><a class="reference internal" href="#management"><span class="std std-ref">Beheer i.f.v. trofiegraad</span></a></p></li>
+<li><p><a class="reference internal" href="#minerality"><span class="std std-ref">Mineraalrijkdom</span></a></p></li>
+<li><p><a class="reference internal" href="#rainwater"><span class="std std-ref">Regenlens</span></a></p></li>
+<li><p><a class="reference internal" href="#management-vegetation"><span class="std std-ref">Aftoetsing potenties aan beheer</span></a></p></li>
+<li><p><a class="reference internal" href="#inundation-vegetation"><span class="std std-ref">Aftoetsing potenties aan overstromingsregime</span></a></p></li>
+</ol>
+<p>Onderstaande figuur geeft de verschillende invoerrasters weer, thematisch geordend (verticaal) en ingedeeld naar hun indirecte (via zuur- en trofiegraad) en directe invloed op de potenties voor de verschillende vegetatietypen (horizontaal).</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/input_rasters.svg"><img alt="_images/input_rasters.svg" src="_images/input_rasters.svg" /></a>
+</figure>
+<section id="bodemklasse-soil-code">
+<span id="soil-code"></span><h2>Bodemklasse <code class="docutils literal notranslate"><span class="pre">soil_code</span></code><a class="headerlink" href="#bodemklasse-soil-code" title="Permalink to this headline"></a></h2>
+<section id="omschrijving">
+<h3>Omschrijving<a class="headerlink" href="#omschrijving" title="Permalink to this headline"></a></h3>
+<p>De bodemkaart die als input dient voor NICHE Vlaanderen is een ecologisch getinte bodemkaart met klassen die niet enkel onderscheiden worden op basis van korrelgrootte (zand-leem-klei), maar ook het gehalte aan organische stof (zuiver mineraal-venig-veen).</p>
+</section>
+<section id="datatype">
+<h3>Datatype<a class="headerlink" href="#datatype" title="Permalink to this headline"></a></h3>
+<p>Nominaal</p>
+</section>
+<section id="mogelijke-waarden">
+<h3>Mogelijke waarden<a class="headerlink" href="#mogelijke-waarden" title="Permalink to this headline"></a></h3>
+<table class="docutils align-default" id="id94">
+<caption><span class="caption-text">Onderscheiden bodemklassen met hun code en beschrijving ( <a class="reference internal" href="codetables.html#ct-soil-code"><span class="std std-ref">soil_code</span></a>)</span><a class="headerlink" href="#id94" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>soil_code</p></th>
+<th class="head"><p>soil_name</p></th>
+<th class="head"><p>description</p></th>
+<th class="head"><p>soil_group</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>K1</p></td>
+<td><p>alluviale kleigronden, arm aan OM</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>KV</p></td>
+<td><p>alluviale kleigronden, rijk aan OM, venige klei, klei op veen</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>Le</p></td>
+<td><p>eolische leemgronden</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>MK</p></td>
+<td><p>maritieme klei</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>P</p></td>
+<td><p>trilveen</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>V</p></td>
+<td><p>veen</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p>Z1</p></td>
+<td><p>humusarme zandgronden (dunne humuslaag), podzol</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>12</p></td>
+<td><p>Z2</p></td>
+<td><p>humusrijke zandgronden (dikke humuslaag)</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>13</p></td>
+<td><p>ZV</p></td>
+<td><p>venige zandgronden, moerige zandgronden, zandige veengronden</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>L1</p></td>
+<td><p>alluviale leemgronden, arm aan OM</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>LV</p></td>
+<td><p>alluviale leemgronden, rijk aan OM, venige leemgronden</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>NG</p></td>
+<td><p>gronden die niet in aanmerking komen voor NICHE: open water, bebouwd of sterk beïnvloed, droge gronden, open water, niet gespecifieerd</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="eenheid">
+<h3>Eenheid<a class="headerlink" href="#eenheid" title="Permalink to this headline"></a></h3>
+<p>Geen</p>
+</section>
+<section id="rol-in-model">
+<h3>Rol in model<a class="headerlink" href="#rol-in-model" title="Permalink to this headline"></a></h3>
+<p>De NICHE bodemkaart speelt een rol:</p>
+<ul class="simple">
+<li><p>bij de berekening van zowel de <a class="reference internal" href="trofie.html"><span class="doc">trofie-</span></a> als de <a class="reference internal" href="zuur.html"><span class="doc">zuurgraad</span></a>, inclusief aflijnen van beslisregels</p></li>
+<li><p>bij het rechtstreeks aftoetsen aan de compatibele bodemklassen van elk vegetatietype in de <a class="reference external" href="https://github.com/INBO/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_vegetation.csv">referentietabel van NICHE Vlaanderen</a>.</p></li>
+</ul>
+</section>
+<section id="brongegevens">
+<h3>Brongegevens<a class="headerlink" href="#brongegevens" title="Permalink to this headline"></a></h3>
+<p>Voor het aanmaken van deze ecologische NICHE bodemkaart kan er gebruik gemaakt worden van de Bodemkaart van België, van een gecorrigeerde bodemkaart (op basis van veldgegevens) of er kan gebruik gemaakt worden van een zelf aangemaakte bodemkaart. Er is een Vlaanderen dekkende NICHE bodemkaart voorhanden, waarin voor Vlaanderen de oorspronkelijke bodemcodes van de Belgische Bodemkaart werden omgezet naar de NICHE-codes via een bodemvertaalsleutel (
+<a class="reference external" href="https://pureportal.inbo.be/portal/files/5370206/Callebaut_etal_2007_NicheVlaanderen.pdf">Callebaut et al. 2007</a>). Aan elke polygoon hangt dus de juiste NICHE bodemcode (zowel letter- als cijfercode). Deze NICHE bodemkaart is beschikbaar onder de vorm van <a class="reference external" href="https://zenodo.org/record/5840965">deze shapefile</a>. Uit deze shapefile kan met gepaste GIS-bewerkingen het gewenste studiegebied geknipt worden en vervolgens verrasterd met de gewenste extent en resolutie.
+De procedure om eigen bodemgegevens of een eigen bodemkaart te gebruiken wordt beschreven in het NICHE rapport (
+<a class="reference external" href="https://pureportal.inbo.be/portal/files/5370206/Callebaut_etal_2007_NicheVlaanderen.pdf">Callebaut et al. 2007</a>, hoofdstukken 3.3 <em>Vertaalsleutel bodemkaart</em> en 3.4 <em>Vertaalsleutel bodemprofielen</em>, met een gedetailleerde beschrijving van de verschillende NICHE bodemtypen, en de procedure om codes van de Bodemkaart van België of profielbeschrijvingen om te zetten naar de NICHE-codes).</p>
+</section>
+<section id="opmerkingen">
+<h3>Opmerkingen<a class="headerlink" href="#opmerkingen" title="Permalink to this headline"></a></h3>
+</section>
+</section>
+<section id="gemiddelde-grondwaterstanden-gxg">
+<span id="mxw"></span><h2>Gemiddelde grondwaterstanden (GxG)<a class="headerlink" href="#gemiddelde-grondwaterstanden-gxg" title="Permalink to this headline"></a></h2>
+<section id="id2">
+<h3>Omschrijving<a class="headerlink" href="#id2" title="Permalink to this headline"></a></h3>
+<p>De diepte van het grondwaterpeil ten opzichte van het maaiveld is voor veel vegetatietypen een uiterst belangrijke standplaatsfactor. De kenmerkende plantensoorten van een (grondwaterafhankelijk) vegetatietype zijn voor hun voortbestaan immers aangewezen op een voldoende vochtvoorziening. Niet enkel de diepte van het grondwater, maar ook de fluctuatie hiervan doorheen het jaar zijn bepalend voor welke soorten op bepaalde plaatsen kunnen groeien.</p>
+<p>De meeste plantensoorten verdwijnen ook niet zomaar na kortstondig afwijkende grondwaterpeilen. Vandaar wordt het voorkomen van vegetatietypen niet afgetoetst ten opzichte van grondwaterpeilen die gedurende één enkel jaar of seizoen waargenomen of modelmatig voorspeld worden, maar ten opzichte van gemiddelde grondwaterpeilen over meerdere jaren.</p>
+<p>Vandaar wordt voor het berekenen van de invloed van grondwaterpeilen op de potenties van vegetatietypen in NICHE Vlaanderen gebruik gemaakt van gemiddelde grondwaterstanden op bepaalde momenten van het jaar. Er wordt gewerkt met drie afzonderlijke invoerrasters, nl. de <a class="reference internal" href="#mlw"><span class="std std-ref">Gemiddelde Laagste Grondwaterstand (GLG)</span></a>, de <a class="reference internal" href="#msw"><span class="std std-ref">Gemiddelde Voorjaarsgrondwaterstand (GVG)</span></a> en de <a class="reference internal" href="#mhw"><span class="std std-ref">Gemiddelde Hoogste Grondwaterstand (GHG)</span></a>.</p>
+<p>De waterstandsparameters worden als volgt gedefinieerd (van der Veen et al., 1994)</p>
+<section id="ghg-gemiddeld-hoogste-grondwaterstand-mhw">
+<span id="mhw"></span><h4>GHG (Gemiddeld hoogste grondwaterstand) <code class="docutils literal notranslate"><span class="pre">mhw</span></code><a class="headerlink" href="#ghg-gemiddeld-hoogste-grondwaterstand-mhw" title="Permalink to this headline"></a></h4>
+<p>GHG - gemiddeld hoogste grondwaterstand: het gemiddelde van de drie hoogste grondwaterstanden (GH3) per (hydrologisch) jaar over tenminste 5 jaar bij kleine variatie tussen GH3 en LG3 en over 8 jaar bij grote variatie tussen GH3 en LG3.
+Het is een maat voor het hoogste grondwaterniveau in een normale winter.</p>
+</section>
+<section id="glg-gemiddeld-laagste-grondwaterstand-mlw">
+<span id="mlw"></span><h4>GLG (gemiddeld laagste grondwaterstand) <code class="docutils literal notranslate"><span class="pre">mlw</span></code><a class="headerlink" href="#glg-gemiddeld-laagste-grondwaterstand-mlw" title="Permalink to this headline"></a></h4>
+<p>GLG - gemiddeld laagste grondwaterstand: het gemiddelde van de drie laagste grondwaterstanden (GL3) per (hydrologisch) jaar over tenminste 5 jaar bij kleine variatie tussen GH3 en LG3 en over 8 jaar bij grote variatie tussen GH3 en LG3.
+Het is een maat voor het laagste niveau in een gemiddelde zomer.</p>
+</section>
+<section id="gvg-gemiddeld-voorjaarsgrondwaterstand-msw">
+<span id="msw"></span><h4>GVG (gemiddeld voorjaarsgrondwaterstand) <code class="docutils literal notranslate"><span class="pre">msw</span></code><a class="headerlink" href="#gvg-gemiddeld-voorjaarsgrondwaterstand-msw" title="Permalink to this headline"></a></h4>
+<p>GVG - gemiddelde voorjaarsgrondwaterstand: de gemiddelde grondwaterstand aan het begin van het groeiseizoen (= gemiddelde van de drie metingen die het dichtst bij 1 april liggen (GV3); kunnen metingen zijn van twee opeenvolgende hydrologische jaren aangezien hydrologisch jaar start op 1 april).
+Indien niet gekend kan de GVG afgeleid worden uit de formule: GVG = 5,4 + 0,83*GHG + 0,19*GLG (in cm).</p>
+</section>
+</section>
+<section id="id3">
+<h3>Datatype<a class="headerlink" href="#id3" title="Permalink to this headline"></a></h3>
+<p>Continu, integer</p>
+</section>
+<section id="id4">
+<h3>Mogelijke waarden<a class="headerlink" href="#id4" title="Permalink to this headline"></a></h3>
+<p>Voor NICHE Vlaanderen moeten de waarden van de gemiddelde grondwaterstanden uitgedrukt worden in centimeter ten opzichte van het maaiveld. Een tweede aandachtspunt is het teken van de waarden: GXG-waarden boven het maaiveld zijn negatief, waterstanden onder maaiveld positief.</p>
+</section>
+<section id="id5">
+<h3>Eenheid<a class="headerlink" href="#id5" title="Permalink to this headline"></a></h3>
+<p>cm; negatief boven maaiveld, positief onder maaiveld</p>
+</section>
+<section id="id6">
+<h3>Rol in model<a class="headerlink" href="#id6" title="Permalink to this headline"></a></h3>
+<p>De gemiddelde grondwaterstanden spelen een rol:</p>
+<ul class="simple">
+<li><p>bij de berekening van zowel de <a class="reference internal" href="trofie.html"><span class="doc">trofie-</span></a> (via GVG) als de <a class="reference internal" href="zuur.html"><span class="doc">zuurgraad</span></a> (via GLG), inclusief aflijnen van beslisregels</p></li>
+<li><p>bij het rechtstreeks aftoetsen aan de grenswaarden van GLG en GHG van elk vegetatietype in de <a class="reference external" href="https://github.com/INBO/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_vegetation.csv">referentietabel van NICHE Vlaanderen</a>.</p></li>
+</ul>
+</section>
+<section id="id8">
+<h3>Brongegevens<a class="headerlink" href="#id8" title="Permalink to this headline"></a></h3>
+<p>Elk invoerraster moet gebiedsdekkend informatie aanleveren. Grondwaterpeilen worden op het terrein opgemeten op welbepaalde meetpunten. De meetpunten zullen echter nooit de vereiste ruimtelijke resolutie hebben om zonder meer een invoerraster mee op te stellen. Ook de temporele resolutie kan ontoereikend zijn om GXG’s af te leiden, rechtstreeks uit de metingen. Dit wordt ondervangen door te werken met gemodelleerde grondwaterpeilen. Een grondwatermodel laat toe om peilen (in feite hydrostratische drukken) af te leiden met de gewenste ruimtelijke en temporele resolutie. De gesimuleerde peilen ter hoogte van elke rastercel worden dan gebruikt om GXG’s te berekenen volgens bovenstaande definities. Werkelijk gemeten peilen op het terrein blijven evenwel noodzakelijk om het grondwatermodel op zich te kalibreren met als doel de modelmatig gesimuleerde peilen zo goed mogelijk te laten aansluiten op de effectief gemeten waarden. Richtlijnen voor het opstellen van een grondwatermodel in functie van de onderzoeksvraag of verwachte impact van een ingreep in de waterhuishouding zijn o.a. terug te vinden als bijlage bij de praktische wegwijzer voor het opstellen van een passende beoordeling van ingrepen die een verdroging of vernatting van de standplaats kunnen veroorzaken (<a class="reference external" href="https://pureportal.inbo.be/portal/nl/publications/leidraad-grondwatermodellering-voor-passende-beoordeling(5a1c0838-c361-466f-8e38-10b5e7437b38).html">Van Daele &amp; De Bie, 2015</a>). Een belangrijk voordeel van het gebruik van een grondwatermodel is de mogelijkheid om naast een gebiedsdekkende weergave van de actuele toestand ook de impact van geplande ingrepen in de waterhuishouding door te rekenen in termen van verwachte GXG’s. Op die manier kan NICHE Vlaanderen gebruikt worden om voorspellingen van het voorkomen van vegetatietyepn te doen onder verschillende scenario’s met elk hun set van geplande ingrepen.</p>
+<p>De beschikbaarheid van grondwaterpeilmetingen voor de Vlaamse natuurgebieden is na te gaan in de online <a class="reference external" href="http://data.inbo.be/watina/Pages/Common/Default.aspx">WATINA+ databank</a>. Zowel grondwaterpeilen als fysico-chemische metingen van het grondwater zijn hier te consulteren. Let wel: peilen in de WATINA+ databank zijn positief boven maaiveld en negatief onder maaiveld. Net het tegenovergestelde als NICHE Vlaanderen vereist.</p>
+</section>
+<section id="id9">
+<h3>Opmerkingen<a class="headerlink" href="#id9" title="Permalink to this headline"></a></h3>
+</section>
+</section>
+<section id="kwel-seepage">
+<span id="seepage"></span><h2>Kwel <code class="docutils literal notranslate"><span class="pre">seepage</span></code><a class="headerlink" href="#kwel-seepage" title="Permalink to this headline"></a></h2>
+<section id="id10">
+<h3>Omschrijving<a class="headerlink" href="#id10" title="Permalink to this headline"></a></h3>
+<p>De kwelkaart is een kaart die aangeeft welke kwelflux in iedere cel van toepassing is.
+Hoewel deze kaart in principe bestaat uit continue waarden, maakt NICHE Vlaanderen gebruik van de volgende omslagpunten in de beslisregels van het model:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>kwel &lt; -1 mm/dag: veel kwel</p></li>
+<li><p>kwel -1 - -0.1 mm/dag: weinig kwel</p></li>
+<li><p>kwel &gt; -0.1 mm/dag: geen kwel</p></li>
+</ul>
+</div></blockquote>
+<p>Negatieve waarden worden gebruikt voor plaatsen waar grondwater uittreedt, positieve waarden
+duiden op infiltratie.</p>
+</section>
+<section id="id11">
+<h3>Datatype<a class="headerlink" href="#id11" title="Permalink to this headline"></a></h3>
+<p>continu, integer</p>
+</section>
+<section id="id12">
+<h3>Mogelijke waarden<a class="headerlink" href="#id12" title="Permalink to this headline"></a></h3>
+<p>Negatieve waarden worden gebruikt voor plaatsen waar grondwater uittreedt, positieve waarden
+duiden op infiltratie.</p>
+</section>
+<section id="id13">
+<h3>Eenheid<a class="headerlink" href="#id13" title="Permalink to this headline"></a></h3>
+<p>mm/dag; negatief waar grondwater uittreedt, postief waar grondwater infiltreert</p>
+</section>
+<section id="id14">
+<h3>Rol in model<a class="headerlink" href="#id14" title="Permalink to this headline"></a></h3>
+<p>In NICHE Vlaanderen wordt de kwelflux samen met de <a class="reference internal" href="#minerality"><span class="std std-ref">mineraalrijkdom</span></a> van het grondwater, de aanwezigheid van een <a class="reference internal" href="#rainwater"><span class="std std-ref">regenwaterlens</span></a>, het optreden van <a class="reference internal" href="#inundation-acidity"><span class="std std-ref">overstromingen</span></a> en de interactie tussen bodem en grondwaterstand gebruikt om de zuur-basen toestand (zie <a class="reference internal" href="zuur.html#acidity"><span class="std std-ref">Berekening zuurgraad acidity</span></a>) van de bestudeerde locaties in te schatten. Meer specifiek worden bovengenoemde klassen van kwelintensiteit gebruikt in de beslisregel voor de bepaling van de zuurgraad. Kwel is niet belangrijk als fysische parameter op zich. De relevante vraag voor het model is of er tijdens een belangrijk deel van het jaar mineraalrijke kwel uittreedt in de wortelzone. Het type kwel dat van belang is voor NICHE Vlaanderen is een opwaartse, oppervlakkige grondwaterstroming naar de wortelzone.</p>
+</section>
+<section id="id15">
+<h3>Brongegevens<a class="headerlink" href="#id15" title="Permalink to this headline"></a></h3>
+<p>De kwelflux wordt op basis van de resultaten van een tijdsafhankelijk grondwatermodel bepaald. Idealiter wordt de gemiddelde kwel (in mm/dag) per cel en gemodelleerde periode berekend. De manier waarop dit gebeurt kan door de grondwatermodelleerder zelf worden gekozen afhankelijk van de opbouw van het model.</p>
+<p>Bijvoorbeeld:</p>
+<ul class="simple">
+<li><p>DRAIN module in MODFLOW gebruiken, met conditie opgelegd over de ganse gemodelleerde zone, om te bepalen hoeveel kwel al dan niet aanwezig is in een rastercel;</p></li>
+<li><p>kwel afleiden uit verschillen in stijghoogtes tussen 2 oppervlakkige lagen in het grondwatermodel: in zones met een ondiepe grondwaterstand (bv. ondieper dan 25 cm) én een opwaartse druk wordt de aanwezigheid van kwel verondersteld.</p></li>
+</ul>
+<p>De gemiddelde kwelflux per cel en per gemodelleerde periode dient als basis voor de berekening van de invoerlagen voor NICHE Vlaanderen. Hiervoor wordt er gekeken in welke zones er gedurende respectievelijk minstens 8, 10 en 12 maanden per (hydrologisch) jaar een opwaarste kweldruk groter dan respectievelijk 0,1 en 1 mm/dag voorkomt, gemiddeld bekeken over de modelperiode. Met andere woorden: is er in cel x gemiddeld meer dan y maanden per jaar minstens z mm/d kwel?</p>
+<p>Dit resulteert in 6 binaire invoerlagen die elk op hun verklarende waarde afgetoetst kunnen worden via expertoordeel of na kalibratie van een NICHE Vlaanderen modelrun met de betreffende kwelkaart als input:</p>
+<p>Kwel</p>
+<ul class="simple">
+<li><p>zones met kwelflux minstens 8 maanden/j &lt; -0,1 mm/dag, gemiddeld over de gemodelleerde periode</p></li>
+<li><p>zones met kwelflux minstens 10 maanden/j &lt; -0,1  mm/dag, gemiddeld over de gemodelleerde periode</p></li>
+<li><p>zones met kwelflux minstens 12 maanden/j &lt; -0,1  mm/dag, gemiddeld over de gemodelleerde periode</p></li>
+</ul>
+<p>Veel kwel (is dus een onderdeel van de overeenkomende lagen voor “kwel”)</p>
+<ul class="simple">
+<li><p>zones met kwelflux minstens 8 maanden/j &lt; -1 mm/dag, gemiddeld over de gemodelleerde periode</p></li>
+<li><p>zones met kwelflux minstens 10 maanden/j &lt; -1 mm/dag, gemiddeld over de gemodelleerde periode</p></li>
+<li><p>zones met kwelflux minstens 12 maanden/j &lt; -1 mm/dag, gemiddeld over de gemodelleerde periode</p></li>
+</ul>
+<p>Afhankelijk van de opbouw van het grondwatermodel kunnen alternatieve berekeningswijzen voorgesteld worden.</p>
+<p>Een belangrijk voordeel van het gebruik van een grondwatermodel is de mogelijkheid om naast een gebiedsdekkende weergave van de <em>actuele</em> kwelflux ook de impact van geplande ingrepen in de waterhuishouding door te rekenen in termen van <em>verwachte</em> kweldruk. Op die manier kan NICHE Vlaanderen gebruikt worden om voorspellingen van het voorkomen van vegetatietypen te doen onder verschillende scenario’s met elk hun set van geplande ingrepen.</p>
+</section>
+<section id="id16">
+<h3>Opmerkingen<a class="headerlink" href="#id16" title="Permalink to this headline"></a></h3>
+</section>
+</section>
+<section id="overstroming-trofie-inundation-nutrient">
+<span id="inundation-nutrient"></span><h2>Overstroming_trofie <code class="docutils literal notranslate"><span class="pre">inundation_nutrient</span></code><a class="headerlink" href="#overstroming-trofie-inundation-nutrient" title="Permalink to this headline"></a></h2>
+<section id="id17">
+<h3>Omschrijving<a class="headerlink" href="#id17" title="Permalink to this headline"></a></h3>
+<p>Overstromingen met voedselrijk water die met een zekere regelmaat terugkeren, hebben invloed op de trofie van de standplaats die relevant is voor de vegetatie. Meestal gaat het hier over overstromingen die frequent optreden, bijvoorbeeld jaarlijks of maximaal 2-jaarlijks. Indien het overstromingswater betreft met weinig nutriënten, of wanneer er geen overstromingen plaatsvinden, dan heeft de kaart overal een waarde 0.</p>
+</section>
+<section id="id18">
+<h3>Datatype<a class="headerlink" href="#id18" title="Permalink to this headline"></a></h3>
+<p>Nominaal</p>
+</section>
+<section id="id19">
+<h3>Mogelijke waarden<a class="headerlink" href="#id19" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p>0: geen frequente overstroming met voedselrijk water;</p></li>
+<li><p>1: frequente (jaarlijkse of 2-jaarlijkse) overstroming met voedselrijk water</p></li>
+</ul>
+</section>
+<section id="id20">
+<h3>Eenheid<a class="headerlink" href="#id20" title="Permalink to this headline"></a></h3>
+<p>geen</p>
+</section>
+<section id="id21">
+<h3>Rol in model<a class="headerlink" href="#id21" title="Permalink to this headline"></a></h3>
+<p>Dit binaire invoerraster geeft aan of de berekende <a class="reference internal" href="trofie.html"><span class="doc">trofiegraad</span></a> (indien lager dan eutroof) op basis van de overige variabelen (mineralisatie bodem, stikstofinput uit depositie en bemesting, beheer en bodemtype) nog met een klasse verhoogd moet worden of niet (tot maximum de klasse eutroof). De trofiegraad bepaalt samen met de zuurgraad, het bodemtype en de grondwaterstanden de potenties voor elk van de vegetatietypen.</p>
+</section>
+<section id="id22">
+<h3>Brongegevens<a class="headerlink" href="#id22" title="Permalink to this headline"></a></h3>
+<p>Men kan bestaande overstromingskaarten gebruiken, eventuele eigen karteringen, of de resultaten van een oppervlaktewatermodel. Bemerk dat het hier moet gaan om zeer frequente (i.e. jaarlijks of minstens 2-jaarlijks) overstromingen met bovendien voedselrijk water. Zoniet wordt er in NICHE Vlaanderen geen impact gekoppeld van overstromingen op de trofiegraad. In oppervlaktewatermodellen is er aan dergelijke korte retourperioden vaak een hoge mate van onzekerheid verbonden.</p>
+<p>Los van de invloed op de trofiegraad laat het NICHE Vlaanderen model ook toe om de potenties van vegetatietypen af te toetsen aan een inschatting van de overtromingstolerantie op zich (zie <a class="reference internal" href="#inundation-vegetation"><span class="std std-ref">Overstroming Vegetatie inundation_vegetation</span></a>). Dat is optioneel en houdt een sterke vereenvoudiging van de werkelijke impact van overstromingen in. In de meer uitgebreide <a class="reference internal" href="overstroming.html"><span class="doc">overstromingsmodule</span></a> is het mogelijk om de voorspelde potenties volgens NICHE Vlaanderen bijkomend te confronteren met meer gedetailleerde gebiedsinformatie over overstromingen (frequentie, duur, tijdstip, diepte).</p>
+</section>
+<section id="id23">
+<h3>Opmerkingen<a class="headerlink" href="#id23" title="Permalink to this headline"></a></h3>
+<p>Voor veel valleigebieden in Vlaanderen bestaan er gevalideerde overstromingsgevaarkaarten met een retourperiode van 10 jaar. Deze zijn raadpleegbaar via www.waterinfo.be of in te laden vanuit <a class="reference external" href="http://inspirepub.waterinfo.be/arcgis/rest/services/gevaarkaarten/MapServer/">deze ArcGis Map Server</a> (“Grote kans” = retourperiode 10 jaar). Hoewel deze retourperiode lager ligt dan de hier beoogde frequentie van 1 of 2 jaar, kan deze kaart toch een belangrijke vertreksbasis vormen voor het aanduiden van de effectief en zeer frequent overstroomde delen van het studiegebied.</p>
+<p>Deze informatie dient vervolgens nog gecombineerd te worden met het al of niet voedselrijk zijn van het overstromingswater. Hiervoor kunnen eigen metingen of publiek beschikbare informatie uit het <a class="reference external" href="http://geoloket.vmm.be/Geoviews/">(oppervlakte)waterkwaliteitsmeetnet van VMM</a> gebruikt worden.</p>
+</section>
+</section>
+<section id="overstroming-zuurgraad-inundation-acidity">
+<span id="inundation-acidity"></span><h2>Overstroming_zuurgraad <code class="docutils literal notranslate"><span class="pre">inundation_acidity</span></code><a class="headerlink" href="#overstroming-zuurgraad-inundation-acidity" title="Permalink to this headline"></a></h2>
+<section id="id24">
+<h3>Omschrijving<a class="headerlink" href="#id24" title="Permalink to this headline"></a></h3>
+<p>Naast een invloed op de trofiegraad hebben overstromingen ook een potentiële invloed op de zuurgraad van de standplaats, die dan weer doorwerkt naar de potenties voor de verschillende vegetatietypen. Analoog worden ook hier enkel overstromingen die frequent optreden in rekening gebracht, bijvoorbeeld jaarlijks of maximaal 2-jaarlijks. Indien het overstromingswater betreft met mineraalarm/zuur water (bv. in veengebieden), of wanneer er geen frequente overstromingen plaatsvinden, krijgt het invoerraster overal een waarde 0.</p>
+</section>
+<section id="id25">
+<h3>Datatype<a class="headerlink" href="#id25" title="Permalink to this headline"></a></h3>
+<p>Nominaal</p>
+</section>
+<section id="id26">
+<h3>Mogelijke waarden<a class="headerlink" href="#id26" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p>0: geen frequente overstroming met basenrijk/mineraalrijk water;</p></li>
+<li><p>1: frequente (jaarlijkse of 2-jaarlijkse) overstroming met basenrijk/mineraalrijk water</p></li>
+</ul>
+</section>
+<section id="id27">
+<h3>Eenheid<a class="headerlink" href="#id27" title="Permalink to this headline"></a></h3>
+<p>geen</p>
+</section>
+<section id="id28">
+<h3>Rol in model<a class="headerlink" href="#id28" title="Permalink to this headline"></a></h3>
+<p>Dit binaire invoerraster stuurt mee de <a class="reference internal" href="zuur.html"><span class="doc">berekening van de zuurgraad</span></a> aan, die dan weer samen met de trofiegraad, het bodemtype en de grondwaterstanden aangeeft waar de potenties liggen voor de verschillende vegetatietypen.</p>
+</section>
+<section id="id29">
+<h3>Brongegevens<a class="headerlink" href="#id29" title="Permalink to this headline"></a></h3>
+<p>Men kan bestaande overstromingskaarten gebruiken, eventuele eigen karteringen, of de resultaten van een oppervlaktewatermodel. Bemerk dat het hier moet gaan om zeer frequente (i.e. jaarlijks of minstens 2-jaarlijks) overstromingen met bovendien mineraalrijk water. Zoniet wordt er in NICHE Vlaanderen geen impact gekoppeld van overstromingen op de zuurgraad. In oppervlaktewatermodellen is er aan dergelijke korte retourperioden vaak een hoge mate van onzekerheid verbonden.</p>
+<p>Los van de invloed op de zuurgraad laat het NICHE Vlaanderen model ook toe om de potenties van vegetatietypen af te toetsen aan een inschatting van de overtromingstolerantie op zich (zie <a class="reference internal" href="#inundation-vegetation"><span class="std std-ref">Overstroming Vegetatie inundation_vegetation</span></a>). Dat is optioneel en houdt een sterke vereenvoudiging van de werkelijke impact van overstromingen in. In de meer uitgebreide <a class="reference internal" href="overstroming.html"><span class="doc">overstromingsmodule</span></a> is het mogelijk om de voorspelde potenties volgens NICHE Vlaanderen bijkomend te confronteren met meer gedetailleerde gebiedsinformatie over overstromingen (frequentie, duur, tijdstip, diepte).</p>
+</section>
+<section id="id30">
+<h3>Opmerkingen<a class="headerlink" href="#id30" title="Permalink to this headline"></a></h3>
+<p>Voor veel valleigebieden in Vlaanderen bestaan er gevalideerde overstromingsgevaarkaarten met een retourperiode van 10 jaar. Deze zijn raadpleegbaar via www.waterinfo.be of in te laden vanuit <a class="reference external" href="http://inspirepub.waterinfo.be/arcgis/rest/services/gevaarkaarten/MapServer/">deze ArcGis Map Server</a> (“Grote kans” = retourperiode 10 jaar). Hoewel deze retourperiode lager ligt dan de hier beoogde frequentie van 1 of 2 jaar, kan deze kaart toch een belangrijke vertreksbasis vormen voor het aanduiden van de effectief en zeer frequent overstroomde delen van het studiegebied.</p>
+<p>Deze informatie dient vervolgens nog gecombineerd te worden met de zuurtegraad/mineraalrijkdom van het overstromingswater. Hiervoor kunnen eigen metingen of publiek beschikbare informatie uit het <a class="reference external" href="http://geoloket.vmm.be/Geoviews/">(oppervlakte)waterkwaliteitsmeetnet van VMM</a> gebruikt worden.</p>
+</section>
+</section>
+<section id="atmosferische-depositie-nitrogen-atmospheric">
+<span id="nitrogen-atmospheric"></span><h2>Atmosferische depositie <code class="docutils literal notranslate"><span class="pre">nitrogen_atmospheric</span></code><a class="headerlink" href="#atmosferische-depositie-nitrogen-atmospheric" title="Permalink to this headline"></a></h2>
+<section id="id33">
+<h3>Omschrijving<a class="headerlink" href="#id33" title="Permalink to this headline"></a></h3>
+<p>Het invoerraster met de atmosferische depositie beoogt zo goed mogelijk de eigenlijke neerslag van (zowel droge als natte) stikstof vanuit de lucht weer te geven in het studiegebied . Stikstof is een belangrijke bron van eutrofiëring en bepaalt dus in sterke mate de trofiegraad waaraan NICHE Vlaanderen de potenties van de verschillende vegetatietypen aftoetst.</p>
+</section>
+<section id="id34">
+<h3>Datatype<a class="headerlink" href="#id34" title="Permalink to this headline"></a></h3>
+<p>Continue, integer</p>
+</section>
+<section id="id35">
+<h3>Mogelijke waarden<a class="headerlink" href="#id35" title="Permalink to this headline"></a></h3>
+<p>positief</p>
+</section>
+<section id="id36">
+<h3>Eenheid<a class="headerlink" href="#id36" title="Permalink to this headline"></a></h3>
+<p>kg N/ha/jaar</p>
+</section>
+<section id="id37">
+<h3>Rol in model<a class="headerlink" href="#id37" title="Permalink to this headline"></a></h3>
+<p>De invoerlaag met de inschatting van de atmosferische depositie is onderdeel van de berekening van de <a class="reference internal" href="trofie.html#nutrient-level"><span class="std std-ref">trofiegraad</span></a>), net als de stikstofmineralisatie van de bodem, de bemesting, het beheer en de regelmatige overstroming met voedselrijk oppervlaktewater.</p>
+</section>
+<section id="id38">
+<h3>Brongegevens<a class="headerlink" href="#id38" title="Permalink to this headline"></a></h3>
+<p>Momenteel ontsluit de Vlaamse Milieumaatschappij (VMM) de gemodelleerde <a class="reference external" href="https://metadata.geopunt.be/zoekdienst/srv/dut/csw?service=CSW&amp;version=2.0.2&amp;request=GetRecordById&amp;outputFormat=application%2Fxml&amp;outputSchema=http%3A%2F%2Fwww.opengis.net%2Fcat%2Fcsw%2F2.0.2&amp;elementsetname=full&amp;id=dddd12f8-66f5-46bc-9ae5-40954e23b06b">totale vermestende stikstofdepositie</a> als een Vlaanderen dekkende rasterkaart met een resolutie van 1 km<sup>2</sup> (WCS mogelijk). Hierbij wordt rekening gehouden met verschillen in depositiesnelheden tussen de overheersende landgebruiksvormen.</p>
+<p>De resolutie van 1 km<sup>2</sup> is uiteraard grof, wetende dat de aanbevolen resolutie van een invoerraster 25x25 m bedraagt. Desgewenst kan er op fijnere schaal nog rekening gehouden worden met het werkelijke landgebruik op basis van de BWK-Habitatkaart of een (toekomstige) beheerkaart. Hiervoor is evenwel kennis nodig over de interactie tussen concentraties in de lucht en het landgebruik (ruwheidslengtes, depositiesnelheden, etc.).</p>
+</section>
+<section id="id39">
+<h3>Opmerkingen<a class="headerlink" href="#id39" title="Permalink to this headline"></a></h3>
+</section>
+</section>
+<section id="dierlijke-bemesting-nitrogen-animal">
+<span id="nitrogen-animal"></span><h2>Dierlijke bemesting <code class="docutils literal notranslate"><span class="pre">nitrogen_animal</span></code><a class="headerlink" href="#dierlijke-bemesting-nitrogen-animal" title="Permalink to this headline"></a></h2>
+<section id="id40">
+<h3>Omschrijving<a class="headerlink" href="#id40" title="Permalink to this headline"></a></h3>
+<p>De gift in de vorm van dierlijke organische mest kan een belangrijke bron van stikstof zijn in de bodem. Het bepaalt mede de trofiegraad van de standplaats. Dit invoerraster heeft als waarde voor elke rastercel de hoeveelheid organische stikstof toegevoegd onder de vorm van dierlijke mest.</p>
+</section>
+<section id="id41">
+<h3>Datatype<a class="headerlink" href="#id41" title="Permalink to this headline"></a></h3>
+<p>Continue, integer</p>
+</section>
+<section id="id42">
+<h3>Mogelijke waarden<a class="headerlink" href="#id42" title="Permalink to this headline"></a></h3>
+<p>positief</p>
+</section>
+<section id="id43">
+<h3>Eenheid<a class="headerlink" href="#id43" title="Permalink to this headline"></a></h3>
+<p>kg N/ha/jaar</p>
+</section>
+<section id="id44">
+<h3>Rol in model<a class="headerlink" href="#id44" title="Permalink to this headline"></a></h3>
+<p>De gift aan dierlijke mest bepaalt mede de <a class="reference internal" href="trofie.html#nutrient-level"><span class="std std-ref">trofiegraad</span></a> waaraan de potentiële aanwezigheid van de verschillende vegetatietypen wordt afgetoest.</p>
+</section>
+<section id="id45">
+<h3>Brongegevens<a class="headerlink" href="#id45" title="Permalink to this headline"></a></h3>
+<p>Indien reële mestgiften gekend zijn op perceelsniveau kunnen ze omgerekend worden naar de hoeveelheid stikstof per ha en per jaar. Bij afwezigheid van deze informatie kunnen schattingen gemaakt worden op basis van een landgebruikskaart waarvoor aan elk landgebruik standaard een bepaalde hoeveelheid stikstof wordt toegekend (zie onderstaande tabel). Zo werd voor NICHE Vlaanderen een <a class="reference download internal" download="" href="_downloads/e8454e869e7e0b4c2130288a432ee07f/tblBWK_BeheerBemesting.csv"><code class="xref download docutils literal notranslate"><span class="pre">omzettingstabel</span></code></a> gemaakt met voor elke gedetailleerde landgebruikscode uit de Biologische Waarderingskaart (BWK) een vereenvoudigde landgebruiksklasse met een overeenkomstige bemestingsklasse. Die vereenvoudigde landgebruiksklassen kunnen ook gebruikt worden bij het schatten van de stikstofgift afkomstig uit kunstmest.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 27%" />
+<col style="width: 58%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Landgebruiksklasse</p></th>
+<th class="head"><p>Bemesting</p></th>
+<th class="head"><p>Omschrijving</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="2"><p>0 Natuurgebieden</p></td>
+<td rowspan="2"><p>0 kg N/ha/jaar</p>
+<p>geen enkele vorm van bemesting</p>
+</td>
+<td><p>rietruigten, naaldbossen, loofbossen (broekbossen, populierenaanplanten,…)
+extensief begraasde gronden</p></td>
+</tr>
+<tr class="row-odd"><td><p>natuurlijke graslanden, niet bemeste hooilanden</p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>1 Extensief landgebruik</p></td>
+<td rowspan="2"><p>75 kg N/ha/jaar
+Extensieve bemestingsdruk (veelal dierlijk)</p></td>
+<td><p>intensief begraasde gronden</p></td>
+</tr>
+<tr class="row-odd"><td><p>weinig bemeste hooilanden</p></td>
+</tr>
+<tr class="row-even"><td><p>2 Intensief landgebruik</p></td>
+<td><p>350 kg N/ha/jaar (dierlijke mest)
++ 250 kg N/ha/jaar (kunstmest)</p></td>
+<td><p>het maaibeheer heeft door de hoge nutriënten-input geen invloed op de trofieberekening meer</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id46">
+<h3>Opmerkingen<a class="headerlink" href="#id46" title="Permalink to this headline"></a></h3>
+</section>
+</section>
+<section id="kunstmest-nitrogen-fertilizer">
+<span id="nitrogen-fertilizer"></span><h2>Kunstmest <code class="docutils literal notranslate"><span class="pre">nitrogen_fertilizer</span></code><a class="headerlink" href="#kunstmest-nitrogen-fertilizer" title="Permalink to this headline"></a></h2>
+<section id="id47">
+<h3>Omschrijving<a class="headerlink" href="#id47" title="Permalink to this headline"></a></h3>
+<p>De gift in de vorm van kunstmest kan een belangrijke bron van stikstof zijn in de bodem. Het bepaalt mede de trofiegraad van de standplaats. Dit invoerraster heeft als waarde voor elke rastercel de hoeveelheid anorganische stikstof toegevoegd onder de vorm van kunstmest.</p>
+</section>
+<section id="id48">
+<h3>Datatype<a class="headerlink" href="#id48" title="Permalink to this headline"></a></h3>
+<p>Continue, integer</p>
+</section>
+<section id="id49">
+<h3>Mogelijke waarden<a class="headerlink" href="#id49" title="Permalink to this headline"></a></h3>
+<p>positief</p>
+</section>
+<section id="id50">
+<h3>Eenheid<a class="headerlink" href="#id50" title="Permalink to this headline"></a></h3>
+<p>kg N/ha/jaar</p>
+</section>
+<section id="id51">
+<h3>Rol in model<a class="headerlink" href="#id51" title="Permalink to this headline"></a></h3>
+<p>De gift via kunstmest bepaalt mede de <a class="reference internal" href="trofie.html#nutrient-level"><span class="std std-ref">trofiegraad</span></a> waaraan de potentiële aanwezigheid van de verschillende vegetatietypen wordt afgetoest.</p>
+</section>
+<section id="id52">
+<h3>Brongegevens<a class="headerlink" href="#id52" title="Permalink to this headline"></a></h3>
+<p>Indien reële mestgiften gekend zijn op perceelsniveau kunnen ze omgerekend worden naar de hoeveelheid stikstof per ha en per jaar. Bij afwezigheid van deze informatie kunnen schattingen gemaakt worden op basis van een landgebruikskaart waarvoor aan elk landgebruik standaard een bepaalde hoeveelheid stikstof wordt toegekend (zie bovenstaande tabel). Zo werd voor NICHE Vlaanderen een <a class="reference download internal" download="" href="_downloads/e8454e869e7e0b4c2130288a432ee07f/tblBWK_BeheerBemesting.csv"><code class="xref download docutils literal notranslate"><span class="pre">omzettingstabel</span></code></a> gemaakt met voor elke gedetailleerde landgebruikscode uit de Biologische Waarderingskaart (BWK) een vereenvoudigde landgebruiksklasse met een overeenkomstige bemestingsklasse. Dezelfde vereenvoudigde landgebruiksklassen kunnen ook gebruikt worden bij het schatten van de stikstofgift afkomstig uit dierlijke mest.</p>
+</section>
+<section id="id53">
+<h3>Opmerkingen<a class="headerlink" href="#id53" title="Permalink to this headline"></a></h3>
+</section>
+</section>
+<section id="beheer-management">
+<span id="management"></span><h2>Beheer <code class="docutils literal notranslate"><span class="pre">management</span></code><a class="headerlink" href="#beheer-management" title="Permalink to this headline"></a></h2>
+<section id="id54">
+<h3>Omschrijving<a class="headerlink" href="#id54" title="Permalink to this headline"></a></h3>
+<p>Dit invoerraster beschrijft (de intensiteit van) het gevoerde of te voeren beheer voor elke rastercel in het studiegebied en werkt onrechtstreeks in op de potenties van de vegetatietypen via de bijdrage aan de berekening van de trofiegraad.</p>
+</section>
+<section id="id55">
+<h3>Datatype<a class="headerlink" href="#id55" title="Permalink to this headline"></a></h3>
+<p>Ordinaal/Nominaal</p>
+</section>
+<section id="id56">
+<h3>Mogelijke waarden<a class="headerlink" href="#id56" title="Permalink to this headline"></a></h3>
+<table class="docutils align-default" id="id95">
+<caption><span class="caption-text">Onderscheiden beheerklassen met hun code en korte beschrijving ( <a class="reference internal" href="codetables.html#ct-management"><span class="std std-ref">management</span></a>)</span><a class="headerlink" href="#id95" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>code</p></th>
+<th class="head"><p>management</p></th>
+<th class="head"><p>influence</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>geen</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>laagfrequent</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>begrazing</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>hoogfrequent</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id57">
+<h3>Eenheid<a class="headerlink" href="#id57" title="Permalink to this headline"></a></h3>
+<p>geen</p>
+</section>
+<section id="id58">
+<h3>Rol in model<a class="headerlink" href="#id58" title="Permalink to this headline"></a></h3>
+<p>In NICHE Vlaanderen heeft het gevoerde beheer een impact op twee niveaus.</p>
+<p>Enerzijds heeft het een effect op de <a class="reference internal" href="trofie.html"><span class="doc">trofiegraad</span></a>: als het beheer hoogfrequent is (maaien met afvoer van maaisel) verschuiven de grenzen tussen de trofieklassen en kan een bepaalde locatie meer stikstof tolereren vooraleer de biomassaproductie/trofiegraad toeneemt. Het (verplichte) invoerraster draagt dus <em>onrechtstreeks</em> bij tot de potentieberekeningen voor de verschillende vegetatietypen in het NICHE Vlaanderen model.</p>
+<p>Anderzijds kunnen de berekende potenties voor elk van de vegetatietypen finaal ook afgetoetst worden op basis van hun compatibiliteit met het gevoerde of te voeren beheer. In tegenstelling tot de onrechtstreekse bijdrage van het beheer via de trofiegraad, werkt het beheer dan <em>rechtstreeks</em> in op de potentievoorspellingen. Want hoewel de standplaats abiotisch perfect geschikt kan zijn voor een bepaald vegetatietype, is het immers mogelijk dat het nooit aanwezig kan zijn als het gevoerde of te voeren beheer het voortbestaan of de ontwikkeling ervan in de weg staat. Zo kunnen bostypen zich bijvoorbeeld niet ontwikkelen als er (jaarlijks) gemaaid wordt, of kunnen graslanden niet standhouden op plaatsen zonder een maaibeheer. De compatibiliteit van elk vegetatietype met de verschillende onderscheiden beheerklassen zit vervat in de <a class="reference external" href="https://github.com/INBO/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_vegetation.csv">referentietabel van NICHE Vlaanderen</a>. Merk op dat deze rechtstreekse aftoetsing van de berekende potenties aan het beheer een <em>optionele</em> stap is in NICHE Vlaanderen: de aftoetsing gebeurt enkel als het invoerraster <a class="reference internal" href="#management-vegetation"><span class="std std-ref">Beheer Vegetatie management_vegetation</span></a> (dat inhoudelijk identiek is aan het hier besproken invoerraster) expliciet wordt gespecifieerd. Wordt deze laatste niet gespecifieerd, dan worden de potenties berekend zonder de rechtstreekse impact van het actueel gevoerde of het toekomstig beheer, dus louter op basis van de abiotische eigenschappen van de standplaats.</p>
+</section>
+<section id="id60">
+<h3>Brongegevens<a class="headerlink" href="#id60" title="Permalink to this headline"></a></h3>
+<p>Idealiter is het beheer van elk perceel in het studiegebied gedocumenteerd en kan de beheerklasse eenvoudigweg bepaald worden op basis van deze informatie. Een studiegebied kan echter groot zijn en dus veel percelen tellen waarvan het beheer helemaal niet of slechts gedeeltelijk gedocumenteerd is. Voor elk perceel het beheer achterhalen kan dan arbeidsintensief zijn. Daarom kan men terugvallen op een generieke <a class="reference download internal" download="" href="_downloads/e8454e869e7e0b4c2130288a432ee07f/tblBWK_BeheerBemesting.csv"><code class="xref download docutils literal notranslate"><span class="pre">omzettingstabel</span></code></a> met voor elke code van de Biologische Waarderingskaart (BWK) de meest aannemelijke beheerklasse. Op die manier kan de gebiedsdekkende kartering van de BWK ten volle benut worden. Een manuele controle kan evenwel aangewezen zijn indien de informatie uit de BWK verouderd is. Houdt er ook rekening mee dat de uit de BWK afgeleide beheerkaart steeds het actuele beheer weergeeft. Indien met NICHE Vlaanderen een scenario doorgerekend wordt met een gewenst (toekomstige) beheer en dit beheer afwijkt van het huidige, dan moeten de beheerklassen overeenkomstig toegekend worden aan elke rastercel.</p>
+</section>
+<section id="id61">
+<h3>Opmerkingen<a class="headerlink" href="#id61" title="Permalink to this headline"></a></h3>
+<p>De grens waarmee onderscheid gemaakt wordt tussen hoog- en laagfrequent beheer is niet expliciet gedefinieerd. Belangrijk is om de rol van dit invoerraster in het achterhoofd te houden, met name het verlagen van de berekende trofiegraad als het beheer als hoogfrequent wordt beschouwd. Een verlaging van de trofie is enkel gerechtvaardigd als bij het beheer effectief nutriënten afgevoerd worden. Bij maaien, kappen of andere beheeringrepen impliceert dit het afvoeren van het beheerresidu (maaisel, hout, plaggen, etc). Hoogfrequent houdt bovendien een jaarlijks of tweejaarlijks beheer in. Ingrepen met een lagere frequentie worden veelal als laagfrequent aangeduid. Veel cyclisch beheer valt hieronder.</p>
+</section>
+</section>
+<section id="mineraalrijkdom-minerality">
+<span id="minerality"></span><h2>Mineraalrijkdom <code class="docutils literal notranslate"><span class="pre">minerality</span></code><a class="headerlink" href="#mineraalrijkdom-minerality" title="Permalink to this headline"></a></h2>
+<section id="id62">
+<h3>Omschrijving<a class="headerlink" href="#id62" title="Permalink to this headline"></a></h3>
+<p>Het bepalen of een standplaats mineraalrijk dan wel mineraalarm grondwater heeft, kan afgeleid worden uit verschillende variabelen zoals de HCO<sup>3-</sup> en Ca<sup>2+</sup> concentraties of de elektrische conductiviteit (EC-waarde, µS/cm) van het grondwater. De waarde bepaalt of er sprake is van mineralenrijk (basenrijk) dan wel mineralenarm (basenarm) grondwater. De mineraalrijkdom kan bepaald worden op basis van opgemeten conductiviteitswaarden (&gt;= 500µS/cm is mineraalrijk), maar ook op basis van expertkennis.</p>
+</section>
+<section id="id63">
+<h3>Datatype<a class="headerlink" href="#id63" title="Permalink to this headline"></a></h3>
+<p>Nominaal</p>
+</section>
+<section id="id64">
+<h3>Mogelijke waarden<a class="headerlink" href="#id64" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p>0: mineraalarm (EC &lt; 500 µS/cm of expertoordeel)</p></li>
+<li><p>1: mineraalrijk (EC &gt;= 500 µS/cm of expertoordeel)</p></li>
+</ul>
+</section>
+<section id="id65">
+<h3>Eenheid<a class="headerlink" href="#id65" title="Permalink to this headline"></a></h3>
+<p>geen</p>
+</section>
+<section id="id66">
+<h3>Rol in model<a class="headerlink" href="#id66" title="Permalink to this headline"></a></h3>
+<p>De mineraalrijkdom van het grondwater bepaalt mede de <a class="reference internal" href="zuur.html#acidity"><span class="std std-ref">zuurgraad</span></a> van de standplaats als kwalitatief criterium in de beslisregels.</p>
+</section>
+<section id="id67">
+<h3>Brongegevens<a class="headerlink" href="#id67" title="Permalink to this headline"></a></h3>
+<p>De <a class="reference external" href="http://data.inbo.be/watina/Pages/Common/Default.aspx">WATINA+ databank</a> is een zeer belangrijke bron van grondwatermetingen. Voor veel meetpunten zijn er een of meerdere fysico-chemische analysen uitgevoerd op grondwaterstalen. Op basis van de meetwaarden van een van bovengenoemde variabelen kan de mineraalrijkdom afgeleid worden. Ook eigen metingen kunnen gebruikt worden, en bij ontbrekende meetgegevens kan beroep gedaan worden op expertkennis. Belangrijk is dat niet de meetwaarde op zich, maar het al of niet overschrijden van de grenswaarde van 500 µS/cm (EC) doorslaggevend is. In eenzelfde gebied kan de EC van het grondwater variëren in de ruimte, maar behoren de waarden evenwel tot een van beide bovengenoemde klassen. Zeer lokaal afwijkende waarden kunnen ook te wijten zijn aan een lokale vervuiling van het grondwater (hogere EC) of stagnerend regenwater (lagere EC). Hiervan dient abstractie gemaakt bij het opstellen van het invoerraster (0/1).</p>
+</section>
+<section id="id69">
+<h3>Opmerkingen<a class="headerlink" href="#id69" title="Permalink to this headline"></a></h3>
+</section>
+</section>
+<section id="regenlens-rainwater">
+<span id="rainwater"></span><h2>Regenlens <code class="docutils literal notranslate"><span class="pre">rainwater</span></code><a class="headerlink" href="#regenlens-rainwater" title="Permalink to this headline"></a></h2>
+<section id="id70">
+<h3>Omschrijving<a class="headerlink" href="#id70" title="Permalink to this headline"></a></h3>
+<p>NICHE Vlaanderen heeft een optie om rekening te houden met de opbouw van regenwaterlenzen. Als regenwater onvoldoende kan worden afgevoerd door een drainagesysteem, stagneert het water, en geeft het de standplaats een zuur karakter. Plaatsen waar de opbouw van regenwaterlenzen mogelijk is worden dus zuur, zelfs als de grondwaterstanden ondiep zijn en kwel een basisch karakter heeft (zie <a class="reference internal" href="zuur.html#acidity"><span class="std std-ref">Berekening zuurgraad acidity</span></a>).</p>
+</section>
+<section id="id71">
+<h3>Datatype<a class="headerlink" href="#id71" title="Permalink to this headline"></a></h3>
+<p>Nominaal</p>
+</section>
+<section id="id72">
+<h3>Mogelijke waarden<a class="headerlink" href="#id72" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p>0: geen regenwaterlens</p></li>
+<li><p>1: regenwaterlens</p></li>
+</ul>
+</section>
+<section id="id73">
+<h3>Eenheid<a class="headerlink" href="#id73" title="Permalink to this headline"></a></h3>
+<p>geen</p>
+</section>
+<section id="id74">
+<h3>Rol in model<a class="headerlink" href="#id74" title="Permalink to this headline"></a></h3>
+<p>De aanwezigheid van regenlenzen speelt een rol in de beslisregels voor de <a class="reference internal" href="zuur.html"><span class="doc">zuurgraad</span></a> van de standplaats: plaatsen met stagnerend regenwater worden dus zuur, zelfs als de grondwaterstanden ondiep zijn en de kwel een basisch karakter heeft.</p>
+</section>
+<section id="id75">
+<h3>Brongegevens<a class="headerlink" href="#id75" title="Permalink to this headline"></a></h3>
+<p>De informatie zal meestal bekomen worden via expertkennis over het gebied aangezien metingen moeilijk zijn. Als de nodige informatie voorhanden is, kunnen de voorziene beslisregels worden toegepast. Bij gebrek aan informatie krijgen alle gridcellen een waarde 0.</p>
+</section>
+<section id="id76">
+<h3>Opmerkingen<a class="headerlink" href="#id76" title="Permalink to this headline"></a></h3>
+</section>
+</section>
+<section id="overstroming-vegetatie-inundation-vegetation">
+<span id="inundation-vegetation"></span><h2>Overstroming Vegetatie <code class="docutils literal notranslate"><span class="pre">inundation_vegetation</span></code><a class="headerlink" href="#overstroming-vegetatie-inundation-vegetation" title="Permalink to this headline"></a></h2>
+<section id="id77">
+<h3>Omschrijving<a class="headerlink" href="#id77" title="Permalink to this headline"></a></h3>
+<p>Deze <em>optionele</em> overstromingskaart wordt enkel gebruikt bij het aftoetsen van voorspelde potenties voor de vegetatietypes aan het overstromingsregime van de standplaats, op basis van de informatie in de <a class="reference external" href="https://github.com/INBO/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_vegetation.csv">referentietabel van NICHE Vlaanderen</a>. Er wordt per vegetatietype nagegaan welke voorspelde potenties nog standhouden bij het aangegeven overstromingsregime en welke niet.</p>
+</section>
+<section id="id79">
+<h3>Datatype<a class="headerlink" href="#id79" title="Permalink to this headline"></a></h3>
+<p>Ordinaal</p>
+</section>
+<section id="id80">
+<h3>Mogelijke waarden<a class="headerlink" href="#id80" title="Permalink to this headline"></a></h3>
+<p>Er worden 3 klassen onderscheiden, nl:</p>
+<table class="docutils align-default" id="id96">
+<caption><span class="caption-text">Overstromingsklassen</span><a class="headerlink" href="#id96" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>inundation</p></th>
+<th class="head"><p>description</p></th>
+<th class="head"><p>beschrijving</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>no flooding</p></td>
+<td><p>geen overstroming</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>regularly</p></td>
+<td><p>regelmatig</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>occasional</p></td>
+<td><p>incidenteel</p></td>
+</tr>
+</tbody>
+</table>
+<p>Deze overstromingskaart is een samenstelling van overstromingskaarten met verschillende retourperiodes (regelmatig = retourperiode 1 tot 2 jaar, incidenteel =  retourperiode van 5 jaar).</p>
+</section>
+<section id="id81">
+<h3>Eenheid<a class="headerlink" href="#id81" title="Permalink to this headline"></a></h3>
+<p>geen</p>
+</section>
+<section id="id82">
+<h3>Rol in model<a class="headerlink" href="#id82" title="Permalink to this headline"></a></h3>
+<p>Los van de <em>indirecte</em> invloed van overstromingen op de potentieberekening voor vegetatietypen via de berekening van zowel de zuur- als de trofiegraad laat het NICHE Vlaanderen model via dit invoerraster ook toe om de potenties van vegetatietypen <em>rechtstreeks</em> af te toetsen aan een inschatting van de overtromingstolerantie op zich (zie <a class="reference internal" href="#inundation-vegetation"><span class="std std-ref">Overstroming Vegetatie inundation_vegetation</span></a>).
+Deze aftoetsing is optioneel en houdt een sterke vereenvoudiging van de werkelijke impact van overstromingen in.
+In de meer uitgebreide <a class="reference internal" href="overstroming.html"><span class="doc">overstromingsmodule</span></a> is het mogelijk om de voorspelde potenties volgens NICHE Vlaanderen bijkomend te confronteren met meer gedetailleerde gebiedsinformatie over overstromingen (frequentie, duur, tijdstip, diepte).</p>
+</section>
+<section id="id83">
+<h3>Brongegevens<a class="headerlink" href="#id83" title="Permalink to this headline"></a></h3>
+<p>Men kan bestaande overstromingskaarten gebruiken, eventuele eigen karteringen, of de resultaten van een oppervlaktewatermodel. Bemerk dat het hier moet gaan om vrij frequente overstromingen (1-5 jaar). In oppervlaktewatermodellen is er aan dergelijke korte retourperioden vaak een hoge mate van onzekerheid verbonden.</p>
+</section>
+<section id="id84">
+<h3>Opmerkingen<a class="headerlink" href="#id84" title="Permalink to this headline"></a></h3>
+<p>Optioneel invoerraster. Potenties voor vegetatietypen kunnen ook voorspeld worden zonder rekening te houden met het huidige of geplande overstromingsregime.</p>
+<p>Voor veel valleigebieden in Vlaanderen bestaan er gevalideerde overstromingsgevaarkaarten met een retourperiode van 10 jaar. Deze zijn raadpleegbaar via www.waterinfo.be of in te laden vanuit <a class="reference external" href="http://inspirepub.waterinfo.be/arcgis/rest/services/gevaarkaarten/MapServer/">deze ArcGis Map Server</a> (“Grote kans” = retourperiode 10 jaar). Hoewel deze retourperiode lager ligt dan de hier beoogde frequentie van 1, 2 of 5 jaar, kan deze kaart toch een belangrijke vertreksbasis vormen voor het aanduiden van de effectief regelmatig/incidenteel overstroomde delen van het studiegebied.</p>
+</section>
+</section>
+<section id="beheer-vegetatie-management-vegetation">
+<span id="management-vegetation"></span><h2>Beheer Vegetatie <code class="docutils literal notranslate"><span class="pre">management_vegetation</span></code><a class="headerlink" href="#beheer-vegetatie-management-vegetation" title="Permalink to this headline"></a></h2>
+<section id="id86">
+<h3>Omschrijving<a class="headerlink" href="#id86" title="Permalink to this headline"></a></h3>
+<p>Dit <em>optionele</em> invoerraster beschrijft (de intensiteit van) het gevoerde (actueel) of te voeren (toekomstig scenario) beheer voor elke rastercel in het studiegebied en werkt rechtstreeks in op de voorspelde potenties van de vegetatietypen door de compatibiliteit tussen vegetatietypen en beheer in rekening te brengen. Hetzelfde invoerraster bepaalt ook de trofiegraad (verplichte invoer; zie <a class="reference internal" href="#management"><span class="std std-ref">Beheer management</span></a>).</p>
+</section>
+<section id="id87">
+<h3>Datatype<a class="headerlink" href="#id87" title="Permalink to this headline"></a></h3>
+<p>Ordinaal/Nominaal</p>
+</section>
+<section id="id88">
+<h3>Mogelijke waarden<a class="headerlink" href="#id88" title="Permalink to this headline"></a></h3>
+<table class="docutils align-default" id="id97">
+<caption><span class="caption-text">Onderscheiden beheerklassen met hun code en korte beschrijving ( <a class="reference internal" href="codetables.html#ct-management"><span class="std std-ref">management</span></a>)</span><a class="headerlink" href="#id97" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>code</p></th>
+<th class="head"><p>management</p></th>
+<th class="head"><p>influence</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>geen</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>laagfrequent</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>begrazing</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>hoogfrequent</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id89">
+<h3>Eenheid<a class="headerlink" href="#id89" title="Permalink to this headline"></a></h3>
+<p>geen</p>
+</section>
+<section id="id90">
+<h3>Rol in model<a class="headerlink" href="#id90" title="Permalink to this headline"></a></h3>
+<p>In NICHE Vlaanderen heeft het gevoerde beheer een impact op twee niveaus.</p>
+<p>Enerzijds heeft het een effect op de <a class="reference internal" href="trofie.html"><span class="doc">trofiegraad</span></a> (zie invoerraster <a class="reference internal" href="#management"><span class="std std-ref">Beheer management</span></a>) : als het beheer hoogfrequent is (maaien met afvoer van maaisel) verschuiven de grenzen tussen de trofieklassen en kan een bepaalde locatie meer stikstof tolereren vooraleer de biomassaproductie/trofiegraad toeneemt. Dit (verplichte) invoerraster draagt dus <em>onrechtstreeks</em> bij tot de potentieberekeningen voor de verschillende vegetatietypen in het NICHE Vlaanderen model.</p>
+<p>Anderzijds kunnen de berekende potenties voor elk van de vegetatietypen finaal ook afgetoetst worden op basis van hun compatibiliteit met het gevoerde of te voeren beheer. In tegenstelling tot de onrechtstreekse bijdrage van het beheer via de trofiegraad, werkt het beheer dan <em>rechtstreeks</em> in op de potentievoorspellingen. Want hoewel de standplaats abiotisch perfect geschikt kan zijn voor een bepaald vegetatietype, is het immers mogelijk dat het nooit aanwezig kan zijn als het gevoerde of te voeren beheer het voortbestaan of de ontwikkeling ervan in de weg staat. Zo kunnen bostypen zich bijvoorbeeld niet ontwikkelen als er (jaarlijks) gemaaid wordt, of kunnen graslanden niet standhouden op plaatsen zonder een maaibeheer. De compatibiliteit van elk vegetatietype met de verschillende onderscheiden beheerklassen zit vervat in de <a class="reference external" href="https://github.com/INBO/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_vegetation.csv">referentietabel van NICHE Vlaanderen</a>. Merk op dat deze rechtstreekse aftoetsing van de berekende potenties aan het beheer een <em>optionele stap</em> is in NICHE Vlaanderen: de aftoetsing gebeurt enkel als het hier besproken invoerraster (dat inhoudelijk identiek is aan het invoerraster <a class="reference internal" href="#management"><span class="std std-ref">Beheer management</span></a>) expliciet wordt gespecifieerd via <code class="docutils literal notranslate"><span class="pre">set_input(&quot;management_vegetation&quot;,</span> <span class="pre">&lt;pad</span> <span class="pre">naar</span> <span class="pre">invoerraster&gt;</span></code> voor een NICHE Vlaanderen object aangemaakt via <code class="docutils literal notranslate"><span class="pre">niche_vlaanderen.Niche()</span></code>. Wordt het niet gespecifieerd, dan worden de potenties berekend zonder de rechtstreekse impact van het actueel gevoerde of het toekomstig beheer, dus louter op basis van de abiotische eigenschappen van de standplaats.</p>
+</section>
+<section id="id92">
+<h3>Brongegevens<a class="headerlink" href="#id92" title="Permalink to this headline"></a></h3>
+<p>Idealiter is het beheer van elk perceel in het studiegebied gedocumenteerd en kan de beheerklasse eenvoudigweg bepaald worden op basis van deze informatie. Een studiegebied kan echter groot zijn en dus veel percelen tellen waarvan het beheer helemaal niet of slechts gedeeltelijk gedocumenteerd is. Voor elk perceel het beheer achterhalen kan dan arbeidsintensief zijn. Daarom kan men terugvallen op een generieke <a class="reference download internal" download="" href="_downloads/e8454e869e7e0b4c2130288a432ee07f/tblBWK_BeheerBemesting.csv"><code class="xref download docutils literal notranslate"><span class="pre">omzettingstabel</span></code></a> met voor elke code van de Biologische Waarderingskaart (BWK) de meest aannemelijke beheerklasse. Op die manier kan de gebiedsdekkende kartering van de BWK ten volle benut worden. Een manuele controle kan evenwel aangewezen zijn indien de informatie uit de BWK verouderd is. Houdt er ook rekening mee dat de uit de BWK afgeleide beheerkaart steeds het actuele beheer weergeeft. Indien met NICHE Vlaanderen een scenario doorgerekend wordt met een gewenst (toekomstige) beheer en dit beheer afwijkt van het huidige, dan moeten de beheerklassen overeenkomstig toegekend worden aan elke rastercel.</p>
+</section>
+<section id="id93">
+<h3>Opmerkingen<a class="headerlink" href="#id93" title="Permalink to this headline"></a></h3>
+<p>Optioneel invoerraster. Potenties voor vegetatietypen kunnen ook voorspeld worden zonder rekening te houden met het gevoerde of geplande beheer.</p>
+<p>De grens waarmee onderscheid gemaakt wordt tussen hoog- en laagfrequent beheer is niet expliciet gedefinieerd. Belangrijk is om de rol van dit invoerraster in het achterhoofd te houden, met name het verlagen van de berekende trofiegraad als het beheer als hoogfrequent wordt beschouwd. Een verlaging van de trofie is enkel gerechtvaardigd als bij het beheer effectief nutriënten afgevoerd worden. Bij maaien, kappen of andere beheeringrepen impliceert dit het afvoeren van het beheerresidu (maaisel, hout, plaggen, etc). Hoogfrequent houdt bovendien een jaarlijks of tweejaarlijks beheer in. Ingrepen met een lagere frequentie worden veelal als laagfrequent aangeduid. Veel cyclisch beheer valt hieronder.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="vegetatie.html" class="btn btn-neutral float-left" title="Bepaling vegetatie vegetation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="kalibratie.html" class="btn btn-neutral float-right" title="Kalibratie" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017 - 2022, Research Institute for Nature and Forest (INBO).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

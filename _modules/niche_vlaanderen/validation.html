@@ -1,0 +1,384 @@
++<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>niche_vlaanderen.validation &mdash; niche_vlaanderen 1.1 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+ +    <link href="../../_static/css/custom.css" rel="stylesheet" type="text/css">
+ +
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> niche_vlaanderen
+          </a>
+              <div class="version">
+                1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Model</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../notendop.html">In een notendop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../model.html">Beschrijving model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../invoer.html">Invoer rasters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../kalibratie.html">Kalibratie</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../overstroming.html">Overstromingsmodule</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Package</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../codetables.html">Code tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">Niche Configuration file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lowlevel.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authors.html">Credits</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">niche_vlaanderen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>niche_vlaanderen.validation</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for niche_vlaanderen.validation</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">pkg_resources</span> <span class="kn">import</span> <span class="n">resource_filename</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">UserWarning</span><span class="p">)</span>
+    <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">niche_vlaanderen.niche</span> <span class="kn">import</span> <span class="n">Niche</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">NicheValidationException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error using Niche Overlay&quot;</span>
+
+
+<div class="viewcode-block" id="NicheValidation"><a class="viewcode-back" href="../../lowlevel.html#niche_vlaanderen.NicheValidation">[docs]</a><span class="k">class</span> <span class="nc">NicheValidation</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Creates a new NicheValidation object</span>
+
+<span class="sd">    Overlays a vegetation map with niche in order to</span>
+<span class="sd">    obtain the accuracy of the model.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        niche: niche_vlaanderen.Niche</span>
+<span class="sd">            Niche object containing predicted variables types according to niche.</span>
+<span class="sd">            The model must have run prior to the overlay</span>
+<span class="sd">        map: Path</span>
+<span class="sd">            Path to a file containing the vegetation map in one of the formats supported</span>
+<span class="sd">            by fiona, eg shape.</span>
+<span class="sd">            must contain these attributes:</span>
+<span class="sd">            * HABx: vegetation type</span>
+<span class="sd">            * pHABx: proportion of the vegetation type</span>
+
+<span class="sd">            different vegetation types can be supplied, eg HAB1, HAB2, ...</span>
+<span class="sd">            for every HABx variable a proportion must be given.</span>
+
+<span class="sd">        mapping_file: Path | None</span>
+<span class="sd">            optional file containing the mapping between habitat (HAB) code on the vegetation map</span>
+<span class="sd">            and Niche vegetation types. The default mapping is a mapping of the</span>
+<span class="sd">            BWK map (biologische waarderingskaart), and is</span>
+<span class="sd">            part of the package at niche_vlaanderen/system_tables/hab_nich_join.csv</span>
+
+<span class="sd">            If a mapping is provided by the user, it must contain a HAB and a NICHE column.</span>
+<span class="sd">            Other columns are ignored.</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">niche</span><span class="p">,</span> <span class="nb">map</span><span class="p">,</span> <span class="n">mapping_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">upscale</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">niche</span><span class="p">)</span> <span class="ow">is</span> <span class="n">Niche</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">niche</span> <span class="o">=</span> <span class="n">niche</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;pass a valid Niche object - type of niche object is </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">niche</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">filename_map</span> <span class="o">=</span> <span class="nb">map</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">map</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="nb">map</span><span class="p">)</span>
+
+        <span class="c1"># the mapping columns contain are the field in the shapefile that contain a field starting with HAB</span>
+        <span class="c1"># (case insensitive)</span>
+        <span class="n">columns</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">columns</span>
+        <span class="n">vegetation_columns</span> <span class="o">=</span> <span class="n">columns</span><span class="p">[</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;HAB&#39;</span><span class="p">)]</span>
+        <span class="n">proportion_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;P&quot;</span> <span class="o">+</span> <span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">vegetation_columns</span><span class="p">]</span>
+        <span class="n">prop_index</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span> <span class="k">for</span> <span class="n">pi</span> <span class="ow">in</span>
+                      <span class="n">proportion_columns</span><span class="p">]</span>
+        <span class="n">proportion_columns</span> <span class="o">=</span> <span class="n">columns</span><span class="p">[</span><span class="n">prop_index</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">mapping_file</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">mapping_file</span> <span class="o">=</span> <span class="n">resource_filename</span><span class="p">(</span>
+                <span class="s2">&quot;niche_vlaanderen&quot;</span><span class="p">,</span> <span class="s2">&quot;system_tables/hab_niche_join.csv&quot;</span>
+            <span class="p">)</span>
+
+
+        <span class="n">mapping</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">mapping_file</span><span class="p">)</span>
+
+        <span class="c1"># drop any row containing niche vegetation 0</span>
+        <span class="n">mapping</span> <span class="o">=</span> <span class="n">mapping</span><span class="p">[</span><span class="n">mapping</span><span class="p">[</span><span class="s2">&quot;NICHE&quot;</span><span class="p">]</span> <span class="o">!=</span><span class="mi">0</span> <span class="p">]</span>
+
+        <span class="c1"># convert to wide format</span>
+        <span class="n">mapping</span><span class="p">[</span><span class="s2">&quot;col&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapping</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;HAB&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">cumcount</span><span class="p">()</span>
+        <span class="n">mapping</span><span class="p">[</span><span class="s2">&quot;col&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;NICHE_C&quot;</span> <span class="o">+</span> <span class="p">(</span><span class="n">mapping</span><span class="p">[</span><span class="s2">&quot;col&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;str&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span> <span class="o">=</span> <span class="n">mapping</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span>
+            <span class="n">index</span><span class="o">=</span><span class="s2">&quot;HAB&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;col&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;NICHE&quot;</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+        <span class="n">niche_columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;NICH_&quot;</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">niche_columns</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="p">[</span><span class="s2">&quot;area_shape&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">area</span> <span class="o">/</span> <span class="mi">10000</span>
+
+
+        <span class="k">for</span> <span class="n">hab_column</span> <span class="ow">in</span> <span class="n">vegetation_columns</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">nich_column</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;NICHE_C&quot;</span><span class="p">)]:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;habi: </span><span class="si">{</span><span class="n">hab_column</span><span class="si">}</span><span class="s2">; nichj: </span><span class="si">{</span><span class="n">nich_column</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[[</span><span class="s2">&quot;HAB&quot;</span><span class="p">,</span> <span class="n">nich_column</span><span class="p">]]</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+                    <span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;HAB&quot;</span><span class="p">:</span> <span class="n">hab_column</span><span class="p">,</span> <span class="n">nich_column</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;NICH_</span><span class="si">{</span><span class="n">hab_column</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">nich_column</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}</span>
+                <span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">map</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="n">hab_column</span><span class="p">,</span>
+                                    <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_niche_columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;NICH&quot;</span><span class="p">)]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">overlay</span><span class="p">(</span><span class="n">upscale</span><span class="o">=</span><span class="n">upscale</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="n">o</span> <span class="o">=</span> <span class="s2">&quot;# Niche Validation object</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">o</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;map: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">filename_map</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">o</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;niche object: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">niche</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="n">o</span>
+
+<div class="viewcode-block" id="NicheValidation.overlay"><a class="viewcode-back" href="../../lowlevel.html#niche_vlaanderen.NicheValidation.overlay">[docs]</a>    <span class="k">def</span> <span class="nf">overlay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">upscale</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Overlays the map and the niche object&quot;&quot;&quot;</span>
+
+        <span class="c1"># Remove any existing &quot;NICH&quot; columns</span>
+
+        <span class="n">present_vegetation_types</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_niche_columns</span><span class="p">])</span>
+
+        <span class="n">present_vegetation_types</span> <span class="o">=</span> <span class="n">present_vegetation_types</span><span class="p">[</span>
+            <span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">present_vegetation_types</span><span class="p">)</span>
+        <span class="p">]</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;present niche types: </span><span class="si">{</span><span class="n">present_vegetation_types</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="c1"># get potential presence</span>
+        <span class="c1"># upscale niche rasters to that before calculating statistics</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">potential_presence</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">niche</span><span class="o">.</span><span class="n">zonal_stats</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="p">,</span>
+            <span class="n">outside</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">vegetation_types</span><span class="o">=</span><span class="n">present_vegetation_types</span><span class="p">,</span>
+            <span class="n">upscale</span><span class="o">=</span><span class="n">upscale</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">potential_presence</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">potential_presence</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span>
+            <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;vegetation&quot;</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;presence&quot;</span><span class="p">,</span> <span class="s2">&quot;shape_id&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tables</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;area_pot&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;area_nonpot&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;area_nonpot_optimistic&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;area_pot_perc_optimistic&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;area_effective&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;area_pot_perc&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;veg_present&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">area_pot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">potential_presence</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;no data&quot;</span><span class="p">][</span><span class="s2">&quot;area_ha&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">area_nonpot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">potential_presence</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;no data&quot;</span><span class="p">][</span><span class="s2">&quot;area_ha&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">area_effective</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">potential_presence</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;no data&quot;</span><span class="p">][</span><span class="s2">&quot;area_ha&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">area_pot_perc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">potential_presence</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;no data&quot;</span><span class="p">][</span><span class="s2">&quot;area_ha&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">area_pot_perc_optimistic</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_pot_perc</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">area_nonpot_optimistic</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_pot_perc</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">veg_present</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_pot_perc</span> <span class="o">*</span> <span class="mi">0</span>
+
+        <span class="c1"># Only if actual present: (pHAB * present) / (present + not present)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">veg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_niche_columns</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">veg</span><span class="p">])</span> <span class="ow">and</span> <span class="n">row</span><span class="p">[</span><span class="n">veg</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;row: </span><span class="si">{</span><span class="n">row</span><span class="o">.</span><span class="n">area_shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="n">area_pot</span> <span class="o">=</span> <span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">potential_presence</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;present&quot;</span><span class="p">]</span>
+                        <span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                        <span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;area_ha&quot;</span><span class="p">][</span><span class="n">row</span><span class="p">[</span><span class="n">veg</span><span class="p">]]</span>
+                    <span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">area_pot</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="n">veg</span><span class="p">]]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">area_pot</span>
+
+                    <span class="n">area_nonpot</span> <span class="o">=</span> <span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">potential_presence</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;not present&quot;</span><span class="p">]</span>
+                        <span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                        <span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;area_ha&quot;</span><span class="p">][</span><span class="n">row</span><span class="p">[</span><span class="n">veg</span><span class="p">]]</span>
+                    <span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">area_nonpot</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="n">veg</span><span class="p">]]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">area_nonpot</span>
+
+                    <span class="n">pHab</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;pHAB&quot;</span> <span class="o">+</span> <span class="n">veg</span><span class="p">[</span><span class="mi">5</span><span class="p">]]</span>  <span class="c1"># pHAB1 --&gt; pHAB5</span>
+                    <span class="c1"># TODO: in ha ?</span>
+                    <span class="n">area_effective</span> <span class="o">=</span> <span class="n">pHab</span> <span class="o">*</span> <span class="n">row</span><span class="o">.</span><span class="n">area_shape</span> <span class="o">/</span> <span class="mi">100</span>
+                    <span class="c1"># area of the shape</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">area_effective</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="n">veg</span><span class="p">]]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">area_effective</span>
+
+                    <span class="k">if</span> <span class="p">(</span><span class="n">area_pot</span> <span class="o">+</span> <span class="n">area_nonpot</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                            <span class="sa">f</span><span class="s2">&quot;No overlap between potential vegetation map and &quot;</span>
+                            <span class="sa">f</span><span class="s2">&quot;shape_id </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span>
+                        <span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">area_pot_perc</span> <span class="o">=</span> <span class="n">area_pot</span> <span class="o">/</span> <span class="p">(</span><span class="n">area_pot</span> <span class="o">+</span> <span class="n">area_nonpot</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">area_pot_perc</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="n">veg</span><span class="p">]]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">area_pot_perc</span>
+
+                        <span class="n">area_pot_perc_optimistic</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span>
+                            <span class="p">[</span><span class="mi">100</span> <span class="o">*</span> <span class="n">area_pot</span> <span class="o">/</span> <span class="n">area_effective</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+                        <span class="p">)</span>
+
+                        <span class="bp">self</span><span class="o">.</span><span class="n">area_pot_perc_optimistic</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="n">veg</span><span class="p">]]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+                            <span class="n">i</span>
+                        <span class="p">]</span> <span class="o">=</span> <span class="n">area_pot_perc_optimistic</span>
+
+                        <span class="n">area_nonpot_optimistic</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">area_effective</span> <span class="o">-</span> <span class="n">area_pot</span><span class="p">])</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">area_nonpot_optimistic</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="n">veg</span><span class="p">]]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+                            <span class="n">i</span>
+                        <span class="p">]</span> <span class="o">=</span> <span class="n">area_nonpot_optimistic</span>
+
+                        <span class="c1"># vegetation type is present (actual presence)</span>
+                        <span class="c1"># used in polygon count</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">veg_present</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="n">veg</span><span class="p">]]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="c1"># Set id column for every polygon based table</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tables</span><span class="p">:</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">]))</span>
+
+        <span class="c1"># create summary table per vegetation type</span>
+
+        <span class="n">summary</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">summary</span><span class="p">[</span><span class="s2">&quot;area_effective&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_effective</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">summary</span><span class="p">[</span><span class="s2">&quot;nonpot&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_nonpot</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">summary</span><span class="p">[</span><span class="s2">&quot;nonpot_opt&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_nonpot_optimistic</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">summary</span><span class="p">[</span><span class="s2">&quot;pot&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_pot</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">summary</span><span class="p">[</span><span class="s2">&quot;polygon_count&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">veg_present</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+        <span class="n">summary</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">summary</span><span class="p">[</span><span class="s2">&quot;pot&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">summary</span><span class="p">[</span><span class="s2">&quot;pot&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">summary</span><span class="p">[</span><span class="s2">&quot;nonpot&quot;</span><span class="p">])</span>
+        <span class="n">summary</span><span class="p">[</span><span class="s2">&quot;score_opt&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="mi">100</span> <span class="o">*</span> <span class="n">summary</span><span class="p">[</span><span class="s2">&quot;pot&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">summary</span><span class="p">[</span><span class="s2">&quot;pot&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">summary</span><span class="p">[</span><span class="s2">&quot;nonpot_opt&quot;</span><span class="p">])</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">overwrite</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="n">NicheValidationException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;path </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2"> is not an empty folder&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">iterdir</span><span class="p">()):</span>
+                <span class="k">raise</span> <span class="n">NicheValidationException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;path </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2"> exists and is not empty&quot;</span><span class="p">)</span>
+        <span class="n">path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># save individual tables</span>
+
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tables</span><span class="p">:</span>
+            <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path</span> <span class="o">/</span> <span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="s2">&quot;.csv&quot;</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">potential_presence</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path</span> <span class="o">/</span> <span class="s2">&quot;potential_presence.csv&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path</span> <span class="o">/</span> <span class="s2">&quot;summary.csv&quot;</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">joined_map</span><span class="p">()</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">path</span> <span class="o">/</span> <span class="s2">&quot;overlay.gpkg&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="NicheValidation.joined_map"><a class="viewcode-back" href="../../lowlevel.html#niche_vlaanderen.NicheValidation.joined_map">[docs]</a>    <span class="k">def</span> <span class="nf">joined_map</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a geopandas dataframe with all tables joined&quot;&quot;&quot;</span>
+        <span class="n">merged</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">map</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">:</span>
+            <span class="n">merged</span> <span class="o">=</span> <span class="n">merged</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tables</span><span class="p">:</span>
+            <span class="n">merged</span> <span class="o">=</span> <span class="n">merged</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">)</span><span class="o">.</span><span class="n">add_prefix</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">table</span><span class="si">}</span><span class="s2">_&quot;</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">merged</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017 - 2022, Research Institute for Nature and Forest (INBO).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
