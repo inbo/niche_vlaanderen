@@ -63,10 +63,10 @@ class NicheValidation(object):
         self.filename_map = map
         self.map = gpd.read_file(map)
 
-        # the mapping columns contain are the field in the shapefile that contain a field starting with HAB
+        # the mapping columns contain are the field in the shapefile that contain a field starting with HAB{1-9}
         # (case insensitive)
         columns =  self.map.columns
-        vegetation_columns = columns[columns.str.upper().str.startswith('HAB')]
+        vegetation_columns = columns[columns.str.upper().str.match('HAB[0-9]')]
         proportion_columns = ["P" + col for col in vegetation_columns]
         prop_index = [list(columns.str.upper()).index(pi) for pi in
                       proportion_columns]
@@ -153,9 +153,9 @@ class NicheValidation(object):
             "veg_present",
         ]
 
-        self.area_pot = self.potential_presence.loc["no data"]["area_ha"] * np.nan
-        self.area_nonpot = self.potential_presence.loc["no data"]["area_ha"] * np.nan
-        self.area_effective = self.potential_presence.loc["no data"]["area_ha"] * np.nan
+        self.area_pot = self.potential_presence.loc["no data"]["area_ha"] * 0
+        self.area_nonpot = self.potential_presence.loc["no data"]["area_ha"] * 0
+        self.area_effective = self.potential_presence.loc["no data"]["area_ha"] * 0
         self.area_pot_perc = self.potential_presence.loc["no data"]["area_ha"] * np.nan
         self.area_pot_perc_optimistic = self.area_pot_perc * np.nan
         self.area_nonpot_optimistic = self.area_pot_perc * np.nan
@@ -172,20 +172,20 @@ class NicheValidation(object):
                         .loc[i]
                         .loc["area_ha"][row[veg]]
                     )
-                    self.area_pot[row[veg]].loc[i] = area_pot
+                    self.area_pot[row[veg]].loc[i] += area_pot
 
                     area_nonpot = (
                         self.potential_presence.loc["not present"]
                         .loc[i]
                         .loc["area_ha"][row[veg]]
                     )
-                    self.area_nonpot[row[veg]].loc[i] = area_nonpot
+                    self.area_nonpot[row[veg]].loc[i] += area_nonpot
 
                     pHab = row["pHAB" + veg[5]]  # pHAB1 --> pHAB5
                     # TODO: in ha ?
                     area_effective = pHab * row.area_shape / 100
                     # area of the shape
-                    self.area_effective[row[veg]].loc[i] = area_effective
+                    self.area_effective[row[veg]].loc[i] += area_effective
 
                     if (area_pot + area_nonpot) == 0:
                         warnings.warn(
@@ -193,25 +193,15 @@ class NicheValidation(object):
                             f"shape_id {i}"
                         )
                     else:
-                        area_pot_perc = area_pot / (area_pot + area_nonpot)
-                        self.area_pot_perc[row[veg]].loc[i] = area_pot_perc
-
-                        area_pot_perc_optimistic = np.min(
-                            [100 * area_pot / area_effective, 100]
-                        )
-
-                        self.area_pot_perc_optimistic[row[veg]].loc[
-                            i
-                        ] = area_pot_perc_optimistic
-
-                        area_nonpot_optimistic = np.max([0, area_effective - area_pot])
-                        self.area_nonpot_optimistic[row[veg]].loc[
-                            i
-                        ] = area_nonpot_optimistic
-
                         # vegetation type is present (actual presence)
                         # used in polygon count
                         self.veg_present[row[veg]].loc[i] = 1
+
+        # aggregate statistics
+        self.area_pot_perc = self.area_pot / (self.area_pot + self.area_nonpot)
+        self.area_pot_perc_optimistic = np.minimum(100*self.area_pot/self.area_effective, 100)
+        self.area_nonpot_optimistic = np.maximum(0, self.area_effective - self.area_pot)
+
 
         # Set id column for every polygon based table
         if self.id is not None:
