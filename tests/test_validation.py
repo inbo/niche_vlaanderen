@@ -116,3 +116,16 @@ def test_validation_multiple_veg():
     no_simplebr_fkok.overlay()
 
     assert pytest.approx(no_simplebr_fkok.area_effective.iloc[6][28]) == 6.775396
+
+def test_validation_hablegend(tmpdir):
+    """Test that fields starting with hab but not hab1-9 are skipped
+
+    cfr issue #313
+    """
+    nv = Niche()
+    nv.run_config_file("tests/data/bwk_tiny/tiny.yaml")
+
+    map = gpd.read_file("tests/data/bwk_tiny/bwk_clip.shp")
+    map["HAB_legend"] = "little text"
+    map.to_file(str(tmpdir / "hablegend.shp"))
+    validation = NicheValidation(niche=nv, map=str(tmpdir / "hablegend.shp"))

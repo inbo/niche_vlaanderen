@@ -63,10 +63,10 @@ class NicheValidation(object):
         self.filename_map = map
         self.map = gpd.read_file(map)
 
-        # the mapping columns contain are the field in the shapefile that contain a field starting with HAB
+        # the mapping columns contain are the field in the shapefile that contain a field starting with HAB{1-9}
         # (case insensitive)
         columns =  self.map.columns
-        vegetation_columns = columns[columns.str.upper().str.startswith('HAB')]
+        vegetation_columns = columns[columns.str.upper().str.match('HAB[0-9]')]
         proportion_columns = ["P" + col for col in vegetation_columns]
         prop_index = [list(columns.str.upper()).index(pi) for pi in
                       proportion_columns]
