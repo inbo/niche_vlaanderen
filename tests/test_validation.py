@@ -83,7 +83,7 @@ def test_validation_write(tmpdir):
     validation.write(tmpdir, overwrite=True)
 
 def test_validation_write_customid(tmpdir):
-    """Test"""
+    """Test writing using a custom id"""
     nv = Niche()
     nv.run_config_file("tests/data/bwk_tiny/tiny.yaml")
 
@@ -102,3 +102,17 @@ def test_validation_write_customid(tmpdir):
 
     assert "new_id" in overlay.columns
     assert "new_id" in area.columns
+
+
+def test_validation_multiple_veg():
+    """Test that multiple mappings are used when converting to niche
+
+    cfr issue #314
+    """
+    simplebr = Niche()
+    simplebr.run_config_file("tests/data/bwk/niche_brasschaat/simple.yaml")
+
+    no_simplebr_fkok = NicheValidation(niche=simplebr, map= "tests/data/bwk_fake/bwk_fake_extentok.shp") # see zip attached
+    no_simplebr_fkok.overlay()
+
+    assert pytest.approx(no_simplebr_fkok.area_effective.iloc[6][28]) == 6.775396
