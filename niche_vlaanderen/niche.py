@@ -716,7 +716,7 @@ class Niche(object):
                 filename = files["%02d_detail" % vi]
                 with rasterio.open(filename, "w", **params) as dst:
                     dst.write(self._vegetation_detail[vi], 1)
-                    self._files_written[filename] = os.path.normpath(filename)
+                    self._files_written["%02d_detail" % vi] = os.path.normpath(filename)
 
         # deviation
         params.update(dtype="float64", nodata=-99999)
