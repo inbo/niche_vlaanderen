@@ -182,8 +182,8 @@ class NicheValidation(object):
                     self.area_nonpot[row[veg]].loc[i] += area_nonpot
 
                     pHab = row["pHAB" + veg[5]]  # pHAB1 --> pHAB5
-                    # TODO: in ha ?
-                    area_effective = pHab * row.area_shape / 100
+
+                    area_effective = pHab * (area_pot + area_nonpot)
                     # area of the shape
                     self.area_effective[row[veg]].loc[i] += area_effective
 
