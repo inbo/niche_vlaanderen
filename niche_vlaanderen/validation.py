@@ -1,15 +1,16 @@
 import logging
-from pkg_resources import resource_filename
-from pathlib import Path
 import warnings
+from pathlib import Path
+
+from pkg_resources import resource_filename
 
 with warnings.catch_warnings():
     warnings.filterwarnings("ignore", category=DeprecationWarning)
     warnings.filterwarnings("ignore", category=UserWarning)
     import geopandas as gpd
 
-import pandas as pd
 import numpy as np
+import pandas as pd
 
 from niche_vlaanderen.niche import Niche
 
@@ -65,23 +66,27 @@ class NicheValidation(object):
 
         # the mapping columns contain are the field in the shapefile that contain a field starting with HAB{1-9}
         # (case insensitive)
-        columns =  self.map.columns
-        vegetation_columns = columns[columns.str.upper().str.match('HAB[0-9]')]
-        proportion_columns = ["P" + col for col in vegetation_columns]
-        prop_index = [list(columns.str.upper()).index(pi) for pi in
-                      proportion_columns]
-        proportion_columns = columns[prop_index]
+        columns = self.map.columns
+        vegetation_columns = columns[columns.str.upper().str.match("HAB[0-9]")]
+        proportion_index = {
+            veg: list(columns.str.upper()).index(f"PHAB{veg}")
+            for veg in vegetation_columns.str[-1]
+        }
+        self.proportion_columns = {
+            i: columns[proportion_index[i]] for i in proportion_index
+        }
+
+        print(self.proportion_columns)
 
         if mapping_file is None:
             mapping_file = resource_filename(
                 "niche_vlaanderen", "system_tables/hab_niche_join.csv"
             )
 
-
         mapping = pd.read_csv(mapping_file)
 
         # drop any row containing niche vegetation 0
-        mapping = mapping[mapping["NICHE"] !=0 ]
+        mapping = mapping[mapping["NICHE"] != 0]
 
         # convert to wide format
         mapping["col"] = mapping.groupby("HAB").cumcount()
@@ -95,16 +100,19 @@ class NicheValidation(object):
         self.map = self.map.drop(columns=niche_columns)
         self.map["area_shape"] = self.map.area / 10000
 
-
         for hab_column in vegetation_columns:
-            for nich_column in self.mapping.columns[self.mapping.columns.str.startswith("NICHE_C")]:
+            for nich_column in self.mapping.columns[
+                self.mapping.columns.str.startswith("NICHE_C")
+            ]:
                 logger.debug(f"habi: {hab_column}; nichj: {nich_column}")
                 source = self.mapping[["HAB", nich_column]].rename(
-                    columns={"HAB": hab_column, nich_column: f"NICH_{hab_column[-1]}_{nich_column[-1]}"}
+                    columns={
+                        "HAB": hab_column,
+                        nich_column: f"NICH_{hab_column[-1]}_{nich_column[-1]}",
+                    }
                 )
 
-                self.map = pd.merge(self.map, source, on=hab_column,
-                                    how="left")
+                self.map = pd.merge(self.map, source, on=hab_column, how="left")
 
         self._niche_columns = self.map.columns[self.map.columns.str.startswith("NICH")]
 
@@ -136,7 +144,7 @@ class NicheValidation(object):
             self.map,
             outside=False,
             vegetation_types=present_vegetation_types,
-            upscale=upscale
+            upscale=upscale,
         )
 
         self.potential_presence = self.potential_presence.pivot(
@@ -153,9 +161,9 @@ class NicheValidation(object):
             "veg_present",
         ]
 
-        self.area_pot = self.potential_presence.loc["no data"]["area_ha"] * 0
-        self.area_nonpot = self.potential_presence.loc["no data"]["area_ha"] * 0
-        self.area_effective = self.potential_presence.loc["no data"]["area_ha"] * 0
+        self.area_pot = self.potential_presence.loc["no data"]["area_ha"] * np.nan
+        self.area_nonpot = self.potential_presence.loc["no data"]["area_ha"] * np.nan
+        self.area_effective = self.potential_presence.loc["no data"]["area_ha"] * np.nan
         self.area_pot_perc = self.potential_presence.loc["no data"]["area_ha"] * np.nan
         self.area_pot_perc_optimistic = self.area_pot_perc * np.nan
         self.area_nonpot_optimistic = self.area_pot_perc * np.nan
@@ -172,20 +180,31 @@ class NicheValidation(object):
                         .loc[i]
                         .loc["area_ha"][row[veg]]
                     )
-                    self.area_pot[row[veg]].loc[i] += area_pot
+                    if np.isnan(self.area_pot[row[veg]].loc[i]):
+                        self.area_pot[row[veg]].loc[i] = area_pot
+                    else:
+                        self.area_pot[row[veg]].loc[i] += area_pot
 
                     area_nonpot = (
                         self.potential_presence.loc["not present"]
                         .loc[i]
                         .loc["area_ha"][row[veg]]
                     )
-                    self.area_nonpot[row[veg]].loc[i] += area_nonpot
+                    if np.isnan(self.area_nonpot[row[veg]].loc[i]):
+                        self.area_nonpot[row[veg]].loc[i] = area_nonpot
+                    else:
+                        self.area_nonpot[row[veg]].loc[i] += area_nonpot
 
-                    pHab = row["pHAB" + veg[5]]  # pHAB1 --> pHAB5
-                    # TODO: in ha ?
-                    area_effective = pHab * row.area_shape / 100
+                    # TODO: case insensitive!
+
+                    pHab = row[self.proportion_columns[veg[5]]]
+
+                    area_effective = pHab * (area_pot + area_nonpot) / 100
                     # area of the shape
-                    self.area_effective[row[veg]].loc[i] += area_effective
+                    if np.isnan(self.area_effective[row[veg]].loc[i]):
+                        self.area_effective[row[veg]].loc[i] = area_effective
+                    else:
+                        self.area_effective[row[veg]].loc[i] += area_effective
 
                     if (area_pot + area_nonpot) == 0:
                         warnings.warn(
@@ -199,9 +218,10 @@ class NicheValidation(object):
 
         # aggregate statistics
         self.area_pot_perc = self.area_pot / (self.area_pot + self.area_nonpot)
-        self.area_pot_perc_optimistic = np.minimum(100*self.area_pot/self.area_effective, 100)
+        self.area_pot_perc_optimistic = np.minimum(
+            100 * self.area_pot / self.area_effective, 100
+        )
         self.area_nonpot_optimistic = np.maximum(0, self.area_effective - self.area_pot)
-
 
         # Set id column for every polygon based table
         if self.id is not None:
