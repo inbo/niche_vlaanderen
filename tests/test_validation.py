@@ -28,7 +28,8 @@ def test_validation():
     # calibration score
     print(no.summary)
     assert np.isclose(no.summary["score"][6], 78.383459)
-    assert np.isclose(no.summary["score_opt"][6], 78.008985)
+    assert np.isclose(no.summary["score_opt"][6], 78.383459)
+    assert np.isclose(no.summary["score_opt"][28], 3.813559)
 
     # repr
     assert "map: tests/data/bwk/bkw_brasschaat_part1.shp" in str(no)
@@ -115,7 +116,7 @@ def test_validation_multiple_veg():
     no_simplebr_fkok = NicheValidation(niche=simplebr, map= "tests/data/bwk_fake/bwk_fake_extentok.shp") # see zip attached
     no_simplebr_fkok.overlay()
 
-    assert pytest.approx(no_simplebr_fkok.area_effective.iloc[6][28]) == 6.775396
+    assert pytest.approx(no_simplebr_fkok.area_effective.iloc[6][28]) == 6.776321
 
 def test_validation_hablegend(tmpdir):
     """Test that fields starting with hab but not hab1-9 are skipped

@@ -153,9 +153,9 @@ class NicheValidation(object):
             "veg_present",
         ]
 
-        self.area_pot = self.potential_presence.loc["no data"]["area_ha"] * 0
-        self.area_nonpot = self.potential_presence.loc["no data"]["area_ha"] * 0
-        self.area_effective = self.potential_presence.loc["no data"]["area_ha"] * 0
+        self.area_pot = self.potential_presence.loc["no data"]["area_ha"] * np.nan
+        self.area_nonpot = self.potential_presence.loc["no data"]["area_ha"] *  np.nan
+        self.area_effective = self.potential_presence.loc["no data"]["area_ha"] *  np.nan
         self.area_pot_perc = self.potential_presence.loc["no data"]["area_ha"] * np.nan
         self.area_pot_perc_optimistic = self.area_pot_perc * np.nan
         self.area_nonpot_optimistic = self.area_pot_perc * np.nan
@@ -172,20 +172,30 @@ class NicheValidation(object):
                         .loc[i]
                         .loc["area_ha"][row[veg]]
                     )
-                    self.area_pot[row[veg]].loc[i] += area_pot
+                    if np.isnan(self.area_pot[row[veg]].loc[i]):
+                        self.area_pot[row[veg]].loc[i] = area_pot
+                    else:
+                        self.area_pot[row[veg]].loc[i] += area_pot
 
                     area_nonpot = (
                         self.potential_presence.loc["not present"]
                         .loc[i]
                         .loc["area_ha"][row[veg]]
                     )
-                    self.area_nonpot[row[veg]].loc[i] += area_nonpot
+                    if np.isnan(self.area_nonpot[row[veg]].loc[i]):
+                        self.area_nonpot[row[veg]].loc[i] = area_nonpot
+                    else:
+                        self.area_nonpot[row[veg]].loc[i] += area_nonpot
 
+                    #TODO: case insensitive!
                     pHab = row["pHAB" + veg[5]]  # pHAB1 --> pHAB5
 
-                    area_effective = pHab * (area_pot + area_nonpot)
+                    area_effective = pHab * (area_pot + area_nonpot)/100
                     # area of the shape
-                    self.area_effective[row[veg]].loc[i] += area_effective
+                    if np.isnan(self.area_effective[row[veg]].loc[i]):
+                        self.area_effective[row[veg]].loc[i] = area_effective
+                    else:
+                        self.area_effective[row[veg]].loc[i] += area_effective
 
                     if (area_pot + area_nonpot) == 0:
                         warnings.warn(
