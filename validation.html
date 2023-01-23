@@ -434,12 +434,20 @@ Warning: CRS definitions are not equal!
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;1&#39;: &#39;PHAB1&#39;, &#39;2&#39;: &#39;pHAB2&#39;, &#39;3&#39;: &#39;pHAB3&#39;, &#39;4&#39;: &#39;pHAB4&#39;, &#39;5&#39;: &#39;pHAB5&#39;}
+</pre></div></div>
+</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00, 91.66it/s]
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00, 83.01it/s]
 </pre></div></div>
 </div>
 <p>It is possible to check the mapping per vegetation type by checking the map attribute of the overlay object</p>
@@ -475,7 +483,7 @@ Warning: CRS definitions are not equal!
     <tr style="text-align: right;">
       <th></th>
       <th>HAB1</th>
-      <th>pHAB1</th>
+      <th>PHAB1</th>
       <th>HAB2</th>
       <th>pHAB2</th>
       <th>HAB3</th>
@@ -620,7 +628,7 @@ Warning: CRS definitions are not equal!
     </tr>
   </tbody>
 </table>
-<p>5 rows × 22 columns</p>
+<p>5 rows × 23 columns</p>
 </div></div>
 </div>
 <p>The actual overlay will compare the grid cell centres with the shapefile. By default a upscaling factor of 5 (25 points per grid cell) is used to ensure sufficient coverage of the shapefile. For niche models of 20-25m resolution, this default value will lead to a spatial resolution of 1m, which is sufficient given the scale of the BWK map. <img alt="comparison between 1 and 5 upscaling" src="_static/png/bwk_overlay.png" /></p>
@@ -633,15 +641,23 @@ Warning: CRS definitions are not equal!
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;1&#39;: &#39;PHAB1&#39;, &#39;2&#39;: &#39;pHAB2&#39;, &#39;3&#39;: &#39;pHAB3&#39;, &#39;4&#39;: &#39;pHAB4&#39;, &#39;5&#39;: &#39;pHAB5&#39;}
+</pre></div></div>
+</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00, 85.99it/s]
-/home/johan/Nextcloud/_proj/niche/niche_vlaanderen/niche_vlaanderen/validation.py:191: UserWarning: No overlap between potential vegetation map and shape_id 0
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00, 66.70it/s]
+/home/johan/Nextcloud/_proj/niche/niche_vlaanderen/niche_vlaanderen/validation.py:210: UserWarning: No overlap between potential vegetation map and shape_id 0
   warnings.warn(
-/home/johan/Nextcloud/_proj/niche/niche_vlaanderen/niche_vlaanderen/validation.py:191: UserWarning: No overlap between potential vegetation map and shape_id 2
+/home/johan/Nextcloud/_proj/niche/niche_vlaanderen/niche_vlaanderen/validation.py:210: UserWarning: No overlap between potential vegetation map and shape_id 2
   warnings.warn(
 </pre></div></div>
 </div>
@@ -699,43 +715,43 @@ Warning: CRS definitions are not equal!
   <tbody>
     <tr>
       <th>5</th>
-      <td>0.600058</td>
+      <td>0.595324</td>
       <td>0.014945</td>
-      <td>0.019679</td>
+      <td>0.014945</td>
       <td>0.580379</td>
       <td>1.0</td>
       <td>97.48954</td>
-      <td>96.720418</td>
+      <td>97.48954</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>0.071813</td>
+      <td>0.071738</td>
       <td>0.358689</td>
-      <td>0.071813</td>
+      <td>0.071738</td>
       <td>0.000000</td>
       <td>1.0</td>
       <td>0.00000</td>
-      <td>0.000000</td>
+      <td>0.00000</td>
     </tr>
     <tr>
       <th>27</th>
-      <td>0.004235</td>
       <td>0.004982</td>
-      <td>0.004235</td>
+      <td>0.004982</td>
+      <td>0.004982</td>
       <td>0.000000</td>
       <td>1.0</td>
       <td>0.00000</td>
-      <td>0.000000</td>
+      <td>0.00000</td>
     </tr>
     <tr>
       <th>28</th>
-      <td>0.006143</td>
       <td>0.004982</td>
-      <td>0.006143</td>
+      <td>0.004982</td>
+      <td>0.004982</td>
       <td>0.000000</td>
       <td>1.0</td>
       <td>0.00000</td>
-      <td>0.000000</td>
+      <td>0.00000</td>
     </tr>
   </tbody>
 </table>
@@ -885,7 +901,7 @@ Warning: CRS definitions are not equal!
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
-      <td>0.006143</td>
+      <td>0.004982</td>
     </tr>
     <tr>
       <th>1</th>
@@ -898,19 +914,19 @@ Warning: CRS definitions are not equal!
       <th>2</th>
       <td>NaN</td>
       <td>NaN</td>
-      <td>0.004235</td>
+      <td>0.004982</td>
       <td>NaN</td>
     </tr>
     <tr>
       <th>3</th>
       <td>NaN</td>
-      <td>0.071813</td>
+      <td>0.071738</td>
       <td>NaN</td>
       <td>NaN</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0.019679</td>
+      <td>0.014945</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
@@ -924,19 +940,27 @@ Warning: CRS definitions are not equal!
 <h2>Using a custom vegetation table<a class="headerlink" href="#Using-a-custom-vegetation-table" title="Permalink to this headline"></a></h2>
 <p>When creating a validation, it is possible to supply a custom mapping table between the vegetation types in the map and niche types. This file must be a csv with two columns, HAB and NICHE, containing the vegetation type on the map in the HAB column,</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validation1</span> <span class="o">=</span> <span class="n">NicheValidation</span><span class="p">(</span><span class="n">niche</span><span class="o">=</span><span class="n">nv</span><span class="p">,</span> <span class="nb">map</span><span class="o">=</span><span class="s2">&quot;../tests/data/bwk_tiny/bwk_clip.shp&quot;</span><span class="p">,</span> <span class="n">mapping_file</span><span class="o">=</span><span class="s2">&quot;../tests/data/hab_niche_test.csv&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;1&#39;: &#39;PHAB1&#39;, &#39;2&#39;: &#39;pHAB2&#39;, &#39;3&#39;: &#39;pHAB3&#39;, &#39;4&#39;: &#39;pHAB4&#39;, &#39;5&#39;: &#39;pHAB5&#39;}
+</pre></div></div>
+</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:00&lt;00:00, 66.16it/s]
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:00&lt;00:00, 74.63it/s]
 </pre></div></div>
 </div>
 </section>
@@ -944,21 +968,39 @@ Warning: CRS definitions are not equal!
 <h2>Storing the analysis<a class="headerlink" href="#Storing-the-analysis" title="Permalink to this headline"></a></h2>
 <p>Finally, the whole project can be saved. This will save the summary tables and the intermediate tables in a folder, and create a shapefile which contains the BWK map with all intermediate tables joined to it.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validation</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;_validation&#39;</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">&#39;_validation&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;area_nonpot_optimistic.csv&#39;,
+ &#39;area_pot_perc.csv&#39;,
+ &#39;potential_presence.csv&#39;,
+ &#39;area_pot.csv&#39;,
+ &#39;overlay.gpkg&#39;,
+ &#39;area_effective.csv&#39;,
+ &#39;summary.csv&#39;,
+ &#39;area_pot_perc_optimistic.csv&#39;,
+ &#39;area_nonpot.csv&#39;,
+ &#39;veg_present.csv&#39;]
+</pre></div></div>
 </div>
 </section>
 </section>
