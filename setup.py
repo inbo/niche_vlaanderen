@@ -3,8 +3,12 @@
 
 import sys
 from setuptools import setup, find_packages
+from pathlib import Path
+
 
 version = {}
+
+long_description = (Path(__file__).parent / "README.rst").read_text()
 with open("niche_vlaanderen/version.py") as fp:
     exec(fp.read(), version)
 
@@ -41,6 +45,8 @@ setup(name='niche_vlaanderen',
     'Programming Language :: Python :: 3.11',
     ],
     include_package_data=True,
+    long_description=long_description,
+    long_description_content_type="text/x-rst",
     tests_require=['pytest'],
     entry_points='''
         [console_scripts]
