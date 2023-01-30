@@ -3,8 +3,12 @@
 
 import sys
 from setuptools import setup, find_packages
+from pathlib import Path
+
 
 version = {}
+
+long_description = (Path(__file__).parent / "README.rst").read_text()
 with open("niche_vlaanderen/version.py") as fp:
     exec(fp.read(), version)
 
@@ -24,7 +28,7 @@ requirements = [
 setup(name='niche_vlaanderen',
     version=version['__version__'],
     description='NICHE Vlaanderen: hydro-ecological model for valley-ecosystems in Flanders',
-    url='https://github.com/INBO/niche_vlaanderen',
+    url='https://github.com/inbo/niche_vlaanderen',
     author='Johan Van de Wauw',
     author_email='johan.vandewauw@inbo.be',
     license='MIT',
@@ -34,13 +38,15 @@ setup(name='niche_vlaanderen',
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: MIT License',
-    'Programming Language :: Python :: 3.5',
-    'Programming Language :: Python :: 3.6',
     'Programming Language :: Python :: 3.7',
     'Programming Language :: Python :: 3.8',
     'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
     ],
     include_package_data=True,
+    long_description=long_description,
+    long_description_content_type="text/x-rst",
     tests_require=['pytest'],
     entry_points='''
         [console_scripts]
