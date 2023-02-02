@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kalibratie &mdash; niche_vlaanderen 1.2b1 documentation</title>
+  <title>Validatie &mdash; niche_vlaanderen 1.2b1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -48,10 +48,10 @@
 <li class="toctree-l1"><a class="reference internal" href="notendop.html">In een notendop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="model.html">Beschrijving model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="invoer.html">Invoer rasters</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Kalibratie</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#kalibratie-trofie-en-zuurgraad">Kalibratie trofie- en zuurgraad</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#kalibratie-potenties-vegetatievoorspellingen">Kalibratie potenties/vegetatievoorspellingen</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#kalibratieresultaten-verbeteren">Kalibratieresultaten verbeteren</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Validatie</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#validatie-trofie-en-zuurgraad">Validatie trofie- en zuurgraad</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#validatie-potenties-vegetatievoorspellingen">Validatie potenties/vegetatievoorspellingen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#validatieresultaten-verbeteren">Validatieresultaten verbeteren</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="overstroming.html">Overstromingsmodule</a></li>
@@ -82,9 +82,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Kalibratie</li>
+      <li>Validatie</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/INBO/niche_vlaanderen/blob/master/docs/kalibratie.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/INBO/niche_vlaanderen/blob/master/docs/validatie.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -116,32 +116,32 @@
     text-align: unset;
 }
 </style>
-<section id="kalibratie">
-<h1>Kalibratie<a class="headerlink" href="#kalibratie" title="Permalink to this headline"></a></h1>
-<p>Het model moet gekalibreerd worden op basis van een gekende referentietoestand. Meestal (en ook verder als voorbeeld in dit document) wordt de actuele toestand hiervoor gebruikt.</p>
-<p>Bij de kalibratie worden <strong>de beschikbare biotische</strong> (vegetatiekaarten)
+<section id="validatie">
+<h1>Validatie<a class="headerlink" href="#validatie" title="Permalink to this headline"></a></h1>
+<p>Het model moet gevalideerd worden op basis van een gekende referentietoestand. Meestal (en ook verder als voorbeeld in dit document) wordt de actuele toestand hiervoor gebruikt.</p>
+<p>Bij de validatie worden <strong>de beschikbare biotische</strong> (vegetatiekaarten)
 <strong>en abiotische gegevens</strong> (terreinmetingen en modelberekeningen) <strong>vergeleken met de outputlagen van NICHE</strong> (zuur- en trofiegraad, potenties).</p>
-<section id="kalibratie-trofie-en-zuurgraad">
-<h2>Kalibratie trofie- en zuurgraad<a class="headerlink" href="#kalibratie-trofie-en-zuurgraad" title="Permalink to this headline"></a></h2>
-<p>Tijdens een eerste kalibratiestap wordt er gekeken of de door NICHE berekende trofie en zuurgraad
+<section id="validatie-trofie-en-zuurgraad">
+<h2>Validatie trofie- en zuurgraad<a class="headerlink" href="#validatie-trofie-en-zuurgraad" title="Permalink to this headline"></a></h2>
+<p>Tijdens een eerste validatiestap wordt er gekeken of de door NICHE berekende trofie en zuurgraad
 in overeenstemming zijn met de beschikbare abiotische gegevens. Hierbij kunnen bv. veldmetingen van bodem pH vergeleken
 worden met de voorspellingen van NICHE Vlaanderen voor de zuurgraad.</p>
-<p>Deze stap heeft natuurlijk enkel betrekking op de kalibratie voor het volledige (<a class="reference external" href="https://inbo.github.io/niche_vlaanderen/getting_started.html#Running-a-full-Niche-model">full</a>) NICHE model. In het vereenvoudigde (<a class="reference external" href="https://inbo.github.io/niche_vlaanderen/getting_started.html#Creating-a-simple-NICHE-model">simple</a>) model wordt immers geen rekening gehouden met de trofie- en zuurgraad bij de bepaling van de potenties.</p>
+<p>Deze stap heeft natuurlijk enkel betrekking op de validatie voor het volledige (<a class="reference external" href="https://inbo.github.io/niche_vlaanderen/getting_started.html#Running-a-full-Niche-model">full</a>) NICHE model. In het vereenvoudigde (<a class="reference external" href="https://inbo.github.io/niche_vlaanderen/getting_started.html#Creating-a-simple-NICHE-model">simple</a>) model wordt immers geen rekening gehouden met de trofie- en zuurgraad bij de bepaling van de potenties.</p>
 </section>
-<section id="kalibratie-potenties-vegetatievoorspellingen">
-<h2>Kalibratie potenties/vegetatievoorspellingen<a class="headerlink" href="#kalibratie-potenties-vegetatievoorspellingen" title="Permalink to this headline"></a></h2>
-<p>Tijdens een tweede kalibratiestap wordt dan gekeken of op de plaatsen waar een vegetatietype actueel aanwezig is,
+<section id="validatie-potenties-vegetatievoorspellingen">
+<h2>Validatie potenties/vegetatievoorspellingen<a class="headerlink" href="#validatie-potenties-vegetatievoorspellingen" title="Permalink to this headline"></a></h2>
+<p>Tijdens een tweede validatiestap wordt dan gekeken of op de plaatsen waar een vegetatietype actueel aanwezig is,
 ook effectief potenties voorspeld worden. Hoe groter de actuele oppervlakte waarvoor potentie opgegeven wordt, hoe beter.
 En, omgekeerd, hoe minder potentie voorspeld wordt binnen het actuele voorkomen, hoe slechter.
 Plaatsen waar potenties voorspeld worden, maar het vegetatietype actueel niet aanwezig is, zijn niet per se foutief, maar kunnen bv. het gevolg zijn
 van het toegepaste beheer.</p>
-<p>Om deze tweede kalibratiestap uit te voeren is er dus ook nood aan een overzicht van de <em>actuele verspreiding van de NICHE vegetatietypen</em>.
+<p>Om deze tweede validatiestap uit te voeren is er dus ook nood aan een overzicht van de <em>actuele verspreiding van de NICHE vegetatietypen</em>.
 Hiervoor kan een beroep worden gedaan op
 eigen vegetatiekaarten of op de <a class="reference external" href="https://www.inbo.be/nl/beschikbaarheid">Biologische Waarderingskaart(BWK)-Habitatkaart</a> van het <a class="reference external" href="https://www.inbo.be">Instituut voor Natuur- en Bosonderzoek</a>.</p>
 <p>Een indicatieve vertaalsleutel tussen de Europese habitattypen en regionaal belangrijke biotopen
 (rbb) die in de Habitatkaart worden gebruikt, en de NICHE vegetatietypen, wordt in de
 tabel <a class="reference external" href="https://github.com/inbo/niche_vlaanderen/blob/master/docs/_data/niche_hab_rbb.csv">niche_hab_rbb.csv</a> gegeven.</p>
-<p>Een <strong>kalibratiescore</strong> kan per vegetatietype worden berekend als de mate waarin de actuele aanwezigheid van het type voorspeld wordt
+<p>Een <strong>validatiescore</strong> kan per vegetatietype worden berekend als de mate waarin de actuele aanwezigheid van het type voorspeld wordt
 door het NICHE Vlaanderen model in het studiegebied. Hiervoor wordt gekeken <em>hoe groot de
 oppervlakte is met voorspelde potentie binnen elke polygoon van de actuele vegetatiekaart</em> (bv. de BWK-habitatkaart) waarbinnen het vegetatietype actueel
 aanwezig is.</p>
@@ -150,14 +150,15 @@ Soms worden meerdere vegetatietypen
 toegekend aan één enkele polygoon. Elk aanwezig vegetatietype krijgt dan tijdens de kartering een aandeel (%) toegekend in de oppervlakte van de polygoon
 (veld “PHABx”, met x de volgorde volgens afnemend aandeel van de verschillende vegetatietypen). Dat aandeel kan worden verrekend
 in de kalibratiescore. Is een vegetatietype bv. slechts in 30% van de polygoonoppervlakte aanwezig, dan bedraagt de
-kalibratiescore op basis van die ene polygoon 100% van zodra er voor minstens  30% van de polygoonoppervlakte potenties
+validatiescore op basis van die ene polygoon 100% van zodra er voor minstens 30% van de polygoonoppervlakte potenties
 worden voorspeld. Dit is een louter boekhoudkundige aftoetsing omdat er abstractie gemaakt wordt van de effectieve
 ruimtelijke overlap tussen potentie en aanwezigheid. De juiste actuele ligging van de oppervlakte van een vegetatie
 in “complex” is immers niet gekend.</p>
+<p>Het Niche package bevat een validatiemodule om deze procedure uit te voeren: zie de <a class="reference external" href="https://inbo.github.io/niche_vlaanderen/validation.html">tutorial</a>.</p>
 </section>
-<section id="kalibratieresultaten-verbeteren">
-<h2>Kalibratieresultaten verbeteren<a class="headerlink" href="#kalibratieresultaten-verbeteren" title="Permalink to this headline"></a></h2>
-<p>Als er systematische afwijkingen tijdens de kalibratie aan het licht komen moeten de <strong>invoerlagen</strong> van het model onder de loep worden genomen.</p>
+<section id="validatieresultaten-verbeteren">
+<h2>Validatieresultaten verbeteren<a class="headerlink" href="#validatieresultaten-verbeteren" title="Permalink to this headline"></a></h2>
+<p>Als er systematische afwijkingen tijdens de validatie aan het licht komen moeten de <strong>invoerlagen</strong> van het model onder de loep worden genomen.</p>
 <p>Hieronder geven we een (niet limitatief) overzicht van de aandachtspunten per inputlaag:</p>
 <ul>
 <li><p>NICHE bodemkaart:</p>
