@@ -9,7 +9,7 @@ NICHE Vlaanderen (*Nature Impact Assessment of Changes in Hydro-Ecological Syste
 
 NICHE Vlaanderen, en bij uitbreiding de overstromingsmodule, is een waardevol instrument om de ontwikkelingskansen voor vegetaties ruimtelijk expliciet in te schatten. Bijzonder handig is dat dit niet enkel kan gebeuren voor de huidige toestand, maar ook voor een geplande eindtoestand na bepaalde ingrepen of inrichtingswerken (scenario's). Op die manier is het mogelijk om de **impact van bepaalde scenario's door te rekenen en onderling te vergelijken in een zoektocht naar het meest gepaste scenario**.
 
-**Het is belangrijk te beseffen dat het hier om een model gaat**. Niet alleen is het belangrijk om de betrouwbare invoergegevens te voorzien, ook de kritische interpretatie van de resultaten bij het fijnstellen van het model (zgn. kalibratie) blijft cruciaal om een gedegen inschatting te maken van de huidige en toekomstige potenties voor de verschillende vegetatietypen.
+**Het is belangrijk te beseffen dat het hier om een model gaat**. Niet alleen is het belangrijk om de betrouwbare invoergegevens te voorzien, ook de kritische interpretatie van de resultaten bij het fijnstellen van het model (zgn. validatie) blijft cruciaal om een gedegen inschatting te maken van de huidige en toekomstige potenties voor de verschillende vegetatietypen.
 
 Werking
 =======
@@ -32,7 +32,7 @@ Doelgroep
 =========
 
 Enige vertrouwdheid met modelbouw, Python code, gis (raster) en last but not least het ecologische functioneren van de verschillende vegetatietypen strekt tot aanbeveling als je aan de slag wilt met de programmacode. In die optiek bestaat de primaire doelgroep uit **thematische experten** van studiebureaus, openbare instellingen of niet gouvernementele organisaties. 
-De modelresultaten moeten immers steeds met een kritisch oog bekeken worden en getoetst aan de realiteit (:doc:`kalibratie<kalibratie>`), vooraleer extrapolaties/simulaties van toekomstige ingrepen op de standplaatscondities modelmatig ingeschat worden.
+De modelresultaten moeten immers steeds met een kritisch oog bekeken worden en getoetst aan de realiteit (:doc:`validatie<validatie>`), vooraleer extrapolaties/simulaties van toekomstige ingrepen op de standplaatscondities modelmatig ingeschat worden.
 
 Opbouw van de website
 =====================
@@ -41,7 +41,7 @@ De documentatie is als volgt opgebouwd:
 
 - :doc:`Beschrijving van het NICHE Vlaanderen model<model>`
 - :doc:`Toelichting bij de benodigde informatie over de standplaatscondities<invoer>`
-- :doc:`Hoe het model afstellen (kalibratie)?<kalibratie>`
+- :doc:`Hoe het model afstellen (validatie)?<validatie>`
 - :doc:`Beschrijving van de overstromingsmodule en de benodigde invoergegevens<overstroming>`
 - :doc:`Installatiehandleiding<installation>`
 - :doc:`Tutorials<tutorials>`
