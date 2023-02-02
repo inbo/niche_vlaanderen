@@ -48,7 +48,7 @@ worden voorspeld. Dit is een louter boekhoudkundige aftoetsing omdat er abstract
 ruimtelijke overlap tussen potentie en aanwezigheid. De juiste actuele ligging van de oppervlakte van een vegetatie 
 in “complex” is immers niet gekend.
 
-Het Niche package bevat een validatiemodule om deze procedure uit te voeren: zie de :doc:`tutorials<tutorials>`.
+Het Niche package bevat een validatiemodule om deze procedure uit te voeren: zie de `tutorial <https://inbo.github.io/niche_vlaanderen/validation.html>`_.
 
 Validatieresultaten verbeteren
 ===============================
