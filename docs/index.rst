@@ -12,7 +12,7 @@ This documentation is split in **two parts**:
  
 Deze documentatie bestaat uit **twee delen**:
 
-* Het eerste deel beschrijft de achtergrond van het NICHE-model, geeft informatie over de invoerlagen en de kalibratie van het model.
+* Het eerste deel beschrijft de achtergrond van het NICHE-model, geeft informatie over de invoerlagen en de validatie van het model.
 * Het tweede deel (in het Engels) beschrijft het package ``niche_vlaanderen``.
 
 .. toctree::
@@ -22,7 +22,7 @@ Deze documentatie bestaat uit **twee delen**:
   notendop
   model
   invoer
-  kalibratie
+  validatie
   overstroming
 
 .. toctree::
