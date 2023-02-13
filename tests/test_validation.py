@@ -73,7 +73,7 @@ def test_validation_write(tmpdir, zwarte_beek_niche):
         validation.write(tmpdir/"overlay.gpkg")
 
     # should not raise
-    validation.write(tmpdir, overwrite=True)
+    validation.write(tmpdir, overwrite_files=True)
 
 def test_validation_write_customid(tmpdir):
     """Test writing using a custom id"""
