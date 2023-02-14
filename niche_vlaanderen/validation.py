@@ -244,9 +244,21 @@ class NicheValidation(object):
 
         self.summary = pd.DataFrame(summary)
 
-    def write(self, path, overwrite=False):
+    def write(self, path, overwrite_files=False):
+        """Write the result of the validation to a folder
+
+        path: string | pathlib.Path
+            Output folder to which files will be written. Parent directory must
+            already exist.
+
+        overwrite_files: bool
+            Overwrite files when saving.
+            Note writing will fail if any of the files to be written already
+            exists.
+        """
+
         path = Path(path)
-        if path.exists() and not overwrite:
+        if path.exists() and not overwrite_files:
             if not path.is_dir():
                 raise NicheValidationException(f"path {path} is not an empty folder")
             if any(path.iterdir()):
