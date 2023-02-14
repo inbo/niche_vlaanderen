@@ -36,4 +36,9 @@ Deze documentatie bestaat uit **twee delen**:
   lowlevel
   faq
   contributing
-  authors
+
+.. toctree::
+  :caption: Credits
+  :maxdepth: 2
+  
+  credits 
