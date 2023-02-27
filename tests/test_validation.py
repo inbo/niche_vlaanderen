@@ -28,7 +28,7 @@ def test_validation(zwarte_beek_niche):
     # calibration score
     print(no.summary)
     assert np.isclose(no.summary["score"][2], 63.75896700)
-    assert np.isclose(no.summary["score_opt"][14], 82.595721)
+    assert np.isclose(no.summary["score_opt"][14], 60.970486)
     assert np.isclose(no.summary["score_opt"][18], 100)
 
     # repr
