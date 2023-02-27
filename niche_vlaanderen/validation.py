@@ -213,7 +213,7 @@ class NicheValidation(object):
                     self.veg_present[veg].loc[i] = 1
 
         # aggregate statistics
-        self.area_pot_perc = self.area_pot / (self.area_pot + self.area_nonpot)
+        self.area_pot_perc = 100 * self.area_pot / (self.area_pot + self.area_nonpot)
         self.area_pot_perc_optimistic = np.minimum(
             100 * self.area_pot / self.area_effective, 100
         )
