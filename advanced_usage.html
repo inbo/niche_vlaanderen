@@ -21,7 +21,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Flooding module" href="flooding.html" />
+    <link rel="next" title="Validation" href="validation.html" />
     <link rel="prev" title="Getting started" href="getting_started.html" />
  +    <link href="_static/css/custom.css" rel="stylesheet" type="text/css">
  +
@@ -69,8 +69,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#Overwriting-standard-code-tables">Overwriting standard code tables</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="flooding.html">Flooding module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="validation.html">Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flooding.html">Flooding module</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cli.html">Niche Configuration file</a></li>
@@ -552,7 +552,7 @@ div.rendered_html tbody tr:hover {
 </section>
 <section id="Create-detailed-absence/presence-plots">
 <h2>Create detailed absence/presence plots<a class="headerlink" href="#Create-detailed-absence/presence-plots" title="Permalink to this headline"></a></h2>
-<p>Rather than just showing if a certain vegetation type is present or not present, it is possible to show a more detailed analysis on the reason a vegetation type is present or not present. This follows the the steps of the niche analysis: ie if soil type is possible, mxw checks are done and finally other input grids are matched.</p>
+<p>Rather than just showing if a certain vegetation type is present or not present, it is possible to show a more detailed analysis on the reason a vegetation type is present or not present. This follows the steps of the niche analysis: ie if soil type is possible, mxw checks are done and finally other input grids are matched.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -574,6 +574,15 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <img alt="_images/advanced_usage_12_1.png" src="_images/advanced_usage_12_1.png" />
+</div>
+</div>
+<p>This detailed version of the map can be exported with:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">full</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="n">detailed_files</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
 </div>
 </div>
 </section>
@@ -770,14 +779,14 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/advanced_usage_20_0.png" src="_images/advanced_usage_20_0.png" />
+<img alt="_images/advanced_usage_22_0.png" src="_images/advanced_usage_22_0.png" />
 </div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/advanced_usage_20_1.png" src="_images/advanced_usage_20_1.png" />
+<img alt="_images/advanced_usage_22_1.png" src="_images/advanced_usage_22_1.png" />
 </div>
 </div>
 </section>
@@ -813,14 +822,14 @@ functioning</a>.</p>
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/advanced_usage_25_0.png" src="_images/advanced_usage_25_0.png" />
+<img alt="_images/advanced_usage_27_0.png" src="_images/advanced_usage_27_0.png" />
 </div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/advanced_usage_25_1.png" src="_images/advanced_usage_25_1.png" />
+<img alt="_images/advanced_usage_27_1.png" src="_images/advanced_usage_27_1.png" />
 </div>
 </div>
 <p>Potential area is shrinking because of the range of grondwater levels that have become more narrow (excluding the wettest places).</p>
@@ -832,7 +841,7 @@ functioning</a>.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="getting_started.html" class="btn btn-neutral float-left" title="Getting started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="flooding.html" class="btn btn-neutral float-right" title="Flooding module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="validation.html" class="btn btn-neutral float-right" title="Validation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
