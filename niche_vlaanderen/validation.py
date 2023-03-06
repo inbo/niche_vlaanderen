@@ -1,5 +1,6 @@
 import logging
 import warnings
+from collections import defaultdict
 from pathlib import Path
 
 from pkg_resources import resource_filename
@@ -167,57 +168,52 @@ class NicheValidation(object):
         self.area_pot_perc = self.potential_presence.loc["no data"]["area_ha"] * np.nan
         self.area_pot_perc_optimistic = self.area_pot_perc * np.nan
         self.area_nonpot_optimistic = self.area_pot_perc * np.nan
-
         self.veg_present = self.area_pot_perc * 0
 
         # Only if actual present: (pHAB * present) / (present + not present)
         for i, row in self.map.iterrows():
+            logger.debug(f"row: {row.area_shape}")
+            # different mappings can exist which lead to the same vegetation
+            # type. First we aggregate them in shape_veg which contains
+            # the niche vegetation and the sum of its pHAB
+            shape_veg = defaultdict(lambda: 0)
+
             for veg in self._niche_columns:
                 if np.isfinite(row[veg]) and row[veg] != 0:
-                    logger.debug(f"row: {row.area_shape}")
-                    area_pot = (
-                        self.potential_presence.loc["present"]
-                        .loc[i]
-                        .loc["area_ha"][row[veg]]
-                    )
-                    if np.isnan(self.area_pot[row[veg]].loc[i]):
-                        self.area_pot[row[veg]].loc[i] = area_pot
-                    else:
-                        self.area_pot[row[veg]].loc[i] += area_pot
-
-                    area_nonpot = (
-                        self.potential_presence.loc["not present"]
-                        .loc[i]
-                        .loc["area_ha"][row[veg]]
-                    )
-                    if np.isnan(self.area_nonpot[row[veg]].loc[i]):
-                        self.area_nonpot[row[veg]].loc[i] = area_nonpot
-                    else:
-                        self.area_nonpot[row[veg]].loc[i] += area_nonpot
-
-                    # TODO: case insensitive!
-
                     pHab = row[self.proportion_columns[veg[5]]]
+                    shape_veg[int(row[veg])] += pHab
 
-                    area_effective = pHab * (area_pot + area_nonpot) / 100
-                    # area of the shape
-                    if np.isnan(self.area_effective[row[veg]].loc[i]):
-                        self.area_effective[row[veg]].loc[i] = area_effective
-                    else:
-                        self.area_effective[row[veg]].loc[i] += area_effective
+            for veg in shape_veg:
+                pHab = shape_veg[veg]
 
-                    if (area_pot + area_nonpot) == 0:
-                        warnings.warn(
-                            f"No overlap between potential vegetation map and "
-                            f"shape_id {i}"
-                        )
-                    else:
-                        # vegetation type is present (actual presence)
-                        # used in polygon count
-                        self.veg_present[row[veg]].loc[i] = 1
+                area_pot = (
+                    self.potential_presence.loc["present"].loc[i].loc["area_ha"][veg]
+                )
+
+                self.area_pot[veg].loc[i] = area_pot
+
+                area_nonpot = (
+                    self.potential_presence.loc["not present"]
+                    .loc[i]
+                    .loc["area_ha"][veg]
+                )
+
+                self.area_nonpot[veg].loc[i] = area_nonpot
+                area_effective = pHab * (area_pot + area_nonpot) / 100
+                self.area_effective[veg].loc[i] = area_effective
+
+                if (area_pot + area_nonpot) == 0:
+                    warnings.warn(
+                        f"No overlap between potential vegetation map and "
+                        f"shape_id {i}"
+                    )
+                else:
+                    # vegetation type is present (actual presence)
+                    # used in polygon count
+                    self.veg_present[veg].loc[i] = 1
 
         # aggregate statistics
-        self.area_pot_perc = self.area_pot / (self.area_pot + self.area_nonpot)
+        self.area_pot_perc = 100 * self.area_pot / (self.area_pot + self.area_nonpot)
         self.area_pot_perc_optimistic = np.minimum(
             100 * self.area_pot / self.area_effective, 100
         )
