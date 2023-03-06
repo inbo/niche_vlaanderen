@@ -276,7 +276,7 @@ class NicheValidation(object):
         with warnings.catch_warnings():
             warnings.filterwarnings("ignore", category=DeprecationWarning)
             warnings.filterwarnings("ignore", category=FutureWarning)
-            self.joined_map().to_file(path / "overlay.gpkg")
+            self.joined_map().to_file(path / "validation.gpkg")
 
     def joined_map(self):
         """Create a geopandas dataframe with all tables joined"""

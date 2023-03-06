@@ -61,16 +61,16 @@ def test_validation_write(tmpdir, zwarte_beek_niche):
     validation = NicheValidation(niche=zwarte_beek_niche, map="tests/data/bwk/BWK_2020_clip_ZwarteBeek_simplified.shp")
     validation.write(tmpdir)
     files_written = os.listdir(tmpdir)
-    expected_files = {'area_nonpot_optimistic.csv', 'area_pot_perc.csv', 'potential_presence.csv', 'area_pot.csv', 'overlay.gpkg', 'area_effective.csv', 'summary.csv', 'veg_present.csv', 'area_pot_perc_optimistic.csv', 'area_nonpot.csv'}
-    assert set(files_written)== expected_files
+    expected_files = {'area_nonpot_optimistic.csv', 'area_pot_perc.csv', 'potential_presence.csv', 'area_pot.csv', 'validation.gpkg', 'area_effective.csv', 'summary.csv', 'veg_present.csv', 'area_pot_perc_optimistic.csv', 'area_nonpot.csv'}
+    assert set(files_written) == expected_files
 
-    # should raise because the dir eists and is not empty
+    # should raise because the dir exists and is not empty
     with pytest.raises(NicheValidationException):
         validation.write(tmpdir)
 
     # raises because the path exists and is not a folder
     with pytest.raises(NicheValidationException):
-        validation.write(tmpdir/"overlay.gpkg")
+        validation.write(tmpdir/"validation.gpkg")
 
     # should not raise
     validation.write(tmpdir, overwrite_files=True)
@@ -87,10 +87,10 @@ def test_validation_write_customid(tmpdir):
     validation = NicheValidation(niche=nv, map=str(tmpdir / "sel_id.shp"), id="new_id")
     validation.write(tmpdir / "validation")
     files_written = os.listdir(tmpdir / "validation")
-    expected_files = {'area_nonpot_optimistic.csv', 'area_pot_perc.csv', 'potential_presence.csv', 'area_pot.csv', 'overlay.gpkg', 'area_effective.csv', 'summary.csv', 'veg_present.csv', 'area_pot_perc_optimistic.csv', 'area_nonpot.csv'}
-    assert set(files_written)== expected_files
+    expected_files = {'area_nonpot_optimistic.csv', 'area_pot_perc.csv', 'potential_presence.csv', 'area_pot.csv', 'validation.gpkg', 'area_effective.csv', 'summary.csv', 'veg_present.csv', 'area_pot_perc_optimistic.csv', 'area_nonpot.csv'}
+    assert set(files_written) == expected_files
 
-    overlay = gpd.read_file(str(tmpdir /"validation"/ "overlay.gpkg"))
+    overlay = gpd.read_file(str(tmpdir /"validation"/ "validation.gpkg"))
     area = pd.read_csv(tmpdir / "validation" /"area_pot_perc.csv")
 
     assert "new_id" in overlay.columns
