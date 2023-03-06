@@ -90,6 +90,7 @@
   <h1>Source code for niche_vlaanderen.validation</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
 <span class="kn">from</span> <span class="nn">pkg_resources</span> <span class="kn">import</span> <span class="n">resource_filename</span>
@@ -257,57 +258,52 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">area_pot_perc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">potential_presence</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;no data&quot;</span><span class="p">][</span><span class="s2">&quot;area_ha&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">area_pot_perc_optimistic</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_pot_perc</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">area_nonpot_optimistic</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_pot_perc</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">veg_present</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_pot_perc</span> <span class="o">*</span> <span class="mi">0</span>
 
         <span class="c1"># Only if actual present: (pHAB * present) / (present + not present)</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;row: </span><span class="si">{</span><span class="n">row</span><span class="o">.</span><span class="n">area_shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="c1"># different mappings can exist which lead to the same vegetation</span>
+            <span class="c1"># type. First we aggregate them in shape_veg which contains</span>
+            <span class="c1"># the niche vegetation and the sum of its pHAB</span>
+            <span class="n">shape_veg</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
+
             <span class="k">for</span> <span class="n">veg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_niche_columns</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">veg</span><span class="p">])</span> <span class="ow">and</span> <span class="n">row</span><span class="p">[</span><span class="n">veg</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;row: </span><span class="si">{</span><span class="n">row</span><span class="o">.</span><span class="n">area_shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-                    <span class="n">area_pot</span> <span class="o">=</span> <span class="p">(</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">potential_presence</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;present&quot;</span><span class="p">]</span>
-                        <span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-                        <span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;area_ha&quot;</span><span class="p">][</span><span class="n">row</span><span class="p">[</span><span class="n">veg</span><span class="p">]]</span>
-                    <span class="p">)</span>
-                    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">area_pot</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="n">veg</span><span class="p">]]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">area_pot</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="n">veg</span><span class="p">]]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">area_pot</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">area_pot</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="n">veg</span><span class="p">]]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">area_pot</span>
-
-                    <span class="n">area_nonpot</span> <span class="o">=</span> <span class="p">(</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">potential_presence</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;not present&quot;</span><span class="p">]</span>
-                        <span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-                        <span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;area_ha&quot;</span><span class="p">][</span><span class="n">row</span><span class="p">[</span><span class="n">veg</span><span class="p">]]</span>
-                    <span class="p">)</span>
-                    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">area_nonpot</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="n">veg</span><span class="p">]]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">area_nonpot</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="n">veg</span><span class="p">]]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">area_nonpot</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">area_nonpot</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="n">veg</span><span class="p">]]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">area_nonpot</span>
-
-                    <span class="c1"># TODO: case insensitive!</span>
-
                     <span class="n">pHab</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">proportion_columns</span><span class="p">[</span><span class="n">veg</span><span class="p">[</span><span class="mi">5</span><span class="p">]]]</span>
+                    <span class="n">shape_veg</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">veg</span><span class="p">])]</span> <span class="o">+=</span> <span class="n">pHab</span>
 
-                    <span class="n">area_effective</span> <span class="o">=</span> <span class="n">pHab</span> <span class="o">*</span> <span class="p">(</span><span class="n">area_pot</span> <span class="o">+</span> <span class="n">area_nonpot</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span>
-                    <span class="c1"># area of the shape</span>
-                    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">area_effective</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="n">veg</span><span class="p">]]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">area_effective</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="n">veg</span><span class="p">]]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">area_effective</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">area_effective</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="n">veg</span><span class="p">]]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">area_effective</span>
+            <span class="k">for</span> <span class="n">veg</span> <span class="ow">in</span> <span class="n">shape_veg</span><span class="p">:</span>
+                <span class="n">pHab</span> <span class="o">=</span> <span class="n">shape_veg</span><span class="p">[</span><span class="n">veg</span><span class="p">]</span>
 
-                    <span class="k">if</span> <span class="p">(</span><span class="n">area_pot</span> <span class="o">+</span> <span class="n">area_nonpot</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-                            <span class="sa">f</span><span class="s2">&quot;No overlap between potential vegetation map and &quot;</span>
-                            <span class="sa">f</span><span class="s2">&quot;shape_id </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span>
-                        <span class="p">)</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="c1"># vegetation type is present (actual presence)</span>
-                        <span class="c1"># used in polygon count</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">veg_present</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="n">veg</span><span class="p">]]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="n">area_pot</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">potential_presence</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;present&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;area_ha&quot;</span><span class="p">][</span><span class="n">veg</span><span class="p">]</span>
+                <span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">area_pot</span><span class="p">[</span><span class="n">veg</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">area_pot</span>
+
+                <span class="n">area_nonpot</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">potential_presence</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;not present&quot;</span><span class="p">]</span>
+                    <span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                    <span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;area_ha&quot;</span><span class="p">][</span><span class="n">veg</span><span class="p">]</span>
+                <span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">area_nonpot</span><span class="p">[</span><span class="n">veg</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">area_nonpot</span>
+                <span class="n">area_effective</span> <span class="o">=</span> <span class="n">pHab</span> <span class="o">*</span> <span class="p">(</span><span class="n">area_pot</span> <span class="o">+</span> <span class="n">area_nonpot</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">area_effective</span><span class="p">[</span><span class="n">veg</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">area_effective</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="n">area_pot</span> <span class="o">+</span> <span class="n">area_nonpot</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;No overlap between potential vegetation map and &quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;shape_id </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># vegetation type is present (actual presence)</span>
+                    <span class="c1"># used in polygon count</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">veg_present</span><span class="p">[</span><span class="n">veg</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 
         <span class="c1"># aggregate statistics</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">area_pot_perc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_pot</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">area_pot</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_nonpot</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">area_pot_perc</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_pot</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">area_pot</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_nonpot</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">area_pot_perc_optimistic</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span>
             <span class="mi">100</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_pot</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_effective</span><span class="p">,</span> <span class="mi">100</span>
         <span class="p">)</span>
