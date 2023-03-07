@@ -853,7 +853,7 @@ class Niche(object):
         try:
             import matplotlib.pyplot as plt
             import matplotlib.patches as mpatches
-            from matplotlib import cm
+            import matplotlib
 
         except (ImportError, RuntimeError):  # pragma: no cover
             msg = "Could not import matplotlib\n"
@@ -892,12 +892,12 @@ class Niche(object):
             present = ma.unique(v_un[~v_un.mask])
 
             patches = [
-                mpatches.Patch(color=cm.get_cmap(cmap)(i), label=legend[legend_keys[i]])
+                mpatches.Patch(color=matplotlib.colormaps[cmap](i), label=legend[legend_keys[i]])
                 for i in present
             ]
         else:
             patches = [
-                mpatches.Patch(color=cm.get_cmap(cmap)(i), label=legend[j])
+                mpatches.Patch(color=matplotlib.colormaps[cmap](i), label=legend[j])
                 for i, j in enumerate(legend)
             ]
 
