@@ -991,8 +991,12 @@ class Niche(object):
         if vegetation_types is None:
             vegetation_types = self._vegetation.keys()
 
+        if len(vegetation_types) == 0:
+            raise NicheException("Can not calculate zonal statistics for empty vegetation list")
+
         logger.debug(f"vegetation_types: {vegetation_types}")
         logger.debug(f"upscaling to {upscale}")
+
         for i in tqdm(vegetation_types):
             # Note we use -99 as nodata value to make sure the true nodata
             # value (255) is part of the result table.

@@ -123,3 +123,11 @@ def test_validation_hablegend(tmpdir):
     map["HAB_legend"] = "little text"
     map.to_file(str(tmpdir / "hablegend.shp"))
     validation = NicheValidation(niche=nv, map=str(tmpdir / "hablegend.shp"))
+
+def test_validation_nomapping(tmpdir):
+    nv = Niche()
+    nv.run_config_file("tests/data/bwk_tiny/tiny.yaml")
+    with pytest.raises(NicheValidationException):
+        NicheValidation(niche=nv,
+                                 map="tests/data/bwk_tiny/bwk_clip.shp",
+                                 mapping_file="tests/data/hab_niche_test.csv")
