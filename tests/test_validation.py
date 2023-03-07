@@ -97,15 +97,13 @@ def test_validation_write(tmpdir, zwarte_beek_niche):
     )
     validation.write(tmpdir)
     files_written = os.listdir(tmpdir)
-<<<<<<< HEAD
     expected_files = {'area_nonpot_optimistic.csv', 'area_pot_perc.csv', 'potential_presence.csv', 'area_pot.csv', 'validation.gpkg', 'area_effective.csv', 'summary.csv', 'veg_present.csv', 'area_pot_perc_optimistic.csv', 'area_nonpot.csv'}
-=======
     expected_files = {
         "area_nonpot_optimistic.csv",
         "area_pot_perc.csv",
         "potential_presence.csv",
         "area_pot.csv",
-        "overlay.gpkg",
+        "validation.gpkg",
         "area_effective.csv",
         "summary.csv",
         "veg_present.csv",
@@ -138,11 +136,22 @@ def test_validation_write_customid(tmpdir):
     validation = NicheValidation(niche=nv, map=str(tmpdir / "sel_id.shp"), id="new_id")
     validation.write(tmpdir / "validation")
     files_written = os.listdir(tmpdir / "validation")
-    expected_files = {'area_nonpot_optimistic.csv', 'area_pot_perc.csv', 'potential_presence.csv', 'area_pot.csv', 'validation.gpkg', 'area_effective.csv', 'summary.csv', 'veg_present.csv', 'area_pot_perc_optimistic.csv', 'area_nonpot.csv'}
+    expected_files = {
+        "area_nonpot_optimistic.csv",
+        "area_pot_perc.csv",
+        "potential_presence.csv",
+        "area_pot.csv",
+        "validation.gpkg",
+        "area_effective.csv",
+        "summary.csv",
+        "veg_present.csv",
+        "area_pot_perc_optimistic.csv",
+        "area_nonpot.csv",
+    }
     assert set(files_written) == expected_files
 
-    overlay = gpd.read_file(str(tmpdir /"validation"/ "validation.gpkg"))
-    area = pd.read_csv(tmpdir / "validation" /"area_pot_perc.csv")
+    overlay = gpd.read_file(str(tmpdir / "validation" / "validation.gpkg"))
+    area = pd.read_csv(tmpdir / "validation" / "area_pot_perc.csv")
 
     assert "new_id" in overlay.columns
     assert "new_id" in area.columns
