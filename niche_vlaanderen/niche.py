@@ -203,8 +203,14 @@ class Niche(object):
             response = urlopen(url, timeout=5)
             json_response = json.loads(response.read().decode("utf-8"))
             releases = json_response["releases"]
-            v = sorted(releases, key=parse_version, reverse=True)
-            last = v[0]
+            versions = sorted(releases, key=parse_version, reverse=True)
+
+            # remove alpha, beta, rc versions
+            dev = ["rc", "a", "b"]
+            indev = lambda a: any(devstring in a for devstring in dev)
+            versions = [v for v in versions if not indev(v)]
+
+            last = versions[0]
 
             if last == __version__:
                 s = "# Using latest niche_vlaanderen  %s" % __version__
