@@ -77,8 +77,6 @@ class NicheValidation(object):
             i: columns[proportion_index[i]] for i in proportion_index
         }
 
-        print(self.proportion_columns)
-
         if mapping_file is None:
             mapping_file = resource_filename(
                 "niche_vlaanderen", "system_tables/hab_niche_join.csv"
@@ -137,8 +135,12 @@ class NicheValidation(object):
         present_vegetation_types = present_vegetation_types[
             ~np.isnan(present_vegetation_types)
         ]
-
         logger.debug(f"present niche types: {present_vegetation_types}")
+
+        if len(present_vegetation_types) == 0:
+            raise NicheValidationException(
+                "No Niche vegetation present in validation map"
+            )
         # get potential presence
         # upscale niche rasters to that before calculating statistics
         self.potential_presence = self.niche.zonal_stats(
@@ -272,7 +274,7 @@ class NicheValidation(object):
         with warnings.catch_warnings():
             warnings.filterwarnings("ignore", category=DeprecationWarning)
             warnings.filterwarnings("ignore", category=FutureWarning)
-            self.joined_map().to_file(path / "overlay.gpkg")
+            self.joined_map().to_file(path / "validation.gpkg")
 
     def joined_map(self):
         """Create a geopandas dataframe with all tables joined"""

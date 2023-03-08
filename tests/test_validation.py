@@ -97,12 +97,13 @@ def test_validation_write(tmpdir, zwarte_beek_niche):
     )
     validation.write(tmpdir)
     files_written = os.listdir(tmpdir)
+    expected_files = {'area_nonpot_optimistic.csv', 'area_pot_perc.csv', 'potential_presence.csv', 'area_pot.csv', 'validation.gpkg', 'area_effective.csv', 'summary.csv', 'veg_present.csv', 'area_pot_perc_optimistic.csv', 'area_nonpot.csv'}
     expected_files = {
         "area_nonpot_optimistic.csv",
         "area_pot_perc.csv",
         "potential_presence.csv",
         "area_pot.csv",
-        "overlay.gpkg",
+        "validation.gpkg",
         "area_effective.csv",
         "summary.csv",
         "veg_present.csv",
@@ -111,13 +112,13 @@ def test_validation_write(tmpdir, zwarte_beek_niche):
     }
     assert set(files_written) == expected_files
 
-    # should raise because the dir eists and is not empty
+    # should raise because the dir exists and is not empty
     with pytest.raises(NicheValidationException):
         validation.write(tmpdir)
 
     # raises because the path exists and is not a folder
     with pytest.raises(NicheValidationException):
-        validation.write(tmpdir / "overlay.gpkg")
+        validation.write(tmpdir/"validation.gpkg")
 
     # should not raise
     validation.write(tmpdir, overwrite_files=True)
@@ -140,7 +141,7 @@ def test_validation_write_customid(tmpdir):
         "area_pot_perc.csv",
         "potential_presence.csv",
         "area_pot.csv",
-        "overlay.gpkg",
+        "validation.gpkg",
         "area_effective.csv",
         "summary.csv",
         "veg_present.csv",
@@ -149,7 +150,7 @@ def test_validation_write_customid(tmpdir):
     }
     assert set(files_written) == expected_files
 
-    overlay = gpd.read_file(str(tmpdir / "validation" / "overlay.gpkg"))
+    overlay = gpd.read_file(str(tmpdir / "validation" / "validation.gpkg"))
     area = pd.read_csv(tmpdir / "validation" / "area_pot_perc.csv")
 
     assert "new_id" in overlay.columns
@@ -186,3 +187,11 @@ def test_validation_hablegend(tmpdir):
     map["HAB_legend"] = "little text"
     map.to_file(str(tmpdir / "hablegend.shp"))
     validation = NicheValidation(niche=nv, map=str(tmpdir / "hablegend.shp"))
+
+def test_validation_nomapping(tmpdir):
+    nv = Niche()
+    nv.run_config_file("tests/data/bwk_tiny/tiny.yaml")
+    with pytest.raises(NicheValidationException):
+        NicheValidation(niche=nv,
+                                 map="tests/data/bwk_tiny/bwk_clip.shp",
+                                 mapping_file="tests/data/hab_niche_test.csv")
