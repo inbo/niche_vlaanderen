@@ -157,8 +157,8 @@ class NicheValidation(object):
         self._tables = [
             "area_pot",
             "area_nonpot",
-            "area_nonpot_optimistic",
-            "area_pot_perc_optimistic",
+            "area_nonpot_phab",
+            "area_pot_perc_phab",
             "area_effective",
             "area_pot_perc",
             "veg_present",
@@ -168,8 +168,8 @@ class NicheValidation(object):
         self.area_nonpot = self.potential_presence.loc["no data"]["area_ha"] * np.nan
         self.area_effective = self.potential_presence.loc["no data"]["area_ha"] * np.nan
         self.area_pot_perc = self.potential_presence.loc["no data"]["area_ha"] * np.nan
-        self.area_pot_perc_optimistic = self.area_pot_perc * np.nan
-        self.area_nonpot_optimistic = self.area_pot_perc * np.nan
+        self.area_pot_perc_phab = self.area_pot_perc * np.nan
+        self.area_nonpot_phab = self.area_pot_perc * np.nan
         self.veg_present = self.area_pot_perc * 0
 
         # Only if actual present: (pHAB * present) / (present + not present)
@@ -216,10 +216,10 @@ class NicheValidation(object):
 
         # aggregate statistics
         self.area_pot_perc = 100 * self.area_pot / (self.area_pot + self.area_nonpot)
-        self.area_pot_perc_optimistic = np.minimum(
+        self.area_pot_perc_phab = np.minimum(
             100 * self.area_pot / self.area_effective, 100
         )
-        self.area_nonpot_optimistic = np.maximum(0, self.area_effective - self.area_pot)
+        self.area_nonpot_phab = np.maximum(0, self.area_effective - self.area_pot)
 
         # Set id column for every polygon based table
         if self.id is not None:
@@ -231,7 +231,7 @@ class NicheValidation(object):
         summary = {}
         summary["area_effective"] = self.area_effective.sum()
         summary["nonpot"] = self.area_nonpot.sum()
-        summary["nonpot_opt"] = self.area_nonpot_optimistic.sum()
+        summary["nonpot_opt"] = self.area_nonpot_phab.sum()
         summary["pot"] = self.area_pot.sum()
         summary["polygon_count"] = self.veg_present.sum()
 
