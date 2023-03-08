@@ -62,7 +62,9 @@
 <li class="toctree-l2"><a class="reference internal" href="advanced_usage.html">Advanced usage</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Validation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#Overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Using-another-field-of-the-vegetation-map-as-ID">Using another field of the vegetation map as ID</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Using-a-custom-vegetation-table">Using a custom vegetation table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Setting-the-spatial-resolution-of-the-overlay">Setting the spatial resolution of the overlay</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Storing-the-analysis">Storing the analysis</a></li>
 </ul>
 </li>
@@ -387,10 +389,15 @@ div.rendered_html tbody tr:hover {
 <h1>Validation<a class="headerlink" href="#Validation" title="Permalink to this headline"></a></h1>
 <section id="Overview">
 <h2>Overview<a class="headerlink" href="#Overview" title="Permalink to this headline"></a></h2>
-<p>The goal of the Niche Validation is to compare the potential vegetation types as determined by Niche Vlaanderen with the actual presence of vegetation types, eg as mapped in the <a class="reference external" href="https://www.vlaanderen.be/inbo/de-biologische-waarderingskaart/wat-is-de-biologische-waarderingskaart/">Biologische waarderingskaart (BWK)</a></p>
-<p>The BWK vector file contains up to 5 habitat types in field HAB1-HAB5 and their proportion of the shape in fields pHAB1-pHAB5.</p>
-<p>This vegetation types in BWK are different from those in niche, but a <a class="reference external" href="https://github.com/inbo/niche_vlaanderen/blob/calibration/niche_vlaanderen/system_tables/hab_niche_join.csv">mapping table</a> exists that links both.</p>
-<p>In the next steps, a (fictive) niche model is created. Vegetation type 5 is plotted because this will be used further as an example.</p>
+<p>The goal of the Niche Validation is to compare the potential vegetation types as determined by Niche Vlaanderen with the actual presence of vegetation types, e.g. as mapped in a vegetation map such as the Biological Valuation Map - <a class="reference external" href="https://www.vlaanderen.be/inbo/de-biologische-waarderingskaart/wat-is-de-biologische-waarderingskaart/">Biologische waarderingskaart (BWK)</a></p>
+<p>The vegetation map should be a spatial vector file (e.g. a shapefile) with:</p>
+<ul class="simple">
+<li><p>up to 9 habitat types in fields named HAB1-HAB9,</p></li>
+<li><p>the proportion of the shape they occupy in fields named pHAB1-pHAB9 (0-100 %).</p></li>
+</ul>
+<p><em>Note that the field names are not case sensitive (hab1, phab1 can be used without any conversion) and HAB2 until HAB9/pHAB2 until pHAB9 are facultative</em>.</p>
+<p>The habitat types in the vegetation map should be described using the official abbreviations of the Natura 2000 habitats and/or the regional important biotopes. Since those are different from the vegetation types in Niche, we provide a <a class="reference external" href="https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/hab_niche_join.csv">mapping table</a> to link both vegetation typologies.</p>
+<p>In the next steps, a (fictive) <strong>niche model</strong> is <strong>created</strong>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -398,11 +405,10 @@ div.rendered_html tbody tr:hover {
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">niche_vlaanderen</span> <span class="kn">import</span> <span class="n">Niche</span>
 <span class="n">nv</span> <span class="o">=</span> <span class="n">Niche</span><span class="p">()</span>
 <span class="n">nv</span><span class="o">.</span><span class="n">run_config_file</span><span class="p">(</span><span class="s2">&quot;../tests/data/bwk_tiny/tiny.yaml&quot;</span><span class="p">)</span>
-<span class="n">nv</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
+<div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
@@ -410,24 +416,8 @@ div.rendered_html tbody tr:hover {
 Warning: CRS definitions are not equal!
 </pre></div></div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-&lt;AxesSubplot: title={&#39;center&#39;: &#39;Carpinion betuli (5)&#39;}&gt;
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="_images/validation_1_2.png" src="_images/validation_1_2.png" />
-</div>
-</div>
-<p>Next an overlay object is created which contains the bwk map with extra columns NICH_x_y for the corresponding niche vegetation types. Note that some vegetation types can not be mapped to niche (eg <code class="docutils literal notranslate"><span class="pre">gh</span></code> in the example below). Next the <code class="docutils literal notranslate"><span class="pre">zonal_statistics</span></code> module is used to calculate the potential vegetation for every shape.</p>
-<p>Note the progress bar, in this example it is going fast, but for larger areas, calculation may take up to 10 minutes.</p>
+<p>Next a <strong>validation object</strong> is <strong>created</strong> which contains the vegetation map with extra columns NICH_x_y for the corresponding niche vegetation types (x refers to the xth habitat, HABx). Note that some vegetation types of the Biological Valuation Map used in this example cannot be mapped to niche vegetation types (e.g. <code class="docutils literal notranslate"><span class="pre">gh</span></code> = ‘geen habitat’/‘no habitat’ in the example below).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">zonal_statistics</span></code> module is used in the background to calculate the potential vegetation for every shape. Note the progress bar: in this example it is going fast, but for larger areas, calculation may take up to 10 minutes.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -437,23 +427,15 @@ Warning: CRS definitions are not equal!
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-{&#39;1&#39;: &#39;PHAB1&#39;, &#39;2&#39;: &#39;pHAB2&#39;, &#39;3&#39;: &#39;pHAB3&#39;, &#39;4&#39;: &#39;pHAB4&#39;, &#39;5&#39;: &#39;pHAB5&#39;}
-</pre></div></div>
-</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00, 83.01it/s]
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00, 72.43it/s]
 </pre></div></div>
 </div>
-<p>It is possible to check the mapping per vegetation type by checking the map attribute of the overlay object</p>
+<p>It is possible to check the <strong>mapping per vegetation</strong> type by checking the <code class="docutils literal notranslate"><span class="pre">map</span></code> attribute of the validation object:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -486,7 +468,7 @@ Warning: CRS definitions are not equal!
     <tr style="text-align: right;">
       <th></th>
       <th>HAB1</th>
-      <th>PHAB1</th>
+      <th>pHAB1</th>
       <th>HAB2</th>
       <th>pHAB2</th>
       <th>HAB3</th>
@@ -634,37 +616,30 @@ Warning: CRS definitions are not equal!
 <p>5 rows × 23 columns</p>
 </div></div>
 </div>
-<p>The actual overlay will compare the grid cell centres with the shapefile. By default a upscaling factor of 5 (25 points per grid cell) is used to ensure sufficient coverage of the shapefile. For niche models of 20-25m resolution, this default value will lead to a spatial resolution of 1m, which is sufficient given the scale of the BWK map. <img alt="comparison between 1 and 5 upscaling" src="_static/png/bwk_overlay.png" /></p>
-<p>If upscaling is not used and set to one, only the grid center will be used, which may lead to warnings because some shapes are not covered.</p>
+<p>Let us plot the vegetation map together with the niche predictions for niche vegetation type 5 that will be used further as an example.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validation1</span> <span class="o">=</span> <span class="n">NicheValidation</span><span class="p">(</span><span class="n">niche</span><span class="o">=</span><span class="n">nv</span><span class="p">,</span> <span class="nb">map</span><span class="o">=</span><span class="s2">&quot;../tests/data/bwk_tiny/bwk_clip.shp&quot;</span><span class="p">,</span> <span class="n">upscale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mymap</span> <span class="o">=</span> <span class="n">validation</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">boundary</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">nv</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">validation</span><span class="o">.</span><span class="n">map</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">mymap</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;pHAB1&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;% &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;HAB1&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+                                                     <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;pHAB2&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;% &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;HAB2&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+                                                     <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;area_shape&#39;</span><span class="p">],</span> <span class="mi">3</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; ha&quot;</span><span class="p">,</span>
+                                                 <span class="n">xy</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">centroid</span><span class="o">.</span><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                                 <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+                                                    <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span><span class="p">),</span>
+                           <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-{&#39;1&#39;: &#39;PHAB1&#39;, &#39;2&#39;: &#39;pHAB2&#39;, &#39;3&#39;: &#39;pHAB3&#39;, &#39;4&#39;: &#39;pHAB4&#39;, &#39;5&#39;: &#39;pHAB5&#39;}
-</pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00, 66.70it/s]
-/home/johan/Nextcloud/_proj/niche/niche_vlaanderen/niche_vlaanderen/validation.py:210: UserWarning: No overlap between potential vegetation map and shape_id 0
-  warnings.warn(
-/home/johan/Nextcloud/_proj/niche/niche_vlaanderen/niche_vlaanderen/validation.py:210: UserWarning: No overlap between potential vegetation map and shape_id 2
-  warnings.warn(
-</pre></div></div>
+<div class="output_area docutils container">
+<img alt="_images/validation_7_0.png" src="_images/validation_7_0.png" />
 </div>
-<p>A summarized table containing scores of the overlay can be found by calling the summary method.</p>
+</div>
+<p>A <strong>summarized table</strong> containing scores of the validation for the whole study area can be found by calling the <code class="docutils literal notranslate"><span class="pre">summary</span></code> method.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -760,18 +735,208 @@ Warning: CRS definitions are not equal!
 </table>
 </div></div>
 </div>
-<p>Intermediate tables giving values can be retrieved by their names:</p>
+<p>with:</p>
 <ul class="simple">
-<li><p>area_pot: area with actual presence and potential presence predicted by niche</p></li>
-<li><p>area_nonpot: area with actual presence without potential presence by niche</p></li>
-<li><p>area_nonpot_optimistic: area with actual presence but without potential presence by niche</p></li>
-<li><p>area_pot_perc: proportion (%) of the area with correct predicted area (not taking into account pHab)</p></li>
-<li><p>area_pot_perc_optimistic: proportion (%) of the area with correct predicted area (taking into account pHab)</p></li>
-<li><p>area_effective: area of the shape in ha taking into account the proportion of the vegetation (pHab)</p></li>
-<li><p>veg_present: table showing whether vegetation is present in this polygon (1 or 0)</p></li>
+<li><p>area_effective: total area in ha with a given vegetation type, taking into account the proportion of the vegetation within each shape (pHAB)</p></li>
+<li><p>nonpot: total area with actual presence according to the vegetation map, but without potential presence according to niche</p></li>
+<li><p>nonpot_opt: total area with actual presence according to the vegetation map, but without potential presence according to niche (taking pHAB into account)</p></li>
+<li><p>pot: total area with actual presence according to the vegetation map and with potential presence according to niche</p></li>
+<li><p>polygon count: number of shapes with the actual vegetation type according to the vegetation map. If there are few polygons, the final score should be taken with caution.</p></li>
+<li><p>score: proportion of the total area with potential presence according to niche, compared to the total area of polygons with presence of a vegetation according to the vegetation map</p></li>
+<li><p>scoreopt: proportion of the total area with potential presence according to niche, compared to the actual area of a vegetation type according to the vegetation map (i.e. taking pHAB into account)</p></li>
+</ul>
+<p><strong>Intermediate tables</strong> giving values for each shape can be retrieved by their names:</p>
+<ul class="simple">
+<li><p>veg_present: table showing whether the vegetation type is present in this polygon according to the vegetation map (1 or 0)</p></li>
+<li><p>area_effective: area of the shape in ha taking into account the proportion of the vegetation = area polygon * pHAB</p></li>
+<li><p>area_nonpot: area with actual presence according to the vegetation map, but without potential presence according to niche</p></li>
+<li><p>area_nonpot_optimistic: area with actual presence according to the vegetation map, but without potential presence according to niche (taking pHAB into account)</p>
+<ul>
+<li><p>calculated as: If([area_effective]&gt;[area_pot];[area_effective]-[area_pot];0)</p></li>
+</ul>
+</li>
+<li><p>area_pot: area with actual presence according to the vegetation map and with potential presence predicted by niche</p></li>
+<li><p>area_pot_perc: proportion (%) of the area with correct predicted area (not taking into account pHAB)</p>
+<ul>
+<li><p>calculated as: 100*[area_pot]/ ([area_pot]+[area_nonpot])</p></li>
+</ul>
+</li>
+<li><p>area_pot_perc_optimistic: proportion (%) of the area with correct predicted area (taking into account pHAB)</p>
+<ul>
+<li><p>calculated as: If([area_pot]&lt;[area_effective];100*[ area_pot]/([area_effective]);100)</p></li>
+</ul>
+</li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validation</span><span class="o">.</span><span class="n">veg_present</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>vegetation</th>
+      <th>5</th>
+      <th>19</th>
+      <th>27</th>
+      <th>28</th>
+    </tr>
+    <tr>
+      <th>shape_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validation</span><span class="o">.</span><span class="n">area_effective</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>vegetation</th>
+      <th>5</th>
+      <th>19</th>
+      <th>27</th>
+      <th>28</th>
+    </tr>
+    <tr>
+      <th>shape_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.004982</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.004982</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>NaN</td>
+      <td>0.071738</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.595324</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validation</span><span class="o">.</span><span class="n">area_nonpot</span>
@@ -779,7 +944,7 @@ Warning: CRS definitions are not equal!
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -855,7 +1020,7 @@ Warning: CRS definitions are not equal!
 </div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validation</span><span class="o">.</span><span class="n">area_nonpot_optimistic</span>
@@ -863,7 +1028,7 @@ Warning: CRS definitions are not equal!
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -938,48 +1103,477 @@ Warning: CRS definitions are not equal!
 </table>
 </div></div>
 </div>
-</section>
-<section id="Using-a-custom-vegetation-table">
-<h2>Using a custom vegetation table<a class="headerlink" href="#Using-a-custom-vegetation-table" title="Permalink to this headline"></a></h2>
-<p>When creating a validation, it is possible to supply a custom mapping table between the vegetation types in the map and niche types. This file must be a csv with two columns, HAB and NICHE, containing the vegetation type on the map in the HAB column,</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validation1</span> <span class="o">=</span> <span class="n">NicheValidation</span><span class="p">(</span><span class="n">niche</span><span class="o">=</span><span class="n">nv</span><span class="p">,</span> <span class="nb">map</span><span class="o">=</span><span class="s2">&quot;../tests/data/bwk_tiny/bwk_clip.shp&quot;</span><span class="p">,</span> <span class="n">mapping_file</span><span class="o">=</span><span class="s2">&quot;../tests/data/hab_niche_test.csv&quot;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validation</span><span class="o">.</span><span class="n">area_pot</span>
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
 </div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-{&#39;1&#39;: &#39;PHAB1&#39;, &#39;2&#39;: &#39;pHAB2&#39;, &#39;3&#39;: &#39;pHAB3&#39;, &#39;4&#39;: &#39;pHAB4&#39;, &#39;5&#39;: &#39;pHAB5&#39;}
-</pre></div></div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>vegetation</th>
+      <th>5</th>
+      <th>19</th>
+      <th>27</th>
+      <th>28</th>
+    </tr>
+    <tr>
+      <th>shape_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.580379</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validation</span><span class="o">.</span><span class="n">area_pot_perc</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>vegetation</th>
+      <th>5</th>
+      <th>19</th>
+      <th>27</th>
+      <th>28</th>
+    </tr>
+    <tr>
+      <th>shape_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.974895</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validation</span><span class="o">.</span><span class="n">area_pot_perc_optimistic</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>vegetation</th>
+      <th>5</th>
+      <th>19</th>
+      <th>27</th>
+      <th>28</th>
+    </tr>
+    <tr>
+      <th>shape_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>97.48954</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="Using-another-field-of-the-vegetation-map-as-ID">
+<h2>Using another field of the vegetation map as ID<a class="headerlink" href="#Using-another-field-of-the-vegetation-map-as-ID" title="Permalink to this headline"></a></h2>
+<p>You can use any field of the vegetation map as ID instead of the standard shape_id.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validation1</span> <span class="o">=</span> <span class="n">NicheValidation</span><span class="p">(</span><span class="n">niche</span><span class="o">=</span><span class="n">nv</span><span class="p">,</span> <span class="nb">map</span><span class="o">=</span><span class="s2">&quot;../tests/data/bwk_tiny/bwk_clip.shp&quot;</span><span class="p">,</span> <span class="nb">id</span> <span class="o">=</span> <span class="s2">&quot;myid&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:00&lt;00:00, 74.63it/s]
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00, 71.69it/s]
+</pre></div></div>
+</div>
+<p>All the results per polygon will show the selected field as identifier, e.g.:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validation1</span><span class="o">.</span><span class="n">veg_present</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>vegetation</th>
+      <th>5</th>
+      <th>19</th>
+      <th>27</th>
+      <th>28</th>
+    </tr>
+    <tr>
+      <th>myid</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>id_1</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>id_2</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>id_3</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>id_4</th>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>id_5</th>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="Using-a-custom-vegetation-table">
+<h2>Using a custom vegetation table<a class="headerlink" href="#Using-a-custom-vegetation-table" title="Permalink to this headline"></a></h2>
+<p>When creating a validation, it is possible to supply a custom mapping table between the vegetation types in the map and niche types. This file must be a csv with two columns, HAB and NICHE, containing the vegetation type on the map in the HAB column, and the corresponding Niche vegetation type in the NICHE column.</p>
+<p>Thanks to this option you can use a vegetation map with another vegetation typology than the Natura 2000 habitats/regional important biotopes or modify the link between vegetation types on the vegetation map and Niche vegetation types.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validation1</span> <span class="o">=</span> <span class="n">NicheValidation</span><span class="p">(</span><span class="n">niche</span><span class="o">=</span><span class="n">nv</span><span class="p">,</span> <span class="nb">map</span><span class="o">=</span><span class="s2">&quot;../tests/data/bwk_tiny/bwk_clip.shp&quot;</span><span class="p">,</span>
+                              <span class="n">mapping_file</span><span class="o">=</span><span class="s2">&quot;custom_vegetation.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:00&lt;00:00, 57.27it/s]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validation1</span><span class="o">.</span><span class="n">mapping</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>col</th>
+      <th>HAB</th>
+      <th>NICHE_C1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2310</td>
+      <td>28</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>rbbsm</td>
+      <td>27</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="Setting-the-spatial-resolution-of-the-overlay">
+<h2>Setting the spatial resolution of the overlay<a class="headerlink" href="#Setting-the-spatial-resolution-of-the-overlay" title="Permalink to this headline"></a></h2>
+<p>The actual overlay will compare the grid cell centres (niche predictions) with the shapefile (vegetation map). By default an upscaling factor of 5 (25 points per grid cell) is used to ensure sufficient coverage of the shapefile. For niche models of 20-25m resolution, this default value will lead to a spatial resolution of 1m, which is sufficient given the common scale of the vegetation map.</p>
+<p><img alt="comparison between 1 and 5 upscaling" src="_images/bwk_overlay.png" /></p>
+<p>A greater upscaling factor can be used if the polygons of the vegetation map are particularly small compared to the resolution of the Niche predictions.</p>
+<p>If upscaling is set to one (not used), only the grid center will be used, which may lead to warnings because some shapes are not covered.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validation1</span> <span class="o">=</span> <span class="n">NicheValidation</span><span class="p">(</span><span class="n">niche</span><span class="o">=</span><span class="n">nv</span><span class="p">,</span> <span class="nb">map</span><span class="o">=</span><span class="s2">&quot;../tests/data/bwk_tiny/bwk_clip.shp&quot;</span><span class="p">,</span> <span class="n">upscale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00, 56.09it/s]
+/home/johan/Nextcloud/_proj/niche/niche_vlaanderen/niche_vlaanderen/validation.py:210: UserWarning: No overlap between potential vegetation map and shape_id 0
+  warnings.warn(
+/home/johan/Nextcloud/_proj/niche/niche_vlaanderen/niche_vlaanderen/validation.py:210: UserWarning: No overlap between potential vegetation map and shape_id 2
+  warnings.warn(
 </pre></div></div>
 </div>
 </section>
 <section id="Storing-the-analysis">
 <h2>Storing the analysis<a class="headerlink" href="#Storing-the-analysis" title="Permalink to this headline"></a></h2>
-<p>Finally, the whole project can be saved. This will save the summary tables and the intermediate tables in a folder, and create a shapefile which contains the BWK map with all intermediate tables joined to it.</p>
+<p>Finally, the whole project can be saved. This will save the summary tables and the intermediate tables in a folder, and create a geopackage (vector spatial file) which contains the habitat map with all intermediate tables joined to it.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validation</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;_validation&#39;</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validation</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;_validation&#39;</span><span class="p">,</span> <span class="n">overwrite_files</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<p>The exported files are:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -988,7 +1582,7 @@ Warning: CRS definitions are not equal!
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -997,7 +1591,7 @@ Warning: CRS definitions are not equal!
  &#39;area_pot_perc.csv&#39;,
  &#39;potential_presence.csv&#39;,
  &#39;area_pot.csv&#39;,
- &#39;overlay.gpkg&#39;,
+ &#39;validation.gpkg&#39;,
  &#39;area_effective.csv&#39;,
  &#39;summary.csv&#39;,
  &#39;area_pot_perc_optimistic.csv&#39;,

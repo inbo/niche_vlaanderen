@@ -943,7 +943,7 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
             <span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="k">as</span> <span class="nn">mpatches</span>
-            <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">cm</span>
+            <span class="kn">import</span> <span class="nn">matplotlib</span>
 
         <span class="k">except</span> <span class="p">(</span><span class="ne">ImportError</span><span class="p">,</span> <span class="ne">RuntimeError</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Could not import matplotlib</span><span class="se">\n</span><span class="s2">&quot;</span>
@@ -982,12 +982,12 @@
             <span class="n">present</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">v_un</span><span class="p">[</span><span class="o">~</span><span class="n">v_un</span><span class="o">.</span><span class="n">mask</span><span class="p">])</span>
 
             <span class="n">patches</span> <span class="o">=</span> <span class="p">[</span>
-                <span class="n">mpatches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="n">cmap</span><span class="p">)(</span><span class="n">i</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="n">legend</span><span class="p">[</span><span class="n">legend_keys</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
+                <span class="n">mpatches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colormaps</span><span class="p">[</span><span class="n">cmap</span><span class="p">](</span><span class="n">i</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="n">legend</span><span class="p">[</span><span class="n">legend_keys</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">present</span>
             <span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">patches</span> <span class="o">=</span> <span class="p">[</span>
-                <span class="n">mpatches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="n">cmap</span><span class="p">)(</span><span class="n">i</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="n">legend</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                <span class="n">mpatches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colormaps</span><span class="p">[</span><span class="n">cmap</span><span class="p">](</span><span class="n">i</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="n">legend</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
                 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">legend</span><span class="p">)</span>
             <span class="p">]</span>
 
@@ -1081,8 +1081,12 @@
         <span class="k">if</span> <span class="n">vegetation_types</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">vegetation_types</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vegetation</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
 
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">vegetation_types</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NicheException</span><span class="p">(</span><span class="s2">&quot;Can not calculate zonal statistics for empty vegetation list&quot;</span><span class="p">)</span>
+
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;vegetation_types: </span><span class="si">{</span><span class="n">vegetation_types</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;upscaling to </span><span class="si">{</span><span class="n">upscale</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">vegetation_types</span><span class="p">):</span>
             <span class="c1"># Note we use -99 as nodata value to make sure the true nodata</span>
             <span class="c1"># value (255) is part of the result table.</span>

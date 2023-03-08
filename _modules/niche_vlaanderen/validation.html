@@ -167,8 +167,6 @@
             <span class="n">i</span><span class="p">:</span> <span class="n">columns</span><span class="p">[</span><span class="n">proportion_index</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">proportion_index</span>
         <span class="p">}</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">proportion_columns</span><span class="p">)</span>
-
         <span class="k">if</span> <span class="n">mapping_file</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">mapping_file</span> <span class="o">=</span> <span class="n">resource_filename</span><span class="p">(</span>
                 <span class="s2">&quot;niche_vlaanderen&quot;</span><span class="p">,</span> <span class="s2">&quot;system_tables/hab_niche_join.csv&quot;</span>
@@ -227,8 +225,12 @@
         <span class="n">present_vegetation_types</span> <span class="o">=</span> <span class="n">present_vegetation_types</span><span class="p">[</span>
             <span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">present_vegetation_types</span><span class="p">)</span>
         <span class="p">]</span>
-
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;present niche types: </span><span class="si">{</span><span class="n">present_vegetation_types</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">present_vegetation_types</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NicheValidationException</span><span class="p">(</span>
+                <span class="s2">&quot;No Niche vegetation present in validation map&quot;</span>
+            <span class="p">)</span>
         <span class="c1"># get potential presence</span>
         <span class="c1"># upscale niche rasters to that before calculating statistics</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">potential_presence</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">niche</span><span class="o">.</span><span class="n">zonal_stats</span><span class="p">(</span>
@@ -362,7 +364,7 @@
         <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">joined_map</span><span class="p">()</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">path</span> <span class="o">/</span> <span class="s2">&quot;overlay.gpkg&quot;</span><span class="p">)</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">joined_map</span><span class="p">()</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">path</span> <span class="o">/</span> <span class="s2">&quot;validation.gpkg&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NicheValidation.joined_map"><a class="viewcode-back" href="../../lowlevel.html#niche_vlaanderen.NicheValidation.joined_map">[docs]</a>    <span class="k">def</span> <span class="nf">joined_map</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a geopandas dataframe with all tables joined&quot;&quot;&quot;</span>
