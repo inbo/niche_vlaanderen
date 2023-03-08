@@ -516,6 +516,18 @@ part of the package at niche_vlaanderen/system_tables/hab_nich_join.csv</p>
 <p>If a mapping is provided by the user, it must contain a HAB and a NICHE column.
 Other columns are ignored.</p>
 </p></li>
+<li><p><strong>upscale</strong> – int
+optional upscale value that is used to increase the resolution of
+the niche rasters while doing the overlay.
+instead of using only the cell center, the comparison between the
+vegetation map and the niche model is done at upscale*upscale places
+in the cell. Defaults to 5.
+More details in
+<a class="reference external" href="https://inbo.github.io/niche_vlaanderen/validation.html">https://inbo.github.io/niche_vlaanderen/validation.html</a></p></li>
+<li><p><strong>id</strong> – str
+(optional) field to use as id for the provided map file. This id will
+be used in the overlay. If no id is supplied, the shape_index (row number)
+of the vector file will be used, starting from 0.</p></li>
 </ul>
 </dd>
 </dl>
@@ -527,7 +539,7 @@ Other columns are ignored.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="niche_vlaanderen.NicheValidation.overlay">
-<span class="sig-name descname"><span class="pre">overlay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">upscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/validation.html#NicheValidation.overlay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.NicheValidation.overlay" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">overlay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">upscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/validation.html#NicheValidation.overlay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.NicheValidation.overlay" title="Permalink to this definition"></a></dt>
 <dd><p>Overlays the map and the niche object</p>
 </dd></dl>
 
