@@ -97,9 +97,9 @@ def test_validation_write(tmpdir, zwarte_beek_niche):
     )
     validation.write(tmpdir)
     files_written = os.listdir(tmpdir)
-    expected_files = {'area_nonpot_optimistic.csv', 'area_pot_perc.csv', 'potential_presence.csv', 'area_pot.csv', 'validation.gpkg', 'area_effective.csv', 'summary.csv', 'veg_present.csv', 'area_pot_perc_optimistic.csv', 'area_nonpot.csv'}
+    expected_files = {'area_nonpot_phab.csv', 'area_pot_perc.csv', 'potential_presence.csv', 'area_pot.csv', 'validation.gpkg', 'area_effective.csv', 'summary.csv', 'veg_present.csv', 'area_pot_perc_phab.csv', 'area_nonpot.csv'}
     expected_files = {
-        "area_nonpot_optimistic.csv",
+        "area_nonpot_phab.csv",
         "area_pot_perc.csv",
         "potential_presence.csv",
         "area_pot.csv",
@@ -107,7 +107,7 @@ def test_validation_write(tmpdir, zwarte_beek_niche):
         "area_effective.csv",
         "summary.csv",
         "veg_present.csv",
-        "area_pot_perc_optimistic.csv",
+        "area_pot_perc_phab.csv",
         "area_nonpot.csv",
     }
     assert set(files_written) == expected_files
@@ -137,7 +137,7 @@ def test_validation_write_customid(tmpdir):
     validation.write(tmpdir / "validation")
     files_written = os.listdir(tmpdir / "validation")
     expected_files = {
-        "area_nonpot_optimistic.csv",
+        "area_nonpot_phab.csv",
         "area_pot_perc.csv",
         "potential_presence.csv",
         "area_pot.csv",
@@ -145,7 +145,7 @@ def test_validation_write_customid(tmpdir):
         "area_effective.csv",
         "summary.csv",
         "veg_present.csv",
-        "area_pot_perc_optimistic.csv",
+        "area_pot_perc_phab.csv",
         "area_nonpot.csv",
     }
     assert set(files_written) == expected_files
