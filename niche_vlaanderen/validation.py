@@ -51,6 +51,20 @@ class NicheValidation(object):
             If a mapping is provided by the user, it must contain a HAB and a NICHE column.
             Other columns are ignored.
 
+        upscale: int
+            optional upscale value that is used to increase the resolution of
+            the niche rasters while doing the overlay.
+            instead of using only the cell center, the comparison between the
+            vegetation map and the niche model is done at upscale*upscale places
+            in the cell. Defaults to 5.
+            More details in
+            https://inbo.github.io/niche_vlaanderen/validation.html
+
+        id: str
+            (optional) field to use as id for the provided map file. This id will
+            be used in the overlay. If no id is supplied, the shape_index (row number)
+            of the vector file will be used, starting from 0.
+
 
     """
 
@@ -125,7 +139,7 @@ class NicheValidation(object):
         o += f"niche object: {self.niche.name}"
         return o
 
-    def overlay(self, upscale=4):
+    def overlay(self, upscale=5):
         """Overlays the map and the niche object"""
 
         # Remove any existing "NICH" columns
