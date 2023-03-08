@@ -58,7 +58,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'niche_vlaanderen'
-copyright = '2017 - 2022, Research Institute for Nature and Forest (INBO)'
+copyright = '2017 - 2023, Research Institute for Nature and Forest (INBO)'
 author = u'Johan Van de Wauw, Cécile Herr and Dries Adriaens'
 
 # The version info for the project you're documenting, acts as replacement for
