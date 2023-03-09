@@ -245,13 +245,13 @@ class NicheValidation(object):
         summary = {}
         summary["area_effective"] = self.area_effective.sum()
         summary["nonpot"] = self.area_nonpot.sum()
-        summary["nonpot_opt"] = self.area_nonpot_phab.sum()
+        summary["nonpot_phab"] = self.area_nonpot_phab.sum()
         summary["pot"] = self.area_pot.sum()
         summary["polygon_count"] = self.veg_present.sum()
 
         summary["score"] = 100 * summary["pot"] / (summary["pot"] + summary["nonpot"])
-        summary["score_opt"] = (
-            100 * summary["pot"] / (summary["pot"] + summary["nonpot_opt"])
+        summary["score_phab"] = (
+            100 * summary["pot"] / (summary["pot"] + summary["nonpot_phab"])
         )
 
         self.summary = pd.DataFrame(summary)
