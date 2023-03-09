@@ -29,8 +29,8 @@ def test_validation(zwarte_beek_niche):
     # calibration score
     print(no.summary)
     assert np.isclose(no.summary["score"][2], 63.75896700)
-    assert np.isclose(no.summary["score_opt"][14], 60.970486)
-    assert np.isclose(no.summary["score_opt"][18], 100)
+    assert np.isclose(no.summary["score_phab"][14], 60.970486)
+    assert np.isclose(no.summary["score_phab"][18], 100)
 
     # repr
     assert "map: tests/data/bwk/BWK_2020_clip_ZwarteBeek_simplified.shp" in str(no)
