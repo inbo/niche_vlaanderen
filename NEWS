@@ -1,7 +1,0 @@
-Changes in version 1.1:
-   * Work with asymmetrical cells (#204)
-   * Add check for new versions of niche_vlaanderen (#180)
-   * Fix a number of warnings for newer versions of Affine and Numpy (#207)
-   * New install instructions for Windows (#260)
-   * Important notice: 
-     * This is the last version supporting Python 2. Switching to Python 3 is highly recommended.
