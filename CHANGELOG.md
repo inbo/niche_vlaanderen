@@ -1,4 +1,4 @@
-# 1.2 (2022-03-09)
+# 1.2 (2023-03-09)
    * Add validation module, allowing the user to compare the result of a niche model with an actual vegetation map.
    * Improved speed of zonal statistics.
    * Detailed plot splitting up unsuitable types to soil unsuitable/mxw unsuitable+ other conditions.
