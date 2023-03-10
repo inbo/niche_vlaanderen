@@ -432,7 +432,7 @@ Warning: CRS definitions are not equal!
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00, 59.46it/s]
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00, 70.35it/s]
 </pre></div></div>
 </div>
 <p>It is possible to check the <strong>mapping per vegetation</strong> type by checking the <code class="docutils literal notranslate"><span class="pre">map</span></code> attribute of the validation object:</p>
@@ -673,11 +673,11 @@ Warning: CRS definitions are not equal!
       <th></th>
       <th>area_effective</th>
       <th>nonpot</th>
-      <th>nonpot_opt</th>
+      <th>nonpot_phab</th>
       <th>pot</th>
       <th>polygon_count</th>
       <th>score</th>
-      <th>score_opt</th>
+      <th>score_phab</th>
     </tr>
     <tr>
       <th>vegetation</th>
@@ -739,11 +739,11 @@ Warning: CRS definitions are not equal!
 <ul class="simple">
 <li><p>area_effective: total area in ha with a given vegetation type, taking into account the proportion of the vegetation within each shape (pHAB)</p></li>
 <li><p>nonpot: total area with actual presence according to the vegetation map, but without potential presence according to niche</p></li>
-<li><p>nonpot_opt: total area with actual presence according to the vegetation map, but without potential presence according to niche (taking pHAB into account)</p></li>
+<li><p>nonpot_phab: total area with actual presence according to the vegetation map, but without potential presence according to niche (taking pHAB into account)</p></li>
 <li><p>pot: total area with actual presence according to the vegetation map and with potential presence according to niche</p></li>
 <li><p>polygon count: number of shapes with the actual vegetation type according to the vegetation map. If there are few polygons, the final score should be taken with caution.</p></li>
 <li><p>score: proportion of the total area with potential presence according to niche, compared to the total area of polygons with presence of a vegetation according to the vegetation map</p></li>
-<li><p>scoreopt: proportion of the total area with potential presence according to niche, compared to the actual area of a vegetation type according to the vegetation map (i.e. taking pHAB into account)</p></li>
+<li><p>score_phab: proportion of the total area with potential presence according to niche, compared to the actual area of a vegetation type according to the vegetation map (i.e. taking pHAB into account)</p></li>
 </ul>
 <p><strong>Intermediate tables</strong> giving values for each shape can be retrieved by their names:</p>
 <ul class="simple">
@@ -1372,7 +1372,7 @@ Warning: CRS definitions are not equal!
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00, 52.64it/s]
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00, 67.35it/s]
 </pre></div></div>
 </div>
 <p>All the results per polygon will show the selected field as identifier, e.g.:</p>
@@ -1479,7 +1479,7 @@ Warning: CRS definitions are not equal!
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:00&lt;00:00, 43.78it/s]
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:00&lt;00:00, 55.96it/s]
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -1552,7 +1552,7 @@ Warning: CRS definitions are not equal!
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00, 67.54it/s]
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00, 60.46it/s]
 /home/johan/Nextcloud/_proj/niche/niche_vlaanderen/niche_vlaanderen/validation.py:222: UserWarning: No overlap between potential vegetation map and shape_id 0
   warnings.warn(
 /home/johan/Nextcloud/_proj/niche/niche_vlaanderen/niche_vlaanderen/validation.py:222: UserWarning: No overlap between potential vegetation map and shape_id 2
@@ -1588,14 +1588,12 @@ Warning: CRS definitions are not equal!
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 [&#39;area_pot_perc_phab.csv&#39;,
- &#39;area_nonpot_optimistic.csv&#39;,
  &#39;area_pot_perc.csv&#39;,
  &#39;potential_presence.csv&#39;,
  &#39;area_pot.csv&#39;,
  &#39;validation.gpkg&#39;,
  &#39;area_effective.csv&#39;,
  &#39;summary.csv&#39;,
- &#39;area_pot_perc_optimistic.csv&#39;,
  &#39;area_nonpot.csv&#39;,
  &#39;area_nonpot_phab.csv&#39;,
  &#39;veg_present.csv&#39;]
