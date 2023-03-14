@@ -25,7 +25,7 @@ jobs:
           pytest --cov niche_vlaanderen --verbose --tb=long
           python setup.py build
           python setup.py sdist
-          python setup.py bdist
+          python setup.py bdist_wheel
 
       - name: Publish package
         if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
