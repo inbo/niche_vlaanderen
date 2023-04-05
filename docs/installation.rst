@@ -5,7 +5,7 @@ Installation
 Windows
 =======
 
-The recommended way of installing niche on windows uses miniconda_ for installation.
+The recommended way of installing niche_vlaanderen on windows uses miniconda_ for installation.
 The recommended version is `64 bit with Python 3.9`__.
 
 __ https://repo.anaconda.com/miniconda/Miniconda3-py39_4.12.0-Windows-x86_64.exe
@@ -16,40 +16,50 @@ we will proceed installing niche_vlaanderen in its own environment.
 
 Start the `Anaconda prompt` from the start menu
 
-Create an environment that will contain niche and its dependencies.
+You will probably see something as:
 
 .. code-block:: shell
 
-    (C:\Users\johan\Miniconda3) C:\Users\johan> conda create --name niche
+    (C:\Users\myusername\Miniconda3) C:\Users\myusername> 
+  OR
+    (base) C:\Users\myusername> 
 
-Activate the niche environment
-
-.. code-block:: shell
-
-    (C:\Users\johan\Miniconda3) C:\Users\johan> activate niche
-
-And install niche and it's dependencies
+Create an environment (called niche in this example) that will contain niche_vlaanderen and its dependencies:
 
 .. code-block:: shell
 
-    conda install pandas pyyaml rasterio fiona
-    pip install niche_vlaanderen
+    (C:\Users\myusername\Miniconda3) C:\Users\myusername> conda create --name niche
+
+Activate the niche environment:
+
+.. code-block:: shell
+
+    (C:\Users\myusername\Miniconda3) C:\Users\myusername> conda activate niche
+
+You will see that `(C:\\Users\\myusername\\Miniconda3)`/`(base)` will change into `(niche)`.
+
+Now install the niche_vlaanderen package and its dependencies within the niche environment:
+
+.. code-block:: shell
+
+    (niche) C:\Users\myusername> conda install pandas pyyaml rasterio fiona
+    (niche) C:\Users\myusername> pip install niche_vlaanderen
 
 It is strongly recommended to install also `matplotlib` (otherwise plotting
 will not work) and `jupyter` notebook, which allows interactive usage from a web browser.
 
 .. code-block:: shell
 
-    conda install matplotlib jupyter
+    (niche) C:\Users\myusername> conda install matplotlib jupyter
 
-You can verify the installation was successful by running the cli interface.
+You can verify the installation was successful by running the command line interface.
 Note you must activate niche once more, because some changes were made during
 installation.
 
 .. code-block:: shell
 
-    (C:\Users\johan\Miniconda3) C:\Users\johan> activate niche
-    (niche) C:\Users\johan> niche --help
+    (C:\Users\myusername\Miniconda3) C:\Users\myusername> conda activate niche
+    (niche) C:\Users\myusername> niche --help
     Usage: niche [OPTIONS] CONFIG
 
       Command line interface to the NICHE vegetation model
@@ -62,26 +72,29 @@ installation.
 Upgrading
 =========
 
-Existing installations of Niche can be updated using pip (run
-from the Anaconda prompt.
+Existing installations of niche_vlaanderen can be updated using pip (run
+from the Anaconda prompt).
 
 .. code-block:: shell
 
-    pip install niche_vlaanderen --upgrade
+    (C:\Users\myusername\Miniconda3) C:\Users\myusername> conda activate niche
+    (niche) C:\Users\myusername> pip install niche_vlaanderen --upgrade
+    
+Note you might need to update other packages.
 
 Installing a specific version
 =============================
 
-If you want to install a specific niche version, you can install using pip:
+If you want to install a specific niche_vlaanderen version, you can install using pip:
 
 .. code-block:: shell
 
-    (C:\Users\johan\Miniconda3) C:\Users\johan> activate niche
-    (niche) C:\Users\johan> pip install niche_vlaanderen==1.0
+    (C:\Users\myusername\Miniconda3) C:\Users\myusername> conda activate niche
+    (niche) C:\Users\myusername> pip install niche_vlaanderen==1.0
 
 Alternative installation
 ========================
-It is possible to install niche without using an environment. This is currently not
+It is possible to install niche_vlaanderen without using an environment. This is currently not
 the recommended installation as it requires setting an environment variable for
 opening some grid files. (See :ref:`missing_gcs` for instructions).
 
@@ -100,27 +113,26 @@ will not work) and `jupyter` notebook, which allows interactive usage from a web
 Running niche
 =============
 
-Whenever you want to use niche (either from the command line or Python) you need
+Whenever you want to use niche_vlaanderen (either from the command line or Python) you need
 to start from the `Anaconda prompt` (in the start menu)
 and activate the environment:
 
 .. code-block:: shell
 
-    (C:\Users\johan\Miniconda3) C:\Users\johan> activate niche
+    (C:\Users\myusername\Miniconda3) C:\Users\myusername> conda activate niche
 
 Optionally - Jupyter Notebook
 =============================
 
 If you want to run niche_vlaanderen interactively, we recommend using a [jupyter notebook](http://jupyter.org/).
-To run this, from the anaconda prompt do:
+To run this, from the `Anaconda prompt` do:
 
 .. code-block:: default
 
-    (C:\Users\johan\Miniconda3) C:\Users\johan> activate niche
-    (niche) C:\Users\johan> jupyter notebook
+    (C:\Users\myusername\Miniconda3) C:\Users\myusername> conda activate niche
+    (niche) C:\Users\myusername> jupyter notebook
 
-This should open a webbrowser pointing towards http://localhost:8888 . If you browser does not open, try looking for the
-correct URL at the anaconda prompt.
+This should open a webbrowser pointing towards http://localhost:8888 . If your browser does not open, try looking for the correct URL at the `Anaconda prompt`.
 
 The :doc:`tutorials` will use these jupyter notebooks, and are the best place to continue from here.
 
