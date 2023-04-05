@@ -40,7 +40,8 @@ will not work) and `jupyter` notebook, which allows interactive usage from a web
 
 .. code-block:: shell
 
-    conda install matplotlib jupyter
+    conda install matplotlib
+    pip install jupyter
 
 You can verify the installation was successful by running the cli interface.
 Note you must activate niche once more, because some changes were made during
