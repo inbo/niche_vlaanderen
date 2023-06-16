@@ -480,14 +480,17 @@
 </pre></div>
 </div>
 </div>
-<p>Next we will create a new niche model using the same options as our previous full models, but we will add the previously calculated acidity as input: in this case, this acidity grid will be used (and not calculated from the other grids). Note that we use the <code class="docutils literal notranslate"><span class="pre">read_config_file</span></code> method (and not <code class="docutils literal notranslate"><span class="pre">run_config_file</span></code>) because we still want to edit the configuration before running.</p>
+<p>Next we will create a new niche model using the same options as our previous full models, but we will add the previously calculated nutrient level as input: in this case, this nutrient level grid will be used (and not calculated from the other grids). Note that we use the <code class="docutils literal notranslate"><span class="pre">read_config_file</span></code> method (and not <code class="docutils literal notranslate"><span class="pre">run_config_file</span></code>) because we still want to edit the configuration before running.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adjusted</span> <span class="o">=</span> <span class="n">nv</span><span class="o">.</span><span class="n">Niche</span><span class="p">()</span>
+<span class="c1"># set the input layers as usual:</span>
 <span class="n">adjusted</span><span class="o">.</span><span class="n">read_config_file</span><span class="p">(</span><span class="s2">&quot;full.yml&quot;</span><span class="p">)</span>
+<span class="c1"># now select a custom layer for the nutrient level:</span>
 <span class="n">adjusted</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;nutrient_level&quot;</span><span class="p">,</span> <span class="s2">&quot;output_abiotic/adjusted_nutrient.tif&quot;</span><span class="p">)</span>
+<span class="c1"># since we do not define a custom acidity layer to use, acidity will be calculated as usual</span>
 <span class="n">adjusted</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;adjusted_nutrient_level&quot;</span>
 <span class="n">adjusted</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 
