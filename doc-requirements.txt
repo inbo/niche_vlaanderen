@@ -4,7 +4,7 @@ jupyter_client
 ipykernel
 sphinx_rtd_theme==1.0.0
 matplotlib
-Pygments==2.11.2
+Pygments==2.15.0
 click==8.0.3
 pandoc==2.0.1
 Jinja2==3.0.3
