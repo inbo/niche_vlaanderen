@@ -461,11 +461,11 @@ Warning: CRS definitions are not equal!
 <ul class="simple">
 <li><p>area_effective: total area in ha with a given vegetation type, taking into account the proportion of the vegetation within each shape (pHAB)</p></li>
 <li><p>nonpot: total area with actual presence according to the vegetation map, but without potential presence according to niche</p></li>
-<li><p>nonpot_phab: total area with actual presence according to the vegetation map, but without potential presence according to niche (taking pHAB into account)</p></li>
+<li><p>nonpot_phab: total area with actual presence according to the vegetation map, but without potential presence according to niche (taking pHAB into account). We recommend using nonpot_phab instead of nonpot.</p></li>
 <li><p>pot: total area with actual presence according to the vegetation map and with potential presence according to niche</p></li>
 <li><p>polygon count: number of shapes with the actual vegetation type according to the vegetation map. If there are few polygons, the final score should be taken with caution.</p></li>
 <li><p>score: proportion of the total area with potential presence according to niche, compared to the total area of polygons with presence of a vegetation according to the vegetation map</p></li>
-<li><p>score_phab: proportion of the total area with potential presence according to niche, compared to the actual area of a vegetation type according to the vegetation map (i.e. taking pHAB into account)</p></li>
+<li><p>score_phab: proportion of the total area with potential presence according to niche, compared to the actual area of a vegetation type according to the vegetation map (i.e. taking pHAB into account). We recommend using score_phab instead of score.</p></li>
 </ul>
 <p><strong>Intermediate tables</strong> giving values for each shape can be retrieved by their names:</p>
 <ul class="simple">
@@ -475,6 +475,7 @@ Warning: CRS definitions are not equal!
 <li><p>area_nonpot_phab: area with actual presence according to the vegetation map, but without potential presence according to niche (taking pHAB into account)</p>
 <ul>
 <li><p>calculated as: If([area_effective]&gt;[area_pot];[area_effective]-[area_pot];0)</p></li>
+<li><p>Note we recommend using area_nonpot_phab instead of area_nonpot.</p></li>
 </ul>
 </li>
 <li><p>area_pot: area with actual presence according to the vegetation map and with potential presence predicted by niche</p></li>
@@ -486,6 +487,7 @@ Warning: CRS definitions are not equal!
 <li><p>area_pot_perc_phab: proportion (%) of the area with correct predicted area (taking into account pHAB)</p>
 <ul>
 <li><p>calculated as: If([area_pot]&lt;[area_effective];100*[ area_pot]/([area_effective]);100)</p></li>
+<li><p>Note we recommend using area_pot_perc_phab instead of area_pot_perc.</p></li>
 </ul>
 </li>
 </ul>
