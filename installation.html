@@ -102,34 +102,41 @@
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h1>
 <section id="windows">
 <h2>Windows<a class="headerlink" href="#windows" title="Permalink to this headline"></a></h2>
-<p>The recommended way of installing niche on windows uses <a class="reference external" href="https://conda.io/miniconda.html">miniconda</a> for installation.
+<p>The recommended way of installing niche_vlaanderen on windows uses <a class="reference external" href="https://conda.io/miniconda.html">miniconda</a> for installation.
 The recommended version is <a class="reference external" href="https://repo.anaconda.com/miniconda/Miniconda3-py39_4.12.0-Windows-x86_64.exe">64 bit with Python 3.9</a>.</p>
 <p>The installation can proceed without administrator rights, keep the default options. After miniconda is installed,
 we will proceed installing niche_vlaanderen in its own environment.</p>
 <p>Start the <cite>Anaconda prompt</cite> from the start menu</p>
-<p>Create an environment that will contain niche and its dependencies.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>C:<span class="se">\U</span>sers<span class="se">\j</span>ohan<span class="se">\M</span>iniconda3<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\j</span>ohan&gt; conda create --name niche
+<p>You will probably see something as:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>  <span class="o">(</span>C:<span class="se">\U</span>sers<span class="se">\m</span>yusername<span class="se">\M</span>iniconda3<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt;
+OR
+  <span class="o">(</span>base<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt;
 </pre></div>
 </div>
-<p>Activate the niche environment</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>C:<span class="se">\U</span>sers<span class="se">\j</span>ohan<span class="se">\M</span>iniconda3<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\j</span>ohan&gt; activate niche
+<p>Create an environment (called niche in this example) that will contain niche_vlaanderen and its dependencies:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>C:<span class="se">\U</span>sers<span class="se">\m</span>yusername<span class="se">\M</span>iniconda3<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt; conda create --name niche
 </pre></div>
 </div>
-<p>And install niche and it’s dependencies</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda install pandas pyyaml rasterio fiona
-pip install niche_vlaanderen
+<p>Activate the niche environment:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>C:<span class="se">\U</span>sers<span class="se">\m</span>yusername<span class="se">\M</span>iniconda3<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt; conda activate niche
+</pre></div>
+</div>
+<p>You will see that <cite>(C:\Users\myusername\Miniconda3)</cite>/<cite>(base)</cite> will change into <cite>(niche)</cite>.</p>
+<p>Now install the niche_vlaanderen package and its dependencies within the niche environment:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>niche<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt; conda install pandas pyyaml rasterio fiona
+<span class="o">(</span>niche<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt; pip install niche_vlaanderen
 </pre></div>
 </div>
 <p>It is strongly recommended to install also <cite>matplotlib</cite> (otherwise plotting
 will not work) and <cite>jupyter</cite> notebook, which allows interactive usage from a web browser.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda install matplotlib jupyter
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>niche<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt; conda install matplotlib jupyter
 </pre></div>
 </div>
-<p>You can verify the installation was successful by running the cli interface.
+<p>You can verify the installation was successful by running the command line interface.
 Note you must activate niche once more, because some changes were made during
 installation.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>C:<span class="se">\U</span>sers<span class="se">\j</span>ohan<span class="se">\M</span>iniconda3<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\j</span>ohan&gt; activate niche
-<span class="o">(</span>niche<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\j</span>ohan&gt; niche --help
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>C:<span class="se">\U</span>sers<span class="se">\m</span>yusername<span class="se">\M</span>iniconda3<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt; conda activate niche
+<span class="o">(</span>niche<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt; niche --help
 Usage: niche <span class="o">[</span>OPTIONS<span class="o">]</span> CONFIG
 
   Command line interface to the NICHE vegetation model
@@ -143,23 +150,25 @@ Options:
 </section>
 <section id="upgrading">
 <h2>Upgrading<a class="headerlink" href="#upgrading" title="Permalink to this headline"></a></h2>
-<p>Existing installations of Niche can be updated using pip (run
-from the Anaconda prompt.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install niche_vlaanderen --upgrade
+<p>Existing installations of niche_vlaanderen can be updated using pip (run
+from the Anaconda prompt).</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>C:<span class="se">\U</span>sers<span class="se">\m</span>yusername<span class="se">\M</span>iniconda3<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt; conda activate niche
+<span class="o">(</span>niche<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt; pip install niche_vlaanderen --upgrade
 </pre></div>
 </div>
+<p>Note you might need to update other packages.</p>
 </section>
 <section id="installing-a-specific-version">
 <h2>Installing a specific version<a class="headerlink" href="#installing-a-specific-version" title="Permalink to this headline"></a></h2>
-<p>If you want to install a specific niche version, you can install using pip:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>C:<span class="se">\U</span>sers<span class="se">\j</span>ohan<span class="se">\M</span>iniconda3<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\j</span>ohan&gt; activate niche
-<span class="o">(</span>niche<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\j</span>ohan&gt; pip install <span class="nv">niche_vlaanderen</span><span class="o">==</span><span class="m">1</span>.0
+<p>If you want to install a specific niche_vlaanderen version, you can install using pip:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>C:<span class="se">\U</span>sers<span class="se">\m</span>yusername<span class="se">\M</span>iniconda3<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt; conda activate niche
+<span class="o">(</span>niche<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt; pip install <span class="nv">niche_vlaanderen</span><span class="o">==</span><span class="m">1</span>.0
 </pre></div>
 </div>
 </section>
 <section id="alternative-installation">
 <h2>Alternative installation<a class="headerlink" href="#alternative-installation" title="Permalink to this headline"></a></h2>
-<p>It is possible to install niche without using an environment. This is currently not
+<p>It is possible to install niche_vlaanderen without using an environment. This is currently not
 the recommended installation as it requires setting an environment variable for
 opening some grid files. (See <a class="reference internal" href="faq.html#missing-gcs"><span class="std std-ref">Missing gcs.csv file</span></a> for instructions).</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda install pandas pyyaml rasterio fiona
@@ -174,23 +183,22 @@ will not work) and <cite>jupyter</cite> notebook, which allows interactive usage
 </section>
 <section id="running-niche">
 <h2>Running niche<a class="headerlink" href="#running-niche" title="Permalink to this headline"></a></h2>
-<p>Whenever you want to use niche (either from the command line or Python) you need
+<p>Whenever you want to use niche_vlaanderen (either from the command line or Python) you need
 to start from the <cite>Anaconda prompt</cite> (in the start menu)
 and activate the environment:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>C:<span class="se">\U</span>sers<span class="se">\j</span>ohan<span class="se">\M</span>iniconda3<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\j</span>ohan&gt; activate niche
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>C:<span class="se">\U</span>sers<span class="se">\m</span>yusername<span class="se">\M</span>iniconda3<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt; conda activate niche
 </pre></div>
 </div>
 </section>
 <section id="optionally-jupyter-notebook">
 <h2>Optionally - Jupyter Notebook<a class="headerlink" href="#optionally-jupyter-notebook" title="Permalink to this headline"></a></h2>
 <p>If you want to run niche_vlaanderen interactively, we recommend using a [jupyter notebook](<a class="reference external" href="http://jupyter.org/">http://jupyter.org/</a>).
-To run this, from the anaconda prompt do:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">johan</span>\<span class="n">Miniconda3</span><span class="p">)</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">johan</span><span class="o">&gt;</span> <span class="n">activate</span> <span class="n">niche</span>
-<span class="p">(</span><span class="n">niche</span><span class="p">)</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">johan</span><span class="o">&gt;</span> <span class="n">jupyter</span> <span class="n">notebook</span>
+To run this, from the <cite>Anaconda prompt</cite> do:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">myusername</span>\<span class="n">Miniconda3</span><span class="p">)</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">myusername</span><span class="o">&gt;</span> <span class="n">conda</span> <span class="n">activate</span> <span class="n">niche</span>
+<span class="p">(</span><span class="n">niche</span><span class="p">)</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">myusername</span><span class="o">&gt;</span> <span class="n">jupyter</span> <span class="n">notebook</span>
 </pre></div>
 </div>
-<p>This should open a webbrowser pointing towards <a class="reference external" href="http://localhost:8888">http://localhost:8888</a> . If you browser does not open, try looking for the
-correct URL at the anaconda prompt.</p>
+<p>This should open a webbrowser pointing towards <a class="reference external" href="http://localhost:8888">http://localhost:8888</a> . If your browser does not open, try looking for the correct URL at the <cite>Anaconda prompt</cite>.</p>
 <p>The <a class="reference internal" href="tutorials.html"><span class="doc">Tutorials</span></a> will use these jupyter notebooks, and are the best place to continue from here.</p>
 </section>
 </section>
