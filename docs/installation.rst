@@ -42,7 +42,7 @@ Now install the niche_vlaanderen package and its dependencies within the niche e
 
 .. code-block:: shell
 
-    (niche) C:\Users\myusername> conda install pandas pyyaml rasterio fiona
+    (niche) C:\Users\myusername> conda install pandas=1.5.3 pyyaml rasterio fiona
     (niche) C:\Users\myusername> pip install niche_vlaanderen
 
 It is strongly recommended to install also `matplotlib` (otherwise plotting
@@ -100,7 +100,7 @@ opening some grid files. (See :ref:`missing_gcs` for instructions).
 
 .. code-block:: shell
 
-    conda install pandas pyyaml rasterio fiona
+    conda install pandas=1.5.3 pyyaml rasterio fiona
     pip install niche_vlaanderen
 
 Like for the normal installation, it is strongly recommended to install also `matplotlib` (otherwise plotting
