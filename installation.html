@@ -123,7 +123,7 @@ OR
 </div>
 <p>You will see that <cite>(C:\Users\myusername\Miniconda3)</cite>/<cite>(base)</cite> will change into <cite>(niche)</cite>.</p>
 <p>Now install the niche_vlaanderen package and its dependencies within the niche environment:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>niche<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt; conda install pandas pyyaml rasterio fiona
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>niche<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt; conda install <span class="nv">pandas</span><span class="o">=</span><span class="m">1</span>.5.3 pyyaml rasterio fiona
 <span class="o">(</span>niche<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt; pip install niche_vlaanderen
 </pre></div>
 </div>
@@ -171,7 +171,7 @@ from the Anaconda prompt).</p>
 <p>It is possible to install niche_vlaanderen without using an environment. This is currently not
 the recommended installation as it requires setting an environment variable for
 opening some grid files. (See <a class="reference internal" href="faq.html#missing-gcs"><span class="std std-ref">Missing gcs.csv file</span></a> for instructions).</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda install pandas pyyaml rasterio fiona
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda install <span class="nv">pandas</span><span class="o">=</span><span class="m">1</span>.5.3 pyyaml rasterio fiona
 pip install niche_vlaanderen
 </pre></div>
 </div>
