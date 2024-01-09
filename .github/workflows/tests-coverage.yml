@@ -21,7 +21,7 @@ jobs:
         run: |
           conda config --add channels conda-forge
           conda config --set channel_priority strict
-          conda install pandas pyyaml rasterio fiona
+          conda install pandas=1.5.3 pyyaml rasterio fiona
           pip install -e .
           pip install -r dev-requirements.txt coverage
           pytest --cov niche_vlaanderen --cov-report xml --verbose --tb=long
