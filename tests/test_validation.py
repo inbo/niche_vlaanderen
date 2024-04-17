@@ -33,7 +33,7 @@ def test_validation(zwarte_beek_niche, path_testdata):
     assert np.isclose(no.summary["score_phab"][18], 100)
 
     # repr
-    assert "tests/data/bwk/BWK_2020_clip_ZwarteBeek_simplified.shp" in str(no)
+    assert "BWK_2020_clip_ZwarteBeek_simplified.shp" in str(no)
     assert "niche object: zwarte beek" in str(no)
 
 
