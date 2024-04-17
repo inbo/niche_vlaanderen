@@ -439,15 +439,19 @@ class Niche(object):
             ):
                 band = band.astype("float32")
 
-            # convert old soil codes to new soil codes
-            if f == "soil_code" and np.all(band[band != nodata] >= 10000):
-                band[band != nodata] = np.round(band[band != nodata] / 10000)
-
             # create a mask for no-data values, taking into account data-types
             if band.dtype == "float32" and nodata is not None:
-                band[np.isclose(band, nodata)] = np.nan
+                band[np.isclose(nodata, band)] = np.nan
             else:
                 band[band == nodata] = -99
+            
+            # convert old soil codes to new soil codes
+            if f == "soil_code" and np.all((band >= 10000)|(band==-99)|np.isnan(band)):
+                band[band>=10000] = np.round(band[band>=10000] / 10000)
+            
+            if f == "soil_code" and band.dtype == "float32":
+                band[np.isnan(band)] = -99
+                band = band.astype(int)
 
             inputarray[f] = band
 
