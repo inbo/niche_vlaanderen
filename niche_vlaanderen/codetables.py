@@ -68,8 +68,6 @@ def check_join(df1, df2, f1, f2=None, inner=True):
                 raise CodeTableException("Not all codes from table 1 are in table 2")
             else:
                 warnings.warn("Warning, different keys exist in tables")
-        print(u1)
-        print(u2)
 
 
 def check_unique(df, col):

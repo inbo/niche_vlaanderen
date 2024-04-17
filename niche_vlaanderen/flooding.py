@@ -109,7 +109,7 @@ class Flooding(object):
         check_codes_used("duration", duration, self._ct["duration"]["code"])
         check_codes_used("period", period, ["summer", "winter"])
 
-        for veg_code, subtable_veg in self._ct["lnk_potential"].groupby(["veg_code"]):
+        for veg_code, subtable_veg in self._ct["lnk_potential"].groupby("veg_code"):
             subtable_veg = subtable_veg.reset_index()
             # by default we give code 4 (no information/flooding)
             # https://github.com/inbo/niche_vlaanderen/issues/87

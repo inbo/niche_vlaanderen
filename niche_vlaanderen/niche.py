@@ -998,7 +998,8 @@ class Niche(object):
             vegetation_types = self._vegetation.keys()
 
         if len(vegetation_types) == 0:
-            raise NicheException("Can not calculate zonal statistics for empty vegetation list")
+            raise NicheException("Can not calculate zonal statistics for "
+                                 "empty vegetation list")
 
         logger.debug(f"vegetation_types: {vegetation_types}")
         logger.debug(f"upscaling to {upscale}")
@@ -1026,7 +1027,7 @@ class Niche(object):
                 raster=raster,
                 affine=affine,
                 categorical=True,
-                nodata=-99,
+                nodata=Vegetation.nodata_veg,
                 geojson_out=attribute is not None,
             )
         warnings.simplefilter("default")

@@ -98,7 +98,7 @@ class Vegetation(object):
                 "soil_codes.csv")
 
         if ct_acidity is None:
-            ct_soil_code = files(
+            ct_acidity = files(
                 "niche_vlaanderen.system_tables").joinpath(
                 "acidity.csv")
 
@@ -170,8 +170,7 @@ class Vegetation(object):
         -------
         veg: dict
             A dictionary containing the different output arrays per
-            veg_code value.
-            -99 is used for nodata_veg values
+            veg_code value. 255 is used for nodata_veg values
         expected: int
             Expected code in veg arrays if all conditions are met
         veg_occurrence: dict
@@ -215,7 +214,7 @@ class Vegetation(object):
         veg_detail = dict()
         occurrence = dict()
 
-        for veg_code, subtable in self._ct_vegetation.groupby(["veg_code"]):
+        for veg_code, subtable in self._ct_vegetation.groupby("veg_code"):
 
             subtable = subtable.reset_index()
             # vegi is the prediction for the current veg_code
@@ -314,7 +313,7 @@ class Vegetation(object):
 
         warnings.simplefilter(action="ignore", category=RuntimeWarning)
 
-        for veg_code, subtable in veg.groupby(["veg_code"]):
+        for veg_code, subtable in veg.groupby("veg_code"):
             subtable = subtable.reset_index()
 
             mhw_diff = np.full(soil_code.shape, np.nan)

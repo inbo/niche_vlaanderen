@@ -71,14 +71,14 @@ class Acidity(object):
         orig_shape = mlw.shape
         soil_code = soil_code.flatten()
         mlw = mlw.flatten()
-        soil_group = self._ct_soil_codes.soil_group.reindex(soil_code).values.astype(
-            "int8"
+        soil_group = (
+            self._ct_soil_codes.soil_group
+            .reindex(soil_code, fill_value=-99)  # Fill with -99 for no data
+            .values.astype("int8")
         )
-        # the function above gives 0 for no data
-        soil_group[soil_group == 0] = -99
 
         result = np.full(soil_code.shape, -99)
-        for sel_group, subtable in self._ct_soil_mlw.groupby(["soil_group"]):
+        for sel_group, subtable in self._ct_soil_mlw.groupby("soil_group"):
 
             subtable = subtable.copy().reset_index(drop=True)
             index = np.digitize(mlw, subtable.mlw_max, right=True)
