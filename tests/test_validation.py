@@ -11,6 +11,7 @@ from niche_vlaanderen.validation import NicheValidation, NicheValidationExceptio
 
 def test_validation(zwarte_beek_niche, path_testdata):
     myniche = zwarte_beek_niche()
+    myniche.name = "zwarte beek"
     myniche.run()
 
     no = NicheValidation(

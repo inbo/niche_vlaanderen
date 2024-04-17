@@ -45,7 +45,11 @@ def check_lower_upper_boundaries(df, min_col, max_col, value):
     """
 
     group_cols = set(df.columns.tolist()) - {min_col, max_col, value}
-    for sel_group, subtable in df.groupby(list(group_cols)):
+    if len(list(group_cols)) > 0:
+        groups = list(group_cols)
+    else:
+        groups = list(group_cols)[0]
+    for sel_group, subtable in df.groupby(groups):
         min_values = subtable[min_col]
         max_values = subtable[max_col]
         for (i, index) in enumerate(min_values.index):
