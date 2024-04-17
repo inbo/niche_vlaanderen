@@ -3,7 +3,7 @@ from __future__ import division
 import logging
 import rasterio
 import os
-from pkg_resources import resource_filename
+from importlib.resources import files
 import copy
 from collections import OrderedDict
 
@@ -47,9 +47,9 @@ class Flooding(object):
 
         for i in ["depths", "duration", "frequency", "lnk_potential", "potential"]:
             if locals()[i] is None:
-                ct = resource_filename(
-                    "niche_vlaanderen", "system_tables/flooding/" + i + ".csv"
-                )
+                ct = files(
+                    "niche_vlaanderen.system_tables.flooding").joinpath(
+                    f"{i}.csv")
             else:
                 ct = locals()[i]
             self._ct[i] = pd.read_csv(ct)

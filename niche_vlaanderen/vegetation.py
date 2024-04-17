@@ -1,5 +1,5 @@
 from __future__ import division
-from pkg_resources import resource_filename
+from importlib.resources import files
 from enum import IntEnum
 
 import numpy as np
@@ -85,37 +85,37 @@ class Vegetation(object):
         """
 
         if ct_vegetation is None:
-            ct_vegetation = resource_filename(
-                "niche_vlaanderen", "system_tables/niche_vegetation.csv"
-            )
+            ct_vegetation = files(
+                "niche_vlaanderen.system_tables").joinpath(
+                "niche_vegetation.csv")
 
         # Note that the next code tables are only used for validation, they are
         # not part of the logic of the vegetation class
 
         if ct_soil_code is None:
-            ct_soil_code = resource_filename(
-                "niche_vlaanderen", "system_tables/soil_codes.csv"
-            )
+            ct_soil_code = files(
+                "niche_vlaanderen.system_tables").joinpath(
+                "soil_codes.csv")
 
         if ct_acidity is None:
-            ct_acidity = resource_filename(
-                "niche_vlaanderen", "system_tables/acidity.csv"
-            )
+            ct_soil_code = files(
+                "niche_vlaanderen.system_tables").joinpath(
+                "acidity.csv")
 
         if ct_nutrient_level is None:
-            ct_nutrient_level = resource_filename(
-                "niche_vlaanderen", "system_tables/nutrient_level.csv"
-            )
+            ct_nutrient_level = files(
+                "niche_vlaanderen.system_tables").joinpath(
+                "nutrient_level.csv")
 
         if ct_management is None:
-            ct_management = resource_filename(
-                "niche_vlaanderen", "system_tables/management.csv"
-            )
+            ct_management = files(
+                "niche_vlaanderen.system_tables").joinpath(
+                "management.csv")
 
         if ct_inundation is None:
-            ct_inundation = resource_filename(
-                "niche_vlaanderen", "system_tables/inundation.csv"
-            )
+            ct_inundation = files(
+                "niche_vlaanderen.system_tables").joinpath(
+                "inundation.csv")
 
         self._ct_vegetation = pd.read_csv(ct_vegetation)
         self._ct_soil_code = pd.read_csv(ct_soil_code)

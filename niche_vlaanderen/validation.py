@@ -2,8 +2,7 @@ import logging
 import warnings
 from collections import defaultdict
 from pathlib import Path
-
-from pkg_resources import resource_filename
+from importlib.resources import files
 
 with warnings.catch_warnings():
     warnings.filterwarnings("ignore", category=DeprecationWarning)
@@ -92,9 +91,9 @@ class NicheValidation(object):
         }
 
         if mapping_file is None:
-            mapping_file = resource_filename(
-                "niche_vlaanderen", "system_tables/hab_niche_join.csv"
-            )
+            mapping_file = files(
+                "niche_vlaanderen.system_tables").joinpath(
+                "hab_niche_join.csv")
 
         mapping = pd.read_csv(mapping_file)
 

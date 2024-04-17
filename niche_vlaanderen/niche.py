@@ -15,9 +15,9 @@ from .version import __version__
 from .flooding import Flooding
 from .exception import NicheException
 
-from pkg_resources import resource_filename
+from importlib.resources import files
 import json
-from pkg_resources import parse_version
+from packaging.version import parse
 from urllib.request import urlopen, URLError
 
 import logging
@@ -203,7 +203,7 @@ class Niche(object):
             response = urlopen(url, timeout=5)
             json_response = json.loads(response.read().decode("utf-8"))
             releases = json_response["releases"]
-            versions = sorted(releases, key=parse_version, reverse=True)
+            versions = sorted(releases, key=parse, reverse=True)
 
             # remove alpha, beta, rc versions
             dev = ["rc", "a", "b"]
@@ -1084,9 +1084,9 @@ class Niche(object):
             if "ct_vegetation" in self._code_tables:
                 ct_vegetation = self._code_tables["ct_vegetation"]
             else:
-                ct_vegetation = resource_filename(
-                    "niche_vlaanderen", "system_tables/niche_vegetation.csv"
-                )
+                ct_vegetation = files(
+                    "niche_vlaanderen.system_tables").joinpath(
+                    "niche_vegetation.csv")
 
             ct_vegetation = pd.read_csv(ct_vegetation)
             subtable = ct_vegetation[["veg_code", "veg_type"]]
