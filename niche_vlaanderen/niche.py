@@ -1,11 +1,21 @@
-import rasterio
-import rasterstats
 import warnings
 import inspect
+import json
+from packaging.version import parse
+from urllib.request import urlopen, URLError
+import logging
+import os.path
+import numbers
+import yaml
+import datetime
+import sys
 
 import numpy as np
 import numpy.ma as ma
 import pandas as pd
+import rasterio
+import rasterstats
+from tqdm import tqdm
 
 from niche_vlaanderen.vegetation import Vegetation, VegSuitable
 from niche_vlaanderen.acidity import Acidity
@@ -14,19 +24,8 @@ from niche_vlaanderen.spatial_context import SpatialContext
 from niche_vlaanderen.version import __version__
 from niche_vlaanderen.flooding import Flooding
 from niche_vlaanderen.exception import NicheException
+from niche_vlaanderen.codetables import package_resource
 
-import json
-from packaging.version import parse
-from urllib.request import urlopen, URLError
-
-import logging
-import os.path
-import numbers
-import yaml
-import datetime
-import sys
-
-from tqdm import tqdm
 
 _allowed_input = {
     "soil_code",
@@ -1086,7 +1085,7 @@ class Niche(object):
                 ct_vegetation = self._code_tables["ct_vegetation"]
             else:
                 ct_vegetation = package_resource(
-                    "system_tables", "niche_vegetation.csv")
+                    ["system_tables"], "niche_vegetation.csv")
 
             ct_vegetation = pd.read_csv(ct_vegetation)
             subtable = ct_vegetation[["veg_code", "veg_type"]]

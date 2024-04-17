@@ -1,9 +1,7 @@
 from __future__ import division
-
 import logging
 import rasterio
 import os
-from importlib.resources import files
 import copy
 from collections import OrderedDict
 

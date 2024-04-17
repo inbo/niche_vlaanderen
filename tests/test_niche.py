@@ -36,7 +36,7 @@ class TestNiche:
         This tests runs the data from the testcase/zwarte_beek.
         TODO no actual validation is done!
         """
-        myniche = zwarte_beek_niche
+        myniche = zwarte_beek_niche()
         myniche.run()
 
         o1 = myniche.occurrence
@@ -97,10 +97,10 @@ class TestNiche:
         ]
 
         dir_listing = os.listdir(tmpdir)
-        assert Counter(list(expected_files)) == Counter(list(dir_listing))
+        assert set(expected_files) == set(dir_listing)
 
         # run check after predefined acidity
-        myniche = zwarte_beek_niche
+        myniche = zwarte_beek_niche()
         myniche.set_input("acidity", tmpdir / "acidity.tif")
         myniche.run()
 
@@ -109,16 +109,16 @@ class TestNiche:
 
         dir_listing = os.listdir(tmpdir_acidity)
         expected_files.remove("acidity.tif")
-        assert Counter(list(expected_files)) == Counter(list(dir_listing))
+        assert set(expected_files) == set(dir_listing)
 
     def test_zwarte_beek_constant_values(self, zwarte_beek_niche):
-        myniche = zwarte_beek_niche
+        myniche = zwarte_beek_niche()
         myniche.set_input("rainwater", 0)
         assert "rainwater" not in myniche._inputfiles
         myniche.set_input("nitrogen_fertilizer", 0)
         myniche.run()
 
-        myniche2 = zwarte_beek_niche
+        myniche2 = zwarte_beek_niche()
         myniche2.run()
         assert myniche.occurrence == myniche2.occurrence
 
@@ -182,7 +182,7 @@ class TestNiche:
         reason="gdalinfo not available in the environment.",
     )
     def test_zwarte_beek_validate(self, tmp_path, zwarte_beek_niche):
-        myniche = zwarte_beek_niche
+        myniche = zwarte_beek_niche()
         myniche.run()
         myniche.write(tmp_path)
 
@@ -196,14 +196,14 @@ class TestNiche:
 
     def test_windowed_read(self, zwarte_beek_niche):
         # tests whether the spatial context is adjusted to the smaller grid
-        myniche = zwarte_beek_niche
+        myniche = zwarte_beek_niche()
         myniche.set_input("mlw", "tests/data/part_zwarte_beek_mlw.asc")
         myniche.run(full_model=True)
         assert 37 == myniche._context.width
         assert 37 == myniche._context.height
 
     def test_deviation(self, zwarte_beek_niche):
-        myniche = zwarte_beek_niche
+        myniche = zwarte_beek_niche()
         myniche.run(deviation=True)
         # check dict exists and contains enough nan values
         assert 14400 == np.isnan(myniche._deviation["mhw_04"]).sum()
@@ -408,12 +408,12 @@ class TestNiche:
         )
 
     def test_zonal_stats(self, path_testcase, zwarte_beek_niche):
-        myniche = zwarte_beek_niche
+        myniche = zwarte_beek_niche()
         myniche.run(full_model=False)
         vector = path_testcase / "zwarte_beek" / "input" / "study_area_l72.geojson"
 
         # there is only one polygon
-        stats = myniche.zonal_stats(vector, outside=False)
+        stats = myniche.zonal_stats(str(vector), outside=False)
 
         # we expect no data to be absent as the shape is a mask
         np.testing.assert_equal(np.all(stats.presence == "no data"), False)
@@ -425,7 +425,7 @@ class TestNiche:
         table_sum = np.sum(table.area_ha[(table.presence == "present")])
         assert table_sum == stats_sum
 
-        stats = myniche.zonal_stats(vector)
+        stats = myniche.zonal_stats(str(vector))
         # we should have nodata areas now
         assert np.any(stats.presence == "no data")
 
@@ -440,21 +440,21 @@ class TestNiche:
         assert 15.16 == result
 
     def test_zonal_attribute(self, path_testcase, zwarte_beek_niche):
-        myniche = zwarte_beek_niche
+        myniche = zwarte_beek_niche()
         myniche.run(full_model=False)
         vector = path_testcase / "zwarte_beek" / "input" / "study_area_l72.geojson"
 
         # there is only one polygon
-        stats = myniche.zonal_stats(vector, outside=False, attribute="OID")
+        stats = myniche.zonal_stats(str(vector), outside=False, attribute="OID")
         # we expect no data to be absent as the shape is a mask
         np.testing.assert_equal(np.all(stats.presence == "no data"), False)
         assert np.all(stats.OID == 0)
 
         # check what happens if we supply an unexisting attribute
         with pytest.raises(KeyError):
-            myniche.zonal_stats(vector, outside=False, attribute="xyz")
+            myniche.zonal_stats(str(vector), outside=False, attribute="xyz")
 
-        stats = myniche.zonal_stats(vector, outside=True, attribute="OID")
+        stats = myniche.zonal_stats(str(vector), outside=True, attribute="OID")
         print(stats.OID.unique())
         np.testing.assert_equal([0, -1], stats.OID.unique())
 
@@ -630,7 +630,7 @@ class TestNicheDelta:
             # should fail as the model has not yet been run
             niche_vlaanderen.NicheDelta(small, small)
 
-        zwb = zwarte_beek_niche
+        zwb = zwarte_beek_niche()
         zwb.run()
         small.run(full_model=False)
         # should fail due to different extent

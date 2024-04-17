@@ -10,10 +10,11 @@ from niche_vlaanderen.validation import NicheValidation, NicheValidationExceptio
 
 
 def test_validation(zwarte_beek_niche, path_testdata):
-    zwarte_beek_niche.run()
+    myniche = zwarte_beek_niche()
+    myniche.run()
 
     no = NicheValidation(
-        niche=zwarte_beek_niche,
+        niche=myniche,
         map=path_testdata / "bwk" / "BWK_2020_clip_ZwarteBeek_simplified.shp",
     )
 
@@ -36,10 +37,11 @@ def test_validation(zwarte_beek_niche, path_testdata):
 
 
 def test_validation_custom_vegetation(zwarte_beek_niche, path_testdata):
-    zwarte_beek_niche.run()
+    myniche = zwarte_beek_niche()
+    myniche.run()
 
     no = NicheValidation(
-        niche=zwarte_beek_niche,
+        niche=myniche,
         map=path_testdata / "bwk" / "BWK_2020_clip_ZwarteBeek_simplified.shp",
         mapping_file=path_testdata / "hab_niche_test.csv",
     )
@@ -53,13 +55,15 @@ def test_validation_multiple_mapping(tmp_path, zwarte_beek_niche, path_testdata)
     """
     Test that area's are correct if multiple vegetation types map to the same niche type
     """
-    zwarte_beek_niche.run()
+    myniche = zwarte_beek_niche()
+    myniche.run()
+
     mapping = pd.read_csv(path_testdata / "hab_niche_test.csv")
     mapping["NICHE"] = 4
     mapping.drop_duplicates(inplace=True, ignore_index=True)
     mapping.to_csv(tmp_path / "mapping.csv")
     no = NicheValidation(
-        niche=zwarte_beek_niche,
+        niche=myniche,
         map=path_testdata / "bwk" / "BWK_2020_clip_ZwarteBeek_simplified.shp",
         mapping_file=tmp_path / "mapping.csv"
     )
@@ -78,19 +82,21 @@ def test_validation_invalid_niche(path_testdata):
 
 
 def test_validation_warning_overlap(zwarte_beek_niche, path_testdata):
-    zwarte_beek_niche.run()
+    myniche = zwarte_beek_niche()
+    myniche.run()
     with pytest.warns(UserWarning):
         NicheValidation(
-            niche=zwarte_beek_niche,
+            niche=myniche,
             map=path_testdata / "bwk" / "BWK_2020_clip_ZwarteBeek.shp",
             upscale=1,
         )
 
 
 def test_validation_write(tmp_path, zwarte_beek_niche, path_testdata):
-    zwarte_beek_niche.run()
+    myniche = zwarte_beek_niche()
+    myniche.run()
     validation = NicheValidation(
-        niche=zwarte_beek_niche,
+        niche=myniche,
         map=path_testdata / "bwk" / "BWK_2020_clip_ZwarteBeek_simplified.shp",
     )
     validation.write(tmp_path)
@@ -161,10 +167,11 @@ def test_validation_multiple_veg(zwarte_beek_niche, path_testdata):
 
     cfr issue #314
     """
-    zwarte_beek_niche.run()
+    myniche = zwarte_beek_niche()
+    myniche.run()
 
     no_simplebr_fkok = NicheValidation(
-        niche=zwarte_beek_niche,
+        niche=myniche,
         map=path_testdata / "bwk" / "BWK_2020_clip_ZwarteBeek_simplified.shp",
         id="OBJECTID",
     )  # see zip attached
