@@ -16,7 +16,7 @@ def package_resource(folder_paths, file_path):
     file_path : str
         File name of the package resource.
     """
-    if sys.version_info < (3, 9):
+    if sys.version_info < (3, 10):
         from pkg_resources import resource_filename
         return resource_filename("niche_vlaanderen",
                                  f"{'/'.join(folder_paths)}/{file_path}")
