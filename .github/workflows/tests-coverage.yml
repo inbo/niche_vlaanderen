@@ -10,7 +10,7 @@ jobs:
   windows-conda-tests:
     runs-on: "windows-latest"
     steps:
-      - uses: conda-incubator/setup-miniconda@v2
+      - uses: conda-incubator/setup-miniconda@v3
         with:
           miniconda-version: "latest"
           environment-file:
