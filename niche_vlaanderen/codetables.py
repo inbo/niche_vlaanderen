@@ -45,7 +45,7 @@ def check_lower_upper_boundaries(df, min_col, max_col, value):
     """
 
     group_cols = set(df.columns.tolist()) - {min_col, max_col, value}
-    if len(list(group_cols)) > 0:
+    if len(list(group_cols)) > 1:
         groups = list(group_cols)
     else:
         groups = list(group_cols)[0]
