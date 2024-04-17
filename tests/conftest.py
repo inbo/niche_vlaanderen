@@ -34,6 +34,7 @@ def path_system_tables():
 
 @pytest.fixture
 def zwarte_beek_niche(path_testcase):
+    """Create testcase Zwarte Beek"""
     myniche = niche_vlaanderen.Niche()
     myniche.name="zwarte beek"
     input_dir = path_testcase / "zwarte_beek" / "input"
@@ -52,4 +53,12 @@ def zwarte_beek_niche(path_testcase):
     myniche.set_input("inundation_acidity", input_dir / "inundation.asc")
     myniche.set_input("seepage", input_dir / "seepage.asc")
     myniche.set_input("rainwater", input_dir / "rainwater.asc")
+    return myniche
+
+
+@pytest.fixture
+def small_niche(path_tests):
+    """Create dummy testcase small"""
+    myniche = niche_vlaanderen.Niche()
+    myniche.read_config_file(path_tests / "small.yaml")
     return myniche

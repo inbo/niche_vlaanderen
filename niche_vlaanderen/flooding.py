@@ -11,8 +11,10 @@ import pandas as pd
 import numpy as np
 import numpy.ma as ma
 
-from .spatial_context import SpatialContext
-from .codetables import validate_tables_flooding, check_codes_used
+from niche_vlaanderen.spatial_context import SpatialContext
+from niche_vlaanderen.codetables import (validate_tables_flooding,
+                                         check_codes_used,
+                                         package_resource)
 
 
 class FloodingException(Exception):
@@ -47,9 +49,8 @@ class Flooding(object):
 
         for i in ["depths", "duration", "frequency", "lnk_potential", "potential"]:
             if locals()[i] is None:
-                ct = files(
-                    "niche_vlaanderen.system_tables.flooding").joinpath(
-                    f"{i}.csv")
+                ct = package_resource(["system_tables", "flooding"],
+                                      f"{i}.csv")
             else:
                 ct = locals()[i]
             self._ct[i] = pd.read_csv(ct)

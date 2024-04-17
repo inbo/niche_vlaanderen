@@ -7,15 +7,14 @@ import numpy as np
 import numpy.ma as ma
 import pandas as pd
 
-from .vegetation import Vegetation, VegSuitable
-from .acidity import Acidity
-from .nutrient_level import NutrientLevel
-from .spatial_context import SpatialContext
-from .version import __version__
-from .flooding import Flooding
-from .exception import NicheException
+from niche_vlaanderen.vegetation import Vegetation, VegSuitable
+from niche_vlaanderen.acidity import Acidity
+from niche_vlaanderen.nutrient_level import NutrientLevel
+from niche_vlaanderen.spatial_context import SpatialContext
+from niche_vlaanderen.version import __version__
+from niche_vlaanderen.flooding import Flooding
+from niche_vlaanderen.exception import NicheException
 
-from importlib.resources import files
 import json
 from packaging.version import parse
 from urllib.request import urlopen, URLError
@@ -649,6 +648,7 @@ class Niche(object):
         if not self.vegetation_calculated:
             raise NicheException("A valid run must be done before writing the output.")
 
+        folder = str(folder)
         self._options["output_dir"] = folder
 
         if not os.path.exists(folder):
@@ -1085,9 +1085,8 @@ class Niche(object):
             if "ct_vegetation" in self._code_tables:
                 ct_vegetation = self._code_tables["ct_vegetation"]
             else:
-                ct_vegetation = files(
-                    "niche_vlaanderen.system_tables").joinpath(
-                    "niche_vegetation.csv")
+                ct_vegetation = package_resource(
+                    "system_tables", "niche_vegetation.csv")
 
             ct_vegetation = pd.read_csv(ct_vegetation)
             subtable = ct_vegetation[["veg_code", "veg_type"]]

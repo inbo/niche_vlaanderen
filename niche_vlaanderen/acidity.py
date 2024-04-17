@@ -1,9 +1,8 @@
-from importlib.resources import files
-
 import numpy as np
 import pandas as pd
 
-from .codetables import validate_tables_acidity, check_codes_used
+from niche_vlaanderen.codetables import package_resource
+from niche_vlaanderen.codetables import validate_tables_acidity, check_codes_used
 
 
 class Acidity(object):
@@ -25,25 +24,20 @@ class Acidity(object):
     ):
 
         if ct_acidity is None:
-            ct_acidity = files(
-                "niche_vlaanderen.system_tables").joinpath(
-                "acidity.csv")
+            ct_acidity = package_resource(
+                ["system_tables"], "acidity.csv")
         if ct_soil_mlw_class is None:
-            ct_soil_mlw_class = files(
-                "niche_vlaanderen.system_tables").joinpath(
-                "soil_mlw_class.csv")
+            ct_soil_mlw_class = package_resource(
+                ["system_tables"], "soil_mlw_class.csv")
         if ct_soil_codes is None:
-            ct_soil_codes = files(
-                "niche_vlaanderen.system_tables").joinpath(
-                "soil_codes.csv")
+            ct_soil_codes = package_resource(
+                ["system_tables"], "soil_codes.csv")
         if lnk_acidity is None:
-            lnk_acidity = files(
-                "niche_vlaanderen.system_tables").joinpath(
-                "lnk_acidity.csv")
+            lnk_acidity = package_resource(
+                ["system_tables"], "lnk_acidity.csv")
         if ct_seepage is None:
-            ct_seepage = files(
-                "niche_vlaanderen.system_tables").joinpath(
-                "seepage.csv")
+            ct_seepage = package_resource(
+                ["system_tables"], "seepage.csv")
 
         self._ct_acidity = pd.read_csv(ct_acidity)
         self._ct_soil_mlw = pd.read_csv(ct_soil_mlw_class)
