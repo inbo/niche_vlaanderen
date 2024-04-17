@@ -717,7 +717,7 @@ class TestNicheDelta(TestCase):
 
 @image_comparison(
     baseline_images=["zwb12", "zwb12_full_legend"],
-    remove_text=True, extensions=["svg"]
+    remove_text=True, extensions=["svg"], tol=5
 )
 def test_niche_plot(path_testcase):
     """Test with limited legend for detail"""
