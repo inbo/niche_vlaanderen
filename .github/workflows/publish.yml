@@ -15,7 +15,7 @@ jobs:
         fail-fast: [true]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: build package
         run: |
           sudo apt-get -y install libgdal-dev gdal-bin pandoc
