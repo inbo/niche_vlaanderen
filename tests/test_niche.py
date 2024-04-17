@@ -716,25 +716,26 @@ class TestNicheDelta(TestCase):
 
 
 @image_comparison(
-    baseline_images=["zwb12", "zwb12_full_legend"], remove_text=True, extensions=["svg"]
+    baseline_images=["zwb12", "zwb12_full_legend"],
+    remove_text=True, extensions=["svg"]
 )
-def test_niche_plot():
+def test_niche_plot(path_testcase):
     """Test with limited legend for detail"""
     full = niche_vlaanderen.Niche()
-    path = "testcase/zwarte_beek/input/"
-    full.set_input("mhw", path + "mhw.asc")
-    full.set_input("mlw", path + "mlw.asc")
-    full.set_input("msw", path + "msw.asc")
-    full.set_input("soil_code", path + "soil_code.asc")
+    path = path_testcase / "zwarte_beek" / "input"
+    full.set_input("mhw", path / "mhw.asc")
+    full.set_input("mlw", path / "mlw.asc")
+    full.set_input("msw", path / "msw.asc")
+    full.set_input("soil_code", path / "soil_code.asc")
     full.set_input("nitrogen_animal", 0)
     full.set_input("nitrogen_fertilizer", 0)
-    full.set_input("management", path + "managemen" "t.asc")
-    full.set_input("nitrogen_atmospheric", path + "nitrogen_atmospheric.asc")
+    full.set_input("management", path / "management.asc")
+    full.set_input("nitrogen_atmospheric", path / "nitrogen_atmospheric.asc")
     full.set_input("inundation_acidity", 0)
     full.set_input("inundation_nutrient", 0)
     full.set_input("rainwater", 0)
     full.set_input("seepage", 0)
-    full.set_input("minerality", path + "minerality.asc")
+    full.set_input("minerality", path / "minerality.asc")
 
     full.run()
     vegetation = 12
@@ -755,13 +756,14 @@ def test_niche_plot():
     distutils.spawn.find_executable("gdalinfo") is None,
     reason="gdalinfo not available in the environment.",
 )
-def test_conductivity2minerality(tmpdir):
+def test_conductivity2minerality(tmp_path, path_testdata):
     niche_vlaanderen.conductivity2minerality(
-        "tests/data/small/conductivity.asc", str(tmpdir / "minerality.tif")
+        path_testdata / "small" / "conductivity.asc",
+        str(tmp_path / "minerality.tif")
     )
 
     info = subprocess.check_output(
-        ["gdalinfo", "-stats", str(tmpdir / "minerality.tif")]
+        ["gdalinfo", "-stats", str(tmp_path / "minerality.tif")]
     ).decode("utf-8")
 
     assert "STATISTICS_MAXIMUM=1" in info
