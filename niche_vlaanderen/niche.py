@@ -784,6 +784,12 @@ class Niche(object):
         norm = None
         v = None
 
+        # Inform user that data is not available to plot
+        # (key is present, but value is None)
+        if key not in self._inputfiles and key in self._inputarray:
+            if not self._inputarray[key]:
+                raise KeyError(f"{key} data is not available to plot.")
+
         if key in self._inputfiles and key not in self._inputarray:
             # if set_input has been done, but no model run yet
             # in this case we will open the file and fetch the data
