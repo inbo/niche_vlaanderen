@@ -45,6 +45,8 @@ def check_lower_upper_boundaries(df, min_col, max_col, value):
     """
 
     group_cols = set(df.columns.tolist()) - {min_col, max_col, value}
+    # Tackle Pandas single key (no list) versus multiple keys 
+    # (in a list) as input to groupby
     if len(list(group_cols)) > 1:
         groups = list(group_cols)
     else:
