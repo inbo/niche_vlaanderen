@@ -30,7 +30,7 @@ def raster_to_numpy(filename):
 class TestAcidity:
 
     def test_get_soil_mlw(self):
-        mlw = np.array([50, 66])
+        mlw = np.array([-50, -66])
         soil_code = np.array([14, 7])
         a = niche_vlaanderen.Acidity()
         result = a._calculate_soil_mlw(soil_code, mlw)
@@ -38,7 +38,7 @@ class TestAcidity:
         np.testing.assert_equal(np.array([1, 9]), result)
 
     def test_get_soil_mlw_borders(self):
-        mlw = np.array([79, 80, 100, 110, 111])
+        mlw = np.array([-79, -80, -100, -110, -111])
         soil_code = np.array([14, 14, 14, 14, 14])
         a = niche_vlaanderen.Acidity()
         result = a._calculate_soil_mlw(soil_code, mlw)
@@ -72,7 +72,7 @@ class TestAcidity:
         soilcode = np.array([14])
         inundation = np.array([1])
         seepage = np.array([20])
-        mlw = np.array([50])
+        mlw = -1 * np.array([50])
 
         a = niche_vlaanderen.Acidity()
         result = a.calculate(soilcode, mlw, inundation, seepage, minerality,
@@ -86,7 +86,7 @@ class TestAcidity:
         soil_code_r = soil_code
         soil_code_r[soil_code > 0] = np.round(soil_code / 10000)[soil_code > 0]
 
-        mlw = raster_to_numpy(inputdir / "mlw.asc")
+        mlw = -1 * raster_to_numpy(inputdir / "mlw.asc")
         inundation = \
             raster_to_numpy(inputdir / "inundation.asc")
         rainwater = raster_to_numpy(inputdir / "nullgrid.asc")

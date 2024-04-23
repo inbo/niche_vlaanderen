@@ -67,19 +67,19 @@ class Acidity(object):
         mlw = mlw.flatten()
         soil_group = (
             self._ct_soil_codes.soil_group
-            .reindex(soil_code, fill_value=-99)  # Fill with -99 for no data
+            .reindex(soil_code, fill_value=99)  # Fill with -99 for no data
             .values.astype("int8")
         )
 
-        result = np.full(soil_code.shape, -99)
+        result = np.full(soil_code.shape, 99)
         for sel_group, subtable in self._ct_soil_mlw.groupby("soil_group"):
 
             subtable = subtable.copy().reset_index(drop=True)
-            index = np.digitize(mlw, subtable.mlw_max, right=True)
+            index = np.digitize(mlw, subtable.mlw_min, right=False)
             selection = soil_group == sel_group
             result[selection] = subtable.soil_mlw_class.reindex(index)[selection]
 
-        result[mlw == -99] = -99
+        result[mlw == 99] = 99
         result = result.reshape(orig_shape)
         return result
 
