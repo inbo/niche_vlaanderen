@@ -197,7 +197,7 @@ class TestNiche:
     def test_windowed_read(self, zwarte_beek_niche):
         # tests whether the spatial context is adjusted to the smaller grid
         myniche = zwarte_beek_niche()
-        myniche.set_input("mlw", "tests/data/part_zwarte_beek_mlw.asc")
+        myniche.set_input("mlw", "data/part_zwarte_beek_mlw.asc")
         myniche.run(full_model=True)
         assert 37 == myniche._context.width
         assert 37 == myniche._context.height

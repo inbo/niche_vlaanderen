@@ -1,4 +1,4 @@
-soil_name,msw_max,msw_min,nitrogen_mineralisation
+soil_name,msw_min,msw_max,nitrogen_mineralisation
 K1,5000,-5,11
 K1,-5,-10,13
 K1,-10,-15,15

@@ -30,14 +30,14 @@ class TestNutrientLevel(TestCase):
 
     def test_nitrogen_mineralisation(self):
         soil_code = np.array([14])
-        msw = np.array([33])
+        msw = np.array([-33])
         nl = niche_vlaanderen.NutrientLevel()
         result = nl._calculate_mineralisation(soil_code, msw)
         np.testing.assert_equal(np.array([75]), result)
 
     def test_borders(self):
         soil_code = np.array([7, 7, 7, 7, 7])
-        msw = np.array([4, 5, 7, 10, 11])
+        msw = np.array([-4, -5, -7, -10, -11])
         nl = niche_vlaanderen.NutrientLevel()
         result_nm = nl._calculate_mineralisation(soil_code, msw)
         expected_nm = np.array([50, 50, 55, 55, 76])
@@ -73,7 +73,7 @@ class TestNutrientLevel(TestCase):
         nl = niche_vlaanderen.NutrientLevel()
         management = np.array([2])
         soil_code = np.array([14])
-        msw = np.array([33])
+        msw = np.array([-33])
         nitrogen_deposition = np.array([20])
         nitrogen_animal = np.array([350])
         nitrogen_fertilizer = np.array([0])
@@ -86,11 +86,12 @@ class TestNutrientLevel(TestCase):
 
     def test_nutrient_level_testcase(self):
         nl = niche_vlaanderen.NutrientLevel()
-        soil_code = raster_to_numpy("testcase/zwarte_beek/input/soil_code.asc")
+        soil_code = raster_to_numpy("../testcase/zwarte_beek/input/soil_code.asc")
+
         soil_code_r = soil_code
         soil_code_r[soil_code > 0] = np.round(soil_code / 10000)[soil_code > 0]
 
-        input_dir = "testcase/zwarte_beek/input/"
+        input_dir = "../testcase/zwarte_beek/input/"
         msw = raster_to_numpy(input_dir + "msw.asc")
         nitrogen_deposition = \
             raster_to_numpy(input_dir + "nitrogen_atmospheric.asc")
@@ -100,11 +101,11 @@ class TestNutrientLevel(TestCase):
         management = raster_to_numpy(input_dir + "management.asc")
 
         nutrient_level = \
-            raster_to_numpy("testcase/zwarte_beek/abiotic/nutrient_level.asc")
+            raster_to_numpy("../testcase/zwarte_beek/abiotic/nutrient_level.asc")
         # convert nodata value from -99 to 255 (
         nutrient_level[nutrient_level == -99] = 255
 
-        result = nl.calculate(soil_code_r, msw, nitrogen_deposition,
+        result = nl.calculate(soil_code_r, -msw, nitrogen_deposition,
                               nitrogen_animal, nitrogen_fertilizer, management,
                               inundation)
 

@@ -15,14 +15,11 @@ def raster_to_numpy(filename):
     No-data values are -99 for integer types and np.nan for real types.
     """
     with rasterio.open(filename) as ds:
-        data = ds.read(1)
+        data = ds.read(1).astype(float)
         nodata = ds.nodatavals[0]
     print(nodata)
     # create a mask for no-data values, taking into account the data-types
-    if data.dtype == 'float32':
-        data[np.isclose(data, nodata)] = np.nan
-    else:
-        data[np.isclose(data, nodata)] = -99
+    data[np.isclose(data, nodata)] = np.nan
 
     return data
 

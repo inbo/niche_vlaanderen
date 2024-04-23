@@ -90,7 +90,7 @@ class NutrientLevel(object):
             table_sel = self._ct_mineralisation[select].copy()
             table_sel = table_sel.reset_index(drop=True)
             soil_sel = soil_code_array == code
-            ix = np.digitize(msw_array[soil_sel], table_sel.msw_max, right=True)
+            ix = np.digitize(msw_array[soil_sel], table_sel.msw_max, right=False)
 
             result[soil_sel] = table_sel["nitrogen_mineralisation"].reindex(ix)
 
