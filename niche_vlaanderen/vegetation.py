@@ -1,15 +1,15 @@
 from __future__ import division
-from pkg_resources import resource_filename
 from enum import IntEnum
+import warnings
 
 import numpy as np
 import pandas as pd
-import warnings
 
-from .nutrient_level import NutrientLevel
-from .acidity import Acidity
-from .codetables import validate_tables_vegetation, check_codes_used
-from .exception import NicheException
+from niche_vlaanderen.nutrient_level import NutrientLevel
+from niche_vlaanderen.acidity import Acidity
+from niche_vlaanderen.codetables import (validate_tables_vegetation,
+                                         check_codes_used, package_resource)
+from niche_vlaanderen.exception import NicheException
 
 
 class VegSuitable(IntEnum):
@@ -85,37 +85,31 @@ class Vegetation(object):
         """
 
         if ct_vegetation is None:
-            ct_vegetation = resource_filename(
-                "niche_vlaanderen", "system_tables/niche_vegetation.csv"
-            )
+            ct_vegetation = package_resource(["system_tables"],
+                                             "niche_vegetation.csv")
 
         # Note that the next code tables are only used for validation, they are
         # not part of the logic of the vegetation class
 
         if ct_soil_code is None:
-            ct_soil_code = resource_filename(
-                "niche_vlaanderen", "system_tables/soil_codes.csv"
-            )
+            ct_soil_code = package_resource(["system_tables"],
+                                             "soil_codes.csv")
 
         if ct_acidity is None:
-            ct_acidity = resource_filename(
-                "niche_vlaanderen", "system_tables/acidity.csv"
-            )
+            ct_acidity = package_resource(["system_tables"],
+                                             "acidity.csv")
 
         if ct_nutrient_level is None:
-            ct_nutrient_level = resource_filename(
-                "niche_vlaanderen", "system_tables/nutrient_level.csv"
-            )
+            ct_nutrient_level = package_resource(["system_tables"],
+                                                 "nutrient_level.csv")
 
         if ct_management is None:
-            ct_management = resource_filename(
-                "niche_vlaanderen", "system_tables/management.csv"
-            )
+            ct_management = package_resource(["system_tables"],
+                                                 "management.csv")
 
         if ct_inundation is None:
-            ct_inundation = resource_filename(
-                "niche_vlaanderen", "system_tables/inundation.csv"
-            )
+            ct_inundation = package_resource(["system_tables"],
+                                             "inundation.csv")
 
         self._ct_vegetation = pd.read_csv(ct_vegetation)
         self._ct_soil_code = pd.read_csv(ct_soil_code)
@@ -170,8 +164,7 @@ class Vegetation(object):
         -------
         veg: dict
             A dictionary containing the different output arrays per
-            veg_code value.
-            -99 is used for nodata_veg values
+            veg_code value. 255 is used for nodata_veg values
         expected: int
             Expected code in veg arrays if all conditions are met
         veg_occurrence: dict
@@ -215,7 +208,7 @@ class Vegetation(object):
         veg_detail = dict()
         occurrence = dict()
 
-        for veg_code, subtable in self._ct_vegetation.groupby(["veg_code"]):
+        for veg_code, subtable in self._ct_vegetation.groupby("veg_code"):
 
             subtable = subtable.reset_index()
             # vegi is the prediction for the current veg_code
@@ -314,7 +307,7 @@ class Vegetation(object):
 
         warnings.simplefilter(action="ignore", category=RuntimeWarning)
 
-        for veg_code, subtable in veg.groupby(["veg_code"]):
+        for veg_code, subtable in veg.groupby("veg_code"):
             subtable = subtable.reset_index()
 
             mhw_diff = np.full(soil_code.shape, np.nan)

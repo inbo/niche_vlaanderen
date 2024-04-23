@@ -1,7 +1,7 @@
-from affine import Affine
 from textwrap import dedent
 import warnings
 
+from affine import Affine
 
 class SpatialContextError(Exception):
     """"""

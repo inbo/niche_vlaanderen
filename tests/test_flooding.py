@@ -1,4 +1,4 @@
-from unittest import TestCase
+from collections import Counter
 import niche_vlaanderen as nv
 import numpy as np
 import rasterio
@@ -10,36 +10,36 @@ import shutil
 import sys
 
 
-class TestFlooding(TestCase):
+class TestFlooding:
     def test__calculate(self):
         fp = nv.Flooding()
         fp._calculate(depth=np.array([1, 2, 3]), frequency="T25",
                       period="winter", duration=1)
         np.testing.assert_equal(np.array([3, 3, 3]), fp._veg[1])
 
-    def test_calculate(self):
+    def test_calculate_asc(self, path_testcase):
         fp = nv.Flooding()
-        fp.calculate("testcase/flooding/ff_bt_t10_h.asc", "T10",
+        fp.calculate(path_testcase / "flooding" / "ff_bt_t10_h.asc", "T10",
                      period="winter", duration=1)
         with rasterio.open(
-                "testcase/flooding/result/F25-T10-P1-winter.asc") as dst:
+                path_testcase / "flooding" / "result" / "F25-T10-P1-winter.asc") as dst:
             expected = dst.read(1)
         np.testing.assert_equal(expected, fp._veg[25])
 
     @pytest.mark.xfail
-    def test_calculate_arcgis(self):
+    def test_calculate_arcgis(self, path_testcase, path_testdata):
         # note this tests uses an arcgis raster with only 8bit unsigned values
         fp = nv.Flooding()
-        fp.calculate("tests/data/ff_bt_t10_h", "T10",
+        fp.calculate(path_testdata / "ff_bt_t10_h", "T10",
                      period="winter", duration=1)
         with rasterio.open(
-                "testcase/flooding/result/F25-T10-P1-winter.asc") as dst:
+                path_testcase / "flooding" / "result" / "F25-T10-P1-winter.asc") as dst:
             expected = dst.read(1)
         np.testing.assert_equal(expected, fp._veg[25])
 
-    def test_calculate_withnodata(self):
+    def test_calculate_withnodata(self, path_testdata):
         fp = nv.Flooding()
-        fp.calculate("tests/data/depths_with_nodata.asc", "T10",
+        fp.calculate(path_testdata / "depths_with_nodata.asc", "T10",
                      period="winter", duration=1)
         unique = []
         for i in fp._veg:
@@ -48,19 +48,19 @@ class TestFlooding(TestCase):
         expected = np.array([-99, 0, 1, 2, 3, 4])
         np.testing.assert_equal(expected, unique)
 
-    def test_table(self):
+    def test_table(self, path_testcase):
         fp = nv.Flooding()
         with pytest.raises(FloodingException):
             fp.table
 
-        fp.calculate(depth_file="testcase/flooding/ff_bt_t10_h.asc",
+        fp.calculate(depth_file=path_testcase / "flooding" / "ff_bt_t10_h.asc",
                      frequency="T10", period="winter", duration=1)
         df = fp.table
         sel = df[((df.vegetation == 1)
                   & (df.presence == "goed combineerbaar"))]
         assert np.all(178.64 == np.round(sel["area_ha"], 2))
 
-    def test_plot(self):
+    def test_plot(self, path_testcase):
         import matplotlib as mpl
         mpl.use('agg')
 
@@ -68,25 +68,23 @@ class TestFlooding(TestCase):
         plt.show = lambda: None
 
         fp = nv.Flooding()
-        fp.calculate("testcase/flooding/ff_bt_t10_h.asc", "T10",
+        fp.calculate(path_testcase / "flooding" / "ff_bt_t10_h.asc", "T10",
                      period="winter", duration=1)
         fp.plot(7)
 
         with pytest.raises(FloodingException):
             fp.plot(2000)
 
-    def test_write(self):
+    def test_write(self, path_testcase, tmp_path, caplog):
         fp = nv.Flooding()
-        tempdir = tempfile.mkdtemp() + "/newdir"
         with pytest.raises(FloodingException):
             # Should fail - model not yet run
-            fp.write(tempdir)
+            fp.write(str(tmp_path))
 
-        fp.calculate(depth_file="testcase/flooding/ff_bt_t10_h.asc",
-                     frequency="T10",
-                     period="winter", duration=1)
+        fp.calculate(depth_file=path_testcase / "flooding" / "ff_bt_t10_h.asc",
+                     frequency="T10", period="winter", duration=1)
 
-        fp.write(tempdir)
+        fp.write(str(tmp_path))
 
         expected_files = [
             'F01-T10-P1-winter.tif', 'F07-T10-P1-winter.tif',
@@ -104,46 +102,43 @@ class TestFlooding(TestCase):
             'summary.csv'
         ]
 
-        dir = os.listdir(tempdir)
+        dir = os.listdir(tmp_path)
 
-        if sys.version_info < (3, 2):
-            self.assertItemsEqual(expected_files, dir)
-        else:
-            self.assertCountEqual(expected_files, dir)
+        assert Counter(list(expected_files)) == Counter(list(dir))
 
         # try writing again, should raise as files already exist
         with pytest.raises(FloodingException):
-            fp.write(tempdir)
+            fp.write(str(tmp_path))
 
-        fp.write(tempdir, overwrite_files=True)
+        fp.write(str(tmp_path), overwrite_files=True)
+        assert "already exists" in caplog.text
 
-        shutil.rmtree(tempdir)
 
-    def test_combine(self):
+    def test_combine(self, path_testcase, path_tests):
         fp = nv.Flooding()
 
         myniche = nv.Niche()
-        input = "testcase/dijle/"
-        myniche.set_input("soil_code", input + "bodemv.asc")
-        myniche.set_input("msw", input + "gvg_0_cm.asc")
-        myniche.set_input("mlw", input + "glg_0_cm.asc")
-        myniche.set_input("mhw", input + "ghg_0_cm.asc")
-        myniche.set_input("seepage", input + "kwel_mm_dag.asc")
+        input_path = path_testcase / "dijle"
+        myniche.set_input("soil_code", input_path / "bodemv.asc")
+        myniche.set_input("msw", input_path / "gvg_0_cm.asc")
+        myniche.set_input("mlw", input_path / "glg_0_cm.asc")
+        myniche.set_input("mhw", input_path / "ghg_0_cm.asc")
+        myniche.set_input("seepage", input_path / "kwel_mm_dag.asc")
 
-        myniche.set_input("management", input + "beheer_int.asc")
+        myniche.set_input("management", input_path / "beheer_int.asc")
 
-        myniche.set_input("nitrogen_atmospheric", input + "depositie_def.asc")
-        myniche.set_input("nitrogen_animal", input + "bemest_dier.asc")
+        myniche.set_input("nitrogen_atmospheric",input_path / "depositie_def.asc")
+        myniche.set_input("nitrogen_animal", input_path / "bemest_dier.asc")
 
-        myniche.set_input("nitrogen_fertilizer", input + "bemest_kunst.asc")
+        myniche.set_input("nitrogen_fertilizer", input_path / "bemest_kunst.asc")
 
-        myniche.set_input("inundation_vegetation", input + "overstr_veg.asc")
-        myniche.set_input("inundation_acidity", input + "ovrstr_t10_50.asc")
-        myniche.set_input("inundation_nutrient", input + "ovrstr_t10_50.asc")
+        myniche.set_input("inundation_vegetation", input_path / "overstr_veg.asc")
+        myniche.set_input("inundation_acidity", input_path / "ovrstr_t10_50.asc")
+        myniche.set_input("inundation_nutrient", input_path / "ovrstr_t10_50.asc")
 
-        myniche.set_input("minerality", input + "minerality.asc")
+        myniche.set_input("minerality", input_path / "minerality.asc")
 
-        myniche.set_input("rainwater", input + "nulgrid.asc")
+        myniche.set_input("rainwater", input_path / "nulgrid.asc")
 
         with pytest.raises(FloodingException):
             # niche model not yet run
@@ -154,12 +149,11 @@ class TestFlooding(TestCase):
             # floodplain model not yet run
             fp.combine(myniche)
 
-        fp.calculate("testcase/flooding/ff_bt_t10_h.asc", "T10",
+        fp.calculate(path_testcase / "flooding" / "ff_bt_t10_h.asc", "T10",
                      period="winter", duration=1)
 
         small = nv.Niche()
-        small.run_config_file("tests/small.yaml")
-
+        small.run_config_file(path_tests / "small.yaml")
         with pytest.raises(FloodingException):
             # floodplain has different spatial extent than niche
             fp.combine(small)
