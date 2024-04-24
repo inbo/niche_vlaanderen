@@ -18,10 +18,12 @@ with open('README.rst') as readme_file:
 requirements = [
         'pandas',
         'numpy',
+        'matplotlib',
         'rasterio',
         'pyyaml',
         'rasterstats>=0.17',
         'tqdm',
+        'pygeos',
         'geopandas'
         ]
 

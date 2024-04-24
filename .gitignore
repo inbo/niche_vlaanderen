@@ -111,3 +111,6 @@ docs/_build
 tests/_*
 docs/_*
 result_images/*
+
+# package specific content
+tests/result_images/*
