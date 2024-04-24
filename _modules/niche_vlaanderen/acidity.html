@@ -1,19 +1,22 @@
 +<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>niche_vlaanderen.acidity &mdash; niche_vlaanderen 1.2 documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=e11d4c5b"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -27,14 +30,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> niche_vlaanderen
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            niche_vlaanderen
           </a>
               <div class="version">
                 1.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -77,9 +84,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">Module code</a> &raquo;</li>
-      <li>niche_vlaanderen.acidity</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">niche_vlaanderen.acidity</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -89,16 +96,17 @@
            <div itemprop="articleBody">
              
   <h1>Source code for niche_vlaanderen.acidity</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pkg_resources</span> <span class="kn">import</span> <span class="n">resource_filename</span>
-
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<span class="kn">from</span> <span class="nn">.codetables</span> <span class="kn">import</span> <span class="n">validate_tables_acidity</span><span class="p">,</span> <span class="n">check_codes_used</span>
+<span class="kn">from</span> <span class="nn">niche_vlaanderen.codetables</span> <span class="kn">import</span> <span class="n">package_resource</span>
+<span class="kn">from</span> <span class="nn">niche_vlaanderen.codetables</span> <span class="kn">import</span> <span class="n">validate_tables_acidity</span><span class="p">,</span> <span class="n">check_codes_used</span>
 
 
-<div class="viewcode-block" id="Acidity"><a class="viewcode-back" href="../../lowlevel.html#niche_vlaanderen.Acidity">[docs]</a><span class="k">class</span> <span class="nc">Acidity</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Class to calculate the Acidity</span>
+<div class="viewcode-block" id="Acidity">
+<a class="viewcode-back" href="../../lowlevel.html#niche_vlaanderen.Acidity">[docs]</a>
+<span class="k">class</span> <span class="nc">Acidity</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to calculate the Acidity</span>
 
 <span class="sd">    The used codetables can be overwritten by using the corresponding ct_*</span>
 <span class="sd">    arguments.</span>
@@ -116,25 +124,20 @@
     <span class="p">):</span>
 
         <span class="k">if</span> <span class="n">ct_acidity</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">ct_acidity</span> <span class="o">=</span> <span class="n">resource_filename</span><span class="p">(</span>
-                <span class="s2">&quot;niche_vlaanderen&quot;</span><span class="p">,</span> <span class="s2">&quot;system_tables/acidity.csv&quot;</span>
-            <span class="p">)</span>
+            <span class="n">ct_acidity</span> <span class="o">=</span> <span class="n">package_resource</span><span class="p">(</span>
+                <span class="p">[</span><span class="s2">&quot;system_tables&quot;</span><span class="p">],</span> <span class="s2">&quot;acidity.csv&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">ct_soil_mlw_class</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">ct_soil_mlw_class</span> <span class="o">=</span> <span class="n">resource_filename</span><span class="p">(</span>
-                <span class="s2">&quot;niche_vlaanderen&quot;</span><span class="p">,</span> <span class="s2">&quot;system_tables/soil_mlw_class.csv&quot;</span>
-            <span class="p">)</span>
+            <span class="n">ct_soil_mlw_class</span> <span class="o">=</span> <span class="n">package_resource</span><span class="p">(</span>
+                <span class="p">[</span><span class="s2">&quot;system_tables&quot;</span><span class="p">],</span> <span class="s2">&quot;soil_mlw_class.csv&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">ct_soil_codes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">ct_soil_codes</span> <span class="o">=</span> <span class="n">resource_filename</span><span class="p">(</span>
-                <span class="s2">&quot;niche_vlaanderen&quot;</span><span class="p">,</span> <span class="s2">&quot;system_tables/soil_codes.csv&quot;</span>
-            <span class="p">)</span>
+            <span class="n">ct_soil_codes</span> <span class="o">=</span> <span class="n">package_resource</span><span class="p">(</span>
+                <span class="p">[</span><span class="s2">&quot;system_tables&quot;</span><span class="p">],</span> <span class="s2">&quot;soil_codes.csv&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">lnk_acidity</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">lnk_acidity</span> <span class="o">=</span> <span class="n">resource_filename</span><span class="p">(</span>
-                <span class="s2">&quot;niche_vlaanderen&quot;</span><span class="p">,</span> <span class="s2">&quot;system_tables/lnk_acidity.csv&quot;</span>
-            <span class="p">)</span>
+            <span class="n">lnk_acidity</span> <span class="o">=</span> <span class="n">package_resource</span><span class="p">(</span>
+                <span class="p">[</span><span class="s2">&quot;system_tables&quot;</span><span class="p">],</span> <span class="s2">&quot;lnk_acidity.csv&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">ct_seepage</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">ct_seepage</span> <span class="o">=</span> <span class="n">resource_filename</span><span class="p">(</span>
-                <span class="s2">&quot;niche_vlaanderen&quot;</span><span class="p">,</span> <span class="s2">&quot;system_tables/seepage.csv&quot;</span>
-            <span class="p">)</span>
+            <span class="n">ct_seepage</span> <span class="o">=</span> <span class="n">package_resource</span><span class="p">(</span>
+                <span class="p">[</span><span class="s2">&quot;system_tables&quot;</span><span class="p">],</span> <span class="s2">&quot;seepage.csv&quot;</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_ct_acidity</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">ct_acidity</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_ct_soil_mlw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">ct_soil_mlw_class</span><span class="p">)</span>
@@ -162,14 +165,14 @@
         <span class="n">orig_shape</span> <span class="o">=</span> <span class="n">mlw</span><span class="o">.</span><span class="n">shape</span>
         <span class="n">soil_code</span> <span class="o">=</span> <span class="n">soil_code</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
         <span class="n">mlw</span> <span class="o">=</span> <span class="n">mlw</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-        <span class="n">soil_group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ct_soil_codes</span><span class="o">.</span><span class="n">soil_group</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">soil_code</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span>
-            <span class="s2">&quot;int8&quot;</span>
+        <span class="n">soil_group</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ct_soil_codes</span><span class="o">.</span><span class="n">soil_group</span>
+            <span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">soil_code</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=-</span><span class="mi">99</span><span class="p">)</span>  <span class="c1"># Fill with -99 for no data</span>
+            <span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;int8&quot;</span><span class="p">)</span>
         <span class="p">)</span>
-        <span class="c1"># the function above gives 0 for no data</span>
-        <span class="n">soil_group</span><span class="p">[</span><span class="n">soil_group</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">99</span>
 
         <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">soil_code</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="o">-</span><span class="mi">99</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">sel_group</span><span class="p">,</span> <span class="n">subtable</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ct_soil_mlw</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;soil_group&quot;</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">sel_group</span><span class="p">,</span> <span class="n">subtable</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ct_soil_mlw</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;soil_group&quot;</span><span class="p">):</span>
 
             <span class="n">subtable</span> <span class="o">=</span> <span class="n">subtable</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">(</span><span class="n">mlw</span><span class="p">,</span> <span class="n">subtable</span><span class="o">.</span><span class="n">mlw_max</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -222,7 +225,7 @@
         <span class="k">return</span> <span class="n">result</span>
 
     <span class="k">def</span> <span class="nf">_get_seepage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seepage</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Classify seepage values&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Classify seepage values&quot;&quot;&quot;</span>
         <span class="n">orig_shape</span> <span class="o">=</span> <span class="n">seepage</span><span class="o">.</span><span class="n">shape</span>
         <span class="n">seepage</span> <span class="o">=</span> <span class="n">seepage</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
         <span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">(</span><span class="n">seepage</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ct_seepage</span><span class="o">.</span><span class="n">seepage_max</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -230,8 +233,10 @@
         <span class="n">seepage_class</span><span class="p">[(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">seepage</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">seepage</span> <span class="o">==</span> <span class="o">-</span><span class="mi">99</span><span class="p">))]</span>
         <span class="k">return</span> <span class="n">seepage_class</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">orig_shape</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Acidity.calculate"><a class="viewcode-back" href="../../lowlevel.html#niche_vlaanderen.Acidity.calculate">[docs]</a>    <span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">soil_class</span><span class="p">,</span> <span class="n">mlw</span><span class="p">,</span> <span class="n">inundation</span><span class="p">,</span> <span class="n">seepage</span><span class="p">,</span> <span class="n">minerality</span><span class="p">,</span> <span class="n">rainwater</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Acidity.calculate">
+<a class="viewcode-back" href="../../lowlevel.html#niche_vlaanderen.Acidity.calculate">[docs]</a>
+    <span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">soil_class</span><span class="p">,</span> <span class="n">mlw</span><span class="p">,</span> <span class="n">inundation</span><span class="p">,</span> <span class="n">seepage</span><span class="p">,</span> <span class="n">minerality</span><span class="p">,</span> <span class="n">rainwater</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 
 <span class="sd">        Parameters:</span>
@@ -259,7 +264,9 @@
         <span class="n">acidity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_acidity</span><span class="p">(</span>
             <span class="n">rainwater</span><span class="p">,</span> <span class="n">minerality</span><span class="p">,</span> <span class="n">inundation</span><span class="p">,</span> <span class="n">seepage</span><span class="p">,</span> <span class="n">soil_mlw</span>
         <span class="p">)</span>
-        <span class="k">return</span> <span class="n">acidity</span></div></div>
+        <span class="k">return</span> <span class="n">acidity</span></div>
+</div>
+
 </pre></div>
 
            </div>

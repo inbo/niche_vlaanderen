@@ -1,20 +1,23 @@
 +<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Running niche &mdash; niche_vlaanderen 1.2 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=e11d4c5b"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -30,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> niche_vlaanderen
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            niche_vlaanderen
           </a>
               <div class="version">
                 1.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -83,8 +90,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Running niche</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Running niche</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/INBO/niche_vlaanderen/blob/master/docs/running.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -95,17 +102,17 @@
            <div itemprop="articleBody">
              
   <section id="running-niche">
-<h1>Running niche<a class="headerlink" href="#running-niche" title="Permalink to this headline"></a></h1>
+<h1>Running niche<a class="headerlink" href="#running-niche" title="Link to this heading"></a></h1>
 <p>Whenever you want to use niche_vlaanderen (either from the command line or Python) you need
 to start from the <cite>Anaconda/Miniconda prompt</cite> (in the start menu)
 and activate the environment (in this example, an environment you called <cite>niche</cite> during the installation):</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>C:<span class="se">\U</span>sers<span class="se">\m</span>yusername<span class="se">\M</span>iniconda3<span class="o">)</span> C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt; conda activate niche
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>C:<span class="se">\U</span>sers<span class="se">\m</span>yusername<span class="se">\M</span>iniconda3<span class="o">)</span><span class="w"> </span>C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt;<span class="w"> </span>conda<span class="w"> </span>activate<span class="w"> </span>niche
 </pre></div>
 </div>
 <section id="optionally-jupyter-notebook">
-<h2>Optionally - Jupyter Notebook<a class="headerlink" href="#optionally-jupyter-notebook" title="Permalink to this headline"></a></h2>
-<p>If you want to run niche_vlaanderen interactively, we recommend using a [jupyter notebook](<a class="reference external" href="http://jupyter.org/">http://jupyter.org/</a>).
-To run this, from the <cite>Anaconda/Miniconda prompt</cite> do:</p>
+<h2>Optionally - Jupyter Notebook<a class="headerlink" href="#optionally-jupyter-notebook" title="Link to this heading"></a></h2>
+<p>If you want to run niche_vlaanderen interactively, we recommend using a  <a class="reference external" href="http://jupyter.org/">Jupyter notebook</a>.</p>
+<p>To use Jupyter Notebooks, from the <cite>Anaconda/Miniconda prompt</cite> do:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">myusername</span>\<span class="n">Miniconda3</span><span class="p">)</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">myusername</span><span class="o">&gt;</span> <span class="n">conda</span> <span class="n">activate</span> <span class="n">niche</span>
 <span class="p">(</span><span class="n">niche</span><span class="p">)</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">myusername</span><span class="o">&gt;</span> <span class="n">jupyter</span> <span class="n">notebook</span>
 </pre></div>

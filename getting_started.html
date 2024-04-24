@@ -1,24 +1,27 @@
 +<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Getting started &mdash; niche_vlaanderen 1.2 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/nbsphinx-code-cells.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=e11d4c5b"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +36,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> niche_vlaanderen
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            niche_vlaanderen
           </a>
               <div class="version">
                 1.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -103,9 +110,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="tutorials.html">Tutorials</a> &raquo;</li>
-      <li>Getting started</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="tutorials.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Getting started</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/INBO/niche_vlaanderen/blob/master/docs/getting_started.ipynb" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -116,9 +123,9 @@
            <div itemprop="articleBody">
              
   <section id="Getting-started">
-<h1>Getting started<a class="headerlink" href="#Getting-started" title="Permalink to this headline"></a></h1>
+<h1>Getting started<a class="headerlink" href="#Getting-started" title="Link to this heading"></a></h1>
 <section id="Interactive-usage">
-<h2>Interactive usage<a class="headerlink" href="#Interactive-usage" title="Permalink to this headline"></a></h2>
+<h2>Interactive usage<a class="headerlink" href="#Interactive-usage" title="Link to this heading"></a></h2>
 <p>Niche Vlaanderen can be used interactively in Python. For interactive use, we recommend using the <a class="reference external" href="https://inbo.github.io/niche_vlaanderen/installation.html#running-niche">Jupyter notebook</a>. This allows one to save documentation, code and results in the same file.</p>
 <p>This file itself is a notebook, and if you want to reproduce our result this is possible:</p>
 <ul class="simple">
@@ -131,7 +138,7 @@
 </ul>
 </section>
 <section id="Steps-to-create-a-Niche-model">
-<h2>Steps to create a Niche model<a class="headerlink" href="#Steps-to-create-a-Niche-model" title="Permalink to this headline"></a></h2>
+<h2>Steps to create a Niche model<a class="headerlink" href="#Steps-to-create-a-Niche-model" title="Link to this heading"></a></h2>
 <p>To calculate a Niche model one has to take the following steps:</p>
 <ul class="simple">
 <li><p>Initialize the model (create a <code class="docutils literal notranslate"><span class="pre">Niche</span></code> object)</p></li>
@@ -144,7 +151,7 @@
 <p>Optionally the user can also create difference maps showing how much MHW/MLW has to change to allow a certain vegetation type. This is done using the <code class="docutils literal notranslate"><span class="pre">deviation</span></code> parameter of the <code class="docutils literal notranslate"><span class="pre">run</span></code> method.</p>
 </section>
 <section id="Creating-a-simple-NICHE-model">
-<h2>Creating a simple NICHE model<a class="headerlink" href="#Creating-a-simple-NICHE-model" title="Permalink to this headline"></a></h2>
+<h2>Creating a simple NICHE model<a class="headerlink" href="#Creating-a-simple-NICHE-model" title="Link to this heading"></a></h2>
 <p>For our first example, we will be creating a <a class="reference external" href="https://inbo.github.io/niche_vlaanderen/vegetatie.html#eenvoudig-niche-model">simple model</a>, using only MHW, MLW and soil for the predictions.</p>
 <p>The first step is importing the <code class="docutils literal notranslate"><span class="pre">niche_vlaanderen</span></code> module. For convenience, we will be importing as <code class="docutils literal notranslate"><span class="pre">nv</span></code>.</p>
 <div class="nbinput nblast docutils container">
@@ -156,7 +163,7 @@
 </div>
 </div>
 <section id="Creating-a-niche-object">
-<h3>Creating a niche object<a class="headerlink" href="#Creating-a-niche-object" title="Permalink to this headline"></a></h3>
+<h3>Creating a niche object<a class="headerlink" href="#Creating-a-niche-object" title="Link to this heading"></a></h3>
 <p>Next we create a <code class="docutils literal notranslate"><span class="pre">Niche</span></code> object. This object will hold all the data and results for an analysis.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
@@ -168,7 +175,7 @@
 </div>
 </section>
 <section id="Adding-input-files">
-<h3>Adding input files<a class="headerlink" href="#Adding-input-files" title="Permalink to this headline"></a></h3>
+<h3>Adding input files<a class="headerlink" href="#Adding-input-files" title="Link to this heading"></a></h3>
 <p>After initialization, we can add input layers to this object, using the <code class="docutils literal notranslate"><span class="pre">set_input</span></code> method.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -182,7 +189,7 @@
 </div>
 </section>
 <section id="Running-the-model">
-<h3>Running the model<a class="headerlink" href="#Running-the-model" title="Permalink to this headline"></a></h3>
+<h3>Running the model<a class="headerlink" href="#Running-the-model" title="Link to this heading"></a></h3>
 <p>These three input files are the only required for running a simple NICHE model. This means we can already run our model.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
@@ -194,7 +201,7 @@
 </div>
 </section>
 <section id="Inspecting-the-model">
-<h3>Inspecting the model<a class="headerlink" href="#Inspecting-the-model" title="Permalink to this headline"></a></h3>
+<h3>Inspecting the model<a class="headerlink" href="#Inspecting-the-model" title="Link to this heading"></a></h3>
 <p>After a model is run, we can inspect the results using the <code class="docutils literal notranslate"><span class="pre">table</span></code> method. Note that the values are given in ha. In the example below we also use the <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.head.html">head</a> function to show only the first five rows.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
@@ -413,7 +420,7 @@
 </div>
 </section>
 <section id="Saving-the-model">
-<h3>Saving the model<a class="headerlink" href="#Saving-the-model" title="Permalink to this headline"></a></h3>
+<h3>Saving the model<a class="headerlink" href="#Saving-the-model" title="Link to this heading"></a></h3>
 <p>The model results can be saved to disk using the <code class="docutils literal notranslate"><span class="pre">write</span></code> function. As an argument, this takes the directory to which you want to save, _output_scen1 in our example. When saving a model, the log file, containing the model configuration, a summary table and all 28 vegetation grids will be saved. Note we specify the <code class="docutils literal notranslate"><span class="pre">overwrite_files</span></code> option so subsequent calls of the example will not raise an error</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
@@ -473,7 +480,7 @@
 </div>
 </section>
 <section id="Showing-the-model-configuration">
-<h3>Showing the model configuration<a class="headerlink" href="#Showing-the-model-configuration" title="Permalink to this headline"></a></h3>
+<h3>Showing the model configuration<a class="headerlink" href="#Showing-the-model-configuration" title="Link to this heading"></a></h3>
 <p>While using niche, it is always possible to view the configuration by typing the object name.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
@@ -554,7 +561,7 @@ files_written:
 </section>
 </section>
 <section id="Running-a-full-Niche-model">
-<h2>Running a full Niche model<a class="headerlink" href="#Running-a-full-Niche-model" title="Permalink to this headline"></a></h2>
+<h2>Running a full Niche model<a class="headerlink" href="#Running-a-full-Niche-model" title="Link to this heading"></a></h2>
 <p>A full Niche model requires more inputs that only mhw, mlw and soil_code. The full list can be found in the documentation. When trying to run a model without sufficient inputs, a warning will be generated.</p>
 <p>If we add all the required values, we can run the full model. Note that it is possible to set a constant value instead of a complete grid</p>
 <div class="nbinput nblast docutils container">

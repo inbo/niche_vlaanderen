@@ -1,20 +1,23 @@
 +<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Frequently Asked Questions &mdash; niche_vlaanderen 1.2 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=e11d4c5b"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -30,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> niche_vlaanderen
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            niche_vlaanderen
           </a>
               <div class="version">
                 1.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -85,8 +92,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Frequently Asked Questions</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Frequently Asked Questions</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/INBO/niche_vlaanderen/blob/master/docs/faq.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -97,13 +104,13 @@
            <div itemprop="articleBody">
              
   <section id="frequently-asked-questions">
-<h1>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline"></a></h1>
+<h1>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Link to this heading"></a></h1>
 <p>This page lists a few known problems that may occur during the installation
 or usage of niche_vlaanderen, and workarounds for them.</p>
 <p>If your issue is not mentioned in this list, please search for the issues on
 our <a class="reference external" href="https://github.com/inbo/niche_vlaanderen/issues">issuetracker</a>, and file a new issue if it is needed.</p>
 <section id="warnings-and-exceptions-in-jupyter-notebook">
-<h2>Warnings and exceptions in jupyter notebook<a class="headerlink" href="#warnings-and-exceptions-in-jupyter-notebook" title="Permalink to this headline"></a></h2>
+<h2>Warnings and exceptions in jupyter notebook<a class="headerlink" href="#warnings-and-exceptions-in-jupyter-notebook" title="Link to this heading"></a></h2>
 <p><strong>Warnings</strong> don’t interrupt the model but should draw your attention to possible
 problems.
 Standard warnings appear in jupyter notebook as black text in a red box, while
@@ -138,7 +145,7 @@ of the computer, causing the model to stop.</p>
 </div>
 </section>
 <section id="missing-gcs-csv-file">
-<span id="missing-gcs"></span><h2>Missing gcs.csv file<a class="headerlink" href="#missing-gcs-csv-file" title="Permalink to this headline"></a></h2>
+<span id="missing-gcs"></span><h2>Missing gcs.csv file<a class="headerlink" href="#missing-gcs-csv-file" title="Link to this heading"></a></h2>
 <p>If you see the following issue:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ERROR</span><span class="p">:</span><span class="n">rasterio</span><span class="o">.</span><span class="n">_gdal</span><span class="p">:</span><span class="n">CPLE_OpenFailed</span> <span class="ow">in</span> <span class="sa">b</span><span class="s1">&#39;Unable to open EPSG support file gcs.csv.</span>
 <span class="n">Try</span> <span class="n">setting</span> <span class="n">the</span> <span class="n">GDAL_DATA</span> <span class="n">environment</span> <span class="n">variable</span> <span class="n">to</span> <span class="n">point</span> <span class="n">to</span> <span class="n">the</span>
@@ -197,7 +204,7 @@ that way the configuration will apply to all users of the computer).</p></li>
 </div></blockquote>
 </section>
 <section id="using-esri-grids-without-sta-adf">
-<h2>Using ESRI grids without sta.adf<a class="headerlink" href="#using-esri-grids-without-sta-adf" title="Permalink to this headline"></a></h2>
+<h2>Using ESRI grids without sta.adf<a class="headerlink" href="#using-esri-grids-without-sta-adf" title="Link to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
 <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="n">File</span> <span class="s2">&quot;/home/johan/_proj/niche/niche_vlaanderen/niche_vlaanderen/niche.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">192</span><span class="p">,</span> <span class="ow">in</span> <span class="n">set_input</span>

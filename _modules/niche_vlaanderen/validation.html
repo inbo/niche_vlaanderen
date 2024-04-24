@@ -1,19 +1,22 @@
 +<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>niche_vlaanderen.validation &mdash; niche_vlaanderen 1.2 documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=e11d4c5b"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -27,14 +30,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> niche_vlaanderen
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            niche_vlaanderen
           </a>
               <div class="version">
                 1.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -77,9 +84,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">Module code</a> &raquo;</li>
-      <li>niche_vlaanderen.validation</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">niche_vlaanderen.validation</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -94,8 +101,6 @@
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
-<span class="kn">from</span> <span class="nn">pkg_resources</span> <span class="kn">import</span> <span class="n">resource_filename</span>
-
 <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
     <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
     <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">UserWarning</span><span class="p">)</span>
@@ -105,6 +110,7 @@
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 <span class="kn">from</span> <span class="nn">niche_vlaanderen.niche</span> <span class="kn">import</span> <span class="n">Niche</span>
+<span class="kn">from</span> <span class="nn">niche_vlaanderen.codetables</span> <span class="kn">import</span> <span class="n">package_resource</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
@@ -113,8 +119,10 @@
     <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Error using Niche Overlay&quot;</span>
 
 
-<div class="viewcode-block" id="NicheValidation"><a class="viewcode-back" href="../../lowlevel.html#niche_vlaanderen.NicheValidation">[docs]</a><span class="k">class</span> <span class="nc">NicheValidation</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Creates a new NicheValidation object</span>
+<div class="viewcode-block" id="NicheValidation">
+<a class="viewcode-back" href="../../lowlevel.html#niche_vlaanderen.NicheValidation">[docs]</a>
+<span class="k">class</span> <span class="nc">NicheValidation</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates a new NicheValidation object</span>
 
 <span class="sd">    Overlays a vegetation map with niche in order to</span>
 <span class="sd">    obtain the accuracy of the model.</span>
@@ -183,9 +191,8 @@
         <span class="p">}</span>
 
         <span class="k">if</span> <span class="n">mapping_file</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">mapping_file</span> <span class="o">=</span> <span class="n">resource_filename</span><span class="p">(</span>
-                <span class="s2">&quot;niche_vlaanderen&quot;</span><span class="p">,</span> <span class="s2">&quot;system_tables/hab_niche_join.csv&quot;</span>
-            <span class="p">)</span>
+            <span class="n">mapping_file</span> <span class="o">=</span> <span class="n">package_resource</span><span class="p">([</span><span class="s2">&quot;system_tables&quot;</span><span class="p">],</span>
+                                            <span class="s2">&quot;hab_niche_join.csv&quot;</span><span class="p">)</span>
 
         <span class="n">mapping</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">mapping_file</span><span class="p">)</span>
 
@@ -230,8 +237,10 @@
         <span class="n">o</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;niche object: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">niche</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">return</span> <span class="n">o</span>
 
-<div class="viewcode-block" id="NicheValidation.overlay"><a class="viewcode-back" href="../../lowlevel.html#niche_vlaanderen.NicheValidation.overlay">[docs]</a>    <span class="k">def</span> <span class="nf">overlay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">upscale</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Overlays the map and the niche object&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="NicheValidation.overlay">
+<a class="viewcode-back" href="../../lowlevel.html#niche_vlaanderen.NicheValidation.overlay">[docs]</a>
+    <span class="k">def</span> <span class="nf">overlay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">upscale</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Overlays the map and the niche object&quot;&quot;&quot;</span>
 
         <span class="c1"># Remove any existing &quot;NICH&quot; columns</span>
 
@@ -297,7 +306,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">potential_presence</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;present&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;area_ha&quot;</span><span class="p">][</span><span class="n">veg</span><span class="p">]</span>
                 <span class="p">)</span>
 
-                <span class="bp">self</span><span class="o">.</span><span class="n">area_pot</span><span class="p">[</span><span class="n">veg</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">area_pot</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">area_pot</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">veg</span><span class="p">]</span> <span class="o">=</span> <span class="n">area_pot</span>
 
                 <span class="n">area_nonpot</span> <span class="o">=</span> <span class="p">(</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">potential_presence</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;not present&quot;</span><span class="p">]</span>
@@ -305,9 +314,9 @@
                     <span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;area_ha&quot;</span><span class="p">][</span><span class="n">veg</span><span class="p">]</span>
                 <span class="p">)</span>
 
-                <span class="bp">self</span><span class="o">.</span><span class="n">area_nonpot</span><span class="p">[</span><span class="n">veg</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">area_nonpot</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">area_nonpot</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">veg</span><span class="p">]</span> <span class="o">=</span> <span class="n">area_nonpot</span>
                 <span class="n">area_effective</span> <span class="o">=</span> <span class="n">pHab</span> <span class="o">*</span> <span class="p">(</span><span class="n">area_pot</span> <span class="o">+</span> <span class="n">area_nonpot</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">area_effective</span><span class="p">[</span><span class="n">veg</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">area_effective</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">area_effective</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">veg</span><span class="p">]</span> <span class="o">=</span> <span class="n">area_effective</span>
 
                 <span class="k">if</span> <span class="p">(</span><span class="n">area_pot</span> <span class="o">+</span> <span class="n">area_nonpot</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
@@ -317,7 +326,7 @@
                 <span class="k">else</span><span class="p">:</span>
                     <span class="c1"># vegetation type is present (actual presence)</span>
                     <span class="c1"># used in polygon count</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">veg_present</span><span class="p">[</span><span class="n">veg</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">veg_present</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">veg</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 
         <span class="c1"># aggregate statistics</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">area_pot_perc</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_pot</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">area_pot</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_nonpot</span><span class="p">)</span>
@@ -347,8 +356,11 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="NicheValidation.write"><a class="viewcode-back" href="../../lowlevel.html#niche_vlaanderen.NicheValidation.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">overwrite_files</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Write the result of the validation to a folder</span>
+
+<div class="viewcode-block" id="NicheValidation.write">
+<a class="viewcode-back" href="../../lowlevel.html#niche_vlaanderen.NicheValidation.write">[docs]</a>
+    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">overwrite_files</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Write the result of the validation to a folder</span>
 
 <span class="sd">        path: string | pathlib.Path</span>
 <span class="sd">            Output folder to which files will be written. Parent directory must</span>
@@ -381,15 +393,20 @@
             <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">joined_map</span><span class="p">()</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">path</span> <span class="o">/</span> <span class="s2">&quot;validation.gpkg&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="NicheValidation.joined_map"><a class="viewcode-back" href="../../lowlevel.html#niche_vlaanderen.NicheValidation.joined_map">[docs]</a>    <span class="k">def</span> <span class="nf">joined_map</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Create a geopandas dataframe with all tables joined&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="NicheValidation.joined_map">
+<a class="viewcode-back" href="../../lowlevel.html#niche_vlaanderen.NicheValidation.joined_map">[docs]</a>
+    <span class="k">def</span> <span class="nf">joined_map</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a geopandas dataframe with all tables joined&quot;&quot;&quot;</span>
         <span class="n">merged</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">map</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">:</span>
             <span class="n">merged</span> <span class="o">=</span> <span class="n">merged</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tables</span><span class="p">:</span>
             <span class="n">merged</span> <span class="o">=</span> <span class="n">merged</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">)</span><span class="o">.</span><span class="n">add_prefix</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">table</span><span class="si">}</span><span class="s2">_&quot;</span><span class="p">))</span>
 
-        <span class="k">return</span> <span class="n">merged</span></div></div>
+        <span class="k">return</span> <span class="n">merged</span></div>
+</div>
+
 </pre></div>
 
            </div>

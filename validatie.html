@@ -1,20 +1,23 @@
 +<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Validatie &mdash; niche_vlaanderen 1.2 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=e11d4c5b"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -30,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> niche_vlaanderen
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            niche_vlaanderen
           </a>
               <div class="version">
                 1.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -85,8 +92,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Validatie</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Validatie</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/INBO/niche_vlaanderen/blob/master/docs/validatie.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -97,19 +104,19 @@
            <div itemprop="articleBody">
              
   <section id="validatie">
-<h1>Validatie<a class="headerlink" href="#validatie" title="Permalink to this headline"></a></h1>
+<h1>Validatie<a class="headerlink" href="#validatie" title="Link to this heading"></a></h1>
 <p>Het model moet gevalideerd worden op basis van een gekende referentietoestand. Meestal (en ook verder als voorbeeld in dit document) wordt de actuele toestand hiervoor gebruikt.</p>
 <p>Bij de validatie worden <strong>de beschikbare biotische</strong> (vegetatiekaarten)
 <strong>en abiotische gegevens</strong> (terreinmetingen en modelberekeningen) <strong>vergeleken met de outputlagen van NICHE</strong> (zuur- en trofiegraad, potenties).</p>
 <section id="validatie-trofie-en-zuurgraad">
-<h2>Validatie trofie- en zuurgraad<a class="headerlink" href="#validatie-trofie-en-zuurgraad" title="Permalink to this headline"></a></h2>
+<h2>Validatie trofie- en zuurgraad<a class="headerlink" href="#validatie-trofie-en-zuurgraad" title="Link to this heading"></a></h2>
 <p>Tijdens een eerste validatiestap wordt er gekeken of de door NICHE berekende trofie en zuurgraad
 in overeenstemming zijn met de beschikbare abiotische gegevens. Hierbij kunnen bv. veldmetingen van bodem pH vergeleken
 worden met de voorspellingen van NICHE Vlaanderen voor de zuurgraad.</p>
 <p>Deze stap heeft natuurlijk enkel betrekking op de validatie voor het volledige (<a class="reference external" href="https://inbo.github.io/niche_vlaanderen/getting_started.html#Running-a-full-Niche-model">full</a>) NICHE model. In het vereenvoudigde (<a class="reference external" href="https://inbo.github.io/niche_vlaanderen/getting_started.html#Creating-a-simple-NICHE-model">simple</a>) model wordt immers geen rekening gehouden met de trofie- en zuurgraad bij de bepaling van de potenties.</p>
 </section>
 <section id="validatie-potenties-vegetatievoorspellingen">
-<h2>Validatie potenties/vegetatievoorspellingen<a class="headerlink" href="#validatie-potenties-vegetatievoorspellingen" title="Permalink to this headline"></a></h2>
+<h2>Validatie potenties/vegetatievoorspellingen<a class="headerlink" href="#validatie-potenties-vegetatievoorspellingen" title="Link to this heading"></a></h2>
 <p>Tijdens een tweede validatiestap wordt dan gekeken of op de plaatsen waar een vegetatietype actueel aanwezig is,
 ook effectief potenties voorspeld worden. Hoe groter de actuele oppervlakte waarvoor potentie opgegeven wordt, hoe beter.
 En, omgekeerd, hoe minder potentie voorspeld wordt binnen het actuele voorkomen, hoe slechter.
@@ -137,7 +144,7 @@ in “complex” is immers niet gekend.</p>
 <p>Het Niche package bevat een validatiemodule om deze procedure uit te voeren: zie de <a class="reference external" href="https://inbo.github.io/niche_vlaanderen/validation.html">tutorial</a>.</p>
 </section>
 <section id="validatieresultaten-verbeteren">
-<h2>Validatieresultaten verbeteren<a class="headerlink" href="#validatieresultaten-verbeteren" title="Permalink to this headline"></a></h2>
+<h2>Validatieresultaten verbeteren<a class="headerlink" href="#validatieresultaten-verbeteren" title="Link to this heading"></a></h2>
 <p>Als er systematische afwijkingen tijdens de validatie aan het licht komen moeten de <strong>invoerlagen</strong> van het model onder de loep worden genomen.</p>
 <p>Hieronder geven we een (niet limitatief) overzicht van de aandachtspunten per inputlaag:</p>
 <ul>

@@ -1,20 +1,23 @@
 +<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Niche Configuration file &mdash; niche_vlaanderen 1.2 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=e11d4c5b"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -30,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> niche_vlaanderen
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            niche_vlaanderen
           </a>
               <div class="version">
                 1.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -90,8 +97,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Niche Configuration file</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Niche Configuration file</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/INBO/niche_vlaanderen/blob/master/docs/cli.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -102,20 +109,20 @@
            <div itemprop="articleBody">
              
   <section id="niche-configuration-file">
-<h1>Niche Configuration file<a class="headerlink" href="#niche-configuration-file" title="Permalink to this headline"></a></h1>
+<h1>Niche Configuration file<a class="headerlink" href="#niche-configuration-file" title="Link to this heading"></a></h1>
 <section id="simple-model">
-<span id="simple-config"></span><h2>Simple model<a class="headerlink" href="#simple-model" title="Permalink to this headline"></a></h2>
+<span id="simple-config"></span><h2>Simple model<a class="headerlink" href="#simple-model" title="Link to this heading"></a></h2>
 <p>Instead of running Niche interactively, it can be used  with a configuration file.
 For a simple NICHE model this could look like this:</p>
 <blockquote>
-<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">model_options</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">full_model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="w">  </span><span class="nt">output_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">_output</span><span class="w"></span>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">model_options</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">full_model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="w">  </span><span class="nt">output_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">_output</span>
 
-<span class="nt">input_layers</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">mhw</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data/mhw_small.asc</span><span class="w"></span>
-<span class="w">  </span><span class="nt">mlw</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data/mlw_small.asc</span><span class="w"></span>
-<span class="w">  </span><span class="nt">soil_code</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data/soil_code_small.asc</span><span class="w"></span>
+<span class="nt">input_layers</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">mhw</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data/mhw_small.asc</span>
+<span class="w">  </span><span class="nt">mlw</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data/mlw_small.asc</span>
+<span class="w">  </span><span class="nt">soil_code</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">data/soil_code_small.asc</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -123,16 +130,10 @@ For a simple NICHE model this could look like this:</p>
 In this case, as we have a simple model (<a class="reference internal" href="vegetatie.html#simple"><span class="std std-ref">Vereenvoudigd model</span></a>), as specified in the model options.</p>
 </section>
 <section id="full-model">
-<span id="id1"></span><h2>Full model<a class="headerlink" href="#full-model" title="Permalink to this headline"></a></h2>
+<span id="id1"></span><h2>Full model<a class="headerlink" href="#full-model" title="Link to this heading"></a></h2>
 <p>For a full model, more input layers must be specified:</p>
 <table class="docutils align-default" id="id3">
-<caption><span class="caption-text">Possible input layers for a Full Niche model</span><a class="headerlink" href="#id3" title="Permalink to this table"></a></caption>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-</colgroup>
+<caption><span class="caption-text">Possible input layers for a Full Niche model</span><a class="headerlink" href="#id3" title="Link to this table"></a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>key</p></th>
 <th class="head"><p>simple model</p></th>
@@ -258,7 +259,7 @@ In this case, as we have a simple model (<a class="reference internal" href="veg
 The other model options correspond to the parameters that could be given to the <a class="reference internal" href="lowlevel.html#niche_vlaanderen.Niche.run" title="niche_vlaanderen.Niche.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">niche_vlaanderen.Niche.run()</span></code></a> method.</p>
 </section>
 <section id="abiotic-and-or-deviation">
-<span id="abiot-dev-config"></span><h2>Abiotic and/or deviation<a class="headerlink" href="#abiotic-and-or-deviation" title="Permalink to this headline"></a></h2>
+<span id="abiot-dev-config"></span><h2>Abiotic and/or deviation<a class="headerlink" href="#abiotic-and-or-deviation" title="Link to this heading"></a></h2>
 <p>Using a configuration file, it is also possible to use abiotic values, like
 previously demonstrated in <a class="reference external" href="https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Using-abiotic-grids">Using abiotic grids</a>.</p>
 <p>To do this the values <code class="docutils literal notranslate"><span class="pre">acidity</span></code> or <code class="docutils literal notranslate"><span class="pre">nutrient_level</span></code> must be specified.</p>
@@ -267,39 +268,39 @@ the borders specified in the niche table and the actual values of mhw and mlw fo
 every soil type, as discussed in <a class="reference external" href="https://inbo.github.io/niche_vlaanderen/advanced_usage.html#Creating-deviation-maps">Creating deviation maps</a>.</p>
 </section>
 <section id="flooding-module">
-<span id="flood-config"></span><h2>Flooding module<a class="headerlink" href="#flooding-module" title="Permalink to this headline"></a></h2>
+<span id="flood-config"></span><h2>Flooding module<a class="headerlink" href="#flooding-module" title="Link to this heading"></a></h2>
 <p>If you want to calculate a niche object combined with a Flooding model, this is possible by
 adding a flooding block. Different scenarios can be specified. They need a single name.
 The output of the module will be written to the same directory as the output specified in the model options.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">flooding</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">T25-winter</span><span class="w"></span>
-<span class="w">    </span><span class="nt">depth</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">T25.tif</span><span class="w"></span>
-<span class="w">    </span><span class="nt">frequency</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">T25</span><span class="w"></span>
-<span class="w">    </span><span class="nt">duration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">short</span><span class="w"></span>
-<span class="w">    </span><span class="nt">period</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">winter</span><span class="w"></span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">T25-zomer</span><span class="w"></span>
-<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">....</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">flooding</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">T25-winter</span>
+<span class="w">    </span><span class="nt">depth</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">T25.tif</span>
+<span class="w">    </span><span class="nt">frequency</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">T25</span>
+<span class="w">    </span><span class="nt">duration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">short</span>
+<span class="w">    </span><span class="nt">period</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">winter</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">T25-zomer</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">....</span>
 </pre></div>
 </div>
 </section>
 <section id="generating-a-config-file-in-interactive-mode">
-<span id="gen-config-int"></span><h2>Generating a config file in interactive mode<a class="headerlink" href="#generating-a-config-file-in-interactive-mode" title="Permalink to this headline"></a></h2>
+<span id="gen-config-int"></span><h2>Generating a config file in interactive mode<a class="headerlink" href="#generating-a-config-file-in-interactive-mode" title="Link to this heading"></a></h2>
 <p>When running Niche in interactive mode, representing the model will show the
 corresponding configuration file. This was demonstrated in <a class="reference external" href="https://inbo.github.io/niche_vlaanderen/getting_started.html#Showing-the-model-configuration">Showing the model configuration</a>.</p>
 <p>Also when writing a grid using the write method a “log.txt” file will be written.
 This file itself is also a valid configuration file for a next run. The list with generated files will be ignored.</p>
 </section>
 <section id="running-a-config-file-in-interactive-mode">
-<span id="run-config-int"></span><h2>Running a config file in interactive mode<a class="headerlink" href="#running-a-config-file-in-interactive-mode" title="Permalink to this headline"></a></h2>
+<span id="run-config-int"></span><h2>Running a config file in interactive mode<a class="headerlink" href="#running-a-config-file-in-interactive-mode" title="Link to this heading"></a></h2>
 <p>When using Niche in interactive mode, you can load all data from a config file using the
 <a class="reference internal" href="lowlevel.html#niche_vlaanderen.Niche.read_config_file" title="niche_vlaanderen.Niche.read_config_file"><code class="xref py py-func docutils literal notranslate"><span class="pre">niche_vlaanderen.Niche.read_config_file()</span></code></a> method, or you can run all by using the
 <a class="reference internal" href="lowlevel.html#niche_vlaanderen.Niche.run_config_file" title="niche_vlaanderen.Niche.run_config_file"><code class="xref py py-func docutils literal notranslate"><span class="pre">niche_vlaanderen.Niche.run_config_file()</span></code></a> method.</p>
 </section>
 <section id="running-a-config-file-from-the-command-line">
-<span id="run-config-cl"></span><h2>Running a config file from the command line<a class="headerlink" href="#running-a-config-file-from-the-command-line" title="Permalink to this headline"></a></h2>
+<span id="run-config-cl"></span><h2>Running a config file from the command line<a class="headerlink" href="#running-a-config-file-from-the-command-line" title="Link to this heading"></a></h2>
 <p>After opening the anaconda prompt (and starting the environment) you can also run niche from a command line using a
 config file. This is done by running the <code class="docutils literal notranslate"><span class="pre">niche</span></code> application.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>niche example.yml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>niche<span class="w"> </span>example.yml
 </pre></div>
 </div>
 <div class="admonition note">
@@ -308,7 +309,7 @@ config file. This is done by running the <code class="docutils literal notransla
 </div>
 </section>
 <section id="full-example">
-<span id="id2"></span><h2>Full example<a class="headerlink" href="#full-example" title="Permalink to this headline"></a></h2>
+<span id="id2"></span><h2>Full example<a class="headerlink" href="#full-example" title="Link to this heading"></a></h2>
 <p>We offer a full example (included below) which contains all possible options and some documentation.
 This file may be a good starting point for creating your own configuration files.</p>
 <p>This full example can be generated from the command line by running <code class="docutils literal notranslate"><span class="pre">niche</span> <span class="pre">--example</span></code></p>

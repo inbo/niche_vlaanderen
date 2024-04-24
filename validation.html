@@ -1,24 +1,27 @@
 +<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Validation &mdash; niche_vlaanderen 1.2 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/nbsphinx-code-cells.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=e11d4c5b"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +36,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> niche_vlaanderen
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            niche_vlaanderen
           </a>
               <div class="version">
                 1.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -96,9 +103,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="tutorials.html">Tutorials</a> &raquo;</li>
-      <li>Validation</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="tutorials.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Validation</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/INBO/niche_vlaanderen/blob/master/docs/validation.ipynb" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -109,9 +116,9 @@
            <div itemprop="articleBody">
              
   <section id="Validation">
-<h1>Validation<a class="headerlink" href="#Validation" title="Permalink to this headline"></a></h1>
+<h1>Validation<a class="headerlink" href="#Validation" title="Link to this heading"></a></h1>
 <section id="Overview">
-<h2>Overview<a class="headerlink" href="#Overview" title="Permalink to this headline"></a></h2>
+<h2>Overview<a class="headerlink" href="#Overview" title="Link to this heading"></a></h2>
 <p>The goal of the Niche Validation is to compare the potential vegetation types as determined by Niche Vlaanderen with the actual presence of vegetation types, e.g. as mapped in a vegetation map such as the Biological Valuation Map - <a class="reference external" href="https://www.vlaanderen.be/inbo/de-biologische-waarderingskaart/wat-is-de-biologische-waarderingskaart/">Biologische waarderingskaart (BWK)</a></p>
 <p>The vegetation map should be a spatial vector file (e.g. a shapefile) with:</p>
 <ul class="simple">
@@ -1082,7 +1089,7 @@ Warning: CRS definitions are not equal!
 </div>
 </section>
 <section id="Using-another-field-of-the-vegetation-map-as-ID">
-<h2>Using another field of the vegetation map as ID<a class="headerlink" href="#Using-another-field-of-the-vegetation-map-as-ID" title="Permalink to this headline"></a></h2>
+<h2>Using another field of the vegetation map as ID<a class="headerlink" href="#Using-another-field-of-the-vegetation-map-as-ID" title="Link to this heading"></a></h2>
 <p>You can use any field of the vegetation map as ID instead of the standard shape_id.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
@@ -1187,7 +1194,7 @@ Warning: CRS definitions are not equal!
 </div>
 </section>
 <section id="Using-a-custom-vegetation-table">
-<h2>Using a custom vegetation table<a class="headerlink" href="#Using-a-custom-vegetation-table" title="Permalink to this headline"></a></h2>
+<h2>Using a custom vegetation table<a class="headerlink" href="#Using-a-custom-vegetation-table" title="Link to this heading"></a></h2>
 <p>When creating a validation, it is possible to supply a custom mapping table between the vegetation types in the map and niche types. This file must be a csv with two columns, HAB and NICHE, containing the vegetation type on the map in the HAB column, and the corresponding Niche vegetation type in the NICHE column.</p>
 <p>Thanks to this option you can use a vegetation map with another vegetation typology than the Natura 2000 habitats/regional important biotopes or modify the link between vegetation types on the vegetation map and Niche vegetation types.</p>
 <div class="nbinput docutils container">
@@ -1259,7 +1266,7 @@ Warning: CRS definitions are not equal!
 </div>
 </section>
 <section id="Setting-the-spatial-resolution-of-the-overlay">
-<h2>Setting the spatial resolution of the overlay<a class="headerlink" href="#Setting-the-spatial-resolution-of-the-overlay" title="Permalink to this headline"></a></h2>
+<h2>Setting the spatial resolution of the overlay<a class="headerlink" href="#Setting-the-spatial-resolution-of-the-overlay" title="Link to this heading"></a></h2>
 <p>The actual overlay will compare the grid cell centres (niche predictions) with the shapefile (vegetation map). By default an upscaling factor of 5 (25 points per grid cell) is used to ensure sufficient coverage of the shapefile. For niche models of 20-25m resolution, this default value will lead to a spatial resolution of 1m, which is sufficient given the common scale of the vegetation map.</p>
 <p><img alt="comparison between 1 and 5 upscaling" src="_images/bwk_overlay.png" /></p>
 <p>A greater upscaling factor can be used if the polygons of the vegetation map are particularly small compared to the resolution of the Niche predictions.</p>
@@ -1286,7 +1293,7 @@ Warning: CRS definitions are not equal!
 </div>
 </section>
 <section id="Storing-the-analysis">
-<h2>Storing the analysis<a class="headerlink" href="#Storing-the-analysis" title="Permalink to this headline"></a></h2>
+<h2>Storing the analysis<a class="headerlink" href="#Storing-the-analysis" title="Link to this heading"></a></h2>
 <p>Finally, the whole project can be saved. This will save the summary tables and the intermediate tables in a folder, and create a geopackage (vector spatial file) which contains the habitat map with all intermediate tables joined to it.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:

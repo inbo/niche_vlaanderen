@@ -1,20 +1,23 @@
 +<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Reference &mdash; niche_vlaanderen 1.2 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=e11d4c5b"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -30,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> niche_vlaanderen
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            niche_vlaanderen
           </a>
               <div class="version">
                 1.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -59,14 +66,60 @@
 <li class="toctree-l1"><a class="reference internal" href="codetables.html">Code tables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cli.html">Niche Configuration file</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#niche">Niche</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#niche-delta">Niche Delta</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#flooding">Flooding</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#validation">Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#niche">Niche</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#niche_vlaanderen.Niche"><code class="docutils literal notranslate"><span class="pre">Niche</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.Niche.plot"><code class="docutils literal notranslate"><span class="pre">Niche.plot()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.Niche.plot_detail"><code class="docutils literal notranslate"><span class="pre">Niche.plot_detail()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.Niche.read_config_file"><code class="docutils literal notranslate"><span class="pre">Niche.read_config_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.Niche.run"><code class="docutils literal notranslate"><span class="pre">Niche.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.Niche.run_config_file"><code class="docutils literal notranslate"><span class="pre">Niche.run_config_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.Niche.set_input"><code class="docutils literal notranslate"><span class="pre">Niche.set_input()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.Niche.table"><code class="docutils literal notranslate"><span class="pre">Niche.table</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.Niche.write"><code class="docutils literal notranslate"><span class="pre">Niche.write()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.Niche.zonal_stats"><code class="docutils literal notranslate"><span class="pre">Niche.zonal_stats()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#niche-delta">Niche Delta</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#niche_vlaanderen.NicheDelta"><code class="docutils literal notranslate"><span class="pre">NicheDelta</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.NicheDelta.plot"><code class="docutils literal notranslate"><span class="pre">NicheDelta.plot()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.NicheDelta.table"><code class="docutils literal notranslate"><span class="pre">NicheDelta.table</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.NicheDelta.write"><code class="docutils literal notranslate"><span class="pre">NicheDelta.write()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#flooding">Flooding</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#niche_vlaanderen.Flooding"><code class="docutils literal notranslate"><span class="pre">Flooding</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.Flooding.calculate"><code class="docutils literal notranslate"><span class="pre">Flooding.calculate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.Flooding.combine"><code class="docutils literal notranslate"><span class="pre">Flooding.combine()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.Flooding.table"><code class="docutils literal notranslate"><span class="pre">Flooding.table</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.Flooding.write"><code class="docutils literal notranslate"><span class="pre">Flooding.write()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#validation">Validation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#niche_vlaanderen.NicheValidation"><code class="docutils literal notranslate"><span class="pre">NicheValidation</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.NicheValidation.joined_map"><code class="docutils literal notranslate"><span class="pre">NicheValidation.joined_map()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.NicheValidation.overlay"><code class="docutils literal notranslate"><span class="pre">NicheValidation.overlay()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.NicheValidation.write"><code class="docutils literal notranslate"><span class="pre">NicheValidation.write()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#array-based-functions">Array based functions</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#nutrientlevel">NutrientLevel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#acidity">Acidity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nutrientlevel">NutrientLevel</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.NutrientLevel"><code class="docutils literal notranslate"><span class="pre">NutrientLevel</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#acidity">Acidity</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.Acidity"><code class="docutils literal notranslate"><span class="pre">Acidity</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#vegetation">Vegetation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.Vegetation"><code class="docutils literal notranslate"><span class="pre">Vegetation</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#example">Example</a></li>
 </ul>
 </li>
@@ -95,8 +148,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Reference</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Reference</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/INBO/niche_vlaanderen/blob/master/docs/lowlevel.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -106,25 +159,25 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <span class="target" id="module-niche_vlaanderen"></span><section id="reference">
-<h1>Reference<a class="headerlink" href="#reference" title="Permalink to this headline"></a></h1>
+  <section id="reference">
+<span id="module-niche_vlaanderen"></span><h1>Reference<a class="headerlink" href="#reference" title="Link to this heading"></a></h1>
 <p>For simple calculation, the recommended way to run NICHE is through the
 <a class="reference internal" href="#niche"><span class="std std-ref">Niche</span></a> class, as demonstrated in the <a class="reference internal" href="tutorials.html"><span class="doc">Tutorials</span></a>.</p>
 <p>In the low level interface, it is possible to run the three classes
 <code class="docutils literal notranslate"><span class="pre">Vegetation</span></code>, <code class="docutils literal notranslate"><span class="pre">Acidity</span></code> and <code class="docutils literal notranslate"><span class="pre">NutrientLevel</span></code> directly using numpy arrays.
 This allows a greater flexibility and control over the details of the calculation,</p>
 <section id="niche">
-<span id="id1"></span><h2>Niche<a class="headerlink" href="#niche" title="Permalink to this headline"></a></h2>
+<span id="id1"></span><h2>Niche<a class="headerlink" href="#niche" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="niche_vlaanderen.Niche">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">niche_vlaanderen.</span></span><span class="sig-name descname"><span class="pre">Niche</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ct_acidity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_soil_mlw_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_soil_codes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lnk_acidity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_seepage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_vegetation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_management</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_nutrient_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_mineralisation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#Niche"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Niche" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">niche_vlaanderen.</span></span><span class="sig-name descname"><span class="pre">Niche</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ct_acidity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_soil_mlw_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_soil_codes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lnk_acidity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_seepage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_vegetation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_management</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_nutrient_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_mineralisation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#Niche"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Niche" title="Link to this definition"></a></dt>
 <dd><p>Creates a new Niche object</p>
 <p>A niche object can be used to predict vegetation types according to the
 NICHE Vlaanderen model.</p>
 <p>The default codetables are used unless other tables are supplied to the
 constructor.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>lnk_*</strong> (<em>ct_*</em>) – path
 Optionally, paths to codetables can be provided. These will override
 the standard codetables used by Niche.</p>
@@ -132,7 +185,7 @@ the standard codetables used by Niche.</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="niche_vlaanderen.Niche.plot">
-<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixed_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#Niche.plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Niche.plot" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixed_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#Niche.plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Niche.plot" title="Link to this definition"></a></dt>
 <dd><p>Plots the result or input of a Niche object</p>
 <p>Creates a plot of an input layer of a Niche object or of the result
 of a Niche object.</p>
@@ -144,7 +197,7 @@ to call the matplotlib show method to actually show the plot:</p>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>key</strong> (<em>veg_code</em><em> (</em><em>1..28</em><em>) or </em><em>input_code</em>) – key of the vegetation type that should be plotted, eg myniche.plot(7)
 or key of the input layer you want to plot eg myniche(“mhw”).
@@ -155,11 +208,11 @@ different plots in one layout</p></li>
 <li><p><strong>fixed_scale</strong> (<em>boolean</em><em> (</em><em>default: True</em><em>)</em>) – Use a fixed scale</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ax</strong> – Can be used to update the plot (eg change the
 title).</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes">matplotlib.axes.Axes</a></p>
 </dd>
 </dl>
@@ -167,7 +220,7 @@ title).</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="niche_vlaanderen.Niche.plot_detail">
-<span class="sig-name descname"><span class="pre">plot_detail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit_legend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tab20'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#Niche.plot_detail"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Niche.plot_detail" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">plot_detail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit_legend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tab20'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#Niche.plot_detail"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Niche.plot_detail" title="Link to this definition"></a></dt>
 <dd><p>Detailed plot for a vegetation type
 key: veg_code (1..28)</p>
 <blockquote>
@@ -185,11 +238,11 @@ from the default value.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="niche_vlaanderen.Niche.read_config_file">
-<span class="sig-name descname"><span class="pre">read_config_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_ct</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#Niche.read_config_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Niche.read_config_file" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">read_config_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_ct</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#Niche.read_config_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Niche.read_config_file" title="Link to this definition"></a></dt>
 <dd><p>Sets the input based on an input file, without running it</p>
 <p>Configures a model based on a config file</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>overwrite_ct</strong> – bool (False)
 Allows the user to override the default codetables (after
 the class has been initialized).</p>
@@ -199,12 +252,12 @@ the class has been initialized).</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="niche_vlaanderen.Niche.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">full_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deviation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict_checks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#Niche.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Niche.run" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">full_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deviation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict_checks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#Niche.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Niche.run" title="Link to this definition"></a></dt>
 <dd><p>Run the niche model</p>
 <p>Runs niche Vlaanderen model. Requires that the necessary input values
 have been added using set_input.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>full_model</strong> (<em>bool</em>) – Uses the full niche model. The simple model only uses mhw,
 mlw and soil_code as input.</p></li>
@@ -222,11 +275,11 @@ it is recommended to fix the data rather than disabling this.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="niche_vlaanderen.Niche.run_config_file">
-<span class="sig-name descname"><span class="pre">run_config_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_ct</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#Niche.run_config_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Niche.run_config_file" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">run_config_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_ct</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#Niche.run_config_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Niche.run_config_file" title="Link to this definition"></a></dt>
 <dd><p>Runs Niche using a configuration file</p>
 <p>This will configure the model, run and output as specified.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>config</strong> – string
 path to a config file</p></li>
@@ -240,10 +293,10 @@ the configuration file.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="niche_vlaanderen.Niche.set_input">
-<span class="sig-name descname"><span class="pre">set_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#Niche.set_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Niche.set_input" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">set_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#Niche.set_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Niche.set_input" title="Link to this definition"></a></dt>
 <dd><p>Adds a raster or numeric value as input layer</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>key</strong> (<em>string</em>) – The type of grid that you want to assign (eg msw, soil_code, …).
 Possible options are listed in
@@ -259,20 +312,20 @@ everywhere.</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="niche_vlaanderen.Niche.table">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">table</span></span><a class="headerlink" href="#niche_vlaanderen.Niche.table" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">table</span></span><a class="headerlink" href="#niche_vlaanderen.Niche.table" title="Link to this definition"></a></dt>
 <dd><p>Dataframe containing the potential area (ha) per vegetation type</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="niche_vlaanderen.Niche.write">
-<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detailed_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#Niche.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Niche.write" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detailed_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#Niche.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Niche.write" title="Link to this definition"></a></dt>
 <dd><p>Saves the model results to a folder</p>
 <p>Saves the model results to a folder. Files will be written as geotiff.
 Vegetation files have names V1 … V28
 Abiotic files are exported as well (nutrient_level.tif and
 acidity.tif) if they were not input files.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>folder</strong> (<em>string</em>) – Output folder to which files will be written. Parent directory must
 already exist.</p></li>
@@ -287,10 +340,10 @@ exists.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="niche_vlaanderen.Niche.zonal_stats">
-<span class="sig-name descname"><span class="pre">zonal_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vectors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outside</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attribute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vegetation_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#Niche.zonal_stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Niche.zonal_stats" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">zonal_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vectors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outside</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attribute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vegetation_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#Niche.zonal_stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Niche.zonal_stats" title="Link to this definition"></a></dt>
 <dd><p>Calculates zonal statistics using vectors</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>vectors</strong> (<em>path to a vector source</em><em> or </em><em>geo-like python objects</em>) – <p>you can specify a path to a vector file eg “../test.shp”, or pass
 geo objects from other python functions.</p>
@@ -308,10 +361,10 @@ niche vegetation types by default.</p></li>
 the resolution</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>table</strong></p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>pandas.DataFrame</p>
 </dd>
 </dl>
@@ -321,20 +374,20 @@ the resolution</p></li>
 
 </section>
 <section id="niche-delta">
-<h2>Niche Delta<a class="headerlink" href="#niche-delta" title="Permalink to this headline"></a></h2>
+<h2>Niche Delta<a class="headerlink" href="#niche-delta" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="niche_vlaanderen.NicheDelta">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">niche_vlaanderen.</span></span><span class="sig-name descname"><span class="pre">NicheDelta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#NicheDelta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.NicheDelta" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">niche_vlaanderen.</span></span><span class="sig-name descname"><span class="pre">NicheDelta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#NicheDelta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.NicheDelta" title="Link to this definition"></a></dt>
 <dd><p>Class containing the difference between two niche runs</p>
 <p>The difference can be visualized using the plot method. It is also
 possible to derive a table with the area’s according to each group.</p>
 <p>See the tutorial at: <a class="reference external" href="https://inbo.github.io/niche_vlaanderen/advanced_usage.rst#Comparing-Niche-classes">Comparing Niche classes</a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="niche_vlaanderen.NicheDelta.plot">
-<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#NicheDelta.plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.NicheDelta.plot" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#NicheDelta.plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.NicheDelta.plot" title="Link to this definition"></a></dt>
 <dd><p>Plots the difference between two classes</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>key</strong> (<em>number</em>) – The vegetation code (1-28)</p>
 </dd>
 </dl>
@@ -342,13 +395,13 @@ possible to derive a table with the area’s according to each group.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="niche_vlaanderen.NicheDelta.table">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">table</span></span><a class="headerlink" href="#niche_vlaanderen.NicheDelta.table" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">table</span></span><a class="headerlink" href="#niche_vlaanderen.NicheDelta.table" title="Link to this definition"></a></dt>
 <dd><p>Return a summarized dataframe for a NicheDelta object</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>df</strong></p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html">pandas.DataFrame</a></p>
 </dd>
 </dl>
@@ -356,7 +409,7 @@ possible to derive a table with the area’s according to each group.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="niche_vlaanderen.NicheDelta.write">
-<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#NicheDelta.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.NicheDelta.write" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#NicheDelta.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.NicheDelta.write" title="Link to this definition"></a></dt>
 <dd><p>Writes the difference grids to grid files.</p>
 <p>The differences are coded using these values:</p>
 <blockquote>
@@ -369,7 +422,7 @@ possible to derive a table with the area’s according to each group.</p>
 </ul>
 </div></blockquote>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>folder</strong> (<em>path</em>) – Path to which the output files will be written.</p></li>
 <li><p><strong>overwrite_files</strong> (<em>bool</em>) – Whether files should be overwritten on save.</p></li>
@@ -382,10 +435,10 @@ possible to derive a table with the area’s according to each group.</p>
 
 </section>
 <section id="flooding">
-<h2>Flooding<a class="headerlink" href="#flooding" title="Permalink to this headline"></a></h2>
+<h2>Flooding<a class="headerlink" href="#flooding" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="niche_vlaanderen.Flooding">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">niche_vlaanderen.</span></span><span class="sig-name descname"><span class="pre">Flooding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lnk_potential</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">potential</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/flooding.html#Flooding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Flooding" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">niche_vlaanderen.</span></span><span class="sig-name descname"><span class="pre">Flooding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lnk_potential</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">potential</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/flooding.html#Flooding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Flooding" title="Link to this definition"></a></dt>
 <dd><p>Predict the vegetation response to (frequent) flooding</p>
 <p>A Flooding object can be used to predict the response of vegetation to
 (frequent) flooding.</p>
@@ -394,10 +447,10 @@ Optionally also a name can be given which is used in plots and output
 files.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="niche_vlaanderen.Flooding.calculate">
-<span class="sig-name descname"><span class="pre">calculate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depth_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/flooding.html#Flooding.calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Flooding.calculate" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">calculate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depth_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/flooding.html#Flooding.calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Flooding.calculate" title="Link to this definition"></a></dt>
 <dd><p>Calculate a floodplain object</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>depth_file</strong> (<em>filename</em>) – The filename containing a classified grid with inundation dephts.
 The classes used must correspond to the codes in the
 <a class="reference external" href="https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/flooding/depths.csv">depths.csv</a> code table.</p>
@@ -417,19 +470,19 @@ are given in the <a class="reference external" href="https://github.com/inbo/nic
 
 <dl class="py method">
 <dt class="sig sig-object py" id="niche_vlaanderen.Flooding.combine">
-<span class="sig-name descname"><span class="pre">combine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">niche_result</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/flooding.html#Flooding.combine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Flooding.combine" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">combine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">niche_result</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/flooding.html#Flooding.combine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Flooding.combine" title="Link to this definition"></a></dt>
 <dd><p>Combines a Flooding model with a Niche model</p>
 <p>Both models must be run prior to combining them. The niche model will
 act as a “mask” making areas where Niche predicts a vegetation type
 to be not present are set to “not combinable”.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>niche_result</strong> (<a class="reference internal" href="#niche_vlaanderen.Niche" title="niche_vlaanderen.Niche"><em>Niche</em></a>) – Niche model that must be run prior to running combine.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>combined</strong></p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#niche_vlaanderen.Flooding" title="niche_vlaanderen.Flooding">Flooding</a></p>
 </dd>
 </dl>
@@ -437,18 +490,18 @@ to be not present are set to “not combinable”.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="niche_vlaanderen.Flooding.table">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">table</span></span><a class="headerlink" href="#niche_vlaanderen.Flooding.table" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">table</span></span><a class="headerlink" href="#niche_vlaanderen.Flooding.table" title="Link to this definition"></a></dt>
 <dd><p>Dataframe containing the potential area (ha) per vegetation type</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="niche_vlaanderen.Flooding.write">
-<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/flooding.html#Flooding.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Flooding.write" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/flooding.html#Flooding.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Flooding.write" title="Link to this definition"></a></dt>
 <dd><p>Writes the floodplain grids to grid files.</p>
 <p>The differences are coded using the values specified in the
 potential.csv table.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>folder</strong> (<em>path</em>) – Path to which the output files will be written.</p></li>
 <li><p><strong>overwrite_files</strong> (<em>bool</em>) – Overwrite files when saving.
@@ -463,15 +516,15 @@ exists.</p></li>
 
 </section>
 <section id="validation">
-<h2>Validation<a class="headerlink" href="#validation" title="Permalink to this headline"></a></h2>
+<h2>Validation<a class="headerlink" href="#validation" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="niche_vlaanderen.NicheValidation">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">niche_vlaanderen.</span></span><span class="sig-name descname"><span class="pre">NicheValidation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">niche</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">map</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mapping_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/validation.html#NicheValidation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.NicheValidation" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">niche_vlaanderen.</span></span><span class="sig-name descname"><span class="pre">NicheValidation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">niche</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">map</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mapping_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/validation.html#NicheValidation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.NicheValidation" title="Link to this definition"></a></dt>
 <dd><p>Creates a new NicheValidation object</p>
 <p>Overlays a vegetation map with niche in order to
 obtain the accuracy of the model.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>niche</strong> – niche_vlaanderen.Niche
 Niche object containing predicted variables types according to niche.
@@ -510,19 +563,19 @@ of the vector file will be used, starting from 0.</p></li>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="niche_vlaanderen.NicheValidation.joined_map">
-<span class="sig-name descname"><span class="pre">joined_map</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/validation.html#NicheValidation.joined_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.NicheValidation.joined_map" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">joined_map</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/validation.html#NicheValidation.joined_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.NicheValidation.joined_map" title="Link to this definition"></a></dt>
 <dd><p>Create a geopandas dataframe with all tables joined</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="niche_vlaanderen.NicheValidation.overlay">
-<span class="sig-name descname"><span class="pre">overlay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">upscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/validation.html#NicheValidation.overlay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.NicheValidation.overlay" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">overlay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">upscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/validation.html#NicheValidation.overlay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.NicheValidation.overlay" title="Link to this definition"></a></dt>
 <dd><p>Overlays the map and the niche object</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="niche_vlaanderen.NicheValidation.write">
-<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/validation.html#NicheValidation.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.NicheValidation.write" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/validation.html#NicheValidation.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.NicheValidation.write" title="Link to this definition"></a></dt>
 <dd><p>Write the result of the validation to a folder</p>
 <dl class="simple">
 <dt>path: string | pathlib.Path</dt><dd><p>Output folder to which files will be written. Parent directory must
@@ -539,23 +592,23 @@ exists.</p>
 
 </section>
 <section id="array-based-functions">
-<h2>Array based functions<a class="headerlink" href="#array-based-functions" title="Permalink to this headline"></a></h2>
+<h2>Array based functions<a class="headerlink" href="#array-based-functions" title="Link to this heading"></a></h2>
 <p>At the lowest level of Niche sit a number of array-based classes which calculate the actual Niche model. These require numpy arrays as an input: all handling of gis files/… is done in the Niche class.</p>
 <section id="nutrientlevel">
-<h3>NutrientLevel<a class="headerlink" href="#nutrientlevel" title="Permalink to this headline"></a></h3>
+<h3>NutrientLevel<a class="headerlink" href="#nutrientlevel" title="Link to this heading"></a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="niche_vlaanderen.NutrientLevel">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">niche_vlaanderen.</span></span><span class="sig-name descname"><span class="pre">NutrientLevel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ct_lnk_soil_nutrient_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_management</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_mineralisation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_soil_code</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_nutrient_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/nutrient_level.html#NutrientLevel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.NutrientLevel" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">niche_vlaanderen.</span></span><span class="sig-name descname"><span class="pre">NutrientLevel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ct_lnk_soil_nutrient_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_management</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_mineralisation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_soil_code</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_nutrient_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/nutrient_level.html#NutrientLevel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.NutrientLevel" title="Link to this definition"></a></dt>
 <dd><p>Class to calculate the NutrientLevel</p>
 <p>The used codetables can be overwritten by using the corresponding ct_*
 arguments.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="niche_vlaanderen.NutrientLevel.calculate">
-<span class="sig-name descname"><span class="pre">calculate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">soil_code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nitrogen_atmospheric</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nitrogen_animal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nitrogen_fertilizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">management</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inundation</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/nutrient_level.html#NutrientLevel.calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.NutrientLevel.calculate" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">calculate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">soil_code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nitrogen_atmospheric</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nitrogen_animal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nitrogen_fertilizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">management</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inundation</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/nutrient_level.html#NutrientLevel.calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.NutrientLevel.calculate" title="Link to this definition"></a></dt>
 <dd><p>Calculates the Nutrient level</p>
 <p>Calculates the nutrient level based on a number of numpy arrays.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>soil_code</strong> (<em>numpy.array</em>) – Array containing the soil codes. Values must be present
 in the soil_code table. -99 is used as no data value.</p></li>
@@ -578,17 +631,19 @@ is used as no data value</p></li>
 
 </section>
 <section id="acidity">
-<h3>Acidity<a class="headerlink" href="#acidity" title="Permalink to this headline"></a></h3>
+<h3>Acidity<a class="headerlink" href="#acidity" title="Link to this heading"></a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="niche_vlaanderen.Acidity">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">niche_vlaanderen.</span></span><span class="sig-name descname"><span class="pre">Acidity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ct_acidity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_soil_mlw_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_soil_codes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lnk_acidity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_seepage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/acidity.html#Acidity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Acidity" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">niche_vlaanderen.</span></span><span class="sig-name descname"><span class="pre">Acidity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ct_acidity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_soil_mlw_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_soil_codes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lnk_acidity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_seepage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/acidity.html#Acidity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Acidity" title="Link to this definition"></a></dt>
 <dd><p>Class to calculate the Acidity</p>
 <p>The used codetables can be overwritten by using the corresponding ct_*
 arguments.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="niche_vlaanderen.Acidity.calculate">
-<span class="sig-name descname"><span class="pre">calculate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">soil_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mlw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inundation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seepage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minerality</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rainwater</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/acidity.html#Acidity.calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Acidity.calculate" title="Permalink to this definition"></a></dt>
-<dd><dl class="simple">
+<span class="sig-name descname"><span class="pre">calculate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">soil_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mlw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inundation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seepage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minerality</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rainwater</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/acidity.html#Acidity.calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Acidity.calculate" title="Link to this definition"></a></dt>
+<dd><section id="parameters">
+<h4>Parameters:<a class="headerlink" href="#parameters" title="Link to this heading"></a></h4>
+<dl class="simple">
 <dt>soil_class: numpy.array</dt><dd><p>Array containing the soil codes. Values must be present
 in the soil_code table. -99 is used as no data value.</p>
 </dd>
@@ -607,42 +662,42 @@ in the soil_code table. -99 is used as no data value.</p>
 <a class="reference external" href="https://inbo.github.io/niche_vlaanderen/invoer.html#regenlens-rainwater">https://inbo.github.io/niche_vlaanderen/invoer.html#regenlens-rainwater</a></p>
 </dd>
 </dl>
+</section>
 </dd></dl>
 
 </dd></dl>
 
 </section>
 <section id="vegetation">
-<h3>Vegetation<a class="headerlink" href="#vegetation" title="Permalink to this headline"></a></h3>
+<h3>Vegetation<a class="headerlink" href="#vegetation" title="Link to this heading"></a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="niche_vlaanderen.Vegetation">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">niche_vlaanderen.</span></span><span class="sig-name descname"><span class="pre">Vegetation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ct_vegetation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_soil_code</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_acidity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_management</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_nutrient_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_inundation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/vegetation.html#Vegetation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Vegetation" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">niche_vlaanderen.</span></span><span class="sig-name descname"><span class="pre">Vegetation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ct_vegetation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_soil_code</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_acidity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_management</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_nutrient_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_inundation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/vegetation.html#Vegetation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Vegetation" title="Link to this definition"></a></dt>
 <dd><p>Helper class to calculate vegetation based on input arrays</p>
 <p>This class helps predicting vegetation based on a number of input arrays.
 On initialization the input codetables are parsed (and validated).</p>
 <p>Note that to use grid inputs (eg raster files) it is recommended to use
 the Niche Class</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>ct_vegetation</strong> (<em>filename</em><em>, </em><em>csv</em>) – optional alternative classification table
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ct_vegetation</strong> (<em>filename</em><em>, </em><em>.csv</em>) – optional alternative classification table
 Must contain the columns mentioned in the documentation:
 <a class="reference external" href="https://inbo.github.io/niche_vlaanderen/codetables.html">https://inbo.github.io/niche_vlaanderen/codetables.html</a></p>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="niche_vlaanderen.Vegetation.calculate">
-<span class="sig-name descname"><span class="pre">calculate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">soil_code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mhw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mlw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nutrient_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acidity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">management</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inundation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_all</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">full_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/vegetation.html#Vegetation.calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Vegetation.calculate" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">calculate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">soil_code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mhw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mlw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nutrient_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acidity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">management</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inundation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_all</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">full_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/vegetation.html#Vegetation.calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Vegetation.calculate" title="Link to this definition"></a></dt>
 <dd><p>Calculate vegetation types based on input arrays</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>return_all</strong> (<em>boolean</em>) – A boolean (default=True) whether all grids should be returned or
 only grids containing data.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p><strong>veg</strong> (<em>dict</em>) – A dictionary containing the different output arrays per
-veg_code value.
--99 is used for nodata_veg values</p></li>
+veg_code value. 255 is used for nodata_veg values</p></li>
 <li><p><strong>expected</strong> (<em>int</em>) – Expected code in veg arrays if all conditions are met</p></li>
 <li><p><strong>veg_occurrence</strong> (<em>dict</em>) – A dictionary containing the percentage of the area where the
 vegetation can occur.</p></li>
@@ -654,7 +709,7 @@ vegetation can occur.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="niche_vlaanderen.Vegetation.calculate_deviation">
-<span class="sig-name descname"><span class="pre">calculate_deviation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">soil_code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mhw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mlw</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/vegetation.html#Vegetation.calculate_deviation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Vegetation.calculate_deviation" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">calculate_deviation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">soil_code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mhw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mlw</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/vegetation.html#Vegetation.calculate_deviation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Vegetation.calculate_deviation" title="Link to this definition"></a></dt>
 <dd><p>Calculates the deviation between the mhw/mlw and the reference</p>
 <p>This function calculates the difference between the mhw and mlw and
 the reference values for each vegetation type.</p>
@@ -663,12 +718,12 @@ wet values.</p>
 <p>Values of zero indicate that the vegetation type can occur based on
 soil type and the value under consideration (mhw or mlw)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>difference</strong> – A dictionary containing the difference between the vegetation
 value an the actual value.
 Keys are eg mhw_01 for mhw and vegetation type 01</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>dict</p>
 </dd>
 </dl>
@@ -677,7 +732,7 @@ Keys are eg mhw_01 for mhw and vegetation type 01</p>
 </dd></dl>
 
 <section id="example">
-<h4>Example<a class="headerlink" href="#example" title="Permalink to this headline"></a></h4>
+<h4>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h4>
 <p>The low level api can be used to calculate single values without having to
 create a full grid.</p>
 <blockquote>

@@ -1,24 +1,27 @@
 +<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Flooding module &mdash; niche_vlaanderen 1.2 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/nbsphinx-code-cells.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=e11d4c5b"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,14 +36,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> niche_vlaanderen
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            niche_vlaanderen
           </a>
               <div class="version">
                 1.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -96,9 +103,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="tutorials.html">Tutorials</a> &raquo;</li>
-      <li>Flooding module</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="tutorials.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Flooding module</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/INBO/niche_vlaanderen/blob/master/docs/flooding.ipynb" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -109,7 +116,7 @@
            <div itemprop="articleBody">
              
   <section id="Flooding-module">
-<h1>Flooding module<a class="headerlink" href="#Flooding-module" title="Permalink to this headline"></a></h1>
+<h1>Flooding module<a class="headerlink" href="#Flooding-module" title="Link to this heading"></a></h1>
 <p>Niche Vlaanderen also contains a module to model the influence of flooding more precisely. This is done using the <a class="reference internal" href="lowlevel.html#flooding"><span class="std std-ref">Flooding</span></a> class.</p>
 <p>The first step is importing the <code class="docutils literal notranslate"><span class="pre">niche_vlaanderen</span></code> module. For convenience, we will be importing as <code class="docutils literal notranslate"><span class="pre">nv</span></code>.</p>
 <div class="nbinput nblast docutils container">
@@ -123,7 +130,7 @@
 </div>
 </div>
 <section id="Creating-a-Flooding-model">
-<h2>Creating a Flooding model<a class="headerlink" href="#Creating-a-Flooding-model" title="Permalink to this headline"></a></h2>
+<h2>Creating a Flooding model<a class="headerlink" href="#Creating-a-Flooding-model" title="Link to this heading"></a></h2>
 <p>Here the <a class="reference internal" href="lowlevel.html#flooding"><span class="std std-ref">Flooding</span></a> class is created. Like in Niche Vlaanderen, when creating the class, the model with its codetables is initialized.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
@@ -135,7 +142,7 @@
 </div>
 </section>
 <section id="Running-the-model">
-<h2>Running the model<a class="headerlink" href="#Running-the-model" title="Permalink to this headline"></a></h2>
+<h2>Running the model<a class="headerlink" href="#Running-the-model" title="Link to this heading"></a></h2>
 <p>The <a class="reference internal" href="lowlevel.html#niche_vlaanderen.Flooding.calculate"><span class="std std-ref">calculate</span></a> method of the class takes four arguments: the depths (as grid), frequency, period and duration.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -148,7 +155,7 @@
 </div>
 </section>
 <section id="Inspecting-the-model">
-<h2>Inspecting the model<a class="headerlink" href="#Inspecting-the-model" title="Permalink to this headline"></a></h2>
+<h2>Inspecting the model<a class="headerlink" href="#Inspecting-the-model" title="Link to this heading"></a></h2>
 <p>The results can be plotted per vegetation type. Note that <a class="reference internal" href="overstroming.html#vegetatietypen"><span class="std std-ref">not all vegetation types of Niche are supported</span></a> by the flooding module.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
@@ -255,7 +262,7 @@
 </div>
 </section>
 <section id="Saving-the-model">
-<h2>Saving the model<a class="headerlink" href="#Saving-the-model" title="Permalink to this headline"></a></h2>
+<h2>Saving the model<a class="headerlink" href="#Saving-the-model" title="Link to this heading"></a></h2>
 <p>Comparable to the niche model, the resulting grids can be saved using the <a class="reference internal" href="lowlevel.html#niche_vlaanderen.Flooding.write"><span class="std std-ref">write</span></a> method.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
@@ -267,7 +274,7 @@
 </div>
 </section>
 <section id="Combining-the-output-with-niche">
-<h2>Combining the output with niche<a class="headerlink" href="#Combining-the-output-with-niche" title="Permalink to this headline"></a></h2>
+<h2>Combining the output with niche<a class="headerlink" href="#Combining-the-output-with-niche" title="Link to this heading"></a></h2>
 <p>The output of a Flooding model can be combined with a Niche model, by using the <a class="reference internal" href="lowlevel.html#niche_vlaanderen.Flooding.combine"><span class="std std-ref">combine</span></a> method.</p>
 <p>We will create a new niche model and set the inputs.</p>
 <div class="nbinput docutils container">

@@ -1,20 +1,23 @@
 +<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Code tables &mdash; niche_vlaanderen 1.2 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=e11d4c5b"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -30,14 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> niche_vlaanderen
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            niche_vlaanderen
           </a>
               <div class="version">
                 1.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -85,8 +92,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Code tables</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Code tables</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/INBO/niche_vlaanderen/blob/master/docs/codetables.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -97,20 +104,14 @@
            <div itemprop="articleBody">
              
   <section id="code-tables">
-<h1>Code tables<a class="headerlink" href="#code-tables" title="Permalink to this headline"></a></h1>
+<h1>Code tables<a class="headerlink" href="#code-tables" title="Link to this heading"></a></h1>
 <p>The logic of Niche is largely based on code tables.
 They convert values (eg mlw, …) to another (eg soil_mlw_class).
 For categorical data, this happens directly. For continuous data such as
 nitrogren or mhw, minimum and maximum values are used.</p>
 <blockquote>
 <div><table class="docutils align-default" id="id1">
-<caption><span class="caption-text">interpretation of minimum and maximum values</span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-</colgroup>
+<caption><span class="caption-text">interpretation of minimum and maximum values</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>soil_name</p></th>
 <th class="head"><p>msw_min</p></th>
@@ -143,16 +144,16 @@ A value of msw=5 will give nitrogen_mineralisation=50 as a result, a value of ms
 When using real values for mxw, the values will be rounded up to 2 decimals. Eg 50.005 will become 50.01 (&gt; 50) and 50.004 will become 50.00 (=50).</p>
 <p>By default the codetables of the niche_vlaanderen package are used, but <strong>the user can supply one or more own codetables</strong> (see <a class="reference internal" href="cli.html"><span class="doc">Niche Configuration file</span></a>, <em>full example</em> at page bottom; see <a class="reference internal" href="lowlevel.html#niche"><span class="std std-ref">here</span></a> for interactive implementation). If real values are used in these codetables, the decimal separator is ‘.’ (note that no real values are used in the existing codetables).</p>
 <section id="soil-code">
-<span id="ct-soil-code"></span><h2>soil_code<a class="headerlink" href="#soil-code" title="Permalink to this headline"></a></h2>
+<span id="ct-soil-code"></span><h2>soil_code<a class="headerlink" href="#soil-code" title="Link to this heading"></a></h2>
 <p>The table <a class="reference external" href="https://github.com/INBO/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/soil_codes.csv">soil_codes.csv</a> contains the supported soil_codes in NICHE and their corresponding <cite>soil_group</cite> (used in determining the soil_glg_class, <a class="reference internal" href="zuur.html#soil-glg-class"><span class="std std-ref">Bepaling bodem_GLG klasse</span></a>).</p>
 </section>
 <section id="management">
-<span id="ct-management"></span><h2>management<a class="headerlink" href="#management" title="Permalink to this headline"></a></h2>
+<span id="ct-management"></span><h2>management<a class="headerlink" href="#management" title="Link to this heading"></a></h2>
 <p>The table <a class="reference external" href="https://github.com/INBO/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/management.csv">management.csv</a> contains the supported management_codes in NICHE.
 It also contains a column <cite>influence</cite> which is used in the calculation of nutrient level.</p>
 </section>
 <section id="niche-vlaanderen">
-<span id="ct-niche"></span><h2>niche_vlaanderen<a class="headerlink" href="#niche-vlaanderen" title="Permalink to this headline"></a></h2>
+<span id="ct-niche"></span><h2>niche_vlaanderen<a class="headerlink" href="#niche-vlaanderen" title="Link to this heading"></a></h2>
 <p>The table <a class="reference external" href="https://github.com/INBO/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_vegetation.csv">niche_vegetation.csv</a> contains the link between the vegetation types that can be predicted by niche and the location factors that govern them.</p>
 <dl class="simple">
 <dt>Required columns are:</dt><dd><ul class="simple">
@@ -172,18 +173,7 @@ It also contains a column <cite>influence</cite> which is used in the calculatio
 <p>The lower and upper limits of mhw and mlw are included when classifying.</p>
 <blockquote>
 <div><table class="docutils align-default" id="id2">
-<caption><span class="caption-text">interpretation of minimum and maximum values</span><a class="headerlink" href="#id2" title="Permalink to this table"></a></caption>
-<colgroup>
-<col style="width: 11%" />
-<col style="width: 11%" />
-<col style="width: 11%" />
-<col style="width: 11%" />
-<col style="width: 11%" />
-<col style="width: 11%" />
-<col style="width: 11%" />
-<col style="width: 11%" />
-<col style="width: 11%" />
-</colgroup>
+<caption><span class="caption-text">interpretation of minimum and maximum values</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>veg_code</p></th>
 <th class="head"><p>veg_type</p></th>
