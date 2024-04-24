@@ -13,8 +13,9 @@ and activate the environment (in this example, an environment you called `niche`
 Optionally - Jupyter Notebook
 =============================
 
-If you want to run niche_vlaanderen interactively, we recommend using a [jupyter notebook](http://jupyter.org/).
-To run this, from the `Anaconda/Miniconda prompt` do:
+If you want to run niche_vlaanderen interactively, we recommend using a  `Jupyter notebook <http://jupyter.org/>`_.
+
+To use Jupyter Notebooks, from the `Anaconda/Miniconda prompt` do:
 
 .. code-block:: default
 

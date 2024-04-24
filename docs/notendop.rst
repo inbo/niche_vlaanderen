@@ -19,7 +19,10 @@ Onderstaande figuur tracht de werking van zowel het NICHE Vlaanderen model als d
 De hyperlinks in de figuur verwijzen je door naar de documentatie bij het betreffende item.
 
 .. figure:: _static/svg/NICHE_summary_extended.svg
-   :scale: 100%
+    :scale: 100%
+    :width: 1092px
+    :height: 935px
+    :alt: Functional overview of the Niche-Vlaanderen model and post-flooding module.
 
 Doel van deze website
 =====================
