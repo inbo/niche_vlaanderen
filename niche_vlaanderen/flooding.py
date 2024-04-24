@@ -1,9 +1,7 @@
 from __future__ import division
-
 import logging
 import rasterio
 import os
-from pkg_resources import resource_filename
 import copy
 from collections import OrderedDict
 
@@ -11,8 +9,10 @@ import pandas as pd
 import numpy as np
 import numpy.ma as ma
 
-from .spatial_context import SpatialContext
-from .codetables import validate_tables_flooding, check_codes_used
+from niche_vlaanderen.spatial_context import SpatialContext
+from niche_vlaanderen.codetables import (validate_tables_flooding,
+                                         check_codes_used,
+                                         package_resource)
 
 
 class FloodingException(Exception):
@@ -47,9 +47,8 @@ class Flooding(object):
 
         for i in ["depths", "duration", "frequency", "lnk_potential", "potential"]:
             if locals()[i] is None:
-                ct = resource_filename(
-                    "niche_vlaanderen", "system_tables/flooding/" + i + ".csv"
-                )
+                ct = package_resource(["system_tables", "flooding"],
+                                      f"{i}.csv")
             else:
                 ct = locals()[i]
             self._ct[i] = pd.read_csv(ct)
@@ -109,7 +108,7 @@ class Flooding(object):
         check_codes_used("duration", duration, self._ct["duration"]["code"])
         check_codes_used("period", period, ["summer", "winter"])
 
-        for veg_code, subtable_veg in self._ct["lnk_potential"].groupby(["veg_code"]):
+        for veg_code, subtable_veg in self._ct["lnk_potential"].groupby("veg_code"):
             subtable_veg = subtable_veg.reset_index()
             # by default we give code 4 (no information/flooding)
             # https://github.com/inbo/niche_vlaanderen/issues/87

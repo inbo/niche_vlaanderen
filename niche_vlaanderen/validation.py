@@ -3,8 +3,6 @@ import warnings
 from collections import defaultdict
 from pathlib import Path
 
-from pkg_resources import resource_filename
-
 with warnings.catch_warnings():
     warnings.filterwarnings("ignore", category=DeprecationWarning)
     warnings.filterwarnings("ignore", category=UserWarning)
@@ -14,6 +12,7 @@ import numpy as np
 import pandas as pd
 
 from niche_vlaanderen.niche import Niche
+from niche_vlaanderen.codetables import package_resource
 
 logger = logging.getLogger(__name__)
 
@@ -92,9 +91,8 @@ class NicheValidation(object):
         }
 
         if mapping_file is None:
-            mapping_file = resource_filename(
-                "niche_vlaanderen", "system_tables/hab_niche_join.csv"
-            )
+            mapping_file = package_resource(["system_tables"],
+                                            "hab_niche_join.csv")
 
         mapping = pd.read_csv(mapping_file)
 
@@ -206,7 +204,7 @@ class NicheValidation(object):
                     self.potential_presence.loc["present"].loc[i].loc["area_ha"][veg]
                 )
 
-                self.area_pot[veg].loc[i] = area_pot
+                self.area_pot.loc[i, veg] = area_pot
 
                 area_nonpot = (
                     self.potential_presence.loc["not present"]
@@ -214,9 +212,9 @@ class NicheValidation(object):
                     .loc["area_ha"][veg]
                 )
 
-                self.area_nonpot[veg].loc[i] = area_nonpot
+                self.area_nonpot.loc[i, veg] = area_nonpot
                 area_effective = pHab * (area_pot + area_nonpot) / 100
-                self.area_effective[veg].loc[i] = area_effective
+                self.area_effective.loc[i, veg] = area_effective
 
                 if (area_pot + area_nonpot) == 0:
                     warnings.warn(
@@ -226,7 +224,7 @@ class NicheValidation(object):
                 else:
                     # vegetation type is present (actual presence)
                     # used in polygon count
-                    self.veg_present[veg].loc[i] = 1
+                    self.veg_present.loc[i, veg] = 1
 
         # aggregate statistics
         self.area_pot_perc = 100 * self.area_pot / (self.area_pot + self.area_nonpot)

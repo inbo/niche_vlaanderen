@@ -1,25 +1,8 @@
-import rasterio
-import rasterstats
 import warnings
 import inspect
-
-import numpy as np
-import numpy.ma as ma
-import pandas as pd
-
-from .vegetation import Vegetation, VegSuitable
-from .acidity import Acidity
-from .nutrient_level import NutrientLevel
-from .spatial_context import SpatialContext
-from .version import __version__
-from .flooding import Flooding
-from .exception import NicheException
-
-from pkg_resources import resource_filename
 import json
-from pkg_resources import parse_version
+from packaging.version import parse
 from urllib.request import urlopen, URLError
-
 import logging
 import os.path
 import numbers
@@ -27,7 +10,22 @@ import yaml
 import datetime
 import sys
 
+import numpy as np
+import numpy.ma as ma
+import pandas as pd
+import rasterio
+import rasterstats
 from tqdm import tqdm
+
+from niche_vlaanderen.vegetation import Vegetation, VegSuitable
+from niche_vlaanderen.acidity import Acidity
+from niche_vlaanderen.nutrient_level import NutrientLevel
+from niche_vlaanderen.spatial_context import SpatialContext
+from niche_vlaanderen.version import __version__
+from niche_vlaanderen.flooding import Flooding
+from niche_vlaanderen.exception import NicheException
+from niche_vlaanderen.codetables import package_resource
+
 
 _allowed_input = {
     "soil_code",
@@ -203,7 +201,7 @@ class Niche(object):
             response = urlopen(url, timeout=5)
             json_response = json.loads(response.read().decode("utf-8"))
             releases = json_response["releases"]
-            versions = sorted(releases, key=parse_version, reverse=True)
+            versions = sorted(releases, key=parse, reverse=True)
 
             # remove alpha, beta, rc versions
             dev = ["rc", "a", "b"]
@@ -653,6 +651,7 @@ class Niche(object):
         if not self.vegetation_calculated:
             raise NicheException("A valid run must be done before writing the output.")
 
+        folder = str(folder)
         self._options["output_dir"] = folder
 
         if not os.path.exists(folder):
@@ -787,6 +786,12 @@ class Niche(object):
 
         norm = None
         v = None
+
+        # Inform user that data is not available to plot
+        # (key is present, but value is None)
+        if key not in self._inputfiles and key in self._inputarray:
+            if not self._inputarray[key]:
+                raise KeyError(f"{key} data is not available to plot.")
 
         if key in self._inputfiles and key not in self._inputarray:
             # if set_input has been done, but no model run yet
@@ -1002,7 +1007,8 @@ class Niche(object):
             vegetation_types = self._vegetation.keys()
 
         if len(vegetation_types) == 0:
-            raise NicheException("Can not calculate zonal statistics for empty vegetation list")
+            raise NicheException("Can not calculate zonal statistics for "
+                                 "empty vegetation list")
 
         logger.debug(f"vegetation_types: {vegetation_types}")
         logger.debug(f"upscaling to {upscale}")
@@ -1030,7 +1036,7 @@ class Niche(object):
                 raster=raster,
                 affine=affine,
                 categorical=True,
-                nodata=-99,
+                nodata=Vegetation.nodata_veg,
                 geojson_out=attribute is not None,
             )
         warnings.simplefilter("default")
@@ -1088,9 +1094,8 @@ class Niche(object):
             if "ct_vegetation" in self._code_tables:
                 ct_vegetation = self._code_tables["ct_vegetation"]
             else:
-                ct_vegetation = resource_filename(
-                    "niche_vlaanderen", "system_tables/niche_vegetation.csv"
-                )
+                ct_vegetation = package_resource(
+                    ["system_tables"], "niche_vegetation.csv")
 
             ct_vegetation = pd.read_csv(ct_vegetation)
             subtable = ct_vegetation[["veg_code", "veg_type"]]

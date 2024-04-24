@@ -6,6 +6,7 @@ from .vegetation import Vegetation  # noqa
 from .version import __version__  # noqa
 from .flooding import Flooding  # noqa
 
+
 __all__ = [
     "Acidity",
     "Niche",

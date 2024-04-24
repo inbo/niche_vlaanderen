@@ -1,6 +1,7 @@
 import click
+
 import niche_vlaanderen
-from pkg_resources import resource_filename
+from niche_vlaanderen.codetables import package_resource
 
 
 @click.command()
@@ -11,7 +12,8 @@ from pkg_resources import resource_filename
 def cli(ctx, config, example, version):
     """Command line interface to the NICHE vegetation model"""
     if example:
-        ex = resource_filename("niche_vlaanderen", "system_tables/example.yaml")
+        ex = package_resource(
+            ["system_tables"], "example.yaml")
         with open(ex) as f:
             print(f.read())
 
