@@ -387,9 +387,9 @@ class Niche(object):
         # We ignore comparison problems with np.nan (nodata)
         warnings.simplefilter(action="ignore", category=RuntimeWarning)
         higher = (
-            (input_array[a] > input_array[b])
-            & (input_array[a] != -99)
-            & (input_array[b] != -99)
+            (input_array[a] < input_array[b])
+            & (~np.isnan(input_array[a]))
+            & (~np.isnan(input_array[b]))
         )
         warnings.simplefilter("default")
 

@@ -1,7 +1,7 @@
 input_layers:
-  mhw: data/small/mhw.asc
-  msw: data/small/msw.asc
-  mlw: data/small/mlw.asc
+  mhw: data/small/mhw_inv.asc
+  msw: data/small/msw_inv.asc
+  mlw: data/small/mlw_inv.asc
   soil_code: data/small/soil_code.asc
   seepage: 0
   inundation_nutrient: 0

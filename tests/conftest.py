@@ -40,9 +40,9 @@ def zwarte_beek_niche(path_testcase):
         myniche = niche_vlaanderen.Niche()
         input_dir = path_testcase / "zwarte_beek" / "input"
         myniche.set_input("soil_code", input_dir / "soil_code.asc")
-        myniche.set_input("mhw", input_dir / "mhw.asc")
-        myniche.set_input("mlw", input_dir / "mlw.asc")
-        myniche.set_input("msw", input_dir / "msw.asc")
+        myniche.set_input("mhw", input_dir / "mhw_inv.asc")
+        myniche.set_input("mlw", input_dir / "mlw_inv.asc")
+        myniche.set_input("msw", input_dir / "msw_inv.asc")
         myniche.set_input("minerality", input_dir / "minerality.asc")
         myniche.set_input(
             "nitrogen_atmospheric", input_dir / "nitrogen_atmospheric.asc"
