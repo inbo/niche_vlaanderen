@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Validation &mdash; niche_vlaanderen 1.2 documentation</title>
+  <title>Validation &mdash; niche_vlaanderen 1.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css" />
@@ -16,7 +16,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=e11d4c5b"></script>
+        <script src="_static/documentation_options.js?v=85d29c1f"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -43,7 +43,7 @@
             niche_vlaanderen
           </a>
               <div class="version">
-                1.2
+                1.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -128,7 +128,7 @@
 <p><em>Note that the field names are not case sensitive (hab1, phab1 can be used without any conversion) and HAB2 until HAB9/pHAB2 until pHAB9 are facultative</em>.</p>
 <p>The habitat types in the vegetation map should be described using the official abbreviations of the Natura 2000 habitats and/or the regional important biotopes. Since those are different from the vegetation types in Niche, we provide a <a class="reference external" href="https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/hab_niche_join.csv">mapping table</a> to link both vegetation typologies.</p>
 <p>In the next steps, a (fictive) <strong>niche model</strong> is <strong>created</strong>.</p>
-<div class="nbinput docutils container">
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
@@ -137,14 +137,6 @@
 <span class="n">nv</span><span class="o">.</span><span class="n">run_config_file</span><span class="p">(</span><span class="s2">&quot;../tests/data/bwk_tiny/tiny.yaml&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-Warning: CRS definitions are not equal!
-</pre></div></div>
 </div>
 <p>Next a <strong>validation object</strong> is <strong>created</strong> which contains the vegetation map with extra columns NICH_x_y for the corresponding niche vegetation types (x refers to the xth habitat, HABx). Note that some vegetation types of the Biological Valuation Map used in this example cannot be mapped to niche vegetation types (e.g. <code class="docutils literal notranslate"><span class="pre">gh</span></code> = ‘geen habitat’/’no habitat’ in the example below).</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">zonal_statistics</span></code> module is used in the background to calculate the potential vegetation for every shape. Note the progress bar: in this example it is going fast, but for larger areas, calculation may take up to 10 minutes.</p>
@@ -162,7 +154,7 @@ Warning: CRS definitions are not equal!
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00, 70.35it/s]
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00, 56.79it/s]
 </pre></div></div>
 </div>
 <p>It is possible to check the <strong>mapping per vegetation</strong> type by checking the <code class="docutils literal notranslate"><span class="pre">map</span></code> attribute of the validation object:</p>
@@ -1104,7 +1096,7 @@ Warning: CRS definitions are not equal!
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00, 67.35it/s]
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00, 95.10it/s]
 </pre></div></div>
 </div>
 <p>All the results per polygon will show the selected field as identifier, e.g.:</p>
@@ -1211,7 +1203,7 @@ Warning: CRS definitions are not equal!
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:00&lt;00:00, 55.96it/s]
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:00&lt;00:00, 121.32it/s]
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -1284,10 +1276,10 @@ Warning: CRS definitions are not equal!
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00, 60.46it/s]
-/home/johan/Nextcloud/_proj/niche/niche_vlaanderen/niche_vlaanderen/validation.py:222: UserWarning: No overlap between potential vegetation map and shape_id 0
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00&lt;00:00, 112.36it/s]
+/home/johan/git/inbo/niche_vlaanderen/niche_vlaanderen/validation.py:220: UserWarning: No overlap between potential vegetation map and shape_id 0
   warnings.warn(
-/home/johan/Nextcloud/_proj/niche/niche_vlaanderen/niche_vlaanderen/validation.py:222: UserWarning: No overlap between potential vegetation map and shape_id 2
+/home/johan/git/inbo/niche_vlaanderen/niche_vlaanderen/validation.py:220: UserWarning: No overlap between potential vegetation map and shape_id 2
   warnings.warn(
 </pre></div></div>
 </div>
@@ -1319,16 +1311,16 @@ Warning: CRS definitions are not equal!
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[&#39;area_pot_perc_phab.csv&#39;,
- &#39;area_pot_perc.csv&#39;,
- &#39;potential_presence.csv&#39;,
+[&#39;area_effective.csv&#39;,
  &#39;area_pot.csv&#39;,
- &#39;validation.gpkg&#39;,
- &#39;area_effective.csv&#39;,
- &#39;summary.csv&#39;,
+ &#39;potential_presence.csv&#39;,
  &#39;area_nonpot.csv&#39;,
  &#39;area_nonpot_phab.csv&#39;,
- &#39;veg_present.csv&#39;]
+ &#39;veg_present.csv&#39;,
+ &#39;validation.gpkg&#39;,
+ &#39;area_pot_perc_phab.csv&#39;,
+ &#39;area_pot_perc.csv&#39;,
+ &#39;summary.csv&#39;]
 </pre></div></div>
 </div>
 </section>

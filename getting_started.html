@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Getting started &mdash; niche_vlaanderen 1.2 documentation</title>
+  <title>Getting started &mdash; niche_vlaanderen 1.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css" />
@@ -16,7 +16,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=e11d4c5b"></script>
+        <script src="_static/documentation_options.js?v=85d29c1f"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -43,7 +43,7 @@
             niche_vlaanderen
           </a>
               <div class="version">
-                1.2
+                1.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -436,7 +436,7 @@
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;_output_scen1&quot;</span><span class="p">)</span>
+<span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;_output_scen1&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -446,36 +446,36 @@
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[&#39;scen_1_summary.csv&#39;,
- &#39;scen_1_V01.tif&#39;,
- &#39;scen_1_V25.tif&#39;,
- &#39;scen_1_V24.tif&#39;,
+[&#39;scen_1_V01.tif&#39;,
+ &#39;scen_1_V02.tif&#39;,
  &#39;scen_1_V03.tif&#39;,
- &#39;scen_1_V26.tif&#39;,
- &#39;scen_1_V10.tif&#39;,
- &#39;scen_1_V27.tif&#39;,
- &#39;scen_1_V17.tif&#39;,
- &#39;scen_1_V11.tif&#39;,
- &#39;scen_1_V28.tif&#39;,
- &#39;scen_1_V16.tif&#39;,
- &#39;scen_1_V13.tif&#39;,
- &#39;scen_1_V09.tif&#39;,
- &#39;scen_1_V23.tif&#39;,
- &#39;scen_1_V12.tif&#39;,
- &#39;scen_1_V14.tif&#39;,
  &#39;scen_1_V04.tif&#39;,
  &#39;scen_1_V05.tif&#39;,
- &#39;scen_1_V18.tif&#39;,
- &#39;scen_1_V15.tif&#39;,
- &#39;scen_1_V07.tif&#39;,
  &#39;scen_1_V06.tif&#39;,
- &#39;scen_1_V22.tif&#39;,
- &#39;scen_1_V20.tif&#39;,
- &#39;scen_1_V19.tif&#39;,
- &#39;scen_1_V02.tif&#39;,
- &#39;scen_1_log.txt&#39;,
+ &#39;scen_1_V07.tif&#39;,
  &#39;scen_1_V08.tif&#39;,
- &#39;scen_1_V21.tif&#39;]
+ &#39;scen_1_V09.tif&#39;,
+ &#39;scen_1_V10.tif&#39;,
+ &#39;scen_1_V11.tif&#39;,
+ &#39;scen_1_V12.tif&#39;,
+ &#39;scen_1_V13.tif&#39;,
+ &#39;scen_1_V14.tif&#39;,
+ &#39;scen_1_V15.tif&#39;,
+ &#39;scen_1_V16.tif&#39;,
+ &#39;scen_1_V17.tif&#39;,
+ &#39;scen_1_V18.tif&#39;,
+ &#39;scen_1_V19.tif&#39;,
+ &#39;scen_1_V20.tif&#39;,
+ &#39;scen_1_V21.tif&#39;,
+ &#39;scen_1_V22.tif&#39;,
+ &#39;scen_1_V23.tif&#39;,
+ &#39;scen_1_V24.tif&#39;,
+ &#39;scen_1_V25.tif&#39;,
+ &#39;scen_1_V26.tif&#39;,
+ &#39;scen_1_V27.tif&#39;,
+ &#39;scen_1_V28.tif&#39;,
+ &#39;scen_1_log.txt&#39;,
+ &#39;scen_1_summary.csv&#39;]
 </pre></div></div>
 </div>
 </section>
@@ -496,17 +496,16 @@
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-# Niche Vlaanderen version: 1.2
-# Newer niche_vlaanderen  1.1 available
-# Run at: 2023-03-10 11:39:35.894941
+# Niche Vlaanderen version: 1.3
+# Newer niche_vlaanderen  1.2 available
+# Run at: 2024-05-02 16:55:31.266069
 
 package_versions:
-  pandas: 1.4.0
-  numpy: 1.22.1
-  rasterio: 1.3.4
-  gdal: 3.5.3
-  python: &#39;3.9.2 (default, Feb 28 2021, 17:03:44)
-[GCC 10.2.1 20210110]&#39;
+  pandas: 1.5.3
+  numpy: 1.26.2
+  rasterio: 1.3.9
+  gdal: 3.6.4
+  python: &#39;3.11.2 (main, Mar 13 2023, 12:18:29) [GCC 12.2.0]&#39;
 
 model_options:
   deviation: false
@@ -562,7 +561,7 @@ files_written:
 </section>
 <section id="Running-a-full-Niche-model">
 <h2>Running a full Niche model<a class="headerlink" href="#Running-a-full-Niche-model" title="Link to this heading"></a></h2>
-<p>A full Niche model requires more inputs that only mhw, mlw and soil_code. The full list can be found in the documentation. When trying to run a model without sufficient inputs, a warning will be generated.</p>
+<p>A full Niche model requires more inputs that only mhw, mlw and soil_code. The full list can be found in the <a class="reference internal" href="cli.html"><span class="doc">documentation</span></a>. When trying to run a model without sufficient inputs, a warning will be generated.</p>
 <p>If we add all the required values, we can run the full model. Note that it is possible to set a constant value instead of a complete grid</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
