@@ -26,7 +26,7 @@ def raster_to_numpy(filename):
     return data
 
 
-class TestNutrientLevel(TestCase):
+class TestNutrientLevel:
 
     def test_nitrogen_mineralisation(self):
         soil_code = np.array([14])

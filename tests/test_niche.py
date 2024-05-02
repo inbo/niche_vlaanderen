@@ -194,10 +194,10 @@ class TestNiche:
         assert "STATISTICS_MAXIMUM=1" in info
         assert "STATISTICS_MINIMUM=0" in info
 
-    def test_windowed_read(self, zwarte_beek_niche):
+    def test_windowed_read(self, zwarte_beek_niche, path_testdata):
         # tests whether the spatial context is adjusted to the smaller grid
         myniche = zwarte_beek_niche()
-        myniche.set_input("mlw", "data/part_zwarte_beek_mlw.asc")
+        myniche.set_input("mlw", path_testdata / "part_zwarte_beek_mlw.asc")
         myniche.run(full_model=True)
         assert 37 == myniche._context.width
         assert 37 == myniche._context.height
