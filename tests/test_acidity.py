@@ -27,7 +27,7 @@ def raster_to_numpy(filename):
     return data
 
 
-class testAcidity(TestCase):
+class TestAcidity:
 
     def test_get_soil_mlw(self):
         mlw = np.array([50, 66])
@@ -79,20 +79,21 @@ class testAcidity(TestCase):
                              rainwater)
         np.testing.assert_equal(3, result)
 
-    def test_acidity_testcase(self):
+    def test_acidity_testcase(self, path_testcase):
         a = niche_vlaanderen.Acidity()
-        inputdir = "testcase/zwarte_beek/input/"
-        soil_code = raster_to_numpy(inputdir + "soil_code.asc")
+        inputdir = path_testcase / "zwarte_beek"/ "input"
+        soil_code = raster_to_numpy(inputdir / "soil_code.asc")
         soil_code_r = soil_code
         soil_code_r[soil_code > 0] = np.round(soil_code / 10000)[soil_code > 0]
 
-        mlw = raster_to_numpy(inputdir + "mlw.asc")
+        mlw = raster_to_numpy(inputdir / "mlw.asc")
         inundation = \
-            raster_to_numpy(inputdir + "inundation.asc")
-        rainwater = raster_to_numpy(inputdir + "nullgrid.asc")
-        seepage = raster_to_numpy(inputdir + "seepage.asc")
-        minerality = raster_to_numpy(inputdir + "minerality.asc")
-        acidity = raster_to_numpy("testcase/zwarte_beek/abiotic/acidity.asc")
+            raster_to_numpy(inputdir / "inundation.asc")
+        rainwater = raster_to_numpy(inputdir / "nullgrid.asc")
+        seepage = raster_to_numpy(inputdir / "seepage.asc")
+        minerality = raster_to_numpy(inputdir / "minerality.asc")
+        acidity = raster_to_numpy(path_testcase / "zwarte_beek"
+                                  / "abiotic" / "acidity.asc")
         acidity[np.isnan(acidity)] = 255
         acidity[acidity == -99] = 255
         result = a.calculate(soil_code_r, mlw, inundation, seepage,

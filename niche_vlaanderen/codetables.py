@@ -1,6 +1,28 @@
-import numpy as np
-from .exception import NicheException
+import sys
 import warnings
+
+import numpy as np
+
+from niche_vlaanderen.exception import NicheException
+
+
+def package_resource(folder_paths, file_path):
+    """Provide backward compatbile package resources load function
+
+    Parameters
+    ----------
+    folder_paths : list
+        List of folders and subfolders to get resources from.
+    file_path : str
+        File name of the package resource.
+    """
+    if sys.version_info < (3, 10):
+        from pkg_resources import resource_filename
+        return resource_filename("niche_vlaanderen",
+                                 f"{'/'.join(folder_paths)}/{file_path}")
+    else:
+        from importlib.resources import files
+        return files(f"niche_vlaanderen.{'.'.join(folder_paths)}").joinpath(file_path)
 
 
 class CodeTableException(Exception):
@@ -23,7 +45,13 @@ def check_lower_upper_boundaries(df, min_col, max_col, value):
     """
 
     group_cols = set(df.columns.tolist()) - {min_col, max_col, value}
-    for sel_group, subtable in df.groupby(list(group_cols)):
+    # Tackle Pandas single key (no list) versus multiple keys 
+    # (in a list) as input to groupby
+    if len(list(group_cols)) > 1:
+        groups = list(group_cols)
+    else:
+        groups = list(group_cols)[0]
+    for sel_group, subtable in df.groupby(groups):
         min_values = subtable[min_col]
         max_values = subtable[max_col]
         for (i, index) in enumerate(min_values.index):
@@ -68,8 +96,6 @@ def check_join(df1, df2, f1, f2=None, inner=True):
                 raise CodeTableException("Not all codes from table 1 are in table 2")
             else:
                 warnings.warn("Warning, different keys exist in tables")
-        print(u1)
-        print(u2)
 
 
 def check_unique(df, col):

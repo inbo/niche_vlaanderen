@@ -1,5 +1,6 @@
-pandas<2
+pandas
 numpy
+matplotlib
 rasterio
 pyyaml
 rasterstats>=0.17

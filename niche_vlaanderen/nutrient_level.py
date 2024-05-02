@@ -1,8 +1,8 @@
-from pkg_resources import resource_filename
-
 import numpy as np
 import pandas as pd
-from .codetables import validate_tables_nutrient_level, check_codes_used
+
+from niche_vlaanderen.codetables import (validate_tables_nutrient_level,
+                                         check_codes_used, package_resource)
 
 
 class NutrientLevel(object):
@@ -24,26 +24,20 @@ class NutrientLevel(object):
         ct_nutrient_level=None,
     ):
         if ct_lnk_soil_nutrient_level is None:
-            ct_lnk_soil_nutrient_level = resource_filename(
-                "niche_vlaanderen", "system_tables/lnk_soil_nutrient_level.csv"
-            )
+            ct_lnk_soil_nutrient_level = package_resource(
+                ["system_tables"], "lnk_soil_nutrient_level.csv")
         if ct_management is None:
-            ct_management = resource_filename(
-                "niche_vlaanderen", "system_tables/management.csv"
-            )
+            ct_management = package_resource(
+                ["system_tables"], "management.csv")
         if ct_mineralisation is None:
-            ct_mineralisation = resource_filename(
-                "niche_vlaanderen", "system_tables/nitrogen_mineralisation.csv"
-            )
+            ct_mineralisation = package_resource(
+                ["system_tables"], "nitrogen_mineralisation.csv")
         if ct_soil_code is None:
-            ct_soil_code = resource_filename(
-                "niche_vlaanderen", "system_tables/soil_codes.csv"
-            )
-
+            ct_soil_code = package_resource(
+                ["system_tables"], "soil_codes.csv")
         if ct_nutrient_level is None:
-            ct_nutrient_level = resource_filename(
-                "niche_vlaanderen", "system_tables/nutrient_level.csv"
-            )
+            ct_nutrient_level = package_resource(
+                ["system_tables"], "nutrient_level.csv")
 
         self.ct_lnk_soil_nutrient_level = pd.read_csv(ct_lnk_soil_nutrient_level)
         self._ct_management = pd.read_csv(ct_management).set_index("management")

@@ -1,9 +1,8 @@
-from pkg_resources import resource_filename
-
 import numpy as np
 import pandas as pd
 
-from .codetables import validate_tables_acidity, check_codes_used
+from niche_vlaanderen.codetables import package_resource
+from niche_vlaanderen.codetables import validate_tables_acidity, check_codes_used
 
 
 class Acidity(object):
@@ -25,25 +24,20 @@ class Acidity(object):
     ):
 
         if ct_acidity is None:
-            ct_acidity = resource_filename(
-                "niche_vlaanderen", "system_tables/acidity.csv"
-            )
+            ct_acidity = package_resource(
+                ["system_tables"], "acidity.csv")
         if ct_soil_mlw_class is None:
-            ct_soil_mlw_class = resource_filename(
-                "niche_vlaanderen", "system_tables/soil_mlw_class.csv"
-            )
+            ct_soil_mlw_class = package_resource(
+                ["system_tables"], "soil_mlw_class.csv")
         if ct_soil_codes is None:
-            ct_soil_codes = resource_filename(
-                "niche_vlaanderen", "system_tables/soil_codes.csv"
-            )
+            ct_soil_codes = package_resource(
+                ["system_tables"], "soil_codes.csv")
         if lnk_acidity is None:
-            lnk_acidity = resource_filename(
-                "niche_vlaanderen", "system_tables/lnk_acidity.csv"
-            )
+            lnk_acidity = package_resource(
+                ["system_tables"], "lnk_acidity.csv")
         if ct_seepage is None:
-            ct_seepage = resource_filename(
-                "niche_vlaanderen", "system_tables/seepage.csv"
-            )
+            ct_seepage = package_resource(
+                ["system_tables"], "seepage.csv")
 
         self._ct_acidity = pd.read_csv(ct_acidity)
         self._ct_soil_mlw = pd.read_csv(ct_soil_mlw_class)
@@ -71,14 +65,14 @@ class Acidity(object):
         orig_shape = mlw.shape
         soil_code = soil_code.flatten()
         mlw = mlw.flatten()
-        soil_group = self._ct_soil_codes.soil_group.reindex(soil_code).values.astype(
-            "int8"
+        soil_group = (
+            self._ct_soil_codes.soil_group
+            .reindex(soil_code, fill_value=-99)  # Fill with -99 for no data
+            .values.astype("int8")
         )
-        # the function above gives 0 for no data
-        soil_group[soil_group == 0] = -99
 
         result = np.full(soil_code.shape, -99)
-        for sel_group, subtable in self._ct_soil_mlw.groupby(["soil_group"]):
+        for sel_group, subtable in self._ct_soil_mlw.groupby("soil_group"):
 
             subtable = subtable.copy().reset_index(drop=True)
             index = np.digitize(mlw, subtable.mlw_max, right=True)

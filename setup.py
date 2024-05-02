@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import sys
-from setuptools import setup, find_packages
+from setuptools import setup
 from pathlib import Path
 
 
@@ -18,10 +18,12 @@ with open('README.rst') as readme_file:
 requirements = [
         'pandas',
         'numpy',
+        'matplotlib',
         'rasterio',
         'pyyaml',
         'rasterstats>=0.17',
         'tqdm',
+        'pygeos',
         'geopandas'
         ]
 
@@ -33,7 +35,8 @@ setup(name='niche_vlaanderen',
     author_email='johan.vandewauw@inbo.be',
     license='MIT',
     install_requires=requirements,
-    packages=['niche_vlaanderen'],
+    packages=["niche_vlaanderen", "niche_vlaanderen.system_tables",
+              "niche_vlaanderen.system_tables.flooding"],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Science/Research',
