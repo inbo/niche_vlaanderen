@@ -110,6 +110,8 @@ docs/_build
 # test and doc build files
 tests/_*
 docs/_*
+docs/demo.csv
+docs/output/*
 result_images/*
 
 # package specific content
