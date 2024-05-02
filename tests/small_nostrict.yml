@@ -1,7 +1,7 @@
 input_layers:
-  mhw: data/small/mlw_inv.asc
-  mlw: data/small/mhw_inv.asc # this is wrong on purpose
-  msw: data/small/msw_inv.asc
+  mhw: data/small/mlw.asc
+  mlw: data/small/mhw.asc # this is wrong on purpose
+  msw: data/small/msw.asc
   soil_code: data/small/soil_code.asc
   seepage: 0
   inundation_acidity: 0
