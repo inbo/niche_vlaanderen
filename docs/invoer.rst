@@ -32,7 +32,10 @@ Hieronder wordt voor elk van de mogelijke invoerrasters een omschrijving gegeven
 Onderstaande figuur geeft de verschillende invoerrasters weer, thematisch geordend (verticaal) en ingedeeld naar hun indirecte (via zuur- en trofiegraad) en directe invloed op de potenties voor de verschillende vegetatietypen (horizontaal).
 
 .. figure:: _static/svg/input_rasters.svg
-   :scale: 100%
+    :scale: 100%
+    :width: 960px
+    :height: 720px
+    :alt: Overview of the required raster inputs for the Niche-Vlaanderen model.
 
 .. _soil_code:
 

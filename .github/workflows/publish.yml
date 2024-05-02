@@ -32,3 +32,14 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           password: ${{ secrets.PYPI_API_TOKEN }}
+
+      - name: Get documentation dependencies
+        run: |
+          sudo apt install pandoc
+          pip install -r doc-requirements.txt
+
+      - name: Check if documentation builds succesfully
+        run: |
+          pip install .
+          cd docs
+          make html          
