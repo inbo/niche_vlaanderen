@@ -133,8 +133,8 @@ class TestNiche:
         input_dir = path_testcase / "zwarte_beek" / "input"
 
         myniche.set_input("soil_code", input_dir / "soil_code.asc")
-        myniche.set_input("mhw", input_dir / "mhw.asc")
-        myniche.set_input("mlw", input_dir / "mlw.asc")
+        myniche.set_input("mhw", input_dir / "mhw_inv.asc")
+        myniche.set_input("mlw", input_dir / "mlw_inv.asc")
         myniche.name = "simple"
         myniche.run(full_model=False)
         myniche.write(tmp_path)
@@ -197,7 +197,7 @@ class TestNiche:
     def test_windowed_read(self, zwarte_beek_niche):
         # tests whether the spatial context is adjusted to the smaller grid
         myniche = zwarte_beek_niche()
-        myniche.set_input("mlw", "data/part_zwarte_beek_mlw.asc")
+        myniche.set_input("mlw", "data/part_zwarte_beek_mlw_inv.asc")
         myniche.run(full_model=True)
         assert 37 == myniche._context.width
         assert 37 == myniche._context.height
@@ -243,7 +243,7 @@ class TestNiche:
 
     def test_incomplete_model(self, path_testdata):
         myniche = niche_vlaanderen.Niche()
-        myniche.set_input("mhw", path_testdata / "small" / "msw.asc")
+        myniche.set_input("mhw", path_testdata / "small" / "msw_inv.asc")
         with pytest.raises(NicheException):
             myniche.run()  # incomplete, keys are missing
         with pytest.raises(NicheException):
@@ -327,8 +327,8 @@ class TestNiche:
             ct_vegetation=path_testdata / "bad_ct" / "one_vegetation.csv"
         )
 
-        myniche.set_input("mhw", path_testdata / "small" / "mhw.asc")
-        myniche.set_input("mlw", path_testdata / "small"/ "mlw.asc")
+        myniche.set_input("mhw", path_testdata / "small" / "mhw_inv.asc")
+        myniche.set_input("mlw", path_testdata / "small"/ "mlw_inv.asc")
         myniche.set_input("soil_code",
                           path_testdata / "small" / "soil_code.asc")
         myniche.run(full_model=False)
@@ -461,8 +461,8 @@ class TestNiche:
     def test_uint(self, path_testdata):
         myniche = niche_vlaanderen.Niche()
 
-        myniche.set_input("mhw", path_testdata / "small" / "mhw.asc")
-        myniche.set_input("mlw", path_testdata / "small" / "mlw.asc")
+        myniche.set_input("mhw", path_testdata / "small" / "mhw_inv.asc")
+        myniche.set_input("mlw", path_testdata / "small" / "mlw_inv.asc")
         myniche.set_input("soil_code",
                           path_testdata / "tif" / "soil_code.tif")
         myniche.run(full_model=False)
@@ -606,8 +606,8 @@ class TestNicheDelta:
             ct_vegetation=path_testdata / "bad_ct" / "one_vegetation.csv"
         )
 
-        myniche.set_input("mhw", path_testdata / "small" / "mhw.asc")
-        myniche.set_input("mlw", path_testdata / "small" / "mlw.asc")
+        myniche.set_input("mhw", path_testdata / "small" / "mhw_inv.asc")
+        myniche.set_input("mlw", path_testdata / "small" / "mlw_inv.asc")
         myniche.set_input("soil_code",
                           path_testdata / "small" / "soil_code.asc")
         myniche.run(full_model=False)
@@ -657,9 +657,9 @@ def test_niche_plot(path_testcase):
     """Test with limited legend for detail"""
     full = niche_vlaanderen.Niche()
     path = path_testcase / "zwarte_beek" / "input"
-    full.set_input("mhw", path / "mhw.asc")
-    full.set_input("mlw", path / "mlw.asc")
-    full.set_input("msw", path / "msw.asc")
+    full.set_input("mhw", path / "mhw_inv.asc")
+    full.set_input("mlw", path / "mlw_inv.asc")
+    full.set_input("msw", path / "msw_inv.asc")
     full.set_input("soil_code", path / "soil_code.asc")
     full.set_input("nitrogen_animal", 0)
     full.set_input("nitrogen_fertilizer", 0)

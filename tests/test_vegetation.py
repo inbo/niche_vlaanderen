@@ -142,9 +142,9 @@ class testVegetation(TestCase):
         soil_code_r = soil_code
         soil_code_r[soil_code > 0] = np.round(soil_code / 10000)[soil_code > 0]
 
-        msw = raster_to_numpy(input_dir + "msw.asc")
-        mhw = raster_to_numpy(input_dir + "mhw.asc")
-        mlw = raster_to_numpy(input_dir + "mlw.asc")
+        msw = -1 * raster_to_numpy(input_dir + "msw.asc")
+        mhw = -1 * raster_to_numpy(input_dir + "mhw.asc")
+        mlw = -1 * raster_to_numpy(input_dir + "mlw.asc")
         inundation = \
             raster_to_numpy(input_dir + "inundation.asc")
         regenlens = raster_to_numpy(input_dir + "nullgrid.asc")

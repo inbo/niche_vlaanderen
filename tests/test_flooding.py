@@ -120,9 +120,9 @@ class TestFlooding:
         myniche = nv.Niche()
         input_path = path_testcase / "dijle"
         myniche.set_input("soil_code", input_path / "bodemv.asc")
-        myniche.set_input("msw", input_path / "gvg_0_cm.asc")
-        myniche.set_input("mlw", input_path / "glg_0_cm.asc")
-        myniche.set_input("mhw", input_path / "ghg_0_cm.asc")
+        myniche.set_input("msw", input_path / "gvg_0_cm_inv.asc")
+        myniche.set_input("mlw", input_path / "glg_0_cm_inv.asc")
+        myniche.set_input("mhw", input_path / "ghg_0_cm_inv.asc")
         myniche.set_input("seepage", input_path / "kwel_mm_dag.asc")
 
         myniche.set_input("management", input_path / "beheer_int.asc")

@@ -1,6 +1,6 @@
 # Niche Vlaanderen version: 1.2
 # Using latest niche_vlaanderen  1.2
-# Run at: 2024-05-02 12:15:16.422004
+# Run at: 2024-04-30 10:53:55.590404
 
 package_versions:
   pandas: 2.2.2
@@ -21,8 +21,8 @@ model_properties:
   model_extent: ((172762.5, 210637.5), (172937.5, 210487.5))
 
 input_layers:
-  mhw: C:\Users\DavyDepreiter\niche_vlaanderen\tests\data/small/mhw.asc
-  mlw: C:\Users\DavyDepreiter\niche_vlaanderen\tests\data/small/mlw.asc
+  mhw: C:\Users\DavyDepreiter\niche_vlaanderen\tests\data/small/mhw_inv.asc
+  mlw: C:\Users\DavyDepreiter\niche_vlaanderen\tests\data/small/mlw_inv.asc
   soil_code: C:\Users\DavyDepreiter\niche_vlaanderen\tests\data/small/soil_code.asc
   # Model run completed
 files_written:
