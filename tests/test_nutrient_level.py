@@ -84,15 +84,15 @@ class TestNutrientLevel:
 
         np.testing.assert_equal(np.array([5]), result)
 
-    def test_nutrient_level_testcase(self, path_testdata):
+    def test_nutrient_level_testcase(self, path_testcase):
         nl = niche_vlaanderen.NutrientLevel()
         soil_code = raster_to_numpy(
-            path_testdata / "zwarte_beek" / "input" / "soil_code.asc")
+            path_testcase / "zwarte_beek" / "input" / "soil_code.asc")
 
         soil_code_r = soil_code
         soil_code_r[soil_code > 0] = np.round(soil_code / 10000)[soil_code > 0]
 
-        input_dir = path_testdata / "zwarte_beek" / "input"
+        input_dir = path_testcase / "zwarte_beek" / "input"
         msw = raster_to_numpy(input_dir + "msw.asc")
         nitrogen_deposition = \
             raster_to_numpy(input_dir / "nitrogen_atmospheric.asc")
@@ -103,7 +103,7 @@ class TestNutrientLevel:
 
         nutrient_level = \
             raster_to_numpy(
-                path_testdata / "zwarte_beek" / "abiotic" / "nutrient_level.asc")
+                path_testcase / "zwarte_beek" / "abiotic" / "nutrient_level.asc")
         # convert nodata value from -99 to 255 (
         nutrient_level[nutrient_level == -99] = 255
 
