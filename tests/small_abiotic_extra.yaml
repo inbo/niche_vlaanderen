@@ -1,6 +1,6 @@
 input_layers:
-  mhw: data/small/mhw_inv.asc
-  mlw: data/small/mlw_inv.asc
+  mhw: data/small/mhw.asc
+  mlw: data/small/mlw.asc
   soil_code: data/small/soil_code.asc
   acidity: data/small/acidity.asc
   nutrient_level: data/small/nutrient_level.asc

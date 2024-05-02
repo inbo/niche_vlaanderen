@@ -1,5 +1,5 @@
 input_layers:
-  mhw: data/small/mhw_inv.asc
+  mhw: data/small/mhw.asc
   mlw: -80
   soil_code: data/small/soil_code.asc
 

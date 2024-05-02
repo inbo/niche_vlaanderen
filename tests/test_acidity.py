@@ -83,7 +83,7 @@ class TestAcidity:
         soil_code_r = soil_code
         soil_code_r[soil_code > 0] = np.round(soil_code / 10000)[soil_code > 0]
 
-        mlw = -1 * raster_to_numpy(inputdir / "mlw.asc")
+        mlw = raster_to_numpy(inputdir / "mlw.asc")
         inundation = \
             raster_to_numpy(inputdir / "inundation.asc")
         rainwater = raster_to_numpy(inputdir / "nullgrid.asc")

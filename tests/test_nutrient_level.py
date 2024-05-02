@@ -105,7 +105,7 @@ class TestNutrientLevel(TestCase):
         # convert nodata value from -99 to 255 (
         nutrient_level[nutrient_level == -99] = 255
 
-        result = nl.calculate(soil_code_r, -msw, nitrogen_deposition,
+        result = nl.calculate(soil_code_r, msw, nitrogen_deposition,
                               nitrogen_animal, nitrogen_fertilizer, management,
                               inundation)
 
