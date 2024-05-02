@@ -93,7 +93,7 @@ class TestNutrientLevel:
         soil_code_r[soil_code > 0] = np.round(soil_code / 10000)[soil_code > 0]
 
         input_dir = path_testcase / "zwarte_beek" / "input"
-        msw = raster_to_numpy(input_dir + "msw.asc")
+        msw = raster_to_numpy(input_dir / "msw.asc")
         nitrogen_deposition = \
             raster_to_numpy(input_dir / "nitrogen_atmospheric.asc")
         nitrogen_animal = raster_to_numpy(input_dir / "nullgrid.asc")
