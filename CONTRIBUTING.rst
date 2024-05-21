@@ -118,7 +118,14 @@ MINOR versions are backwards-compatible. Alpha and beta releases are made by app
 
 2. Before updating a version, make sure you run all notebooks (clear kernel and run all steps).
 
-3. Finally, to update the version, edit the file `niche_vlaanderen/version.py <https://github.com/inbo/niche_vlaanderen/blob/master/setup.py>`_.
+3. Check whether the reference values source table have been updated. For this, the data source repository needs to be checked
+at https://zenodo.org/doi/10.5281/zenodo.10417821. If the reference table version is newer than the reference table
+verion mentioned in `niche_vlaanderen/version.py <https://github.com/inbo/niche_vlaanderen/blob/master/setup.py>`_, then
+- replace the `niche_vlaanderen/system_tables/niche_vegetation.csv <https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_vegetation.csv>`_
+by the newer reference file. Note: the original name `niche_vegetation.csv` and header names must be kept!
+- edit the reference value version (\__reference_table_version__) and source file name (\__reference_table_file__) in `niche_vlaanderen/version.py <https://github.com/inbo/niche_vlaanderen/blob/master/version.py>`_.
+
+4. Finally, to update the version, edit the package version (\__version__) number in the file `niche_vlaanderen/version.py <https://github.com/inbo/niche_vlaanderen/blob/master/version.py>`_.
 
 Building the documentation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
