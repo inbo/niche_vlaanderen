@@ -75,7 +75,7 @@ class Flooding(object):
 
         td = list()
 
-        labels = dict(self._ct["potential"].set_index("code")["description"])
+        labels = dict(self._ct["potential"].set_index("potential")["description"])
 
         if not self._combined:
             del labels[-1]
@@ -103,9 +103,9 @@ class Flooding(object):
         depth = depth.flatten()
         nodata = depth == -99
 
-        check_codes_used("depth", depth, self._ct["depths"]["code"])
-        check_codes_used("frequency", frequency, self._ct["frequency"]["code"])
-        check_codes_used("duration", duration, self._ct["duration"]["code"])
+        check_codes_used("depth", depth, self._ct["depths"]["depth"])
+        check_codes_used("frequency", frequency, self._ct["frequency"]["frequency"])
+        check_codes_used("duration", duration, self._ct["duration"]["duration"])
         check_codes_used("period", period, ["summer", "winter"])
 
         for veg_code, subtable_veg in self._ct["lnk_potential"].groupby("veg_code"):
@@ -190,7 +190,7 @@ class Flooding(object):
 
         labels = (
             self._ct["potential"]
-            .set_index("code")["description"]
+            .set_index("potential")["description"]
             .to_dict(into=OrderedDict)
         )
 

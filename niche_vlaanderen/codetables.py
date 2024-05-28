@@ -202,8 +202,8 @@ def validate_tables_flooding(
 ):
     # test disabled as we have a 0 code which is not in lnk_potential
     # check_join(lnk_potential, depths, "depth","code")
-    check_join(lnk_potential, duration, "duration", "code", inner)
-    check_join(lnk_potential, frequency, "frequency", "code", inner)
+    check_join(lnk_potential, duration, "duration", inner=inner)
+    check_join(lnk_potential, frequency, "frequency", inner=inner)
     # test disabled as we have a code 4 which is not in lnk_potential
     # check_join(lnk_potential, potential, "potential", "code")
 
