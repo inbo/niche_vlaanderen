@@ -102,7 +102,7 @@ class NutrientLevel(object):
         """
         Calculates the nutrient level using previously calculated nitrogen
         """
-        check_codes_used("management", management, self._ct_management["code"])
+        check_codes_used("management", management, self._ct_management["management"])
         check_codes_used("soil_code", soil_code, self._ct_soil_code["soil_code"])
 
         # calculate management influence
@@ -124,7 +124,7 @@ class NutrientLevel(object):
         result = np.full(influence.shape, self.nodata, dtype="uint8")
 
         for name, subtable in self.ct_lnk_soil_nutrient_level.groupby(
-            ["soil_code", "management_influence"]
+            ["soil_code", "influence"]
         ):
 
             soil_selected, influence_selected = name

@@ -1,4 +1,4 @@
-Sphinx
+Sphinx>=5
 nbsphinx
 jupyter_client
 ipykernel

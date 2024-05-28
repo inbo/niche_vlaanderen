@@ -194,7 +194,7 @@ class Vegetation(object):
         if full_model:
             check_codes_used("acidity", acidity, self._ct_acidity["acidity"])
             check_codes_used(
-                "nutrient_level", nutrient_level, self._ct_nutrient_level["code"]
+                "nutrient_level", nutrient_level, self._ct_nutrient_level["nutrient_level"]
             )
 
         if inundation is not None:
@@ -202,7 +202,7 @@ class Vegetation(object):
                 "inundation", inundation, self._ct_inundation["inundation"]
             )
         if management is not None:
-            check_codes_used("management", management, self._ct_management["code"])
+            check_codes_used("management", management, self._ct_management["management"])
 
         veg_bands = dict()
         veg_detail = dict()

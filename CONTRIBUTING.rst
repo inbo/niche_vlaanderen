@@ -101,9 +101,8 @@ Before you submit a pull request, check that it meets these guidelines:
 2. If the pull request adds functionality, the docs should be updated. Put
    your new functionality into a function with a docstring, and add the
    feature to the list in README.rst.
-3. The pull request should work for Python 2.7, 3.5 and 3.6. Check
-   https://travis-ci.org/inbo/niche_vlaanderen/pull_requests
-   and make sure that the tests pass for all supported Python versions.
+3. The pull request should work for the supported versions listed in `setup.py <https://github.com/inbo/niche_vlaanderen/blob/master/setup.py>`_).
+   Results of the automated tests can be found at: https://github.com/inbo/niche_vlaanderen/actions
 
 .. note::
     Note that this are guidelines. If you are stuck while adding functionality
@@ -112,11 +111,21 @@ Before you submit a pull request, check that it meets these guidelines:
 Tips
 ----
 
-Version numbering scheme
-~~~~~~~~~~~~~~~~~~~~~~~~
-The version numbers of ``niche_vlaanderen`` are based on semver_: MAJOR.MINOR version. MAJOR versions can have incompatible API changes,
-MINOR versions are backwards-compatible.
-Alpha and beta releases are made by appending a1/b1 to the version number, eg 1.0a10 for the 10th alpha release.
+Releasing a new version
+~~~~~~~~~~~~~~~~~~~~~~~
+1. The version numbers of ``niche_vlaanderen`` are based on semver_: MAJOR.MINOR version. MAJOR versions can have incompatible API changes,
+MINOR versions are backwards-compatible. Alpha and beta releases are made by appending a1/b1 to the version number, eg 1.0a10 for the 10th alpha release.
+
+2. Before updating a version, make sure you run all notebooks (clear kernel and run all steps).
+
+3. Check whether the reference values source table have been updated. For this, the data source repository needs to be checked
+at https://zenodo.org/doi/10.5281/zenodo.10417821. If the reference table version is newer than the reference table
+verion mentioned in `niche_vlaanderen/version.py <https://github.com/inbo/niche_vlaanderen/blob/master/setup.py>`_, then
+- replace the `niche_vlaanderen/system_tables/niche_vegetation.csv <https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_vegetation.csv>`_
+by the newer reference file. Note: the original name `niche_vegetation.csv` and header names must be kept!
+- edit the reference value version (\__reference_table_version__) and source file name (\__reference_table_file__) in `niche_vlaanderen/version.py <https://github.com/inbo/niche_vlaanderen/blob/master/version.py>`_.
+
+4. Finally, to update the version, edit the package version (\__version__) number in the file `niche_vlaanderen/version.py <https://github.com/inbo/niche_vlaanderen/blob/master/version.py>`_.
 
 Building the documentation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -132,9 +141,9 @@ To build the documentation locally, you need to install the doc requirements, wh
 After which you should be able to generate HTML output by typing ``make html`` from the `docs` directory.
 
 Publishing on the documentation website (https://inbo.github.io/niche_vlaanderen/ ) will happen when changes
-to master build correctly (under travis). Note that this may mean that the documentation is actually a bit more recent than the last released version.
+to master build correctly (under github actions). Note that this may mean that the documentation is actually a bit more recent than the last released version.
 
-.. _reStructuredText: http://docutils.sourceforge.net/rst.html
-.. _sphinx: http://www.sphinx-doc.org/en/master/
+.. _reStructuredText: https://docutils.sourceforge.net/rst.html
+.. _sphinx: https://www.sphinx-doc.org/en/master/
 .. _semver: https://semver.org/
 
