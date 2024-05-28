@@ -135,7 +135,7 @@ def validate_tables_nutrient_level(
     # check tables
     check_unique(ct_soil_code, "soil_code")
     check_unique(ct_soil_code, "soil_name")
-    check_unique(ct_management, "code")
+    check_unique(ct_management, "management")
 
     check_lower_upper_boundaries(
         ct_mineralisation, "msw_min", "msw_max", "nitrogen_mineralisation"
@@ -145,7 +145,6 @@ def validate_tables_nutrient_level(
     check_join(
         ct_lnk_soil_nutrient_level,
         ct_management,
-        "management_influence",
         "influence",
         inner=inner,
     )
@@ -179,7 +178,7 @@ def validate_tables_vegetation(
     check_join(ct_vegetation, ct_inundation, "inundation", inner=inner)
     check_join(ct_vegetation, ct_acidity, "acidity", inner=inner)
     check_join(ct_vegetation, ct_nutrient_level, "nutrient_level", inner=inner)
-    check_join(ct_vegetation, ct_management, "management", "code", inner=inner)
+    check_join(ct_vegetation, ct_management, "management", inner=inner)
 
     # extra check: per vegetation type, soil_code only one mhw, mlw combination
     #  is allowed. Otherwise the simple model may give unexpected results.

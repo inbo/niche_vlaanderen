@@ -202,7 +202,7 @@ class Vegetation(object):
                 "inundation", inundation, self._ct_inundation["inundation"]
             )
         if management is not None:
-            check_codes_used("management", management, self._ct_management["code"])
+            check_codes_used("management", management, self._ct_management["management"])
 
         veg_bands = dict()
         veg_detail = dict()
