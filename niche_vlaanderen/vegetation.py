@@ -194,7 +194,7 @@ class Vegetation(object):
         if full_model:
             check_codes_used("acidity", acidity, self._ct_acidity["acidity"])
             check_codes_used(
-                "nutrient_level", nutrient_level, self._ct_nutrient_level["code"]
+                "nutrient_level", nutrient_level, self._ct_nutrient_level["nutrient_level"]
             )
 
         if inundation is not None:

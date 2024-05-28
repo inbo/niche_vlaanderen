@@ -162,7 +162,6 @@ def validate_tables_nutrient_level(
         ct_lnk_soil_nutrient_level,
         ct_nutrient_level,
         "nutrient_level",
-        "code",
         inner=inner,
     )
 
@@ -179,7 +178,7 @@ def validate_tables_vegetation(
 
     check_join(ct_vegetation, ct_inundation, "inundation", inner=inner)
     check_join(ct_vegetation, ct_acidity, "acidity", inner=inner)
-    check_join(ct_vegetation, ct_nutrient_level, "nutrient_level", "code", inner=inner)
+    check_join(ct_vegetation, ct_nutrient_level, "nutrient_level", inner=inner)
     check_join(ct_vegetation, ct_management, "management", "code", inner=inner)
 
     # extra check: per vegetation type, soil_code only one mhw, mlw combination
