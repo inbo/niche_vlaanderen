@@ -318,11 +318,11 @@ class Vegetation(object):
 
                 # mhw smaller than maximum
                 sel = (row.soil_code == soil_code) & (row.mhw_max < mhw)
-                mhw_diff[sel] = (mhw - row.mhw_max)[sel]
+                mhw_diff[sel] = -(mhw - row.mhw_max)[sel]
 
                 # mhw larger than minimum
                 sel = (row.soil_code == soil_code) & (row.mhw_min > mhw)
-                mhw_diff[sel] = (mhw - row.mhw_min)[sel]
+                mhw_diff[sel] = -(mhw - row.mhw_min)[sel]
 
                 # mhw in range
                 sel = (
@@ -334,11 +334,11 @@ class Vegetation(object):
 
                 # mlw smaller than maximum
                 sel = (row.soil_code == soil_code) & (row.mlw_max < mlw)
-                mlw_diff[sel] = (mlw - row.mlw_max)[sel]
+                mlw_diff[sel] = -(mlw - row.mlw_max)[sel]
 
                 # mlw larger than minimum
                 sel = (row.soil_code == soil_code) & (row.mlw_min > mlw)
-                mlw_diff[sel] = (mlw - row.mlw_min)[sel]
+                mlw_diff[sel] = -(mlw - row.mlw_min)[sel]
 
                 # mlw in range
                 sel = (

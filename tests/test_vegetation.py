@@ -202,7 +202,7 @@ class TestVegetation:
         mhw = -1 * np.array([66, 16, 5, -5, 5, 5])
         mlw = -1 * np.array([35, 35, 35, 35, 35, 35])
         d = v.calculate_deviation(soil_code, mhw, mlw)
-        expected = -1 * np.array([46, 0, 0, -6, np.nan, np.nan])
+        expected = np.array([46, 0, 0, -6, np.nan, np.nan])
         np.testing.assert_equal(expected, d["mhw_01"])
 
     def test_deviation_mlw(self):
@@ -212,7 +212,7 @@ class TestVegetation:
         mhw = -1 * np.array([5, 5, 5, 5, 5, 5, 5])
         mlw = -1 * np.array([66, 50, 38, 25, 5, 25, 25])
         d = v.calculate_deviation(soil_code, mhw, mlw)
-        expected = -1 * np.array([28, 12, 0, 0, -15, np.nan, np.nan])
+        expected = np.array([28, 12, 0, 0, -15, np.nan, np.nan])
         np.testing.assert_equal(expected, d["mlw_01"])
 
     def test_detailed_vegetation(self):
