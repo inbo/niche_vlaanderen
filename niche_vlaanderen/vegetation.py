@@ -232,12 +232,13 @@ class Vegetation(object):
                 warnings.simplefilter(action="ignore", category=RuntimeWarning)
                 row_soil = row.soil_code == soil_code
                 vegi |= row_soil * VegSuitable.SOIL
+
                 current_row = (
-                    row_soil
-                    & (row.mhw_min >= mhw)
-                    & (row.mhw_max <= mhw)
-                    & (row.mlw_min >= mlw)
-                    & (row.mlw_max <= mlw)
+                        row_soil
+                        & (row.mhw_min <= mhw)
+                        & (row.mhw_max >= mhw)
+                        & (row.mlw_min <= mlw)
+                        & (row.mlw_max >= mlw)
                 )
 
                 vegi |= current_row * VegSuitable.MXW
@@ -316,34 +317,34 @@ class Vegetation(object):
             for row in subtable.itertuples():
 
                 # mhw smaller than maximum
-                sel = (row.soil_code == soil_code) & (row.mhw_max > mhw)
-                mhw_diff[sel] = (mhw - row.mhw_max)[sel]
+                sel = (row.soil_code == soil_code) & (row.mhw_max < mhw)
+                mhw_diff[sel] = -(mhw - row.mhw_max)[sel]
 
                 # mhw larger than minimum
-                sel = (row.soil_code == soil_code) & (row.mhw_min < mhw)
-                mhw_diff[sel] = (mhw - row.mhw_min)[sel]
+                sel = (row.soil_code == soil_code) & (row.mhw_min > mhw)
+                mhw_diff[sel] = -(mhw - row.mhw_min)[sel]
 
                 # mhw in range
                 sel = (
                     (row.soil_code == soil_code)
-                    & (row.mhw_min >= mhw)
-                    & (row.mhw_max <= mhw)
+                    & (row.mhw_min <= mhw)
+                    & (row.mhw_max >= mhw)
                 )
                 mhw_diff[sel] = (np.zeros(soil_code.shape))[sel]
 
                 # mlw smaller than maximum
-                sel = (row.soil_code == soil_code) & (row.mlw_max > mlw)
-                mlw_diff[sel] = (mlw - row.mlw_max)[sel]
+                sel = (row.soil_code == soil_code) & (row.mlw_max < mlw)
+                mlw_diff[sel] = -(mlw - row.mlw_max)[sel]
 
                 # mlw larger than minimum
-                sel = (row.soil_code == soil_code) & (row.mlw_min < mlw)
-                mlw_diff[sel] = (mlw - row.mlw_min)[sel]
+                sel = (row.soil_code == soil_code) & (row.mlw_min > mlw)
+                mlw_diff[sel] = -(mlw - row.mlw_min)[sel]
 
                 # mlw in range
                 sel = (
                     (row.soil_code == soil_code)
-                    & (row.mlw_min >= mlw)
-                    & (row.mlw_max <= mlw)
+                    & (row.mlw_min <= mlw)
+                    & (row.mlw_max >= mlw)
                 )
                 mlw_diff[sel] = (np.zeros(soil_code.shape))[sel]
 

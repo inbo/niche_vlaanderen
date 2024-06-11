@@ -823,7 +823,7 @@ class Niche(object):
                 norm = Normalize(-50, 50)
 
         if key in {"mhw", "mlw", "msw"} and fixed_scale:
-            norm = Normalize(200, 0)
+            norm = Normalize(-200, 0)
 
         if v is None:
             raise NicheException("Invalid key specified")
@@ -851,6 +851,7 @@ class Niche(object):
                 handles=patches, bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.0
             )
         else:
+            im.set_cmap(im.get_cmap().reversed())
             plt.colorbar()
 
         return ax

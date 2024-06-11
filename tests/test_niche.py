@@ -242,8 +242,8 @@ class TestNiche:
         ).decode("utf-8")
         print(info)
         assert "Origin = (172762.500000000000000,210637.500000000000000)" in info
-        assert "STATISTICS_MAXIMUM=0" in info
-        assert "STATISTICS_MINIMUM=-9" in info
+        assert "STATISTICS_MAXIMUM=9" in info
+        assert "STATISTICS_MINIMUM=0" in info
 
     def test_read_configuration(self, path_tests):
         config = path_tests / "small_simple.yaml"
