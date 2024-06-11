@@ -1,3 +1,10 @@
+# 1.3 (2024-05-04)
+   * Fix compatibility with recent Numpy/Pandas versions, update tests to pytest (#370)
+   * Add support for float data type soil code rasters (#371)
+   * Make sure package build process correctly includes the system tables (#372)
+   * Provide user feedback when trying to plot a non-existing raster (#373) 
+   * Update and improve sphinx documentation version (#374)
+
 # 1.2 (2023-03-09)
    * Add validation module, allowing the user to compare the result of a niche model with an actual vegetation map.
    * Improved speed of zonal statistics.

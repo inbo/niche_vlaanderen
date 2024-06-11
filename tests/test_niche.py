@@ -177,6 +177,26 @@ class TestNiche:
         dir_listing = os.listdir(tmp_path)
         assert Counter(list(expected_files)) == Counter(list(dir_listing))
 
+    def test_soil_tif_float32(self, zwarte_beek_niche, path_tests):
+        """Test that float32 soil code files are parsed correctly
+
+        cfr bug report #334
+        """
+        myniche = zwarte_beek_niche()
+        input_dir =  path_tests / "data" / "tif"
+
+        myniche.set_input("soil_code", input_dir /  "soil_smallerextent_float.tif")
+        myniche.run(full_model=False)
+        # check a position which is nan in soil code and not in mhw
+        # this should be nan in output
+        coords = ~myniche._context.transform*(216796,198172)
+        coords = (int(coords[0]), int(coords[1]))
+        
+        assert myniche._inputarray["soil_code"][coords] == -99
+        assert myniche._inputarray["mhw"][coords] != -99
+        assert myniche._vegetation[14][coords] == 255
+       
+
     @pytest.mark.skipif(
         distutils.spawn.find_executable("gdalinfo") is None,
         reason="gdalinfo not available in the environment.",
