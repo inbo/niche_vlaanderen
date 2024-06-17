@@ -40,7 +40,7 @@ class NutrientLevel(object):
                 ["system_tables"], "nutrient_level.csv")
 
         self.ct_lnk_soil_nutrient_level = pd.read_csv(ct_lnk_soil_nutrient_level)
-        self._ct_management = pd.read_csv(ct_management) #.set_index("management")
+        self._ct_management = pd.read_csv(ct_management)
         self._ct_mineralisation = pd.read_csv(ct_mineralisation)
         self._ct_nutrient_level = pd.read_csv(ct_nutrient_level)
         self._ct_soil_code = pd.read_csv(ct_soil_code)
