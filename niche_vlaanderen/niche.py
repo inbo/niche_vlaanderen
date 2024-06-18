@@ -152,9 +152,9 @@ class Niche(object):
         s = "# Niche Vlaanderen version: {}\n".format(__version__)
         s += self._latest_version + "\n"
         s += "# Reference values:\n"
-        s += "      version: {}\n".format(__reference_table_version__)
-        s += "      source: {}\n".format(__reference_table_source__)
-        s += "      original file: {}\n".format(__reference_table_file__)
+        s += "#     version: {}\n".format(__reference_table_version__)
+        s += "#     source: {}\n".format(__reference_table_source__)
+        s += "#     original file: {}\n".format(__reference_table_file__)
         s += "# Run at: {}\n\n".format(datetime.datetime.now())
         # Also add some versions of the major packages we use - easy for
         # debugging
