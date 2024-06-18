@@ -28,7 +28,7 @@ Niet voor alle 28 vegetatietypen die in NICHE Vlaanderen aan bod komen is er inf
 
   .. csv-table:: NICHE Vlaanderen vegetatietypen waarvoor overstromingstolerantie bepaald kan worden (cfr. overeenkomstige natuurtypencode)
     :header-rows: 1
-    :file: _data/vegetatietypen_DeNocker.csv
+    :file: ../niche_vlaanderen/system_tables/vegetatietypen_DeNocker.csv
   
 Input
 =====

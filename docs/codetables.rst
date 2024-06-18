@@ -11,14 +11,15 @@ nitrogren or mhw, minimum and maximum values are used.
     :header-rows: 1
 
     soil_name,msw_min,msw_max,nitrogen_mineralisation
-    K1,-5000,5,50
-    K1,5,10,55
-    K1,10,15,76
+    K1,5000,-5,11
+    K1,-5,-10,13
+    K1,-10,-15,15
+    K1,-15,-20,17
 
 Niche will use the values from the _max column to determine to which category a value has to be added.
-In this particular case, with a soil_code of 10000 an MSW values ]5,10] will give the value 55: the upper limit is included, the lower limit is not.
-A value of msw=5 will give nitrogen_mineralisation=50 as a result, a value of msw10 will lead to nitrogen_mineralisation=55.
-When using real values for mxw, the values will be rounded up to 2 decimals. Eg 50.005 will become 50.01 (> 50) and 50.004 will become 50.00 (=50).
+In this particular case, with a soil_code of 10000 an MSW values ]-5,-10] will give the value 55: the upper limit is included, the lower limit is not.
+A value of msw=-5 will give nitrogen_mineralisation=50 as a result, a value of msw10 will lead to nitrogen_mineralisation=55.
+When using real values for mxw, the values will be rounded up to 2 decimals. Eg -50.005 will become -50.01 (< -50) and -50.004 will become -50.00 (=-50).
 
 By default the codetables of the niche_vlaanderen package are used, but **the user can supply one or more own codetables** (see :doc:`cli`, *full example* at page bottom; see :ref:`here<niche>` for interactive implementation). If real values are used in these codetables, the decimal separator is '.' (note that no real values are used in the existing codetables).
 
@@ -63,6 +64,6 @@ The lower and upper limits of mhw and mlw are included when classifying.
     :header-rows: 1
 
     veg_code,veg_type,soil_name,nutrient_level,acidity,mhw_min,mhw_max,mlw_min,mlw_max
-    1,Sphagno-Betuletum,KV,2,1,20,1,38,20
+    1,Sphagno-Betuletum,KV,2,1,-20,-1,-38,-20
 
-In the above case, mhw values 20 and 1 both fullfill the required range.
+In the above case, mhw values -20 and -1 both fullfill the required range.
