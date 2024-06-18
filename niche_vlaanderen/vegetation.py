@@ -173,7 +173,7 @@ class Vegetation(object):
 
         """
 
-        nodata = (soil_code == -99) | np.isnan(mhw) | np.isnan(mlw)
+        nodata = (soil_code == -99) | np.isnan(soil_code) | np.isnan(mhw) | np.isnan(mlw)
 
         if full_model:
             nodata = (
