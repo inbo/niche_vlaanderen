@@ -348,8 +348,8 @@ class Vegetation(object):
                 )
                 mlw_diff[sel] = (np.zeros(soil_code.shape))[sel]
 
-            mhw_diff[nodata] = np.NaN
-            mlw_diff[nodata] = np.NaN
+            mhw_diff[nodata] = np.nan
+            mlw_diff[nodata] = np.nan
 
             difference["mhw_%02d" % veg_code] = mhw_diff
             difference["mlw_%02d" % veg_code] = mlw_diff
