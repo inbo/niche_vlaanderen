@@ -10,7 +10,4 @@ soil_code,soil_name,beschrijving,description,soil_group
 13,ZV,"venige zandgronden, moerige zandgronden, zandige veengronden","peaty sandy soils, swampy sandy soils, sandy peat soils",2
 14,L1,"alluviale leemgronden, arm aan OM","alluvial loamy soils, poor in organic matter",1
 15,LV,"alluviale leemgronden, rijk aan OM, venige leemgronden","alluvial loamy soils, rich in organic matter, peaty loams",2
-10,NG,"gronden die niet in aanmerking komen voor NICHE: niet gespecifieerd","grounds that do not qualify for NICHE Flanders: not specified",1
-10,B,"gronden die niet in aanmerking komen voor NICHE: bebouwd of sterk beïnvloed","grounds that do not qualify for NICHE Flanders: built-up or heavily influenced soils",1
-10,D,"gronden die niet in aanmerking komen voor NICHE: droge gronden","grounds that do not qualify for NICHE Flanders: dry soils",1
-10,W,"gronden die niet in aanmerking komen voor NICHE: open water","grounds that do not qualify for NICHE Flanders: open water",1
+10,NG,"gronden die niet in aanmerking komen voor NICHE","grounds that do not qualify for NICHE Flanders",1
