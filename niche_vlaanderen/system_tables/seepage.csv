@@ -1,4 +1,4 @@
-seepage,seepage_min,seepage_max,description
-3,-999,-1,much seepage
-2,-1,-0.1,little seepage
-1,-0.1,999,infiltration
+seepage,seepage_min,seepage_max,description,beschrijving
+3,-999,-1,much seepage,sterke kwel
+2,-1,-0.1,little seepage,beperkte kwel
+1,-0.1,999,infiltration,infiltratie
