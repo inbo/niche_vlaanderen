@@ -40,7 +40,7 @@ class NutrientLevel(object):
                 ["system_tables"], "nutrient_level.csv")
 
         self.ct_lnk_soil_nutrient_level = pd.read_csv(ct_lnk_soil_nutrient_level)
-        self._ct_management = pd.read_csv(ct_management).set_index("management")
+        self._ct_management = pd.read_csv(ct_management)
         self._ct_mineralisation = pd.read_csv(ct_mineralisation)
         self._ct_nutrient_level = pd.read_csv(ct_nutrient_level)
         self._ct_soil_code = pd.read_csv(ct_soil_code)
@@ -102,14 +102,14 @@ class NutrientLevel(object):
         """
         Calculates the nutrient level using previously calculated nitrogen
         """
-        check_codes_used("management", management, self._ct_management["code"])
+        check_codes_used("management", management, self._ct_management["management"])
         check_codes_used("soil_code", soil_code, self._ct_soil_code["soil_code"])
 
         # calculate management influence
         influence = np.full(management.shape, -99)  # -99 used as no data value
-        for i in self._ct_management.code.unique():
+        for i in self._ct_management.management.unique():
             sel_grid = management == i
-            sel_ct = self._ct_management.code == i
+            sel_ct = self._ct_management.management == i
             influence[sel_grid] = self._ct_management[sel_ct].influence.values[0]
 
         # flatten all input layers (necessary for digitize)
@@ -124,7 +124,7 @@ class NutrientLevel(object):
         result = np.full(influence.shape, self.nodata, dtype="uint8")
 
         for name, subtable in self.ct_lnk_soil_nutrient_level.groupby(
-            ["soil_code", "management_influence"]
+            ["soil_code", "influence"]
         ):
 
             soil_selected, influence_selected = name

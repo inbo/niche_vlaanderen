@@ -10,10 +10,10 @@ drogere typen is niet de volledige range in de database aanwezig, maar enkel het
 
 .. csv-table:: Vegetatietypen NICHE Vlaanderen
   :header-rows: 1
-  :file: _data/vegetatietypen.csv
+  :file: ../niche_vlaanderen/system_tables/vegetatietypen.csv
 
 Een indicatieve **vertaling** van de NICHE vegetatietypen **naar Europese habitattypen en regionaal belangrijke biotopen** (rbb) wordt 
-in de tabel `niche_hab_rbb.csv <https://github.com/inbo/niche_vlaanderen/blob/master/docs/_data/niche_hab_rbb.csv>`_ gegeven.
+in de tabel `hab_niche_join.csv <https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/hab_niche_join.csv>`_ gegeven.
 
 Een vertaling blijft uiteraard een vertaling, met de inherente kans op een over- of onderschatting van de aanwezigheid van de NICHE vegetatietypen. 
 Niet elk NICHE vegetatietype stemt immers helemaal overeen met één of meerdere Europese habitattypen of rbb. Hoe groot deze onder- en overschatting is, 

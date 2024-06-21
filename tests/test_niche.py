@@ -183,16 +183,16 @@ class TestNiche:
         cfr bug report #334
         """
         myniche = zwarte_beek_niche()
-        input_dir =  path_tests / "data" / "tif"
+        input_dir = path_tests / "data" / "tif"
 
-        myniche.set_input("soil_code", input_dir /  "soil_smallerextent_float.tif")
+        myniche.set_input("soil_code", input_dir / "soil_smallerextent_float.tif")
         myniche.run(full_model=False)
         # check a position which is nan in soil code and not in mhw
         # this should be nan in output
         coords = ~myniche._context.transform*(216796,198172)
         coords = (int(coords[0]), int(coords[1]))
         
-        assert myniche._inputarray["soil_code"][coords] == -99
+        assert (myniche._inputarray["soil_code"][coords] == -99 or np.isnan(myniche._inputarray["soil_code"][coords]))
         assert myniche._inputarray["mhw"][coords] != -99
         assert myniche._vegetation[14][coords] == 255
        

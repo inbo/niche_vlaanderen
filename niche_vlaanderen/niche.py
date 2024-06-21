@@ -21,7 +21,8 @@ from niche_vlaanderen.vegetation import Vegetation, VegSuitable
 from niche_vlaanderen.acidity import Acidity
 from niche_vlaanderen.nutrient_level import NutrientLevel
 from niche_vlaanderen.spatial_context import SpatialContext
-from niche_vlaanderen.version import __version__
+from niche_vlaanderen.version import __version__, __reference_table_version__, __reference_table_source__, \
+    __reference_table_file__
 from niche_vlaanderen.flooding import Flooding
 from niche_vlaanderen.exception import NicheException
 from niche_vlaanderen.codetables import package_resource
@@ -105,16 +106,16 @@ class Niche(object):
     """
 
     def __init__(
-        self,
-        ct_acidity=None,
-        ct_soil_mlw_class=None,
-        ct_soil_codes=None,
-        lnk_acidity=None,
-        ct_seepage=None,
-        ct_vegetation=None,
-        ct_management=None,
-        ct_nutrient_level=None,
-        ct_mineralisation=None,
+            self,
+            ct_acidity=None,
+            ct_soil_mlw_class=None,
+            ct_soil_codes=None,
+            lnk_acidity=None,
+            ct_seepage=None,
+            ct_vegetation=None,
+            ct_management=None,
+            ct_nutrient_level=None,
+            ct_mineralisation=None,
     ):
         self._inputfiles = dict()
         self._inputvalues = dict()
@@ -150,6 +151,10 @@ class Niche(object):
     def __repr__(self):
         s = "# Niche Vlaanderen version: {}\n".format(__version__)
         s += self._latest_version + "\n"
+        s += "# Reference values:\n"
+        s += "#     version: {}\n".format(__reference_table_version__)
+        s += "#     source: {}\n".format(__reference_table_source__)
+        s += "#     original file: {}\n".format(__reference_table_file__)
         s += "# Run at: {}\n\n".format(datetime.datetime.now())
         # Also add some versions of the major packages we use - easy for
         # debugging
@@ -428,28 +433,24 @@ class Niche(object):
                 band = band.astype(int)
 
             if f in (
-                "nitrogen_animal",
-                "nitrogen_fertilizer",
-                "nitrogen_atmospheric",
-                "mhw",
-                "mlw",
-                "msw",
+                    "nitrogen_animal",
+                    "nitrogen_fertilizer",
+                    "nitrogen_atmospheric",
+                    "mhw",
+                    "mlw",
+                    "msw",
             ):
                 band = band.astype("float32")
 
+            # convert old soil codes to new soil codes
+            if f == "soil_code" and np.all(band[band != nodata] >= 10000):
+                band[band != nodata] = np.round(band[band != nodata] / 10000)
+
             # create a mask for no-data values, taking into account data-types
             if band.dtype == "float32" and nodata is not None:
-                band[np.isclose(nodata, band)] = np.nan
+                band[np.isclose(band, nodata)] = np.nan
             else:
                 band[band == nodata] = -99
-            
-            # convert old soil codes to new soil codes
-            if f == "soil_code" and np.all((band >= 10000)|(band==-99)|np.isnan(band)):
-                band[band>=10000] = np.round(band[band>=10000] / 10000)
-            
-            if f == "soil_code" and band.dtype == "float32":
-                band[np.isnan(band)] = -99
-                band = band.astype(int)
 
             inputarray[f] = band
 
@@ -471,12 +472,12 @@ class Niche(object):
         if full_model and "nutrient_level" not in inputarray.keys():
             with np.errstate(invalid="ignore"):  # ignore NaN comparison errors
                 if np.any(
-                    (inputarray["nitrogen_animal"] < 0)
-                    | (inputarray["nitrogen_animal"] > 10000)
-                    | (inputarray["nitrogen_fertilizer"] < 0)
-                    | (inputarray["nitrogen_fertilizer"] > 10000)
-                    | (inputarray["nitrogen_atmospheric"] < 0)
-                    | (inputarray["nitrogen_atmospheric"] > 10000)
+                        (inputarray["nitrogen_animal"] < 0)
+                        | (inputarray["nitrogen_animal"] > 10000)
+                        | (inputarray["nitrogen_fertilizer"] < 0)
+                        | (inputarray["nitrogen_fertilizer"] > 10000)
+                        | (inputarray["nitrogen_atmospheric"] < 0)
+                        | (inputarray["nitrogen_atmospheric"] > 10000)
                 ):
                     raise NicheException("Error: nitrogen values must be >0 and <10000")
 
@@ -965,7 +966,7 @@ class Niche(object):
         return df
 
     def zonal_stats(
-        self, vectors, outside=True, attribute=None, vegetation_types=None, upscale=1
+            self, vectors, outside=True, attribute=None, vegetation_types=None, upscale=1
     ):
         """Calculates zonal statistics using vectors
 
@@ -999,8 +1000,8 @@ class Niche(object):
 
         # Ignore the warnings from rasterstats - code must be adjusted
         # in that package - not in our code.
-        #warnings.simplefilter(action="ignore", category=FutureWarning)
-        #warnings.simplefilter(action="ignore", category=DeprecationWarning)
+        # warnings.simplefilter(action="ignore", category=FutureWarning)
+        # warnings.simplefilter(action="ignore", category=DeprecationWarning)
 
         presence = dict({0: "not present", 1: "present", 255: "no data"})
 

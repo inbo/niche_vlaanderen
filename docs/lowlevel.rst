@@ -103,7 +103,7 @@ create a full grid.
 
  Vegetation type 8 is no longer a potential vegetation type.
 
-.. _depths.csv: https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/flooding/depths.csv
+.. _depth.csv: https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/flooding/depth.csv
 .. _duration.csv: https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/flooding/duration.csv
 .. _frequency.csv: https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/flooding/frequency.csv
 

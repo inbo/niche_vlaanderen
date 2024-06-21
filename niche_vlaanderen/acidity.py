@@ -134,11 +134,10 @@ class Acidity(object):
         return seepage_class.values.reshape(orig_shape)
 
     def calculate(self, soil_class, mlw, inundation, seepage, minerality, rainwater):
-        """
-
+        """Calculate the Acidity
 
         Parameters:
-        ==========
+        ===========
         soil_class: numpy.array
             Array containing the soil codes. Values must be present
             in the soil_code table. -99 is used as no data value.

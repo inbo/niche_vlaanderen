@@ -31,7 +31,7 @@ eigen vegetatiekaarten of op de `Biologische Waarderingskaart(BWK)-Habitatkaart 
 
 Een indicatieve vertaalsleutel tussen de Europese habitattypen en regionaal belangrijke biotopen 
 (rbb) die in de Habitatkaart worden gebruikt, en de NICHE vegetatietypen, wordt in de 
-tabel `niche_hab_rbb.csv <https://github.com/inbo/niche_vlaanderen/blob/master/docs/_data/niche_hab_rbb.csv>`_ gegeven.
+tabel `niche_hab_rbb.csv <https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_hab_rbb.csv>`_ gegeven.
 
 Een **validatiescore** kan per vegetatietype worden berekend als de mate waarin de actuele aanwezigheid van het type voorspeld wordt 
 door het NICHE Vlaanderen model in het studiegebied. Hiervoor wordt gekeken *hoe groot de 

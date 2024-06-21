@@ -173,7 +173,7 @@ class Vegetation(object):
 
         """
 
-        nodata = (soil_code == -99) | np.isnan(mhw) | np.isnan(mlw)
+        nodata = (soil_code == -99) | np.isnan(soil_code) | np.isnan(mhw) | np.isnan(mlw)
 
         if full_model:
             nodata = (
@@ -194,7 +194,7 @@ class Vegetation(object):
         if full_model:
             check_codes_used("acidity", acidity, self._ct_acidity["acidity"])
             check_codes_used(
-                "nutrient_level", nutrient_level, self._ct_nutrient_level["code"]
+                "nutrient_level", nutrient_level, self._ct_nutrient_level["nutrient_level"]
             )
 
         if inundation is not None:
@@ -202,7 +202,7 @@ class Vegetation(object):
                 "inundation", inundation, self._ct_inundation["inundation"]
             )
         if management is not None:
-            check_codes_used("management", management, self._ct_management["code"])
+            check_codes_used("management", management, self._ct_management["management"])
 
         veg_bands = dict()
         veg_detail = dict()
@@ -348,8 +348,8 @@ class Vegetation(object):
                 )
                 mlw_diff[sel] = (np.zeros(soil_code.shape))[sel]
 
-            mhw_diff[nodata] = np.NaN
-            mlw_diff[nodata] = np.NaN
+            mhw_diff[nodata] = np.nan
+            mlw_diff[nodata] = np.nan
 
             difference["mhw_%02d" % veg_code] = mhw_diff
             difference["mlw_%02d" % veg_code] = mlw_diff
