@@ -2,6 +2,21 @@
 Code tables
 #################
 
+.. warning::
+  The Niche code tables are published on `Zenodo <https://zenodo.org/records/10521548>`_ as a reference. These files are used by the package and stored in the `niche_vlaanderen/system_tables` subdirectory. To check if your current Niche version corresponds to the latest reference data published on Zenodo, check the `Zenodo Versions section <https://zenodo.org/records/10521548>`_ and compare this with a `Niche` object output::
+
+    >>> from niche_vlaanderen import niche
+    >>> niche.Niche()
+    # Niche Vlaanderen version: 1.3
+    # Using latest niche_vlaanderen  1.3
+    # Reference values:
+    #     version: 12C                       <----- Zenodo version used in package
+    #     source: 10.5281/zenodo.10417821
+    #     original file: NICHE_FL_referencegroundwaterlevels_v12C.csv
+
+
+  The steps to create a new release of the package with an updated data set on Zenodo is described in the :ref:`Package release documentation<release_version>`.
+
 The logic of Niche is largely based on code tables.
 They convert values (eg mlw, ...) to another (eg soil_mlw_class).
 For categorical data, this happens directly. For continuous data such as
@@ -67,3 +82,15 @@ The lower and upper limits of mhw and mlw are included when classifying.
     1,Sphagno-Betuletum,KV,2,1,-20,-1,-38,-20
 
 In the above case, mhw values -20 and -1 both fullfill the required range.
+
+system table relation
+=====================
+
+The following images illustrate the relation between the individual code tables for respectively niche-vegetation and flooding:
+
+.. figure:: _static/png/niche_table_relation.png
+   :scale: 100%
+
+.. figure:: _static/png/flooding_table_relation.png
+   :scale: 100%
+
