@@ -44,7 +44,7 @@ De overstromingsdiepte dient als een raster aangeleverd te worden met voor elke 
 
   .. csv-table:: Mogelijke diepteklassen van overstroming
     :header-rows: 1
-    :file: ../niche_vlaanderen/system_tables/flooding/depths.csv
+    :file: ../niche_vlaanderen/system_tables/flooding/depth.csv
  
 Het is belangrijk om een duidelijk onderscheid te maken tussen de plaatsen waar effectief geen overstroming voorkomt of voorspeld wordt, en de plaatsen waar er geen uitspraken mogelijk zijn omdat de informatie er ontbreekt en dus niet gekend is. In het eerste geval wordt de waarde 0 toegekend, in het laatste geval een waarde voor "no data".
  

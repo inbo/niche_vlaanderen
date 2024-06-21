@@ -34,7 +34,7 @@ class Flooding(object):
 
     def __init__(
         self,
-        depths=None,
+        depth=None,
         duration=None,
         frequency=None,
         lnk_potential=None,
@@ -45,7 +45,7 @@ class Flooding(object):
         self._veg = dict()
         self._log = logging.getLogger("niche_vlaanderen")
 
-        for i in ["depths", "duration", "frequency", "lnk_potential", "potential"]:
+        for i in ["depth", "duration", "frequency", "lnk_potential", "potential"]:
             if locals()[i] is None:
                 ct = package_resource(["system_tables", "flooding"],
                                       f"{i}.csv")
@@ -103,7 +103,7 @@ class Flooding(object):
         depth = depth.flatten()
         nodata = depth == -99
 
-        check_codes_used("depth", depth, self._ct["depths"]["depth"])
+        check_codes_used("depth", depth, self._ct["depth"]["depth"])
         check_codes_used("frequency", frequency, self._ct["frequency"]["frequency"])
         check_codes_used("duration", duration, self._ct["duration"]["duration"])
         check_codes_used("period", period, ["summer", "winter"])
@@ -132,7 +132,7 @@ class Flooding(object):
         depth_file: filename
            The filename containing a classified grid with inundation dephts.
            The classes used must correspond to the codes in the
-           depths.csv_ code table.
+           depth.csv_ code table.
 
 
         frequency: code

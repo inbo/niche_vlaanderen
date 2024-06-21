@@ -196,10 +196,10 @@ def validate_tables_vegetation(
 
 
 def validate_tables_flooding(
-    depths, duration, frequency, lnk_potential, potential, inner
+    depth, duration, frequency, lnk_potential, potential, inner
 ):
     # test disabled as we have a 0 code which is not in lnk_potential
-    # check_join(lnk_potential, depths, "depth","code")
+    # check_join(lnk_potential, depth, "depth","code")
     check_join(lnk_potential, duration, "duration", inner=inner)
     check_join(lnk_potential, frequency, "frequency", inner=inner)
     # test disabled as we have a code 4 which is not in lnk_potential
