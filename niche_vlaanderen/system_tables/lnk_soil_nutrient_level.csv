@@ -1,4 +1,4 @@
-management_influence,soil_name,total_nitrogen_min,total_nitrogen_max,nutrient_level
+influence,soil_name,total_nitrogen_min,total_nitrogen_max,nutrient_level
 0,K1,0,60,3
 0,K1,60,160,4
 0,K1,160,10000,5

@@ -78,6 +78,10 @@ class NicheValidation(object):
         self.filename_map = map
         self.map = gpd.read_file(map)
 
+        # Prevent wrong mapping of HAB strings to floats
+        self.map[[col for col in self.map.columns if col.startswith("HAB")]] = self.map[
+            [col for col in self.map.columns if col.startswith("HAB")]].astype(str)
+
         # the mapping columns contain are the field in the shapefile that contain a field starting with HAB{1-9}
         # (case insensitive)
         columns = self.map.columns

@@ -75,11 +75,11 @@ class Acidity(object):
         for sel_group, subtable in self._ct_soil_mlw.groupby("soil_group"):
 
             subtable = subtable.copy().reset_index(drop=True)
-            index = np.digitize(mlw, subtable.mlw_max, right=True)
+            index = np.digitize(mlw, subtable.mlw_max, right=False)
             selection = soil_group == sel_group
             result[selection] = subtable.soil_mlw_class.reindex(index)[selection]
 
-        result[mlw == -99] = -99
+        result[(mlw == 99) | (np.isnan(mlw))] = -99
         result = result.reshape(orig_shape)
         return result
 
@@ -134,11 +134,10 @@ class Acidity(object):
         return seepage_class.values.reshape(orig_shape)
 
     def calculate(self, soil_class, mlw, inundation, seepage, minerality, rainwater):
-        """
-
+        """Calculate the Acidity
 
         Parameters:
-        ==========
+        ===========
         soil_class: numpy.array
             Array containing the soil codes. Values must be present
             in the soil_code table. -99 is used as no data value.

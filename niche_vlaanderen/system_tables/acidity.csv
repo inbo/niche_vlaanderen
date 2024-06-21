@@ -1,4 +1,4 @@
-acidity,zuurgraadklasse_bodem,ph_kcl_soil
-1,zuur,3.5 ‐ 5
-2,zwak zuur,5 ‐ 6.5
-3,neutraal/basisch,6.5 ‐ 8
+acidity,beschrijving,description,ph_kcl_soil
+1,zuur,acidic,3.5 ‐ 5
+2,zwak zuur,slightly acidic,5 ‐ 6.5
+3,neutraal/basisch,neutral/basic,6.5 ‐ 8

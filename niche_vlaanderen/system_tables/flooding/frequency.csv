@@ -1,5 +1,5 @@
-code, description
-T2, 0-2 year
-T10, 2-10 year
-T25, 10-25 year
-T50, 25-50 year
+frequency,description,beschrijving
+T2,0-2 year,0-2 jaar
+T10,2-10 year,2-10 jaar
+T25,10-25 year,10-25 jaar
+T50,25-50 year,25-50 jaar

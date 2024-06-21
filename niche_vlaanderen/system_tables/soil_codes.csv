@@ -1,13 +1,13 @@
-soil_code,soil_name,description,soil_group
-2,K1,"alluviale kleigronden, arm aan OM",1
-3,KV,"alluviale kleigronden, rijk aan OM, venige klei, klei op veen",2
-5,Le,"eolische leemgronden",1
-6,MK,"maritieme klei",1
-7,P,trilveen,3
-8,V,veen,2
-11,Z1,"humusarme zandgronden (dunne humuslaag), podzol",1
-12,Z2,humusrijke zandgronden (dikke humuslaag),1
-13,ZV,"venige zandgronden, moerige zandgronden, zandige veengronden",2
-14,L1,"alluviale leemgronden, arm aan OM",1
-15,LV,"alluviale leemgronden, rijk aan OM, venige leemgronden",2
-10,NG,"gronden die niet in aanmerking komen voor NICHE: open water, bebouwd of sterk beïnvloed, droge gronden, open water, niet gespecifieerd",1
+soil_code,soil_name,beschrijving,description,soil_group
+2,K1,"alluviale kleigronden, arm aan OM","alluvial clay soils, poor in organic matter",1
+3,KV,"alluviale kleigronden, rijk aan OM, venige klei, klei op veen","alluvial clay soils, rich in organic matter, peaty clay, clay on peat",2
+5,Le,"eolische leemgronden","aeolian loamy soils",1
+6,MK,"maritieme klei","maritime clay",1
+7,P,trilveen,"quaking bog",3
+8,V,veen,"peat",2
+11,Z1,"humusarme zandgronden (dunne humuslaag), podzol","humus-poor sandy soils (thin humus layer), podzol",1
+12,Z2,humusrijke zandgronden (dikke humuslaag),"humus-rich sandy soils (thick humus layer)",1
+13,ZV,"venige zandgronden, moerige zandgronden, zandige veengronden","peaty sandy soils, swampy sandy soils, sandy peat soils",2
+14,L1,"alluviale leemgronden, arm aan OM","alluvial loamy soils, poor in organic matter",1
+15,LV,"alluviale leemgronden, rijk aan OM, venige leemgronden","alluvial loamy soils, rich in organic matter, peaty loams",2
+10,NG,"gronden die niet in aanmerking komen voor NICHE","grounds that do not qualify for NICHE Flanders",1

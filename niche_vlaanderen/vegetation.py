@@ -173,7 +173,7 @@ class Vegetation(object):
 
         """
 
-        nodata = (soil_code == -99) | np.isnan(mhw) | np.isnan(mlw)
+        nodata = (soil_code == -99) | np.isnan(soil_code) | np.isnan(mhw) | np.isnan(mlw)
 
         if full_model:
             nodata = (
@@ -194,7 +194,7 @@ class Vegetation(object):
         if full_model:
             check_codes_used("acidity", acidity, self._ct_acidity["acidity"])
             check_codes_used(
-                "nutrient_level", nutrient_level, self._ct_nutrient_level["code"]
+                "nutrient_level", nutrient_level, self._ct_nutrient_level["nutrient_level"]
             )
 
         if inundation is not None:
@@ -202,7 +202,7 @@ class Vegetation(object):
                 "inundation", inundation, self._ct_inundation["inundation"]
             )
         if management is not None:
-            check_codes_used("management", management, self._ct_management["code"])
+            check_codes_used("management", management, self._ct_management["management"])
 
         veg_bands = dict()
         veg_detail = dict()
@@ -232,12 +232,13 @@ class Vegetation(object):
                 warnings.simplefilter(action="ignore", category=RuntimeWarning)
                 row_soil = row.soil_code == soil_code
                 vegi |= row_soil * VegSuitable.SOIL
+
                 current_row = (
-                    row_soil
-                    & (row.mhw_min >= mhw)
-                    & (row.mhw_max <= mhw)
-                    & (row.mlw_min >= mlw)
-                    & (row.mlw_max <= mlw)
+                        row_soil
+                        & (row.mhw_min <= mhw)
+                        & (row.mhw_max >= mhw)
+                        & (row.mlw_min <= mlw)
+                        & (row.mlw_max >= mlw)
                 )
 
                 vegi |= current_row * VegSuitable.MXW
@@ -316,39 +317,39 @@ class Vegetation(object):
             for row in subtable.itertuples():
 
                 # mhw smaller than maximum
-                sel = (row.soil_code == soil_code) & (row.mhw_max > mhw)
-                mhw_diff[sel] = (mhw - row.mhw_max)[sel]
+                sel = (row.soil_code == soil_code) & (row.mhw_max < mhw)
+                mhw_diff[sel] = -(mhw - row.mhw_max)[sel]
 
                 # mhw larger than minimum
-                sel = (row.soil_code == soil_code) & (row.mhw_min < mhw)
-                mhw_diff[sel] = (mhw - row.mhw_min)[sel]
+                sel = (row.soil_code == soil_code) & (row.mhw_min > mhw)
+                mhw_diff[sel] = -(mhw - row.mhw_min)[sel]
 
                 # mhw in range
                 sel = (
                     (row.soil_code == soil_code)
-                    & (row.mhw_min >= mhw)
-                    & (row.mhw_max <= mhw)
+                    & (row.mhw_min <= mhw)
+                    & (row.mhw_max >= mhw)
                 )
                 mhw_diff[sel] = (np.zeros(soil_code.shape))[sel]
 
                 # mlw smaller than maximum
-                sel = (row.soil_code == soil_code) & (row.mlw_max > mlw)
-                mlw_diff[sel] = (mlw - row.mlw_max)[sel]
+                sel = (row.soil_code == soil_code) & (row.mlw_max < mlw)
+                mlw_diff[sel] = -(mlw - row.mlw_max)[sel]
 
                 # mlw larger than minimum
-                sel = (row.soil_code == soil_code) & (row.mlw_min < mlw)
-                mlw_diff[sel] = (mlw - row.mlw_min)[sel]
+                sel = (row.soil_code == soil_code) & (row.mlw_min > mlw)
+                mlw_diff[sel] = -(mlw - row.mlw_min)[sel]
 
                 # mlw in range
                 sel = (
                     (row.soil_code == soil_code)
-                    & (row.mlw_min >= mlw)
-                    & (row.mlw_max <= mlw)
+                    & (row.mlw_min <= mlw)
+                    & (row.mlw_max >= mlw)
                 )
                 mlw_diff[sel] = (np.zeros(soil_code.shape))[sel]
 
-            mhw_diff[nodata] = np.NaN
-            mlw_diff[nodata] = np.NaN
+            mhw_diff[nodata] = np.nan
+            mlw_diff[nodata] = np.nan
 
             difference["mhw_%02d" % veg_code] = mhw_diff
             difference["mlw_%02d" % veg_code] = mlw_diff

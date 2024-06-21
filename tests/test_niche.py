@@ -183,16 +183,16 @@ class TestNiche:
         cfr bug report #334
         """
         myniche = zwarte_beek_niche()
-        input_dir =  path_tests / "data" / "tif"
+        input_dir = path_tests / "data" / "tif"
 
-        myniche.set_input("soil_code", input_dir /  "soil_smallerextent_float.tif")
+        myniche.set_input("soil_code", input_dir / "soil_smallerextent_float.tif")
         myniche.run(full_model=False)
         # check a position which is nan in soil code and not in mhw
         # this should be nan in output
         coords = ~myniche._context.transform*(216796,198172)
         coords = (int(coords[0]), int(coords[1]))
         
-        assert myniche._inputarray["soil_code"][coords] == -99
+        assert (myniche._inputarray["soil_code"][coords] == -99 or np.isnan(myniche._inputarray["soil_code"][coords]))
         assert myniche._inputarray["mhw"][coords] != -99
         assert myniche._vegetation[14][coords] == 255
        
@@ -214,10 +214,10 @@ class TestNiche:
         assert "STATISTICS_MAXIMUM=1" in info
         assert "STATISTICS_MINIMUM=0" in info
 
-    def test_windowed_read(self, zwarte_beek_niche):
+    def test_windowed_read(self, zwarte_beek_niche, path_testdata):
         # tests whether the spatial context is adjusted to the smaller grid
         myniche = zwarte_beek_niche()
-        myniche.set_input("mlw", "tests/data/part_zwarte_beek_mlw.asc")
+        myniche.set_input("mlw", path_testdata / "part_zwarte_beek_mlw.asc")
         myniche.run(full_model=True)
         assert 37 == myniche._context.width
         assert 37 == myniche._context.height
