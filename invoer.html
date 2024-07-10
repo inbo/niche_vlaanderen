@@ -280,6 +280,7 @@
 <thead>
 <tr class="row-odd"><th class="head"><p>soil_code</p></th>
 <th class="head"><p>soil_name</p></th>
+<th class="head"><p>beschrijving</p></th>
 <th class="head"><p>description</p></th>
 <th class="head"><p>soil_group</p></th>
 </tr>
@@ -288,61 +289,73 @@
 <tr class="row-even"><td><p>2</p></td>
 <td><p>K1</p></td>
 <td><p>alluviale kleigronden, arm aan OM</p></td>
+<td><p>alluvial clay soils, poor in organic matter</p></td>
 <td><p>1</p></td>
 </tr>
 <tr class="row-odd"><td><p>3</p></td>
 <td><p>KV</p></td>
 <td><p>alluviale kleigronden, rijk aan OM, venige klei, klei op veen</p></td>
+<td><p>alluvial clay soils, rich in organic matter, peaty clay, clay on peat</p></td>
 <td><p>2</p></td>
 </tr>
 <tr class="row-even"><td><p>5</p></td>
 <td><p>Le</p></td>
 <td><p>eolische leemgronden</p></td>
+<td><p>aeolian loamy soils</p></td>
 <td><p>1</p></td>
 </tr>
 <tr class="row-odd"><td><p>6</p></td>
 <td><p>MK</p></td>
 <td><p>maritieme klei</p></td>
+<td><p>maritime clay</p></td>
 <td><p>1</p></td>
 </tr>
 <tr class="row-even"><td><p>7</p></td>
 <td><p>P</p></td>
 <td><p>trilveen</p></td>
+<td><p>quaking bog</p></td>
 <td><p>3</p></td>
 </tr>
 <tr class="row-odd"><td><p>8</p></td>
 <td><p>V</p></td>
 <td><p>veen</p></td>
+<td><p>peat</p></td>
 <td><p>2</p></td>
 </tr>
 <tr class="row-even"><td><p>11</p></td>
 <td><p>Z1</p></td>
 <td><p>humusarme zandgronden (dunne humuslaag), podzol</p></td>
+<td><p>humus-poor sandy soils (thin humus layer), podzol</p></td>
 <td><p>1</p></td>
 </tr>
 <tr class="row-odd"><td><p>12</p></td>
 <td><p>Z2</p></td>
 <td><p>humusrijke zandgronden (dikke humuslaag)</p></td>
+<td><p>humus-rich sandy soils (thick humus layer)</p></td>
 <td><p>1</p></td>
 </tr>
 <tr class="row-even"><td><p>13</p></td>
 <td><p>ZV</p></td>
 <td><p>venige zandgronden, moerige zandgronden, zandige veengronden</p></td>
+<td><p>peaty sandy soils, swampy sandy soils, sandy peat soils</p></td>
 <td><p>2</p></td>
 </tr>
 <tr class="row-odd"><td><p>14</p></td>
 <td><p>L1</p></td>
 <td><p>alluviale leemgronden, arm aan OM</p></td>
+<td><p>alluvial loamy soils, poor in organic matter</p></td>
 <td><p>1</p></td>
 </tr>
 <tr class="row-even"><td><p>15</p></td>
 <td><p>LV</p></td>
 <td><p>alluviale leemgronden, rijk aan OM, venige leemgronden</p></td>
+<td><p>alluvial loamy soils, rich in organic matter, peaty loams</p></td>
 <td><p>2</p></td>
 </tr>
 <tr class="row-odd"><td><p>10</p></td>
 <td><p>NG</p></td>
-<td><p>gronden die niet in aanmerking komen voor NICHE: open water, bebouwd of sterk beïnvloed, droge gronden, open water, niet gespecifieerd</p></td>
+<td><p>gronden die niet in aanmerking komen voor NICHE</p></td>
+<td><p>grounds that do not qualify for NICHE Flanders</p></td>
 <td><p>1</p></td>
 </tr>
 </tbody>
@@ -695,25 +708,30 @@ Extensieve bemestingsdruk (veelal dierlijk)</p></td>
 <table class="docutils align-default" id="id95">
 <caption><span class="caption-text">Onderscheiden beheerklassen met hun code en korte beschrijving ( <a class="reference internal" href="codetables.html#ct-management"><span class="std std-ref">management</span></a>)</span><a class="headerlink" href="#id95" title="Link to this table"></a></caption>
 <thead>
-<tr class="row-odd"><th class="head"><p>code</p></th>
-<th class="head"><p>management</p></th>
+<tr class="row-odd"><th class="head"><p>management</p></th>
+<th class="head"><p>description</p></th>
+<th class="head"><p>beschrijving</p></th>
 <th class="head"><p>influence</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>0</p></td>
+<td><p>no management</p></td>
 <td><p>geen</p></td>
 <td><p>0</p></td>
 </tr>
 <tr class="row-odd"><td><p>1</p></td>
+<td><p>low frequency management</p></td>
 <td><p>laagfrequent</p></td>
 <td><p>0</p></td>
 </tr>
 <tr class="row-even"><td><p>2</p></td>
+<td><p>grazing</p></td>
 <td><p>begrazing</p></td>
 <td><p>0</p></td>
 </tr>
 <tr class="row-odd"><td><p>3</p></td>
+<td><p>high frequency management</p></td>
 <td><p>hoogfrequent</p></td>
 <td><p>1</p></td>
 </tr>
@@ -878,25 +896,30 @@ In de meer uitgebreide <a class="reference internal" href="overstroming.html"><s
 <table class="docutils align-default" id="id97">
 <caption><span class="caption-text">Onderscheiden beheerklassen met hun code en korte beschrijving ( <a class="reference internal" href="codetables.html#ct-management"><span class="std std-ref">management</span></a>)</span><a class="headerlink" href="#id97" title="Link to this table"></a></caption>
 <thead>
-<tr class="row-odd"><th class="head"><p>code</p></th>
-<th class="head"><p>management</p></th>
+<tr class="row-odd"><th class="head"><p>management</p></th>
+<th class="head"><p>description</p></th>
+<th class="head"><p>beschrijving</p></th>
 <th class="head"><p>influence</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>0</p></td>
+<td><p>no management</p></td>
 <td><p>geen</p></td>
 <td><p>0</p></td>
 </tr>
 <tr class="row-odd"><td><p>1</p></td>
+<td><p>low frequency management</p></td>
 <td><p>laagfrequent</p></td>
 <td><p>0</p></td>
 </tr>
 <tr class="row-even"><td><p>2</p></td>
+<td><p>grazing</p></td>
 <td><p>begrazing</p></td>
 <td><p>0</p></td>
 </tr>
 <tr class="row-odd"><td><p>3</p></td>
+<td><p>high frequency management</p></td>
 <td><p>hoogfrequent</p></td>
 <td><p>1</p></td>
 </tr>

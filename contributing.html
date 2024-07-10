@@ -221,12 +221,35 @@ Results of the automated tests can be found at: <a class="reference external" hr
 <section id="tips">
 <h2>Tips<a class="headerlink" href="#tips" title="Link to this heading"></a></h2>
 <section id="releasing-a-new-version">
-<h3>Releasing a new version<a class="headerlink" href="#releasing-a-new-version" title="Link to this heading"></a></h3>
+<span id="release-version"></span><h3>Releasing a new version<a class="headerlink" href="#releasing-a-new-version" title="Link to this heading"></a></h3>
 <p>1. The version numbers of <code class="docutils literal notranslate"><span class="pre">niche_vlaanderen</span></code> are based on <a class="reference external" href="https://semver.org/">semver</a>: MAJOR.MINOR version. MAJOR versions can have incompatible API changes,
 MINOR versions are backwards-compatible. Alpha and beta releases are made by appending a1/b1 to the version number, eg 1.0a10 for the 10th alpha release.</p>
 <ol class="arabic simple" start="2">
 <li><p>Before updating a version, make sure you run all notebooks (clear kernel and run all steps).</p></li>
-<li><p>Finally, to update the version, edit the file <a class="reference external" href="https://github.com/inbo/niche_vlaanderen/blob/master/setup.py">niche_vlaanderen/version.py</a>.</p></li>
+</ol>
+<p>3. Check whether the reference values source table have been updated. For this, the data source repository needs to be checked
+at <a class="reference external" href="https://zenodo.org/doi/10.5281/zenodo.10417821">https://zenodo.org/doi/10.5281/zenodo.10417821</a>. If the reference table version (NICHE_FL_referencevalues_**v12C**.csv) is newer than the reference table
+version mentioned in <a class="reference external" href="https://github.com/inbo/niche_vlaanderen/blob/master/version.py">niche_vlaanderen/version.py file</a>, then</p>
+<blockquote>
+<div><ul>
+<li><p>replace the <a class="reference external" href="https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_vegetation.csv">niche_vlaanderen/system_tables/niche_vegetation.csv</a> by the newer reference file. Note: the original name <cite>niche_vegetation.csv</cite> and header names must be kept!</p></li>
+<li><p>edit the reference value version (<code class="docutils literal notranslate"><span class="pre">__reference_table_version__</span></code>), DOI (<code class="docutils literal notranslate"><span class="pre">__reference_table_source__</span></code>, choose the DOI of the specific version) and source file name (<code class="docutils literal notranslate"><span class="pre">__reference_table_file__</span></code>) in <a class="reference external" href="https://github.com/inbo/niche_vlaanderen/blob/master/version.py">niche_vlaanderen/version.py</a>, e.g.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">__reference_table_version__</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;12C&quot;</span>
+<span class="nv">__reference_table_source__</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;10.5281/zenodo.10521548&quot;</span>
+<span class="nv">__reference_table_file__</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;NICHE_FL_referencegroundwaterlevels_v12C.csv&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>check if the metadata tables (other tables inside the system-tables subsfolder still correspond to the mappings described in the metadata description of Zenodo. Adjust if necessary.</p></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li><p>Similar as in 3., an updated file describing the vegetation types should replace the original <a class="reference external" href="https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/vegetatietypen.csv">niche_vlaanderen/system_tables/vegetatietypen.csv</a> (Note: the file on Zenodo of version 12C (<a class="reference external" href="https://zenodo.org/doi/10.5281/zenodo.10417821">https://zenodo.org/doi/10.5281/zenodo.10417821</a>) does not contain the ‘Groep’ column.)</p></li>
+<li><p>Finally, to update the niche_vlaanderen package version, edit the package version (<code class="docutils literal notranslate"><span class="pre">__version__</span></code>) number in the file <a class="reference external" href="https://github.com/inbo/niche_vlaanderen/blob/master/version.py">niche_vlaanderen/version.py</a>.</p></li>
 </ol>
 </section>
 <section id="building-the-documentation">

@@ -67,6 +67,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#soil-code">soil_code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#management">management</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#niche-vlaanderen">niche_vlaanderen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#system-table-relation">system table relation</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cli.html">Niche Configuration file</a></li>
@@ -105,6 +106,21 @@
              
   <section id="code-tables">
 <h1>Code tables<a class="headerlink" href="#code-tables" title="Link to this heading"></a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The Niche code tables are published on <a class="reference external" href="https://zenodo.org/records/10521548">Zenodo</a> as a reference. These files are used by the package and stored in the <cite>niche_vlaanderen/system_tables</cite> subdirectory. To check if your current Niche version corresponds to the latest reference data published on Zenodo, check the <a class="reference external" href="https://zenodo.org/records/10521548">Zenodo Versions section</a> and compare this with a <cite>Niche</cite> object output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">niche_vlaanderen</span> <span class="kn">import</span> <span class="n">niche</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">niche</span><span class="o">.</span><span class="n">Niche</span><span class="p">()</span>
+<span class="go"># Niche Vlaanderen version: 1.3</span>
+<span class="go"># Using latest niche_vlaanderen  1.3</span>
+<span class="go"># Reference values:</span>
+<span class="go">#     version: 12C                       &lt;----- Zenodo version used in package</span>
+<span class="go">#     source: 10.5281/zenodo.10417821</span>
+<span class="go">#     original file: NICHE_FL_referencegroundwaterlevels_v12C.csv</span>
+</pre></div>
+</div>
+<p>The steps to create a new release of the package with an updated data set on Zenodo is described in the <a class="reference internal" href="contributing.html#release-version"><span class="std std-ref">Package release documentation</span></a>.</p>
+</div>
 <p>The logic of Niche is largely based on code tables.
 They convert values (eg mlw, …) to another (eg soil_mlw_class).
 For categorical data, this happens directly. For continuous data such as
@@ -121,27 +137,32 @@ nitrogren or mhw, minimum and maximum values are used.</p>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>K1</p></td>
-<td><p>-5000</p></td>
-<td><p>5</p></td>
-<td><p>50</p></td>
+<td><p>5000</p></td>
+<td><p>-5</p></td>
+<td><p>11</p></td>
 </tr>
 <tr class="row-odd"><td><p>K1</p></td>
-<td><p>5</p></td>
-<td><p>10</p></td>
-<td><p>55</p></td>
+<td><p>-5</p></td>
+<td><p>-10</p></td>
+<td><p>13</p></td>
 </tr>
 <tr class="row-even"><td><p>K1</p></td>
-<td><p>10</p></td>
+<td><p>-10</p></td>
+<td><p>-15</p></td>
 <td><p>15</p></td>
-<td><p>76</p></td>
+</tr>
+<tr class="row-odd"><td><p>K1</p></td>
+<td><p>-15</p></td>
+<td><p>-20</p></td>
+<td><p>17</p></td>
 </tr>
 </tbody>
 </table>
 </div></blockquote>
 <p>Niche will use the values from the _max column to determine to which category a value has to be added.
-In this particular case, with a soil_code of 10000 an MSW values ]5,10] will give the value 55: the upper limit is included, the lower limit is not.
-A value of msw=5 will give nitrogen_mineralisation=50 as a result, a value of msw10 will lead to nitrogen_mineralisation=55.
-When using real values for mxw, the values will be rounded up to 2 decimals. Eg 50.005 will become 50.01 (&gt; 50) and 50.004 will become 50.00 (=50).</p>
+In this particular case, with a soil_code of 10000 an MSW values ]-5,-10] will give the value 55: the upper limit is included, the lower limit is not.
+A value of msw=-5 will give nitrogen_mineralisation=50 as a result, a value of msw10 will lead to nitrogen_mineralisation=55.
+When using real values for mxw, the values will be rounded up to 2 decimals. Eg -50.005 will become -50.01 (&lt; -50) and -50.004 will become -50.00 (=-50).</p>
 <p>By default the codetables of the niche_vlaanderen package are used, but <strong>the user can supply one or more own codetables</strong> (see <a class="reference internal" href="cli.html"><span class="doc">Niche Configuration file</span></a>, <em>full example</em> at page bottom; see <a class="reference internal" href="lowlevel.html#niche"><span class="std std-ref">here</span></a> for interactive implementation). If real values are used in these codetables, the decimal separator is ‘.’ (note that no real values are used in the existing codetables).</p>
 <section id="soil-code">
 <span id="ct-soil-code"></span><h2>soil_code<a class="headerlink" href="#soil-code" title="Link to this heading"></a></h2>
@@ -192,15 +213,25 @@ It also contains a column <cite>influence</cite> which is used in the calculatio
 <td><p>KV</p></td>
 <td><p>2</p></td>
 <td><p>1</p></td>
-<td><p>20</p></td>
-<td><p>1</p></td>
-<td><p>38</p></td>
-<td><p>20</p></td>
+<td><p>-20</p></td>
+<td><p>-1</p></td>
+<td><p>-38</p></td>
+<td><p>-20</p></td>
 </tr>
 </tbody>
 </table>
 </div></blockquote>
-<p>In the above case, mhw values 20 and 1 both fullfill the required range.</p>
+<p>In the above case, mhw values -20 and -1 both fullfill the required range.</p>
+</section>
+<section id="system-table-relation">
+<h2>system table relation<a class="headerlink" href="#system-table-relation" title="Link to this heading"></a></h2>
+<p>The following images illustrate the relation between the individual code tables for respectively niche-vegetation and flooding:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_static/png/niche_table_relation.png"><img alt="_static/png/niche_table_relation.png" src="_static/png/niche_table_relation.png" /></a>
+</figure>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_static/png/flooding_table_relation.png"><img alt="_static/png/flooding_table_relation.png" src="_static/png/flooding_table_relation.png" /></a>
+</figure>
 </section>
 </section>
 

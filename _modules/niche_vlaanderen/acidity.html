@@ -175,11 +175,11 @@
         <span class="k">for</span> <span class="n">sel_group</span><span class="p">,</span> <span class="n">subtable</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ct_soil_mlw</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;soil_group&quot;</span><span class="p">):</span>
 
             <span class="n">subtable</span> <span class="o">=</span> <span class="n">subtable</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-            <span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">(</span><span class="n">mlw</span><span class="p">,</span> <span class="n">subtable</span><span class="o">.</span><span class="n">mlw_max</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">(</span><span class="n">mlw</span><span class="p">,</span> <span class="n">subtable</span><span class="o">.</span><span class="n">mlw_max</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
             <span class="n">selection</span> <span class="o">=</span> <span class="n">soil_group</span> <span class="o">==</span> <span class="n">sel_group</span>
             <span class="n">result</span><span class="p">[</span><span class="n">selection</span><span class="p">]</span> <span class="o">=</span> <span class="n">subtable</span><span class="o">.</span><span class="n">soil_mlw_class</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">index</span><span class="p">)[</span><span class="n">selection</span><span class="p">]</span>
 
-        <span class="n">result</span><span class="p">[</span><span class="n">mlw</span> <span class="o">==</span> <span class="o">-</span><span class="mi">99</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">99</span>
+        <span class="n">result</span><span class="p">[(</span><span class="n">mlw</span> <span class="o">==</span> <span class="mi">99</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">mlw</span><span class="p">))]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">99</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">orig_shape</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span>
 
@@ -236,11 +236,10 @@
 <div class="viewcode-block" id="Acidity.calculate">
 <a class="viewcode-back" href="../../lowlevel.html#niche_vlaanderen.Acidity.calculate">[docs]</a>
     <span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">soil_class</span><span class="p">,</span> <span class="n">mlw</span><span class="p">,</span> <span class="n">inundation</span><span class="p">,</span> <span class="n">seepage</span><span class="p">,</span> <span class="n">minerality</span><span class="p">,</span> <span class="n">rainwater</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the Acidity</span>
 
 <span class="sd">        Parameters:</span>
-<span class="sd">        ==========</span>
+<span class="sd">        ===========</span>
 <span class="sd">        soil_class: numpy.array</span>
 <span class="sd">            Array containing the soil codes. Values must be present</span>
 <span class="sd">            in the soil_code table. -99 is used as no data value.</span>
