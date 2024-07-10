@@ -123,7 +123,9 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">niche_vlaanderen</span> <span class="k">as</span> <span class="nn">nv</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">niche_vlaanderen</span> <span class="k">as</span> <span class="nn">nv</span>
+
 <span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
@@ -282,38 +284,42 @@
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">myniche</span> <span class="o">=</span> <span class="n">nv</span><span class="o">.</span><span class="n">Niche</span><span class="p">()</span>
-<span class="nb">input</span> <span class="o">=</span> <span class="s2">&quot;../testcase/dijle/&quot;</span>
-<span class="n">myniche</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;soil_code&quot;</span><span class="p">,</span> <span class="nb">input</span> <span class="o">+</span><span class="s2">&quot;bodemv.asc&quot;</span><span class="p">)</span>
-<span class="n">myniche</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;msw&quot;</span><span class="p">,</span> <span class="nb">input</span> <span class="o">+</span><span class="s2">&quot;gvg_0_cm.asc&quot;</span><span class="p">)</span>
-<span class="n">myniche</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;mlw&quot;</span><span class="p">,</span> <span class="nb">input</span> <span class="o">+</span><span class="s2">&quot;glg_0_cm.asc&quot;</span><span class="p">)</span>
-<span class="n">myniche</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;mhw&quot;</span><span class="p">,</span> <span class="nb">input</span> <span class="o">+</span><span class="s2">&quot;ghg_0_cm.asc&quot;</span><span class="p">)</span>
-<span class="n">myniche</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;seepage&quot;</span><span class="p">,</span> <span class="nb">input</span> <span class="o">+</span><span class="s2">&quot;kwel_mm_dag.asc&quot;</span><span class="p">)</span>
+<span class="n">input_folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../testcase/dijle/&quot;</span><span class="p">)</span>
+<span class="n">myniche</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;soil_code&quot;</span><span class="p">,</span> <span class="n">input_folder</span> <span class="o">/</span> <span class="s2">&quot;bodemv.asc&quot;</span><span class="p">)</span>
+<span class="n">myniche</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;msw&quot;</span><span class="p">,</span> <span class="n">input_folder</span> <span class="o">/</span> <span class="s2">&quot;gvg_0_cm.asc&quot;</span><span class="p">)</span>
+<span class="n">myniche</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;mlw&quot;</span><span class="p">,</span> <span class="n">input_folder</span> <span class="o">/</span> <span class="s2">&quot;glg_0_cm.asc&quot;</span><span class="p">)</span>
+<span class="n">myniche</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;mhw&quot;</span><span class="p">,</span> <span class="n">input_folder</span> <span class="o">/</span> <span class="s2">&quot;ghg_0_cm.asc&quot;</span><span class="p">)</span>
+<span class="n">myniche</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;seepage&quot;</span><span class="p">,</span> <span class="n">input_folder</span> <span class="o">/</span> <span class="s2">&quot;kwel_mm_dag.asc&quot;</span><span class="p">)</span>
+<span class="n">myniche</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;management&quot;</span><span class="p">,</span> <span class="n">input_folder</span> <span class="o">/</span> <span class="s2">&quot;beheer_int.asc&quot;</span><span class="p">)</span>
 
-<span class="n">myniche</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;management&quot;</span><span class="p">,</span> <span class="nb">input</span> <span class="o">+</span><span class="s2">&quot;beheer_int.asc&quot;</span><span class="p">)</span>
+<span class="n">myniche</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;nitrogen_atmospheric&quot;</span><span class="p">,</span> <span class="n">input_folder</span> <span class="o">/</span> <span class="s2">&quot;depositie_def.asc&quot;</span><span class="p">)</span>
+<span class="n">myniche</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;nitrogen_animal&quot;</span><span class="p">,</span> <span class="n">input_folder</span> <span class="o">/</span> <span class="s2">&quot;bemest_dier.asc&quot;</span><span class="p">)</span>
+<span class="n">myniche</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;nitrogen_fertilizer&quot;</span><span class="p">,</span> <span class="n">input_folder</span> <span class="o">/</span> <span class="s2">&quot;bemest_kunst.asc&quot;</span><span class="p">)</span>
 
+<span class="n">myniche</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;inundation_vegetation&quot;</span><span class="p">,</span> <span class="n">input_folder</span> <span class="o">/</span> <span class="s2">&quot;overstr_veg.asc&quot;</span><span class="p">)</span>
+<span class="n">myniche</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;inundation_acidity&quot;</span><span class="p">,</span> <span class="n">input_folder</span> <span class="o">/</span> <span class="s2">&quot;ovrstr_t10_50.asc&quot;</span><span class="p">)</span>
+<span class="n">myniche</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;inundation_nutrient&quot;</span><span class="p">,</span> <span class="n">input_folder</span> <span class="o">/</span> <span class="s2">&quot;ovrstr_t10_50.asc&quot;</span><span class="p">)</span>
 
-<span class="n">myniche</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;nitrogen_atmospheric&quot;</span><span class="p">,</span> <span class="nb">input</span> <span class="o">+</span><span class="s2">&quot;depositie_def.asc&quot;</span><span class="p">)</span>
-<span class="n">myniche</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;nitrogen_animal&quot;</span><span class="p">,</span> <span class="nb">input</span> <span class="o">+</span><span class="s2">&quot;bemest_dier.asc&quot;</span><span class="p">)</span>
-<span class="n">myniche</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;nitrogen_fertilizer&quot;</span><span class="p">,</span> <span class="nb">input</span> <span class="o">+</span><span class="s2">&quot;bemest_kunst.asc&quot;</span><span class="p">)</span>
-
-<span class="n">myniche</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;inundation_vegetation&quot;</span><span class="p">,</span> <span class="nb">input</span> <span class="o">+</span><span class="s2">&quot;overstr_veg.asc&quot;</span><span class="p">)</span>
-<span class="n">myniche</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;inundation_acidity&quot;</span><span class="p">,</span> <span class="nb">input</span> <span class="o">+</span><span class="s2">&quot;ovrstr_t10_50.asc&quot;</span><span class="p">)</span>
-<span class="n">myniche</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;inundation_nutrient&quot;</span><span class="p">,</span> <span class="nb">input</span> <span class="o">+</span><span class="s2">&quot;ovrstr_t10_50.asc&quot;</span><span class="p">)</span>
-
-<span class="n">myniche</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;minerality&quot;</span><span class="p">,</span> <span class="nb">input</span> <span class="o">+</span> <span class="s2">&quot;minerality.asc&quot;</span><span class="p">)</span>
-
-<span class="n">myniche</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;rainwater&quot;</span><span class="p">,</span> <span class="nb">input</span> <span class="o">+</span><span class="s2">&quot;nulgrid.asc&quot;</span><span class="p">)</span>
+<span class="n">myniche</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;minerality&quot;</span><span class="p">,</span> <span class="n">input_folder</span> <span class="o">/</span> <span class="s2">&quot;minerality.asc&quot;</span><span class="p">)</span>
+<span class="n">myniche</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;rainwater&quot;</span><span class="p">,</span> <span class="n">input_folder</span> <span class="o">/</span> <span class="s2">&quot;nulgrid.asc&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <p>Note that the niche model must be run prior to combining - otherwise this will raise an error.</p>
 <p>In this example we also plot the result to allow comparison with the combined map.</p>
-<div class="nbinput docutils container">
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">myniche</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-<span class="n">myniche</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">18</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">myniche</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">18</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -322,12 +328,12 @@
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/flooding_15_0.png" src="_images/flooding_15_0.png" />
+<img alt="_images/flooding_16_0.png" src="_images/flooding_16_0.png" />
 </div>
 </div>
 <p>Finally, we run the actual <a class="reference internal" href="lowlevel.html#niche_vlaanderen.Flooding.combine"><span class="std std-ref">combine</span></a> method. The resulting object is a Flooding object, so we can use the same method for plotting the results.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">combined</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">combine</span><span class="p">(</span><span class="n">myniche</span><span class="p">)</span>
@@ -336,19 +342,11 @@
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-Warning: CRS definitions are not equal!
-</pre></div></div>
-</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/flooding_17_1.png" src="_images/flooding_17_1.png" />
+<img alt="_images/flooding_18_0.png" src="_images/flooding_18_0.png" />
 </div>
 </div>
 </section>

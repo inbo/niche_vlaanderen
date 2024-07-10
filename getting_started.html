@@ -149,13 +149,21 @@
 </ul>
 <p>These steps are mirrored in the design of the <code class="docutils literal notranslate"><span class="pre">Niche</span></code> class which is given below.</p>
 <p>Optionally the user can also create difference maps showing how much MHW/MLW has to change to allow a certain vegetation type. This is done using the <code class="docutils literal notranslate"><span class="pre">deviation</span></code> parameter of the <code class="docutils literal notranslate"><span class="pre">run</span></code> method.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+</pre></div>
+</div>
+</div>
 </section>
 <section id="Creating-a-simple-NICHE-model">
 <h2>Creating a simple NICHE model<a class="headerlink" href="#Creating-a-simple-NICHE-model" title="Link to this heading"></a></h2>
 <p>For our first example, we will be creating a <a class="reference external" href="https://inbo.github.io/niche_vlaanderen/vegetatie.html#eenvoudig-niche-model">simple model</a>, using only MHW, MLW and soil for the predictions.</p>
 <p>The first step is importing the <code class="docutils literal notranslate"><span class="pre">niche_vlaanderen</span></code> module. For convenience, we will be importing as <code class="docutils literal notranslate"><span class="pre">nv</span></code>.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">niche_vlaanderen</span> <span class="k">as</span> <span class="nn">nv</span>
@@ -166,7 +174,7 @@
 <h3>Creating a niche object<a class="headerlink" href="#Creating-a-niche-object" title="Link to this heading"></a></h3>
 <p>Next we create a <code class="docutils literal notranslate"><span class="pre">Niche</span></code> object. This object will hold all the data and results for an analysis.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simple</span> <span class="o">=</span> <span class="n">nv</span><span class="o">.</span><span class="n">Niche</span><span class="p">()</span>
@@ -178,12 +186,12 @@
 <h3>Adding input files<a class="headerlink" href="#Adding-input-files" title="Link to this heading"></a></h3>
 <p>After initialization, we can add input layers to this object, using the <code class="docutils literal notranslate"><span class="pre">set_input</span></code> method.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simple</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;mhw&quot;</span><span class="p">,</span><span class="s2">&quot;../testcase/zwarte_beek/input/mhw.asc&quot;</span><span class="p">)</span>
-<span class="n">simple</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;mlw&quot;</span><span class="p">,</span><span class="s2">&quot;../testcase/zwarte_beek/input/mlw.asc&quot;</span><span class="p">)</span>
-<span class="n">simple</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;soil_code&quot;</span><span class="p">,</span><span class="s2">&quot;../testcase/zwarte_beek/input/soil_code.asc&quot;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simple</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;mhw&quot;</span><span class="p">,</span> <span class="s2">&quot;../testcase/zwarte_beek/input/mhw.asc&quot;</span><span class="p">)</span>
+<span class="n">simple</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;mlw&quot;</span><span class="p">,</span> <span class="s2">&quot;../testcase/zwarte_beek/input/mlw.asc&quot;</span><span class="p">)</span>
+<span class="n">simple</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;soil_code&quot;</span><span class="p">,</span> <span class="s2">&quot;../testcase/zwarte_beek/input/soil_code.asc&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -192,7 +200,7 @@
 <h3>Running the model<a class="headerlink" href="#Running-the-model" title="Link to this heading"></a></h3>
 <p>These three input files are the only required for running a simple NICHE model. This means we can already run our model.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simple</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">full_model</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -204,7 +212,7 @@
 <h3>Inspecting the model<a class="headerlink" href="#Inspecting-the-model" title="Link to this heading"></a></h3>
 <p>After a model is run, we can inspect the results using the <code class="docutils literal notranslate"><span class="pre">table</span></code> method. Note that the values are given in ha. In the example below we also use the <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.head.html">head</a> function to show only the first five rows.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simple</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -212,7 +220,7 @@
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -276,7 +284,7 @@
 </div>
 <p>The returned object is a <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/10min.html">Pandas dataframe</a> which makes it easy to manipulate (for example calculating a crosstabulation, filtering, …) or save it to a file. Below we present two examples which can be useful when working with these data. The first is saving the data to a csv file.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simple</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;demo.csv&quot;</span><span class="p">)</span>
@@ -285,7 +293,7 @@
 </div>
 <p>By using the pandas <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.pivot_table.html">pivot_table</a> method, we can create a summarized table. Note that only the first 5 rows are shown because we use the <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.head.html">head</a> function</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">simple</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;vegetation&quot;</span><span class="p">,</span>
@@ -298,7 +306,7 @@
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -368,7 +376,7 @@
 </div>
 <p>It is also possible to show actual grids using the <code class="docutils literal notranslate"><span class="pre">plot</span></code> method.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
@@ -382,12 +390,12 @@
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/getting_started_15_0.png" src="_images/getting_started_15_0.png" />
+<img alt="_images/getting_started_17_0.png" src="_images/getting_started_17_0.png" />
 </div>
 </div>
 <p>It is possible to give your model a <code class="docutils literal notranslate"><span class="pre">name</span></code> - this will be shown when plotting and will be used when writing the files.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simple</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;scen_1&quot;</span>
@@ -399,12 +407,12 @@
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/getting_started_17_0.png" src="_images/getting_started_17_0.png" />
+<img alt="_images/getting_started_19_0.png" src="_images/getting_started_19_0.png" />
 </div>
 </div>
 <p>Rather than showing just the presence, a detailed plot will also show why certain parts are not present</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">simple</span><span class="o">.</span><span class="n">plot_detail</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
@@ -415,7 +423,7 @@
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/getting_started_19_0.png" src="_images/getting_started_19_0.png" />
+<img alt="_images/getting_started_21_0.png" src="_images/getting_started_21_0.png" />
 </div>
 </div>
 </section>
@@ -423,7 +431,7 @@
 <h3>Saving the model<a class="headerlink" href="#Saving-the-model" title="Link to this heading"></a></h3>
 <p>The model results can be saved to disk using the <code class="docutils literal notranslate"><span class="pre">write</span></code> function. As an argument, this takes the directory to which you want to save, _output_scen1 in our example. When saving a model, the log file, containing the model configuration, a summary table and all 28 vegetation grids will be saved. Note we specify the <code class="docutils literal notranslate"><span class="pre">overwrite_files</span></code> option so subsequent calls of the example will not raise an error</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simple</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;_output_scen1&quot;</span><span class="p">,</span> <span class="n">overwrite_files</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -432,7 +440,7 @@
 </div>
 <p>Below you can see the list of files that is generated by this operation: There are the 28 vegetation grids (<code class="docutils literal notranslate"><span class="pre">*.tif</span></code> files), the summary table (<code class="docutils literal notranslate"><span class="pre">summary.csv</span></code>) and a logfile (<code class="docutils literal notranslate"><span class="pre">log.txt</span></code>). All files are prepended with the model <code class="docutils literal notranslate"><span class="pre">name</span></code> we set earlier.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -441,7 +449,7 @@
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -483,7 +491,7 @@
 <h3>Showing the model configuration<a class="headerlink" href="#Showing-the-model-configuration" title="Link to this heading"></a></h3>
 <p>While using niche, it is always possible to view the configuration by typing the object name.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simple</span>
@@ -491,21 +499,25 @@
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 # Niche Vlaanderen version: 1.3
-# Newer niche_vlaanderen  1.2 available
-# Run at: 2024-05-02 16:55:31.266069
+# Using latest niche_vlaanderen  1.3
+# Reference values:
+#     version: 12C
+#     source: 10.5281/zenodo.10521548
+#     original file: NICHE_FL_referencegroundwaterlevels_v12C.csv
+# Run at: 2024-07-10 13:25:01.483271
 
 package_versions:
-  pandas: 1.5.3
-  numpy: 1.26.2
-  rasterio: 1.3.9
-  gdal: 3.6.4
-  python: &#39;3.11.2 (main, Mar 13 2023, 12:18:29) [GCC 12.2.0]&#39;
+  pandas: 2.2.2
+  numpy: 1.26.4
+  rasterio: 1.3.10
+  gdal: 3.8.4
+  python: &#39;3.11.0 | packaged by conda-forge | (main, Jan 14 2023, 12:27:40) [GCC 11.3.0]&#39;
 
 model_options:
   deviation: false
@@ -564,31 +576,31 @@ files_written:
 <p>A full Niche model requires more inputs that only mhw, mlw and soil_code. The full list can be found in the <a class="reference internal" href="cli.html"><span class="doc">documentation</span></a>. When trying to run a model without sufficient inputs, a warning will be generated.</p>
 <p>If we add all the required values, we can run the full model. Note that it is possible to set a constant value instead of a complete grid</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">full</span> <span class="o">=</span> <span class="n">nv</span><span class="o">.</span><span class="n">Niche</span><span class="p">()</span>
-<span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;../testcase/zwarte_beek/input/&quot;</span>
-<span class="n">full</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;mhw&quot;</span><span class="p">,</span> <span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;mhw.asc&quot;</span><span class="p">)</span>
-<span class="n">full</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;mlw&quot;</span><span class="p">,</span> <span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;mlw.asc&quot;</span><span class="p">)</span>
-<span class="n">full</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;soil_code&quot;</span><span class="p">,</span> <span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;soil_code.asc&quot;</span><span class="p">)</span>
+<span class="n">input_folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../testcase/zwarte_beek/input/&quot;</span><span class="p">)</span>
+<span class="n">full</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;mhw&quot;</span><span class="p">,</span> <span class="n">input_folder</span> <span class="o">/</span> <span class="s2">&quot;mhw.asc&quot;</span><span class="p">)</span>
+<span class="n">full</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;mlw&quot;</span><span class="p">,</span> <span class="n">input_folder</span> <span class="o">/</span> <span class="s2">&quot;mlw.asc&quot;</span><span class="p">)</span>
+<span class="n">full</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;soil_code&quot;</span><span class="p">,</span> <span class="n">input_folder</span> <span class="o">/</span> <span class="s2">&quot;soil_code.asc&quot;</span><span class="p">)</span>
 <span class="n">full</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;nitrogen_animal&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">full</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;inundation_acidity&quot;</span><span class="p">,</span> <span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;inundation.asc&quot;</span><span class="p">)</span>
-<span class="n">full</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;inundation_nutrient&quot;</span><span class="p">,</span> <span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;inundation.asc&quot;</span><span class="p">)</span>
+<span class="n">full</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;inundation_acidity&quot;</span><span class="p">,</span> <span class="n">input_folder</span> <span class="o">/</span> <span class="s2">&quot;inundation.asc&quot;</span><span class="p">)</span>
+<span class="n">full</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;inundation_nutrient&quot;</span><span class="p">,</span> <span class="n">input_folder</span> <span class="o">/</span> <span class="s2">&quot;inundation.asc&quot;</span><span class="p">)</span>
 <span class="n">full</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;nitrogen_fertilizer&quot;</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">full</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;minerality&quot;</span><span class="p">,</span> <span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;minerality.asc&quot;</span><span class="p">)</span>
-<span class="n">full</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;management&quot;</span><span class="p">,</span> <span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;management.asc&quot;</span><span class="p">)</span>
+<span class="n">full</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;minerality&quot;</span><span class="p">,</span> <span class="n">input_folder</span> <span class="o">/</span> <span class="s2">&quot;minerality.asc&quot;</span><span class="p">)</span>
+<span class="n">full</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;management&quot;</span><span class="p">,</span> <span class="n">input_folder</span> <span class="o">/</span> <span class="s2">&quot;management.asc&quot;</span><span class="p">)</span>
 <span class="n">full</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;nitrogen_atmospheric&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">full</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;msw&quot;</span><span class="p">,</span> <span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;msw.asc&quot;</span><span class="p">)</span>
+<span class="n">full</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;msw&quot;</span><span class="p">,</span> <span class="n">input_folder</span> <span class="o">/</span> <span class="s2">&quot;msw.asc&quot;</span><span class="p">)</span>
 <span class="n">full</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;rainwater&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">full</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;seepage&quot;</span><span class="p">,</span> <span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;seepage.asc&quot;</span><span class="p">)</span>
+<span class="n">full</span><span class="o">.</span><span class="n">set_input</span><span class="p">(</span><span class="s2">&quot;seepage&quot;</span><span class="p">,</span> <span class="n">input_folder</span> <span class="o">/</span> <span class="s2">&quot;seepage.asc&quot;</span><span class="p">)</span>
 <span class="n">full</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <p>We can look at the full model using the same <code class="docutils literal notranslate"><span class="pre">table</span></code> and <code class="docutils literal notranslate"><span class="pre">plot</span></code> functions as we used for the simple model.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">full</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -596,7 +608,7 @@ files_written:
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -660,7 +672,7 @@ files_written:
 </div>
 <p>Comparing to the simple model, one can observe that the area where a vegetation type can be present is always smaller than in the simple model.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simple</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -668,7 +680,7 @@ files_written:
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
