@@ -1,5 +1,5 @@
-code,management,influence
-0,geen,0
-1,laagfrequent,0
-2,begrazing,0
-3,hoogfrequent,1
+management,description,beschrijving,influence
+0,no management,geen,0
+1,low frequency management,laagfrequent,0
+2,grazing,begrazing,0
+3,high frequency management,hoogfrequent,1

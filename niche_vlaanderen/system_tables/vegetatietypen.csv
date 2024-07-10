@@ -1,0 +1,29 @@
+veg_code,veg_type,Nederlandse Naam,Groep
+1,Sphagno-Betuletum,Berkenbroekbos,Bos
+2,Carici elongatae-Alnetum,Mesotroof elzenbroekbos,Bos
+3,Macrophorbio-Alnetum,Ruigte elzenbroekbos,Bos
+4,Pruno-Fraxinetum,Vogelkers-essenbos,Bos
+5,Carpinion betuli,Haagbeuken-verbond,Bos
+6,Betulo-Quercetum roboris,Berken-eikenbos,Bos
+7,Caricion gracilis,Verbond van Scherpe zegge,Ruigte
+8,Filipendulion,Moerasspirea-verbond,Ruigte
+9,Galio-Alliarion,Verbond van Look-zonder-look,Ruigte
+10,RG Phalaris arundinacea-[Convolvulo-Filipendulion],Rompgemeenschap van Rietgras  ,Ruigte
+11,RG Juncus effusus-[Molinietalia/Lolio-Potentillion],Rompgemeenschap van Pitrus,Ruigte
+12,Magnocaricion met Phragmites,Grote zeggevegetatie met Riet ,Ruigte
+13,RG Glyceria maxima-[Phragmitetea],Rompgemeenschap van Liesgras ,Ruigte
+14,Caricion nigrae,Verbond van Zwarte zegge,Grasland
+15,Caricion davallianae,Knopbies-verbond/ kalkmoeras,Grasland
+16,Lolio-Potentillion anserinae,Zilverschoon-verbond,Grasland
+17,Junco-Molinion,Verbond van Biezenknoppen en Pijpestrootje,Grasland
+18,Calthion palustris,Dotterbloem-verbond,Grasland
+19,Alopecurion pratensis,Verbond van Grote vossestaart,Grasland
+20,Arrhenatherion elatioris,Glanshaver-verbond,Grasland
+21,Cynosurion cristati,Kamgras-verbond,Grasland
+22,Ericion tetralicis,Dophei-verbond,Heide
+23,Venige heide,Venige heide,Heide
+24,Oxycocco-Ericion,Hoogveenmos-verbond,Heide
+25,Rynchosporion albae,Verbond van Veenmos en Snavelbies,Heide
+26,RG Molinia caerulea [Oxycocco-sphagnetea],Rompgemeenschap van Pijpestrootje,Heide
+27,RG Myrica gale [Oxycocco-sphagnetea],Rompgemeenschap van Wilde gagel ,Heide
+28,Calluno-Genistion pilosae,Verbond van Struikhei en Kruipbrem,Heide

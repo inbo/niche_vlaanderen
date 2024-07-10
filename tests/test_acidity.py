@@ -15,14 +15,11 @@ def raster_to_numpy(filename):
     No-data values are -99 for integer types and np.nan for real types.
     """
     with rasterio.open(filename) as ds:
-        data = ds.read(1)
+        data = ds.read(1).astype(float)
         nodata = ds.nodatavals[0]
     print(nodata)
     # create a mask for no-data values, taking into account the data-types
-    if data.dtype == 'float32':
-        data[np.isclose(data, nodata)] = np.nan
-    else:
-        data[np.isclose(data, nodata)] = -99
+    data[np.isclose(data, nodata)] = np.nan
 
     return data
 
@@ -30,7 +27,7 @@ def raster_to_numpy(filename):
 class TestAcidity:
 
     def test_get_soil_mlw(self):
-        mlw = np.array([50, 66])
+        mlw = np.array([-50, -66])
         soil_code = np.array([14, 7])
         a = niche_vlaanderen.Acidity()
         result = a._calculate_soil_mlw(soil_code, mlw)
@@ -38,7 +35,7 @@ class TestAcidity:
         np.testing.assert_equal(np.array([1, 9]), result)
 
     def test_get_soil_mlw_borders(self):
-        mlw = np.array([79, 80, 100, 110, 111])
+        mlw = np.array([-79, -80, -100, -110, -111])
         soil_code = np.array([14, 14, 14, 14, 14])
         a = niche_vlaanderen.Acidity()
         result = a._calculate_soil_mlw(soil_code, mlw)
@@ -72,7 +69,7 @@ class TestAcidity:
         soilcode = np.array([14])
         inundation = np.array([1])
         seepage = np.array([20])
-        mlw = np.array([50])
+        mlw = -1 * np.array([50])
 
         a = niche_vlaanderen.Acidity()
         result = a.calculate(soilcode, mlw, inundation, seepage, minerality,
