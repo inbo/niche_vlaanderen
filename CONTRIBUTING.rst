@@ -125,10 +125,10 @@ at https://zenodo.org/doi/10.5281/zenodo.10417821. If the reference table versio
 version mentioned in `niche_vlaanderen/version.py file <https://github.com/inbo/niche_vlaanderen/blob/master/version.py>`_, then
 
   - replace the `niche_vlaanderen/system_tables/niche_vegetation.csv <https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_vegetation.csv>`_ by the newer reference file. Note: the original name `niche_vegetation.csv` and header names must be kept!
-  - edit the reference value version (``__reference_table_version__``), DOI (``__reference_table_source__``) and source file name (``__reference_table_file__``) in `niche_vlaanderen/version.py <https://github.com/inbo/niche_vlaanderen/blob/master/version.py>`_, e.g. ::
+  - edit the reference value version (``__reference_table_version__``), DOI (``__reference_table_source__``, choose the DOI of the specific version) and source file name (``__reference_table_file__``) in `niche_vlaanderen/version.py <https://github.com/inbo/niche_vlaanderen/blob/master/version.py>`_, e.g. ::
 
     __reference_table_version__ = "12C"
-    __reference_table_source__ = "10.5281/zenodo.10417821"
+    __reference_table_source__ = "10.5281/zenodo.10521548"
     __reference_table_file__ = "NICHE_FL_referencegroundwaterlevels_v12C.csv"
 
    - check if the metadata tables (other tables inside the system-tables subsfolder still correspond to the mappings described in the metadata description of Zenodo. Adjust if necessary.
