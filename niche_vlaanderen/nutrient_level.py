@@ -133,7 +133,8 @@ class NutrientLevel(object):
             index = np.digitize(nitrogen, table_sel.total_nitrogen_max, right=True)
             selection = (soil_code == soil_selected) & (influence == influence_selected)
 
-            result[selection] = table_sel.nutrient_level.reindex(index)[selection]
+            result[selection] = table_sel.nutrient_level.reindex(
+                index, fill_value=self.nodata)[selection]
 
         # np.nan values are not ignored in np.digitize
         result[np.isnan(nitrogen)] = self.nodata
