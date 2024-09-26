@@ -24,33 +24,38 @@ You will probably see something as:
   OR
     (base) C:\Users\myusername> 
 
-Create an environment (called niche in this example) that will contain niche_vlaanderen and its dependencies:
+For the remainder, we use ``(<CONDA-ENV-NAME>) C:\>`` to indicate the prompt.
+
+.. Note::
+   If you do not use the installation of Miniconda with the default Python version of 3.11
+   (the python version in your ``base`` environment is not Python 3.11), you can still
+   create an environment with Python 3.11 by running the following command::
+
+       conda create -n py311 python=3.11
+
+   By running the commands below, you will still install niche_vlaanderen in an environment
+   `niche` with Python 3.11.
+
+Create an environment (called ``niche``) that will contain niche_vlaanderen and its dependencies:
 
 .. code-block:: shell
 
-    (base) C:\Users\myusername> conda env create -f environment.yml
+    (base) C:\> conda env create -f environment.yml
 
 Activate the niche environment:
 
 .. code-block:: shell
 
-    (C:\Users\myusername\Miniconda3) C:\Users\myusername> conda activate niche
+    (base) C:\> conda activate niche
 
 You will see that `(C:\\Users\\myusername\\Miniconda3)`/`(base)` will change into `(niche)`.
 
-Now install the niche_vlaanderen package and its dependencies within the niche environment:
+Now install the niche_vlaanderen package within the niche environment (with the option ``--no-deps``
+to avoid installing dependencies that are already in the environment):
 
 .. code-block:: shell
 
-    (niche) C:\Users\myusername> conda install pandas pyyaml rasterio fiona
-    (niche) C:\Users\myusername> pip install niche_vlaanderen
-
-It is strongly recommended to install also `matplotlib` (otherwise plotting
-will not work) and `jupyter` notebook, which allows interactive usage from a web browser.
-
-.. code-block:: shell
-
-    (niche) C:\Users\myusername> conda install matplotlib jupyter
+    (niche) C:\> pip install niche-vlaanderen --no-deps
 
 You can verify the installation was successful by running the command line interface.
 Note you must activate niche once more, because some changes were made during
@@ -58,8 +63,8 @@ installation.
 
 .. code-block:: shell
 
-    (C:\Users\myusername\Miniconda3) C:\Users\myusername> conda activate niche
-    (niche) C:\Users\myusername> niche --help
+    (base) C:\> conda activate niche
+    (niche) C:\> niche --help
     Usage: niche [OPTIONS] CONFIG
 
       Command line interface to the NICHE vegetation model
@@ -77,8 +82,8 @@ from the Anaconda prompt).
 
 .. code-block:: shell
 
-    (C:\Users\myusername\Miniconda3) C:\Users\myusername> conda activate niche
-    (niche) C:\Users\myusername> pip install niche_vlaanderen --upgrade
+    (base) C:\> conda activate niche
+    (niche) C:\> pip install niche_vlaanderen --upgrade  --no-deps
     
 Note you might need to update other packages.
 
@@ -89,11 +94,12 @@ If you want to install a specific niche_vlaanderen version, you can install usin
 
 .. code-block:: shell
 
-    (C:\Users\myusername\Miniconda3) C:\Users\myusername> conda activate niche
-    (niche) C:\Users\myusername> pip install niche_vlaanderen==1.0
+    (base) C:\> conda activate niche
+    (niche) C:\> pip install niche_vlaanderen==1.0
 
 Alternative installation
 ========================
+
 It is possible to install niche_vlaanderen without using an environment. This is currently not
 the recommended installation as it requires setting an environment variable for
 opening some grid files. (See :ref:`missing_gcs` for instructions).

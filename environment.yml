@@ -4,7 +4,6 @@ channels:
   - defaults
 dependencies:
   - geopandas
-  - matplotlib
   - numpy
   - pandas
   - pygeos
@@ -12,3 +11,5 @@ dependencies:
   - rasterio
   - rasterstats>=0.17
   - tqdm
+  - jupyter
+  - matplotlib
