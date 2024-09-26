@@ -264,7 +264,7 @@ class Niche(object):
         if isinstance(value, numbers.Number):
             # Remove any existing values to make sure last value is used
             self._inputfiles.pop(key, None)
-            self._inputvalues[key] = value
+            self._inputvalues[key] = np.float32(value)
         else:
             with rasterio.open(value, "r") as dst:
                 sc_new = SpatialContext(dst)
