@@ -28,12 +28,14 @@ For the remainder, we use ``(<CONDA-ENV-NAME>) C:\>`` to indicate the prompt.
 
 .. Note::
    If you do not use the installation of Miniconda with the default Python version of 3.11
-   (the python version in your ``base`` environment is not Python 3.11), you can still
+   (i.e. the python version in your ``base`` environment is not Python 3.11), you can still
    create an environment with Python 3.11 by running the following command::
 
-       conda create -n py311 python=3.11
+       (base) C:\> conda create -n py311 python=3.11
+       (base) C:\> conda activate py311
+       (py311) C:\>
 
-   By running the commands below, you will still install niche_vlaanderen in an environment
+   By running the commands below from ``py311`` environment instead of ``base``, you will also install niche_vlaanderen in an environment
    `niche` with Python 3.11.
 
 Create an environment (called ``niche``) that will contain niche_vlaanderen and its dependencies:
