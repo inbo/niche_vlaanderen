@@ -10,4 +10,5 @@ dependencies:
   - pygeos
   - pyyaml
   - rasterio
+  - rasterstats>=0.17
   - tqdm
