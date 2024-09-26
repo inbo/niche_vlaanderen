@@ -14,15 +14,15 @@ jobs:
       matrix:
         python-version: ["3.9", "3.10", "3.11", "3.12"]
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - uses: conda-incubator/setup-miniconda@v3
         with:
           miniconda-version: "latest"
           environment-file: environment.yml
           channels: conda-forge
           channel-priority: true
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: PowerShell
+      - name: Run unit tests
         shell: powershell
         run: |
           pip install . --no-deps
