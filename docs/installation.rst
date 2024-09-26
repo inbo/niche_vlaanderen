@@ -28,7 +28,7 @@ Create an environment (called niche in this example) that will contain niche_vla
 
 .. code-block:: shell
 
-    (C:\Users\myusername\Miniconda3) C:\Users\myusername> conda create --name niche
+    (base) C:\Users\myusername> conda env create -f environment.yml
 
 Activate the niche environment:
 
