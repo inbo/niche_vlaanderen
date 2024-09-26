@@ -90,20 +90,7 @@ logger = logging.getLogger(__name__)
 
 
 class Niche(object):
-    """Creates a new Niche object
-
-    A niche object can be used to predict vegetation types according to the
-    NICHE Vlaanderen model.
-
-    The default codetables are used unless other tables are supplied to the
-    constructor.
-
-    Parameters:
-        ct_* lnk_*: path
-          Optionally, paths to codetables can be provided. These will override
-          the standard codetables used by Niche.
-
-    """
+    """Main Niche model class"""
 
     def __init__(
             self,
@@ -117,6 +104,20 @@ class Niche(object):
             ct_nutrient_level=None,
             ct_mineralisation=None,
     ):
+        """Create a new Niche object
+
+        A niche object can be used to predict vegetation types according to the
+        NICHE Vlaanderen model.
+
+        The default codetables are used unless other tables are supplied to the
+        constructor.
+
+        Parameters
+        ----------
+        ct_* lnk_*: Pathlib.Path
+            Optionally, paths to codetables can be provided. These will override
+            the standard codetables used by Niche.
+        """
         self._inputfiles = dict()
         self._inputvalues = dict()
         self._inputarray = dict()
@@ -142,13 +143,16 @@ class Niche(object):
 
     @property
     def name(self):
+        """Get model instance name"""
         return self._options["name"]
 
     @name.setter
     def name(self, name):
+        """Set model instance name"""
         self._options["name"] = str(name)
 
     def __repr__(self):
+        """Model object representation"""
         s = "# Niche Vlaanderen version: {}\n".format(__version__)
         s += self._latest_version + "\n"
         s += "# Reference values:\n"
@@ -201,6 +205,7 @@ class Niche(object):
         return s
 
     def _check_latest_version(self):
+        """Fetch latest niche version from pypi and compare to currently used version"""
         url = "https://pypi.python.org/pypi/niche_vlaanderen/json"
         try:
             response = urlopen(url, timeout=5)
@@ -224,6 +229,7 @@ class Niche(object):
         return s
 
     def _set_ct(self, key, value):
+        """Update key/value of the code tables"""
         if key not in _code_tables and key not in _code_tables_fp:
             raise NicheException("Unrecognized codetable %s" % key)
 
@@ -241,14 +247,12 @@ class Niche(object):
             The type of grid that you want to assign (eg msw, soil_code, ...).
             Possible options are listed in
             https://inbo.github.io/niche_vlaanderen/cli.html#id1
-        value: string / number
+        value: string | number
             Path to a file containing the grid. Can be a folder for
             certain grid types (eg ArcGIS rasters).
             Can also be a number: in that case a constant value is applied
             everywhere.
-
         """
-
         # check type is valid value from list
         if key not in _allowed_input:
             raise NicheException("Unrecognized type %s" % key)
@@ -261,7 +265,6 @@ class Niche(object):
             # Remove any existing values to make sure last value is used
             self._inputfiles.pop(key, None)
             self._inputvalues[key] = value
-
         else:
             with rasterio.open(value, "r") as dst:
                 sc_new = SpatialContext(dst)
