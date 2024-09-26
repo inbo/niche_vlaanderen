@@ -96,23 +96,3 @@ If you want to install a specific niche_vlaanderen version, you can install usin
 
     (base) C:\> conda activate niche
     (niche) C:\> pip install niche_vlaanderen==1.0
-
-Alternative installation
-========================
-
-It is possible to install niche_vlaanderen without using an environment. This is currently not
-the recommended installation as it requires setting an environment variable for
-opening some grid files. (See :ref:`missing_gcs` for instructions).
-
-.. code-block:: shell
-
-    conda install pandas pyyaml rasterio fiona
-    pip install niche_vlaanderen
-
-Like for the normal installation, it is strongly recommended to install also `matplotlib` (otherwise plotting
-will not work) and `jupyter` notebook, which allows interactive usage from a web browser.
-
-.. code-block:: shell
-
-    conda install matplotlib jupyter
-
