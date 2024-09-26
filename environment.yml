@@ -11,4 +11,3 @@ dependencies:
   - pyyaml
   - rasterio
   - tqdm
-  - python=3.11
