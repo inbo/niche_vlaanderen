@@ -20,6 +20,7 @@ jobs:
         with:
           miniconda-version: "latest"
           environment-file: environment.yml
+          python-version: ${{ matrix.python-version }}
           channels: conda-forge
           channel-priority: true
       - name: Run unit tests

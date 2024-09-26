@@ -6,10 +6,10 @@ Windows
 =======
 
 The recommended way of installing niche_vlaanderen on windows uses miniconda_ for installation.
-The recommended version is `64 bit with Python 3.9`__.
+The currently recommended version is `64 bit with Python 3.11`__.
 
-__ https://repo.anaconda.com/miniconda/Miniconda3-py39_4.12.0-Windows-x86_64.exe
-.. _Miniconda: https://conda.io/miniconda.html
+__ https://repo.anaconda.com/miniconda/Miniconda3-py311_24.7.1-0-Windows-x86_64.exe
+.. _Miniconda: https://docs.anaconda.com/miniconda/
 
 The installation can proceed without administrator rights, keep the default options. After miniconda is installed,
 we will proceed installing niche_vlaanderen in its own environment.
