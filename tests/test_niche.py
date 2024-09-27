@@ -31,6 +31,26 @@ class TestNiche:
             n.set_input("bla",
                         path_testcase / "zwarte_beek" / "input" / "soil_code.asc")
 
+
+    @pytest.mark.parametrize("variable,unique_data", [
+        ("soil_code",
+         np.array([ 8, 11, 13,  1], dtype="uint8")),
+        ("mlw",
+         np.array([-148., -129., -123., -117., -113.], dtype="float32"))
+    ])
+    def test_read_rasterio_to_grid(self, path_testcase, variable, unique_data):
+        """Read function returns masked numpy array with correct datatype for inputs."""
+        n = niche_vlaanderen.Niche()
+        file_path = path_testcase / "zwarte_beek" / "input" / f"{variable}.asc"
+        n.set_input(variable, file_path)
+        band = n.read_rasterio_to_grid(file_path, variable_name=variable)
+
+        # Read grids as masked array with correct datatype
+        assert isinstance(band, np.ma.MaskedArray)
+        np.testing.assert_array_equal(np.unique(band).data[:5], unique_data)
+        assert band.fill_value in [255, np.nan]
+
+
     def test_zwarte_beek(self, tmp_path, path_testcase, zwarte_beek_niche):
         """
         This tests runs the data from the testcase/zwarte_beek.

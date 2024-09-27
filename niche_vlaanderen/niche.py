@@ -29,23 +29,23 @@ from niche_vlaanderen.codetables import package_resource
 
 
 _allowed_input = {
-    "soil_code",
-    "mlw",
-    "msw",
-    "mhw",
-    "seepage",
-    "inundation_acidity",
-    "inundation_nutrient",
-    "nitrogen_atmospheric",
-    "nitrogen_animal",
-    "nitrogen_fertilizer",
-    "management",
-    "minerality",
-    "rainwater",
-    "inundation_vegetation",
-    "management_vegetation",
-    "acidity",
-    "nutrient_level",
+    "soil_code": "uint8",
+    "mlw": "float32",
+    "msw": "float32",
+    "mhw": "float32",
+    "seepage": "float32",
+    "inundation_acidity": "uint8",
+    "inundation_nutrient": "uint8",
+    "nitrogen_atmospheric": "float32",
+    "nitrogen_animal": "float32",
+    "nitrogen_fertilizer": "float32",
+    "management": "uint8",
+    "minerality": "uint8",
+    "rainwater": "uint8",
+    "inundation_vegetation": "uint8",
+    "management_vegetation": "uint8",
+    "acidity": "uint8",
+    "nutrient_level": "uint8"
 }
 
 _minimal_input = {"mlw", "mhw", "soil_code"}
@@ -264,7 +264,10 @@ class Niche(object):
         if isinstance(value, numbers.Number):
             # Remove any existing values to make sure last value is used
             self._inputfiles.pop(key, None)
-            self._inputvalues[key] = np.float32(value)
+            if self._inputarray[key] == "uint8":
+                self._inputvalues[key] = np.uint8(value)
+            elif self._inputarray[key] == "float32":
+                self._inputvalues[key] = np.float32(value)
         else:
             with rasterio.open(value, "r") as dst:
                 sc_new = SpatialContext(dst)
@@ -282,10 +285,11 @@ class Niche(object):
 
         Configures a model based on a config file
 
-        Parameters:
-            overwrite_ct: bool (False)
-               Allows the user to override the default codetables (after
-               the class has been initialized).
+        Parameters
+        ----------
+        overwrite_ct: bool (False)
+            Allows the user to override the default codetables (after
+            the class has been initialized).
         """
         with open(config, "r") as stream:
             config_loaded = yaml.safe_load(stream)
@@ -334,12 +338,13 @@ class Niche(object):
 
         This will configure the model, run and output as specified.
 
-        Parameters:
-            config: string
-               path to a config file
-            overwrite_ct: boolean (False)
-               overwrite codetables using the values specified in
-               the configuration file.
+        Parameters
+        ----------
+        config: string
+            path to a config file
+        overwrite_ct: boolean (False)
+            overwrite codetables using the values specified in
+            the configuration file.
         """
 
         self.read_config_file(config, overwrite_ct=overwrite_ct)
@@ -416,46 +421,49 @@ class Niche(object):
                     "Error: not all {} values are lower than {}".format(a, b)
                 )
 
+
+    def read_rasterio_to_grid(self, file_name, variable_name=None):
+        """Read grid files using rasterio as Numpy masked arrays
+
+        Parameters
+        ----------
+        file_name : string | Pathlib.Path
+            Path to the file to be read
+        variable_name : string
+            Name of the variable this grid file represents
+        """
+        dst = rasterio.open(file_name, "r")
+        window = self._context.get_read_window(SpatialContext(dst))
+        band = dst.read(1, masked=True, window=window, fill_value=255)
+
+        # Custom fix for mapping of the old soil_code to the new soil_code
+        if variable_name == "soil_code" and np.all(band >= 10000):
+            band = np.round(band / 10000)
+
+        # Cast inputs to predefined type
+        if variable_name in _allowed_input:
+            band = band.astype(_allowed_input[variable_name])
+            # Assign fill value for unsigned integers (255) and floats (np.nan)
+            if band.dtype.kind == "uint8":
+                band.fill_value = 255
+            elif band.dtype.kind == "float32":
+                band.fill_value = np.nan
+        return band
+
+
     def _check_input_files(self, full_model):
-        """basic input checks (valid files etc)"""
+        """Load all input files to input_array and applu basic input checks
 
-        # Load every input_file in the input_array
+        Parameters
+        ----------
+        full_model : bool
+            If True, the full niche model is applied
+        """
+        # Load the input array from disk
         inputarray = dict()
-        for f in self._inputfiles:
-            dst = rasterio.open(self._inputfiles[f], "r")
-
-            nodata = dst.nodatavals[0]
-
-            window = self._context.get_read_window(SpatialContext(dst))
-            band = dst.read(1, window=window)
-
-            # if we have unsigned integers - switch to signed otherwise
-            # no data (-99) will fail.
-
-            if band.dtype.kind == "u":
-                band = band.astype(int)
-
-            if f in (
-                    "nitrogen_animal",
-                    "nitrogen_fertilizer",
-                    "nitrogen_atmospheric",
-                    "mhw",
-                    "mlw",
-                    "msw",
-            ):
-                band = band.astype("float32")
-
-            # convert old soil codes to new soil codes
-            if f == "soil_code" and np.all(band[band != nodata] >= 10000):
-                band[band != nodata] = np.round(band[band != nodata] / 10000)
-
-            # create a mask for no-data values, taking into account data-types
-            if band.dtype == "float32" and nodata is not None:
-                band[np.isclose(band, nodata)] = np.nan
-            else:
-                band[band == nodata] = -99
-
-            inputarray[f] = band
+        for variable in self._inputfiles:
+            band = self.read_rasterio_to_grid(self._inputfiles[variable], variable)
+            inputarray[variable] = band
 
         # Load in all constant inputvalues
         for f in self._inputvalues:
