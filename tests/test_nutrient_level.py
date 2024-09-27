@@ -6,26 +6,6 @@ import rasterio
 import niche_vlaanderen
 
 
-def raster_to_numpy(filename):
-    '''Read a GDAL grid as numpy array
-
-    Notes
-    ------
-    No-data values are -99 for integer types and np.nan for real types.
-    '''
-    with rasterio.open(filename) as ds:
-        data = ds.read(1)
-        nodata = ds.nodatavals[0]
-
-    # create a mask for no-data values, taking into account the data-types
-    if data.dtype == 'float32':
-        data[data == nodata] = np.nan
-    else:
-        data[data == nodata] = -99
-
-    return data
-
-
 class TestNutrientLevel:
 
     def test_nitrogen_mineralisation(self):
@@ -85,30 +65,54 @@ class TestNutrientLevel:
         np.testing.assert_equal(np.array([5]), result)
 
     def test_nutrient_level_testcase(self, path_testcase):
+        n = niche_vlaanderen.Niche()
+
+        input_folder_path = path_testcase / "zwarte_beek" / "input"
+
+        # Set all inputs required for the nutrient-level calculation
+        soil_code_file_path = input_folder_path / "soil_code.asc"
+        n.set_input("soil_code", soil_code_file_path)
+        soil_code = n.read_rasterio_to_grid(soil_code_file_path,
+                                            variable_name="soil_code")
+
+        msw_file_path = input_folder_path / "msw.asc"
+        n.set_input("msw", msw_file_path)
+        msw = n.read_rasterio_to_grid(msw_file_path, variable_name="msw")
+
+        na_file_path = input_folder_path / "nitrogen_atmospheric.asc"
+        n.set_input("nitrogen_atmospheric", na_file_path)
+        nitrogen_deposition = n.read_rasterio_to_grid(na_file_path,
+                                                      variable_name="nitrogen_atmospheric")
+
+        nanimal_file_path = input_folder_path / "nullgrid.asc"
+        n.set_input("nitrogen_animal", nanimal_file_path)
+        nitrogen_animal = n.read_rasterio_to_grid(nanimal_file_path,
+                                                  variable_name="nitrogen_animal")
+
+        nfertil_file_path = input_folder_path / "nullgrid.asc"
+        n.set_input("nitrogen_fertilizer", nfertil_file_path)
+        nitrogen_fertilizer = n.read_rasterio_to_grid(nfertil_file_path,
+                                                      variable_name="nitrogen_fertilizer")
+
+        in_file_path = input_folder_path / "inundation.asc"
+        n.set_input("inundation_nutrient", in_file_path)
+        inundation_nutrient = n.read_rasterio_to_grid(in_file_path,
+                                                      variable_name="inundation_nutrient")
+
+        management_file_path = input_folder_path / "management.asc"
+        n.set_input("management", management_file_path)
+        management = n.read_rasterio_to_grid(management_file_path, variable_name="management")
+
         nl = niche_vlaanderen.NutrientLevel()
-        soil_code = raster_to_numpy(
-            path_testcase / "zwarte_beek" / "input" / "soil_code.asc")
 
-        soil_code_r = soil_code
-        soil_code_r[soil_code > 0] = np.round(soil_code / 10000)[soil_code > 0]
+        # Read the expected nutrient-level result
+        nutrient_file_path = path_testcase / "zwarte_beek" / "abiotic" / "nutrient_level.asc"
+        n.set_input("nutrient_level", nutrient_file_path)
+        nutrient_level = n.read_rasterio_to_grid(nutrient_file_path, variable_name="nutrient_level")
 
-        input_dir = path_testcase / "zwarte_beek" / "input"
-        msw = raster_to_numpy(input_dir / "msw.asc")
-        nitrogen_deposition = \
-            raster_to_numpy(input_dir / "nitrogen_atmospheric.asc")
-        nitrogen_animal = raster_to_numpy(input_dir / "nullgrid.asc")
-        nitrogen_fertilizer = raster_to_numpy(input_dir / "nullgrid.asc")
-        inundation = raster_to_numpy(input_dir / "inundation.asc")
-        management = raster_to_numpy(input_dir / "management.asc")
-
-        nutrient_level = \
-            raster_to_numpy(
-                path_testcase / "zwarte_beek" / "abiotic" / "nutrient_level.asc")
-        # convert nodata value from -99 to 255 (
-        nutrient_level[nutrient_level == -99] = 255
-
-        result = nl.calculate(soil_code_r, msw, nitrogen_deposition,
+        # Compare calculated result with expected result
+        result = nl.calculate(soil_code, msw, nitrogen_deposition,
                               nitrogen_animal, nitrogen_fertilizer, management,
-                              inundation)
+                              inundation_nutrient)
 
         np.testing.assert_equal(nutrient_level, result)

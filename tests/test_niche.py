@@ -6,6 +6,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+from functools import partial
 import yaml
 
 import pytest
@@ -32,13 +33,14 @@ class TestNiche:
                         path_testcase / "zwarte_beek" / "input" / "soil_code.asc")
 
 
-    @pytest.mark.parametrize("variable,unique_data", [
+    @pytest.mark.parametrize("variable,unique_data, nodata", [
         ("soil_code",
-         np.array([ 8, 11, 13,  1], dtype="uint8")),
+         np.array([ 8, 11, 13,  1], dtype="uint8"),
+         partial(np.isin, test_elements=[255])),
         ("mlw",
-         np.array([-148., -129., -123., -117., -113.], dtype="float32"))
+         np.array([-148., -129., -123., -117., -113.], dtype="float32"), np.isnan)
     ])
-    def test_read_rasterio_to_grid(self, path_testcase, variable, unique_data):
+    def test_read_rasterio_to_grid(self, path_testcase, variable, unique_data, nodata):
         """Read function returns masked numpy array with correct datatype for inputs."""
         n = niche_vlaanderen.Niche()
         file_path = path_testcase / "zwarte_beek" / "input" / f"{variable}.asc"
@@ -48,7 +50,7 @@ class TestNiche:
         # Read grids as masked array with correct datatype
         assert isinstance(band, np.ma.MaskedArray)
         np.testing.assert_array_equal(np.unique(band).data[:5], unique_data)
-        assert band.fill_value in [255, np.nan]
+        assert nodata(band.fill_value) # 255 for uint and npnan for float32
 
 
     def test_zwarte_beek(self, tmp_path, path_testcase, zwarte_beek_niche):

@@ -264,9 +264,9 @@ class Niche(object):
         if isinstance(value, numbers.Number):
             # Remove any existing values to make sure last value is used
             self._inputfiles.pop(key, None)
-            if self._inputarray[key] == "uint8":
+            if _allowed_input[key] == "uint8":
                 self._inputvalues[key] = np.uint8(value)
-            elif self._inputarray[key] == "float32":
+            elif _allowed_input[key] == "float32":
                 self._inputvalues[key] = np.float32(value)
         else:
             with rasterio.open(value, "r") as dst:
@@ -443,11 +443,13 @@ class Niche(object):
         # Cast inputs to predefined type
         if variable_name in _allowed_input:
             band = band.astype(_allowed_input[variable_name])
+
             # Assign fill value for unsigned integers (255) and floats (np.nan)
-            if band.dtype.kind == "uint8":
+            if _allowed_input[variable_name] == "uint8":
                 band.fill_value = 255
-            elif band.dtype.kind == "float32":
+            elif _allowed_input[variable_name] == "float32":
                 band.fill_value = np.nan
+
         return band
 
 
