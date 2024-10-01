@@ -467,15 +467,8 @@ class Niche(object):
         # Load in all constant inputvalues
         for f in self._inputvalues:
             shape = (int(self._context.height), int(self._context.width))
-            if _allowed_input[f] == "uint8":
-                fill_value = 255
-            elif _allowed_input[f] == "float32":
-                fill_value = np.nan
-            else:
-                raise TypeError("Unexpected data type")
-            inputarray[f] = np.ma.array(np.full(shape, self._inputvalues[f]),
-                                        fill_value=fill_value,
-                                        dtype=_allowed_input[f])
+            inputarray[f] = np.full(shape, self._inputvalues[f],
+                                    dtype=_allowed_input[f])
 
         # check if valid values are used in inputarrays
         # check for valid datatypes - values will be checked in the low-level
@@ -972,25 +965,26 @@ class Niche(object):
         return df
 
     def zonal_stats(
-            self, vectors, outside=True, attribute=None, vegetation_types=None, upscale=1
+            self, vectors, outside=True, attribute=None,
+            vegetation_types=None, upscale=1
     ):
         """Calculates zonal statistics using vectors
 
         Parameters
-        ==========
-        vectors: path to a vector source or geo-like python objects
+        ----------
+        vectors : path to a vector source or geo-like python objects
             you can specify a path to a vector file eg "../test.shp", or pass
             geo objects from other python functions.
 
             Note that the vector should be in the same coordinate system as the
             raster.
-        outside: bool (default: True)
+        outside : bool (default: True)
            report values outside shapes as well. The area which is not covered
            by any shapefile will get shape_id -1.
-        attribute: string(default None):
+        attribute : string(default None):
             attribute of the vector source that will be exported along in the
             table.
-        vegetation_types: List | None
+        vegetation_types : List | None
             optional list of vegetation types (as integer number) for which the
             statistics must be calculated. Calculation will happen for all
             niche vegetation types by default.
@@ -999,8 +993,8 @@ class Niche(object):
             the resolution
 
         Returns
-        =======
-        table: pandas.DataFrame
+        -------
+        table : pandas.DataFrame
         """
         td = dict()
 
@@ -1044,7 +1038,7 @@ class Niche(object):
                 raster=raster,
                 affine=affine,
                 categorical=True,
-                nodata=Vegetation.nodata_veg,
+                nodata=Vegetation.nodata,
                 geojson_out=attribute is not None,
             )
         warnings.simplefilter("default")

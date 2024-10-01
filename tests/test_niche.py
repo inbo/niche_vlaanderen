@@ -46,9 +46,8 @@ class TestNiche:
         band = n.read_rasterio_to_grid(file_path, variable_name=variable)
 
         # Read grids as masked array with correct datatype
-        assert isinstance(band, np.ma.MaskedArray)
-        np.testing.assert_array_equal(np.unique(band).data[:5], unique_data)
-        assert nodata(band.fill_value) # 255 for uint and npnan for float32
+        np.testing.assert_array_equal(np.unique(band)[:5], unique_data)
+        assert band.dtype == unique_data.dtype
 
 
     def test_zwarte_beek(self, tmp_path, path_testcase, zwarte_beek_niche):
@@ -213,11 +212,9 @@ class TestNiche:
         coords = (int(coords[0]), int(coords[1]))
 
         # Nan-values in tiff propagate to Masked Values
-        assert isinstance(myniche._inputarray["soil_code"][coords],
-                          np.ma.core.MaskedConstant)
+        assert myniche._inputarray["soil_code"][coords] == 255
         assert myniche._inputarray["mhw"][coords] == 3.0
-        assert isinstance(myniche._vegetation[14][coords],
-                          np.ma.core.MaskedConstant)
+        assert myniche._vegetation[14][coords] == 255
 
     @pytest.mark.skipif(
         distutils.spawn.find_executable("gdalinfo") is None,
@@ -250,8 +247,7 @@ class TestNiche:
         myniche.run(deviation=True)
         # check dict exists and contains enough nan values: the original mask AND
         # the nan values from the deviation calculation
-        assert 14400 == (np.isnan(myniche._deviation["mhw_04"]).sum() +
-                         myniche._deviation["mhw_04"].mask.sum())
+        assert 14400 == np.isnan(myniche._deviation["mhw_04"]).sum()
 
     @pytest.mark.skipif(
         distutils.spawn.find_executable("gdalinfo") is None,
