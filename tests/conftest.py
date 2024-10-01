@@ -59,6 +59,70 @@ def zwarte_beek_niche(path_testcase):
 
 
 @pytest.fixture
+def zwarte_beek_data(path_testcase):
+    """Provide masked arrays loaded from disk for the Zwarte Beek testcase"""
+    n = niche_vlaanderen.Niche()
+    input_folder_path = path_testcase / "zwarte_beek" / "input"
+
+    soil_code_file_path = input_folder_path / "soil_code.asc"
+    n.set_input("soil_code", soil_code_file_path)
+    soil_code = n.read_rasterio_to_grid(soil_code_file_path,
+                                        variable_name="soil_code")
+
+    msw_file_path = input_folder_path / "msw.asc"
+    n.set_input("msw", msw_file_path)
+    msw = n.read_rasterio_to_grid(msw_file_path, variable_name="msw")
+
+    mhw_file_path = input_folder_path / "mhw.asc"
+    n.set_input("mhw", mhw_file_path)
+    mhw = n.read_rasterio_to_grid(mhw_file_path, variable_name="mhw")
+
+    mlw_file_path = input_folder_path / "mlw.asc"
+    n.set_input("mlw", mlw_file_path)
+    mlw = n.read_rasterio_to_grid(mlw_file_path, variable_name="mlw")
+
+    in_file_path = input_folder_path / "inundation.asc"
+    n.set_input("inundation_nutrient", in_file_path)
+    inundation = n.read_rasterio_to_grid(in_file_path,
+                                         variable_name="inundation_nutrient")
+    rainwater_file_path = input_folder_path / "nullgrid.asc"
+    n.set_input("rainwater", rainwater_file_path)
+    rainwater = n.read_rasterio_to_grid(rainwater_file_path,
+                                        variable_name="rainwater")
+    seepage_file_path = input_folder_path / "seepage.asc"
+    n.set_input("seepage", seepage_file_path)
+    seepage = n.read_rasterio_to_grid(seepage_file_path,
+                                      variable_name="seepage")
+
+    minerality_file_path = input_folder_path / "minerality.asc"
+    n.set_input("minerality", minerality_file_path)
+    minerality = n.read_rasterio_to_grid(minerality_file_path,
+                                         variable_name="minerality")
+
+    na_file_path = input_folder_path / "nitrogen_atmospheric.asc"
+    n.set_input("nitrogen_atmospheric", na_file_path)
+    nitrogen_deposition = n.read_rasterio_to_grid(na_file_path,
+                                                  variable_name="nitrogen_atmospheric")
+
+    nanimal_file_path = input_folder_path / "nullgrid.asc"
+    n.set_input("nitrogen_animal", nanimal_file_path)
+    nitrogen_animal = n.read_rasterio_to_grid(nanimal_file_path,
+                                              variable_name="nitrogen_animal")
+
+    nfertil_file_path = input_folder_path / "nullgrid.asc"
+    n.set_input("nitrogen_fertilizer", nfertil_file_path)
+    nitrogen_fertilizer = n.read_rasterio_to_grid(nfertil_file_path,
+                                                  variable_name="nitrogen_fertilizer")
+
+    management_file_path = input_folder_path / "management.asc"
+    n.set_input("management", management_file_path)
+    management = n.read_rasterio_to_grid(management_file_path,
+                                         variable_name="management")
+    return n, (soil_code, msw, mhw, mlw, inundation, rainwater, seepage, minerality,
+            nitrogen_deposition, nitrogen_animal, nitrogen_fertilizer, management)
+
+
+@pytest.fixture
 def small_niche(path_tests):
     """Create dummy testcase small"""
     myniche = niche_vlaanderen.Niche()

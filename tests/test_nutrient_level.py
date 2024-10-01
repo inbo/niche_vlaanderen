@@ -134,45 +134,10 @@ class TestNutrientLevel:
                                             mask=[False, False, True]), result)
         assert result.dtype == np.uint8
 
-    def test_nutrient_level_testcase(self, path_testcase):
+    def test_nutrient_level_testcase(self, path_testcase, zwarte_beek_data):
         """Correct nutrient level calculated for test case of the zwarte beek"""
-        n = niche_vlaanderen.Niche()
-
-        input_folder_path = path_testcase / "zwarte_beek" / "input"
-
-        # Set all inputs required for the nutrient-level calculation
-        soil_code_file_path = input_folder_path / "soil_code.asc"
-        n.set_input("soil_code", soil_code_file_path)
-        soil_code = n.read_rasterio_to_grid(soil_code_file_path,
-                                            variable_name="soil_code")
-
-        msw_file_path = input_folder_path / "msw.asc"
-        n.set_input("msw", msw_file_path)
-        msw = n.read_rasterio_to_grid(msw_file_path, variable_name="msw")
-
-        na_file_path = input_folder_path / "nitrogen_atmospheric.asc"
-        n.set_input("nitrogen_atmospheric", na_file_path)
-        nitrogen_deposition = n.read_rasterio_to_grid(na_file_path,
-                                                      variable_name="nitrogen_atmospheric")
-
-        nanimal_file_path = input_folder_path / "nullgrid.asc"
-        n.set_input("nitrogen_animal", nanimal_file_path)
-        nitrogen_animal = n.read_rasterio_to_grid(nanimal_file_path,
-                                                  variable_name="nitrogen_animal")
-
-        nfertil_file_path = input_folder_path / "nullgrid.asc"
-        n.set_input("nitrogen_fertilizer", nfertil_file_path)
-        nitrogen_fertilizer = n.read_rasterio_to_grid(nfertil_file_path,
-                                                      variable_name="nitrogen_fertilizer")
-
-        in_file_path = input_folder_path / "inundation.asc"
-        n.set_input("inundation_nutrient", in_file_path)
-        inundation_nutrient = n.read_rasterio_to_grid(in_file_path,
-                                                      variable_name="inundation_nutrient")
-
-        management_file_path = input_folder_path / "management.asc"
-        n.set_input("management", management_file_path)
-        management = n.read_rasterio_to_grid(management_file_path, variable_name="management")
+        n, (soil_code, msw, _, _, inundation, _, _, _, nitrogen_deposition,
+            nitrogen_animal, nitrogen_fertilizer, management) = zwarte_beek_data
 
         nl = niche_vlaanderen.NutrientLevel()
 
@@ -184,6 +149,6 @@ class TestNutrientLevel:
         # Compare calculated result with expected result
         result = nl.calculate(soil_code, msw, nitrogen_deposition,
                               nitrogen_animal, nitrogen_fertilizer, management,
-                              inundation_nutrient)
+                              inundation)
 
         np.testing.assert_equal(nutrient_level, result)

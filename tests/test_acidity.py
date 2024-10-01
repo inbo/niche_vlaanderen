@@ -138,46 +138,18 @@ class TestAcidity:
         np.testing.assert_equal(np.ma.array([3, 3, 255]), result)
         assert result.dtype == np.uint8
 
-    def test_acidity_testcase(self, path_testcase):
+    def test_acidity_testcase(self, path_testcase, zwarte_beek_data):
         """Correct acidity calculated for test case of the zwarte beek"""
-        n = niche_vlaanderen.Niche()
 
-        input_folder_path = path_testcase / "zwarte_beek"/ "input"
+        n, (soil_code, _, _, mlw, inundation, rainwater, seepage, minerality,
+            _, _, _, management) = zwarte_beek_data
 
-        soil_code_file_path = input_folder_path / "soil_code.asc"
-        n.set_input("soil_code", soil_code_file_path)
-        soil_code = n.read_rasterio_to_grid(soil_code_file_path,
-                                            variable_name="soil_code")
-
-        mlw_file_path = input_folder_path / "mlw.asc"
-        n.set_input("mlw", mlw_file_path)
-        mlw = n.read_rasterio_to_grid(mlw_file_path, variable_name="mlw")
-
-        in_file_path = input_folder_path / "inundation.asc"
-        n.set_input("inundation_acidity", in_file_path)
-        inundation = n.read_rasterio_to_grid(in_file_path,
-                                             variable_name="inundation_acidity")
-
-        rainwater_file_path = input_folder_path / "nullgrid.asc"
-        n.set_input("rainwater", rainwater_file_path)
-        rainwater = n.read_rasterio_to_grid(rainwater_file_path,
-                                            variable_name="rainwater")
-
-        seepage_file_path = input_folder_path / "seepage.asc"
-        n.set_input("seepage", seepage_file_path)
-        seepage = n.read_rasterio_to_grid(seepage_file_path,
-                                            variable_name="seepage")
-
-        minerality_file_path = input_folder_path / "minerality.asc"
-        n.set_input("minerality", minerality_file_path)
-        minerality = n.read_rasterio_to_grid(minerality_file_path,
-                                             variable_name="minerality")
+        a = niche_vlaanderen.Acidity()
 
         acidity_file_path = path_testcase / "zwarte_beek" / "abiotic" / "acidity.asc"
         n.set_input("acidity",acidity_file_path)
         acidity = n.read_rasterio_to_grid(acidity_file_path, variable_name="acidity")
 
-        a = niche_vlaanderen.Acidity()
         result = a.calculate(soil_code, mlw, inundation,
                              seepage, minerality, rainwater)
         np.testing.assert_equal(acidity, result)

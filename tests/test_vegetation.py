@@ -1,5 +1,4 @@
 from __future__ import division
-from unittest import TestCase
 import pytest
 
 import numpy as np
@@ -134,38 +133,24 @@ class TestVegetation:
         assert 1 == veg_occurrence[7]
         assert 2 / 3 == veg_occurrence[16]
 
-    def test_testcase(self, path_testcase):
-        input_dir = path_testcase / "zwarte_beek" / "input"
-        soil_code = raster_to_numpy(input_dir / "soil_code.asc").astype(int)
-        # soil_code_r = soil_code / 10000
-        soil_code_r = soil_code
-        soil_code_r[soil_code > 0] = np.round(soil_code / 10000)[soil_code > 0]
+    def test_testcase(self, path_testcase, zwarte_beek_data):
 
-        msw = raster_to_numpy(input_dir / "msw.asc")
-        mhw = raster_to_numpy(input_dir / "mhw.asc")
-        mlw = raster_to_numpy(input_dir / "mlw.asc")
-        inundation = \
-            raster_to_numpy(input_dir / "inundation.asc")
-        regenlens = raster_to_numpy(input_dir / "nullgrid.asc")
-        seepage = raster_to_numpy(input_dir / "seepage.asc")
-        conductivity = raster_to_numpy(input_dir / "minerality.asc")
-        nitrogen_deposition = \
-            raster_to_numpy(input_dir / "nitrogen_atmospheric.asc")
-        nitrogen_animal = raster_to_numpy(input_dir / "nullgrid.asc")
-        nitrogen_fertilizer = raster_to_numpy(input_dir / "nullgrid.asc")
-        management = raster_to_numpy(input_dir / "management.asc")
+        n, (soil_code, msw, mhw, mlw, inundation,
+            rainwater, seepage, minerality,
+            nitrogen_deposition, nitrogen_animal,
+            nitrogen_fertilizer, management) = zwarte_beek_data
 
         nl = niche_vlaanderen.NutrientLevel()
-        nutrient_level = nl.calculate(soil_code_r, msw, nitrogen_deposition,
+        nutrient_level = nl.calculate(soil_code, msw, nitrogen_deposition,
                                       nitrogen_animal, nitrogen_fertilizer,
                                       management, inundation)
 
         a = niche_vlaanderen.Acidity()
-        acidity = a.calculate(soil_code_r, mlw, inundation, seepage,
-                              conductivity, regenlens)
+        acidity = a.calculate(soil_code, mlw, inundation, seepage,
+                              minerality, rainwater)
 
         v = niche_vlaanderen.Vegetation()
-        veg_predict, veg_occurrence, _ = v.calculate(soil_code_r, mhw, mlw,
+        veg_predict, veg_occurrence, _ = v.calculate(soil_code, mhw, mlw,
                                                      nutrient_level, acidity)
 
         for i in range(1, 28):
