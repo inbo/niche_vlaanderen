@@ -448,7 +448,7 @@ class Niche(object):
                 band = np.ma.masked_array(band.filled(np.nan), mask=band.mask,
                                           fill_value=np.nan, dtype="float32")
 
-        return band
+        return band.filled() # return numpy array instead of masked array
 
     def _check_input_files(self, full_model):
         """Load all input files to input_array and applu basic input checks

@@ -223,9 +223,11 @@ def check_codes_used(name, used, allowed):
         used = np.array(used)
 
     if used.dtype.kind == "f":
-        used_codes = set(np.unique(used[~np.isnan(used)]).data)
+        used_codes = set(np.unique(used[~np.isnan(used)]))
+    elif used.dtype == "uint8":
+        used_codes = set(np.unique(used[~(used == 255)]))
     else:
-        used_codes = set(np.unique(used.compressed()))
+        used_codes = set(np.unique(used))
 
     allowed_codes = set(allowed)
 

@@ -87,26 +87,28 @@ class NutrientLevel(object):
             .soil_code
         )
 
-    def _calculate_mineralisation(self, soil_code_array, msw_array):
+    def _calculate_mineralisation(self, soil_code, msw):
         """Calculate nitrogen mineralisation based on soil and water arrays
 
         Parameters
         ----------
-        soil_code_array : numpy.ma.MaskedArray
+        soil_code : numpy.ndarray, np.uint8
             Array containing the soil codes. Values must be present
             in the soil_code system table.
-        msw_array : numpy.ma.MaskedArray
+        msw : numpy.ndarray, np.float32
             Array containing the mean spring waterlevel ("gemiddeld
             voorjaarsgrondwaterstand").
 
         Returns
         -------
-        numpy.ma.MaskedArray, float32
-            minerality
+        numpy.ndarray, numpy.float32
+            mineralisation
         """
-        orig_shape = soil_code_array.shape
-        soil_code_array = soil_code_array.flatten()
-        msw_array = msw_array.flatten()
+        nodata = (soil_code == 255) | np.isnan(msw)
+
+        orig_shape = soil_code.shape
+        soil_code_array = soil_code.flatten()
+        msw_array = msw.flatten()
         result = np.empty(soil_code_array.shape, dtype="float32")
         result[:] = np.nan
 
@@ -118,12 +120,10 @@ class NutrientLevel(object):
             table_sel = table_sel.reset_index(drop=True)
             soil_sel = soil_code_array == code
             ix = np.digitize(msw_array[soil_sel], table_sel.msw_max, right=False)
-            result[soil_sel] = table_sel["nitrogen_mineralisation"].reindex(ix)
+            result[soil_sel] = table_sel["nitrogen_mineralisation"][ix].values
 
-        result = result.reshape(orig_shape)
-        # Reuse the mask of the msw_array
-        result = np.ma.array(result, mask=msw_array.mask,
-                             fill_value=np.nan, dtype="float32")
+        result = result.reshape(orig_shape).astype(np.float32)
+        result[nodata] = np.nan # Apply the nodata mask
         return result
 
     def _calculate(self, management, soil_code, nitrogen, inundation):
@@ -131,27 +131,30 @@ class NutrientLevel(object):
 
         Parameters
         ----------
-        management : numpy.ma.MaskedArray
+        management : numpy.ndarray, np.uint8
             Array containing the management codes. Values must be present
             in the management system table.
-        soil_code : numpy.ma.MaskedArray
+        soil_code : numpy.ndarray, np.uint8
             Array containing the soil codes. Values must be present
             in the soil_code system table.
-        nitrogen : numpy.ma.MaskedArray
+        nitrogen : numpy.ndarray, np.float32
             Array containing the calculated nitrogen levels.
-        inundation : numpy.ma.MaskedArray
+        inundation : numpy.ndarray, np.uint8
             Array containing the inundation values.
 
         Returns
         -------
-        numpy.ma.MaskedArray, uint8
+         numpy.ndarray, np.uint8
             nutrient level
         """
         check_codes_used("management", management, self._ct_management["management"])
         check_codes_used("soil_code", soil_code, self._ct_soil_code["soil_code"])
 
+        nodata = ((management == 255) | (soil_code == 255) |
+                  np.isnan(nitrogen) | (inundation == 255))
+
         # calculate management influence
-        influence = np.ma.empty_like(management)
+        influence = np.empty_like(management)
         for i in self._ct_management.management.unique():
             sel_grid = management == i
             sel_ct = self._ct_management.management == i
@@ -175,21 +178,19 @@ class NutrientLevel(object):
             table_sel = subtable.copy(deep=True).reset_index(drop=True)
 
             index = np.digitize(nitrogen, table_sel.total_nitrogen_max, right=True)
-            index = np.ma.array(index, mask=nitrogen.mask, fill_value=self.nodata).filled()
+            index[nodata.flatten()] = 255
             selection = (soil_code == soil_selected) & (influence == influence_selected)
             # Add the no-data value to the mapping
             table_sel.loc[self.nodata, "nutrient_level"] = self.nodata
             result[selection] = table_sel.nutrient_level[index].iloc[selection].values
 
-        # Apply mask to the result array
-        result = np.ma.array(result, mask=nitrogen.mask,
-                             fill_value=self.nodata, dtype="uint8")
-
         # Note that niche_vlaanderen is different from the original (Dutch)
         # model here:
         # only if nutrient_level < 4 the inundation rule is applied.
         result[result < 4] = (result + (inundation > 0))[result < 4]
-        result = result.reshape(orig_shape)
+
+        result = result.reshape(orig_shape).astype(np.uint8)
+        result[nodata] = 255  # Apply the nodata mask
         return result
 
     def calculate(
@@ -206,25 +207,25 @@ class NutrientLevel(object):
 
         Parameters
         ----------
-        soil_code : numpy.ma.MaskedArray
+        soil_code :  numpy.ndarray, np.uint8
             Array containing the soil codes. Values must be present
             in the soil_code table.
-        msw : numpy.ma.MaskedArray
+        msw : numpy.ndarray, np.float32
             Array containing the mean spring waterlevel.
-        nitrogen_atmospheric : numpy.ma.MaskedArray
+        nitrogen_atmospheric : numpy.ndarray, np.float32
             Array containing the atmospheric deposition of Nitrogen.
-        nitrogen_animal : numpy.ma.MaskedArray
+        nitrogen_animal : numpy.ndarray, np.float32
             Array containing the animal contribution of Nitrogen.
-        nitrogen_fertilizer : numpy.ma.MaskedArray
+        nitrogen_fertilizer : numpy.ndarray, np.float32
             Array containing the fertilizer contribution of Nitrogen.
-        management : numpy.ma.MaskedArray
+        management :  numpy.ndarray, np.uint8
             Array containing the management.
-        inundation : numpy.ma.MaskedArray
+        inundation :  numpy.ndarray, np.uint8
             Array containing the inundation values.
 
         Returns
         -------
-        numpy.ma.MaskedArray, uint8
+        numpy.ndarray, np.uint8
             nutrient level
         """
 
