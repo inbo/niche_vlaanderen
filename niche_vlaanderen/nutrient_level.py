@@ -12,6 +12,7 @@ class NutrientLevel(object):
     arguments.
     """
 
+    dtype = "uint8"
     nodata = 255  # unsigned 8 bit integer for nutrient level
 
     def __init__(
@@ -122,6 +123,7 @@ class NutrientLevel(object):
             ix = np.digitize(msw_array[soil_sel], table_sel.msw_max, right=False)
             result[soil_sel] = table_sel["nitrogen_mineralisation"][ix].values
 
+        # The intermediate mineralisation array is a float32 array with np.nan as nodata
         result = result.reshape(orig_shape).astype(np.float32)
         result[nodata] = np.nan # Apply the nodata mask
         return result
@@ -189,7 +191,7 @@ class NutrientLevel(object):
         # only if nutrient_level < 4 the inundation rule is applied.
         result[result < 4] = (result + (inundation > 0))[result < 4]
 
-        result = result.reshape(orig_shape).astype(np.uint8)
+        result = result.reshape(orig_shape).astype(self.dtype)
         result[nodata] = self.nodata  # Apply the nodata mask
         return result
 

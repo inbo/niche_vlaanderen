@@ -13,11 +13,10 @@ class TestVegetation:
 
     @pytest.mark.parametrize("arr_in, expected_1, expected_0",
                         [("single_value_input_arrays",
-                          np.ma.array([1]), np.ma.array([0])),
-                         ("single_value_input_arrays_masked",
-                          np.ma.array([1, 1, 255], mask=[False, False, True]),
-                          np.ma.array([0, 0, 255], mask=[False, False, True]))
-                         ], ids=["one_value_nomask", "one_value_masked"])
+                          np.array([1]), np.array([0])),
+                         ("single_value_input_arrays_nodata",
+                          np.array([1, 1, 255]), np.array([0, 0, 255]))
+                         ], ids=["one_value", "one_value_nodata"])
     def test_one_value_doc(self, arr_in, expected_1, expected_0, request):
         """Correct vegetation prediction is calculated from single-value grids
         with empty and non-empty mask (as used in documentation)"""
@@ -38,11 +37,11 @@ class TestVegetation:
 
     @pytest.mark.parametrize("arr_in, expected_1, expected_0",
                         [("single_value_input_arrays",
-                          np.ma.array([1]), np.ma.array([0])),
-                         ("single_value_input_arrays_masked",
-                          np.ma.array([1, 1, 255], mask=[False, False, True]),
-                          np.ma.array([0, 0, 255], mask=[False, False, True]))
-                         ], ids=["simple_nomask", "simple_masked"])
+                          np.array([1]), np.array([0])),
+                         ("single_value_input_arrays_nodata",
+                          np.array([1, 1, 255]),
+                          np.array([0, 0, 255]))
+                         ], ids=["simple_nomask", "simple_nodata"])
     def test_one_value_simple(self, arr_in, expected_1, expected_0, request):
         """Correct vegetation prediction is calculated from single-value grids
         with empty mask on a simplified niche model"""
@@ -63,13 +62,13 @@ class TestVegetation:
 
     def test_borders(self):
         """Correct vegetation prediction for border values"""
-        soil_code = np.ma.array([3, 3, 3, 3, 3], dtype="uint8")
-        mhw = -1 * np.ma.array([21, 20, 10, 1, 0], dtype="float32")
-        mlw = -1 * np.ma.array([30, 30, 30, 30, 30], dtype="float32")
+        soil_code = np.array([3, 3, 3, 3, 3], dtype="uint8")
+        mhw = -1 * np.array([21, 20, 10, 1, 0], dtype="float32")
+        mlw = -1 * np.array([30, 30, 30, 30, 30], dtype="float32")
 
         v = niche_vlaanderen.Vegetation()
         veg_predict, _, _ = v.calculate(soil_code, mhw, mlw, full_model=False)
-        expected = np.ma.array([0, 1, 1, 1, 0], dtype="uint8")
+        expected = np.array([0, 1, 1, 1, 0], dtype="uint8")
         np.testing.assert_equal(expected, veg_predict[1])
         assert veg_predict[1].dtype == np.uint8
 
@@ -91,10 +90,9 @@ class TestVegetation:
             np.testing.assert_equal(np.ma.array([0]), veg_detail[vi])
 
     @pytest.mark.parametrize("arr_in, expected_0",
-                        [("single_value_input_arrays", np.ma.array([0])),
-                         ("single_value_input_arrays_masked",
-                          np.ma.array([0, 0, 255], mask=[False, False, True]))
-                         ], ids=["doc_inundation_nomask", "doc_inundation_masked"])
+                        [("single_value_input_arrays", np.array([0])),
+                         ("single_value_input_arrays_nodata", np.array([0, 0, 255]))
+                         ], ids=["doc_inundation_nomask", "doc_inundation_nodata"])
     def test_simple_doc_inundation(self, arr_in, expected_0, request):
         """Correct vegetation prediction is calculated from single-value grids
         with empty mask when inindation is added (as used in documentation)"""
@@ -115,29 +113,26 @@ class TestVegetation:
         # Note: in the docs '8' is suitable except for inundation: 1+2+4+8=15 with
         # suitable soil, gxg, nutrient and acidity, but unsuitable inundation (32)
         for vi in veg_predict:
-            np.testing.assert_equal(veg_detail_exp[vi], veg_detail[vi])
+            expected = np.repeat(veg_detail_exp[vi], nutrient_level.size)
+            expected[soil_code == 255] = 255
+            np.testing.assert_equal(expected, veg_detail[vi])
             if vi in correct:
-                np.testing.assert_array_less(expected_0, veg_detail[vi])
+                # Only consider data-values
+                np.testing.assert_array_less(expected_0[:2], veg_detail[vi][:2])
             else:
                 np.testing.assert_equal(expected_0, veg_predict[vi])
+            assert veg_predict[vi].dtype == np.uint8
 
     def test_occurrences_nodata_propagation(self):
         """Occurrences are correclty calculated with propagating no-data values."""
-        nutrient_level = np.ma.array([[4, 4], [4, 5]],
-                                     dtype="uint8", fill_value=255)
-        mlw = -1 * np.ma.array([[50, 50], [50, 50]],
-                               dtype="float32",fill_value=np.nan)
-        mhw = -1 * np.ma.array([[31, 30], [10, 4]],
-                               dtype="float32", fill_value=np.nan)
-        soil_code = np.ma.array([[14, 14], [14, 14]],
-                                dtype="uint8", fill_value=255)
-        inundation = np.ma.array([[1, 1], [1, 1]],
-                                 dtype="uint8", fill_value=255)
+        nutrient_level = np.array([[4, 4], [4, 5]], dtype="uint8")
+        mlw = -1 * np.array([[50, 50], [50, 50]], dtype="float32")
+        mhw = -1 * np.array([[31, 30], [10, 4]], dtype="float32")
+        soil_code = np.array([[14, 14], [14, 14]], dtype="uint8")
+        inundation = np.array([[1, 1], [1, 1]], dtype="uint8")
 
         # Add masked (no-data value) for acidity
-        acidity = np.ma.array([[3, 3], [3, 255]],
-                              mask=[[False, False], [False, True]],
-                              dtype="uint8",fill_value=255)
+        acidity = np.ma.array([[3, 3], [3, 255]], dtype="uint8")
 
         v = niche_vlaanderen.Vegetation()
         veg_predict, veg_occurrence, _ = \
@@ -147,7 +142,8 @@ class TestVegetation:
 
         # check no data propagates nicely
         for pred in veg_predict.values():
-            np.testing.assert_equal(pred.mask, acidity.mask)
+            assert pred[1, 1] == 255
+            assert pred.dtype == np.uint8
 
         # occurrences are not taking into account masked values
         assert 1 / 3 == veg_occurrence[12]
@@ -178,15 +174,13 @@ class TestVegetation:
             file_path = path_testcase / "zwarte_beek" / "vegetation" / f"v{i}.asc"
             with rasterio.open(file_path, "r") as dst:
                 vi = dst.read(1, masked=True)
-            np.testing.assert_array_equal(vi.mask, veg_predict[i].mask)
+                vi = vi.filled(fill_value=255)
             np.testing.assert_allclose(vi - veg_predict[i], 0)
 
     def test_all_nodata(self, path_testdata):
         """Variable with all no-data values raises error"""
-        soil_code = np.ma.array([14, 14, 14],
-                                mask=[False, False, False], dtype="uint8")
-        mlw = np.ma.array([np.nan, np.nan, np.nan],
-                          mask=[True, True, True], dtype="float32")
+        soil_code = np.array([14, 14, 14], dtype="uint8")
+        mlw = np.ma.array([np.nan, np.nan, np.nan], dtype="float32")
         mhw = mlw.copy()
 
         v = niche_vlaanderen.Vegetation()
@@ -197,32 +191,26 @@ class TestVegetation:
         """Correct deviation calculated for mhw with mask-nan versus calculated nan"""
         v = niche_vlaanderen.Vegetation()
 
-        soil_code = np.ma.array([3, 3, 3, 3, -99, 2],
-                                mask=[False, False, False, False, True, False])
-        mhw = -1 * np.ma.array([66, 16, 5, -5, 5, 5])
-        mlw = -1 * np.ma.array([35, 35, 35, 35, 35, 35])
+        soil_code = np.array([3, 3, 3, 3, 255, 2], dtype="uint8")
+        mhw = -1 * np.ma.array([66, 16, 5, -5, 5, 5], dtype="float32")
+        mlw = -1 * np.ma.array([35, 35, 35, 35, 35, 35], dtype="float32")
         d = v.calculate_deviation(soil_code, mhw, mlw)
 
         # Both a Nan inside the mask as well as a calculated Nan in the data
-        expected = np.ma.array([46, 0, 0, -6, np.nan, np.nan],
-                               mask=[False, False, False, False, True, False])
+        expected = np.ma.array([46, 0, 0, -6, np.nan, np.nan])
         np.testing.assert_equal(expected, d["mhw_01"])
-        np.testing.assert_equal(expected.mask, d["mhw_02"].mask)
 
     def test_deviation_mlw(self):
         """Correct deviation calculated for mhw with mask-nan versus calculated nan"""
         v = niche_vlaanderen.Vegetation()
 
-        soil_code = np.ma.array([3, 3, 3, 3, 3, -99, 2],
-                                mask=[False, False, False, False, False, True, False])
-        mhw = -1 * np.ma.array([5, 5, 5, 5, 5, 5, 5])
-        mlw = -1 * np.ma.array([66, 50, 38, 25, 5, 25, 25])
+        soil_code = np.ma.array([3, 3, 3, 3, 3, 255, 2], dtype="uint8")
+        mhw = -1 * np.ma.array([5, 5, 5, 5, 5, 5, 5], dtype="float32")
+        mlw = -1 * np.ma.array([66, 50, 38, 25, 5, 25, 25], dtype="float32")
         d = v.calculate_deviation(soil_code, mhw, mlw)
 
-        expected = np.ma.array([28, 12, 0, 0, -15, np.nan, np.nan],
-                            mask=[False, False, False, False, False, True, False])
+        expected = np.ma.array([28, 12, 0, 0, -15, np.nan, np.nan])
         np.testing.assert_equal(expected, d["mlw_01"])
-        np.testing.assert_equal(expected.mask, d["mlw_01"].mask)
 
     def test_detailed_vegetation(self, single_value_input_arrays):
         """Correct vegetation example in docs"""

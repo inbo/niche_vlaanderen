@@ -126,30 +126,24 @@ def zwarte_beek_data(path_testcase):
 @pytest.yield_fixture
 def single_value_input_arrays():
     """Provide set of fixed single value grids"""
-    nutrient_level = np.ma.array([4], dtype="uint8", fill_value=255)
-    acidity = np.ma.array([3], dtype="uint8", fill_value=255)
-    mlw = np.ma.array([-50], dtype="float32", fill_value=np.nan)
-    mhw = np.ma.array([-10], dtype="float32", fill_value=np.nan)
-    soil_code = np.ma.array([14], dtype="uint8", fill_value=255)
-    inundation = np.ma.array([1], dtype="uint8", fill_value=255)
+    nutrient_level = np.array([4], dtype="uint8")
+    acidity = np.array([3], dtype="uint8")
+    mlw = np.array([-50], dtype="float32")
+    mhw = np.array([-10], dtype="float32")
+    soil_code = np.array([14], dtype="uint8")
+    inundation = np.array([1], dtype="uint8")
     return nutrient_level, acidity, mlw, mhw, soil_code, inundation
 
 @pytest.yield_fixture
-def single_value_input_arrays_masked():
+def single_value_input_arrays_nodata():
     """Provide set of fixed single value grids with a mask"""
 
-    nutrient_level = np.ma.array([4, 4, 255],
-                                 mask=[False, False, True], dtype="uint8",fill_value=255)
-    acidity = np.ma.array([3, 3, 255],
-                          mask=[False, False, True], dtype="uint8", fill_value=255)
-    mlw = np.ma.array([-50, -50, np.nan],
-                      mask=[False, False, True], dtype="float32", fill_value=np.nan)
-    mhw = np.ma.array([-10, -10, np.nan],
-                      mask=[False, False, True], dtype="float32", fill_value=np.nan)
-    soil_code = np.ma.array([14, 14, 255],
-                            mask=[False, False, True], dtype="uint8", fill_value=255)
-    inundation = np.ma.array([1, 1, 255],
-                             mask=[False, False, True], dtype="uint8", fill_value=255)
+    nutrient_level = np.array([4, 4, 255], dtype="uint8")
+    acidity = np.array([3, 3, 255], dtype="uint8")
+    mlw = np.array([-50, -50, np.nan], dtype="float32")
+    mhw = np.array([-10, -10, np.nan], dtype="float32")
+    soil_code = np.array([14, 14, 255], dtype="uint8")
+    inundation = np.array([1, 1, 255], dtype="uint8")
 
     return nutrient_level, acidity, mlw, mhw, soil_code, inundation
 
