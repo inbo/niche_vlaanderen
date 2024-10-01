@@ -264,10 +264,7 @@ class Niche(object):
         if isinstance(value, numbers.Number):
             # Remove any existing values to make sure last value is used
             self._inputfiles.pop(key, None)
-            if _allowed_input[key] == "uint8":
-                self._inputvalues[key] = np.uint8(value)
-            elif _allowed_input[key] == "float32":
-                self._inputvalues[key] = np.float32(value)
+            self._inputvalues[key] = value
         else:
             with rasterio.open(value, "r") as dst:
                 sc_new = SpatialContext(dst)
@@ -470,7 +467,15 @@ class Niche(object):
         # Load in all constant inputvalues
         for f in self._inputvalues:
             shape = (int(self._context.height), int(self._context.width))
-            inputarray[f] = np.full(shape, self._inputvalues[f])
+            if _allowed_input[f] == "uint8":
+                fill_value = 255
+            elif _allowed_input[f] == "float32":
+                fill_value = np.nan
+            else:
+                raise TypeError("Unexpected data type")
+            inputarray[f] = np.ma.array(np.full(shape, self._inputvalues[f]),
+                                        fill_value=fill_value,
+                                        dtype=_allowed_input[f])
 
         # check if valid values are used in inputarrays
         # check for valid datatypes - values will be checked in the low-level
@@ -650,12 +655,10 @@ class Niche(object):
         folder: string
             Output folder to which files will be written. Parent directory must
             already exist.
-
         overwrite_files: bool
             Overwrite files when saving.
             Note writing will fail if any of the files to be written already
             exists.
-
         detailed_files : bool
             Save detailed information on factor affecting vegetation possibility
 
@@ -742,7 +745,6 @@ class Niche(object):
 
         # deviation
         params.update(dtype="float64", nodata=-99999)
-
         for i in self._deviation:
             with rasterio.open(files[i], "w", **params) as dst:
                 band = self._deviation[i]
@@ -767,7 +769,7 @@ class Niche(object):
           >>> plt.show()
 
         Parameters
-        ==========
+        ----------
         key: veg_code (1..28) or input_code
           key of the vegetation type that should be plotted, eg myniche.plot(7)
           or key of the input layer you want to plot eg myniche("mhw").
@@ -782,10 +784,9 @@ class Niche(object):
            Use a fixed scale
 
         Returns
-        =======
+        -------
         ax: `matplotlib.axes.Axes`_
-          Can be used to update the plot (eg change the
-          title).
+          Can be used to update the plot (eg change the title).
         """
         try:
             import matplotlib.pyplot as plt
@@ -809,23 +810,16 @@ class Niche(object):
         if key in self._inputfiles and key not in self._inputarray:
             # if set_input has been done, but no model run yet
             # in this case we will open the file and fetch the data
-            with rasterio.open(self._inputfiles[key], "r") as dst:
-                window = self._context.get_read_window(SpatialContext(dst))
-                v = dst.read(1, window=window)
-                v = ma.masked_equal(v, dst.nodatavals[0])
+            v = self.read_rasterio_to_grid(self._inputfiles[key], key)
             title = key
-
         if key in self._inputarray:
             v = self._inputarray[key]
-            v = ma.masked_equal(v, -99)
             title = key
         if key in self._abiotic:
             v = self._abiotic[key]
-            v = ma.masked_equal(v, 255)
             title = key
         if key in self._vegetation.keys():
             v = self._vegetation[key]
-            v = ma.masked_equal(v, 255)
             title = "{} ({})".format(self._vegcode2name(key), key)
             norm = Normalize(0, 1)
         if key in self._deviation:

@@ -4,8 +4,6 @@ import distutils.spawn
 import os
 import shutil
 import subprocess
-import sys
-import tempfile
 from functools import partial
 import yaml
 
@@ -33,9 +31,9 @@ class TestNiche:
                         path_testcase / "zwarte_beek" / "input" / "soil_code.asc")
 
 
-    @pytest.mark.parametrize("variable,unique_data, nodata", [
+    @pytest.mark.parametrize("variable,unique_data,nodata", [
         ("soil_code",
-         np.array([ 8, 11, 13,  1], dtype="uint8"),
+         np.array([ 8, 11, 13,  255], dtype="uint8"),
          partial(np.isin, test_elements=[255])),
         ("mlw",
          np.array([-148., -129., -123., -117., -113.], dtype="float32"), np.isnan)
@@ -54,9 +52,9 @@ class TestNiche:
 
 
     def test_zwarte_beek(self, tmp_path, path_testcase, zwarte_beek_niche):
-        """
-        This tests runs the data from the testcase/zwarte_beek.
-        TODO no actual validation is done!
+        """Check if the model runs succesfully with data from the testcase/zwarte_beek.
+
+        No data validation itself is done as part of this test
         """
         myniche = zwarte_beek_niche()
         myniche.run()
@@ -134,6 +132,7 @@ class TestNiche:
         assert set(expected_files) == set(dir_listing)
 
     def test_zwarte_beek_constant_values(self, zwarte_beek_niche):
+        """Check if the model runs succesfully with constant values."""
         myniche = zwarte_beek_niche()
         myniche.set_input("rainwater", 0)
         assert "rainwater" not in myniche._inputfiles
@@ -145,12 +144,12 @@ class TestNiche:
         assert myniche.occurrence == myniche2.occurrence
 
     def test_testcase_simple(self, tmp_path, path_testcase):
-        """
-        This tests runs the data from the testcase/zwarte_beek.
-        Note: validation is done in the vegetation tests - not here.
+        """Check if the simple model runs succesfully with data from the
+        testcase/zwarte_beek.
 
+        No data validation itself is done as part of this test (see vegetation module
+        tests)
         """
-
         myniche = niche_vlaanderen.Niche()
         input_dir = path_testcase / "zwarte_beek" / "input"
 
@@ -201,7 +200,6 @@ class TestNiche:
 
     def test_soil_tif_float32(self, zwarte_beek_niche, path_tests):
         """Test that float32 soil code files are parsed correctly
-
         cfr bug report #334
         """
         myniche = zwarte_beek_niche()
@@ -213,17 +211,20 @@ class TestNiche:
         # this should be nan in output
         coords = ~myniche._context.transform*(216796,198172)
         coords = (int(coords[0]), int(coords[1]))
-        
-        assert (myniche._inputarray["soil_code"][coords] == -99 or np.isnan(myniche._inputarray["soil_code"][coords]))
-        assert myniche._inputarray["mhw"][coords] != -99
-        assert myniche._vegetation[14][coords] == 255
-       
+
+        # Nan-values in tiff propagate to Masked Values
+        assert isinstance(myniche._inputarray["soil_code"][coords],
+                          np.ma.core.MaskedConstant)
+        assert myniche._inputarray["mhw"][coords] == 3.0
+        assert isinstance(myniche._vegetation[14][coords],
+                          np.ma.core.MaskedConstant)
 
     @pytest.mark.skipif(
         distutils.spawn.find_executable("gdalinfo") is None,
         reason="gdalinfo not available in the environment.",
     )
     def test_zwarte_beek_validate(self, tmp_path, zwarte_beek_niche):
+        """Verify gdalinfo correct write of data and metadata on the output files."""
         myniche = zwarte_beek_niche()
         myniche.run()
         myniche.write(tmp_path)
@@ -237,7 +238,7 @@ class TestNiche:
         assert "STATISTICS_MINIMUM=0" in info
 
     def test_windowed_read(self, zwarte_beek_niche, path_testdata):
-        # tests whether the spatial context is adjusted to the smaller grid
+        """Spatial context is adjusted to the smaller grid"""
         myniche = zwarte_beek_niche()
         myniche.set_input("mlw", path_testdata / "part_zwarte_beek_mlw.asc")
         myniche.run(full_model=True)
@@ -247,14 +248,17 @@ class TestNiche:
     def test_deviation(self, zwarte_beek_niche):
         myniche = zwarte_beek_niche()
         myniche.run(deviation=True)
-        # check dict exists and contains enough nan values
-        assert 14400 == np.isnan(myniche._deviation["mhw_04"]).sum()
+        # check dict exists and contains enough nan values: the original mask AND
+        # the nan values from the deviation calculation
+        assert 14400 == (np.isnan(myniche._deviation["mhw_04"]).sum() +
+                         myniche._deviation["mhw_04"].mask.sum())
 
     @pytest.mark.skipif(
         distutils.spawn.find_executable("gdalinfo") is None,
         reason="gdalinfo not available in the environment.",
     )
     def test_write_deviation(self, tmp_path, small_niche):
+        """Verify gdalinfo correct write of data and metadata on the deviation files."""
         myniche = small_niche
         myniche.run(deviation=True, full_model=False)
 
