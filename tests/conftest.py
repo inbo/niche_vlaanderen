@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 
 import pytest
+import numpy as np
 
 import niche_vlaanderen
 
@@ -120,6 +121,37 @@ def zwarte_beek_data(path_testcase):
                                          variable_name="management")
     return n, (soil_code, msw, mhw, mlw, inundation, rainwater, seepage, minerality,
             nitrogen_deposition, nitrogen_animal, nitrogen_fertilizer, management)
+
+
+@pytest.yield_fixture
+def single_value_input_arrays():
+    """Provide set of fixed single value grids"""
+    nutrient_level = np.ma.array([4], dtype="uint8", fill_value=255)
+    acidity = np.ma.array([3], dtype="uint8", fill_value=255)
+    mlw = np.ma.array([-50], dtype="float32", fill_value=np.nan)
+    mhw = np.ma.array([-10], dtype="float32", fill_value=np.nan)
+    soil_code = np.ma.array([14], dtype="uint8", fill_value=255)
+    inundation = np.ma.array([1], dtype="uint8", fill_value=255)
+    return nutrient_level, acidity, mlw, mhw, soil_code, inundation
+
+@pytest.yield_fixture
+def single_value_input_arrays_masked():
+    """Provide set of fixed single value grids with a mask"""
+
+    nutrient_level = np.ma.array([4, 4, 255],
+                                 mask=[False, False, True], dtype="uint8",fill_value=255)
+    acidity = np.ma.array([3, 3, 255],
+                          mask=[False, False, True], dtype="uint8", fill_value=255)
+    mlw = np.ma.array([-50, -50, np.nan],
+                      mask=[False, False, True], dtype="float32", fill_value=np.nan)
+    mhw = np.ma.array([-10, -10, np.nan],
+                      mask=[False, False, True], dtype="float32", fill_value=np.nan)
+    soil_code = np.ma.array([14, 14, 255],
+                            mask=[False, False, True], dtype="uint8", fill_value=255)
+    inundation = np.ma.array([1, 1, 255],
+                             mask=[False, False, True], dtype="uint8", fill_value=255)
+
+    return nutrient_level, acidity, mlw, mhw, soil_code, inundation
 
 
 @pytest.fixture

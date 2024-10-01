@@ -49,7 +49,7 @@ class VegSuitable(IntEnum):
 
 
 class Vegetation(object):
-    """Helper class to calculate vegetation based on input arrays
+    """Calculate vegetation based on input arrays
 
     This class helps predicting vegetation based on a number of input arrays.
     On initialization the input codetables are parsed (and validated).
@@ -65,7 +65,7 @@ class Vegetation(object):
         https://inbo.github.io/niche_vlaanderen/codetables.html
     """
 
-    nodata_veg = 255  # uint8
+    nodata_veg = 255  # unsigned 8 bit integer for vegetation
 
     def __init__(
         self,
@@ -76,12 +76,11 @@ class Vegetation(object):
         ct_nutrient_level=None,
         ct_inundation=None,
     ):
-        """Initializes the Vegetation helper class
+        """Create a Vegetation helper class
 
         This class initializes the Vegetation helper class. By default it uses
         the code tables supplied by the niche_vlaanderen package. It is
         possible to overwrite this by supplying the niche_vlaanderen parameter
-
         """
 
         if ct_vegetation is None:
@@ -90,23 +89,18 @@ class Vegetation(object):
 
         # Note that the next code tables are only used for validation, they are
         # not part of the logic of the vegetation class
-
         if ct_soil_code is None:
             ct_soil_code = package_resource(["system_tables"],
                                              "soil_codes.csv")
-
         if ct_acidity is None:
             ct_acidity = package_resource(["system_tables"],
                                              "acidity.csv")
-
         if ct_nutrient_level is None:
             ct_nutrient_level = package_resource(["system_tables"],
                                                  "nutrient_level.csv")
-
         if ct_management is None:
             ct_management = package_resource(["system_tables"],
                                                  "management.csv")
-
         if ct_inundation is None:
             ct_inundation = package_resource(["system_tables"],
                                              "inundation.csv")
@@ -156,40 +150,51 @@ class Vegetation(object):
 
         Parameters
         ----------
+        soil_code : numpy.ma.MaskedArray
+            Array containing the soil codes. Values must be present
+            in the soil_code system table.
+        mhw : numpy.ma.MaskedArray
+            Array containing the mean high waterlevel.
+        mlw : numpy.ma.MaskedArray
+            Array containing the mean low waterlevel.
+        nutrient_level : numpy.ma.MaskedArray, optional
+            Array containing the nutrient levels. Values must be present
+            in the nutrient_level system table.
+        acidity : numpy.ma.MaskedArray, optional
+            Array containing the acidity levels. Values must be present
+            in the acidity system table.
+        management : numpy.ma.MaskedArray
+            Array containing the management codes. Values must be present
+            in the management system table.
+        inundation : numpy.ma.MaskedArray
+            Array containing the inundation values.
         return_all: boolean
             A boolean (default=True) whether all grids should be returned or
             only grids containing data.
+        full_model : bool
+            If True, the full niche model is applied
 
         Returns
         -------
         veg: dict
-            A dictionary containing the different output arrays per
-            veg_code value. 255 is used for nodata_veg values
+            A dictionary containing the different output arrays per veg_code value.
         expected: int
             Expected code in veg arrays if all conditions are met
         veg_occurrence: dict
             A dictionary containing the percentage of the area where the
             vegetation can occur.
-
         """
-
-        nodata = (soil_code == -99) | np.isnan(soil_code) | np.isnan(mhw) | np.isnan(mlw)
-
+        # Create combined mask from all input arrays
+        nodata_mask = soil_code.mask | mhw.mask | mlw.mask
         if full_model:
-            nodata = (
-                nodata
-                | (nutrient_level == NutrientLevel.nodata)
-                | (acidity == Acidity.nodata)
-            )
-
+            nodata_mask = nodata_mask | nutrient_level.mask | acidity.mask
         if inundation is not None:
-            nodata = nodata | (inundation == -99)
-
+            nodata_mask = nodata_mask | inundation.mask
         if management is not None:
-            nodata = nodata | (management == -99)
+            nodata_mask = nodata_mask | management.mask
 
-        if np.all(nodata):
-            raise NicheException("only nodata values in prediction")
+        if np.all(nodata_mask):
+            raise NicheException("Only nodata values in prediction")
 
         if full_model:
             check_codes_used("acidity", acidity, self._ct_acidity["acidity"])
@@ -260,20 +265,18 @@ class Vegetation(object):
                         current_row & (row.management == management)
                     ) * VegSuitable.MANAGEMENT
 
-            vegi = vegi.astype("uint8")
-            vegi[nodata] = self.nodata_veg
-
+            vegi = np.ma.array(vegi, mask=nodata_mask,
+                               fill_value=255, dtype="uint8")
             vegi_summary = vegi == expected
-
-            vegi_summary = vegi_summary.astype("uint8")
-            vegi_summary[nodata] = self.nodata_veg
+            vegi_summary = np.ma.array(vegi_summary, mask=nodata_mask,
+                                       fill_value=255, dtype="uint8")
 
             if return_all or np.any(vegi):
                 veg_bands[veg_code] = vegi_summary
 
             veg_detail[veg_code] = vegi
 
-            occi = np.sum(vegi_summary == 1) / (vegi_summary.size - np.sum(nodata))
+            occi = np.sum(vegi_summary == 1) / vegi_summary.compressed().size
             occurrence[veg_code] = occi.item()
         return veg_bands, occurrence, veg_detail
 
@@ -296,7 +299,7 @@ class Vegetation(object):
             value an the actual value.
             Keys are eg mhw_01 for mhw and vegetation type 01
         """
-        nodata = (soil_code == -99) | np.isnan(mhw) | np.isnan(mlw)
+        nodata_mask = soil_code.mask | mhw.mask | mlw.mask
 
         difference = dict()
 
@@ -307,52 +310,54 @@ class Vegetation(object):
         veg = veg.drop_duplicates()
 
         warnings.simplefilter(action="ignore", category=RuntimeWarning)
-
         for veg_code, subtable in veg.groupby("veg_code"):
             subtable = subtable.reset_index()
 
-            mhw_diff = np.full(soil_code.shape, np.nan)
-            mlw_diff = np.full(soil_code.shape, np.nan)
+            mhw_diff = np.ma.array(np.ma.empty_like(mhw), mask=nodata_mask) * np.nan
+            mlw_diff = np.ma.array(np.ma.empty_like(mlw), mask=nodata_mask) * np.nan
 
             for row in subtable.itertuples():
-
                 # mhw smaller than maximum
-                sel = (row.soil_code == soil_code) & (row.mhw_max < mhw)
-                mhw_diff[sel] = -(mhw - row.mhw_max)[sel]
+                selection = (row.soil_code == soil_code) & (row.mhw_max < mhw)
+                mhw_diff[selection] = -(mhw - row.mhw_max)[selection]
 
                 # mhw larger than minimum
-                sel = (row.soil_code == soil_code) & (row.mhw_min > mhw)
-                mhw_diff[sel] = -(mhw - row.mhw_min)[sel]
+                selection = (row.soil_code == soil_code) & (row.mhw_min > mhw)
+                mhw_diff[selection] = -(mhw - row.mhw_min)[selection]
 
                 # mhw in range
-                sel = (
+                selection = (
                     (row.soil_code == soil_code)
                     & (row.mhw_min <= mhw)
                     & (row.mhw_max >= mhw)
                 )
-                mhw_diff[sel] = (np.zeros(soil_code.shape))[sel]
+                zero_arr = np.ma.array(np.ma.zeros(soil_code.shape), mask=nodata_mask)
+                mhw_diff[selection] = zero_arr[selection]
 
                 # mlw smaller than maximum
-                sel = (row.soil_code == soil_code) & (row.mlw_max < mlw)
-                mlw_diff[sel] = -(mlw - row.mlw_max)[sel]
+                selection = (row.soil_code == soil_code) & (row.mlw_max < mlw)
+                mlw_diff[selection] = -(mlw - row.mlw_max)[selection]
 
                 # mlw larger than minimum
-                sel = (row.soil_code == soil_code) & (row.mlw_min > mlw)
-                mlw_diff[sel] = -(mlw - row.mlw_min)[sel]
+                selection = (row.soil_code == soil_code) & (row.mlw_min > mlw)
+                mlw_diff[selection] = -(mlw - row.mlw_min)[selection]
 
                 # mlw in range
-                sel = (
+                selection = (
                     (row.soil_code == soil_code)
                     & (row.mlw_min <= mlw)
                     & (row.mlw_max >= mlw)
                 )
-                mlw_diff[sel] = (np.zeros(soil_code.shape))[sel]
+                zero_arr = np.ma.array(np.ma.zeros(soil_code.shape), mask=nodata_mask)
+                mlw_diff[selection] = zero_arr[selection]
 
-            mhw_diff[nodata] = np.nan
-            mlw_diff[nodata] = np.nan
+            mhw_diff = np.ma.array(mhw_diff, mask=nodata_mask,
+                                   fill_value=np.nan, dtype="float32")
+            mlw_diff = np.ma.array(mlw_diff, mask=nodata_mask,
+                                   fill_value=np.nan, dtype="float32")
 
             difference["mhw_%02d" % veg_code] = mhw_diff
             difference["mlw_%02d" % veg_code] = mlw_diff
 
-        warnings.simplefilter("default")
+        warnings.simplefilter("default")  # Reset to default warning level
         return difference

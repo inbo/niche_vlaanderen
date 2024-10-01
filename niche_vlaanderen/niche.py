@@ -421,7 +421,6 @@ class Niche(object):
                     "Error: not all {} values are lower than {}".format(a, b)
                 )
 
-
     def read_rasterio_to_grid(self, file_name, variable_name=None):
         """Read grid files using rasterio as Numpy masked arrays
 
@@ -432,9 +431,9 @@ class Niche(object):
         variable_name : string
             Name of the variable this grid file represents
         """
-        dst = rasterio.open(file_name, "r")
-        window = self._context.get_read_window(SpatialContext(dst))
-        band = dst.read(1, masked=True, window=window, fill_value=255)
+        with rasterio.open(file_name, "r") as dst:
+            window = self._context.get_read_window(SpatialContext(dst))
+            band = dst.read(1, masked=True, window=window)
 
         # Custom fix for mapping of the old soil_code to the new soil_code
         if variable_name == "soil_code" and np.all(band >= 10000):
@@ -446,12 +445,13 @@ class Niche(object):
 
             # Assign fill value for unsigned integers (255) and floats (np.nan)
             if _allowed_input[variable_name] == "uint8":
-                band.fill_value = 255
+                band = np.ma.masked_array(band.filled(255), mask=band.mask,
+                                          fill_value=255, dtype="uint8")
             elif _allowed_input[variable_name] == "float32":
-                band.fill_value = np.nan
+                band = np.ma.masked_array(band.filled(np.nan), mask=band.mask,
+                                          fill_value=np.nan, dtype="float32")
 
         return band
-
 
     def _check_input_files(self, full_model):
         """Load all input files to input_array and applu basic input checks
@@ -647,7 +647,6 @@ class Niche(object):
 
         Parameters
         ----------
-
         folder: string
             Output folder to which files will be written. Parent directory must
             already exist.
