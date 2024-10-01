@@ -1,125 +1,201 @@
-from unittest import TestCase
-
-import rasterio
 import numpy as np
-import niche_vlaanderen
 import pytest
+
+import niche_vlaanderen
 from niche_vlaanderen.exception import NicheException
-
-
-def raster_to_numpy(filename):
-    """Read a GDAL grid as numpy array
-
-    Notes
-    ------
-    No-data values are -99 for integer types and np.nan for real types.
-    """
-    with rasterio.open(filename) as ds:
-        data = ds.read(1).astype(float)
-        nodata = ds.nodatavals[0]
-    print(nodata)
-    # create a mask for no-data values, taking into account the data-types
-    data[np.isclose(data, nodata)] = np.nan
-
-    return data
 
 
 class TestAcidity:
 
     def test_get_soil_mlw(self):
-        mlw = np.array([-50, -66])
-        soil_code = np.array([14, 7])
+        """Correct soil_mlw class calculated from grids with empty mask"""
+        mlw = np.ma.array([-50, -66], dtype="float32")
+        soil_code = np.ma.array([14, 7], dtype="uint8", fill_value=255)
+
         a = niche_vlaanderen.Acidity()
         result = a._calculate_soil_mlw(soil_code, mlw)
+        np.testing.assert_equal(np.ma.array([1, 9]), result)
+        assert result.dtype == np.uint8
 
-        np.testing.assert_equal(np.array([1, 9]), result)
+    def test_get_soil_mlw_masked(self):
+        """Correct soil_mlw class calculated from grids with non-empty mask"""
+        mlw = np.ma.array([-50, -66, np.nan],
+                          mask=[False, False, True], dtype="float32")
+        soil_code = np.ma.array([14, 7, 255],
+                                mask=[False, False, True], dtype="uint8")
+
+        a = niche_vlaanderen.Acidity()
+        result = a._calculate_soil_mlw(soil_code, mlw)
+        np.testing.assert_equal(np.ma.array([1, 9, 255],
+                                            mask=[False, False, True]), result)
+        assert result.dtype == np.uint8
 
     def test_get_soil_mlw_borders(self):
-        mlw = np.array([-79, -80, -100, -110, -111])
-        soil_code = np.array([14, 14, 14, 14, 14])
+        """Correct acidity calculated for border values"""
+        mlw = np.ma.array([-79, -80, -100, -110, -111], dtype="float32")
+        soil_code = np.ma.array([14, 14, 14, 14, 14],
+                                dtype="uint8", fill_value=255)
+
         a = niche_vlaanderen.Acidity()
         result = a._calculate_soil_mlw(soil_code, mlw)
-        expected = np.array([1, 1, 2, 2, 3])
+        expected = np.ma.array([1, 1, 2, 2, 3])
         np.testing.assert_equal(expected, result)
+        assert result.dtype == np.uint8
 
-    def test_acidity_partial(self):
-        rainwater = np.array([0])
-        minerality = np.array([1])
-        inundation = np.array([1])
-        seepage = np.array([1])
-        soil_mlw = np.array([1])
+    def test_acidity_support(self):
+        """Correct acidity calculated from grids with empty mask"""
+        rainwater = np.ma.array([0], dtype="uint8")
+        minerality = np.ma.array([1], dtype="uint8")
+        inundation = np.ma.array([1], dtype="uint8")
+        seepage = np.ma.array([1], dtype="float32")
+        soil_mlw = np.ma.array([1], dtype="uint8")
 
         a = niche_vlaanderen.Acidity()
         result = a._get_acidity(rainwater, minerality, inundation,
                                 seepage, soil_mlw)
 
-        np.testing.assert_equal(np.array([3]), result)
+        np.testing.assert_equal(np.ma.array([3]), result)
+        assert result.dtype == np.uint8
 
-    def test_seepage_code(self):
-        seepage = np.array([5, 0.3, 0.05, -0.04, -0.2, -5, -0.1, -1])
+    def test_acidity_support_masked(self):
+        """Correct acidity calculated from grids with non-empty mask"""
+        rainwater = np.ma.array([0, 0, 255],
+                                mask=[False, False, True], dtype="uint8")
+        minerality = np.ma.array([1, 1, 255],
+                                 mask=[False, False, True], dtype="uint8")
+        inundation = np.ma.array([1, 1, 255],
+                                 mask=[False, False, True], dtype="uint8")
+        seepage = np.ma.array([1, 1, np.nan],
+                              mask=[False, False, True], dtype="float32")
+        soil_mlw = np.ma.array([1, 1, 255],
+                               mask=[False, False, True], dtype="uint8")
+
+        a = niche_vlaanderen.Acidity()
+        result = a._get_acidity(rainwater, minerality, inundation,
+                                seepage, soil_mlw)
+
+        np.testing.assert_equal(np.ma.array([3, 3, 255],
+                                            mask=[False, False, True]), result)
+        assert result.dtype == np.uint8
+
+    def test_seepage(self):
+        """Correct seepage calculated from grids with empty mask"""
+        seepage = np.ma.array([5, 0.3, 0.05, -0.04, -0.2, -5, -0.1, -1],
+                              dtype="float32")
         a = niche_vlaanderen.Acidity()
         result = a._get_seepage(seepage)
 
-        expected = np.array([1, 1, 1, 1, 2, 3, 2, 3])
+        expected = np.ma.array([1, 1, 1, 1, 2, 3, 2, 3])
         np.testing.assert_equal(expected, result)
+        assert result.dtype == np.uint8
+
+    def test_seepage_masked(self):
+        """Correct seepage calculated from grids with non-empty mask"""
+        seepage = np.ma.array(
+            [5, 0.3, 0.05, -0.04, -0.2, -5, -0.1, -1, np.nan],
+            mask=[False, False, False, False, False, False, False, False, True],
+            dtype="float32", fill_value=np.nan)
+        a = niche_vlaanderen.Acidity()
+        result = a._get_seepage(seepage)
+
+        expected = np.ma.array([1, 1, 1, 1, 2, 3, 2, 3, 255])
+        np.testing.assert_equal(expected, result)
+        assert result.dtype == np.uint8
 
     def test_acidity(self):
-        rainwater = np.array([0])
-        minerality = np.array([0])
-        soilcode = np.array([14])
-        inundation = np.array([1])
-        seepage = np.array([20])
-        mlw = -1 * np.array([50])
+        """Correct acidity calculated from grids with empty mask"""
+        rainwater = np.ma.array([0], dtype="uint8")
+        minerality = np.ma.array([0], dtype="uint8")
+        soilcode = np.ma.array([14], dtype="uint8")
+        inundation = np.ma.array([1], dtype="uint8")
+        seepage = np.ma.array([20], dtype="float32")
+        mlw = -1 * np.ma.array([50], dtype="float32")
 
         a = niche_vlaanderen.Acidity()
         result = a.calculate(soilcode, mlw, inundation, seepage, minerality,
                              rainwater)
         np.testing.assert_equal(3, result)
+        assert result.dtype == np.uint8
+
+    def test_acidity_masked(self):
+        """Correct acidity calculated from grids with non-empty mask"""
+        rainwater = np.ma.array([0, 0, 255],
+                                mask=[False, False, True], dtype="uint8")
+        minerality = np.ma.array([0, 0, 255],
+                                 mask=[False, False, True], dtype="uint8")
+        soilcode = np.ma.array([14, 14, 255],
+                               mask=[False, False, True], dtype="uint8")
+        inundation = np.ma.array([1, 1, 255],
+                                 mask=[False, False, True], dtype="uint8")
+        seepage = np.ma.array([20, 20, np.nan],
+                              mask=[False, False, True], dtype="float32")
+        mlw = -1 * np.ma.array([50, 50, np.nan],
+                               mask=[False, False, True], dtype="float32")
+
+        a = niche_vlaanderen.Acidity()
+        result = a.calculate(soilcode, mlw, inundation,
+                             seepage, minerality, rainwater)
+        np.testing.assert_equal(np.ma.array([3, 3, 255]), result)
+        assert result.dtype == np.uint8
 
     def test_acidity_testcase(self, path_testcase):
+        """Correct acidity calculated for test case of the zwarte beek"""
+        n = niche_vlaanderen.Niche()
+
+        input_folder_path = path_testcase / "zwarte_beek"/ "input"
+
+        soil_code_file_path = input_folder_path / "soil_code.asc"
+        n.set_input("soil_code", soil_code_file_path)
+        soil_code = n.read_rasterio_to_grid(soil_code_file_path,
+                                            variable_name="soil_code")
+
+        mlw_file_path = input_folder_path / "mlw.asc"
+        n.set_input("mlw", mlw_file_path)
+        mlw = n.read_rasterio_to_grid(mlw_file_path, variable_name="mlw")
+
+        in_file_path = input_folder_path / "inundation.asc"
+        n.set_input("inundation_acidity", in_file_path)
+        inundation = n.read_rasterio_to_grid(in_file_path,
+                                             variable_name="inundation_acidity")
+
+        rainwater_file_path = input_folder_path / "nullgrid.asc"
+        n.set_input("rainwater", rainwater_file_path)
+        rainwater = n.read_rasterio_to_grid(rainwater_file_path,
+                                            variable_name="rainwater")
+
+        seepage_file_path = input_folder_path / "seepage.asc"
+        n.set_input("seepage", seepage_file_path)
+        seepage = n.read_rasterio_to_grid(seepage_file_path,
+                                            variable_name="seepage")
+
+        minerality_file_path = input_folder_path / "minerality.asc"
+        n.set_input("minerality", minerality_file_path)
+        minerality = n.read_rasterio_to_grid(minerality_file_path,
+                                             variable_name="minerality")
+
+        acidity_file_path = path_testcase / "zwarte_beek" / "abiotic" / "acidity.asc"
+        n.set_input("acidity",acidity_file_path)
+        acidity = n.read_rasterio_to_grid(acidity_file_path, variable_name="acidity")
+
         a = niche_vlaanderen.Acidity()
-        inputdir = path_testcase / "zwarte_beek"/ "input"
-        soil_code = raster_to_numpy(inputdir / "soil_code.asc")
-        soil_code_r = soil_code
-        soil_code_r[soil_code > 0] = np.round(soil_code / 10000)[soil_code > 0]
-
-        mlw = raster_to_numpy(inputdir / "mlw.asc")
-        inundation = \
-            raster_to_numpy(inputdir / "inundation.asc")
-        rainwater = raster_to_numpy(inputdir / "nullgrid.asc")
-        seepage = raster_to_numpy(inputdir / "seepage.asc")
-        minerality = raster_to_numpy(inputdir / "minerality.asc")
-        acidity = raster_to_numpy(path_testcase / "zwarte_beek"
-                                  / "abiotic" / "acidity.asc")
-        acidity[np.isnan(acidity)] = 255
-        acidity[acidity == -99] = 255
-        result = a.calculate(soil_code_r, mlw, inundation, seepage,
-                             minerality, rainwater)
-
+        result = a.calculate(soil_code, mlw, inundation,
+                             seepage, minerality, rainwater)
         np.testing.assert_equal(acidity, result)
+        assert result.dtype == np.uint8
 
-    def test_acidity_invalidsoil(self):
-        a = niche_vlaanderen.Acidity()
-        rainwater = np.array([0])
-        minerality = np.array([0])
-        soilcode = np.array([-1])
-        inundation = np.array([1])
-        seepage = np.array([20])
-        mlw = np.array([50])
+    def test_acidity_invalid_variable(self):
+        """Raise an exception when an invalid soil code is used"""
+        rainwater = np.ma.array([0], dtype="uint8")
+        minerality = np.ma.array([0], dtype="uint8")
+        inundation = np.ma.array([1], dtype="uint8")
+        seepage = np.ma.array([20], dtype="float32")
+        mlw = -1 * np.ma.array([50], dtype="float32")
+        soilcode = np.ma.array([14], dtype="uint8")
 
-        a = niche_vlaanderen.Acidity()
-        with pytest.raises(NicheException):
-            a.calculate(soilcode, mlw, inundation, seepage, minerality,
-                        rainwater)
-
-    def test_acidity_invalidminerality(self):
-        a = niche_vlaanderen.Acidity()
-        rainwater = np.array([0])
-        minerality = np.array([500])
-        soilcode = np.array([14])
-        inundation = np.array([1])
-        seepage = np.array([20])
-        mlw = np.array([50])
-        with pytest.raises(NicheException):
-            a.calculate(soilcode, mlw, inundation, seepage, minerality,
-                        rainwater)
+        # set soil_code and minerality one by one as invalid value
+        for invalid_variable in [soilcode, minerality]:
+            invalid_variable[0] = 254
+            a = niche_vlaanderen.Acidity()
+            with pytest.raises(NicheException):
+                a.calculate(soilcode, mlw, inundation, seepage,
+                            minerality, rainwater)

@@ -12,7 +12,7 @@ class NutrientLevel(object):
     arguments.
     """
 
-    nodata = 255  # unsigned 8 bit integer
+    nodata = 255  # unsigned 8 bit integer for nutrient level
 
     def __init__(
         self,
@@ -29,7 +29,7 @@ class NutrientLevel(object):
         ct_lnk_soil_nutrient_level : str, Optional
             Path to the lnk_soil_nutrient_level system table to overwrite the default.
         ct_management : str, Optional
-            Path to the management codetable to overwrite the default.
+            Path to the management system table to overwrite the default.
         ct_mineralisation : str, Optional
             Path to the nitrogen_mineralisation system table to overwrite the default.
         ct_soil_code : str, Optional
@@ -98,6 +98,11 @@ class NutrientLevel(object):
         msw_array : numpy.ma.MaskedArray
             Array containing the mean spring waterlevel ("gemiddeld
             voorjaarsgrondwaterstand").
+
+        Returns
+        -------
+        numpy.ma.MaskedArray, float32
+            minerality
         """
         orig_shape = soil_code_array.shape
         soil_code_array = soil_code_array.flatten()
@@ -117,7 +122,8 @@ class NutrientLevel(object):
 
         result = result.reshape(orig_shape)
         # Reuse the mask of the msw_array
-        result = np.ma.array(result, mask=msw_array.mask, fill_value=np.nan)
+        result = np.ma.array(result, mask=msw_array.mask,
+                             fill_value=np.nan, dtype="float32")
         return result
 
     def _calculate(self, management, soil_code, nitrogen, inundation):
@@ -135,6 +141,11 @@ class NutrientLevel(object):
             Array containing the calculated nitrogen levels.
         inundation : numpy.ma.MaskedArray
             Array containing the inundation values.
+
+        Returns
+        -------
+        numpy.ma.MaskedArray, uint8
+            nutrient level
         """
         check_codes_used("management", management, self._ct_management["management"])
         check_codes_used("soil_code", soil_code, self._ct_soil_code["soil_code"])
@@ -171,7 +182,8 @@ class NutrientLevel(object):
             result[selection] = table_sel.nutrient_level[index].iloc[selection].values
 
         # Apply mask to the result array
-        result = np.ma.array(result, mask=nitrogen.mask, fill_value=self.nodata)
+        result = np.ma.array(result, mask=nitrogen.mask,
+                             fill_value=self.nodata, dtype="uint8")
 
         # Note that niche_vlaanderen is different from the original (Dutch)
         # model here:
@@ -209,6 +221,11 @@ class NutrientLevel(object):
             Array containing the management.
         inundation : numpy.ma.MaskedArray
             Array containing the inundation values.
+
+        Returns
+        -------
+        numpy.ma.MaskedArray, uint8
+            nutrient level
         """
 
         nitrogen_mineralisation = self._calculate_mineralisation(soil_code, msw)

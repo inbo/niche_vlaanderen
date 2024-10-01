@@ -1,5 +1,4 @@
 import numpy as np
-import pytest
 
 import niche_vlaanderen
 
@@ -91,7 +90,7 @@ class TestNutrientLevel:
         assert result.dtype == np.uint8
 
     def test_calculate(self):
-        """Correct acidity calculated from fixed-value grids with empty mask"""
+        """Correct nutrient level calculated from fixed-value grids with empty mask"""
         management = np.ma.array([2], dtype="uint8")
         soil_code = np.ma.array([14], dtype="uint8")
         msw = np.ma.array([-33], dtype="float32")
@@ -109,7 +108,8 @@ class TestNutrientLevel:
         assert result.dtype == np.uint8
 
     def test_calculate_masked(self):
-        """Correct acidity calculated from fixed-value grids with non-empty mask"""
+        """Correct nutrient level calculated from fixed-value grids with
+        non-empty mask"""
         management = np.ma.array([2, 2, 255],
                                  mask=[False, False, True], dtype="uint8")
         soil_code = np.ma.array([14, 14, 255],
@@ -135,7 +135,7 @@ class TestNutrientLevel:
         assert result.dtype == np.uint8
 
     def test_nutrient_level_testcase(self, path_testcase):
-        """Correct acidity calculated for test case of the zwarte beek"""
+        """Correct nutrient level calculated for test case of the zwarte beek"""
         n = niche_vlaanderen.Niche()
 
         input_folder_path = path_testcase / "zwarte_beek" / "input"
