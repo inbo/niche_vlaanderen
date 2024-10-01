@@ -12,6 +12,7 @@ class Acidity(object):
     arguments.
     """
 
+    dtype = "uint8"
     nodata = 255  # unsigned 8 bit integer for acidity
 
     def __init__(
@@ -78,18 +79,20 @@ class Acidity(object):
 
         Parameters
         ----------
-        soil_code : numpy.ma.MaskedArray
+        soil_code : numpy.ndarray, numpy.uint8
             Array containing the soil codes. Values must be present
             in the soil_code system table.
-        mlw : numpy.ma.MaskedArray
+        mlw : numpy.ndarray, numpy.float32
             Array containing the mean low waterlevel.
 
         Returns
         -------
-        numpy.ma.MaskedArray, uint8
+        numpy.ndarray, numpy.uint8
             Array containing the soil_mlw class values.
         """
         check_codes_used("soil_code", soil_code, self._ct_soil_codes.index)
+
+        nodata = (soil_code == 255) | np.isnan(mlw)
 
         # determine soil_group for soil_code
         orig_shape = mlw.shape
@@ -97,44 +100,40 @@ class Acidity(object):
         mlw = mlw.flatten()
 
         self._ct_soil_codes.loc[self.nodata, "soil_group"] = self.nodata
-        # use filled to represent no-data values correctly
-        soil_group = self._ct_soil_codes.soil_group[
-            soil_code.filled(fill_value=self.nodata)].values.astype("uint8")
+        soil_group = self._ct_soil_codes.soil_group[soil_code].values.astype("uint8")
 
         result = np.ma.empty_like(soil_code)
         for sel_group, subtable in self._ct_soil_mlw.groupby("soil_group"):
             subtable = subtable.copy().reset_index(drop=True)
             index = np.digitize(mlw, subtable.mlw_max, right=False)
-            index = np.ma.array(index, mask=mlw.mask,
-                                fill_value=self.nodata).filled()
+            index[nodata.flatten()] = self.nodata
             selection = soil_group == sel_group
             subtable.loc[self.nodata, "soil_mlw_class"] = self.nodata
             result[selection] = subtable.soil_mlw_class[index].iloc[selection].values
-        result = result.reshape(orig_shape)
-        # Set mask values to default no-data value
-        result = np.ma.masked_array(result.filled(self.nodata), mask=mlw.mask,
-                                    fill_value=self.nodata, dtype="uint8")
+        result = result.reshape(orig_shape).astype(self.dtype)
+        result[nodata] = self.nodata  # Apply the nodata mask
         return result
 
-    def _get_acidity(self, rainwater, minerality, inundation, seepage, soil_mlw_class):
+    def _get_acidity(self, rainwater, minerality, inundation,
+                     seepage_class, soil_mlw_class):
         """Calculate the acidity
 
         Parameters
         ----------
-        rainwater : numpy.ma.MaskedArray
+        rainwater : numpy.ndarray, numpy.uint8
             Array denoting whether rainwater lenses occur.
-        minerality : numpy.ma.MaskedArray
+        minerality : numpy.ndarray, numpy.uint8
             Array noting whether the groundwater is rich(1) or poor in minerals
-        inundation : numpy.ma.MaskedArray
+        inundation : numpy.ndarray, numpy.uint8
             Array containing rate of inundation.
-        seepage : numpy.ma.MaskedArray
-            Array containing the flux of groundwater at the location.
-        soil_mlw_class : numpy.ma.MaskedArray
+        seepage_class : numpy.ndarray, numpy.uint8
+            Array containing the classified version of theflux of groundwater.
+        soil_mlw_class : numpy.ndarray, numpy.uint8
             Array containing the soil mlw classes from helper function.
 
         Returns
         -------
-        numpy.ma.MaskedArray, uint8
+        numpy.ndarray, numpy.uint8
             Array containing the acidity values.
         """
         orig_shape = inundation.shape
@@ -144,12 +143,16 @@ class Acidity(object):
             "minerality", minerality, self._lnk_acidity["mineral_richness"]
         )
         check_codes_used("inundation", inundation, self._lnk_acidity["inundation"])
-        check_codes_used("seepage", seepage, self._ct_seepage["seepage"])
+        check_codes_used("seepage", seepage_class, self._ct_seepage["seepage"])
+
+        nodata = ((rainwater == 255) | (minerality == 255) |
+                  (inundation == 255) | (soil_mlw_class == 255) |
+                  (seepage_class == 255))
 
         rainwater = rainwater.flatten()
         minerality = minerality.flatten()
         inundation = inundation.flatten()
-        seepage = seepage.flatten()
+        seepage = seepage_class.flatten()
         soil_mlw_class = soil_mlw_class.flatten()
 
         result = np.empty_like(soil_mlw_class)
@@ -175,12 +178,8 @@ class Acidity(object):
             )
             result[selection] = subtable.acidity[0]
 
-        result = result.reshape(orig_shape)
-        # Set mask values to default no-data value
-        result = np.ma.masked_array(result.filled(self.nodata),
-                                    mask=soil_mlw_class.mask,
-                                    fill_value=self.nodata,
-                                    dtype="uint8")
+        result = result.reshape(orig_shape).astype(self.dtype)
+        result[nodata] = self.nodata
         return result
 
     def _get_seepage(self, seepage):
@@ -188,57 +187,56 @@ class Acidity(object):
 
         Parameters
         ----------
-        seepage : numpy.ma.MaskedArray
+        seepage : numpy.ndarray, numpy.float32
             Seepage array
 
         Returns
         -------
-        numpy.ma.MaskedArray, uint8
+        numpy.ndarray, numpy.uint8
             Seepage class array
         """
+        nodata = np.isnan(seepage)
+
         orig_shape = seepage.shape
         seepage = seepage.flatten()
 
         index = np.digitize(seepage, self._ct_seepage.seepage_max, right=True)
-        index = np.ma.array(index, mask=seepage.mask, fill_value=self.nodata).filled()
-
+        index[nodata.flatten()] = self.nodata
         self._ct_seepage.loc[self.nodata, "seepage"] = self.nodata
         seepage_class = self._ct_seepage["seepage"][index]
-        seepage_class = seepage_class.values.reshape(orig_shape)
-        return np.ma.masked_array(seepage_class,
-                                  mask=seepage.mask,
-                                  fill_value=self.nodata,
-                                  dtype="uint8")
+        seepage_class = seepage_class.values.reshape(orig_shape).astype(self.dtype)
+        seepage_class[nodata] = self.nodata
+        return seepage_class
 
-    def calculate(self, soil_class, mlw, inundation, seepage, minerality, rainwater):
+    def calculate(self, soil_code, mlw, inundation, seepage, minerality, rainwater):
         """Calculate the Acidity
 
         Parameters
         ----------
-        soil_class: numpy.ma.MaskedArray
+        soil_code: numpy.ndarray, numpy.uint8
             Array containing the soil codes. Values must be present
             in the soil_code table. -99 is used as no data value.
-        mlw: numpy.array
+        mlw: numpy.ndarray, numpy.float32
             Array containing the mean lowest waterlevel.
-        inundation:  numpy.ma.MaskedArray
+        inundation:  numpy.ndarray, numpy.uint8
             Array containing rate of inundation.
             https://inbo.github.io/niche_vlaanderen/invoer.html#overstroming-trofie-inundation-nutrient
-        seepage:  numpy.ma.MaskedArray
+        seepage:  numpy.ndarray, numpy.float32
             Array containing the flux of groundwater at the location
             https://inbo.github.io/niche_vlaanderen/invoer.html#overstroming-trofie-inundation-nutrient
-        minerality: numpy.ma.MaskedArray
+        minerality: numpy.ndarray, numpy.uint8
             Array noting whether the groundwater is rich(1) or poor in minerals
             https://inbo.github.io/niche_vlaanderen/invoer.html#mineraalrijkdom-minerality
-        rainwater: numpy.ma.MaskedArray
+        rainwater: numpy.ndarray, numpy.uint8
             Array denoting whether rainwater lenses occur.
             https://inbo.github.io/niche_vlaanderen/invoer.html#regenlens-rainwater
 
         Returns
         -------
-        numpy.ma.MaskedArray, uint8
+        numpy.ndarray, numpy.uint8
             acidity
         """
-        soil_mlw = self._calculate_soil_mlw(soil_class, mlw)
+        soil_mlw = self._calculate_soil_mlw(soil_code, mlw)
         seepage = self._get_seepage(seepage)
         acidity = self._get_acidity(
             rainwater, minerality, inundation, seepage, soil_mlw

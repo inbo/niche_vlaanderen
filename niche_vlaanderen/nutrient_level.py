@@ -178,7 +178,7 @@ class NutrientLevel(object):
             table_sel = subtable.copy(deep=True).reset_index(drop=True)
 
             index = np.digitize(nitrogen, table_sel.total_nitrogen_max, right=True)
-            index[nodata.flatten()] = 255
+            index[nodata.flatten()] = self.nodata
             selection = (soil_code == soil_selected) & (influence == influence_selected)
             # Add the no-data value to the mapping
             table_sel.loc[self.nodata, "nutrient_level"] = self.nodata
@@ -190,7 +190,7 @@ class NutrientLevel(object):
         result[result < 4] = (result + (inundation > 0))[result < 4]
 
         result = result.reshape(orig_shape).astype(np.uint8)
-        result[nodata] = 255  # Apply the nodata mask
+        result[nodata] = self.nodata  # Apply the nodata mask
         return result
 
     def calculate(
