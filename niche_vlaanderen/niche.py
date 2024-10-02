@@ -419,7 +419,7 @@ class Niche(object):
                 )
 
     def read_rasterio_to_grid(self, file_name, variable_name=None):
-        """Read grid files using rasterio as Numpy masked arrays
+        """Read grid files using rasterio as Numpy arrays
 
         Parameters
         ----------
@@ -953,7 +953,7 @@ class Niche(object):
                     td.append((i, presence[a], rec[a]))
         else:
             legend = VegSuitable.legend()
-            legend[255] = "no data"
+            legend[Vegetation.nodata] = "no data"
             for i in self._vegetation_detail:
                 vi = pd.Series(self._vegetation_detail[i].flatten())
                 rec = vi.value_counts() * self._context.cell_area / 10000

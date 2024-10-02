@@ -11,13 +11,28 @@ import sys
 
 
 class TestFlooding:
+
     def test__calculate(self):
+        """Flooding calculate support function returns correct flood potential
+        classes"""
         fp = nv.Flooding()
-        fp._calculate(depth=np.array([1, 2, 3]), frequency="T25",
+        fp._calculate(depth=np.array([1, 2, 3], dtype="uint8"), frequency="T25",
                       period="winter", duration=1)
         np.testing.assert_equal(np.array([3, 3, 3]), fp._veg[1])
+        assert fp._veg[1].dtype == np.uint8
+
+    def test__calculate_nodata(self):
+        """Flooding calculate support function returns correct flood potential
+        classes with no data values in depth input"""
+        fp = nv.Flooding()
+        fp._calculate(depth=np.array([1, 2, 3, 255], dtype="uint8"), frequency="T25",
+                      period="winter", duration=1)
+        np.testing.assert_equal(np.array([3, 3, 3, 255]), fp._veg[1])
+        assert fp._veg[1].dtype == np.uint8
 
     def test_calculate_asc(self, path_testcase):
+        """Flooding calculate function returns correct flood potential
+        classes from depth input grid"""
         fp = nv.Flooding()
         fp.calculate(path_testcase / "flooding" / "ff_bt_t10_h.asc", "T10",
                      period="winter", duration=1)
@@ -25,6 +40,7 @@ class TestFlooding:
                 path_testcase / "flooding" / "result" / "F25-T10-P1-winter.asc") as dst:
             expected = dst.read(1)
         np.testing.assert_equal(expected, fp._veg[25])
+        assert fp._veg[25].dtype == np.uint8
 
     @pytest.mark.xfail
     def test_calculate_arcgis(self, path_testcase, path_testdata):
@@ -37,7 +53,7 @@ class TestFlooding:
             expected = dst.read(1)
         np.testing.assert_equal(expected, fp._veg[25])
 
-    def test_calculate_withnodata(self, path_testdata):
+    def test_calculate_nodata(self, path_testdata):
         fp = nv.Flooding()
         fp.calculate(path_testdata / "depths_with_nodata.asc", "T10",
                      period="winter", duration=1)
@@ -45,15 +61,15 @@ class TestFlooding:
         for i in fp._veg:
             unique.append(np.unique(fp._veg[i]))
         unique = np.unique(np.hstack(unique))
-        expected = np.array([-99, 0, 1, 2, 3, 4])
-        np.testing.assert_equal(expected, unique)
+        expected = np.array([255, 0, 1, 2, 3, 4])
+        np.testing.assert_equal(set(expected), set(unique))
 
     def test_table(self, path_testcase):
         fp = nv.Flooding()
         with pytest.raises(FloodingException):
             fp.table
 
-        fp.calculate(depth_file=path_testcase / "flooding" / "ff_bt_t10_h.asc",
+        fp.calculate(depth_file_path=path_testcase / "flooding" / "ff_bt_t10_h.asc",
                      frequency="T10", period="winter", duration=1)
         df = fp.table
         sel = df[((df.vegetation == 1)
@@ -81,7 +97,7 @@ class TestFlooding:
             # Should fail - model not yet run
             fp.write(str(tmp_path))
 
-        fp.calculate(depth_file=path_testcase / "flooding" / "ff_bt_t10_h.asc",
+        fp.calculate(depth_file_path=path_testcase / "flooding" / "ff_bt_t10_h.asc",
                      frequency="T10", period="winter", duration=1)
 
         fp.write(str(tmp_path))

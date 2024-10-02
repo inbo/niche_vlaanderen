@@ -9,19 +9,23 @@ import pandas as pd
 import numpy as np
 import numpy.ma as ma
 
+from niche_vlaanderen.vegetation import Vegetation
 from niche_vlaanderen.spatial_context import SpatialContext
 from niche_vlaanderen.codetables import (validate_tables_flooding,
                                          check_codes_used,
                                          package_resource)
 
 
+_allowed_input = {
+    "depth": "uint8",
+}
+
 class FloodingException(Exception):
     """"""
 
 
 class Flooding(object):
-    """
-    Predict the vegetation response to (frequent) flooding
+    """Predict the vegetation response to (frequent) flooding
 
     A Flooding object can be used to predict the response of vegetation to
     (frequent) flooding.
@@ -29,8 +33,10 @@ class Flooding(object):
     The code tables used can be overwritten when initializing the object.
     Optionally also a name can be given which is used in plots and output
     files.
-
     """
+
+    nodata = 255  # Keep int16 with nodata -99 to be backward compatible for potential
+    dtype = "uint8"
 
     def __init__(
         self,
@@ -41,8 +47,27 @@ class Flooding(object):
         potential=None,
         name="",
     ):
+        """Create a Flooding class
+
+        Parameters
+        ----------
+        depth : str, Optional
+            Path to the depth system table to overwrite the default.
+        duration : str, Optional
+            Path to the duration system table to overwrite the default.
+        frequency : str, Optional
+            Path to the frequency system table to overwrite the default.
+        lnk_potential : str, Optional
+            Path to the lnk_potential system table to overwrite the default.
+        potential : str, Optional
+            Path to the potential system table to overwrite the default.
+        name : str, Optional
+            Name of the model used for plotting and output files.
+        """
         self._ct = dict()
         self._veg = dict()
+        self._context = None
+        self.options = dict()
         self._log = logging.getLogger("niche_vlaanderen")
 
         for i in ["depth", "duration", "frequency", "lnk_potential", "potential"]:
@@ -74,13 +99,12 @@ class Flooding(object):
             )
 
         td = list()
-
         labels = dict(self._ct["potential"].set_index("potential")["description"])
 
         if not self._combined:
             del labels[-1]
 
-        labels[-99] = "no data"
+        labels[self.nodata] = "no data"
 
         for i in self._veg:
             vi = pd.Series(self._veg[i].flatten())
@@ -101,7 +125,7 @@ class Flooding(object):
         """
         orig_shape = depth.shape
         depth = depth.flatten()
-        nodata = depth == -99
+        nodata = depth == 255   # depth is uint8
 
         check_codes_used("depth", depth, self._ct["depth"]["depth"])
         check_codes_used("frequency", frequency, self._ct["frequency"]["frequency"])
@@ -112,50 +136,60 @@ class Flooding(object):
             subtable_veg = subtable_veg.reset_index()
             # by default we give code 4 (no information/flooding)
             # https://github.com/inbo/niche_vlaanderen/issues/87
-            self._veg[veg_code] = np.full(depth.shape, 4, dtype="int16")
-            self._veg[veg_code][nodata] = -99
+
+            vegi = np.full(depth.shape, 4, dtype=self.dtype)
+            vegi[nodata] = self.nodata
+
             groupby_cols = ["period", "frequency", "duration"]
             for index, subtable in subtable_veg.groupby(groupby_cols):
                 if (period, frequency, duration) == index:
                     subtable.reset_index()
                     for row in subtable.itertuples():
-                        veg = self._veg[veg_code]
+                        veg = vegi
                         veg[row.depth == depth] = row.potential
-                        self._veg[veg_code] = np.maximum(veg, self._veg[veg_code])
-            self._veg[veg_code] = self._veg[veg_code].reshape(orig_shape)
+                        vegi = np.maximum(veg, vegi)
 
-    def calculate(self, depth_file, frequency, period, duration):
+            self._veg[veg_code] = vegi.reshape(orig_shape).astype(self.dtype)
+
+    def read_depth_to_grid(self, file_name):
+        """Read depth file using rasterio to numpy array and set extent
+
+        Parameters
+        ----------
+        file_name : string | Pathlib.Path
+            Path to the file to be read
+        """
+        with rasterio.open(file_name, "r") as dst:
+            band = dst.read(1, masked=True)
+            self._context = SpatialContext(dst)
+
+        # Convert to depth data type and no-data value
+        band = band.astype(_allowed_input["depth"])
+        band = np.ma.masked_array(band.filled(255), mask=band.mask,
+                                  fill_value=255, dtype="uint8")
+        return band.filled() # return numpy array instead of masked array
+
+    def calculate(self, depth_file_path, frequency, period, duration):
         """Calculate a floodplain object
 
         Parameters
-        ==========
-        depth_file: filename
+        ----------
+        depth_file_path: pahtlib.Path | str (file_path)
            The filename containing a classified grid with inundation dephts.
            The classes used must correspond to the codes in the
            depth.csv_ code table.
-
-
-        frequency: code
-           The frequency with which flooding occurs, eg T2, T50. Valid values
-           are given in the frequency.csv_ code table.
-
-        period: winter|summer
-            period in which the flooding occurs. Must be either "summer" or
-            "winter"
-
-        duration: code
-            Period with which the flooding occurs, from duration.csv_
-
-
+        frequency: str (frequency code)
+           The frequency with which flooding occurs, eg T2, T10, T25 or T50. Valid
+           values are given in the frequency.csv_ code table.
+        period: str, winter | summer
+            Period in which the flooding occurs. Must be either "summer" or
+            "winter".
+        duration: int (duration code)
+            Period with which the flooding occurs (1, 2...). Check the first column
+             of the duration.csv_ file for the available codes.
         """
-        with rasterio.open(depth_file, "r") as dst:
-            depth = dst.read(1)
-            self._context = SpatialContext(dst)
-            if depth.dtype.kind == "u":
-                depth = depth.astype(int)
-            depth[depth == dst.nodatavals[0]] = -99
+        depth = self.read_depth_to_grid(depth_file_path)
         self._calculate(depth, frequency, duration, period)
-
         self.options = {"frequency": frequency, "duration": duration, "period": period}
 
     def plot(self, key, ax=None):
@@ -179,7 +213,7 @@ class Flooding(object):
         ((a, b), (c, d)) = self._context.extent
         mpl_extent = (a, c, d, b)
 
-        veg = ma.masked_equal(self._veg[key], -99)
+        veg = ma.masked_equal(self._veg[key], self.nodata)
 
         im = plt.imshow(veg, extent=mpl_extent, norm=Normalize(-1, 4))
         options = self.options.copy()
@@ -212,12 +246,10 @@ class Flooding(object):
         potential.csv table.
 
         Parameters
-        ==========
-
-        folder: path
+        ----------
+        folder: pathlib.Path
             Path to which the output files will be written.
-
-        overwrite_files: bool
+        overwrite_files: bool, default False
            Overwrite files when saving.
            Note writing will fail if any of the files to be written already
            exists.
@@ -237,8 +269,8 @@ class Flooding(object):
             crs=self._context.crs,
             transform=self._context.transform,
             count=1,
-            dtype="int16",
-            nodata=-99,
+            dtype="uint8",
+            nodata=255,
             compress="DEFLATE",
         )
 
@@ -288,15 +320,14 @@ class Flooding(object):
         to be not present are set to "not combinable".
 
         Parameters
-        ==========
+        ----------
         niche_result: Niche
             Niche model that must be run prior to running combine.
 
         Returns
-        =======
+        -------
         combined: Flooding
         """
-
         # check niche model has been run
         if not niche_result.vegetation_calculated:
             raise FloodingException(
@@ -318,11 +349,11 @@ class Flooding(object):
         new = copy.copy(self)
         new._veg = self._veg.copy()
         for vi in new._veg:
-            nodata = (niche_result._vegetation[vi] == 255) | (new._veg[vi] == -99)
+            nodata = ((niche_result._vegetation[vi] == Vegetation.nodata) |
+                      (new._veg[vi] == self.nodata))
             new._veg[vi] = niche_result._vegetation[vi] * new._veg[vi]
             new._veg[vi][niche_result._vegetation[vi] == 0] = -1
-            new._veg[vi][nodata] = -99
+            new._veg[vi][nodata] = self.nodata
 
         new._combined = True
-
         return new
