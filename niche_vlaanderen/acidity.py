@@ -109,7 +109,7 @@ class Acidity(object):
             index[nodata.flatten()] = self.nodata
             selection = soil_group == sel_group
             subtable.loc[self.nodata, "soil_mlw_class"] = self.nodata
-            result[selection] = subtable.soil_mlw_class[index].iloc[selection].values
+            result[selection] = subtable.soil_mlw_class.reindex(index).iloc[selection].values
         result = result.reshape(orig_shape).astype(self.dtype)
         result[nodata] = self.nodata  # Apply the nodata mask
         return result
@@ -203,7 +203,7 @@ class Acidity(object):
         index = np.digitize(seepage, self._ct_seepage.seepage_max, right=True)
         index[nodata.flatten()] = self.nodata
         self._ct_seepage.loc[self.nodata, "seepage"] = self.nodata
-        seepage_class = self._ct_seepage["seepage"][index]
+        seepage_class = self._ct_seepage["seepage"].reindex(index)
         seepage_class = seepage_class.values.reshape(orig_shape).astype(self.dtype)
         seepage_class[nodata] = self.nodata
         return seepage_class

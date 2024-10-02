@@ -217,7 +217,7 @@ class TestNiche:
         assert myniche._vegetation[14][coords] == 255
 
     @pytest.mark.skipif(
-        distutils.spawn.find_executable("gdalinfo") is None,
+        shutil.which("gdalinfo") is None,
         reason="gdalinfo not available in the environment.",
     )
     def test_zwarte_beek_validate(self, tmp_path, zwarte_beek_niche):
@@ -250,7 +250,7 @@ class TestNiche:
         assert 14400 == np.isnan(myniche._deviation["mhw_04"]).sum()
 
     @pytest.mark.skipif(
-        distutils.spawn.find_executable("gdalinfo") is None,
+        shutil.which("gdalinfo") is None,
         reason="gdalinfo not available in the environment.",
     )
     def test_write_deviation(self, tmp_path, small_niche):
@@ -729,7 +729,7 @@ def test_niche_plot(path_testcase):
 
 
 @pytest.mark.skipif(
-    distutils.spawn.find_executable("gdalinfo") is None,
+    shutil.which("gdalinfo") is None,
     reason="gdalinfo not available in the environment.",
 )
 def test_conductivity2minerality(tmp_path, path_testdata):

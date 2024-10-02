@@ -19,7 +19,7 @@ class TestFlooding:
         fp._calculate(depth=np.array([1, 2, 3], dtype="uint8"), frequency="T25",
                       period="winter", duration=1)
         np.testing.assert_equal(np.array([3, 3, 3]), fp._veg[1])
-        assert fp._veg[1].dtype == np.uint8
+        assert fp._veg[1].dtype == np.int8
 
     def test__calculate_nodata(self):
         """Flooding calculate support function returns correct flood potential
@@ -27,8 +27,8 @@ class TestFlooding:
         fp = nv.Flooding()
         fp._calculate(depth=np.array([1, 2, 3, 255], dtype="uint8"), frequency="T25",
                       period="winter", duration=1)
-        np.testing.assert_equal(np.array([3, 3, 3, 255]), fp._veg[1])
-        assert fp._veg[1].dtype == np.uint8
+        np.testing.assert_equal(np.array([3, 3, 3, -99]), fp._veg[1])
+        assert fp._veg[1].dtype == np.int8
 
     def test_calculate_asc(self, path_testcase):
         """Flooding calculate function returns correct flood potential
@@ -40,7 +40,7 @@ class TestFlooding:
                 path_testcase / "flooding" / "result" / "F25-T10-P1-winter.asc") as dst:
             expected = dst.read(1)
         np.testing.assert_equal(expected, fp._veg[25])
-        assert fp._veg[25].dtype == np.uint8
+        assert fp._veg[25].dtype == np.int8
 
     @pytest.mark.xfail
     def test_calculate_arcgis(self, path_testcase, path_testdata):
@@ -61,7 +61,7 @@ class TestFlooding:
         for i in fp._veg:
             unique.append(np.unique(fp._veg[i]))
         unique = np.unique(np.hstack(unique))
-        expected = np.array([255, 0, 1, 2, 3, 4])
+        expected = np.array([-99, 0, 1, 2, 3, 4])
         np.testing.assert_equal(set(expected), set(unique))
 
     def test_table(self, path_testcase):
@@ -181,5 +181,5 @@ class TestFlooding:
         for i in result._veg:
             unique.append(np.unique(result._veg[i]))
         unique = np.unique(np.hstack(unique))
-        expected = np.array([-99, -1, 1, 2, 3])
-        np.testing.assert_equal(expected, unique)
+        expected = np.array([-1, 1, 2, 3, -99])
+        np.testing.assert_equal(set(expected), set(unique))

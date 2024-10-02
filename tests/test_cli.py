@@ -15,9 +15,10 @@ def test_cli_no_param():
 
 def test_cli_floodplain():
     runner = CliRunner()
-
     runner.invoke(nv_cli.cli, ['tests/flooding-codetables.yml'])
 
+    import os
+    print(os.getcwd())
     dir = os.listdir("_output")
     result_eerste = [f.startswith("eerste") for f in dir]
     assert sum(result_eerste) == 25

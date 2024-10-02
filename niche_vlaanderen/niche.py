@@ -9,6 +9,7 @@ import numbers
 import yaml
 import datetime
 import sys
+from pathlib import Path
 
 import numpy as np
 import numpy.ma as ma
@@ -375,11 +376,9 @@ class Niche(object):
                     ct_nl[k] = self._code_tables[k]
 
                 fp = Flooding(name=scen["name"], **ct_nl)
-
                 depth_file = os.path.join(os.path.dirname(config), scen["depth"])
-
                 fp.calculate(
-                    depth_file=depth_file,
+                    depth_file_path=depth_file,
                     period=scen["period"],
                     frequency=scen["frequency"],
                     duration=scen["duration"],
@@ -438,17 +437,15 @@ class Niche(object):
 
         # Cast inputs to predefined type
         if variable_name in _allowed_input:
-            band = band.astype(_allowed_input[variable_name])
-
             # Assign fill value for unsigned integers (255) and floats (np.nan)
             if _allowed_input[variable_name] == "uint8":
-                band = np.ma.masked_array(band.filled(255), mask=band.mask,
-                                          fill_value=255, dtype="uint8")
+                # first fill with fill-value compatible to uint8
+                band = band.filled(fill_value=255).astype("uint8")
             elif _allowed_input[variable_name] == "float32":
-                band = np.ma.masked_array(band.filled(np.nan), mask=band.mask,
-                                          fill_value=np.nan, dtype="float32")
+                # convert to float and fill with Nan
+                band = band.astype("float32").filled(fill_value=np.nan)
 
-        return band.filled() # return numpy array instead of masked array
+        return band # return numpy array instead of masked array
 
     def _check_input_files(self, full_model):
         """Load all input files to input_array and applu basic input checks
@@ -506,11 +503,9 @@ class Niche(object):
         full_model: bool
                    Uses the full niche model. The simple model only uses mhw,
                    mlw and soil_code as input.
-
         deviation: bool
                     Create the maps with the difference between the needed MHW
                     and MLW and the actual MHW/MLW for a vegetation type.
-
         strict_checks: bool
                 By default running a model will fail if impossible combinations
                 of MxW exist somewhere in the input files. By disabling strict
@@ -663,8 +658,7 @@ class Niche(object):
         folder = str(folder)
         self._options["output_dir"] = folder
 
-        if not os.path.exists(folder):
-            os.makedirs(folder)
+        Path(self._options["output_dir"]).mkdir(parents=True, exist_ok=True)
 
         params = dict(
             driver="GTiff",

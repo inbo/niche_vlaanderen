@@ -4,6 +4,7 @@ import rasterio
 import os
 import copy
 from collections import OrderedDict
+from pathlib import Path
 
 import pandas as pd
 import numpy as np
@@ -35,8 +36,8 @@ class Flooding(object):
     files.
     """
 
-    nodata = 255  # Keep int16 with nodata -99 to be backward compatible for potential
-    dtype = "uint8"
+    nodata = -99  # Keep int8 with nodata -99 to be backward compatible for 'potential'
+    dtype = "int8"
 
     def __init__(
         self,
@@ -259,8 +260,7 @@ class Flooding(object):
                 "A valid run must be done before writing the output."
             )
 
-        if not os.path.exists(folder):
-            os.makedirs(folder)
+        Path(folder).mkdir(parents=True, exist_ok=True)
 
         params = dict(
             driver="GTiff",
@@ -269,8 +269,8 @@ class Flooding(object):
             crs=self._context.crs,
             transform=self._context.transform,
             count=1,
-            dtype="uint8",
-            nodata=255,
+            dtype=self.dtype,
+            nodata=self.nodata,
             compress="DEFLATE",
         )
 

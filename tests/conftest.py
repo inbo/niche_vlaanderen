@@ -123,7 +123,7 @@ def zwarte_beek_data(path_testcase):
             nitrogen_deposition, nitrogen_animal, nitrogen_fertilizer, management)
 
 
-@pytest.yield_fixture
+@pytest.fixture
 def single_value_input_arrays():
     """Provide set of fixed single value grids"""
     nutrient_level = np.array([4], dtype="uint8")
@@ -134,7 +134,7 @@ def single_value_input_arrays():
     inundation = np.array([1], dtype="uint8")
     return nutrient_level, acidity, mlw, mhw, soil_code, inundation
 
-@pytest.yield_fixture
+@pytest.fixture
 def single_value_input_arrays_nodata():
     """Provide set of fixed single value grids with a mask"""
 
