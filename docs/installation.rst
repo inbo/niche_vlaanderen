@@ -38,7 +38,15 @@ For the remainder, we use ``(<CONDA-ENV-NAME>) C:\>`` to indicate the prompt.
    By running the commands below from ``py311`` environment instead of ``base``, you will also install niche_vlaanderen in an environment
    `niche` with Python 3.11.
 
-Create an environment (called ``niche``) that will contain niche_vlaanderen and its dependencies:
+To install packages, conda used a dependency resolver. Make sure the ``libmamba`` solver is activated by running
+the following commands in the command prompt:
+
+.. code-block:: shell
+
+    (base) C:\> conda config --show-sources
+    (base) C:\> conda config --set solver libmamba
+
+Once the correct solver is set, create an environment (called ``niche``) that will contain niche_vlaanderen and its dependencies:
 
 .. code-block:: shell
 
