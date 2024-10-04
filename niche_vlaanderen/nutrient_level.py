@@ -63,7 +63,7 @@ class NutrientLevel(object):
         # convert the mineralisation system table to float to use np.nan for nodata
         self._ct_mineralisation["nitrogen_mineralisation"] = self._ct_mineralisation[
             "nitrogen_mineralisation"
-        ].astype("float64")
+        ].astype("float32")
 
         inner = all(v is None for v in self.__init__.__code__.co_varnames[1:])
         validate_tables_nutrient_level(
@@ -110,8 +110,7 @@ class NutrientLevel(object):
         orig_shape = soil_code.shape
         soil_code_array = soil_code.flatten()
         msw_array = msw.flatten()
-        result = np.empty(soil_code_array.shape, dtype="float32")
-        result[:] = np.nan
+        result = np.ones(soil_code_array.shape, dtype="float32") * np.nan
 
         for code in self._ct_mineralisation.soil_code.unique():
             # We must reset the index because digitize will give indexes
@@ -156,7 +155,7 @@ class NutrientLevel(object):
                   np.isnan(nitrogen) | (inundation == 255))
 
         # calculate management influence
-        influence = np.empty_like(management)
+        influence = np.ones(management.shape, dtype=self.dtype) * self.nodata
         for i in self._ct_management.management.unique():
             sel_grid = management == i
             sel_ct = self._ct_management.management == i

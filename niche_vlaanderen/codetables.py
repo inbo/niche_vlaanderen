@@ -214,7 +214,7 @@ def check_codes_used(name, used, allowed):
      ----------
      name : str
         Variable name
-     used : np.ma.MaskedArray
+     used : np.ndarray
         Grid with values to check
      allowed : np.array
         System table provided values

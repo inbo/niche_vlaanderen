@@ -55,11 +55,11 @@ class TestAcidity:
 
     def test_acidity_support_nodata(self):
         """Correct acidity calculated from grids with non-empty mask"""
-        rainwater = np.ma.array([0, 0, 255], dtype="uint8")
-        minerality = np.ma.array([1, 1, 255], dtype="uint8")
-        inundation = np.ma.array([1, 1, 255], dtype="uint8")
-        seepage = np.ma.array([1, 1, np.nan], dtype="float32")
-        soil_mlw = np.ma.array([1, 1, 255], dtype="uint8")
+        rainwater = np.array([0, 0, 255], dtype="uint8")
+        minerality = np.array([1, 1, 255], dtype="uint8")
+        inundation = np.array([1, 1, 255], dtype="uint8")
+        seepage = np.array([1, 1, np.nan], dtype="float32")
+        soil_mlw = np.array([1, 1, 255], dtype="uint8")
 
         a = niche_vlaanderen.Acidity()
         result = a._get_acidity(rainwater, minerality, inundation,
@@ -81,13 +81,13 @@ class TestAcidity:
 
     def test_seepage_nodata(self):
         """Correct seepage calculated from grids with non-empty mask"""
-        seepage = np.ma.array(
+        seepage = np.array(
             [5, 0.3, 0.05, -0.04, -0.2, -5, -0.1, -1, np.nan],
             dtype="float32")
         a = niche_vlaanderen.Acidity()
         result = a._get_seepage(seepage)
 
-        expected = np.ma.array([1, 1, 1, 1, 2, 3, 2, 3, 255])
+        expected = np.array([1, 1, 1, 1, 2, 3, 2, 3, 255])
         np.testing.assert_equal(expected, result)
         assert result.dtype == np.uint8
 

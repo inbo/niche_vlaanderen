@@ -84,10 +84,10 @@ class TestVegetation:
                                                               nutrient_level, acidity)
         # no types should match
         for vi in veg_predict:
-            np.testing.assert_equal(np.ma.array([0]), veg_predict[vi])
+            np.testing.assert_equal(np.array([0]), veg_predict[vi])
 
         for vi in veg_detail:
-            np.testing.assert_equal(np.ma.array([0]), veg_detail[vi])
+            np.testing.assert_equal(np.array([0]), veg_detail[vi])
 
     @pytest.mark.parametrize("arr_in, expected_0",
                         [("single_value_input_arrays", np.array([0])),
@@ -132,7 +132,7 @@ class TestVegetation:
         inundation = np.array([[1, 1], [1, 1]], dtype="uint8")
 
         # Add masked (no-data value) for acidity
-        acidity = np.ma.array([[3, 3], [3, 255]], dtype="uint8")
+        acidity = np.array([[3, 3], [3, 255]], dtype="uint8")
 
         v = niche_vlaanderen.Vegetation()
         veg_predict, veg_occurrence, _ = \
@@ -180,7 +180,7 @@ class TestVegetation:
     def test_all_nodata(self, path_testdata):
         """Variable with all no-data values raises error"""
         soil_code = np.array([14, 14, 14], dtype="uint8")
-        mlw = np.ma.array([np.nan, np.nan, np.nan], dtype="float32")
+        mlw = np.array([np.nan, np.nan, np.nan], dtype="float32")
         mhw = mlw.copy()
 
         v = niche_vlaanderen.Vegetation()
@@ -192,24 +192,24 @@ class TestVegetation:
         v = niche_vlaanderen.Vegetation()
 
         soil_code = np.array([3, 3, 3, 3, 255, 2], dtype="uint8")
-        mhw = -1 * np.ma.array([66, 16, 5, -5, 5, 5], dtype="float32")
-        mlw = -1 * np.ma.array([35, 35, 35, 35, 35, 35], dtype="float32")
+        mhw = -1 * np.array([66, 16, 5, -5, 5, 5], dtype="float32")
+        mlw = -1 * np.array([35, 35, 35, 35, 35, 35], dtype="float32")
         d = v.calculate_deviation(soil_code, mhw, mlw)
 
         # Both a Nan inside the mask as well as a calculated Nan in the data
-        expected = np.ma.array([46, 0, 0, -6, np.nan, np.nan])
+        expected = np.array([46, 0, 0, -6, np.nan, np.nan])
         np.testing.assert_equal(expected, d["mhw_01"])
 
     def test_deviation_mlw(self):
         """Correct deviation calculated for mhw with mask-nan versus calculated nan"""
         v = niche_vlaanderen.Vegetation()
 
-        soil_code = np.ma.array([3, 3, 3, 3, 3, 255, 2], dtype="uint8")
-        mhw = -1 * np.ma.array([5, 5, 5, 5, 5, 5, 5], dtype="float32")
-        mlw = -1 * np.ma.array([66, 50, 38, 25, 5, 25, 25], dtype="float32")
+        soil_code = np.array([3, 3, 3, 3, 3, 255, 2], dtype="uint8")
+        mhw = -1 * np.array([5, 5, 5, 5, 5, 5, 5], dtype="float32")
+        mlw = -1 * np.array([66, 50, 38, 25, 5, 25, 25], dtype="float32")
         d = v.calculate_deviation(soil_code, mhw, mlw)
 
-        expected = np.ma.array([28, 12, 0, 0, -15, np.nan, np.nan])
+        expected = np.array([28, 12, 0, 0, -15, np.nan, np.nan])
         np.testing.assert_equal(expected, d["mlw_01"])
 
     def test_detailed_vegetation(self, single_value_input_arrays):

@@ -165,10 +165,8 @@ class Flooding(object):
             self._context = SpatialContext(dst)
 
         # Convert to depth data type and no-data value
-        band = band.astype(_allowed_input["depth"])
-        band = np.ma.masked_array(band.filled(255), mask=band.mask,
-                                  fill_value=255, dtype="uint8")
-        return band.filled() # return numpy array instead of masked array
+        band = band.filled(fill_value=255).astype(_allowed_input["depth"])
+        return band
 
     def calculate(self, depth_file_path, frequency, period, duration):
         """Calculate a floodplain object

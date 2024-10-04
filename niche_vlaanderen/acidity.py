@@ -75,7 +75,7 @@ class Acidity(object):
         self._ct_soil_codes = self._ct_soil_codes.set_index("soil_code")
 
     def _calculate_soil_mlw(self, soil_code, mlw):
-        """Calculate the soild mlw classes
+        """Calculate the soil mlw classes
 
         Parameters
         ----------
@@ -102,7 +102,7 @@ class Acidity(object):
         self._ct_soil_codes.loc[self.nodata, "soil_group"] = self.nodata
         soil_group = self._ct_soil_codes.soil_group[soil_code].values.astype("uint8")
 
-        result = np.ma.empty_like(soil_code)
+        result = np.ones(soil_code.shape, dtype=self.dtype) * self.nodata
         for sel_group, subtable in self._ct_soil_mlw.groupby("soil_group"):
             subtable = subtable.copy().reset_index(drop=True)
             index = np.digitize(mlw, subtable.mlw_max, right=False)
@@ -155,7 +155,8 @@ class Acidity(object):
         seepage = seepage_class.flatten()
         soil_mlw_class = soil_mlw_class.flatten()
 
-        result = np.empty_like(soil_mlw_class)
+        result = np.ones(soil_mlw_class.shape, dtype=self.dtype) * self.nodata
+
 
         for labels, subtable in self._lnk_acidity.groupby(
             ["rainwater", "mineral_richness", "inundation", "seepage", "soil_mlw_class"]
