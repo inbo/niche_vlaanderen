@@ -1,4 +1,6 @@
-+<!DOCTYPE html>
++
+
+<!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -6,21 +8,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Berekening trofie nutrient_level &mdash; niche_vlaanderen 2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=1fc8a8fd"></script>
-        <script src="_static/doctools.js?v=9a2dae69"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=1fc8a8fd"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -41,9 +39,6 @@
           <a href="index.html" class="icon icon-home">
             niche_vlaanderen
           </a>
-              <div class="version">
-                2.0
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -180,17 +175,20 @@ NICHE Vlaanderen genereert een vereenvoudigde kaart van de trofie ingedeeld in 5
 </ul>
 <p>Eerst wordt de <em>jaarlijkse stikstofmineralisatie</em> bepaald aan de hand van het bodemtype en van de gemiddelde voorjaarsgrondwaterstanden.
 De stikstofmineralisatie wordt afgeleid uit de volgende mineralisatiecurven:</p>
-<a class="reference internal image-reference" href="_images/nutrient_mineralcurve.png"><img alt="_images/nutrient_mineralcurve.png" src="_images/nutrient_mineralcurve.png" style="width: 500px; height: 250px;" /></a>
+<a class="reference internal image-reference" href="_images/nutrient_mineralcurve.png"><img alt="_images/nutrient_mineralcurve.png" src="_images/nutrient_mineralcurve.png" style="width: 500px; height: 250px;" />
+</a>
 <p>De <em>totale hoeveelheid stikstof</em> wordt vervolgens berekend als de som van de mineralisatie, atmosferische depositie en bemesting.</p>
 <p>Deze wordt omgezet in een <em>trofieklasse</em> rekening houdend met het bodemtype en het beheer. De gebruikte <a class="reference external" href="https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/lnk_soil_nutrient_level.csv">omzettingstabel</a> hanteert volgende principes:</p>
 <ul class="simple">
 <li><p>de grenzen tussen de trofieklassen variëren naargelang het bodemtype;</p></li>
 <li><p>als een hoogfrequent beheer wordt toegepast, verschuiven de grenzen tussen de trofieklassen: een gegeven trofieklasse komt dan overeen met een hogere stikstofhoeveelheid (of met andere woorden: een bepaalde locatie kan meer stikstof tolereren vooraleer de biomassaproductie/trofiegraad toeneemt).</p></li>
 </ul>
-<a class="reference internal image-reference" href="_images/nutrient_classes.png"><img alt="_images/nutrient_classes.png" src="_images/nutrient_classes.png" style="width: 653.0px; height: 317.0px;" /></a>
+<a class="reference internal image-reference" href="_images/nutrient_classes.png"><img alt="_images/nutrient_classes.png" src="_images/nutrient_classes.png" style="width: 653.0px; height: 317.0px;" />
+</a>
 <p>Op de locaties met oligotrofe, mesotrofe en meso-eutrofe condities wordt uiteindelijk nog rekening gehouden met de gevolgen van eventuele overstromingen:
 indien er zich overstromingen met nutriëntenrijk water voordoen, wordt er in NICHE Vlaanderen aangenomen dat de nutriëntenrijkdom daardoor met een trofieklasse (extra) toeneemt.</p>
-<a class="reference internal image-reference" href="_images/nutrient_principle.png"><img alt="_images/nutrient_principle.png" src="_images/nutrient_principle.png" style="width: 884.0px; height: 375.0px;" /></a>
+<a class="reference internal image-reference" href="_images/nutrient_principle.png"><img alt="_images/nutrient_principle.png" src="_images/nutrient_principle.png" style="width: 884.0px; height: 375.0px;" />
+</a>
 </section>
 <section id="invoergegevens">
 <span id="nutrient-level-input"></span><h2>Invoergegevens<a class="headerlink" href="#invoergegevens" title="Link to this heading"></a></h2>

@@ -1,4 +1,6 @@
-+<!DOCTYPE html>
++
+
+<!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -6,19 +8,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Installation &mdash; niche_vlaanderen 2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=1fc8a8fd"></script>
-        <script src="_static/doctools.js?v=9a2dae69"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=1fc8a8fd"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -39,9 +37,6 @@
           <a href="index.html" class="icon icon-home">
             niche_vlaanderen
           </a>
-              <div class="version">
-                2.0
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -64,7 +59,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#windows">Windows</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#upgrading">Upgrading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installing-a-specific-version">Installing a specific version</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#alternative-installation">Alternative installation</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="running.html">Running niche</a></li>
@@ -108,8 +102,8 @@
 <h1>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h1>
 <section id="windows">
 <h2>Windows<a class="headerlink" href="#windows" title="Link to this heading"></a></h2>
-<p>The recommended way of installing niche_vlaanderen on windows uses <a class="reference external" href="https://conda.io/miniconda.html">miniconda</a> for installation.
-The recommended version is <a class="reference external" href="https://repo.anaconda.com/miniconda/Miniconda3-py39_4.12.0-Windows-x86_64.exe">64 bit with Python 3.9</a>.</p>
+<p>The recommended way of installing niche_vlaanderen on windows uses <a class="reference external" href="https://docs.anaconda.com/miniconda/">miniconda</a> for installation.
+The currently recommended version is <a class="reference external" href="https://repo.anaconda.com/miniconda/Miniconda3-py311_24.7.1-0-Windows-x86_64.exe">64 bit with Python 3.11</a>.</p>
 <p>The installation can proceed without administrator rights, keep the default options. After miniconda is installed,
 we will proceed installing niche_vlaanderen in its own environment.</p>
 <p>Start the <cite>Anaconda prompt</cite> from the start menu</p>
@@ -119,30 +113,45 @@ OR
 <span class="w">  </span><span class="o">(</span>base<span class="o">)</span><span class="w"> </span>C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt;
 </pre></div>
 </div>
-<p>Create an environment (called niche in this example) that will contain niche_vlaanderen and its dependencies:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>C:<span class="se">\U</span>sers<span class="se">\m</span>yusername<span class="se">\M</span>iniconda3<span class="o">)</span><span class="w"> </span>C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt;<span class="w"> </span>conda<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>niche
+<p>For the remainder, we use <code class="docutils literal notranslate"><span class="pre">(&lt;CONDA-ENV-NAME&gt;)</span> <span class="pre">C:\&gt;</span></code> to indicate the prompt.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you do not use the installation of Miniconda with the default Python version of 3.11
+(i.e. the python version in your <code class="docutils literal notranslate"><span class="pre">base</span></code> environment is not Python 3.11), you can still
+create an environment with Python 3.11 by running the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">base</span><span class="p">)</span> <span class="n">C</span><span class="p">:</span>\<span class="o">&gt;</span> <span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">py311</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.11</span>
+<span class="p">(</span><span class="n">base</span><span class="p">)</span> <span class="n">C</span><span class="p">:</span>\<span class="o">&gt;</span> <span class="n">conda</span> <span class="n">activate</span> <span class="n">py311</span>
+<span class="p">(</span><span class="n">py311</span><span class="p">)</span> <span class="n">C</span><span class="p">:</span>\<span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>By running the commands below from <code class="docutils literal notranslate"><span class="pre">py311</span></code> environment instead of <code class="docutils literal notranslate"><span class="pre">base</span></code>, you will also install niche_vlaanderen in an environment
+<cite>niche</cite> with Python 3.11.</p>
+</div>
+<p>To install packages, conda used a dependency resolver. Make sure the <code class="docutils literal notranslate"><span class="pre">libmamba</span></code> solver is activated by running
+the following commands in the command prompt:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>base<span class="o">)</span><span class="w"> </span>C:<span class="se">\&gt;</span><span class="w"> </span>conda<span class="w"> </span>config<span class="w"> </span>--show-sources
+<span class="o">(</span>base<span class="o">)</span><span class="w"> </span>C:<span class="se">\&gt;</span><span class="w"> </span>conda<span class="w"> </span>config<span class="w"> </span>--set<span class="w"> </span>solver<span class="w"> </span>libmamba
+</pre></div>
+</div>
+<p>Once the correct solver is set, create an environment (called <code class="docutils literal notranslate"><span class="pre">niche</span></code>) that will contain niche_vlaanderen and its dependencies:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>base<span class="o">)</span><span class="w"> </span>C:<span class="se">\&gt;</span><span class="w"> </span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>environment.yml
 </pre></div>
 </div>
 <p>Activate the niche environment:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>C:<span class="se">\U</span>sers<span class="se">\m</span>yusername<span class="se">\M</span>iniconda3<span class="o">)</span><span class="w"> </span>C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt;<span class="w"> </span>conda<span class="w"> </span>activate<span class="w"> </span>niche
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>base<span class="o">)</span><span class="w"> </span>C:<span class="se">\&gt;</span><span class="w"> </span>conda<span class="w"> </span>activate<span class="w"> </span>niche
 </pre></div>
 </div>
 <p>You will see that <cite>(C:\Users\myusername\Miniconda3)</cite>/<cite>(base)</cite> will change into <cite>(niche)</cite>.</p>
-<p>Now install the niche_vlaanderen package and its dependencies within the niche environment:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>niche<span class="o">)</span><span class="w"> </span>C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt;<span class="w"> </span>conda<span class="w"> </span>install<span class="w"> </span>pandas<span class="w"> </span>pyyaml<span class="w"> </span>rasterio<span class="w"> </span>fiona
-<span class="o">(</span>niche<span class="o">)</span><span class="w"> </span>C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt;<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>niche_vlaanderen
-</pre></div>
-</div>
-<p>It is strongly recommended to install also <cite>matplotlib</cite> (otherwise plotting
-will not work) and <cite>jupyter</cite> notebook, which allows interactive usage from a web browser.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>niche<span class="o">)</span><span class="w"> </span>C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt;<span class="w"> </span>conda<span class="w"> </span>install<span class="w"> </span>matplotlib<span class="w"> </span>jupyter
+<p>Now install the niche_vlaanderen package within the niche environment (with the option <code class="docutils literal notranslate"><span class="pre">--no-deps</span></code>
+to avoid installing dependencies that are already in the environment):</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>niche<span class="o">)</span><span class="w"> </span>C:<span class="se">\&gt;</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>niche-vlaanderen<span class="w"> </span>--no-deps
 </pre></div>
 </div>
 <p>You can verify the installation was successful by running the command line interface.
 Note you must activate niche once more, because some changes were made during
 installation.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>C:<span class="se">\U</span>sers<span class="se">\m</span>yusername<span class="se">\M</span>iniconda3<span class="o">)</span><span class="w"> </span>C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt;<span class="w"> </span>conda<span class="w"> </span>activate<span class="w"> </span>niche
-<span class="o">(</span>niche<span class="o">)</span><span class="w"> </span>C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt;<span class="w"> </span>niche<span class="w"> </span>--help
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>base<span class="o">)</span><span class="w"> </span>C:<span class="se">\&gt;</span><span class="w"> </span>conda<span class="w"> </span>activate<span class="w"> </span>niche
+<span class="o">(</span>niche<span class="o">)</span><span class="w"> </span>C:<span class="se">\&gt;</span><span class="w"> </span>niche<span class="w"> </span>--help
 Usage:<span class="w"> </span>niche<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span>CONFIG
 
 <span class="w">  </span>Command<span class="w"> </span>line<span class="w"> </span>interface<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>NICHE<span class="w"> </span>vegetation<span class="w"> </span>model
@@ -158,8 +167,8 @@ Options:
 <h2>Upgrading<a class="headerlink" href="#upgrading" title="Link to this heading"></a></h2>
 <p>Existing installations of niche_vlaanderen can be updated using pip (run
 from the Anaconda prompt).</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>C:<span class="se">\U</span>sers<span class="se">\m</span>yusername<span class="se">\M</span>iniconda3<span class="o">)</span><span class="w"> </span>C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt;<span class="w"> </span>conda<span class="w"> </span>activate<span class="w"> </span>niche
-<span class="o">(</span>niche<span class="o">)</span><span class="w"> </span>C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt;<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>niche_vlaanderen<span class="w"> </span>--upgrade
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>base<span class="o">)</span><span class="w"> </span>C:<span class="se">\&gt;</span><span class="w"> </span>conda<span class="w"> </span>activate<span class="w"> </span>niche
+<span class="o">(</span>niche<span class="o">)</span><span class="w"> </span>C:<span class="se">\&gt;</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>niche_vlaanderen<span class="w"> </span>--upgrade<span class="w">  </span>--no-deps
 </pre></div>
 </div>
 <p>Note you might need to update other packages.</p>
@@ -167,23 +176,8 @@ from the Anaconda prompt).</p>
 <section id="installing-a-specific-version">
 <h2>Installing a specific version<a class="headerlink" href="#installing-a-specific-version" title="Link to this heading"></a></h2>
 <p>If you want to install a specific niche_vlaanderen version, you can install using pip:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>C:<span class="se">\U</span>sers<span class="se">\m</span>yusername<span class="se">\M</span>iniconda3<span class="o">)</span><span class="w"> </span>C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt;<span class="w"> </span>conda<span class="w"> </span>activate<span class="w"> </span>niche
-<span class="o">(</span>niche<span class="o">)</span><span class="w"> </span>C:<span class="se">\U</span>sers<span class="se">\m</span>yusername&gt;<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span><span class="nv">niche_vlaanderen</span><span class="o">==</span><span class="m">1</span>.0
-</pre></div>
-</div>
-</section>
-<section id="alternative-installation">
-<h2>Alternative installation<a class="headerlink" href="#alternative-installation" title="Link to this heading"></a></h2>
-<p>It is possible to install niche_vlaanderen without using an environment. This is currently not
-the recommended installation as it requires setting an environment variable for
-opening some grid files. (See <a class="reference internal" href="faq.html#missing-gcs"><span class="std std-ref">Missing gcs.csv file</span></a> for instructions).</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>install<span class="w"> </span>pandas<span class="w"> </span>pyyaml<span class="w"> </span>rasterio<span class="w"> </span>fiona
-pip<span class="w"> </span>install<span class="w"> </span>niche_vlaanderen
-</pre></div>
-</div>
-<p>Like for the normal installation, it is strongly recommended to install also <cite>matplotlib</cite> (otherwise plotting
-will not work) and <cite>jupyter</cite> notebook, which allows interactive usage from a web browser.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>install<span class="w"> </span>matplotlib<span class="w"> </span>jupyter
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>base<span class="o">)</span><span class="w"> </span>C:<span class="se">\&gt;</span><span class="w"> </span>conda<span class="w"> </span>activate<span class="w"> </span>niche
+<span class="o">(</span>niche<span class="o">)</span><span class="w"> </span>C:<span class="se">\&gt;</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span><span class="nv">niche_vlaanderen</span><span class="o">==</span><span class="m">1</span>.0
 </pre></div>
 </div>
 </section>

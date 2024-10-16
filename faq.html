@@ -1,4 +1,6 @@
-+<!DOCTYPE html>
++
+
+<!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -6,19 +8,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Frequently Asked Questions &mdash; niche_vlaanderen 2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=1fc8a8fd"></script>
-        <script src="_static/doctools.js?v=9a2dae69"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=1fc8a8fd"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -39,9 +37,6 @@
           <a href="index.html" class="icon icon-home">
             niche_vlaanderen
           </a>
-              <div class="version">
-                2.0
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -120,7 +115,8 @@ a white background.</p>
 lowest groundwater level higher than the mean highest groundwater level, which is
 unexpected.</p>
 <blockquote>
-<div><a class="reference internal image-reference" href="_images/warning.png"><img alt="_images/warning.png" src="_images/warning.png" style="width: 393.0px; height: 146.5px;" /></a>
+<div><a class="reference internal image-reference" href="_images/warning.png"><img alt="_images/warning.png" src="_images/warning.png" style="width: 393.0px; height: 146.5px;" />
+</a>
 </div></blockquote>
 <p>Errors detected during execution are called <strong>exceptions</strong> and are causing the model
 to stop. The last line of the error message indicates what happened.
@@ -129,7 +125,8 @@ the earliest point in the line where the error was detected.</p>
 <p>In the example below, the input layer “grntbodem” cannot be found at the indicated location
 of the computer, causing the model to stop.</p>
 <blockquote>
-<div><a class="reference internal image-reference" href="_images/exception.png"><img alt="_images/exception.png" src="_images/exception.png" style="width: 453.5px; height: 354.0px;" /></a>
+<div><a class="reference internal image-reference" href="_images/exception.png"><img alt="_images/exception.png" src="_images/exception.png" style="width: 453.5px; height: 354.0px;" />
+</a>
 </div></blockquote>
 <p>You will mostly be able to find out what the problem is by checking the error message:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">RasterioIOError</span><span class="p">:</span> <span class="o">./</span><span class="n">Inputs_2018</span><span class="o">/</span><span class="n">BT_2014</span><span class="o">/</span><span class="n">grntbodem</span><span class="p">:</span> <span class="n">No</span> <span class="n">such</span> <span class="n">file</span> <span class="ow">or</span> <span class="n">directory</span>
@@ -171,32 +168,37 @@ To do this, follow these steps:</p>
 <li><p>right click the <cite>my computer</cite> icon in windows. And choose the last option “properties”.</p></li>
 </ol>
 <blockquote>
-<div><a class="reference internal image-reference" href="_images/system_properties.png"><img alt="_images/system_properties.png" src="_images/system_properties.png" style="width: 185.5px; height: 311.0px;" /></a>
+<div><a class="reference internal image-reference" href="_images/system_properties.png"><img alt="_images/system_properties.png" src="_images/system_properties.png" style="width: 185.5px; height: 311.0px;" />
+</a>
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>On the left, choose the lower option (“advanced properties”)</p></li>
 </ol>
 <blockquote>
-<div><a class="reference internal image-reference" href="_images/advanced_properties.png"><img alt="_images/advanced_properties.png" src="_images/advanced_properties.png" style="width: 159.5px; height: 139.5px;" /></a>
+<div><a class="reference internal image-reference" href="_images/advanced_properties.png"><img alt="_images/advanced_properties.png" src="_images/advanced_properties.png" style="width: 159.5px; height: 139.5px;" />
+</a>
 </div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>In the next dialog, make sure you select the “advanced” tab. On the button right
 there should be a button with “Environment Variables” (“Omgevingsvariabelen”).</p></li>
 </ol>
 <blockquote>
-<div><a class="reference internal image-reference" href="_images/advanced_properties2.png"><img alt="_images/advanced_properties2.png" src="_images/advanced_properties2.png" style="width: 206.0px; height: 243.0px;" /></a>
+<div><a class="reference internal image-reference" href="_images/advanced_properties2.png"><img alt="_images/advanced_properties2.png" src="_images/advanced_properties2.png" style="width: 206.0px; height: 243.0px;" />
+</a>
 </div></blockquote>
 <ol class="arabic simple" start="4">
 <li><p>In the next dialog, Add a new user variable (if you are admin, you can add a system variable,
 that way the configuration will apply to all users of the computer).</p></li>
 </ol>
 <blockquote>
-<div><a class="reference internal image-reference" href="_images/environment_variables.png"><img alt="_images/environment_variables.png" src="_images/environment_variables.png" style="width: 309.0px; height: 292.5px;" /></a>
+<div><a class="reference internal image-reference" href="_images/environment_variables.png"><img alt="_images/environment_variables.png" src="_images/environment_variables.png" style="width: 309.0px; height: 292.5px;" />
+</a>
 <ol class="arabic simple" start="5">
 <li><p>Add the name “GDAL_DATA” and the path to a place where the gcs.csv file can be found
 (Use search to find it). Don’t include the filename.</p></li>
 </ol>
-<a class="reference internal image-reference" href="_images/new_environment_variable.png"><img alt="_images/new_environment_variable.png" src="_images/new_environment_variable.png" style="width: 326.5px; height: 82.5px;" /></a>
+<a class="reference internal image-reference" href="_images/new_environment_variable.png"><img alt="_images/new_environment_variable.png" src="_images/new_environment_variable.png" style="width: 326.5px; height: 82.5px;" />
+</a>
 <ol class="arabic simple" start="6">
 <li><p>Anaconda prompt must be restarted to find the variable.</p></li>
 </ol>
