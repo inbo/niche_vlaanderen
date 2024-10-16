@@ -1,0 +1,15 @@
+name: niche
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - geopandas
+  - numpy
+  - pandas
+  - pygeos
+  - pyyaml
+  - rasterio
+  - rasterstats>=0.17
+  - tqdm
+  - jupyter
+  - matplotlib

@@ -9,20 +9,24 @@ on:
 jobs:
   windows-conda-tests:
     runs-on: "windows-latest"
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.10", "3.11"]
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - uses: conda-incubator/setup-miniconda@v3
         with:
           miniconda-version: "latest"
-          environment-file:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: PowerShell
+          environment-file: environment.yml
+          python-version: ${{ matrix.python-version }}
+          channels: conda-forge
+          channel-priority: true
+      - name: Run unit tests
         shell: powershell
         run: |
-          conda config --add channels conda-forge
-          conda config --set channel_priority strict
-          conda install pandas=1.5.3 pyyaml rasterio fiona
-          pip install -e .
+          pip install . --no-deps
           pip install -r dev-requirements.txt coverage
           pytest --cov niche_vlaanderen --cov-report xml --verbose --tb=long
       - name: Upload coverage
@@ -31,14 +35,15 @@ jobs:
             coveralls --service=github
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          COVERALLS_PARALLEL: true 
+          COVERALLS_PARALLEL: true
+
   linux-pip-tests:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         python-version: ["3.9", "3.10", "3.11"]
         fail-fast: [false]
-
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
