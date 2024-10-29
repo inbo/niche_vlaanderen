@@ -815,6 +815,10 @@ class Niche(object):
             if fixed_scale:
                 norm = Normalize(-50, 50)
 
+        # Convert uint8 with no-data 255 into Masked array
+        if v.dtype == "uint8":
+            v = ma.masked_equal(v, 255)
+
         if key in {"mhw", "mlw", "msw"} and fixed_scale:
             norm = Normalize(-200, 0)
 
@@ -876,7 +880,7 @@ class Niche(object):
         title = "{} ({})".format(self._vegcode2name(key), key)
 
         v = self._vegetation_detail[key]
-        v = ma.masked_equal(v, 255)
+        v = ma.masked_equal(v, 255)  # always dtype uint8 with 255 as no-data
         ((a, b), (c, d)) = self._context.extent
         mpl_extent = (a, c, d, b)
 
