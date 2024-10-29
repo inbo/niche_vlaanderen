@@ -815,15 +815,15 @@ class Niche(object):
             if fixed_scale:
                 norm = Normalize(-50, 50)
 
-        # Convert uint8 with no-data 255 into Masked array
-        if v.dtype == "uint8":
-            v = ma.masked_equal(v, 255)
-
         if key in {"mhw", "mlw", "msw"} and fixed_scale:
             norm = Normalize(-200, 0)
 
         if v is None:
             raise NicheException("Invalid key specified")
+
+        # Convert uint8 with no-data 255 into Masked array
+        if v.dtype == "uint8":
+            v = ma.masked_equal(v, 255)
 
         if ax is None:
             fig, ax = plt.subplots()
