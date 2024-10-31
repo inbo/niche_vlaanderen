@@ -97,16 +97,22 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">copy</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">numpy.ma</span> <span class="k">as</span> <span class="nn">ma</span>
 
+<span class="kn">from</span> <span class="nn">niche_vlaanderen.vegetation</span> <span class="kn">import</span> <span class="n">Vegetation</span>
 <span class="kn">from</span> <span class="nn">niche_vlaanderen.spatial_context</span> <span class="kn">import</span> <span class="n">SpatialContext</span>
 <span class="kn">from</span> <span class="nn">niche_vlaanderen.codetables</span> <span class="kn">import</span> <span class="p">(</span><span class="n">validate_tables_flooding</span><span class="p">,</span>
                                          <span class="n">check_codes_used</span><span class="p">,</span>
                                          <span class="n">package_resource</span><span class="p">)</span>
 
+
+<span class="n">_allowed_input</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;depth&quot;</span><span class="p">:</span> <span class="s2">&quot;uint8&quot;</span><span class="p">,</span>
+<span class="p">}</span>
 
 <span class="k">class</span> <span class="nc">FloodingException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
@@ -115,8 +121,7 @@
 <div class="viewcode-block" id="Flooding">
 <a class="viewcode-back" href="../../lowlevel.html#niche_vlaanderen.Flooding">[docs]</a>
 <span class="k">class</span> <span class="nc">Flooding</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Predict the vegetation response to (frequent) flooding</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Predict the vegetation response to (frequent) flooding</span>
 
 <span class="sd">    A Flooding object can be used to predict the response of vegetation to</span>
 <span class="sd">    (frequent) flooding.</span>
@@ -124,8 +129,10 @@
 <span class="sd">    The code tables used can be overwritten when initializing the object.</span>
 <span class="sd">    Optionally also a name can be given which is used in plots and output</span>
 <span class="sd">    files.</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">nodata</span> <span class="o">=</span> <span class="o">-</span><span class="mi">99</span>  <span class="c1"># Keep int8 with nodata -99 to be backward compatible for &#39;potential&#39;</span>
+    <span class="n">dtype</span> <span class="o">=</span> <span class="s2">&quot;int8&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -136,8 +143,27 @@
         <span class="n">potential</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
     <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a Flooding class</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        depth : str, Optional</span>
+<span class="sd">            Path to the depth system table to overwrite the default.</span>
+<span class="sd">        duration : str, Optional</span>
+<span class="sd">            Path to the duration system table to overwrite the default.</span>
+<span class="sd">        frequency : str, Optional</span>
+<span class="sd">            Path to the frequency system table to overwrite the default.</span>
+<span class="sd">        lnk_potential : str, Optional</span>
+<span class="sd">            Path to the lnk_potential system table to overwrite the default.</span>
+<span class="sd">        potential : str, Optional</span>
+<span class="sd">            Path to the potential system table to overwrite the default.</span>
+<span class="sd">        name : str, Optional</span>
+<span class="sd">            Name of the model used for plotting and output files.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_ct</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_veg</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_context</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;niche_vlaanderen&quot;</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;depth&quot;</span><span class="p">,</span> <span class="s2">&quot;duration&quot;</span><span class="p">,</span> <span class="s2">&quot;frequency&quot;</span><span class="p">,</span> <span class="s2">&quot;lnk_potential&quot;</span><span class="p">,</span> <span class="s2">&quot;potential&quot;</span><span class="p">]:</span>
@@ -169,13 +195,12 @@
             <span class="p">)</span>
 
         <span class="n">td</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
-
         <span class="n">labels</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ct</span><span class="p">[</span><span class="s2">&quot;potential&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;potential&quot;</span><span class="p">)[</span><span class="s2">&quot;description&quot;</span><span class="p">])</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_combined</span><span class="p">:</span>
             <span class="k">del</span> <span class="n">labels</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
-        <span class="n">labels</span><span class="p">[</span><span class="o">-</span><span class="mi">99</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;no data&quot;</span>
+        <span class="n">labels</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">nodata</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;no data&quot;</span>
 
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_veg</span><span class="p">:</span>
             <span class="n">vi</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_veg</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
@@ -196,7 +221,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">orig_shape</span> <span class="o">=</span> <span class="n">depth</span><span class="o">.</span><span class="n">shape</span>
         <span class="n">depth</span> <span class="o">=</span> <span class="n">depth</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-        <span class="n">nodata</span> <span class="o">=</span> <span class="n">depth</span> <span class="o">==</span> <span class="o">-</span><span class="mi">99</span>
+        <span class="n">nodata</span> <span class="o">=</span> <span class="n">depth</span> <span class="o">==</span> <span class="mi">255</span>   <span class="c1"># depth is uint8</span>
 
         <span class="n">check_codes_used</span><span class="p">(</span><span class="s2">&quot;depth&quot;</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ct</span><span class="p">[</span><span class="s2">&quot;depth&quot;</span><span class="p">][</span><span class="s2">&quot;depth&quot;</span><span class="p">])</span>
         <span class="n">check_codes_used</span><span class="p">(</span><span class="s2">&quot;frequency&quot;</span><span class="p">,</span> <span class="n">frequency</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ct</span><span class="p">[</span><span class="s2">&quot;frequency&quot;</span><span class="p">][</span><span class="s2">&quot;frequency&quot;</span><span class="p">])</span>
@@ -207,52 +232,63 @@
             <span class="n">subtable_veg</span> <span class="o">=</span> <span class="n">subtable_veg</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
             <span class="c1"># by default we give code 4 (no information/flooding)</span>
             <span class="c1"># https://github.com/inbo/niche_vlaanderen/issues/87</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_veg</span><span class="p">[</span><span class="n">veg_code</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">depth</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;int16&quot;</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_veg</span><span class="p">[</span><span class="n">veg_code</span><span class="p">][</span><span class="n">nodata</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">99</span>
+
+            <span class="n">vegi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">depth</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+            <span class="n">vegi</span><span class="p">[</span><span class="n">nodata</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodata</span>
+
             <span class="n">groupby_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;period&quot;</span><span class="p">,</span> <span class="s2">&quot;frequency&quot;</span><span class="p">,</span> <span class="s2">&quot;duration&quot;</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">subtable</span> <span class="ow">in</span> <span class="n">subtable_veg</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">groupby_cols</span><span class="p">):</span>
                 <span class="k">if</span> <span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">frequency</span><span class="p">,</span> <span class="n">duration</span><span class="p">)</span> <span class="o">==</span> <span class="n">index</span><span class="p">:</span>
                     <span class="n">subtable</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
                     <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">subtable</span><span class="o">.</span><span class="n">itertuples</span><span class="p">():</span>
-                        <span class="n">veg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_veg</span><span class="p">[</span><span class="n">veg_code</span><span class="p">]</span>
+                        <span class="n">veg</span> <span class="o">=</span> <span class="n">vegi</span>
                         <span class="n">veg</span><span class="p">[</span><span class="n">row</span><span class="o">.</span><span class="n">depth</span> <span class="o">==</span> <span class="n">depth</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">potential</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">_veg</span><span class="p">[</span><span class="n">veg_code</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">veg</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_veg</span><span class="p">[</span><span class="n">veg_code</span><span class="p">])</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_veg</span><span class="p">[</span><span class="n">veg_code</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_veg</span><span class="p">[</span><span class="n">veg_code</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">orig_shape</span><span class="p">)</span>
+                        <span class="n">vegi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">veg</span><span class="p">,</span> <span class="n">vegi</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_veg</span><span class="p">[</span><span class="n">veg_code</span><span class="p">]</span> <span class="o">=</span> <span class="n">vegi</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">orig_shape</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Flooding.read_depth_to_grid">
+<a class="viewcode-back" href="../../lowlevel.html#niche_vlaanderen.Flooding.read_depth_to_grid">[docs]</a>
+    <span class="k">def</span> <span class="nf">read_depth_to_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read depth file using rasterio to numpy array and set extent</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        file_name : string | Pathlib.Path</span>
+<span class="sd">            Path to the file to be read</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">dst</span><span class="p">:</span>
+            <span class="n">band</span> <span class="o">=</span> <span class="n">dst</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">masked</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_context</span> <span class="o">=</span> <span class="n">SpatialContext</span><span class="p">(</span><span class="n">dst</span><span class="p">)</span>
+
+        <span class="c1"># Convert to depth data type and no-data value</span>
+        <span class="n">band</span> <span class="o">=</span> <span class="n">band</span><span class="o">.</span><span class="n">filled</span><span class="p">(</span><span class="n">fill_value</span><span class="o">=</span><span class="mi">255</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">_allowed_input</span><span class="p">[</span><span class="s2">&quot;depth&quot;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">band</span></div>
+
 
 <div class="viewcode-block" id="Flooding.calculate">
 <a class="viewcode-back" href="../../lowlevel.html#niche_vlaanderen.Flooding.calculate">[docs]</a>
-    <span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">depth_file</span><span class="p">,</span> <span class="n">frequency</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">duration</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">depth_file_path</span><span class="p">,</span> <span class="n">frequency</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">duration</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate a floodplain object</span>
 
 <span class="sd">        Parameters</span>
-<span class="sd">        ==========</span>
-<span class="sd">        depth_file: filename</span>
+<span class="sd">        ----------</span>
+<span class="sd">        depth_file_path: pahtlib.Path | str (file_path)</span>
 <span class="sd">           The filename containing a classified grid with inundation dephts.</span>
 <span class="sd">           The classes used must correspond to the codes in the</span>
 <span class="sd">           depth.csv_ code table.</span>
-
-
-<span class="sd">        frequency: code</span>
-<span class="sd">           The frequency with which flooding occurs, eg T2, T50. Valid values</span>
-<span class="sd">           are given in the frequency.csv_ code table.</span>
-
-<span class="sd">        period: winter|summer</span>
-<span class="sd">            period in which the flooding occurs. Must be either &quot;summer&quot; or</span>
-<span class="sd">            &quot;winter&quot;</span>
-
-<span class="sd">        duration: code</span>
-<span class="sd">            Period with which the flooding occurs, from duration.csv_</span>
-
-
+<span class="sd">        frequency: str (frequency code)</span>
+<span class="sd">           The frequency with which flooding occurs, eg T2, T10, T25 or T50. Valid</span>
+<span class="sd">           values are given in the frequency.csv_ code table.</span>
+<span class="sd">        period: str, winter | summer</span>
+<span class="sd">            Period in which the flooding occurs. Must be either &quot;summer&quot; or</span>
+<span class="sd">            &quot;winter&quot;.</span>
+<span class="sd">        duration: int (duration code)</span>
+<span class="sd">            Period with which the flooding occurs (1, 2...). Check the first column</span>
+<span class="sd">             of the duration.csv_ file for the available codes.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">depth_file</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">dst</span><span class="p">:</span>
-            <span class="n">depth</span> <span class="o">=</span> <span class="n">dst</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_context</span> <span class="o">=</span> <span class="n">SpatialContext</span><span class="p">(</span><span class="n">dst</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">depth</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="s2">&quot;u&quot;</span><span class="p">:</span>
-                <span class="n">depth</span> <span class="o">=</span> <span class="n">depth</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-            <span class="n">depth</span><span class="p">[</span><span class="n">depth</span> <span class="o">==</span> <span class="n">dst</span><span class="o">.</span><span class="n">nodatavals</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">99</span>
+        <span class="n">depth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_depth_to_grid</span><span class="p">(</span><span class="n">depth_file_path</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_calculate</span><span class="p">(</span><span class="n">depth</span><span class="p">,</span> <span class="n">frequency</span><span class="p">,</span> <span class="n">duration</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;frequency&quot;</span><span class="p">:</span> <span class="n">frequency</span><span class="p">,</span> <span class="s2">&quot;duration&quot;</span><span class="p">:</span> <span class="n">duration</span><span class="p">,</span> <span class="s2">&quot;period&quot;</span><span class="p">:</span> <span class="n">period</span><span class="p">}</span></div>
 
 
@@ -277,7 +313,7 @@
         <span class="p">((</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">extent</span>
         <span class="n">mpl_extent</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
 
-        <span class="n">veg</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">masked_equal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_veg</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="o">-</span><span class="mi">99</span><span class="p">)</span>
+        <span class="n">veg</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">masked_equal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_veg</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodata</span><span class="p">)</span>
 
         <span class="n">im</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">veg</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="n">mpl_extent</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">Normalize</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
         <span class="n">options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -312,12 +348,10 @@
 <span class="sd">        potential.csv table.</span>
 
 <span class="sd">        Parameters</span>
-<span class="sd">        ==========</span>
-
-<span class="sd">        folder: path</span>
+<span class="sd">        ----------</span>
+<span class="sd">        folder: pathlib.Path</span>
 <span class="sd">            Path to which the output files will be written.</span>
-
-<span class="sd">        overwrite_files: bool</span>
+<span class="sd">        overwrite_files: bool, default False</span>
 <span class="sd">           Overwrite files when saving.</span>
 <span class="sd">           Note writing will fail if any of the files to be written already</span>
 <span class="sd">           exists.</span>
@@ -327,8 +361,7 @@
                 <span class="s2">&quot;A valid run must be done before writing the output.&quot;</span>
             <span class="p">)</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">folder</span><span class="p">):</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
+        <span class="n">Path</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="n">params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
             <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;GTiff&quot;</span><span class="p">,</span>
@@ -337,8 +370,8 @@
             <span class="n">crs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">crs</span><span class="p">,</span>
             <span class="n">transform</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">transform</span><span class="p">,</span>
             <span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;int16&quot;</span><span class="p">,</span>
-            <span class="n">nodata</span><span class="o">=-</span><span class="mi">99</span><span class="p">,</span>
+            <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span>
+            <span class="n">nodata</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">nodata</span><span class="p">,</span>
             <span class="n">compress</span><span class="o">=</span><span class="s2">&quot;DEFLATE&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
@@ -391,15 +424,14 @@
 <span class="sd">        to be not present are set to &quot;not combinable&quot;.</span>
 
 <span class="sd">        Parameters</span>
-<span class="sd">        ==========</span>
+<span class="sd">        ----------</span>
 <span class="sd">        niche_result: Niche</span>
 <span class="sd">            Niche model that must be run prior to running combine.</span>
 
 <span class="sd">        Returns</span>
-<span class="sd">        =======</span>
+<span class="sd">        -------</span>
 <span class="sd">        combined: Flooding</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-
         <span class="c1"># check niche model has been run</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">niche_result</span><span class="o">.</span><span class="n">vegetation_calculated</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">FloodingException</span><span class="p">(</span>
@@ -421,13 +453,13 @@
         <span class="n">new</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">new</span><span class="o">.</span><span class="n">_veg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_veg</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">vi</span> <span class="ow">in</span> <span class="n">new</span><span class="o">.</span><span class="n">_veg</span><span class="p">:</span>
-            <span class="n">nodata</span> <span class="o">=</span> <span class="p">(</span><span class="n">niche_result</span><span class="o">.</span><span class="n">_vegetation</span><span class="p">[</span><span class="n">vi</span><span class="p">]</span> <span class="o">==</span> <span class="mi">255</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">new</span><span class="o">.</span><span class="n">_veg</span><span class="p">[</span><span class="n">vi</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">99</span><span class="p">)</span>
+            <span class="n">nodata</span> <span class="o">=</span> <span class="p">((</span><span class="n">niche_result</span><span class="o">.</span><span class="n">_vegetation</span><span class="p">[</span><span class="n">vi</span><span class="p">]</span> <span class="o">==</span> <span class="n">Vegetation</span><span class="o">.</span><span class="n">nodata</span><span class="p">)</span> <span class="o">|</span>
+                      <span class="p">(</span><span class="n">new</span><span class="o">.</span><span class="n">_veg</span><span class="p">[</span><span class="n">vi</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodata</span><span class="p">))</span>
             <span class="n">new</span><span class="o">.</span><span class="n">_veg</span><span class="p">[</span><span class="n">vi</span><span class="p">]</span> <span class="o">=</span> <span class="n">niche_result</span><span class="o">.</span><span class="n">_vegetation</span><span class="p">[</span><span class="n">vi</span><span class="p">]</span> <span class="o">*</span> <span class="n">new</span><span class="o">.</span><span class="n">_veg</span><span class="p">[</span><span class="n">vi</span><span class="p">]</span>
             <span class="n">new</span><span class="o">.</span><span class="n">_veg</span><span class="p">[</span><span class="n">vi</span><span class="p">][</span><span class="n">niche_result</span><span class="o">.</span><span class="n">_vegetation</span><span class="p">[</span><span class="n">vi</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-            <span class="n">new</span><span class="o">.</span><span class="n">_veg</span><span class="p">[</span><span class="n">vi</span><span class="p">][</span><span class="n">nodata</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">99</span>
+            <span class="n">new</span><span class="o">.</span><span class="n">_veg</span><span class="p">[</span><span class="n">vi</span><span class="p">][</span><span class="n">nodata</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodata</span>
 
         <span class="n">new</span><span class="o">.</span><span class="n">_combined</span> <span class="o">=</span> <span class="kc">True</span>
-
         <span class="k">return</span> <span class="n">new</span></div>
 </div>
 

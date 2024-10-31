@@ -63,9 +63,11 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#niche">Niche</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#niche_vlaanderen.Niche"><code class="docutils literal notranslate"><span class="pre">Niche</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.Niche.name"><code class="docutils literal notranslate"><span class="pre">Niche.name</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.Niche.plot"><code class="docutils literal notranslate"><span class="pre">Niche.plot()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.Niche.plot_detail"><code class="docutils literal notranslate"><span class="pre">Niche.plot_detail()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.Niche.read_config_file"><code class="docutils literal notranslate"><span class="pre">Niche.read_config_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.Niche.read_rasterio_to_grid"><code class="docutils literal notranslate"><span class="pre">Niche.read_rasterio_to_grid()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.Niche.run"><code class="docutils literal notranslate"><span class="pre">Niche.run()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.Niche.run_config_file"><code class="docutils literal notranslate"><span class="pre">Niche.run_config_file()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.Niche.set_input"><code class="docutils literal notranslate"><span class="pre">Niche.set_input()</span></code></a></li>
@@ -89,6 +91,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#niche_vlaanderen.Flooding"><code class="docutils literal notranslate"><span class="pre">Flooding</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.Flooding.calculate"><code class="docutils literal notranslate"><span class="pre">Flooding.calculate()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.Flooding.combine"><code class="docutils literal notranslate"><span class="pre">Flooding.combine()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.Flooding.read_depth_to_grid"><code class="docutils literal notranslate"><span class="pre">Flooding.read_depth_to_grid()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.Flooding.table"><code class="docutils literal notranslate"><span class="pre">Flooding.table</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#niche_vlaanderen.Flooding.write"><code class="docutils literal notranslate"><span class="pre">Flooding.write()</span></code></a></li>
 </ul>
@@ -166,18 +169,13 @@ This allows a greater flexibility and control over the details of the calculatio
 <dl class="py class">
 <dt class="sig sig-object py" id="niche_vlaanderen.Niche">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">niche_vlaanderen.</span></span><span class="sig-name descname"><span class="pre">Niche</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ct_acidity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_soil_mlw_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_soil_codes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lnk_acidity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_seepage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_vegetation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_management</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_nutrient_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_mineralisation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#Niche"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Niche" title="Link to this definition"></a></dt>
-<dd><p>Creates a new Niche object</p>
-<p>A niche object can be used to predict vegetation types according to the
-NICHE Vlaanderen model.</p>
-<p>The default codetables are used unless other tables are supplied to the
-constructor.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>lnk_*</strong> (<em>ct_*</em>) – path
-Optionally, paths to codetables can be provided. These will override
-the standard codetables used by Niche.</p>
-</dd>
-</dl>
+<dd><p>Main Niche model class</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="niche_vlaanderen.Niche.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#niche_vlaanderen.Niche.name" title="Link to this definition"></a></dt>
+<dd><p>Get model instance name</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="niche_vlaanderen.Niche.plot">
 <span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixed_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#Niche.plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Niche.plot" title="Link to this definition"></a></dt>
@@ -204,8 +202,7 @@ different plots in one layout</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ax</strong> – Can be used to update the plot (eg change the
-title).</p>
+<dd class="field-even"><p><strong>ax</strong> – Can be used to update the plot (eg change the title).</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes">matplotlib.axes.Axes</a></p>
@@ -238,9 +235,22 @@ from the default value.</p>
 <p>Configures a model based on a config file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>overwrite_ct</strong> – bool (False)
-Allows the user to override the default codetables (after
+<dd class="field-odd"><p><strong>overwrite_ct</strong> (<em>bool</em><em> (</em><em>False</em><em>)</em>) – Allows the user to override the default codetables (after
 the class has been initialized).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="niche_vlaanderen.Niche.read_rasterio_to_grid">
+<span class="sig-name descname"><span class="pre">read_rasterio_to_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/niche.html#Niche.read_rasterio_to_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Niche.read_rasterio_to_grid" title="Link to this definition"></a></dt>
+<dd><p>Read grid files using rasterio as Numpy arrays</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> (<em>string</em><em> | </em><em>Pathlib.Path</em>) – Path to the file to be read</p></li>
+<li><p><strong>variable_name</strong> (<em>string</em>) – Name of the variable this grid file represents</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -276,10 +286,8 @@ it is recommended to fix the data rather than disabling this.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>config</strong> – string
-path to a config file</p></li>
-<li><p><strong>overwrite_ct</strong> – boolean (False)
-overwrite codetables using the values specified in
+<li><p><strong>config</strong> (<em>string</em>) – path to a config file</p></li>
+<li><p><strong>overwrite_ct</strong> (<em>boolean</em><em> (</em><em>False</em><em>)</em>) – overwrite codetables using the values specified in
 the configuration file.</p></li>
 </ul>
 </dd>
@@ -296,7 +304,7 @@ the configuration file.</p></li>
 <li><p><strong>key</strong> (<em>string</em>) – The type of grid that you want to assign (eg msw, soil_code, …).
 Possible options are listed in
 <a class="reference external" href="https://inbo.github.io/niche_vlaanderen/cli.html#id1">https://inbo.github.io/niche_vlaanderen/cli.html#id1</a></p></li>
-<li><p><strong>value</strong> (<em>string / number</em>) – Path to a file containing the grid. Can be a folder for
+<li><p><strong>value</strong> (<em>string</em><em> | </em><em>number</em>) – Path to a file containing the grid. Can be a folder for
 certain grid types (eg ArcGIS rasters).
 Can also be a number: in that case a constant value is applied
 everywhere.</p></li>
@@ -442,23 +450,24 @@ Optionally also a name can be given which is used in plots and output
 files.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="niche_vlaanderen.Flooding.calculate">
-<span class="sig-name descname"><span class="pre">calculate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depth_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/flooding.html#Flooding.calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Flooding.calculate" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">calculate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depth_file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/flooding.html#Flooding.calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Flooding.calculate" title="Link to this definition"></a></dt>
 <dd><p>Calculate a floodplain object</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>depth_file</strong> (<em>filename</em>) – The filename containing a classified grid with inundation dephts.
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>depth_file_path</strong> (<em>pahtlib.Path</em><em> | </em><em>str</em><em> (</em><em>file_path</em><em>)</em>) – The filename containing a classified grid with inundation dephts.
 The classes used must correspond to the codes in the
-<a class="reference external" href="https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/flooding/depth.csv">depth.csv</a> code table.</p>
+<a class="reference external" href="https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/flooding/depth.csv">depth.csv</a> code table.</p></li>
+<li><p><strong>frequency</strong> (<em>str</em><em> (</em><em>frequency code</em><em>)</em>) – The frequency with which flooding occurs, eg T2, T10, T25 or T50. Valid
+values are given in the <a class="reference external" href="https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/flooding/frequency.csv">frequency.csv</a> code table.</p></li>
+<li><p><strong>period</strong> (<em>str</em><em>, </em><em>winter</em><em> | </em><em>summer</em>) – Period in which the flooding occurs. Must be either “summer” or
+“winter”.</p></li>
+<li><p><strong>duration</strong> (<em>int</em><em> (</em><em>duration code</em><em>)</em>) – <dl class="simple">
+<dt>Period with which the flooding occurs (1, 2…). Check the first column</dt><dd><p>of the <a class="reference external" href="https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/flooding/duration.csv">duration.csv</a> file for the available codes.</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>frequency: code</dt><dd><p>The frequency with which flooding occurs, eg T2, T50. Valid values
-are given in the <a class="reference external" href="https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/flooding/frequency.csv">frequency.csv</a> code table.</p>
-</dd>
-<dt>period: winter|summer</dt><dd><p>period in which the flooding occurs. Must be either “summer” or
-“winter”</p>
-</dd>
-<dt>duration: code</dt><dd><p>Period with which the flooding occurs, from <a class="reference external" href="https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/flooding/duration.csv">duration.csv</a></p>
+</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -483,6 +492,17 @@ to be not present are set to “not combinable”.</p>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="niche_vlaanderen.Flooding.read_depth_to_grid">
+<span class="sig-name descname"><span class="pre">read_depth_to_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/flooding.html#Flooding.read_depth_to_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Flooding.read_depth_to_grid" title="Link to this definition"></a></dt>
+<dd><p>Read depth file using rasterio to numpy array and set extent</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_name</strong> (<em>string</em><em> | </em><em>Pathlib.Path</em>) – Path to the file to be read</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="niche_vlaanderen.Flooding.table">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">table</span></span><a class="headerlink" href="#niche_vlaanderen.Flooding.table" title="Link to this definition"></a></dt>
@@ -498,8 +518,8 @@ potential.csv table.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>folder</strong> (<em>path</em>) – Path to which the output files will be written.</p></li>
-<li><p><strong>overwrite_files</strong> (<em>bool</em>) – Overwrite files when saving.
+<li><p><strong>folder</strong> (<em>pathlib.Path</em>) – Path to which the output files will be written.</p></li>
+<li><p><strong>overwrite_files</strong> (<em>bool</em><em>, </em><em>default False</em>) – Overwrite files when saving.
 Note writing will fail if any of the files to be written already
 exists.</p></li>
 </ul>
@@ -594,30 +614,31 @@ exists.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="niche_vlaanderen.NutrientLevel">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">niche_vlaanderen.</span></span><span class="sig-name descname"><span class="pre">NutrientLevel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ct_lnk_soil_nutrient_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_management</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_mineralisation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_soil_code</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_nutrient_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/nutrient_level.html#NutrientLevel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.NutrientLevel" title="Link to this definition"></a></dt>
-<dd><p>Class to calculate the NutrientLevel</p>
+<dd><p>Calculate the NutrientLevel</p>
 <p>The used codetables can be overwritten by using the corresponding ct_*
 arguments.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="niche_vlaanderen.NutrientLevel.calculate">
 <span class="sig-name descname"><span class="pre">calculate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">soil_code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nitrogen_atmospheric</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nitrogen_animal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nitrogen_fertilizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">management</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inundation</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/nutrient_level.html#NutrientLevel.calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.NutrientLevel.calculate" title="Link to this definition"></a></dt>
-<dd><p>Calculates the Nutrient level</p>
-<p>Calculates the nutrient level based on a number of numpy arrays.</p>
+<dd><p>Calculates the nutrient level based on the input arrays provided</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>soil_code</strong> (<em>numpy.array</em>) – Array containing the soil codes. Values must be present
-in the soil_code table. -99 is used as no data value.</p></li>
-<li><p><strong>msw</strong> (<em>numpy.array</em>) – Array containing the mean spring waterlevel. numpy.nan is used as
-no data value</p></li>
-<li><p><strong>nitrogen_atmospheric</strong> (<em>numpy.array</em>) – Array containing the atmospheric deposition of Nitrogen. numpy.nan
-is used as no data value</p></li>
-<li><p><strong>nitrogen_animal</strong> (<em>numpy.array</em>) – Array containing the animal contribution of Nitrogen.numpy.nan
-is used as no data value</p></li>
-<li><p><strong>nitrogen_fertilizer</strong> (<em>numpy.array</em>) – Array containing the fertilizer contribution of Nitrogen.numpy.nan
-is used as no data value</p></li>
-<li><p><strong>management</strong> (<em>numpy.array</em>) – Array containing the management.</p></li>
-<li><p><strong>inundation</strong> – Array containing the inundation values.</p></li>
+<li><p><strong>soil_code</strong> (<em>numpy.ndarray</em><em>, </em><em>np.uint8</em>) – Array containing the soil codes. Values must be present
+in the soil_code table.</p></li>
+<li><p><strong>msw</strong> (<em>numpy.ndarray</em><em>, </em><em>np.float32</em>) – Array containing the mean spring waterlevel.</p></li>
+<li><p><strong>nitrogen_atmospheric</strong> (<em>numpy.ndarray</em><em>, </em><em>np.float32</em>) – Array containing the atmospheric deposition of Nitrogen.</p></li>
+<li><p><strong>nitrogen_animal</strong> (<em>numpy.ndarray</em><em>, </em><em>np.float32</em>) – Array containing the animal contribution of Nitrogen.</p></li>
+<li><p><strong>nitrogen_fertilizer</strong> (<em>numpy.ndarray</em><em>, </em><em>np.float32</em>) – Array containing the fertilizer contribution of Nitrogen.</p></li>
+<li><p><strong>management</strong> (<em>numpy.ndarray</em><em>, </em><em>np.uint8</em>) – Array containing the management.</p></li>
+<li><p><strong>inundation</strong> (<em>numpy.ndarray</em><em>, </em><em>np.uint8</em>) – Array containing the inundation values.</p></li>
 </ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>nutrient level</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray, np.uint8</p>
 </dd>
 </dl>
 </dd></dl>
@@ -629,36 +650,37 @@ is used as no data value</p></li>
 <h3>Acidity<a class="headerlink" href="#acidity" title="Link to this heading"></a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="niche_vlaanderen.Acidity">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">niche_vlaanderen.</span></span><span class="sig-name descname"><span class="pre">Acidity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ct_acidity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_soil_mlw_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_soil_codes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lnk_acidity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_seepage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/acidity.html#Acidity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Acidity" title="Link to this definition"></a></dt>
-<dd><p>Class to calculate the Acidity</p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">niche_vlaanderen.</span></span><span class="sig-name descname"><span class="pre">Acidity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ct_acidity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_soil_mlw_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_soil_code</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lnk_acidity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_seepage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/acidity.html#Acidity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Acidity" title="Link to this definition"></a></dt>
+<dd><p>Calculate the Acidity</p>
 <p>The used codetables can be overwritten by using the corresponding ct_*
 arguments.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="niche_vlaanderen.Acidity.calculate">
-<span class="sig-name descname"><span class="pre">calculate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">soil_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mlw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inundation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seepage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minerality</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rainwater</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/acidity.html#Acidity.calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Acidity.calculate" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">calculate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">soil_code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mlw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inundation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seepage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minerality</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rainwater</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/acidity.html#Acidity.calculate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Acidity.calculate" title="Link to this definition"></a></dt>
 <dd><p>Calculate the Acidity</p>
-<section id="parameters">
-<h4>Parameters:<a class="headerlink" href="#parameters" title="Link to this heading"></a></h4>
-<dl class="simple">
-<dt>soil_class: numpy.array</dt><dd><p>Array containing the soil codes. Values must be present
-in the soil_code table. -99 is used as no data value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>soil_code</strong> (<em>numpy.ndarray</em><em>, </em><em>numpy.uint8</em>) – Array containing the soil codes. Values must be present
+in the soil_code table. -99 is used as no data value.</p></li>
+<li><p><strong>mlw</strong> (<em>numpy.ndarray</em><em>, </em><em>numpy.float32</em>) – Array containing the mean lowest waterlevel.</p></li>
+<li><p><strong>inundation</strong> (<em>numpy.ndarray</em><em>, </em><em>numpy.uint8</em>) – Array containing rate of inundation.
+<a class="reference external" href="https://inbo.github.io/niche_vlaanderen/invoer.html#overstroming-trofie-inundation-nutrient">https://inbo.github.io/niche_vlaanderen/invoer.html#overstroming-trofie-inundation-nutrient</a></p></li>
+<li><p><strong>seepage</strong> (<em>numpy.ndarray</em><em>, </em><em>numpy.float32</em>) – Array containing the flux of groundwater at the location
+<a class="reference external" href="https://inbo.github.io/niche_vlaanderen/invoer.html#overstroming-trofie-inundation-nutrient">https://inbo.github.io/niche_vlaanderen/invoer.html#overstroming-trofie-inundation-nutrient</a></p></li>
+<li><p><strong>minerality</strong> (<em>numpy.ndarray</em><em>, </em><em>numpy.uint8</em>) – Array noting whether the groundwater is rich(1) or poor in minerals
+<a class="reference external" href="https://inbo.github.io/niche_vlaanderen/invoer.html#mineraalrijkdom-minerality">https://inbo.github.io/niche_vlaanderen/invoer.html#mineraalrijkdom-minerality</a></p></li>
+<li><p><strong>rainwater</strong> (<em>numpy.ndarray</em><em>, </em><em>numpy.uint8</em>) – Array denoting whether rainwater lenses occur.
+<a class="reference external" href="https://inbo.github.io/niche_vlaanderen/invoer.html#regenlens-rainwater">https://inbo.github.io/niche_vlaanderen/invoer.html#regenlens-rainwater</a></p></li>
+</ul>
 </dd>
-<dt>mlw: numpy.array</dt><dd><p>Array containing the mean lowest waterlevel.</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>acidity</p>
 </dd>
-<dt>inundation:  numpy.array</dt><dd><p>Array containing rate of inundation.
-<a class="reference external" href="https://inbo.github.io/niche_vlaanderen/invoer.html#overstroming-trofie-inundation-nutrient">https://inbo.github.io/niche_vlaanderen/invoer.html#overstroming-trofie-inundation-nutrient</a></p>
-</dd>
-<dt>seepage:  numpy.array</dt><dd><p>Array containing the flux of groundwater at the location
-<a class="reference external" href="https://inbo.github.io/niche_vlaanderen/invoer.html#overstroming-trofie-inundation-nutrient">https://inbo.github.io/niche_vlaanderen/invoer.html#overstroming-trofie-inundation-nutrient</a></p>
-</dd>
-<dt>minerality: numpy.array</dt><dd><p>Array noting whether the groundwater is rich(1) or poor in minerals
-<a class="reference external" href="https://inbo.github.io/niche_vlaanderen/invoer.html#mineraalrijkdom-minerality">https://inbo.github.io/niche_vlaanderen/invoer.html#mineraalrijkdom-minerality</a></p>
-</dd>
-<dt>rainwater: numpy.array (optional)</dt><dd><p>Array denoting whether rainwater lenses occur.
-<a class="reference external" href="https://inbo.github.io/niche_vlaanderen/invoer.html#regenlens-rainwater">https://inbo.github.io/niche_vlaanderen/invoer.html#regenlens-rainwater</a></p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray, numpy.uint8</p>
 </dd>
 </dl>
-</section>
 </dd></dl>
 
 </dd></dl>
@@ -669,7 +691,7 @@ in the soil_code table. -99 is used as no data value.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="niche_vlaanderen.Vegetation">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">niche_vlaanderen.</span></span><span class="sig-name descname"><span class="pre">Vegetation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ct_vegetation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_soil_code</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_acidity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_management</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_nutrient_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ct_inundation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/niche_vlaanderen/vegetation.html#Vegetation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#niche_vlaanderen.Vegetation" title="Link to this definition"></a></dt>
-<dd><p>Helper class to calculate vegetation based on input arrays</p>
+<dd><p>Calculate vegetation based on input arrays</p>
 <p>This class helps predicting vegetation based on a number of input arrays.
 On initialization the input codetables are parsed (and validated).</p>
 <p>Note that to use grid inputs (eg raster files) it is recommended to use
@@ -687,13 +709,26 @@ Must contain the columns mentioned in the documentation:
 <dd><p>Calculate vegetation types based on input arrays</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>return_all</strong> (<em>boolean</em>) – A boolean (default=True) whether all grids should be returned or
-only grids containing data.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>soil_code</strong> (<em>numpy.ndarray</em><em>, </em><em>numpy.uint8</em>) – Array containing the soil codes. Values must be present
+in the soil_code system table.</p></li>
+<li><p><strong>mhw</strong> (<em>numpy.ndarray</em><em>, </em><em>numpy.float32</em>) – Array containing the mean high waterlevel.</p></li>
+<li><p><strong>mlw</strong> (<em>numpy.ndarray</em><em>, </em><em>numpy.float32</em>) – Array containing the mean low waterlevel.</p></li>
+<li><p><strong>nutrient_level</strong> (<em>numpy.ndarray</em><em>, </em><em>numpy.uint8</em>) – Array containing the nutrient levels. Values must be present
+in the nutrient_level system table.</p></li>
+<li><p><strong>acidity</strong> (<em>numpy.ndarray</em><em>, </em><em>numpy.uint8</em>) – Array containing the acidity levels. Values must be present
+in the acidity system table.</p></li>
+<li><p><strong>management</strong> (<em>numpy.ndarray</em><em>, </em><em>numpy.uint8</em>) – Array containing the management codes. Values must be present
+in the management system table.</p></li>
+<li><p><strong>inundation</strong> (<em>numpy.ndarray</em><em>, </em><em>numpy.uint8</em>) – Array containing the inundation values.</p></li>
+<li><p><strong>return_all</strong> (<em>boolean</em>) – A boolean (default=True) whether all grids should be returned or
+only grids containing data.</p></li>
+<li><p><strong>full_model</strong> (<em>bool</em>) – If True, the full niche model is applied</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
-<li><p><strong>veg</strong> (<em>dict</em>) – A dictionary containing the different output arrays per
-veg_code value. 255 is used for nodata_veg values</p></li>
+<li><p><strong>veg</strong> (<em>dict</em>) – A dictionary containing the different output arrays per veg_code value.</p></li>
 <li><p><strong>expected</strong> (<em>int</em>) – Expected code in veg arrays if all conditions are met</p></li>
 <li><p><strong>veg_occurrence</strong> (<em>dict</em>) – A dictionary containing the percentage of the area where the
 vegetation can occur.</p></li>
@@ -714,13 +749,21 @@ wet values.</p>
 <p>Values of zero indicate that the vegetation type can occur based on
 soil type and the value under consideration (mhw or mlw)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>difference</strong> – A dictionary containing the difference between the vegetation
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>soil_code</strong> (<em>numpy.ndarray</em><em>, </em><em>numpy.uint8</em>) – Array containing the soil codes. Values must be present
+in the soil_code system table.</p></li>
+<li><p><strong>mhw</strong> (<em>numpy.ndarray</em><em>, </em><em>numpy.float32</em>) – Array containing the mean high waterlevel.</p></li>
+<li><p><strong>mlw</strong> (<em>numpy.ndarray</em><em>, </em><em>numpy.float32</em>) – Array containing the mean low waterlevel.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>difference</strong> – A dictionary containing the difference between the vegetation
 value an the actual value.
 Keys are eg mhw_01 for mhw and vegetation type 01</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>dict</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>

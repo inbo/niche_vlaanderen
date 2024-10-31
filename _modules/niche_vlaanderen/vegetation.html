@@ -98,8 +98,6 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<span class="kn">from</span> <span class="nn">niche_vlaanderen.nutrient_level</span> <span class="kn">import</span> <span class="n">NutrientLevel</span>
-<span class="kn">from</span> <span class="nn">niche_vlaanderen.acidity</span> <span class="kn">import</span> <span class="n">Acidity</span>
 <span class="kn">from</span> <span class="nn">niche_vlaanderen.codetables</span> <span class="kn">import</span> <span class="p">(</span><span class="n">validate_tables_vegetation</span><span class="p">,</span>
                                          <span class="n">check_codes_used</span><span class="p">,</span> <span class="n">package_resource</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">niche_vlaanderen.exception</span> <span class="kn">import</span> <span class="n">NicheException</span>
@@ -144,7 +142,7 @@
 <div class="viewcode-block" id="Vegetation">
 <a class="viewcode-back" href="../../lowlevel.html#niche_vlaanderen.Vegetation">[docs]</a>
 <span class="k">class</span> <span class="nc">Vegetation</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper class to calculate vegetation based on input arrays</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate vegetation based on input arrays</span>
 
 <span class="sd">    This class helps predicting vegetation based on a number of input arrays.</span>
 <span class="sd">    On initialization the input codetables are parsed (and validated).</span>
@@ -160,7 +158,8 @@
 <span class="sd">        https://inbo.github.io/niche_vlaanderen/codetables.html</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">nodata_veg</span> <span class="o">=</span> <span class="mi">255</span>  <span class="c1"># uint8</span>
+    <span class="n">nodata</span> <span class="o">=</span> <span class="mi">255</span>  <span class="c1"># unsigned 8 bit integer for vegetation</span>
+    <span class="n">dtype</span> <span class="o">=</span> <span class="s2">&quot;uint8&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -171,37 +170,46 @@
         <span class="n">ct_nutrient_level</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">ct_inundation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the Vegetation helper class</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a Vegetation helper class</span>
 
 <span class="sd">        This class initializes the Vegetation helper class. By default it uses</span>
 <span class="sd">        the code tables supplied by the niche_vlaanderen package. It is</span>
 <span class="sd">        possible to overwrite this by supplying the niche_vlaanderen parameter</span>
+<span class="sd">        with a path to a file.</span>
 
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ct_vegetation : str, Optional</span>
+<span class="sd">            Path to the vegetation system table to overwrite the default.</span>
+<span class="sd">        ct_soil_code : str, Optional</span>
+<span class="sd">            Path to the soil_code system table to overwrite the default.</span>
+<span class="sd">        ct_acidity : str, Optional</span>
+<span class="sd">            Path to the acidity system table to overwrite the default.</span>
+<span class="sd">        ct_management : str, Optional</span>
+<span class="sd">            Path to the management system table to overwrite the default.</span>
+<span class="sd">        ct_nutrient_level : str, Optional</span>
+<span class="sd">            Path to the nutrient_level system table to overwrite the default.</span>
+<span class="sd">        ct_inundation : str, Optional</span>
+<span class="sd">            Path to the inundation system table to overwrite the default.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-
         <span class="k">if</span> <span class="n">ct_vegetation</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">ct_vegetation</span> <span class="o">=</span> <span class="n">package_resource</span><span class="p">([</span><span class="s2">&quot;system_tables&quot;</span><span class="p">],</span>
                                              <span class="s2">&quot;niche_vegetation.csv&quot;</span><span class="p">)</span>
 
         <span class="c1"># Note that the next code tables are only used for validation, they are</span>
         <span class="c1"># not part of the logic of the vegetation class</span>
-
         <span class="k">if</span> <span class="n">ct_soil_code</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">ct_soil_code</span> <span class="o">=</span> <span class="n">package_resource</span><span class="p">([</span><span class="s2">&quot;system_tables&quot;</span><span class="p">],</span>
                                              <span class="s2">&quot;soil_codes.csv&quot;</span><span class="p">)</span>
-
         <span class="k">if</span> <span class="n">ct_acidity</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">ct_acidity</span> <span class="o">=</span> <span class="n">package_resource</span><span class="p">([</span><span class="s2">&quot;system_tables&quot;</span><span class="p">],</span>
                                              <span class="s2">&quot;acidity.csv&quot;</span><span class="p">)</span>
-
         <span class="k">if</span> <span class="n">ct_nutrient_level</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">ct_nutrient_level</span> <span class="o">=</span> <span class="n">package_resource</span><span class="p">([</span><span class="s2">&quot;system_tables&quot;</span><span class="p">],</span>
                                                  <span class="s2">&quot;nutrient_level.csv&quot;</span><span class="p">)</span>
-
         <span class="k">if</span> <span class="n">ct_management</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">ct_management</span> <span class="o">=</span> <span class="n">package_resource</span><span class="p">([</span><span class="s2">&quot;system_tables&quot;</span><span class="p">],</span>
                                                  <span class="s2">&quot;management.csv&quot;</span><span class="p">)</span>
-
         <span class="k">if</span> <span class="n">ct_inundation</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">ct_inundation</span> <span class="o">=</span> <span class="n">package_resource</span><span class="p">([</span><span class="s2">&quot;system_tables&quot;</span><span class="p">],</span>
                                              <span class="s2">&quot;inundation.csv&quot;</span><span class="p">)</span>
@@ -253,40 +261,51 @@
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
+<span class="sd">        soil_code : numpy.ndarray, numpy.uint8</span>
+<span class="sd">            Array containing the soil codes. Values must be present</span>
+<span class="sd">            in the soil_code system table.</span>
+<span class="sd">        mhw : numpy.ndarray, numpy.float32</span>
+<span class="sd">            Array containing the mean high waterlevel.</span>
+<span class="sd">        mlw : numpy.ndarray, numpy.float32</span>
+<span class="sd">            Array containing the mean low waterlevel.</span>
+<span class="sd">        nutrient_level : numpy.ndarray, numpy.uint8</span>
+<span class="sd">            Array containing the nutrient levels. Values must be present</span>
+<span class="sd">            in the nutrient_level system table.</span>
+<span class="sd">        acidity : numpy.ndarray, numpy.uint8</span>
+<span class="sd">            Array containing the acidity levels. Values must be present</span>
+<span class="sd">            in the acidity system table.</span>
+<span class="sd">        management : numpy.ndarray, numpy.uint8</span>
+<span class="sd">            Array containing the management codes. Values must be present</span>
+<span class="sd">            in the management system table.</span>
+<span class="sd">        inundation : numpy.ndarray, numpy.uint8</span>
+<span class="sd">            Array containing the inundation values.</span>
 <span class="sd">        return_all: boolean</span>
 <span class="sd">            A boolean (default=True) whether all grids should be returned or</span>
 <span class="sd">            only grids containing data.</span>
+<span class="sd">        full_model : bool</span>
+<span class="sd">            If True, the full niche model is applied</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        veg: dict</span>
-<span class="sd">            A dictionary containing the different output arrays per</span>
-<span class="sd">            veg_code value. 255 is used for nodata_veg values</span>
+<span class="sd">            A dictionary containing the different output arrays per veg_code value.</span>
 <span class="sd">        expected: int</span>
 <span class="sd">            Expected code in veg arrays if all conditions are met</span>
 <span class="sd">        veg_occurrence: dict</span>
 <span class="sd">            A dictionary containing the percentage of the area where the</span>
 <span class="sd">            vegetation can occur.</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="n">nodata</span> <span class="o">=</span> <span class="p">(</span><span class="n">soil_code</span> <span class="o">==</span> <span class="o">-</span><span class="mi">99</span><span class="p">)</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">soil_code</span><span class="p">)</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">mhw</span><span class="p">)</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">mlw</span><span class="p">)</span>
-
+        <span class="c1"># Create combined mask from all input arrays</span>
+        <span class="n">nodata</span> <span class="o">=</span> <span class="p">(</span><span class="n">soil_code</span> <span class="o">==</span> <span class="mi">255</span><span class="p">)</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">mhw</span><span class="p">)</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">mhw</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">full_model</span><span class="p">:</span>
-            <span class="n">nodata</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="n">nodata</span>
-                <span class="o">|</span> <span class="p">(</span><span class="n">nutrient_level</span> <span class="o">==</span> <span class="n">NutrientLevel</span><span class="o">.</span><span class="n">nodata</span><span class="p">)</span>
-                <span class="o">|</span> <span class="p">(</span><span class="n">acidity</span> <span class="o">==</span> <span class="n">Acidity</span><span class="o">.</span><span class="n">nodata</span><span class="p">)</span>
-            <span class="p">)</span>
-
+            <span class="n">nodata</span> <span class="o">|=</span> <span class="p">(</span><span class="n">nutrient_level</span> <span class="o">==</span> <span class="mi">255</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">acidity</span> <span class="o">==</span> <span class="mi">255</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">inundation</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">nodata</span> <span class="o">=</span> <span class="n">nodata</span> <span class="o">|</span> <span class="p">(</span><span class="n">inundation</span> <span class="o">==</span> <span class="o">-</span><span class="mi">99</span><span class="p">)</span>
-
+            <span class="n">nodata</span> <span class="o">|=</span> <span class="p">(</span><span class="n">inundation</span> <span class="o">==</span> <span class="mi">255</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">management</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">nodata</span> <span class="o">=</span> <span class="n">nodata</span> <span class="o">|</span> <span class="p">(</span><span class="n">management</span> <span class="o">==</span> <span class="o">-</span><span class="mi">99</span><span class="p">)</span>
+            <span class="n">nodata</span> <span class="o">|=</span> <span class="p">(</span><span class="n">management</span> <span class="o">==</span> <span class="mi">255</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">nodata</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">NicheException</span><span class="p">(</span><span class="s2">&quot;only nodata values in prediction&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">NicheException</span><span class="p">(</span><span class="s2">&quot;Only nodata values in prediction&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">full_model</span><span class="p">:</span>
             <span class="n">check_codes_used</span><span class="p">(</span><span class="s2">&quot;acidity&quot;</span><span class="p">,</span> <span class="n">acidity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ct_acidity</span><span class="p">[</span><span class="s2">&quot;acidity&quot;</span><span class="p">])</span>
@@ -299,14 +318,14 @@
                 <span class="s2">&quot;inundation&quot;</span><span class="p">,</span> <span class="n">inundation</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ct_inundation</span><span class="p">[</span><span class="s2">&quot;inundation&quot;</span><span class="p">]</span>
             <span class="p">)</span>
         <span class="k">if</span> <span class="n">management</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">check_codes_used</span><span class="p">(</span><span class="s2">&quot;management&quot;</span><span class="p">,</span> <span class="n">management</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ct_management</span><span class="p">[</span><span class="s2">&quot;management&quot;</span><span class="p">])</span>
+            <span class="n">check_codes_used</span><span class="p">(</span><span class="s2">&quot;management&quot;</span><span class="p">,</span> <span class="n">management</span><span class="p">,</span>
+                             <span class="bp">self</span><span class="o">.</span><span class="n">_ct_management</span><span class="p">[</span><span class="s2">&quot;management&quot;</span><span class="p">])</span>
 
         <span class="n">veg_bands</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
         <span class="n">veg_detail</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
         <span class="n">occurrence</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
 
         <span class="k">for</span> <span class="n">veg_code</span><span class="p">,</span> <span class="n">subtable</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ct_vegetation</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;veg_code&quot;</span><span class="p">):</span>
-
             <span class="n">subtable</span> <span class="o">=</span> <span class="n">subtable</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
             <span class="c1"># vegi is the prediction for the current veg_code</span>
             <span class="c1"># it is a logical or of the result of every row:</span>
@@ -358,16 +377,14 @@
                     <span class="p">)</span> <span class="o">*</span> <span class="n">VegSuitable</span><span class="o">.</span><span class="n">MANAGEMENT</span>
 
             <span class="n">vegi</span> <span class="o">=</span> <span class="n">vegi</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;uint8&quot;</span><span class="p">)</span>
-            <span class="n">vegi</span><span class="p">[</span><span class="n">nodata</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodata_veg</span>
+            <span class="n">vegi</span><span class="p">[</span><span class="n">nodata</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodata</span>
 
             <span class="n">vegi_summary</span> <span class="o">=</span> <span class="n">vegi</span> <span class="o">==</span> <span class="n">expected</span>
-
             <span class="n">vegi_summary</span> <span class="o">=</span> <span class="n">vegi_summary</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;uint8&quot;</span><span class="p">)</span>
-            <span class="n">vegi_summary</span><span class="p">[</span><span class="n">nodata</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodata_veg</span>
+            <span class="n">vegi_summary</span><span class="p">[</span><span class="n">nodata</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodata</span>
 
             <span class="k">if</span> <span class="n">return_all</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">vegi</span><span class="p">):</span>
                 <span class="n">veg_bands</span><span class="p">[</span><span class="n">veg_code</span><span class="p">]</span> <span class="o">=</span> <span class="n">vegi_summary</span>
-
             <span class="n">veg_detail</span><span class="p">[</span><span class="n">veg_code</span><span class="p">]</span> <span class="o">=</span> <span class="n">vegi</span>
 
             <span class="n">occi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">vegi_summary</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">vegi_summary</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">nodata</span><span class="p">))</span>
@@ -389,6 +406,16 @@
 <span class="sd">        Values of zero indicate that the vegetation type can occur based on</span>
 <span class="sd">        soil type and the value under consideration (mhw or mlw)</span>
 
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        soil_code : numpy.ndarray, numpy.uint8</span>
+<span class="sd">            Array containing the soil codes. Values must be present</span>
+<span class="sd">            in the soil_code system table.</span>
+<span class="sd">        mhw : numpy.ndarray, numpy.float32</span>
+<span class="sd">            Array containing the mean high waterlevel.</span>
+<span class="sd">        mlw : numpy.ndarray, numpy.float32</span>
+<span class="sd">            Array containing the mean low waterlevel.</span>
+
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        difference: dict</span>
@@ -396,10 +423,9 @@
 <span class="sd">            value an the actual value.</span>
 <span class="sd">            Keys are eg mhw_01 for mhw and vegetation type 01</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">nodata</span> <span class="o">=</span> <span class="p">(</span><span class="n">soil_code</span> <span class="o">==</span> <span class="o">-</span><span class="mi">99</span><span class="p">)</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">mhw</span><span class="p">)</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">mlw</span><span class="p">)</span>
+        <span class="n">nodata</span> <span class="o">=</span> <span class="p">(</span><span class="n">soil_code</span> <span class="o">==</span> <span class="mi">255</span><span class="p">)</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">mhw</span><span class="p">)</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">mhw</span><span class="p">)</span>
 
         <span class="n">difference</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-
         <span class="n">veg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ct_vegetation</span><span class="p">[</span>
             <span class="p">[</span><span class="s2">&quot;veg_code&quot;</span><span class="p">,</span> <span class="s2">&quot;soil_code&quot;</span><span class="p">,</span> <span class="s2">&quot;mhw_min&quot;</span><span class="p">,</span> <span class="s2">&quot;mhw_max&quot;</span><span class="p">,</span> <span class="s2">&quot;mlw_min&quot;</span><span class="p">,</span> <span class="s2">&quot;mlw_max&quot;</span><span class="p">]</span>
         <span class="p">]</span>
@@ -407,54 +433,53 @@
         <span class="n">veg</span> <span class="o">=</span> <span class="n">veg</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
 
         <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">RuntimeWarning</span><span class="p">)</span>
-
         <span class="k">for</span> <span class="n">veg_code</span><span class="p">,</span> <span class="n">subtable</span> <span class="ow">in</span> <span class="n">veg</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;veg_code&quot;</span><span class="p">):</span>
             <span class="n">subtable</span> <span class="o">=</span> <span class="n">subtable</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 
-            <span class="n">mhw_diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">soil_code</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
-            <span class="n">mlw_diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">soil_code</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+            <span class="n">mhw_diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">soil_code</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span>
+            <span class="n">mlw_diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">soil_code</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span>
 
             <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">subtable</span><span class="o">.</span><span class="n">itertuples</span><span class="p">():</span>
-
                 <span class="c1"># mhw smaller than maximum</span>
-                <span class="n">sel</span> <span class="o">=</span> <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">soil_code</span> <span class="o">==</span> <span class="n">soil_code</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">mhw_max</span> <span class="o">&lt;</span> <span class="n">mhw</span><span class="p">)</span>
-                <span class="n">mhw_diff</span><span class="p">[</span><span class="n">sel</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">mhw</span> <span class="o">-</span> <span class="n">row</span><span class="o">.</span><span class="n">mhw_max</span><span class="p">)[</span><span class="n">sel</span><span class="p">]</span>
+                <span class="n">selection</span> <span class="o">=</span> <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">soil_code</span> <span class="o">==</span> <span class="n">soil_code</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">mhw_max</span> <span class="o">&lt;</span> <span class="n">mhw</span><span class="p">)</span>
+                <span class="n">mhw_diff</span><span class="p">[</span><span class="n">selection</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">mhw</span> <span class="o">-</span> <span class="n">row</span><span class="o">.</span><span class="n">mhw_max</span><span class="p">)[</span><span class="n">selection</span><span class="p">]</span>
 
                 <span class="c1"># mhw larger than minimum</span>
-                <span class="n">sel</span> <span class="o">=</span> <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">soil_code</span> <span class="o">==</span> <span class="n">soil_code</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">mhw_min</span> <span class="o">&gt;</span> <span class="n">mhw</span><span class="p">)</span>
-                <span class="n">mhw_diff</span><span class="p">[</span><span class="n">sel</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">mhw</span> <span class="o">-</span> <span class="n">row</span><span class="o">.</span><span class="n">mhw_min</span><span class="p">)[</span><span class="n">sel</span><span class="p">]</span>
+                <span class="n">selection</span> <span class="o">=</span> <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">soil_code</span> <span class="o">==</span> <span class="n">soil_code</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">mhw_min</span> <span class="o">&gt;</span> <span class="n">mhw</span><span class="p">)</span>
+                <span class="n">mhw_diff</span><span class="p">[</span><span class="n">selection</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">mhw</span> <span class="o">-</span> <span class="n">row</span><span class="o">.</span><span class="n">mhw_min</span><span class="p">)[</span><span class="n">selection</span><span class="p">]</span>
 
                 <span class="c1"># mhw in range</span>
-                <span class="n">sel</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">selection</span> <span class="o">=</span> <span class="p">(</span>
                     <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">soil_code</span> <span class="o">==</span> <span class="n">soil_code</span><span class="p">)</span>
                     <span class="o">&amp;</span> <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">mhw_min</span> <span class="o">&lt;=</span> <span class="n">mhw</span><span class="p">)</span>
                     <span class="o">&amp;</span> <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">mhw_max</span> <span class="o">&gt;=</span> <span class="n">mhw</span><span class="p">)</span>
                 <span class="p">)</span>
-                <span class="n">mhw_diff</span><span class="p">[</span><span class="n">sel</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">soil_code</span><span class="o">.</span><span class="n">shape</span><span class="p">))[</span><span class="n">sel</span><span class="p">]</span>
+                <span class="n">zero_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">soil_code</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+                <span class="n">mhw_diff</span><span class="p">[</span><span class="n">selection</span><span class="p">]</span> <span class="o">=</span> <span class="n">zero_arr</span><span class="p">[</span><span class="n">selection</span><span class="p">]</span>
 
                 <span class="c1"># mlw smaller than maximum</span>
-                <span class="n">sel</span> <span class="o">=</span> <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">soil_code</span> <span class="o">==</span> <span class="n">soil_code</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">mlw_max</span> <span class="o">&lt;</span> <span class="n">mlw</span><span class="p">)</span>
-                <span class="n">mlw_diff</span><span class="p">[</span><span class="n">sel</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">mlw</span> <span class="o">-</span> <span class="n">row</span><span class="o">.</span><span class="n">mlw_max</span><span class="p">)[</span><span class="n">sel</span><span class="p">]</span>
+                <span class="n">selection</span> <span class="o">=</span> <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">soil_code</span> <span class="o">==</span> <span class="n">soil_code</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">mlw_max</span> <span class="o">&lt;</span> <span class="n">mlw</span><span class="p">)</span>
+                <span class="n">mlw_diff</span><span class="p">[</span><span class="n">selection</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">mlw</span> <span class="o">-</span> <span class="n">row</span><span class="o">.</span><span class="n">mlw_max</span><span class="p">)[</span><span class="n">selection</span><span class="p">]</span>
 
                 <span class="c1"># mlw larger than minimum</span>
-                <span class="n">sel</span> <span class="o">=</span> <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">soil_code</span> <span class="o">==</span> <span class="n">soil_code</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">mlw_min</span> <span class="o">&gt;</span> <span class="n">mlw</span><span class="p">)</span>
-                <span class="n">mlw_diff</span><span class="p">[</span><span class="n">sel</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">mlw</span> <span class="o">-</span> <span class="n">row</span><span class="o">.</span><span class="n">mlw_min</span><span class="p">)[</span><span class="n">sel</span><span class="p">]</span>
+                <span class="n">selection</span> <span class="o">=</span> <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">soil_code</span> <span class="o">==</span> <span class="n">soil_code</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">mlw_min</span> <span class="o">&gt;</span> <span class="n">mlw</span><span class="p">)</span>
+                <span class="n">mlw_diff</span><span class="p">[</span><span class="n">selection</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">mlw</span> <span class="o">-</span> <span class="n">row</span><span class="o">.</span><span class="n">mlw_min</span><span class="p">)[</span><span class="n">selection</span><span class="p">]</span>
 
                 <span class="c1"># mlw in range</span>
-                <span class="n">sel</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">selection</span> <span class="o">=</span> <span class="p">(</span>
                     <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">soil_code</span> <span class="o">==</span> <span class="n">soil_code</span><span class="p">)</span>
                     <span class="o">&amp;</span> <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">mlw_min</span> <span class="o">&lt;=</span> <span class="n">mlw</span><span class="p">)</span>
                     <span class="o">&amp;</span> <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">mlw_max</span> <span class="o">&gt;=</span> <span class="n">mlw</span><span class="p">)</span>
                 <span class="p">)</span>
-                <span class="n">mlw_diff</span><span class="p">[</span><span class="n">sel</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">soil_code</span><span class="o">.</span><span class="n">shape</span><span class="p">))[</span><span class="n">sel</span><span class="p">]</span>
+                <span class="n">mlw_diff</span><span class="p">[</span><span class="n">selection</span><span class="p">]</span> <span class="o">=</span> <span class="n">zero_arr</span><span class="p">[</span><span class="n">selection</span><span class="p">]</span>
 
             <span class="n">mhw_diff</span><span class="p">[</span><span class="n">nodata</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
             <span class="n">mlw_diff</span><span class="p">[</span><span class="n">nodata</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
 
-            <span class="n">difference</span><span class="p">[</span><span class="s2">&quot;mhw_</span><span class="si">%02d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">veg_code</span><span class="p">]</span> <span class="o">=</span> <span class="n">mhw_diff</span>
-            <span class="n">difference</span><span class="p">[</span><span class="s2">&quot;mlw_</span><span class="si">%02d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">veg_code</span><span class="p">]</span> <span class="o">=</span> <span class="n">mlw_diff</span>
+            <span class="n">difference</span><span class="p">[</span><span class="s2">&quot;mhw_</span><span class="si">%02d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">veg_code</span><span class="p">]</span> <span class="o">=</span> <span class="n">mhw_diff</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span>
+            <span class="n">difference</span><span class="p">[</span><span class="s2">&quot;mlw_</span><span class="si">%02d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">veg_code</span><span class="p">]</span> <span class="o">=</span> <span class="n">mlw_diff</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span>
 
-        <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">)</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">)</span>  <span class="c1"># Reset to default warning level</span>
         <span class="k">return</span> <span class="n">difference</span></div>
 </div>
 

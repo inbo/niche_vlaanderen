@@ -101,14 +101,14 @@
 <div class="viewcode-block" id="NutrientLevel">
 <a class="viewcode-back" href="../../lowlevel.html#niche_vlaanderen.NutrientLevel">[docs]</a>
 <span class="k">class</span> <span class="nc">NutrientLevel</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Class to calculate the NutrientLevel</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the NutrientLevel</span>
 
 <span class="sd">    The used codetables can be overwritten by using the corresponding ct_*</span>
 <span class="sd">    arguments.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">nodata</span> <span class="o">=</span> <span class="mi">255</span>  <span class="c1"># unsigned 8 bit type is used</span>
+    <span class="n">dtype</span> <span class="o">=</span> <span class="s2">&quot;uint8&quot;</span>
+    <span class="n">nodata</span> <span class="o">=</span> <span class="mi">255</span>  <span class="c1"># unsigned 8 bit integer for nutrient level</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -118,6 +118,21 @@
         <span class="n">ct_soil_code</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">ct_nutrient_level</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a nutrient level calculator</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ct_lnk_soil_nutrient_level : str, Optional</span>
+<span class="sd">            Path to the lnk_soil_nutrient_level system table to overwrite the default.</span>
+<span class="sd">        ct_management : str, Optional</span>
+<span class="sd">            Path to the management system table to overwrite the default.</span>
+<span class="sd">        ct_mineralisation : str, Optional</span>
+<span class="sd">            Path to the nitrogen_mineralisation system table to overwrite the default.</span>
+<span class="sd">        ct_soil_code : str, Optional</span>
+<span class="sd">            Path to the soil_codes system table to overwrite the default.</span>
+<span class="sd">        ct_nutrient_level : str, Optional</span>
+<span class="sd">            Path to the nutrient_level system table to overwrite the default.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">ct_lnk_soil_nutrient_level</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">ct_lnk_soil_nutrient_level</span> <span class="o">=</span> <span class="n">package_resource</span><span class="p">(</span>
                 <span class="p">[</span><span class="s2">&quot;system_tables&quot;</span><span class="p">],</span> <span class="s2">&quot;lnk_soil_nutrient_level.csv&quot;</span><span class="p">)</span>
@@ -140,10 +155,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_ct_nutrient_level</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">ct_nutrient_level</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_ct_soil_code</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">ct_soil_code</span><span class="p">)</span>
 
-        <span class="c1"># convert the mineralisation to float so we can use np.nan for nodata</span>
+        <span class="c1"># convert the mineralisation system table to float to use np.nan for nodata</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_ct_mineralisation</span><span class="p">[</span><span class="s2">&quot;nitrogen_mineralisation&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ct_mineralisation</span><span class="p">[</span>
             <span class="s2">&quot;nitrogen_mineralisation&quot;</span>
-        <span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float64&quot;</span><span class="p">)</span>
+        <span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span>
 
         <span class="n">inner</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="n">v</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__init__</span><span class="o">.</span><span class="vm">__code__</span><span class="o">.</span><span class="n">co_varnames</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
         <span class="n">validate_tables_nutrient_level</span><span class="p">(</span>
@@ -168,15 +183,29 @@
             <span class="o">.</span><span class="n">soil_code</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_calculate_mineralisation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">soil_code_array</span><span class="p">,</span> <span class="n">msw_array</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get nitrogen mineralisation for numpy arrays</span>
+    <span class="k">def</span> <span class="nf">_calculate_mineralisation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">soil_code</span><span class="p">,</span> <span class="n">msw</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate nitrogen mineralisation based on soil and water arrays</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        soil_code : numpy.ndarray, np.uint8</span>
+<span class="sd">            Array containing the soil codes. Values must be present</span>
+<span class="sd">            in the soil_code system table.</span>
+<span class="sd">        msw : numpy.ndarray, np.float32</span>
+<span class="sd">            Array containing the mean spring waterlevel (&quot;gemiddeld</span>
+<span class="sd">            voorjaarsgrondwaterstand&quot;).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        numpy.ndarray, numpy.float32</span>
+<span class="sd">            mineralisation</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">orig_shape</span> <span class="o">=</span> <span class="n">soil_code_array</span><span class="o">.</span><span class="n">shape</span>
-        <span class="n">soil_code_array</span> <span class="o">=</span> <span class="n">soil_code_array</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-        <span class="n">msw_array</span> <span class="o">=</span> <span class="n">msw_array</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">soil_code_array</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-        <span class="n">result</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+        <span class="n">nodata</span> <span class="o">=</span> <span class="p">(</span><span class="n">soil_code</span> <span class="o">==</span> <span class="mi">255</span><span class="p">)</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">msw</span><span class="p">)</span>
+
+        <span class="n">orig_shape</span> <span class="o">=</span> <span class="n">soil_code</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">soil_code_array</span> <span class="o">=</span> <span class="n">soil_code</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="n">msw_array</span> <span class="o">=</span> <span class="n">msw</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">soil_code_array</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
 
         <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ct_mineralisation</span><span class="o">.</span><span class="n">soil_code</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
             <span class="c1"># We must reset the index because digitize will give indexes</span>
@@ -186,28 +215,48 @@
             <span class="n">table_sel</span> <span class="o">=</span> <span class="n">table_sel</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="n">soil_sel</span> <span class="o">=</span> <span class="n">soil_code_array</span> <span class="o">==</span> <span class="n">code</span>
             <span class="n">ix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">(</span><span class="n">msw_array</span><span class="p">[</span><span class="n">soil_sel</span><span class="p">],</span> <span class="n">table_sel</span><span class="o">.</span><span class="n">msw_max</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">soil_sel</span><span class="p">]</span> <span class="o">=</span> <span class="n">table_sel</span><span class="p">[</span><span class="s2">&quot;nitrogen_mineralisation&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">ix</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
 
-            <span class="n">result</span><span class="p">[</span><span class="n">soil_sel</span><span class="p">]</span> <span class="o">=</span> <span class="n">table_sel</span><span class="p">[</span><span class="s2">&quot;nitrogen_mineralisation&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">ix</span><span class="p">)</span>
-
-        <span class="n">result</span><span class="p">[</span><span class="n">msw_array</span> <span class="o">==</span> <span class="o">-</span><span class="mi">99</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">orig_shape</span><span class="p">)</span>
+        <span class="c1"># The intermediate mineralisation array is a float32 array with np.nan as nodata</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">orig_shape</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">nodata</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="c1"># Apply the nodata mask</span>
         <span class="k">return</span> <span class="n">result</span>
 
     <span class="k">def</span> <span class="nf">_calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">management</span><span class="p">,</span> <span class="n">soil_code</span><span class="p">,</span> <span class="n">nitrogen</span><span class="p">,</span> <span class="n">inundation</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Calculates the nutrient level using previously calculated nitrogen</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the nutrient level based on calculated nitrogen</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        management : numpy.ndarray, np.uint8</span>
+<span class="sd">            Array containing the management codes. Values must be present</span>
+<span class="sd">            in the management system table.</span>
+<span class="sd">        soil_code : numpy.ndarray, np.uint8</span>
+<span class="sd">            Array containing the soil codes. Values must be present</span>
+<span class="sd">            in the soil_code system table.</span>
+<span class="sd">        nitrogen : numpy.ndarray, np.float32</span>
+<span class="sd">            Array containing the calculated nitrogen levels.</span>
+<span class="sd">        inundation : numpy.ndarray, np.uint8</span>
+<span class="sd">            Array containing the inundation values.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">         numpy.ndarray, np.uint8</span>
+<span class="sd">            nutrient level</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">check_codes_used</span><span class="p">(</span><span class="s2">&quot;management&quot;</span><span class="p">,</span> <span class="n">management</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ct_management</span><span class="p">[</span><span class="s2">&quot;management&quot;</span><span class="p">])</span>
         <span class="n">check_codes_used</span><span class="p">(</span><span class="s2">&quot;soil_code&quot;</span><span class="p">,</span> <span class="n">soil_code</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ct_soil_code</span><span class="p">[</span><span class="s2">&quot;soil_code&quot;</span><span class="p">])</span>
 
+        <span class="n">nodata</span> <span class="o">=</span> <span class="p">((</span><span class="n">management</span> <span class="o">==</span> <span class="mi">255</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">soil_code</span> <span class="o">==</span> <span class="mi">255</span><span class="p">)</span> <span class="o">|</span>
+                  <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">nitrogen</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">inundation</span> <span class="o">==</span> <span class="mi">255</span><span class="p">))</span>
+
         <span class="c1"># calculate management influence</span>
-        <span class="n">influence</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">management</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="o">-</span><span class="mi">99</span><span class="p">)</span>  <span class="c1"># -99 used as no data value</span>
+        <span class="n">influence</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">management</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodata</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ct_management</span><span class="o">.</span><span class="n">management</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
             <span class="n">sel_grid</span> <span class="o">=</span> <span class="n">management</span> <span class="o">==</span> <span class="n">i</span>
             <span class="n">sel_ct</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ct_management</span><span class="o">.</span><span class="n">management</span> <span class="o">==</span> <span class="n">i</span>
             <span class="n">influence</span><span class="p">[</span><span class="n">sel_grid</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ct_management</span><span class="p">[</span><span class="n">sel_ct</span><span class="p">]</span><span class="o">.</span><span class="n">influence</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-        <span class="c1"># flatten all input layers (necessary for digitize)</span>
+        <span class="c1"># flatten all input layers</span>
         <span class="n">orig_shape</span> <span class="o">=</span> <span class="n">soil_code</span><span class="o">.</span><span class="n">shape</span>
         <span class="n">soil_code</span> <span class="o">=</span> <span class="n">soil_code</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
         <span class="n">nitrogen</span> <span class="o">=</span> <span class="n">nitrogen</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
@@ -215,9 +264,8 @@
         <span class="n">inundation</span> <span class="o">=</span> <span class="n">inundation</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
         <span class="n">influence</span> <span class="o">=</span> <span class="n">influence</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
 
+        <span class="n">result</span> <span class="o">=</span> <span class="n">influence</span>
         <span class="c1"># search for classification values in nutrient level codetable</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">influence</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodata</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;uint8&quot;</span><span class="p">)</span>
-
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">subtable</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ct_lnk_soil_nutrient_level</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span>
             <span class="p">[</span><span class="s2">&quot;soil_code&quot;</span><span class="p">,</span> <span class="s2">&quot;influence&quot;</span><span class="p">]</span>
         <span class="p">):</span>
@@ -226,20 +274,19 @@
             <span class="n">table_sel</span> <span class="o">=</span> <span class="n">subtable</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
             <span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">(</span><span class="n">nitrogen</span><span class="p">,</span> <span class="n">table_sel</span><span class="o">.</span><span class="n">total_nitrogen_max</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">index</span><span class="p">[</span><span class="n">nodata</span><span class="o">.</span><span class="n">flatten</span><span class="p">()]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodata</span>
             <span class="n">selection</span> <span class="o">=</span> <span class="p">(</span><span class="n">soil_code</span> <span class="o">==</span> <span class="n">soil_selected</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">influence</span> <span class="o">==</span> <span class="n">influence_selected</span><span class="p">)</span>
-
-            <span class="n">result</span><span class="p">[</span><span class="n">selection</span><span class="p">]</span> <span class="o">=</span> <span class="n">table_sel</span><span class="o">.</span><span class="n">nutrient_level</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span>
-                <span class="n">index</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">nodata</span><span class="p">)[</span><span class="n">selection</span><span class="p">]</span>
-
-        <span class="c1"># np.nan values are not ignored in np.digitize</span>
-        <span class="n">result</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">nitrogen</span><span class="p">)]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodata</span>
+            <span class="c1"># Add the no-data value to the mapping</span>
+            <span class="n">table_sel</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">nodata</span><span class="p">,</span> <span class="s2">&quot;nutrient_level&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodata</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">selection</span><span class="p">]</span> <span class="o">=</span> <span class="n">table_sel</span><span class="o">.</span><span class="n">nutrient_level</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">selection</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 
         <span class="c1"># Note that niche_vlaanderen is different from the original (Dutch)</span>
         <span class="c1"># model here:</span>
         <span class="c1"># only if nutrient_level &lt; 4 the inundation rule is applied.</span>
-        <span class="n">selection</span> <span class="o">=</span> <span class="p">(</span><span class="n">result</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">result</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodata</span><span class="p">)</span>
-        <span class="n">result</span><span class="p">[</span><span class="n">selection</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">result</span> <span class="o">+</span> <span class="p">(</span><span class="n">inundation</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">))[</span><span class="n">selection</span><span class="p">]</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">orig_shape</span><span class="p">)</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">result</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">result</span> <span class="o">+</span> <span class="p">(</span><span class="n">inundation</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">))[</span><span class="n">result</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">]</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">orig_shape</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">nodata</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodata</span>  <span class="c1"># Apply the nodata mask</span>
         <span class="k">return</span> <span class="n">result</span>
 
 <div class="viewcode-block" id="NutrientLevel.calculate">
@@ -254,33 +301,30 @@
         <span class="n">management</span><span class="p">,</span>
         <span class="n">inundation</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Calculates the Nutrient level</span>
-
-<span class="sd">        Calculates the nutrient level based on a number of numpy arrays.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates the nutrient level based on the input arrays provided</span>
 
 <span class="sd">        Parameters</span>
-<span class="sd">        ==========</span>
-<span class="sd">        soil_code: numpy.array</span>
+<span class="sd">        ----------</span>
+<span class="sd">        soil_code :  numpy.ndarray, np.uint8</span>
 <span class="sd">            Array containing the soil codes. Values must be present</span>
-<span class="sd">            in the soil_code table. -99 is used as no data value.</span>
-<span class="sd">        msw: numpy.array</span>
-<span class="sd">            Array containing the mean spring waterlevel. numpy.nan is used as</span>
-<span class="sd">            no data value</span>
-<span class="sd">        nitrogen_atmospheric: numpy.array</span>
-<span class="sd">            Array containing the atmospheric deposition of Nitrogen. numpy.nan</span>
-<span class="sd">            is used as no data value</span>
-<span class="sd">        nitrogen_animal: numpy.array</span>
-<span class="sd">            Array containing the animal contribution of Nitrogen.numpy.nan</span>
-<span class="sd">            is used as no data value</span>
-<span class="sd">        nitrogen_fertilizer: numpy.array</span>
-<span class="sd">            Array containing the fertilizer contribution of Nitrogen.numpy.nan</span>
-<span class="sd">            is used as no data value</span>
-<span class="sd">        management: numpy.array</span>
+<span class="sd">            in the soil_code table.</span>
+<span class="sd">        msw : numpy.ndarray, np.float32</span>
+<span class="sd">            Array containing the mean spring waterlevel.</span>
+<span class="sd">        nitrogen_atmospheric : numpy.ndarray, np.float32</span>
+<span class="sd">            Array containing the atmospheric deposition of Nitrogen.</span>
+<span class="sd">        nitrogen_animal : numpy.ndarray, np.float32</span>
+<span class="sd">            Array containing the animal contribution of Nitrogen.</span>
+<span class="sd">        nitrogen_fertilizer : numpy.ndarray, np.float32</span>
+<span class="sd">            Array containing the fertilizer contribution of Nitrogen.</span>
+<span class="sd">        management :  numpy.ndarray, np.uint8</span>
 <span class="sd">            Array containing the management.</span>
-<span class="sd">        inundation:</span>
+<span class="sd">        inundation :  numpy.ndarray, np.uint8</span>
 <span class="sd">            Array containing the inundation values.</span>
 
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        numpy.ndarray, np.uint8</span>
+<span class="sd">            nutrient level</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">nitrogen_mineralisation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_mineralisation</span><span class="p">(</span><span class="n">soil_code</span><span class="p">,</span> <span class="n">msw</span><span class="p">)</span>

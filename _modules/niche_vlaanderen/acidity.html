@@ -101,22 +101,38 @@
 <div class="viewcode-block" id="Acidity">
 <a class="viewcode-back" href="../../lowlevel.html#niche_vlaanderen.Acidity">[docs]</a>
 <span class="k">class</span> <span class="nc">Acidity</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to calculate the Acidity</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the Acidity</span>
 
 <span class="sd">    The used codetables can be overwritten by using the corresponding ct_*</span>
 <span class="sd">    arguments.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">nodata</span> <span class="o">=</span> <span class="mi">255</span>  <span class="c1"># uint8 data type</span>
+    <span class="n">dtype</span> <span class="o">=</span> <span class="s2">&quot;uint8&quot;</span>
+    <span class="n">nodata</span> <span class="o">=</span> <span class="mi">255</span>  <span class="c1"># unsigned 8 bit integer for acidity</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">ct_acidity</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">ct_soil_mlw_class</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">ct_soil_codes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">ct_soil_code</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">lnk_acidity</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">ct_seepage</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an acidity calculator</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ct_acidity : str, Optional</span>
+<span class="sd">            Path to the acidity system table to overwrite the default.</span>
+<span class="sd">        ct_soil_mlw_class : str, Optional</span>
+<span class="sd">            Path to the soil_mlw_class system table to overwrite the default.</span>
+<span class="sd">        ct_soil_code : str, Optional</span>
+<span class="sd">            Path to the soil_code system table to overwrite the default.</span>
+<span class="sd">        lnk_acidity : str, Optional</span>
+<span class="sd">            Path to the lnk_acidity system table to overwrite the default.</span>
+<span class="sd">        ct_seepage : str, Optional</span>
+<span class="sd">            Path to the seepage system table to overwrite the default.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">ct_acidity</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">ct_acidity</span> <span class="o">=</span> <span class="n">package_resource</span><span class="p">(</span>
@@ -124,8 +140,8 @@
         <span class="k">if</span> <span class="n">ct_soil_mlw_class</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">ct_soil_mlw_class</span> <span class="o">=</span> <span class="n">package_resource</span><span class="p">(</span>
                 <span class="p">[</span><span class="s2">&quot;system_tables&quot;</span><span class="p">],</span> <span class="s2">&quot;soil_mlw_class.csv&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">ct_soil_codes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">ct_soil_codes</span> <span class="o">=</span> <span class="n">package_resource</span><span class="p">(</span>
+        <span class="k">if</span> <span class="n">ct_soil_code</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ct_soil_code</span> <span class="o">=</span> <span class="n">package_resource</span><span class="p">(</span>
                 <span class="p">[</span><span class="s2">&quot;system_tables&quot;</span><span class="p">],</span> <span class="s2">&quot;soil_codes.csv&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">lnk_acidity</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">lnk_acidity</span> <span class="o">=</span> <span class="n">package_resource</span><span class="p">(</span>
@@ -136,7 +152,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_ct_acidity</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">ct_acidity</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_ct_soil_mlw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">ct_soil_mlw_class</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_ct_soil_codes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">ct_soil_codes</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ct_soil_codes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">ct_soil_code</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_lnk_acidity</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">lnk_acidity</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_ct_seepage</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">ct_seepage</span><span class="p">)</span>
 
@@ -154,32 +170,67 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_ct_soil_codes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ct_soil_codes</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;soil_code&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_calculate_soil_mlw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">soil_code</span><span class="p">,</span> <span class="n">mlw</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the soil mlw classes</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        soil_code : numpy.ndarray, numpy.uint8</span>
+<span class="sd">            Array containing the soil codes. Values must be present</span>
+<span class="sd">            in the soil_code system table.</span>
+<span class="sd">        mlw : numpy.ndarray, numpy.float32</span>
+<span class="sd">            Array containing the mean low waterlevel.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        numpy.ndarray, numpy.uint8</span>
+<span class="sd">            Array containing the soil_mlw class values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">check_codes_used</span><span class="p">(</span><span class="s2">&quot;soil_code&quot;</span><span class="p">,</span> <span class="n">soil_code</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ct_soil_codes</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+        <span class="n">nodata</span> <span class="o">=</span> <span class="p">(</span><span class="n">soil_code</span> <span class="o">==</span> <span class="mi">255</span><span class="p">)</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">mlw</span><span class="p">)</span>
 
         <span class="c1"># determine soil_group for soil_code</span>
         <span class="n">orig_shape</span> <span class="o">=</span> <span class="n">mlw</span><span class="o">.</span><span class="n">shape</span>
         <span class="n">soil_code</span> <span class="o">=</span> <span class="n">soil_code</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
         <span class="n">mlw</span> <span class="o">=</span> <span class="n">mlw</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-        <span class="n">soil_group</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_ct_soil_codes</span><span class="o">.</span><span class="n">soil_group</span>
-            <span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">soil_code</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=-</span><span class="mi">99</span><span class="p">)</span>  <span class="c1"># Fill with -99 for no data</span>
-            <span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;int8&quot;</span><span class="p">)</span>
-        <span class="p">)</span>
 
-        <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">soil_code</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="o">-</span><span class="mi">99</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ct_soil_codes</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">nodata</span><span class="p">,</span> <span class="s2">&quot;soil_group&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodata</span>
+        <span class="n">soil_group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ct_soil_codes</span><span class="o">.</span><span class="n">soil_group</span><span class="p">[</span><span class="n">soil_code</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;uint8&quot;</span><span class="p">)</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">soil_code</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodata</span>
         <span class="k">for</span> <span class="n">sel_group</span><span class="p">,</span> <span class="n">subtable</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ct_soil_mlw</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;soil_group&quot;</span><span class="p">):</span>
-
             <span class="n">subtable</span> <span class="o">=</span> <span class="n">subtable</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">(</span><span class="n">mlw</span><span class="p">,</span> <span class="n">subtable</span><span class="o">.</span><span class="n">mlw_max</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">index</span><span class="p">[</span><span class="n">nodata</span><span class="o">.</span><span class="n">flatten</span><span class="p">()]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodata</span>
             <span class="n">selection</span> <span class="o">=</span> <span class="n">soil_group</span> <span class="o">==</span> <span class="n">sel_group</span>
-            <span class="n">result</span><span class="p">[</span><span class="n">selection</span><span class="p">]</span> <span class="o">=</span> <span class="n">subtable</span><span class="o">.</span><span class="n">soil_mlw_class</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">index</span><span class="p">)[</span><span class="n">selection</span><span class="p">]</span>
-
-        <span class="n">result</span><span class="p">[(</span><span class="n">mlw</span> <span class="o">==</span> <span class="mi">99</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">mlw</span><span class="p">))]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">99</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">orig_shape</span><span class="p">)</span>
+            <span class="n">subtable</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">nodata</span><span class="p">,</span> <span class="s2">&quot;soil_mlw_class&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodata</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">selection</span><span class="p">]</span> <span class="o">=</span> <span class="n">subtable</span><span class="o">.</span><span class="n">soil_mlw_class</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">selection</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">orig_shape</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">nodata</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodata</span>  <span class="c1"># Apply the nodata mask</span>
         <span class="k">return</span> <span class="n">result</span>
 
-    <span class="k">def</span> <span class="nf">_get_acidity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rainwater</span><span class="p">,</span> <span class="n">minerality</span><span class="p">,</span> <span class="n">inundation</span><span class="p">,</span> <span class="n">seepage</span><span class="p">,</span> <span class="n">soil_mlw_class</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_get_acidity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rainwater</span><span class="p">,</span> <span class="n">minerality</span><span class="p">,</span> <span class="n">inundation</span><span class="p">,</span>
+                     <span class="n">seepage_class</span><span class="p">,</span> <span class="n">soil_mlw_class</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the acidity</span>
 
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        rainwater : numpy.ndarray, numpy.uint8</span>
+<span class="sd">            Array denoting whether rainwater lenses occur.</span>
+<span class="sd">        minerality : numpy.ndarray, numpy.uint8</span>
+<span class="sd">            Array noting whether the groundwater is rich(1) or poor in minerals</span>
+<span class="sd">        inundation : numpy.ndarray, numpy.uint8</span>
+<span class="sd">            Array containing rate of inundation.</span>
+<span class="sd">        seepage_class : numpy.ndarray, numpy.uint8</span>
+<span class="sd">            Array containing the classified version of theflux of groundwater.</span>
+<span class="sd">        soil_mlw_class : numpy.ndarray, numpy.uint8</span>
+<span class="sd">            Array containing the soil mlw classes from helper function.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        numpy.ndarray, numpy.uint8</span>
+<span class="sd">            Array containing the acidity values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">orig_shape</span> <span class="o">=</span> <span class="n">inundation</span><span class="o">.</span><span class="n">shape</span>
 
         <span class="n">check_codes_used</span><span class="p">(</span><span class="s2">&quot;rainwater&quot;</span><span class="p">,</span> <span class="n">rainwater</span><span class="p">,</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">})</span>
@@ -187,15 +238,21 @@
             <span class="s2">&quot;minerality&quot;</span><span class="p">,</span> <span class="n">minerality</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lnk_acidity</span><span class="p">[</span><span class="s2">&quot;mineral_richness&quot;</span><span class="p">]</span>
         <span class="p">)</span>
         <span class="n">check_codes_used</span><span class="p">(</span><span class="s2">&quot;inundation&quot;</span><span class="p">,</span> <span class="n">inundation</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lnk_acidity</span><span class="p">[</span><span class="s2">&quot;inundation&quot;</span><span class="p">])</span>
-        <span class="n">check_codes_used</span><span class="p">(</span><span class="s2">&quot;seepage&quot;</span><span class="p">,</span> <span class="n">seepage</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ct_seepage</span><span class="p">[</span><span class="s2">&quot;seepage&quot;</span><span class="p">])</span>
+        <span class="n">check_codes_used</span><span class="p">(</span><span class="s2">&quot;seepage&quot;</span><span class="p">,</span> <span class="n">seepage_class</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ct_seepage</span><span class="p">[</span><span class="s2">&quot;seepage&quot;</span><span class="p">])</span>
+
+        <span class="n">nodata</span> <span class="o">=</span> <span class="p">((</span><span class="n">rainwater</span> <span class="o">==</span> <span class="mi">255</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">minerality</span> <span class="o">==</span> <span class="mi">255</span><span class="p">)</span> <span class="o">|</span>
+                  <span class="p">(</span><span class="n">inundation</span> <span class="o">==</span> <span class="mi">255</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">soil_mlw_class</span> <span class="o">==</span> <span class="mi">255</span><span class="p">)</span> <span class="o">|</span>
+                  <span class="p">(</span><span class="n">seepage_class</span> <span class="o">==</span> <span class="mi">255</span><span class="p">))</span>
 
         <span class="n">rainwater</span> <span class="o">=</span> <span class="n">rainwater</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
         <span class="n">minerality</span> <span class="o">=</span> <span class="n">minerality</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
         <span class="n">inundation</span> <span class="o">=</span> <span class="n">inundation</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-        <span class="n">seepage</span> <span class="o">=</span> <span class="n">seepage</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="n">seepage</span> <span class="o">=</span> <span class="n">seepage_class</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
         <span class="n">soil_mlw_class</span> <span class="o">=</span> <span class="n">soil_mlw_class</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
 
-        <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">soil_mlw_class</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodata</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;uint8&quot;</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">soil_mlw_class</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodata</span>
+
+
         <span class="k">for</span> <span class="n">labels</span><span class="p">,</span> <span class="n">subtable</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lnk_acidity</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span>
             <span class="p">[</span><span class="s2">&quot;rainwater&quot;</span><span class="p">,</span> <span class="s2">&quot;mineral_richness&quot;</span><span class="p">,</span> <span class="s2">&quot;inundation&quot;</span><span class="p">,</span> <span class="s2">&quot;seepage&quot;</span><span class="p">,</span> <span class="s2">&quot;soil_mlw_class&quot;</span><span class="p">]</span>
         <span class="p">):</span>
@@ -215,45 +272,69 @@
                 <span class="o">&amp;</span> <span class="p">(</span><span class="n">seepage</span> <span class="o">==</span> <span class="n">sel_seepage</span><span class="p">)</span>
                 <span class="o">&amp;</span> <span class="p">(</span><span class="n">soil_mlw_class</span> <span class="o">==</span> <span class="n">sel_soil_mlw_class</span><span class="p">)</span>
             <span class="p">)</span>
-            <span class="n">result</span><span class="p">[(</span><span class="n">selection</span><span class="p">)]</span> <span class="o">=</span> <span class="n">subtable</span><span class="o">.</span><span class="n">acidity</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">orig_shape</span><span class="p">)</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">selection</span><span class="p">]</span> <span class="o">=</span> <span class="n">subtable</span><span class="o">.</span><span class="n">acidity</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">orig_shape</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">nodata</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodata</span>
         <span class="k">return</span> <span class="n">result</span>
 
     <span class="k">def</span> <span class="nf">_get_seepage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seepage</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Classify seepage values&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Classify seepage values into seepage classes</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        seepage : numpy.ndarray, numpy.float32</span>
+<span class="sd">            Seepage array</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        numpy.ndarray, numpy.uint8</span>
+<span class="sd">            Seepage class array</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nodata</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">seepage</span><span class="p">)</span>
+
         <span class="n">orig_shape</span> <span class="o">=</span> <span class="n">seepage</span><span class="o">.</span><span class="n">shape</span>
         <span class="n">seepage</span> <span class="o">=</span> <span class="n">seepage</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
         <span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">(</span><span class="n">seepage</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ct_seepage</span><span class="o">.</span><span class="n">seepage_max</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">seepage_class</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ct_seepage</span><span class="o">.</span><span class="n">seepage</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
-        <span class="n">seepage_class</span><span class="p">[(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">seepage</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">seepage</span> <span class="o">==</span> <span class="o">-</span><span class="mi">99</span><span class="p">))]</span>
-        <span class="k">return</span> <span class="n">seepage_class</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">orig_shape</span><span class="p">)</span>
+        <span class="n">index</span><span class="p">[</span><span class="n">nodata</span><span class="o">.</span><span class="n">flatten</span><span class="p">()]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodata</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ct_seepage</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">nodata</span><span class="p">,</span> <span class="s2">&quot;seepage&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodata</span>
+        <span class="n">seepage_class</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ct_seepage</span><span class="p">[</span><span class="s2">&quot;seepage&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+        <span class="n">seepage_class</span> <span class="o">=</span> <span class="n">seepage_class</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">orig_shape</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="n">seepage_class</span><span class="p">[</span><span class="n">nodata</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodata</span>
+        <span class="k">return</span> <span class="n">seepage_class</span>
 
 <div class="viewcode-block" id="Acidity.calculate">
 <a class="viewcode-back" href="../../lowlevel.html#niche_vlaanderen.Acidity.calculate">[docs]</a>
-    <span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">soil_class</span><span class="p">,</span> <span class="n">mlw</span><span class="p">,</span> <span class="n">inundation</span><span class="p">,</span> <span class="n">seepage</span><span class="p">,</span> <span class="n">minerality</span><span class="p">,</span> <span class="n">rainwater</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">soil_code</span><span class="p">,</span> <span class="n">mlw</span><span class="p">,</span> <span class="n">inundation</span><span class="p">,</span> <span class="n">seepage</span><span class="p">,</span> <span class="n">minerality</span><span class="p">,</span> <span class="n">rainwater</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the Acidity</span>
 
-<span class="sd">        Parameters:</span>
-<span class="sd">        ===========</span>
-<span class="sd">        soil_class: numpy.array</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        soil_code: numpy.ndarray, numpy.uint8</span>
 <span class="sd">            Array containing the soil codes. Values must be present</span>
 <span class="sd">            in the soil_code table. -99 is used as no data value.</span>
-<span class="sd">        mlw: numpy.array</span>
+<span class="sd">        mlw: numpy.ndarray, numpy.float32</span>
 <span class="sd">            Array containing the mean lowest waterlevel.</span>
-<span class="sd">        inundation:  numpy.array</span>
+<span class="sd">        inundation:  numpy.ndarray, numpy.uint8</span>
 <span class="sd">            Array containing rate of inundation.</span>
 <span class="sd">            https://inbo.github.io/niche_vlaanderen/invoer.html#overstroming-trofie-inundation-nutrient</span>
-<span class="sd">        seepage:  numpy.array</span>
+<span class="sd">        seepage:  numpy.ndarray, numpy.float32</span>
 <span class="sd">            Array containing the flux of groundwater at the location</span>
 <span class="sd">            https://inbo.github.io/niche_vlaanderen/invoer.html#overstroming-trofie-inundation-nutrient</span>
-<span class="sd">        minerality: numpy.array</span>
+<span class="sd">        minerality: numpy.ndarray, numpy.uint8</span>
 <span class="sd">            Array noting whether the groundwater is rich(1) or poor in minerals</span>
 <span class="sd">            https://inbo.github.io/niche_vlaanderen/invoer.html#mineraalrijkdom-minerality</span>
-<span class="sd">        rainwater: numpy.array (optional)</span>
+<span class="sd">        rainwater: numpy.ndarray, numpy.uint8</span>
 <span class="sd">            Array denoting whether rainwater lenses occur.</span>
 <span class="sd">            https://inbo.github.io/niche_vlaanderen/invoer.html#regenlens-rainwater</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        numpy.ndarray, numpy.uint8</span>
+<span class="sd">            acidity</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">soil_mlw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_soil_mlw</span><span class="p">(</span><span class="n">soil_class</span><span class="p">,</span> <span class="n">mlw</span><span class="p">)</span>
+        <span class="n">soil_mlw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_soil_mlw</span><span class="p">(</span><span class="n">soil_code</span><span class="p">,</span> <span class="n">mlw</span><span class="p">)</span>
         <span class="n">seepage</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_seepage</span><span class="p">(</span><span class="n">seepage</span><span class="p">)</span>
         <span class="n">acidity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_acidity</span><span class="p">(</span>
             <span class="n">rainwater</span><span class="p">,</span> <span class="n">minerality</span><span class="p">,</span> <span class="n">inundation</span><span class="p">,</span> <span class="n">seepage</span><span class="p">,</span> <span class="n">soil_mlw</span>
