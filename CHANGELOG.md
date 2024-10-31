@@ -1,3 +1,14 @@
+
+# 2.1 (2024-10-31)
+
+* The supported Python versions are 3.9, 3.10 and 3.11 (deprecated 3.8). This is now
+  reflected in the metadata and the CI-setup (#385).
+* Add missing documentation files to explain data model (#386).
+* Improvement of the handling of no-data values in the processing modules. This refactoring
+  does not impact the user-facing handling of the data and focuses on the internals. Each
+  input raster now has a dedicated dtype and no-data representation (#387).
+
+
 # 2.0 (2024-07-10)
 
 This release contains a breaking change with the 1.x version of Niche-Vlaanderen due to
