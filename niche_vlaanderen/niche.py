@@ -9,6 +9,7 @@ import numbers
 import yaml
 import datetime
 import sys
+from pathlib import Path
 
 import numpy as np
 import numpy.ma as ma
@@ -29,23 +30,23 @@ from niche_vlaanderen.codetables import package_resource
 
 
 _allowed_input = {
-    "soil_code",
-    "mlw",
-    "msw",
-    "mhw",
-    "seepage",
-    "inundation_acidity",
-    "inundation_nutrient",
-    "nitrogen_atmospheric",
-    "nitrogen_animal",
-    "nitrogen_fertilizer",
-    "management",
-    "minerality",
-    "rainwater",
-    "inundation_vegetation",
-    "management_vegetation",
-    "acidity",
-    "nutrient_level",
+    "soil_code": "uint8",
+    "mlw": "float32",
+    "msw": "float32",
+    "mhw": "float32",
+    "seepage": "float32",
+    "inundation_acidity": "uint8",
+    "inundation_nutrient": "uint8",
+    "nitrogen_atmospheric": "float32",
+    "nitrogen_animal": "float32",
+    "nitrogen_fertilizer": "float32",
+    "management": "uint8",
+    "minerality": "uint8",
+    "rainwater": "uint8",
+    "inundation_vegetation": "uint8",
+    "management_vegetation": "uint8",
+    "acidity": "uint8",
+    "nutrient_level": "uint8"
 }
 
 _minimal_input = {"mlw", "mhw", "soil_code"}
@@ -90,20 +91,7 @@ logger = logging.getLogger(__name__)
 
 
 class Niche(object):
-    """Creates a new Niche object
-
-    A niche object can be used to predict vegetation types according to the
-    NICHE Vlaanderen model.
-
-    The default codetables are used unless other tables are supplied to the
-    constructor.
-
-    Parameters:
-        ct_* lnk_*: path
-          Optionally, paths to codetables can be provided. These will override
-          the standard codetables used by Niche.
-
-    """
+    """Main Niche model class"""
 
     def __init__(
             self,
@@ -117,6 +105,20 @@ class Niche(object):
             ct_nutrient_level=None,
             ct_mineralisation=None,
     ):
+        """Create a new Niche object
+
+        A niche object can be used to predict vegetation types according to the
+        NICHE Vlaanderen model.
+
+        The default codetables are used unless other tables are supplied to the
+        constructor.
+
+        Parameters
+        ----------
+        ct_* lnk_*: Pathlib.Path
+            Optionally, paths to codetables can be provided. These will override
+            the standard codetables used by Niche.
+        """
         self._inputfiles = dict()
         self._inputvalues = dict()
         self._inputarray = dict()
@@ -142,13 +144,16 @@ class Niche(object):
 
     @property
     def name(self):
+        """Get model instance name"""
         return self._options["name"]
 
     @name.setter
     def name(self, name):
+        """Set model instance name"""
         self._options["name"] = str(name)
 
     def __repr__(self):
+        """Model object representation"""
         s = "# Niche Vlaanderen version: {}\n".format(__version__)
         s += self._latest_version + "\n"
         s += "# Reference values:\n"
@@ -201,6 +206,7 @@ class Niche(object):
         return s
 
     def _check_latest_version(self):
+        """Fetch latest niche version from pypi and compare to currently used version"""
         url = "https://pypi.python.org/pypi/niche_vlaanderen/json"
         try:
             response = urlopen(url, timeout=5)
@@ -224,6 +230,7 @@ class Niche(object):
         return s
 
     def _set_ct(self, key, value):
+        """Update key/value of the code tables"""
         if key not in _code_tables and key not in _code_tables_fp:
             raise NicheException("Unrecognized codetable %s" % key)
 
@@ -241,14 +248,12 @@ class Niche(object):
             The type of grid that you want to assign (eg msw, soil_code, ...).
             Possible options are listed in
             https://inbo.github.io/niche_vlaanderen/cli.html#id1
-        value: string / number
+        value: string | number
             Path to a file containing the grid. Can be a folder for
             certain grid types (eg ArcGIS rasters).
             Can also be a number: in that case a constant value is applied
             everywhere.
-
         """
-
         # check type is valid value from list
         if key not in _allowed_input:
             raise NicheException("Unrecognized type %s" % key)
@@ -261,7 +266,6 @@ class Niche(object):
             # Remove any existing values to make sure last value is used
             self._inputfiles.pop(key, None)
             self._inputvalues[key] = value
-
         else:
             with rasterio.open(value, "r") as dst:
                 sc_new = SpatialContext(dst)
@@ -279,10 +283,11 @@ class Niche(object):
 
         Configures a model based on a config file
 
-        Parameters:
-            overwrite_ct: bool (False)
-               Allows the user to override the default codetables (after
-               the class has been initialized).
+        Parameters
+        ----------
+        overwrite_ct: bool (False)
+            Allows the user to override the default codetables (after
+            the class has been initialized).
         """
         with open(config, "r") as stream:
             config_loaded = yaml.safe_load(stream)
@@ -331,12 +336,13 @@ class Niche(object):
 
         This will configure the model, run and output as specified.
 
-        Parameters:
-            config: string
-               path to a config file
-            overwrite_ct: boolean (False)
-               overwrite codetables using the values specified in
-               the configuration file.
+        Parameters
+        ----------
+        config: string
+            path to a config file
+        overwrite_ct: boolean (False)
+            overwrite codetables using the values specified in
+            the configuration file.
         """
 
         self.read_config_file(config, overwrite_ct=overwrite_ct)
@@ -370,11 +376,9 @@ class Niche(object):
                     ct_nl[k] = self._code_tables[k]
 
                 fp = Flooding(name=scen["name"], **ct_nl)
-
                 depth_file = os.path.join(os.path.dirname(config), scen["depth"])
-
                 fp.calculate(
-                    depth_file=depth_file,
+                    depth_file_path=depth_file,
                     period=scen["period"],
                     frequency=scen["frequency"],
                     duration=scen["duration"],
@@ -413,51 +417,55 @@ class Niche(object):
                     "Error: not all {} values are lower than {}".format(a, b)
                 )
 
-    def _check_input_files(self, full_model):
-        """basic input checks (valid files etc)"""
+    def read_rasterio_to_grid(self, file_name, variable_name=None):
+        """Read grid files using rasterio as Numpy arrays
 
-        # Load every input_file in the input_array
-        inputarray = dict()
-        for f in self._inputfiles:
-            dst = rasterio.open(self._inputfiles[f], "r")
-
-            nodata = dst.nodatavals[0]
-
+        Parameters
+        ----------
+        file_name : string | Pathlib.Path
+            Path to the file to be read
+        variable_name : string
+            Name of the variable this grid file represents
+        """
+        with rasterio.open(file_name, "r") as dst:
             window = self._context.get_read_window(SpatialContext(dst))
-            band = dst.read(1, window=window)
+            band = dst.read(1, masked=True, window=window)
 
-            # if we have unsigned integers - switch to signed otherwise
-            # no data (-99) will fail.
+        # Custom fix for mapping of the old soil_code to the new soil_code
+        if variable_name == "soil_code" and np.all(band >= 10000):
+            band = np.round(band / 10000)
 
-            if band.dtype.kind == "u":
-                band = band.astype(int)
+        # Cast inputs to predefined type
+        if variable_name in _allowed_input:
+            # Assign fill value for unsigned integers (255) and floats (np.nan)
+            if _allowed_input[variable_name] == "uint8":
+                # first fill with fill-value compatible to uint8
+                band = band.filled(fill_value=255).astype("uint8")
+            elif _allowed_input[variable_name] == "float32":
+                # convert to float and fill with Nan
+                band = band.astype("float32").filled(fill_value=np.nan)
 
-            if f in (
-                    "nitrogen_animal",
-                    "nitrogen_fertilizer",
-                    "nitrogen_atmospheric",
-                    "mhw",
-                    "mlw",
-                    "msw",
-            ):
-                band = band.astype("float32")
+        return band # return numpy array instead of masked array
 
-            # convert old soil codes to new soil codes
-            if f == "soil_code" and np.all(band[band != nodata] >= 10000):
-                band[band != nodata] = np.round(band[band != nodata] / 10000)
+    def _check_input_files(self, full_model):
+        """Load all input files to input_array and applu basic input checks
 
-            # create a mask for no-data values, taking into account data-types
-            if band.dtype == "float32" and nodata is not None:
-                band[np.isclose(band, nodata)] = np.nan
-            else:
-                band[band == nodata] = -99
-
-            inputarray[f] = band
+        Parameters
+        ----------
+        full_model : bool
+            If True, the full niche model is applied
+        """
+        # Load the input array from disk
+        inputarray = dict()
+        for variable in self._inputfiles:
+            band = self.read_rasterio_to_grid(self._inputfiles[variable], variable)
+            inputarray[variable] = band
 
         # Load in all constant inputvalues
         for f in self._inputvalues:
             shape = (int(self._context.height), int(self._context.width))
-            inputarray[f] = np.full(shape, self._inputvalues[f])
+            inputarray[f] = np.full(shape, self._inputvalues[f],
+                                    dtype=_allowed_input[f])
 
         # check if valid values are used in inputarrays
         # check for valid datatypes - values will be checked in the low-level
@@ -495,11 +503,9 @@ class Niche(object):
         full_model: bool
                    Uses the full niche model. The simple model only uses mhw,
                    mlw and soil_code as input.
-
         deviation: bool
                     Create the maps with the difference between the needed MHW
                     and MLW and the actual MHW/MLW for a vegetation type.
-
         strict_checks: bool
                 By default running a model will fail if impossible combinations
                 of MxW exist somewhere in the input files. By disabling strict
@@ -634,16 +640,13 @@ class Niche(object):
 
         Parameters
         ----------
-
         folder: string
             Output folder to which files will be written. Parent directory must
             already exist.
-
         overwrite_files: bool
             Overwrite files when saving.
             Note writing will fail if any of the files to be written already
             exists.
-
         detailed_files : bool
             Save detailed information on factor affecting vegetation possibility
 
@@ -655,8 +658,7 @@ class Niche(object):
         folder = str(folder)
         self._options["output_dir"] = folder
 
-        if not os.path.exists(folder):
-            os.makedirs(folder)
+        Path(self._options["output_dir"]).mkdir(parents=True, exist_ok=True)
 
         params = dict(
             driver="GTiff",
@@ -730,7 +732,6 @@ class Niche(object):
 
         # deviation
         params.update(dtype="float64", nodata=-99999)
-
         for i in self._deviation:
             with rasterio.open(files[i], "w", **params) as dst:
                 band = self._deviation[i]
@@ -755,7 +756,7 @@ class Niche(object):
           >>> plt.show()
 
         Parameters
-        ==========
+        ----------
         key: veg_code (1..28) or input_code
           key of the vegetation type that should be plotted, eg myniche.plot(7)
           or key of the input layer you want to plot eg myniche("mhw").
@@ -770,10 +771,9 @@ class Niche(object):
            Use a fixed scale
 
         Returns
-        =======
+        -------
         ax: `matplotlib.axes.Axes`_
-          Can be used to update the plot (eg change the
-          title).
+          Can be used to update the plot (eg change the title).
         """
         try:
             import matplotlib.pyplot as plt
@@ -797,23 +797,16 @@ class Niche(object):
         if key in self._inputfiles and key not in self._inputarray:
             # if set_input has been done, but no model run yet
             # in this case we will open the file and fetch the data
-            with rasterio.open(self._inputfiles[key], "r") as dst:
-                window = self._context.get_read_window(SpatialContext(dst))
-                v = dst.read(1, window=window)
-                v = ma.masked_equal(v, dst.nodatavals[0])
+            v = self.read_rasterio_to_grid(self._inputfiles[key], key)
             title = key
-
         if key in self._inputarray:
             v = self._inputarray[key]
-            v = ma.masked_equal(v, -99)
             title = key
         if key in self._abiotic:
             v = self._abiotic[key]
-            v = ma.masked_equal(v, 255)
             title = key
         if key in self._vegetation.keys():
             v = self._vegetation[key]
-            v = ma.masked_equal(v, 255)
             title = "{} ({})".format(self._vegcode2name(key), key)
             norm = Normalize(0, 1)
         if key in self._deviation:
@@ -827,6 +820,10 @@ class Niche(object):
 
         if v is None:
             raise NicheException("Invalid key specified")
+
+        # Convert uint8 with no-data 255 into Masked array
+        if v.dtype == "uint8":
+            v = ma.masked_equal(v, 255)
 
         if ax is None:
             fig, ax = plt.subplots()
@@ -883,7 +880,7 @@ class Niche(object):
         title = "{} ({})".format(self._vegcode2name(key), key)
 
         v = self._vegetation_detail[key]
-        v = ma.masked_equal(v, 255)
+        v = ma.masked_equal(v, 255)  # always dtype uint8 with 255 as no-data
         ((a, b), (c, d)) = self._context.extent
         mpl_extent = (a, c, d, b)
 
@@ -954,7 +951,7 @@ class Niche(object):
                     td.append((i, presence[a], rec[a]))
         else:
             legend = VegSuitable.legend()
-            legend[255] = "no data"
+            legend[Vegetation.nodata] = "no data"
             for i in self._vegetation_detail:
                 vi = pd.Series(self._vegetation_detail[i].flatten())
                 rec = vi.value_counts() * self._context.cell_area / 10000
@@ -966,25 +963,26 @@ class Niche(object):
         return df
 
     def zonal_stats(
-            self, vectors, outside=True, attribute=None, vegetation_types=None, upscale=1
+            self, vectors, outside=True, attribute=None,
+            vegetation_types=None, upscale=1
     ):
         """Calculates zonal statistics using vectors
 
         Parameters
-        ==========
-        vectors: path to a vector source or geo-like python objects
+        ----------
+        vectors : path to a vector source or geo-like python objects
             you can specify a path to a vector file eg "../test.shp", or pass
             geo objects from other python functions.
 
             Note that the vector should be in the same coordinate system as the
             raster.
-        outside: bool (default: True)
+        outside : bool (default: True)
            report values outside shapes as well. The area which is not covered
            by any shapefile will get shape_id -1.
-        attribute: string(default None):
+        attribute : string(default None):
             attribute of the vector source that will be exported along in the
             table.
-        vegetation_types: List | None
+        vegetation_types : List | None
             optional list of vegetation types (as integer number) for which the
             statistics must be calculated. Calculation will happen for all
             niche vegetation types by default.
@@ -993,8 +991,8 @@ class Niche(object):
             the resolution
 
         Returns
-        =======
-        table: pandas.DataFrame
+        -------
+        table : pandas.DataFrame
         """
         td = dict()
 
@@ -1038,7 +1036,7 @@ class Niche(object):
                 raster=raster,
                 affine=affine,
                 categorical=True,
-                nodata=Vegetation.nodata_veg,
+                nodata=Vegetation.nodata,
                 geojson_out=attribute is not None,
             )
         warnings.simplefilter("default")

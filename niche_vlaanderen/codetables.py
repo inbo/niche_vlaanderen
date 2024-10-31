@@ -207,19 +207,29 @@ def validate_tables_flooding(
 
 
 def check_codes_used(name, used, allowed):
-    """"""
+    """Compare the incoming grid values with allowed values according
+     to system tables
+
+     Parameters
+     ----------
+     name : str
+        Variable name
+     used : np.ndarray
+        Grid with values to check
+     allowed : np.array
+        System table provided values
+     """
     if isinstance(used, str) or isinstance(used, int):
         used = np.array(used)
 
     if used.dtype.kind == "f":
         used_codes = set(np.unique(used[~np.isnan(used)]))
+    elif used.dtype == "uint8":
+        used_codes = set(np.unique(used[~(used == 255)]))
     else:
         used_codes = set(np.unique(used))
 
     allowed_codes = set(allowed)
-    allowed_codes.add(-99)  # no data when loaded from grid
-    if name in ["acidity", "nutrient_level"]:  # no data value when calculated
-        allowed_codes.add(255)
 
     if not used_codes.issubset(allowed_codes):
         msg = "Invalid %s code used\n" % name

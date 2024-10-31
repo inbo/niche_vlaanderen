@@ -210,9 +210,8 @@ class SpatialContext(object):
         overlap with the current (equally large or larger) SpatialContext
 
         Parameters
-        ==========
-
-        new_sc: SpatialContext
+        ----------
+        new_sc : SpatialContext
             Spatial context for which a read window is to be determined,
             based on the extent of the overall (equally large or larger
             base SpatialContext)

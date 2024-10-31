@@ -6,14 +6,14 @@ from niche_vlaanderen.codetables import (validate_tables_nutrient_level,
 
 
 class NutrientLevel(object):
-    """
-    Class to calculate the NutrientLevel
+    """Calculate the NutrientLevel
 
     The used codetables can be overwritten by using the corresponding ct_*
     arguments.
     """
 
-    nodata = 255  # unsigned 8 bit type is used
+    dtype = "uint8"
+    nodata = 255  # unsigned 8 bit integer for nutrient level
 
     def __init__(
         self,
@@ -23,6 +23,21 @@ class NutrientLevel(object):
         ct_soil_code=None,
         ct_nutrient_level=None,
     ):
+        """Create a nutrient level calculator
+
+        Parameters
+        ----------
+        ct_lnk_soil_nutrient_level : str, Optional
+            Path to the lnk_soil_nutrient_level system table to overwrite the default.
+        ct_management : str, Optional
+            Path to the management system table to overwrite the default.
+        ct_mineralisation : str, Optional
+            Path to the nitrogen_mineralisation system table to overwrite the default.
+        ct_soil_code : str, Optional
+            Path to the soil_codes system table to overwrite the default.
+        ct_nutrient_level : str, Optional
+            Path to the nutrient_level system table to overwrite the default.
+        """
         if ct_lnk_soil_nutrient_level is None:
             ct_lnk_soil_nutrient_level = package_resource(
                 ["system_tables"], "lnk_soil_nutrient_level.csv")
@@ -45,10 +60,10 @@ class NutrientLevel(object):
         self._ct_nutrient_level = pd.read_csv(ct_nutrient_level)
         self._ct_soil_code = pd.read_csv(ct_soil_code)
 
-        # convert the mineralisation to float so we can use np.nan for nodata
+        # convert the mineralisation system table to float to use np.nan for nodata
         self._ct_mineralisation["nitrogen_mineralisation"] = self._ct_mineralisation[
             "nitrogen_mineralisation"
-        ].astype("float64")
+        ].astype("float32")
 
         inner = all(v is None for v in self.__init__.__code__.co_varnames[1:])
         validate_tables_nutrient_level(
@@ -73,15 +88,29 @@ class NutrientLevel(object):
             .soil_code
         )
 
-    def _calculate_mineralisation(self, soil_code_array, msw_array):
+    def _calculate_mineralisation(self, soil_code, msw):
+        """Calculate nitrogen mineralisation based on soil and water arrays
+
+        Parameters
+        ----------
+        soil_code : numpy.ndarray, np.uint8
+            Array containing the soil codes. Values must be present
+            in the soil_code system table.
+        msw : numpy.ndarray, np.float32
+            Array containing the mean spring waterlevel ("gemiddeld
+            voorjaarsgrondwaterstand").
+
+        Returns
+        -------
+        numpy.ndarray, numpy.float32
+            mineralisation
         """
-        Get nitrogen mineralisation for numpy arrays
-        """
-        orig_shape = soil_code_array.shape
-        soil_code_array = soil_code_array.flatten()
-        msw_array = msw_array.flatten()
-        result = np.empty(soil_code_array.shape)
-        result[:] = np.nan
+        nodata = (soil_code == 255) | np.isnan(msw)
+
+        orig_shape = soil_code.shape
+        soil_code_array = soil_code.flatten()
+        msw_array = msw.flatten()
+        result = np.ones(soil_code_array.shape, dtype="float32") * np.nan
 
         for code in self._ct_mineralisation.soil_code.unique():
             # We must reset the index because digitize will give indexes
@@ -91,28 +120,48 @@ class NutrientLevel(object):
             table_sel = table_sel.reset_index(drop=True)
             soil_sel = soil_code_array == code
             ix = np.digitize(msw_array[soil_sel], table_sel.msw_max, right=False)
+            result[soil_sel] = table_sel["nitrogen_mineralisation"].reindex(ix).values
 
-            result[soil_sel] = table_sel["nitrogen_mineralisation"].reindex(ix)
-
-        result[msw_array == -99] = np.nan
-        result = result.reshape(orig_shape)
+        # The intermediate mineralisation array is a float32 array with np.nan as nodata
+        result = result.reshape(orig_shape).astype(np.float32)
+        result[nodata] = np.nan # Apply the nodata mask
         return result
 
     def _calculate(self, management, soil_code, nitrogen, inundation):
-        """
-        Calculates the nutrient level using previously calculated nitrogen
+        """Calculate the nutrient level based on calculated nitrogen
+
+        Parameters
+        ----------
+        management : numpy.ndarray, np.uint8
+            Array containing the management codes. Values must be present
+            in the management system table.
+        soil_code : numpy.ndarray, np.uint8
+            Array containing the soil codes. Values must be present
+            in the soil_code system table.
+        nitrogen : numpy.ndarray, np.float32
+            Array containing the calculated nitrogen levels.
+        inundation : numpy.ndarray, np.uint8
+            Array containing the inundation values.
+
+        Returns
+        -------
+         numpy.ndarray, np.uint8
+            nutrient level
         """
         check_codes_used("management", management, self._ct_management["management"])
         check_codes_used("soil_code", soil_code, self._ct_soil_code["soil_code"])
 
+        nodata = ((management == 255) | (soil_code == 255) |
+                  np.isnan(nitrogen) | (inundation == 255))
+
         # calculate management influence
-        influence = np.full(management.shape, -99)  # -99 used as no data value
+        influence = np.ones(management.shape, dtype=self.dtype) * self.nodata
         for i in self._ct_management.management.unique():
             sel_grid = management == i
             sel_ct = self._ct_management.management == i
             influence[sel_grid] = self._ct_management[sel_ct].influence.values[0]
 
-        # flatten all input layers (necessary for digitize)
+        # flatten all input layers
         orig_shape = soil_code.shape
         soil_code = soil_code.flatten()
         nitrogen = nitrogen.flatten()
@@ -120,9 +169,8 @@ class NutrientLevel(object):
         inundation = inundation.flatten()
         influence = influence.flatten()
 
+        result = influence
         # search for classification values in nutrient level codetable
-        result = np.full(influence.shape, self.nodata, dtype="uint8")
-
         for name, subtable in self.ct_lnk_soil_nutrient_level.groupby(
             ["soil_code", "influence"]
         ):
@@ -131,20 +179,19 @@ class NutrientLevel(object):
             table_sel = subtable.copy(deep=True).reset_index(drop=True)
 
             index = np.digitize(nitrogen, table_sel.total_nitrogen_max, right=True)
+            index[nodata.flatten()] = self.nodata
             selection = (soil_code == soil_selected) & (influence == influence_selected)
-
-            result[selection] = table_sel.nutrient_level.reindex(
-                index, fill_value=self.nodata)[selection]
-
-        # np.nan values are not ignored in np.digitize
-        result[np.isnan(nitrogen)] = self.nodata
+            # Add the no-data value to the mapping
+            table_sel.loc[self.nodata, "nutrient_level"] = self.nodata
+            result[selection] = table_sel.nutrient_level[index].iloc[selection].values
 
         # Note that niche_vlaanderen is different from the original (Dutch)
         # model here:
         # only if nutrient_level < 4 the inundation rule is applied.
-        selection = (result < 4) & (result != self.nodata)
-        result[selection] = (result + (inundation > 0))[selection]
-        result = result.reshape(orig_shape)
+        result[result < 4] = (result + (inundation > 0))[result < 4]
+
+        result = result.reshape(orig_shape).astype(self.dtype)
+        result[nodata] = self.nodata  # Apply the nodata mask
         return result
 
     def calculate(
@@ -157,33 +204,30 @@ class NutrientLevel(object):
         management,
         inundation,
     ):
-        """
-        Calculates the Nutrient level
-
-        Calculates the nutrient level based on a number of numpy arrays.
+        """Calculates the nutrient level based on the input arrays provided
 
         Parameters
-        ==========
-        soil_code: numpy.array
+        ----------
+        soil_code :  numpy.ndarray, np.uint8
             Array containing the soil codes. Values must be present
-            in the soil_code table. -99 is used as no data value.
-        msw: numpy.array
-            Array containing the mean spring waterlevel. numpy.nan is used as
-            no data value
-        nitrogen_atmospheric: numpy.array
-            Array containing the atmospheric deposition of Nitrogen. numpy.nan
-            is used as no data value
-        nitrogen_animal: numpy.array
-            Array containing the animal contribution of Nitrogen.numpy.nan
-            is used as no data value
-        nitrogen_fertilizer: numpy.array
-            Array containing the fertilizer contribution of Nitrogen.numpy.nan
-            is used as no data value
-        management: numpy.array
+            in the soil_code table.
+        msw : numpy.ndarray, np.float32
+            Array containing the mean spring waterlevel.
+        nitrogen_atmospheric : numpy.ndarray, np.float32
+            Array containing the atmospheric deposition of Nitrogen.
+        nitrogen_animal : numpy.ndarray, np.float32
+            Array containing the animal contribution of Nitrogen.
+        nitrogen_fertilizer : numpy.ndarray, np.float32
+            Array containing the fertilizer contribution of Nitrogen.
+        management :  numpy.ndarray, np.uint8
             Array containing the management.
-        inundation:
+        inundation :  numpy.ndarray, np.uint8
             Array containing the inundation values.
 
+        Returns
+        -------
+        numpy.ndarray, np.uint8
+            nutrient level
         """
 
         nitrogen_mineralisation = self._calculate_mineralisation(soil_code, msw)
