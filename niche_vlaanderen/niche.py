@@ -408,13 +408,13 @@ class Niche(object):
             # convert these cells into the projection system
             bad_points = self._context.transform * bad_points
 
-            print("Warning: Not all {} values are lower than {}".format(a, b))
+            print("Warning: Not all {} values are higher than {}".format(a, b))
             print("coordinates with invalid values are:")
             print(pd.DataFrame(list(bad_points)))
 
             if self._options["strict_checks"]:
                 raise NicheException(
-                    "Error: not all {} values are lower than {}".format(a, b)
+                    "Error: not all {} values are higher than {}".format(a, b)
                 )
 
     def read_rasterio_to_grid(self, file_name, variable_name=None):
