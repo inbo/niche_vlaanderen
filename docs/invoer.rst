@@ -122,11 +122,11 @@ Continu, integer
 
 Mogelijke waarden
 -----------------
-Voor NICHE Vlaanderen moeten de waarden van de gemiddelde grondwaterstanden uitgedrukt worden in centimeter ten opzichte van het maaiveld. Een tweede aandachtspunt is het teken van de waarden: GXG-waarden boven het maaiveld zijn negatief, waterstanden onder maaiveld positief. 
+Voor NICHE Vlaanderen moeten de waarden van de gemiddelde grondwaterstanden uitgedrukt worden in centimeter ten opzichte van het maaiveld. Een tweede aandachtspunt is het teken van de waarden: GXG-waarden boven het maaiveld zijn positief, waterstanden onder maaiveld negatief. 
 
 Eenheid
 -------
-cm; negatief boven maaiveld, positief onder maaiveld
+cm; positief boven maaiveld, negatief onder maaiveld
 
 Rol in model
 ------------
@@ -139,7 +139,7 @@ Brongegevens
 ------------
 Elk invoerraster moet gebiedsdekkend informatie aanleveren. Grondwaterpeilen worden op het terrein opgemeten op welbepaalde meetpunten. De meetpunten zullen echter nooit de vereiste ruimtelijke resolutie hebben om zonder meer een invoerraster mee op te stellen. Ook de temporele resolutie kan ontoereikend zijn om GXG's af te leiden, rechtstreeks uit de metingen. Dit wordt ondervangen door te werken met gemodelleerde grondwaterpeilen. Een grondwatermodel laat toe om peilen (in feite hydrostratische drukken) af te leiden met de gewenste ruimtelijke en temporele resolutie. De gesimuleerde peilen ter hoogte van elke rastercel worden dan gebruikt om GXG's te berekenen volgens bovenstaande definities. Werkelijk gemeten peilen op het terrein blijven evenwel noodzakelijk om het grondwatermodel op zich te kalibreren met als doel de modelmatig gesimuleerde peilen zo goed mogelijk te laten aansluiten op de effectief gemeten waarden. Richtlijnen voor het opstellen van een grondwatermodel in functie van de onderzoeksvraag of verwachte impact van een ingreep in de waterhuishouding zijn o.a. terug te vinden als bijlage bij de praktische wegwijzer voor het opstellen van een passende beoordeling van ingrepen die een verdroging of vernatting van de standplaats kunnen veroorzaken (`Van Daele & De Bie, 2015 <https://pureportal.inbo.be/portal/nl/publications/leidraad-grondwatermodellering-voor-passende-beoordeling(5a1c0838-c361-466f-8e38-10b5e7437b38).html>`_). Een belangrijk voordeel van het gebruik van een grondwatermodel is de mogelijkheid om naast een gebiedsdekkende weergave van de actuele toestand ook de impact van geplande ingrepen in de waterhuishouding door te rekenen in termen van verwachte GXG's. Op die manier kan NICHE Vlaanderen gebruikt worden om voorspellingen van het voorkomen van vegetatietyepn te doen onder verschillende scenario's met elk hun set van geplande ingrepen.
 
-De beschikbaarheid van grondwaterpeilmetingen voor de Vlaamse natuurgebieden is na te gaan in de online `WATINA+ databank <http://data.inbo.be/watina/Pages/Common/Default.aspx>`_. Zowel grondwaterpeilen als fysico-chemische metingen van het grondwater zijn hier te consulteren. Let wel: peilen in de WATINA+ databank zijn positief boven maaiveld en negatief onder maaiveld. Net het tegenovergestelde als NICHE Vlaanderen vereist.
+De beschikbaarheid van grondwaterpeilmetingen voor de Vlaamse natuurgebieden is na te gaan in de online `WATINA+ databank <http://data.inbo.be/watina/Pages/Common/Default.aspx>`_. Zowel grondwaterpeilen als fysico-chemische metingen van het grondwater zijn hier te consulteren. Peilen in de WATINA+ databank zijn positief boven maaiveld en negatief onder maaiveld. 
 
 Opmerkingen
 ------------
@@ -172,7 +172,7 @@ duiden op infiltratie.
 
 Eenheid
 -------
-mm/dag; negatief waar grondwater uittreedt, postief waar grondwater infiltreert
+mm/dag; negatief waar grondwater uittreedt, positief waar grondwater infiltreert
 
 Rol in model
 ------------
