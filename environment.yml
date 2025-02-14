@@ -6,7 +6,6 @@ dependencies:
   - geopandas
   - numpy
   - pandas
-  - pygeos
   - pyyaml
   - rasterio
   - rasterstats>=0.17

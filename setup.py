@@ -23,7 +23,6 @@ requirements = [
         'pyyaml',
         'rasterstats>=0.17',
         'tqdm',
-        'pygeos',
         'geopandas'
         ]
 
