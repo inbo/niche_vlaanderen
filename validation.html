@@ -1255,7 +1255,7 @@
 <section id="Setting-the-spatial-resolution-of-the-overlay">
 <h2>Setting the spatial resolution of the overlay<a class="headerlink" href="#Setting-the-spatial-resolution-of-the-overlay" title="Link to this heading"></a></h2>
 <p>The actual overlay will compare the grid cell centres (niche predictions) with the shapefile (vegetation map). By default an upscaling factor of 5 (25 points per grid cell) is used to ensure sufficient coverage of the shapefile. For niche models of 20-25m resolution, this default value will lead to a spatial resolution of 1m, which is sufficient given the common scale of the vegetation map.</p>
-<p><img alt="comparison between 1 and 5 upscaling" src="_images/bwk_overlay.png" /></p>
+<img alt="comparison between 1 and 5 upscaling" src="_images/bwk_overlay.png" />
 <p>A greater upscaling factor can be used if the polygons of the vegetation map are particularly small compared to the resolution of the Niche predictions.</p>
 <p>If upscaling is set to one (not used), only the grid center will be used, which may lead to warnings because some shapes are not covered.</p>
 <div class="nbinput docutils container">
