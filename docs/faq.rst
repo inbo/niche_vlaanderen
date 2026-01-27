@@ -8,6 +8,14 @@ or usage of niche_vlaanderen, and workarounds for them.
 If your issue is not mentioned in this list, please search for the issues on
 our issuetracker_, and file a new issue if it is needed.
 
+1. :ref:`Warnings and exceptions in jupyter notebook<warnings_exceptions>`
+2. :ref:`Missing gcs.csv file<missing_gcs>`
+3. :ref:`Using ESRI grids without sta.adf<esri_without_sta>`
+4. :ref:`ERROR: cells do not overlap <no_overlap>`
+5. :ref:`There are hardly any pixels with predictions<no_predictions>`
+
+.. _warnings_exceptions:
+
 Warnings and exceptions in jupyter notebook
 ===========================================
 
@@ -113,6 +121,8 @@ To do this, follow these steps:
 
   6) Anaconda prompt must be restarted to find the variable.
 
+.. _esri_without_sta:
+
 Using ESRI grids without sta.adf
 ================================
 
@@ -135,3 +145,22 @@ a geotiff from arcgis. This format is best supported by the library we use
 for raster analysis.
 
 .. _issuetracker: https://github.com/inbo/niche_vlaanderen/issues
+
+.. _no_overlap:
+
+ERROR: cells do not overlap 
+================================
+All input rasters must have exactly the same resolution, i.e. the same cell size and 
+no offset between cells. You will get this error if this is not the case. Try redefining 
+the resolution (cell size) and extent of the layers to correct this. 
+
+.. _no_predictions:
+
+There are hardly any pixels with predictions
+================================
+Check whether there might be a layer with many 'NoData' cells. 
+Do not forget to fill in the NoData-cells with a suitable value if needed. 
+A typical layer is, for example, the seepage map if there is little seepage in the area: 
+if there is no seepage, the value for the cell should be set to a value bigger 
+than -0.1 (for instance 0), and not to 'NoData'.
+
