@@ -48,10 +48,12 @@ De bodemkaart die als input dient voor NICHE Vlaanderen is een ecologisch getint
 
 Datatype
 --------
-Nominaal
+Nominaal 
 
 Mogelijke waarden
 -----------------
+Een nummer van 2 tot 15 (zie 'soil_code' hieronder):
+
 .. csv-table:: Onderscheiden bodemklassen met hun code en beschrijving ( :ref:`ct_soil_code`)
   :header-rows: 1
   :file: ../niche_vlaanderen/system_tables/soil_codes.csv
@@ -137,12 +139,14 @@ De gemiddelde grondwaterstanden spelen een rol:
 
 Brongegevens
 ------------
-Elk invoerraster moet gebiedsdekkend informatie aanleveren. Grondwaterpeilen worden op het terrein opgemeten op welbepaalde meetpunten. De meetpunten zullen echter nooit de vereiste ruimtelijke resolutie hebben om zonder meer een invoerraster mee op te stellen. Ook de temporele resolutie kan ontoereikend zijn om GXG's af te leiden, rechtstreeks uit de metingen. Dit wordt ondervangen door te werken met gemodelleerde grondwaterpeilen. Een grondwatermodel laat toe om peilen (in feite hydrostratische drukken) af te leiden met de gewenste ruimtelijke en temporele resolutie. De gesimuleerde peilen ter hoogte van elke rastercel worden dan gebruikt om GXG's te berekenen volgens bovenstaande definities. Werkelijk gemeten peilen op het terrein blijven evenwel noodzakelijk om het grondwatermodel op zich te kalibreren met als doel de modelmatig gesimuleerde peilen zo goed mogelijk te laten aansluiten op de effectief gemeten waarden. Richtlijnen voor het opstellen van een grondwatermodel in functie van de onderzoeksvraag of verwachte impact van een ingreep in de waterhuishouding zijn o.a. terug te vinden als bijlage bij de praktische wegwijzer voor het opstellen van een passende beoordeling van ingrepen die een verdroging of vernatting van de standplaats kunnen veroorzaken (`Van Daele & De Bie, 2015 <https://pureportal.inbo.be/portal/nl/publications/leidraad-grondwatermodellering-voor-passende-beoordeling(5a1c0838-c361-466f-8e38-10b5e7437b38).html>`_). Een belangrijk voordeel van het gebruik van een grondwatermodel is de mogelijkheid om naast een gebiedsdekkende weergave van de actuele toestand ook de impact van geplande ingrepen in de waterhuishouding door te rekenen in termen van verwachte GXG's. Op die manier kan NICHE Vlaanderen gebruikt worden om voorspellingen van het voorkomen van vegetatietyepn te doen onder verschillende scenario's met elk hun set van geplande ingrepen.
+Elk invoerraster moet gebiedsdekkend informatie aanleveren. Grondwaterpeilen worden op het terrein opgemeten op welbepaalde meetpunten. De meetpunten zullen echter nooit de vereiste ruimtelijke resolutie hebben om zonder meer een invoerraster mee op te stellen. Ook de temporele resolutie kan ontoereikend zijn om GXG's af te leiden, rechtstreeks uit de metingen. Dit wordt ondervangen door te werken met gemodelleerde grondwaterpeilen. Een grondwatermodel laat toe om peilen (in feite hydrostratische drukken) af te leiden met de gewenste ruimtelijke en temporele resolutie. De gesimuleerde peilen ter hoogte van elke rastercel worden dan gebruikt om GXG's te berekenen volgens bovenstaande definities. Werkelijk gemeten peilen op het terrein blijven evenwel noodzakelijk om het grondwatermodel op zich te kalibreren met als doel de modelmatig gesimuleerde peilen zo goed mogelijk te laten aansluiten op de effectief gemeten waarden. Richtlijnen voor het opstellen van een grondwatermodel in functie van de onderzoeksvraag of verwachte impact van een ingreep in de waterhuishouding zijn o.a. terug te vinden als bijlage bij de praktische wegwijzer voor het opstellen van een passende beoordeling van ingrepen die een verdroging of vernatting van de standplaats kunnen veroorzaken (`Van Daele & De Bie, 2015 <https://pureportal.inbo.be/nl/publications/leidraad-grondwatermodellering-voor-passende-beoordeling-onderbou/>`_). Een belangrijk voordeel van het gebruik van een grondwatermodel is de mogelijkheid om naast een gebiedsdekkende weergave van de actuele toestand ook de impact van geplande ingrepen in de waterhuishouding door te rekenen in termen van verwachte GXG's. Op die manier kan NICHE Vlaanderen gebruikt worden om voorspellingen van het voorkomen van vegetatietyepn te doen onder verschillende scenario's met elk hun set van geplande ingrepen.
 
 De beschikbaarheid van grondwaterpeilmetingen voor de Vlaamse natuurgebieden is na te gaan in de online `WATINA+ databank <http://data.inbo.be/watina/Pages/Common/Default.aspx>`_. Zowel grondwaterpeilen als fysico-chemische metingen van het grondwater zijn hier te consulteren. Peilen in de WATINA+ databank zijn positief boven maaiveld en negatief onder maaiveld. 
 
 Opmerkingen
 ------------
+
+Nog een aandachtspunt is om te kijken of het aangewezen is om de gemodelleerde grondwaterstanden af te toppen boven het maaiveld. Sommige vegetatietypes dulden immers geen gxg's boven een bepaalde hoogte boven maaiveld (de referentietabel van NICHE Vlaanderen kan je `hier <https://github.com/inbo/niche_vlaanderen/blob/master/niche_vlaanderen/system_tables/niche_vegetation.csv>`_ raadplegen: zie vooral de bovengrens voor de GHG 'mhw_max'). 
 
 .. _seepage:
 
@@ -315,7 +319,7 @@ De invoerlaag met de inschatting van de atmosferische depositie is onderdeel van
 
 Brongegevens
 ------------
-Momenteel ontsluit de Vlaamse Milieumaatschappij (VMM) de gemodelleerde `totale vermestende stikstofdepositie <https://metadata.geopunt.be/zoekdienst/srv/dut/csw?service=CSW&version=2.0.2&request=GetRecordById&outputFormat=application%2Fxml&outputSchema=http%3A%2F%2Fwww.opengis.net%2Fcat%2Fcsw%2F2.0.2&elementsetname=full&id=dddd12f8-66f5-46bc-9ae5-40954e23b06b>`_ als een Vlaanderen dekkende rasterkaart met een resolutie van 1 km\ :sup:`2`\  (WCS mogelijk). Hierbij wordt rekening gehouden met verschillen in depositiesnelheden tussen de overheersende landgebruiksvormen.
+Momenteel ontsluit de Vlaamse Milieumaatschappij (VMM) de gemodelleerde `totale vermestende stikstofdepositie <https://www.vlaanderen.be/datavindplaats/catalogus/vlops-kaarten-totale-stikstofdepositie-vlops24-meteo-2017-emissies-2022>`_ als een Vlaanderen dekkende rasterkaart met een resolutie van 1 km\ :sup:`2`\  (WCS mogelijk). Hierbij wordt rekening gehouden met verschillen in depositiesnelheden tussen de overheersende landgebruiksvormen.
 
 De resolutie van 1 km\ :sup:`2`\  is uiteraard grof, wetende dat de aanbevolen resolutie van een invoerraster 25x25 m bedraagt. Desgewenst kan er op fijnere schaal nog rekening gehouden worden met het werkelijke landgebruik op basis van de BWK-Habitatkaart of een (toekomstige) beheerkaart. Hiervoor is evenwel kennis nodig over de interactie tussen concentraties in de lucht en het landgebruik (ruwheidslengtes, depositiesnelheden, etc.).
 
