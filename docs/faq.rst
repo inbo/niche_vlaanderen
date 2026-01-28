@@ -11,7 +11,7 @@ our issuetracker_, and file a new issue if it is needed.
 1. :ref:`Warnings and exceptions in jupyter notebook<warnings_exceptions>`
 2. :ref:`Missing gcs.csv file<missing_gcs>`
 3. :ref:`Using ESRI grids without sta.adf<esri_without_sta>`
-4. :ref:`ERROR: cells do not overlap <no_overlap>`
+4. :ref:`ERROR: cells do not overlap<no_overlap>`
 5. :ref:`There are hardly any pixels with predictions<no_predictions>`
 
 .. _warnings_exceptions:
