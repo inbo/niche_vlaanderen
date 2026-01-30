@@ -8,14 +8,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Frequently Asked Questions &mdash; niche_vlaanderen 2.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=7b0778b9"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -65,6 +65,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#warnings-and-exceptions-in-jupyter-notebook">Warnings and exceptions in jupyter notebook</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#missing-gcs-csv-file">Missing gcs.csv file</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#using-esri-grids-without-sta-adf">Using ESRI grids without sta.adf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#error-cells-do-not-overlap">ERROR: cells do not overlap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#there-are-hardly-any-pixels-with-predictions">There are hardly any pixels with predictions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
@@ -104,8 +106,15 @@
 or usage of niche_vlaanderen, and workarounds for them.</p>
 <p>If your issue is not mentioned in this list, please search for the issues on
 our <a class="reference external" href="https://github.com/inbo/niche_vlaanderen/issues">issuetracker</a>, and file a new issue if it is needed.</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#warnings-exceptions"><span class="std std-ref">Warnings and exceptions in jupyter notebook</span></a></p></li>
+<li><p><a class="reference internal" href="#missing-gcs"><span class="std std-ref">Missing gcs.csv file</span></a></p></li>
+<li><p><a class="reference internal" href="#esri-without-sta"><span class="std std-ref">Using ESRI grids without sta.adf</span></a></p></li>
+<li><p><a class="reference internal" href="#no-overlap"><span class="std std-ref">ERROR: cells do not overlap</span></a></p></li>
+<li><p><a class="reference internal" href="#no-predictions"><span class="std std-ref">There are hardly any pixels with predictions</span></a></p></li>
+</ol>
 <section id="warnings-and-exceptions-in-jupyter-notebook">
-<h2>Warnings and exceptions in jupyter notebook<a class="headerlink" href="#warnings-and-exceptions-in-jupyter-notebook" title="Link to this heading"></a></h2>
+<span id="warnings-exceptions"></span><h2>Warnings and exceptions in jupyter notebook<a class="headerlink" href="#warnings-and-exceptions-in-jupyter-notebook" title="Link to this heading"></a></h2>
 <p><strong>Warnings</strong> don’t interrupt the model but should draw your attention to possible
 problems.
 Standard warnings appear in jupyter notebook as black text in a red box, while
@@ -115,7 +124,7 @@ a white background.</p>
 lowest groundwater level higher than the mean highest groundwater level, which is
 unexpected.</p>
 <blockquote>
-<div><a class="reference internal image-reference" href="_images/warning.png"><img alt="_images/warning.png" src="_images/warning.png" style="width: 393.0px; height: 146.5px;" />
+<div><a class="reference internal image-reference" href="_images/warning.png"><img alt="_images/warning.png" height="146" src="_images/warning.png" width="393" />
 </a>
 </div></blockquote>
 <p>Errors detected during execution are called <strong>exceptions</strong> and are causing the model
@@ -125,7 +134,7 @@ the earliest point in the line where the error was detected.</p>
 <p>In the example below, the input layer “grntbodem” cannot be found at the indicated location
 of the computer, causing the model to stop.</p>
 <blockquote>
-<div><a class="reference internal image-reference" href="_images/exception.png"><img alt="_images/exception.png" src="_images/exception.png" style="width: 453.5px; height: 354.0px;" />
+<div><a class="reference internal image-reference" href="_images/exception.png"><img alt="_images/exception.png" height="354" src="_images/exception.png" width="454" />
 </a>
 </div></blockquote>
 <p>You will mostly be able to find out what the problem is by checking the error message:</p>
@@ -168,14 +177,14 @@ To do this, follow these steps:</p>
 <li><p>right click the <cite>my computer</cite> icon in windows. And choose the last option “properties”.</p></li>
 </ol>
 <blockquote>
-<div><a class="reference internal image-reference" href="_images/system_properties.png"><img alt="_images/system_properties.png" src="_images/system_properties.png" style="width: 185.5px; height: 311.0px;" />
+<div><a class="reference internal image-reference" href="_images/system_properties.png"><img alt="_images/system_properties.png" height="311" src="_images/system_properties.png" width="186" />
 </a>
 </div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>On the left, choose the lower option (“advanced properties”)</p></li>
 </ol>
 <blockquote>
-<div><a class="reference internal image-reference" href="_images/advanced_properties.png"><img alt="_images/advanced_properties.png" src="_images/advanced_properties.png" style="width: 159.5px; height: 139.5px;" />
+<div><a class="reference internal image-reference" href="_images/advanced_properties.png"><img alt="_images/advanced_properties.png" height="140" src="_images/advanced_properties.png" width="160" />
 </a>
 </div></blockquote>
 <ol class="arabic simple" start="3">
@@ -183,7 +192,7 @@ To do this, follow these steps:</p>
 there should be a button with “Environment Variables” (“Omgevingsvariabelen”).</p></li>
 </ol>
 <blockquote>
-<div><a class="reference internal image-reference" href="_images/advanced_properties2.png"><img alt="_images/advanced_properties2.png" src="_images/advanced_properties2.png" style="width: 206.0px; height: 243.0px;" />
+<div><a class="reference internal image-reference" href="_images/advanced_properties2.png"><img alt="_images/advanced_properties2.png" height="243" src="_images/advanced_properties2.png" width="206" />
 </a>
 </div></blockquote>
 <ol class="arabic simple" start="4">
@@ -191,13 +200,13 @@ there should be a button with “Environment Variables” (“Omgevingsvariabele
 that way the configuration will apply to all users of the computer).</p></li>
 </ol>
 <blockquote>
-<div><a class="reference internal image-reference" href="_images/environment_variables.png"><img alt="_images/environment_variables.png" src="_images/environment_variables.png" style="width: 309.0px; height: 292.5px;" />
+<div><a class="reference internal image-reference" href="_images/environment_variables.png"><img alt="_images/environment_variables.png" height="292" src="_images/environment_variables.png" width="309" />
 </a>
 <ol class="arabic simple" start="5">
 <li><p>Add the name “GDAL_DATA” and the path to a place where the gcs.csv file can be found
 (Use search to find it). Don’t include the filename.</p></li>
 </ol>
-<a class="reference internal image-reference" href="_images/new_environment_variable.png"><img alt="_images/new_environment_variable.png" src="_images/new_environment_variable.png" style="width: 326.5px; height: 82.5px;" />
+<a class="reference internal image-reference" href="_images/new_environment_variable.png"><img alt="_images/new_environment_variable.png" height="82" src="_images/new_environment_variable.png" width="326" />
 </a>
 <ol class="arabic simple" start="6">
 <li><p>Anaconda prompt must be restarted to find the variable.</p></li>
@@ -206,7 +215,7 @@ that way the configuration will apply to all users of the computer).</p></li>
 </div></blockquote>
 </section>
 <section id="using-esri-grids-without-sta-adf">
-<h2>Using ESRI grids without sta.adf<a class="headerlink" href="#using-esri-grids-without-sta-adf" title="Link to this heading"></a></h2>
+<span id="esri-without-sta"></span><h2>Using ESRI grids without sta.adf<a class="headerlink" href="#using-esri-grids-without-sta-adf" title="Link to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
 <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="n">File</span> <span class="s2">&quot;/home/johan/_proj/niche/niche_vlaanderen/niche_vlaanderen/niche.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">192</span><span class="p">,</span> <span class="ow">in</span> <span class="n">set_input</span>
@@ -223,6 +232,20 @@ file is missing, the file can not be opened in niche (it will also fail in QGis
 or other gdal-based applications). In that case, try exporting the grid to
 a geotiff from arcgis. This format is best supported by the library we use
 for raster analysis.</p>
+</section>
+<section id="error-cells-do-not-overlap">
+<span id="no-overlap"></span><h2>ERROR: cells do not overlap<a class="headerlink" href="#error-cells-do-not-overlap" title="Link to this heading"></a></h2>
+<p>All input rasters must have exactly the same resolution, i.e. the same cell size and
+no offset between cells. You will get this error if this is not the case. Try redefining
+the resolution (cell size) and extent of the layers to correct this.</p>
+</section>
+<section id="there-are-hardly-any-pixels-with-predictions">
+<span id="no-predictions"></span><h2>There are hardly any pixels with predictions<a class="headerlink" href="#there-are-hardly-any-pixels-with-predictions" title="Link to this heading"></a></h2>
+<p>Check whether there might be a layer with many ‘NoData’ cells.
+Do not forget to fill in the NoData-cells with a suitable value if needed.
+A typical layer is, for example, the seepage map if there is little seepage in the area:
+if there is no seepage, the value for the cell should be set to a value bigger
+than -0.1 (for instance 0), and not to ‘NoData’.</p>
 </section>
 </section>
 
