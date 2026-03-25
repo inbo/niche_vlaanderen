@@ -9,5 +9,6 @@ Contributors
 * Stijn Van Hoey
 * Cécile Herr
 * Dries Adriaens
+* Baris Oztas <baris@bariso.dev>
 
 Why not join?
