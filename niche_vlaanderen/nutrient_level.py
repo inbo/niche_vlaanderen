@@ -120,6 +120,7 @@ class NutrientLevel(object):
             table_sel = table_sel.reset_index(drop=True)
             soil_sel = soil_code_array == code
             ix = np.digitize(msw_array[soil_sel], table_sel.msw_max, right=False)
+            ix = np.clip(ix, 0, len(table_sel) - 1)
             result[soil_sel] = table_sel["nitrogen_mineralisation"].reindex(ix).values
 
         # The intermediate mineralisation array is a float32 array with np.nan as nodata
