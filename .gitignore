@@ -116,6 +116,5 @@ result_images/*
 
 # package specific content
 tests/result_images/*
-*/log.txt
+**/log.txt
 *_output*
-log.txt
