@@ -39,7 +39,7 @@ class VegSuitable(IntEnum):
                 if i & j == j:
                     legend_items += [VegSuitable(i & j).name.lower()]
             legend[i] = "+".join(legend_items) + " suitable"
-        legend[0] = "soil unsuitable"
+        legend[0] = "soil unsuitable or unknown"
 
         # only select possible combinations for legend
         sel = VegSuitable.possible()

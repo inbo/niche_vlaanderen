@@ -27,6 +27,17 @@ class TestNutrientLevel:
         np.testing.assert_equal(np.array([75, 75, np.nan]), result)
         assert result.dtype == np.float32
 
+    def test_nitrogen_mineralisation_not_suitable(self):
+        """Correct nitrogen mineralisation calculated from fixed-value
+        grids with non-empty mask"""
+        soil_code = np.array([10], dtype="uint8")
+        msw =np.array([-33], dtype="float32")
+
+        nl = niche_vlaanderen.NutrientLevel()
+        result = nl._calculate_mineralisation(soil_code, msw)
+        np.testing.assert_equal(np.array([0]), result)
+        assert result.dtype == np.float32
+
     def test_borders(self):
         """Correct nutrient level calculated for border values"""
         soil_code = np.array([7, 7, 7, 7, 7], dtype="uint8")
