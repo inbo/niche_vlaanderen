@@ -132,7 +132,7 @@
                 <span class="k">if</span> <span class="n">i</span> <span class="o">&amp;</span> <span class="n">j</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
                     <span class="n">legend_items</span> <span class="o">+=</span> <span class="p">[</span><span class="n">VegSuitable</span><span class="p">(</span><span class="n">i</span> <span class="o">&amp;</span> <span class="n">j</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
             <span class="n">legend</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;+&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">legend_items</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; suitable&quot;</span>
-        <span class="n">legend</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;soil unsuitable&quot;</span>
+        <span class="n">legend</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;soil unsuitable or unknown&quot;</span>
 
         <span class="c1"># only select possible combinations for legend</span>
         <span class="n">sel</span> <span class="o">=</span> <span class="n">VegSuitable</span><span class="o">.</span><span class="n">possible</span><span class="p">()</span>
