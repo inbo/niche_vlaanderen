@@ -89,10 +89,12 @@ Upgrading
 
 Existing installations of niche_vlaanderen can be updated using pip (run
 from the Anaconda prompt).
+Dependencies need to be updated separately, as they are managed by `conda`.
 
 .. code-block:: shell
 
     (base) C:\> conda activate niche
+    (niche) C:\> conda env update
     (niche) C:\> pip install niche_vlaanderen --upgrade  --no-deps
     
 Note you might need to update other packages.
