@@ -166,8 +166,10 @@ Options:
 <section id="upgrading">
 <h2>Upgrading<a class="headerlink" href="#upgrading" title="Link to this heading"></a></h2>
 <p>Existing installations of niche_vlaanderen can be updated using pip (run
-from the Anaconda prompt).</p>
+from the Anaconda prompt).
+Dependencies need to be updated separately, as they are managed by <cite>conda</cite>.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>base<span class="o">)</span><span class="w"> </span>C:<span class="se">\&gt;</span><span class="w"> </span>conda<span class="w"> </span>activate<span class="w"> </span>niche
+<span class="o">(</span>niche<span class="o">)</span><span class="w"> </span>C:<span class="se">\&gt;</span><span class="w"> </span>conda<span class="w"> </span>env<span class="w"> </span>update
 <span class="o">(</span>niche<span class="o">)</span><span class="w"> </span>C:<span class="se">\&gt;</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>niche_vlaanderen<span class="w"> </span>--upgrade<span class="w">  </span>--no-deps
 </pre></div>
 </div>
